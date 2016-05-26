@@ -7,7 +7,7 @@
 ## Utvikling og stabile versjoner
 
 - Branchen (mappen) 'master' er vår stabile versjon.
-- For hver ny oppdatering oppdateres versjonnummeret.
+- For hver ny oppdatering i master oppdateres versjonnummeret.
   - Versionnummer følger, så godt det lar seg gjøre, [Semantic Versioning](semver.org) -- 1.0.0 ... 1.0.1 osv.
   - Ny versjon får en tag, og eventuelt en egen mappe. Da får man kontroll på hvilke versjoner av rateprogrammet som er brukt til ulike prosjekter.
 - All ny-utvikling skal skje i branchen (mappen) 'develop' eller i egen branch (mappe).
