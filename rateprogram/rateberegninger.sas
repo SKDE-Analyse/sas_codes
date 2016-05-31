@@ -314,10 +314,24 @@ group by aar;
 
 data &Bo._Agg_rate;
 set &Bo._Agg_rate;
-KI_N=RV_rate-(1.96*SD_rate);
-KI_O=RV_rate+(1.96*SD_rate);
-KI_N_J=RV_just_rate-(1.96*SDJUSTRate);
-KI_O_J=RV_just_rate+(1.96*SDJUSTRate);
+if aar ne 9999 then do;
+	KI_N=RV_rate-(1.96*SD_rate);
+	KI_O=RV_rate+(1.96*SD_rate);
+	KI_N_J=RV_just_rate-(1.96*SDJUSTRate);
+	KI_O_J=RV_just_rate+(1.96*SDJUSTRate);
+end;
+If aar=9999 then do; /*Etter innspill fra HelseVest (Jofrid) - KI for snitt skal ganges med 1/rot(antall_år) */
+/*	KI_N=(1/(sqrt((&antall_aar-1))))*(RV_rate-(1.96*SD_rate));*/
+/*	KI_O=(1/(sqrt((&antall_aar-1))))*(RV_rate+(1.96*SD_rate));*/
+/*	KI_N_J=(1/(sqrt((&antall_aar-1))))*(RV_just_rate-(1.96*SDJUSTRate));*/
+/*	KI_O_J=(1/(sqrt((&antall_aar-1))))*(RV_just_rate+(1.96*SDJUSTRate));*/
+
+	KI_N=(RV_rate-((1/(sqrt((&antall_aar-1))))*(1.96*SD_rate)));
+	KI_O=(RV_rate+((1/(sqrt((&antall_aar-1))))*(1.96*SD_rate)));
+	KI_N_J=(RV_just_rate-((1/(sqrt((&antall_aar-1))))*(1.96*SDJUSTRate)));
+	KI_O_J=(RV_just_rate+((1/(sqrt((&antall_aar-1))))*(1.96*SDJUSTRate)));
+
+end;
 MCV=RV_just_rate*Ant_Innbyggere;
 SDCV=RV_just_rate**2*Ant_Innbyggere;
 /* ny alternativ SVC */ 
@@ -426,34 +440,56 @@ PATTERN3 VALUE=SOLID COLOR=CX4A4AFF;
 legend1 ACROSS=1 POSITION=(MIDDLE RIGHT INSIDE)
 LABEL=(JUSTIFY=Left );
 
+/*%if &bo ne bydel %then %do;
 title "Kart &Bo, avvik fra snittet for landet, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
-proc gmap data=&Bo._Kart map=&kart_&Bo&kartaar;
+proc gmap data=&Bo._Kart map=&kart_&Bo&kartaar density=1;
 id &bo;
-choro col&antall_aar/CDEFAULT=CXFFFF99 legend=legend1 midpoints=(1,2,3);
+choro col&antall_aar/CDEFAULT=CXFFFF99 midpoints=(1,2,3);
 label col&antall_aar='Ratekategorier';
 run;
 quit;
-Title;
+Title; %end;
+
+%if &bo=bydel %then %do;
+title "Kart &Bo, avvik fra snittet for landet, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
+proc gmap data=&Bo._Kart map=&kart_&Bo&kartaar anno=skdekart.oslo_txt_anno density=1;
+id &bo;
+choro col&antall_aar/CDEFAULT=CXFFFF99 midpoints=(1,2,3) anno=skdekart.oslo_hf_anno;
+label col&antall_aar='Ratekategorier';
+run;
+quit;
+Title; %end;*/
 
 goptions reset=pattern;
 %if &bo=BoRHF %then %do;
 title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
-proc gmap data=&Bo._fig map=&kart_&Bo&kartaar;
+proc gmap data=&Bo._fig map=&kart_&Bo&kartaar density=1;
 where aar=9999;
 id &bo;
 choro RV_just_rate_sum/levels=4;
-*label RV_just_rate_sum;
+label RV_just_rate_sum='Rate';
 run;
 quit;
 Title;
 %end;
-%if &bo ne BoRHF %then %do;
+%if &bo ne BoRHF and &bo ne bydel %then %do;
 title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
-proc gmap data=&Bo._fig map=&kart_&Bo&kartaar;
+proc gmap data=&Bo._fig map=&kart_&Bo&kartaar density=1;
 where aar=9999;
 id &bo;
-choro RV_just_rate_sum/levels=8;
-*label RV_just_rate_sum;
+choro RV_just_rate_sum/levels=5;
+label RV_just_rate_sum='Rate';
+run;
+quit;
+Title;
+%end;
+%if &bo=bydel %then %do;
+title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
+proc gmap data=&Bo._fig map=&kart_&Bo&kartaar anno=skdekart.oslo_txt_anno density=1;
+where aar=9999;
+id &bo;
+choro RV_just_rate_sum / levels=5 anno=skdekart.oslo_hf_anno;
+label RV_just_rate_sum='Rate';
 run;
 quit;
 Title;
@@ -885,7 +921,125 @@ RUN;
 %mend Tabell_3;
 
 /* årsvariasjonsfigur */
+%macro lag_aarsvarbilde;
 
+proc sql;
+create table aldersspenn as
+select distinct max(alder) as maxalder, min(alder) as minalder
+from RV;
+quit;
+Data _null_;
+set aldersspenn;
+call symput('Min_alder', trim(left(put(minalder,8.))));
+call symput('Max_alder', trim(left(put(maxalder,8.))));
+run;
+
+proc sql;
+create table Norgeaarsspenn as
+select distinct max(aar) as maxaar, min(aar) as minaar
+from RV
+where aar ne 9999;
+quit;
+Data _null_;
+set Norgeaarsspenn;
+call symput('Min_aar', trim(left(put(minaar,8.))));
+call symput('Max_aar', trim(left(put(maxaar,8.))));
+run;
+
+data &bo._fig;
+set &bo._fig;
+keep aar &bo rv_just_rate_sum Ant_Opphold_Sum Ant_Innbyggere_Sum;
+run;
+
+proc transpose data=&bo._fig out=snudd name=RV_just_rate_Sum
+prefix=rate;
+by &bo notsorted;
+id aar;
+var RV_just_rate_Sum;
+run; quit;
+
+data snudd;
+set snudd;
+drop RV_just_rate_Sum;
+aar=9999;
+run;
+
+proc sql;
+create table &bo._aarsvar as 
+select *
+from &bo._fig left join snudd 
+on &bo._fig.&bo=snudd.&bo;
+quit;
+
+/*data _null_;
+set norgesnitt;
+call symput('Norge',(rv_just_rate_sum));
+run;*/
+
+data _null_;
+set Norge_agg_rate;
+If Aar=9999 then do;
+call symput('Norge',(rv_just_rate));
+Call symput('Norge_KI_N',(KI_N_J));
+Call symput('Norge_KI_O',(KI_O_J));
+end;
+run;
+
+options locale=NB_NO;
+
+data &bo._aarsvar;
+set &bo._aarsvar;
+where aar=9999;
+max=max(of ra:);
+min=min(of ra:);
+Norge=&Norge;
+rename Ant_innbyggere_sum=Innbyggere;
+rename Ant_opphold_sum=&forbruksmal;
+run;
+
+data &bo._aarsvar;
+set &bo._aarsvar;
+format Innbyggere NLnum12.0 &forbruksmal NLnum12.0;
+run;
+
+proc sort data=&bo._aarsvar;
+by descending rateSnitt;
+run;
+
+/*data &forbruksmal._&bo; set &bo._aarsvar; run;*/
+
+%include "\\tos-sastest-07\SKDE\SAS_Stiler\stil_figur.sas";
+%include "\\tos-sastest-07\SKDE\SAS_Stiler\Anno_logo_kilde_NPR_SSB.sas";
+
+/*ods graphics on;*/
+ODS Graphics ON /reset=All imagename="AA_&RV_variabelnavn._&bo" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
+ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
+title;
+proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
+hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6); 
+     Refline &Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=2) name="Ref1";
+			%if &Antall_aar>2 and &aarsobs=1 %then %do; scatter x=rate&år1 y=&Bo / markerattrs=(symbol=squarefilled color=black);%end;
+			%if &Antall_aar>2 and &aarsobs=1 %then %do; scatter x=rate&år2 y=&Bo / markerattrs=(symbol=circlefilled color=black); %end;
+			%if &Antall_aar>3 and &aarsobs=1 %then %do; scatter x=rate&år3 y=&Bo / markerattrs=(symbol=trianglefilled color=black);%end;
+			%if &Antall_aar>4 and &aarsobs=1 %then %do; scatter x=rate&år4 y=&Bo / markerattrs=(symbol=Diamondfilled color=black);%end;
+			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black);%end;
+			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
+			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
+     Yaxistable Innbyggere &forbruksmal /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+     xaxis display=(nolabel) offsetmin=0.02 /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
+     inset (
+		%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &år1" %end;  
+	 	%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cf'x}"="   &år2" %end;
+	 	%if &Antall_aar>3 and &aarsobs=1 %then %do;"(*ESC*){unicode'25b2'x}"="   &år3" %end;
+	 	%if &Antall_aar>4 and &aarsobs=1 %then %do;"(*ESC*){unicode'2666'x}"="   &år4" %end;
+	 	%if &Antall_aar>5 and &aarsobs=1 %then %do;"(*ESC*){unicode'0058'x}"="   &år5" %end;
+		%if &Antall_aar>6 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cb'x}"="   &år6" %end;
+        "(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" Norge, snitt") 
+	 	/ position=bottomright textattrs=(size=7);
+run;Title; ods listing close; /*ods graphics off;*/
+
+%mend lag_aarsvarbilde;
 %macro lag_aarsvarfigur;
 
 proc sql;
@@ -936,9 +1090,18 @@ from &bo._fig left join snudd
 on &bo._fig.&bo=snudd.&bo;
 quit;
 
-data _null_;
+/*data _null_;
 set norgesnitt;
 call symput('Norge',(rv_just_rate_sum));
+run;*/
+
+data _null_;
+set Norge_agg_rate;
+If Aar=9999 then do;
+call symput('Norge',(rv_just_rate));
+Call symput('Norge_KI_N',(KI_N_J));
+Call symput('Norge_KI_O',(KI_O_J));
+end;
 run;
 
 options locale=NB_NO;
@@ -948,6 +1111,7 @@ set &bo._aarsvar;
 where aar=9999;
 max=max(of ra:);
 min=min(of ra:);
+Norge=&Norge;
 rename Ant_innbyggere_sum=Innbyggere;
 rename Ant_opphold_sum=&forbruksmal;
 run;
@@ -961,11 +1125,13 @@ proc sort data=&bo._aarsvar;
 by descending rateSnitt;
 run;
 
+/*data &forbruksmal._&bo; set &bo._aarsvar; run;*/
+
 %include "\\tos-sastest-07\SKDE\SAS_Stiler\stil_figur.sas";
 %include "\\tos-sastest-07\SKDE\SAS_Stiler\Anno_logo_kilde_NPR_SSB.sas";
 
-ods graphics on;
-ods listing style=stil_figur gpath="c:\temp";
+/*ods graphics on;*/
+ods listing style=stil_figur gpath="%sysfunc(getoption(work))";
 title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, &min_aar - &max_aar";
 proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
 hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6); 
@@ -979,7 +1145,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
      Yaxistable Innbyggere &forbruksmal /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
-     xaxis display=(nolabel) offsetmin=0.02 /*values=(0 to 160 by 40)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
+     xaxis display=(nolabel) offsetmin=0.02 /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset (
 		%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &år1" %end;  
 	 	%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cf'x}"="   &år2" %end;
@@ -989,18 +1155,79 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 		%if &Antall_aar>6 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cb'x}"="   &år6" %end;
         "(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" Norge, snitt") 
 	 	/ position=bottomright textattrs=(size=7);
-run;Title; ods listing close; ods graphics off;
+run;Title; ods listing close; /*ods graphics off;*/
 
 %mend lag_aarsvarfigur;
-%macro lagre_data;
+
+%Macro KI_figur;
+Data &bo._KI_Fig; set &bo._agg_rate; Where aar=9999; Norge=&Norge; Norge_KI_N=&Norge_KI_N; Norge_KI_O=&Norge_KI_O;
+Label Ant_Innbyggere='Innbyggere' Ant_Opphold=&forbruksmal; format Ant_opphold 8.0; run;
+data &bo._KI_Fig;
+set &bo._KI_Fig;
+format Ant_Innbyggere NLnum12.0 Ant_Opphold NLnum12.0;
+run;
+
+proc sort data=&bo._KI_Fig; by descending RV_just_rate; run;
+
+ods listing style=stil_figur;
+title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, rate med 95% KI, &min_aar - &max_aar";
+proc sgplot data=&bo._KI_Fig noborder noautolegend sganno=anno pad=(Bottom=5%);
+hbarparm category=&bo response=RV_just_rate / limitlower=KI_N_J limitupper=KI_O_J Limitattrs=(Color=black) fillattrs=(color=CX95BDE6); 
+	 Refline Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=1);
+	 Refline Norge_KI_N / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
+	 Refline Norge_KI_O / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
+     Yaxistable Ant_Innbyggere Ant_opphold /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+     xaxis display=(nolabel) offsetmin=0.02 /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
+     inset ("(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" KI, rate Norge"
+			"(*ESC*){unicode'2014'x}"=" Rate, Norge") / position=bottomright textattrs=(size=7);
+run; Title; ods listing close; 
+%Mend KI_figur;
+
+%macro KI_bilde;
+Data &bo._KI_Fig; set &bo._agg_rate; Where aar=9999; Norge=&Norge; Norge_KI_N=&Norge_KI_N; Norge_KI_O=&Norge_KI_O;
+Label Ant_Innbyggere='Innbyggere' Ant_Opphold=&forbruksmal; format Ant_opphold 8.0; run;
+data &bo._KI_Fig;
+set &bo._KI_Fig;
+format Ant_Innbyggere NLnum12.0 Ant_Opphold NLnum12.0;
+run;
+
+proc sort data=&bo._KI_Fig; by descending RV_just_rate; run;
+
+ODS Graphics ON /reset=All imagename="KI_&RV_variabelnavn._&bo" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
+ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
+proc sgplot data=&bo._KI_Fig noborder noautolegend sganno=anno pad=(Bottom=5%);
+hbarparm category=&bo response=RV_just_rate / limitlower=KI_N_J limitupper=KI_O_J Limitattrs=(Color=black) fillattrs=(color=CX95BDE6); 
+	 Refline Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=1);
+	 Refline Norge_KI_N / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
+	 Refline Norge_KI_O / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
+     Yaxistable Ant_Innbyggere Ant_opphold /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+     xaxis display=(nolabel) offsetmin=0.02 /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
+     inset ("(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" KI, rate Norge"
+			"(*ESC*){unicode'2014'x}"=" Rate, Norge") / position=bottomright textattrs=(size=7);
+run;Title; ods listing close;
+%mend KI_bilde;
+
+%macro lagre_dataNorge;
 	data &forbruksmal._&bo; set &bo._agg_rate; run;
-%mend lagre_data;
-%macro lagre_Kom_data;
-	data &forbruksmal._&bo; set Komnr_agg_rate; run;
-%mend lagre_Kom_data;
-%macro lagre_KomHN_data;
-	data &forbruksmal._&bo._HN; set Komnr_agg_rate; run;
-%mend lagre_KomHN_data;
+%mend lagre_dataNorge;
+%macro lagre_dataN;
+%if &Ut_sett=1 %then %do;
+	data &forbruksmal._S_&bo; set &bo._agg_rate; run;
+%end;
+%else %do;
+	data &forbruksmal._&bo; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
+%end;
+%mend lagre_dataN;
+%macro lagre_dataHN;
+%if &Ut_sett=1 %then %do;
+	data &forbruksmal._S_&bo._HN; set &bo._agg_rate; run;
+%end;
+%else %do;
+	data &forbruksmal._&bo._HN; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
+%end;
+%mend lagre_dataHN;
 
 %macro rateberegninger;
 proc sql;
@@ -1043,7 +1270,7 @@ RUN; Title;
 	%end;
 	%if &Vis_tabeller=3 %then %do;
 		%tabell_1; %tabell_3;
-	%end; %lagre_data;
+	%end; %lagre_dataNorge;
 
 	%if &RHF=1 %then %do;
 		%let Bo=BoRHF;
@@ -1060,9 +1287,19 @@ RUN; Title;
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end;
-		%if &aarsvarfigur=1 %then %do;
+		%if &aarsvarfigur=1 and &Fig_AA_RHF=1 %then %do;
+			%lag_aarsvarbilde;
+		%end;
+		%if &aarsvarfigur=1 and &Fig_AA_RHF ne 1 %then %do;
 			%lag_aarsvarfigur;
-		%end; %lagre_data;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_RHF=1 %then %do;
+			%KI_bilde;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_RHF ne 1 %then %do;
+			%KI_figur;
+		%end;
+		%lagre_dataN;
 	%end;
 
 	%if &HF=1 %then %do;
@@ -1080,9 +1317,19 @@ RUN; Title;
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end;
-		%if &aarsvarfigur=1 %then %do;
+		%if &aarsvarfigur=1 and &Fig_AA_HF=1 %then %do;
+			%lag_aarsvarbilde;
+		%end;
+		%if &aarsvarfigur=1 and &Fig_AA_HF ne 1 %then %do;
 			%lag_aarsvarfigur;
-		%end; %lagre_data;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_HF=1 %then %do;
+			%KI_bilde;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_HF ne 1 %then %do;
+			%KI_figur;
+		%end;
+		%lagre_dataN;
 	%end;
 
 	%if &sykehus_HN=1 %then %do;
@@ -1100,9 +1347,19 @@ RUN; Title;
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end;
-		%if &aarsvarfigur=1 %then %do;
+		%if &aarsvarfigur=1 and &Fig_AA_ShHN=1 %then %do;
+			%lag_aarsvarbilde;
+		%end;
+		%if &aarsvarfigur=1 and &Fig_AA_ShHN ne 1 %then %do;
 			%lag_aarsvarfigur;
-		%end; %lagre_data;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_ShHN=1 %then %do;
+			%KI_bilde;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_ShHN ne 1 %then %do;
+			%KI_figur;
+		%end;
+		%lagre_dataN;
 	%end;
 
 	%if &kommune=1 %then %do;
@@ -1119,7 +1376,20 @@ RUN; Title;
 		%end;
 		%if &kart=1 %then %do;
 			%lag_kart;
-		%end; %lagre_Kom_data;
+		%end;
+		%if &aarsvarfigur=1 and &Fig_AA_kom=1 %then %do;
+			%lag_aarsvarbilde;
+		%end;
+		%if &aarsvarfigur=1 and &Fig_AA_kom ne 1 %then %do;
+			%lag_aarsvarfigur;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_kom=1 %then %do;
+			%KI_bilde;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_kom ne 1 %then %do;
+			%KI_figur;
+		%end;
+		%lagre_dataN;
 	%end;
 
 	%if &kommune_HN=1 %then %do;
@@ -1136,7 +1406,20 @@ RUN; Title;
 		%end;
 		%if &kart=1 %then %do;
 			%lag_kart;
-		%end; %lagre_KomHN_data;
+		%end; 
+		%if &aarsvarfigur=1 and &Fig_AA_komHN=1 %then %do;
+			%lag_aarsvarbilde;
+		%end;
+		%if &aarsvarfigur=1 and &Fig_AA_komHN ne 1 %then %do;
+			%lag_aarsvarfigur;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_komHN=1 %then %do;
+			%KI_bilde;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_komHN ne 1 %then %do;
+			%KI_figur;
+		%end;
+		%lagre_dataN;
 	%end;
 
 	%if &fylke=1 %then %do;
@@ -1154,9 +1437,19 @@ RUN; Title;
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end;
-		%if &aarsvarfigur=1 %then %do;
+		%if &aarsvarfigur=1 and &Fig_AA_fylke=1 %then %do;
+			%lag_aarsvarbilde;
+		%end;
+		%if &aarsvarfigur=1 and &Fig_AA_fylke ne 1 %then %do;
 			%lag_aarsvarfigur;
-		%end; %lagre_data;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_fylke=1 %then %do;
+			%KI_bilde;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_fylke ne 1 %then %do;
+			%KI_figur;
+		%end; 
+		%lagre_dataN;
 	%end;
 
 	%if &Verstkommune_HN=1 %then %do;
@@ -1170,7 +1463,37 @@ RUN; Title;
 		%end;
 		%if &Vis_tabeller=3 %then %do;
 			%tabell_1; %tabell_CV; %tabell_3;
-		%end; %lagre_data;
+		%end; %lagre_dataN;
+	%end;
+
+		%if &oslo=1 %then %do;
+		%let Bo=bydel;
+		%omraade;
+		%if &Vis_tabeller=1 %then %do;
+			%tabell_1;
+		%end;
+		%if &Vis_tabeller=2 %then %do;
+			%tabell_1; %tabell_CV;
+		%end;
+		%if &Vis_tabeller=3 %then %do;
+			%tabell_1; %tabell_CV; %tabell_3;
+		%end;
+		%if &kart=1 %then %do;
+			%lag_kart;
+		%end;
+		%if &aarsvarfigur=1 and &Fig_AA_Oslo=1 %then %do;
+			%lag_aarsvarbilde;
+		%end;
+		%if &aarsvarfigur=1 and &Fig_AA_Oslo ne 1 %then %do;
+			%lag_aarsvarfigur;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_Oslo=1 %then %do;
+			%KI_bilde;
+		%end;
+		%if &KIfigur=1 and &Fig_KI_Oslo ne 1 %then %do;
+			%KI_figur;
+		%end;
+		%lagre_dataN;
 	%end;
 
 %mend rateberegninger;
