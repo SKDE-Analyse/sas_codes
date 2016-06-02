@@ -26,7 +26,7 @@
 %let Verstkommune_HN=;
 /* Dersom du skal ha bilde-filer */
 %let bildeformat=jpeg; /*Format*/
-%let lagring="\\tos-sastest-07\SKDE\rateprogram\Bildefiler"; /*Hvor skal filene lagres*/
+%let lagring="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Dataverktoy\SAS\Bildefiler"; /*Hvor skal filene lagres*/
 %let hoyde=8.0cm; %let bredde=11.0cm; /*Høyde (8) og Bredde (11) på bildefilene*/
 
 /* Hvilke tabeller ønsker du? */
