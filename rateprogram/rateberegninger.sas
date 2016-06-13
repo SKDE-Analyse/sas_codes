@@ -2,6 +2,30 @@
 
 
 %macro utvalgx;
+%let aarsvarfigur=1;
+/*Beregne år1, år2 osv*/
+%let Periode=(&StartÅr:&SluttÅr);
+%let Antall_aar=%sysevalf(&SluttÅr-&StartÅr+2);
+%let År1=%sysevalf(&StartÅr);
+%if &Antall_aar ge 2 %then %do;
+	%let År2=%sysevalf(&StartÅr+1);
+%end;
+%if &Antall_aar ge 3 %then %do;
+	%let År3=%sysevalf(&StartÅr+2);
+%end;
+%if &Antall_aar ge 4 %then %do;
+	%let År4=%sysevalf(&StartÅr+3);
+%end;
+%if &Antall_aar ge 5 %then %do;
+	%let År5=%sysevalf(&StartÅr+4);
+%end;
+%if &Antall_aar ge 6 %then %do;
+	%let År6=%sysevalf(&StartÅr+5);
+%end;
+%if &Antall_aar ge 7 %then %do;
+	%let År7=%sysevalf(&StartÅr+6);
+%end;
+
 
 %if &Antall_aar=2 %then %do;
 	proc format; Value aar
@@ -117,12 +141,18 @@ options locale=NB_NO;
 	proc delete data=alderdef utvalgx;
 	run;
 
+	/*test 13/6-16*/
+	data RV;
+	set RV;
+	%Boomraader;
+	run;
+
 	/* beregne andeler */
 	proc sql;
 	    create table Andel as
 	    select distinct aar, alderny, ErMann, sum(innbyggere) as innbyggere 
 	    from RV
-		where aar=&aar
+		where aar=&aar and &boomraadeN /*test 13/6-16*/
 	    group by aar, alderny, ErMann;
 	quit;
 
@@ -137,7 +167,8 @@ options locale=NB_NO;
 	%include "\\tos-sastest-07\SKDE\rateprogram\Rateprogram_BoFormat.sas";*/
 	data RV;
 	set RV;
-	%Boomraader;
+/*	%Boomraader; test 13/6-16*/
+	where &boomraade;
 	rename alderny=alder_ny;
 	run;
 %mend utvalgx;
@@ -819,8 +850,8 @@ PROC TABULATE DATA=&Bo._Agg_Rate out=norgesnitt;
 	TABLE aar='',
 		sum=' '*(RV_just_rate="&standard rater"*Format=NLnum12.&rateformat 
 		Ant_Opphold="&forbruksmal"*Format=NLNUM12.0 Ant_Innbyggere='Antall innbyggere'*Format=NLNUM12.0)
-		/BOX={LABEL='Norge' STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none';
-		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+		/BOX={LABEL="&SnittOmraade" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none';
+		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &SnittOmraade";
 RUN;
 
 data norgesnitt;
@@ -871,8 +902,8 @@ PROC TABULATE DATA=&Bo._Agg_Rate out=norgesnitt;
 	TABLE aar='',
 		sum=' '*(RV_just_rate="&standard rater"*Format=12.&rateformat 
 		Ant_Opphold="&forbruksmal"*Format=12.0 Ant_Innbyggere='Antall innbyggere'*Format=12.0)
-		/BOX={LABEL='Norge' STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none';
-		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+		/BOX={LABEL="&SnittOmraade" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none';
+		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &SnittOmraade";
 RUN;
 
 data norgesnitt;
@@ -957,8 +988,8 @@ PROC TABULATE DATA=&Bo._Agg_Rate;
 		sum=''*(Ant_Innbyggere='Innbyggere'*Format=Nlnum12.0 Ant_Opphold="&forbruksmal"*Format=Nlnum12.0 RV_rate='Ujust.rate'*Format=Nlnum12.&rateformat 
 		RV_just_rate='Just.rate'*Format=Nlnum12.&rateformat SDJUSTRate='Std.avvik'*Format=Nlnum12.3
 		KI_N_J='Nedre KI'*Format=Nlnum12.3 KI_O_J='Øvre KI'*Format=Nlnum12.3 ) 
-		/BOX={LABEL="Rater - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
-		Title "&standard rater pr &rate_pr innbyggere, &Min_alder - &Max_alder år, &Bo";
+		/BOX={LABEL="Rater - &SnittOmraade" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
+		Title "&standard rater pr &rate_pr innbyggere, &Min_alder - &Max_alder år, &SnittOmraade";
 RUN;
 %mend tabell_3N;
 
@@ -977,8 +1008,8 @@ PROC TABULATE DATA=&Bo._Agg_Rate;
 		sum=''*(Ant_Innbyggere='Innbyggere'*Format=12.0 Ant_Opphold="&forbruksmal"*Format=12.0 RV_rate='Ujust.rate'*Format=12.&rateformat 
 		RV_just_rate='Just.rate'*Format=12.&rateformat SDJUSTRate='Std.avvik'*Format=12.3
 		KI_N_J='Nedre KI'*Format=12.3 KI_O_J='Øvre KI'*Format=12.3 ) 
-		/BOX={LABEL="Rater - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
-		Title "&standard rater pr &rate_pr innbyggere, &Min_alder - &Max_alder år, &Bo";
+		/BOX={LABEL="Rater - &SnittOmraade" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
+		Title "&standard rater pr &rate_pr innbyggere, &Min_alder - &Max_alder år, &SnittOmraade";
 RUN;
 %mend tabell_3Ne;
 
@@ -1138,6 +1169,7 @@ ODS Graphics ON /reset=All imagename="AA_&RV_variabelnavn._&bo" imagefmt=&bildef
 ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
 title;
 proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
+where &Mine_Boomraader;
 hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6); 
      Refline &Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=2) name="Ref1";
 			%if &Antall_aar>2 and &aarsobs=1 %then %do; scatter x=rate&år1 y=&Bo / markerattrs=(symbol=squarefilled color=black);%end;
@@ -1149,7 +1181,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
      Yaxistable Innbyggere &forbruksmal /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
-     xaxis display=(nolabel) offsetmin=0.02 /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
+     xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset (
 		%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &år1" %end;  
 	 	%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cf'x}"="   &år2" %end;
@@ -1157,7 +1189,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 	 	%if &Antall_aar>4 and &aarsobs=1 %then %do;"(*ESC*){unicode'2666'x}"="   &år4" %end;
 	 	%if &Antall_aar>5 and &aarsobs=1 %then %do;"(*ESC*){unicode'0058'x}"="   &år5" %end;
 		%if &Antall_aar>6 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cb'x}"="   &år6" %end;
-        "(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" Norge, snitt") 
+        "(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" &SnittOmraade, snitt") 
 	 	/ position=bottomright textattrs=(size=7);
 run;Title; ods listing close; /*ods graphics off;*/
 
@@ -1256,6 +1288,7 @@ run;
 ods listing style=stil_figur gpath="%sysfunc(getoption(work))";
 title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, &min_aar - &max_aar";
 proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
+where &Mine_Boomraader;
 hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6); 
      Refline &Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=2) name="Ref1";
 			%if &Antall_aar>2 and &aarsobs=1 %then %do; scatter x=rate&år1 y=&Bo / markerattrs=(symbol=squarefilled color=black);%end;
@@ -1267,7 +1300,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
      Yaxistable Innbyggere &forbruksmal /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
-     xaxis display=(nolabel) offsetmin=0.02 /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
+     xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset (
 		%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &år1" %end;  
 	 	%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cf'x}"="   &år2" %end;
@@ -1275,7 +1308,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 	 	%if &Antall_aar>4 and &aarsobs=1 %then %do;"(*ESC*){unicode'2666'x}"="   &år4" %end;
 	 	%if &Antall_aar>5 and &aarsobs=1 %then %do;"(*ESC*){unicode'0058'x}"="   &år5" %end;
 		%if &Antall_aar>6 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cb'x}"="   &år6" %end;
-        "(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" Norge, snitt") 
+        "(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" &SnittOmraade, snitt") 
 	 	/ position=bottomright textattrs=(size=7);
 run;Title; ods listing close; /*ods graphics off;*/
 
@@ -1294,15 +1327,16 @@ proc sort data=&bo._KI_Fig; by descending RV_just_rate; run;
 ods listing style=stil_figur;
 title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, rate med 95% KI, &min_aar - &max_aar";
 proc sgplot data=&bo._KI_Fig noborder noautolegend sganno=anno pad=(Bottom=5%);
+where &Mine_Boomraader;
 hbarparm category=&bo response=RV_just_rate / limitlower=KI_N_J limitupper=KI_O_J Limitattrs=(Color=black) fillattrs=(color=CX95BDE6); 
 	 Refline Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=1);
 	 Refline Norge_KI_N / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
 	 Refline Norge_KI_O / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
      Yaxistable Ant_Innbyggere Ant_opphold /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
-     xaxis display=(nolabel) offsetmin=0.02 /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
-     inset ("(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" KI, rate Norge"
-			"(*ESC*){unicode'2014'x}"=" Rate, Norge") / position=bottomright textattrs=(size=7);
+     xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
+     inset ("(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" KI, rate &SnittOmraade"
+			"(*ESC*){unicode'2014'x}"=" Rate, &SnittOmraade") / position=bottomright textattrs=(size=7);
 run; Title; ods listing close; 
 %Mend KI_figur;
 
@@ -1319,15 +1353,16 @@ proc sort data=&bo._KI_Fig; by descending RV_just_rate; run;
 ODS Graphics ON /reset=All imagename="KI_&RV_variabelnavn._&bo" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
 ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
 proc sgplot data=&bo._KI_Fig noborder noautolegend sganno=anno pad=(Bottom=5%);
+where &Mine_Boomraader;
 hbarparm category=&bo response=RV_just_rate / limitlower=KI_N_J limitupper=KI_O_J Limitattrs=(Color=black) fillattrs=(color=CX95BDE6); 
 	 Refline Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=1);
 	 Refline Norge_KI_N / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
 	 Refline Norge_KI_O / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
      Yaxistable Ant_Innbyggere Ant_opphold /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
-     xaxis display=(nolabel) offsetmin=0.02 /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
-     inset ("(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" KI, rate Norge"
-			"(*ESC*){unicode'2014'x}"=" Rate, Norge") / position=bottomright textattrs=(size=7);
+     xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
+     inset ("(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" KI, rate &SnittOmraade"
+			"(*ESC*){unicode'2014'x}"=" Rate, &SnittOmraade") / position=bottomright textattrs=(size=7);
 run;Title; ods listing close;
 %mend KI_bilde;
 
@@ -1459,7 +1494,7 @@ by alder;
 run;
 
 %if &tallformat=NLnum %then %do;
-title "Aldersstruktur for snitt i perioden (&min_aar-&max_aar)";
+title "Aldersstruktur for snitt i perioden (&min_aar-&max_aar), Andeler for &boomraadeN, Rater for &boomraade";
 PROC TABULATE DATA=NORGE_AGG_SNITT;	
 	VAR N_RV N_Innbyggere;
 	CLASS alder_ny /	ORDER=data MISSING;
@@ -1471,7 +1506,7 @@ RUN; Title;
 %end;
 
 %if &tallformat=Excel %then %do;
-title "Aldersstruktur for snitt i perioden (&min_aar-&max_aar)";
+title "Aldersstruktur for snitt i perioden (&min_aar-&max_aar), Andeler for &boomraadeN, Rater for &boomraade";
 PROC TABULATE DATA=NORGE_AGG_SNITT;	
 	VAR N_RV N_Innbyggere;
 	CLASS alder_ny /	ORDER=data MISSING;
@@ -1503,10 +1538,10 @@ RUN; Title;
 
 	%if &Vis_tabeller=3 %then %do;
 		%if &tallformat=NLnum %then %do;
-			%tabell_1; %tabell_3;
+			%tabell_1; %tabell_3N;
 		%end;
 		%if &tallformat=Excel %then %do;
-			%tabell_1e; %tabell_3e;
+			%tabell_1e; %tabell_3Ne;
 		%end;
 	%end; %lagre_dataNorge;
 

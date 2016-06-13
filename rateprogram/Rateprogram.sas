@@ -13,8 +13,9 @@
 
 /******  HVA ØNSKER DU Å FÅ UT?  **************************************************************/
 /* Ønsker du Årsvariasjonsfigurer og/eller Konfidensintervallfigurer? */
-%let aarsvarfigur=1;
-%let KIfigur=; 
+%let aarsobs=1;/* dersom du ønsker årsobservasjonene med i figur - dersom ikke må denne stå tom */
+%let KIfigur=1;
+%let Mine_boomraader=; /* Utvalgte områder til figurer - eks: komnr in (1900:1930) eller bydel in (1:15)*/ 
 /* Hvilke bonivåer ønskes? ja eller nei, hvor 1 betyr ja */
 %let kommune=; 		/*Bildefiler*/ %let Fig_AA_kom=; 	%let Fig_KI_kom=;
 %let kommune_HN=; 	/*Bildefiler*/ %let Fig_AA_komHN=; 	%let Fig_KI_komHN=;
@@ -25,9 +26,10 @@
 %let Oslo=; 		/*Bildefiler*/ %let Fig_AA_Oslo=; 	%let Fig_KI_Oslo=;
 %let Verstkommune_HN=;
 /* Dersom du skal ha bilde-filer */
-%let bildeformat=jpeg; /*Format*/
+%let bildeformat=png; /*Format*/
 %let lagring="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Dataverktoy\SAS\Bildefiler"; /*Hvor skal filene lagres*/
-%let hoyde=8.0cm; %let bredde=11.0cm; /*Høyde (8) og Bredde (11) på bildefilene*/
+%let hoyde=8.0cm; %let bredde=11.0cm; /*Høyde (8) og Bredde (11) på bildefilene, gjelder kun bilde-filer*/
+%let skala=; /* Skala på x-aksen på figurene - eks: values=(0 to 0.8 by 0.2) */
 
 /* Hvilke tabeller ønsker du? */
 %Let Vis_Tabeller=1; /*1=Enkel tabell, 2=Enkel + CV og SCV, 3=Enkel + CV og SCV + Ujusterte rater og KI*/
@@ -35,16 +37,14 @@
 /* Vil du ha kart? */
 %let kart=; /* ja eller nei */
 
-%let aarsobs=1;/* dersom du ønsker årsobservasjonene med i figur - dersom ikke må denne stå tom */
 %let rateformat=2; /*Antall desimaler på rate: 0,1 eller 2*/
 
 %let Ut_sett=; /*Utdata, dersom du ønsker stor tabell med KI osv., --> Ut_sett=1 */
 
 /******  PERIODE OG ALDER  **************************************************************/
-%Let Periode=(2011:2015); /* Periode, dvs aktuelle år må defineres her*/
+%let StartÅr=2011;
+%let SluttÅr=2015;
 %Let aar=2013; /* Standardiseringsår defineres her*/
-%Let År1=2011; %Let År2=2012; %Let År3=2013; %Let År4=2014; %Let År5=2015;
-%Let Antall_aar=6; /*Antall år+1 - KUN dersom du ønsker kart */
 %Let aldersspenn=in (0:105); /*Definerer det aktuelle aldersspennet: (0:105) --> 0 til 105 år*/
 %Let Alderskategorier=41; /*40, 41, 50, 51 eller 99
 							40=4-delt med alle aldre, 41=4-delt KUN med aldre med RV
@@ -63,8 +63,9 @@ else if 80<=alder then alder_ny=5;
 %Let standard = Kjønns- og aldersstandardiserte; /*Brukes til å lage figur og tabell-overskrifter */
 %Let kjonn=(0,1); /*Dersom både menn og kvinner (0,1), dersom kun menn (1), dersom kun kvinner (0)*/
 %Let rate_pr=1000; /*Definerer rate pr 1.000 eller 100.000 innbyggere eller osv */
-%Let boomraade=BoRHF in (1,2,3,4); /*Definerer Boområde det skal beregnes rater for utfra BoRHF - her kan man velge andre kriterier, feks BoHF, komnr osv*/
-%Let boomraadeN=BoRHF in (1:4); /*Definerer Boområde som det beregnes "nasjonale" andeler utfra BoRHF - her kan man velge andre kriterier, feks BoHF, komnr osv*/
+%Let boomraade=BoRHF in (1:4); /*Definerer Boområder det skal beregnes rater for utfra BoRHF - her kan man velge andre kriterier, feks BoHF, komnr osv*/
+%Let boomraadeN=BoRHF in (1:4); /*Definerer Boområder som det beregnes "nasjonale" andeler utfra BoRHF - her kan man velge andre kriterier, feks BoHF, komnr osv*/
+%let SnittOmraade=Norge; /*Definerer Snittlinja på figurene - må være samsvar med boomraade ovenfor*/
 
 /******  DU ER FERDIG  *******************************************************************/
 
