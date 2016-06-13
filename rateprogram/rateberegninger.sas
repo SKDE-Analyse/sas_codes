@@ -849,6 +849,59 @@ run;
 %end;
 %mend tabell_1;
 
+%macro tabell_1e;
+
+/*finn min og max alder*/
+/*finn min og max alder*/
+proc sql;
+create table aldersspenn as
+select distinct max(alder) as maxalder, min(alder) as minalder
+from RV;
+quit;
+Data _null_;
+set aldersspenn;
+call symput('Min_alder', trim(left(put(minalder,8.))));
+call symput('Max_alder', trim(left(put(maxalder,8.))));
+run;
+
+%if &bo=Norge %then %do;
+PROC TABULATE DATA=&Bo._Agg_Rate out=norgesnitt;	
+	VAR RV_just_rate Ant_Opphold Ant_Innbyggere;
+	CLASS aar /	ORDER=UNFORMATTED MISSING;
+	TABLE aar='',
+		sum=' '*(RV_just_rate="&standard rater"*Format=12.&rateformat 
+		Ant_Opphold="&forbruksmal"*Format=12.0 Ant_Innbyggere='Antall innbyggere'*Format=12.0)
+		/BOX={LABEL='Norge' STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none';
+		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+RUN;
+
+data norgesnitt;
+set norgesnitt;
+keep aar RV_just_rate_sum;
+where aar=9999;
+run;
+%end;
+
+%if &bo ne Norge %then %do;
+PROC TABULATE DATA=&Bo._Agg_Rate out=&bo._Fig;	
+	VAR RV_just_rate Ant_Opphold Ant_Innbyggere;
+	CLASS &Bo /	ORDER=UNFORMATTED MISSING;
+	CLASS aar /	ORDER=UNFORMATTED MISSING;
+	TABLE &Bo=' ', sum=' '*(RV_just_rate="&standard rater"*Format=12.&rateformat 
+	Ant_Opphold="&forbruksmal"*Format=12.0 Ant_Innbyggere='Antall innbyggere'*Format=12.0)*aar=' '
+	/BOX={LABEL="&Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none';
+	Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+RUN;
+
+data HNsnitt;
+set &bo._Fig;
+keep aar RV_just_rate_sum;
+where aar=9999 /*and BoRHF=1*/;/*MÅ FIXES*/
+run;
+%end;
+%mend tabell_1e;
+
+
 /* Tabeller med ujust og KI*/
 
 %macro Tabell_CV;
@@ -870,6 +923,25 @@ DATA=&Bo._Agg_CV Format=Nlnum12.3;
 RUN;
 %mend tabell_cv;
 
+%macro Tabell_CVe;
+
+Data _null_;
+set aldersspenn;
+call symput('Min_alder', trim(left(put(minalder,8.))));
+call symput('Max_alder', trim(left(put(maxalder,8.))));
+run;
+
+PROC TABULATE
+DATA=&Bo._Agg_CV Format=12.3;
+	VAR CV SCV OBV RCV;
+	CLASS aar /	ORDER=UNFORMATTED MISSING;
+	TABLE aar='',
+	mean=' '*(CV*Format=12.3 SCV*Format=12.3 OBV*Format=12.3 RCV*Format=12.3)
+	/BOX={Label="CV - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
+		Title "Variasjonsmål &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+RUN;
+%mend tabell_cve;
+
 %macro tabell_3N;
 
 Data _null_;
@@ -889,6 +961,26 @@ PROC TABULATE DATA=&Bo._Agg_Rate;
 		Title "&standard rater pr &rate_pr innbyggere, &Min_alder - &Max_alder år, &Bo";
 RUN;
 %mend tabell_3N;
+
+%macro tabell_3Ne;
+
+Data _null_;
+set aldersspenn;
+call symput('Min_alder', trim(left(put(minalder,8.))));
+call symput('Max_alder', trim(left(put(maxalder,8.))));
+run;
+
+PROC TABULATE DATA=&Bo._Agg_Rate;	
+	VAR Ant_Innbyggere Ant_Opphold RV_rate RV_just_rate SDJUSTRate KI_N_J KI_O_J;
+	CLASS aar /	ORDER=UNFORMATTED MISSING;
+	TABLE aar='',
+		sum=''*(Ant_Innbyggere='Innbyggere'*Format=12.0 Ant_Opphold="&forbruksmal"*Format=12.0 RV_rate='Ujust.rate'*Format=12.&rateformat 
+		RV_just_rate='Just.rate'*Format=12.&rateformat SDJUSTRate='Std.avvik'*Format=12.3
+		KI_N_J='Nedre KI'*Format=12.3 KI_O_J='Øvre KI'*Format=12.3 ) 
+		/BOX={LABEL="Rater - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
+		Title "&standard rater pr &rate_pr innbyggere, &Min_alder - &Max_alder år, &Bo";
+RUN;
+%mend tabell_3Ne;
 
 %macro Tabell_3;
 Data _null_;
@@ -919,6 +1011,36 @@ DATA=&Bo._Agg_CV Format=Nlnum12.3;
 		Title "Variasjonsmål &ratevariabel, &Min_alder - &Max_alder år, &Bo";
 RUN;
 %mend Tabell_3;
+
+%macro Tabell_3e;
+Data _null_;
+set aldersspenn;
+call symput('Min_alder', trim(left(put(minalder,8.))));
+call symput('Max_alder', trim(left(put(maxalder,8.))));
+run;
+
+PROC TABULATE DATA=&Bo._Agg_Rate ;	
+	VAR Ant_Innbyggere Ant_Opphold RV_rate RV_just_rate SDJUSTRate KI_N_J KI_O_J;
+	CLASS &Bo /	ORDER=UNFORMATTED MISSING;
+	CLASS aar /	ORDER=UNFORMATTED MISSING;
+	TABLE aar=''*&Bo='',
+		sum=''*(Ant_Innbyggere='Innbyggere'*Format=12.0 Ant_Opphold="&forbruksmal"*Format=12.0 RV_rate='Ujust.rate'*Format=12.&rateformat 
+		RV_just_rate='Just.rate'*Format=12.&rateformat SDJUSTRate='Std.avvik'*Format=12.3
+		KI_N_J='Nedre KI'*Format=12.3 KI_O_J='Øvre KI'*Format=12.3 )  
+		/BOX={LABEL="Rater - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
+		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+RUN;
+
+PROC TABULATE
+DATA=&Bo._Agg_CV Format=12.3;
+	VAR CV SCV OBV RCV;
+	CLASS aar /	ORDER=UNFORMATTED MISSING;
+	TABLE aar='',
+	mean=' '*(CV*Format=12.3 SCV*Format=12.3 OBV*Format=12.3 RCV*Format=12.3)
+	/BOX={Label="CV - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
+		Title "Variasjonsmål &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+RUN;
+%mend Tabell_3e;
 
 /* årsvariasjonsfigur */
 %macro lag_aarsvarbilde;
@@ -1041,7 +1163,7 @@ run;Title; ods listing close; /*ods graphics off;*/
 
 %mend lag_aarsvarbilde;
 %macro lag_aarsvarfigur;
-
+/**/
 proc sql;
 create table aldersspenn as
 select distinct max(alder) as maxalder, min(alder) as minalder
@@ -1229,6 +1351,91 @@ run;Title; ods listing close;
 %end;
 %mend lagre_dataHN;
 
+%macro aarsvar;
+proc sql;
+create table aldersspenn as
+select distinct max(alder) as maxalder, min(alder) as minalder
+from RV;
+quit;
+Data _null_;
+set aldersspenn;
+call symput('Min_alder', trim(left(put(minalder,8.))));
+call symput('Max_alder', trim(left(put(maxalder,8.))));
+run;
+
+proc sql;
+create table Norgeaarsspenn as
+select distinct max(aar) as maxaar, min(aar) as minaar
+from RV
+where aar ne 9999;
+quit;
+Data _null_;
+set Norgeaarsspenn;
+call symput('Min_aar', trim(left(put(minaar,8.))));
+call symput('Max_aar', trim(left(put(maxaar,8.))));
+run;
+
+data &bo._fig;
+set &bo._fig;
+keep aar &bo rv_just_rate_sum Ant_Opphold_Sum Ant_Innbyggere_Sum;
+run;
+
+proc transpose data=&bo._fig out=snudd name=RV_just_rate_Sum
+prefix=rate;
+by &bo notsorted;
+id aar;
+var RV_just_rate_Sum;
+run; quit;
+
+data snudd;
+set snudd;
+drop RV_just_rate_Sum;
+aar=9999;
+run;
+
+proc sql;
+create table &bo._aarsvar as 
+select *
+from &bo._fig left join snudd 
+on &bo._fig.&bo=snudd.&bo;
+quit;
+
+/*data _null_;
+set norgesnitt;
+call symput('Norge',(rv_just_rate_sum));
+run;*/
+
+data _null_;
+set Norge_agg_rate;
+If Aar=9999 then do;
+call symput('Norge',(rv_just_rate));
+Call symput('Norge_KI_N',(KI_N_J));
+Call symput('Norge_KI_O',(KI_O_J));
+end;
+run;
+
+options locale=NB_NO;
+
+data &bo._aarsvar;
+set &bo._aarsvar;
+where aar=9999;
+max=max(of ra:);
+min=min(of ra:);
+Norge=&Norge;
+rename Ant_innbyggere_sum=Innbyggere;
+rename Ant_opphold_sum=&forbruksmal;
+run;
+
+data &bo._aarsvar;
+set &bo._aarsvar;
+format Innbyggere NLnum12.0 &forbruksmal NLnum12.0;
+run;
+
+proc sort data=&bo._aarsvar;
+by descending rateSnitt;
+run;
+%mend aarsvar;
+
 %macro rateberegninger;
 proc sql;
 create table Norgeaarsspenn as
@@ -1251,6 +1458,7 @@ proc sort data=NORGE_AGG_SNITT;
 by alder;
 run;
 
+%if &tallformat=NLnum %then %do;
 title "Aldersstruktur for snitt i perioden (&min_aar-&max_aar)";
 PROC TABULATE DATA=NORGE_AGG_SNITT;	
 	VAR N_RV N_Innbyggere;
@@ -1260,29 +1468,74 @@ PROC TABULATE DATA=NORGE_AGG_SNITT;
 	N_Innbyggere={LABEL="Innbyggere"}*(Sum={LABEL="Antall"}*F=NLNUM12.0 ColPctSum={LABEL="Andel (%)"}*F=NLNUM8.1*{STYLE={JUST=CENTER}})
 	/ BOX={LABEL="Alderskategorier"};
 RUN; Title;
+%end;
+
+%if &tallformat=Excel %then %do;
+title "Aldersstruktur for snitt i perioden (&min_aar-&max_aar)";
+PROC TABULATE DATA=NORGE_AGG_SNITT;	
+	VAR N_RV N_Innbyggere;
+	CLASS alder_ny /	ORDER=data MISSING;
+	TABLE alder_ny={LABEL=""} all={Label="Totalt"},
+	N_RV={LABEL="&ratevariabel"}*(Sum={LABEL="&forbruksmal"}*F=12.0 ColPctSum={LABEL="Andel (%)"}*F=8.1*{STYLE={JUST=CENTER}}) 
+	N_Innbyggere={LABEL="Innbyggere"}*(Sum={LABEL="Antall"}*F=12.0 ColPctSum={LABEL="Andel (%)"}*F=8.1*{STYLE={JUST=CENTER}})
+	/ BOX={LABEL="Alderskategorier"};
+RUN; Title;
+%end;
 
 %let Bo=Norge; 	%omraade; /*må lage egen for Norge*/
 	%if &Vis_tabeller=1 %then %do;
-		%tabell_1;
+		%if &tallformat=NLnum %then %do;
+			%tabell_1;
+		%end;
+		%if &tallformat=Excel %then %do;
+			%tabell_1e;
+		%end;
 	%end;
+
 	%if &Vis_tabeller=2 %then %do;
-		%tabell_1; 
+		%if &tallformat=NLnum %then %do;
+			%tabell_1;
+		%end;
+		%if &tallformat=Excel %then %do;
+			%tabell_1e;
+		%end;
 	%end;
+
 	%if &Vis_tabeller=3 %then %do;
-		%tabell_1; %tabell_3;
+		%if &tallformat=NLnum %then %do;
+			%tabell_1; %tabell_3;
+		%end;
+		%if &tallformat=Excel %then %do;
+			%tabell_1e; %tabell_3e;
+		%end;
 	%end; %lagre_dataNorge;
 
 	%if &RHF=1 %then %do;
 		%let Bo=BoRHF;
-		%omraade;
+		%omraade; 
 		%if &Vis_tabeller=1 %then %do;
-			%tabell_1;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e;
+			%end;
 		%end;
 		%if &Vis_tabeller=2 %then %do;
-			%tabell_1; %tabell_CV;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe;
+			%end;
 		%end;
 		%if &Vis_tabeller=3 %then %do;
-			%tabell_1; %tabell_CV; %tabell_3;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV; %tabell_3;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe; %tabell_3e;
+			%end;
 		%end;
 		%if &kart=1 %then %do;
 			%lag_kart;
@@ -1304,15 +1557,30 @@ RUN; Title;
 
 	%if &HF=1 %then %do;
 		%let Bo=BoHF;
-		%omraade;
+		%omraade; 
 		%if &Vis_tabeller=1 %then %do;
-			%tabell_1;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e;
+			%end;
 		%end;
 		%if &Vis_tabeller=2 %then %do;
-			%tabell_1; %tabell_CV;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe;
+			%end;
 		%end;
 		%if &Vis_tabeller=3 %then %do;
-			%tabell_1; %tabell_CV; %tabell_3;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV; %tabell_3;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe; %tabell_3e;
+			%end;
 		%end;
 		%if &kart=1 %then %do;
 			%lag_kart;
@@ -1334,15 +1602,30 @@ RUN; Title;
 
 	%if &sykehus_HN=1 %then %do;
 		%let Bo=BoShHN;
-		%omraadeHN;
+		%omraadeHN; 
 		%if &Vis_tabeller=1 %then %do;
-			%tabell_1;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e;
+			%end;
 		%end;
 		%if &Vis_tabeller=2 %then %do;
-			%tabell_1; %tabell_CV;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe;
+			%end;
 		%end;
 		%if &Vis_tabeller=3 %then %do;
-			%tabell_1; %tabell_CV; %tabell_3;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV; %tabell_3;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe; %tabell_3e;
+			%end;
 		%end;
 		%if &kart=1 %then %do;
 			%lag_kart;
@@ -1364,15 +1647,30 @@ RUN; Title;
 
 	%if &kommune=1 %then %do;
 		%let Bo=komnr;
-		%omraade;
+		%omraade; 
 		%if &Vis_tabeller=1 %then %do;
-			%tabell_1;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e;
+			%end;
 		%end;
 		%if &Vis_tabeller=2 %then %do;
-			%tabell_1; %tabell_CV;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe;
+			%end;
 		%end;
 		%if &Vis_tabeller=3 %then %do;
-			%tabell_1; %tabell_CV; %tabell_3;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV; %tabell_3;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe; %tabell_3e;
+			%end;
 		%end;
 		%if &kart=1 %then %do;
 			%lag_kart;
@@ -1394,15 +1692,30 @@ RUN; Title;
 
 	%if &kommune_HN=1 %then %do;
 		%let Bo=komnr;
-		%omraadeHN;
+		%omraadeHN; 
 		%if &Vis_tabeller=1 %then %do;
-			%tabell_1;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e;
+			%end;
 		%end;
 		%if &Vis_tabeller=2 %then %do;
-			%tabell_1; %tabell_CV;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe;
+			%end;
 		%end;
 		%if &Vis_tabeller=3 %then %do;
-			%tabell_1; %tabell_CV; %tabell_3;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV; %tabell_3;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe; %tabell_3e;
+			%end;
 		%end;
 		%if &kart=1 %then %do;
 			%lag_kart;
@@ -1424,15 +1737,30 @@ RUN; Title;
 
 	%if &fylke=1 %then %do;
 		%let Bo=fylke;
-		%omraade;
+		%omraade; 
 		%if &Vis_tabeller=1 %then %do;
-			%tabell_1;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e;
+			%end;
 		%end;
 		%if &Vis_tabeller=2 %then %do;
-			%tabell_1; %tabell_CV;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe;
+			%end;
 		%end;
 		%if &Vis_tabeller=3 %then %do;
-			%tabell_1; %tabell_CV; %tabell_3;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV; %tabell_3;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe; %tabell_3e;
+			%end;
 		%end;
 		%if &kart=1 %then %do;
 			%lag_kart;
@@ -1454,29 +1782,60 @@ RUN; Title;
 
 	%if &Verstkommune_HN=1 %then %do;
 		%let Bo=VK;
-		%omraadeHN;
+		%omraadeHN; 
 		%if &Vis_tabeller=1 %then %do;
-			%tabell_1;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e;
+			%end;
 		%end;
 		%if &Vis_tabeller=2 %then %do;
-			%tabell_1; %tabell_CV;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe;
+			%end;
 		%end;
 		%if &Vis_tabeller=3 %then %do;
-			%tabell_1; %tabell_CV; %tabell_3;
-		%end; %lagre_dataN;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV; %tabell_3;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe; %tabell_3e;
+			%end;
+		%end; 
+		%lagre_dataN;
 	%end;
 
 		%if &oslo=1 %then %do;
 		%let Bo=bydel;
-		%omraade;
+		%omraade; 
 		%if &Vis_tabeller=1 %then %do;
-			%tabell_1;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e;
+			%end;
 		%end;
 		%if &Vis_tabeller=2 %then %do;
-			%tabell_1; %tabell_CV;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe;
+			%end;
 		%end;
 		%if &Vis_tabeller=3 %then %do;
-			%tabell_1; %tabell_CV; %tabell_3;
+			%if &tallformat=NLnum %then %do;
+				%tabell_1; %tabell_CV; %tabell_3;
+			%end;
+			%if &tallformat=Excel %then %do;
+				%tabell_1e; %tabell_CVe; %tabell_3e;
+			%end;
 		%end;
 		%if &kart=1 %then %do;
 			%lag_kart;

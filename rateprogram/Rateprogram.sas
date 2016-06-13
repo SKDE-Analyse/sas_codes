@@ -1,11 +1,11 @@
 /*Options symbolgen mlogic mprint;*/
 
-%include "\\tos-sastest-07\SKDE\rateprogram\Rateprogram_Boomraader.sas";
-%include "\\tos-sastest-07\SKDE\rateprogram\Rateprogram_BoFormat.sas";
+%include "\\tos-sastest-07\SKDE\rateprogram\master\Boomraader.sas";
+%include "\\tos-sastest-07\SKDE\rateprogram\master\BoFormat.sas";
 %include "\\tos-sastest-07\SKDE\rateprogram\develop\rateberegninger.sas";
 
 /******  DATAGRUNNLAG  ****************************************************************/
-%let Ratefil=Bard.AblasjonAgg;
+%let Ratefil=skde_kur.ratetest09_17;;
 %let RV_variabelnavn=ablasjon; /*navn på ratevariabel i det aggregerte datasettet*/
 %Let ratevariabel = ablasjon ved hjertearytmi; /*Brukes til å lage "pene" overskrifter*/
 %Let forbruksmal = Inngrep; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
@@ -19,9 +19,9 @@
 %let kommune=; 		/*Bildefiler*/ %let Fig_AA_kom=; 	%let Fig_KI_kom=;
 %let kommune_HN=; 	/*Bildefiler*/ %let Fig_AA_komHN=; 	%let Fig_KI_komHN=;
 %let fylke=; 		/*Bildefiler*/ %let Fig_AA_fylke=; 	%let Fig_KI_fylke=;
-%let sykehus_HN=1; 	/*Bildefiler*/ %let Fig_AA_ShHN=; 	%let Fig_KI_ShHN=;
+%let sykehus_HN=; 	/*Bildefiler*/ %let Fig_AA_ShHN=; 	%let Fig_KI_ShHN=;
 %let HF=1; 			/*Bildefiler*/ %let Fig_AA_HF=; 	%let Fig_KI_HF=;
-%let RHF=1; 		/*Bildefiler*/ %let Fig_AA_RHF=; 	%let Fig_KI_RHF=;
+%let RHF=; 			/*Bildefiler*/ %let Fig_AA_RHF=; 	%let Fig_KI_RHF=;
 %let Oslo=; 		/*Bildefiler*/ %let Fig_AA_Oslo=; 	%let Fig_KI_Oslo=;
 %let Verstkommune_HN=;
 /* Dersom du skal ha bilde-filer */
@@ -31,6 +31,7 @@
 
 /* Hvilke tabeller ønsker du? */
 %Let Vis_Tabeller=1; /*1=Enkel tabell, 2=Enkel + CV og SCV, 3=Enkel + CV og SCV + Ujusterte rater og KI*/
+%Let TallFormat=NLnum; /*Tallformat i tabeller: NLnum=tusenskilletegn, Excel=klart til excel */
 /* Vil du ha kart? */
 %let kart=; /* ja eller nei */
 
@@ -40,10 +41,10 @@
 %let Ut_sett=; /*Utdata, dersom du ønsker stor tabell med KI osv., --> Ut_sett=1 */
 
 /******  PERIODE OG ALDER  **************************************************************/
-%Let Periode=(2009:2014); /* Periode, dvs aktuelle år må defineres her*/
+%Let Periode=(2011:2015); /* Periode, dvs aktuelle år må defineres her*/
 %Let aar=2013; /* Standardiseringsår defineres her*/
-%Let År1=2009; %Let År2=2010; %Let År3=2011; %Let År4=2012; %Let År5=2013; %Let År6=2014;
-%Let Antall_aar=7; /*Antall år+1 - KUN dersom du ønsker kart */
+%Let År1=2011; %Let År2=2012; %Let År3=2013; %Let År4=2014; %Let År5=2015;
+%Let Antall_aar=6; /*Antall år+1 - KUN dersom du ønsker kart */
 %Let aldersspenn=in (0:105); /*Definerer det aktuelle aldersspennet: (0:105) --> 0 til 105 år*/
 %Let Alderskategorier=41; /*40, 41, 50, 51 eller 99
 							40=4-delt med alle aldre, 41=4-delt KUN med aldre med RV
