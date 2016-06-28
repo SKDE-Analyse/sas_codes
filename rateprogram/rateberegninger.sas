@@ -236,7 +236,7 @@ QUIT;
 
 
 %macro omraade;
-
+%let Antall_aar=%sysevalf(&Slutt≈r-&Start≈r+2);
 data RV&Bo;
 set RV;
 run;
@@ -1515,6 +1515,30 @@ PROC TABULATE DATA=NORGE_AGG_SNITT;
 	N_Innbyggere={LABEL="Innbyggere"}*(Sum={LABEL="Antall"}*F=12.0 ColPctSum={LABEL="Andel (%)"}*F=8.1*{STYLE={JUST=CENTER}})
 	/ BOX={LABEL="Alderskategorier"};
 RUN; Title;
+%end;
+
+%let aarsvarfigur=1;
+/*Beregne Âr1, Âr2 osv*/
+%let Periode=(&Start≈r:&Slutt≈r);
+%let Antall_aar=%sysevalf(&Slutt≈r-&Start≈r+2);
+%let ≈r1=%sysevalf(&Start≈r);
+%if &Antall_aar ge 2 %then %do;
+	%let ≈r2=%sysevalf(&Start≈r+1);
+%end;
+%if &Antall_aar ge 3 %then %do;
+	%let ≈r3=%sysevalf(&Start≈r+2);
+%end;
+%if &Antall_aar ge 4 %then %do;
+	%let ≈r4=%sysevalf(&Start≈r+3);
+%end;
+%if &Antall_aar ge 5 %then %do;
+	%let ≈r5=%sysevalf(&Start≈r+4);
+%end;
+%if &Antall_aar ge 6 %then %do;
+	%let ≈r6=%sysevalf(&Start≈r+5);
+%end;
+%if &Antall_aar ge 7 %then %do;
+	%let ≈r7=%sysevalf(&Start≈r+6);
 %end;
 
 %let Bo=Norge; 	%omraade; /*mÂ lage egen for Norge*/
