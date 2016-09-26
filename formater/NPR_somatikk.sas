@@ -11,7 +11,6 @@ proc format;
       3 = 'Ulikt fødselsår i fødselsnummer/ D-nummer og i aktivitetsdata.'  
       4 = 'Fødselsnummer/ D-nummer mangler.'  
       5 = 'Dødsdato i Det sentrale folkeregister er før inndato.' ;
-	  
    value INSTITUSJONID
       813381192 = 'Aleris Helse AS Stavanger'  
       879595762 = 'Teres Drammen'  
@@ -1855,15 +1854,18 @@ proc format;
       7 = 'Nettverksterapi'  
       8 = 'Fysisk trening' ;
    value POLINDIR
-      1 = 'Erklæring eller uttalelse eller melding'  
-      2 = 'Møte. Samarbeid om pasient med annet helsepersonell'  
+      1 = 'Erklæring/uttalelse/melding'  
+      2 = 'Møte. Samarbeid (om pasient) med annet helsepersonell'  
       3 = 'Aktivitetsgruppe'  
       5 = 'Brev'  
       6 = 'e-post'  
       7 = 'Telefon'  
       8 = 'Tele- eller videokonferanse'  
       11 = 'Telemedisin'  
-      12 = 'Telefonsamtale med pasient' ;
+      12 = 'Telefonsamtale med pasient' 
+      21 = 'Teknisk Episode';
+
+
    value INTERN_KONS
       1 = 'Ja'  
       2 = 'Nei'  
@@ -1886,10 +1888,10 @@ proc format;
    value $SPES_DRG
      'J' = 'Ja'  
      'N' = 'Nei' ;
-   value $REHABTYPE
-     '1' = 'Vanlig'  
-     '2' = 'Kompleks'  
-     '3' = 'Sekundær' ;
+   value REHABTYPE
+     1 = 'Vanlig'  
+     2 = 'Kompleks'  
+     3 = 'Sekundær' ;
    value HDG
       1 = 'Sykdommer i nervesystemet'  
       2 = 'Øyesykdommer'  
@@ -2911,5 +2913,19 @@ proc format;
       996860884 = 'Somni Søvnsenter og Spesialisthelsetjenester AS'  
       998396522 = 'Tore Bru' ;
 
+value kommTjeneste
+1 = 'Kommunale hjemmetjenester'
+2 = 'Kommunal omsorgsbolig' 
+3 = 'Sykehjem korttidsplass'
+4 = 'Sykehjem langtidsplass'
+5 = 'Kommunal ø-hjelp enhet'
+6 = 'Andre kommunale tjenester'
+9 = 'Ukjent';
+
+value pakkeforlop
+1 = 'Ja'
+2 = 'Nei';
+
+
+
 run;
-	  
