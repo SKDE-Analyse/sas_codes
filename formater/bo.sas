@@ -1,0 +1,177 @@
+Proc format;
+
+value BoHF_gammel 
+1='Boomr Helse Finnmark HF' 
+2='Boomr UNN HF' 
+3='Boomr NLSH HF' 
+4='Boomr Helgeland HF' 
+6='Boomr Helse Nord-Trøndelag HF' 
+7='Boomr St. Olavs hospital HF' 
+8='Boomr Helse Møre og Romsdal HF' 
+10='Boomr Helse Førde HF' 
+11='Boomr Helse Bergen HF' 
+12='Boomr Helse Fonna HF' 
+13='Boomr Helse Stavanger HF' 
+14='Boomr Østfold HF' 
+15='Boomr Akershus HF' 
+16='Boomr Oslo universitetssykehus HF' 
+19='Boomr Innlandet HF' 
+20='Boomr Vestre Viken HF' 
+21='Boomr Vestfold HF' 
+22='Boomr Telemark HF' 
+23='Boomr Sørlandet HF' 
+24='Boomr utlandet/Svalbard' 
+99='Ukjent/ugyldig kommunenr';
+
+value BoHF_13_12F 
+1='Finnmarkssykehuset HF - bosted'
+2='UNN HF - bosted'
+3='NLSH HF- bosted'
+4='Helgelandssykehuset HF - bosted'
+6='Helse Nord-Trøndelag HF - bosted'
+7='St. Olavs hospital HF - bosted'
+8='Helse Møre og Romsdal HF - bosted'
+10='Helse Førde HF - bosted'
+11='Helse Bergen HF - bosted'
+12='Helse Fonna HF - bosted'
+13='Helse Stavanger HF - bosted'
+14='Sykehuset i Østfold HF - bosted'
+15='Akershus univ.sh. HF (uten bydeler i Oslo) - bosted'
+16='OUS HF (inkl. alle bydeler i Oslo) - bosted'
+17='Innlandet HF - bosted'
+18='Vestre Viken HF - bosted'
+19='Vestfold HF - bosted'
+20='Telemark sykehus HF - bosted'
+21='Sørlandet sykehus HF - bosted'
+22='Utlandet/Svalbard - bosted'
+99='Ukjent/ugyldig kommunenr';
+ 
+value BoRHF_13_12F
+1='Helse Nord RHF - bosted' 
+2='Helse Midt-Norge RHF - bosted' 
+3='Helse Vest RHF - bosted' 
+4='Helse Sør-Øst RHF - bosted' 
+22='Utlandet/Svalbard - bosted' 
+99='Ukjent/ugyldig kommunenr';
+
+Value BoHF
+1='Finnmarkssykehuset HF - bosted'
+2='UNN HF - bosted'
+3='NLSH HF- bosted'
+4='Helgelandssykehuset HF - bosted'
+6='Helse Nord-Trøndelag HF - bosted'
+7='St. Olavs hospital HF - bosted'
+8='Helse Møre og Romsdal HF - bosted'
+10='Helse Førde HF - bosted'
+11='Helse Bergen HF - bosted'
+12='Helse Fonna HF - bosted'
+13='Helse Stavanger HF - bosted'
+14='Sykehuset i Østfold HF - bosted'
+15='Akershus univ.sh. HF - bosted'
+16='OUS HF - bosted'
+17='Lovisenberg sykehus - bosted'
+18='Diakonhjemmet sykehus - bosted'
+19='Innlandet HF - bosted'
+20='Vestre Viken HF - bosted'
+21='Vestfold HF - bosted'
+22='Telemark sykehus HF - bosted'
+23='Sørlandet sykehus HF - bosted'
+24='Utlandet/Svalbard - bosted'
+99='Ukjent/ugyldig kommunenr';
+ 
+Value BoHF_kort
+1='Finnmark'
+2='UNN'
+3='Nordland'
+4='Helgeland '
+6='Nord-Trøndelag'
+7='St. Olavs'
+8='Møre og Romsdal'
+10='Førde'
+11='Bergen'
+12='Fonna'
+13='Stavanger'
+14='Østfold'
+15='Akershus'
+16='OUS'
+17='Lovisenberg'
+18='Diakonhjemmet'
+19='Innlandet'
+20='Vestre Viken'
+21='Vestfold'
+22='Telemark'
+23='Sørlandet'
+24='Utlandet/Svalbard'
+99='Ukjent/ugyldig kommunenr';
+ 
+Value Bydel_Oslo
+0='Ikke bosatt i Oslo'
+01='Gamle Oslo'
+02='Grünerløkka'
+03='Sagene'
+04='St. Hanshaugen'
+05='Frogner'
+06='Ullern'
+07='Vestre Aker'
+08='Nordre Aker'
+09='Bjerke'
+10='Grorud'
+11='Stovner'
+12='Alna'
+13='Østensjø'
+14='Nordstrand'
+15='Søndre Nordstrand'
+16='Sentrum'
+17='Marka'
+99='Uoppgitt bydel';
+ 
+value BoRHF
+1='Helse Nord RHF - bosted' 
+2='Helse Midt-Norge RHF - bosted' 
+3='Helse Vest RHF - bosted' 
+4='Helse Sør-Øst RHF - bosted' 
+24='Utlandet/Svalbard - bosted' 
+99='Ukjent/ugyldig kommunenr';
+ 
+value BoShHN
+1='Kirkenes - bosted'
+2='Hammerfest - bosted' 
+3='Tromsø - bosted'
+4='Harstad - bosted'
+5='Narvik - bosted' 
+6='Vesterålen - bosted'
+7='Lofoten - bosted' 
+8='Bodø - bosted' 
+9='Rana - bosted' 
+10='Mosjøen - bosted' 
+11='Sandnessjøen - bosted';
+ 
+value fylke
+1 ='Østfold'
+2 ='Akershus'
+3 ='Oslo'
+4 ='Hedmark'
+5 ='Oppland'
+6 ='Buskerud'
+7 ='Vestfold'      
+8 ='Telemark'
+9 ='Aust-Agder'
+10='Vest-Agder'
+11='Rogaland'
+12='Hordaland'
+14='Sogn og Fjordane'
+15='Møre og Romsdal'
+16='Sør-Trøndelag'
+17='Nord-Trøndelag'
+18='Nordland'
+19='Troms Romsa'
+20='Finnmark Finnmárku'
+24='Utlandet/Svalbard - bosted' 
+99='Ukjent/ugyldig kommunenr';
+ 
+value vertskommHN
+1='Vertskommune'
+0='Ikke vertskommune';
+ 
+run;
+ 
