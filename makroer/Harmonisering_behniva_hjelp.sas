@@ -1,0 +1,10 @@
+%macro Harmonisering_behniva_hjelp;
+options nomlogic nomprint;
+%put ===========================================================================================;
+%put Harmonisering_behniva Makro - Opprettet 5/7-16 av Petter Otterdal;
+%put Lager ny variabel med sammenlignbare verdier over år for behandlingsnivå, for Fantomet 2012-2015;
+%put Harmonisering_behniva(dsn=);
+%put Parametre:;
+%put 1. Dsn: datasett man utfører analysen på;
+%put ===========================================================================================;
+%mend Harmonisering_behniva_hjelp;
