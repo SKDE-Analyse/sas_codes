@@ -1,3 +1,7 @@
+/*
+Formater spyttet ut fra SPSS-til-SAS konverteringen av avtalespesialist-filene til NPR,
+basert på 2015. Supplert med INSTITUSJONID fra tidligere år.
+*/
 Proc format;
 
  value $EPISODEFAG
@@ -54,18 +58,7 @@ Proc format;
      '365' = 'LAR - Legemiddelassistert rehabilitering'  
      '999' = 'Ukjent' ;
 
-value KJONN
-      0 = 'Ikke kjent'  
-      1 = 'Mann'  
-      2 = 'Kvinne'  
-      9 = 'Ikke spesifisert' ;
-	  
-value NPRID_REG
-      1 = 'Fødselsnummer/ D-nummer er ok.'  
-      2 = 'Ulikt kjønn i fødselsnummer/ D-nummer og i aktivitetsdata.'  
-      3 = 'Ulikt fødselsår i fødselsnummer/ D-nummer og i aktivitetsdata.'  
-      4 = 'Fødselsnummer/ D-nummer mangler.'  
-      5 = 'Dødsdato i Det sentrale folkeregister er før inndato.' ;
+
 
 value FAG_SKDE
       1 = 'Anestesi'  
@@ -140,7 +133,7 @@ value INSTITUSJONID
       112023 = 'Bygholm , Hanne'  
       112024 = 'Bøe, Bjørn'  
       112025 = 'Bøgwald, Kjell-Petter'  
-      112027 = 'Clementsen   , Mildrid'  
+      112027 = 'Clementsen, Mildrid'  
       112029 = 'Cramer, Gunnar P.'  
       112030 = 'Dahle, Lars Gunnar'  
       112031 = 'Dammen, Toril'  
@@ -1734,7 +1727,7 @@ value INSTITUSJONID
       4204493 = 'Walseth, Fridtjof'  
       4204494 = 'Moser, Karin'  
       4204495 = 'Stenersen, Merete Ziel'  
-      4204512 = 'Måseide, Per Helge' ;
+      4204512 = 'Måseide, Per Helge' 
       4204522 = 'Alvestrand, Monica'  
       4204571 = 'Arnøy, Eva Pauline'  
       4204754 = 'Flatvad, Terje'  
@@ -1977,5 +1970,5 @@ value INSTITUSJONID
       4210553 = 'Zare, Reza'  
       4210581 = 'Karma, Markku Antero'  
       4210584 = 'Stang, Henning'  
-      4210591 = 'Njå, Frode'
+      4210591 = 'Njå, Frode';
 run;

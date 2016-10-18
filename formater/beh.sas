@@ -267,9 +267,9 @@ value behSh
       998396522 = 'Tore Bru' ;
 
 value BehHF 
-1='Finnmarkssykehusene HF' 
+1='Finnmarkssykehuset HF' 
 2='UNN HF' 
-3='NLSH HF' 
+3='Nordlandssykehuset HF' 
 4='Helgelandssykehuset HF' 
 5='Helse Nord-Trøndelag HF' 
 6='St. Olavs Hospital HF' 
@@ -294,6 +294,35 @@ value BehHF
 26='Haraldsplass diakonale sykehus'
 27='Private sykehus';
 
+value BehHF_kort
+1='Finnmarkssykehuset' 
+2='UNN'
+3='Nordlandssykehuset' 
+4='Helgelandssykehuset' 
+5='Helse Nord-Trøndelag' 
+6='St. Olavs Hospital' 
+7='Helse Møre og Romsdal' 
+9='Helse Førde' 
+10='Helse Bergen' 
+11='Helse Fonna' 
+12='Helse Stavanger' 
+13='Resterende Helse Vest' 
+14='Vestre Viken' 
+15='Sykehuset Telemark' 
+16='Akershus universitetssykehus' 
+17='Sykehuset Innlandet' 
+18='Oslo universitetssykehus' 
+19='Sunnaas sykehus' 
+20='Sykehuset Østfold' 
+21='Sørlandet sykehus' 
+22='Sykehuset i Vestfold' 
+23='Diakonhjemmet sykehus'
+24='Lovisenberg diakonale sykehus'
+25='Resterende Helse Sør-Øst' 
+26='Haraldsplass diakonale sykehus'
+27='Private sykehus';
+
+
 value BehRHF 
 1='Helse Nord RHF' 
 2='Helse Midt-Norge RHF' 
@@ -301,4 +330,18 @@ value BehRHF
 4='Helse Sør-Øst RHF'
 5='Private sykehus';
 
-	  run;
+value BehRHF_kort
+1='Helse Nord' 
+2='Helse Midt-Norge' 
+3='Helse Vest' 
+4='Helse Sør-Øst'
+5='Private sykehus';
+
+value BehRHF_kortest
+1='Nord'
+2='Midt'
+3='Vest'
+4='Sør-Øst'
+5='Private sykehus';
+
+run;
