@@ -61,7 +61,7 @@ quit;
 %koble_avtspes (niva=avtspes,aar=2014);
 %koble_avtspes (niva=avtspes,aar=2015);
 
-data &dsnMagnus._UT;
+data &dsnMagnus;
 set tmp_avd_2011 tmp_avd_2012 tmp_avd_2013 tmp_avd_2014 tmp_avd_2015
 	tmp_sho_2011 tmp_sho_2012 tmp_sho_2013 tmp_sho_2014 tmp_sho_2015
 tmp_avtspes_2011 tmp_avtspes_2012 tmp_avtspes_2013 tmp_avtspes_2014 tmp_avtspes_2015;
