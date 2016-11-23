@@ -1,6 +1,24 @@
-
 %macro Boomraader;
-If KomNr>1800 then do;
+
+/*
+***********************
+0. Nulle ut variabler
+***********************
+*/
+
+BoShHN=.;
+VertskommHN=.;
+BoHF=.;
+BoRHF=.;
+Fylke=.;
+
+
+/*
+********************************************************
+1. BoShHN - Opptaksområder for lokalsykehusene i Helse Nord
+********************************************************
+*/
+
 if KomNr in (2002,2003,2023,2024,2025,2027,2028,2030) then BoShHN=1;
 else if KomNr in (2004,2011,2012,2014,2015,2017,2018,2019,2020,2021,2022) then BoShHN=2;
 else if KomNr in (1902,1922,1924,1925,1926,1927,1928,1929,1931,1933,1936,1938,1939,1940,1941,1942,1943) then BoShHN=3;
@@ -12,15 +30,18 @@ else if KomNr in (1804,1837,1838,1839,1840,1841,1845,1848,1849,1850,1856,1857) t
 else if KomNr in (1828,1832,1833,1836) then BoShHN=9;
 else if KomNr in (1824,1825,1826) then BoShHN=10;
 else if KomNr in (1811,1812,1813,1815,1816,1818,1820,1822,1827,1834,1835) then BoShHN=11;
-end;
-/*SAS-kode BoHF*/
-If KomNr>1800 then do;
+
+/*
+*********************************************************
+2. BoHF - Opptaksområder for helseforetakene
+*********************************************************
+*/
+
 If BoShHN in (1,2) then BoHF=1;
-else If BoShHN in (3,4,5) then BoHF=2;
-else If BoShHN in (6,7,8) then BoHF=3;
-else If BoShHN in (9,10,11,12) then BoHF=4;
-end;
-If KomNr<1800 then do;
+else if BoShHN in (3,4,5) then BoHF=2;
+else if BoShHN in (6,7,8) then BoHF=3;
+else if BoShHN in (9,10,11,12) then BoHF=4;
+
 if KomNr in (1632,1633,1702,1703,1711,1714,1717,1718,1719,1721,1724,1725,1736,1738,1739,1740,1742,1743,1744,1748,1749,1750,1751,1755,1756) then BoHF=6;
 else if KomNr in (1567,1612,1613,1617,1620,1621,1622,1624,1627,1630,1634,1635,1636,1638,1640,1644,1648,1653,1657,1662,1663,1664,1665) then BoHF=7;
 else if KomNr in (1601) then do;
@@ -40,12 +61,12 @@ else if komnr in (1103) then do;
 end;
 else if KomNr in (101,104,105,106,111,118,119,122,123,124,125,127,128,135,136,137,138) then BoHF=14;
 else if KomNr in (121,211,213,214,215,216,217,221,226,227,228,229,230,231,233,234,235,237,238,239) then BoHF=15;
-else If KomNr in (301) then do;
-		If Bydel in (30110,30111,30112) then BoHF=15;/*AHUS*/
-		* Nov. 2016: Sagene flyttet fra Lovisenberg til OUS;
-		Else if Bydel in (30103,30108,30109,30113,30114,30115,30117,30199) then BoHF=16;/*OUS*/
-		Else if Bydel in (30101,30102,30104,30116) then BoHF=17;/*Lovisenberg*/
-		Else if Bydel in (30105,30106,30107) then BoHF=18;/*Diakonhjemmet*/
+else if KomNr in (301) then do;
+	if bydel in (030110,030111,030112) then BoHF=15;/*AHUS*/
+	* Nov. 2016: Sagene flyttet fra Lovisenberg til OUS;
+	else if bydel in (030103,030108,030109,030113,030114,030115,030117,030199) then BoHF=16;/*OUS*/
+	else if bydel in (030101,030102,030104,030116) then BoHF=17;/*Lovisenberg*/
+	else if bydel in (030105,030106,030107) then BoHF=18;/*Diakonhjemmet*/
 end;
 else if KomNr in (236,402,403,412,415,417,418,419,420,423,425,426,427,428,429,430,432,434,436,437,438,439,441,501,502,511,512,513,514,515,516,517,519,520,521,
 522,528,529,533,534,536,538,540,541,542,543,544,545) then BoHF=19;
@@ -53,19 +74,28 @@ else if KomNr in (219,220,532,602,604,605,612,615,616,617,618,619,620,621,622,62
 else if KomNr in (701,702,704,706,709,714,716,719,720,722,723,728) then BoHF=21;
 else if KomNr in (805,806,807,811,814,815,817,819,821,822,826,827,828,829,830,831,833,834) then BoHF=22;
 else if KomNr in (901,904,906,911,912,914,919,926,928,929,935,937,938,940,941,1001,1002,1003,1004,1014,1017,1018,1021,1026,1027,1029,1032,1034,1037,1046) then BoHF=23;
-end;
-/*SAS-kode BoRHF*/
+else if komNr in (9000,9900,2100,2111,2121,2131,2211,2311,2321) then BoHF=24;
+else if komNr=9999 then BoHF=99;
+
+/*
+*****************************************************
+3. BoRHF - Opptaksområder for RHF'ene
+*****************************************************
+*/
+
 If BoHF in (1:4) then BoRHF=1;
 else If BoHF in (6:8) then BoRHF=2;
 else If BoHF in (10:13) then BoRHF=3;
 else If BoHF in (14:23) then BoRHF=4;
-else if BOHF in (24:99) then BoRHF=.; /*kaster ut Utlandet og Svalbard*/
-/*SAS-kode Vertskommune*/
-If BoRHF=1 then do;
-if KomNr in (1804,1805,1820,1824,1833,1860,1866,1903,1902,2004,2030) then VertskommuneHN=1;
-else if KomNr in (1811,1812,1813,1815,1818,1822,1825,1826,1827,1828,1832,1834,1836,1837,1838,1839,1840,1841,1845,1848,1849,1850,1851,1852,1853,1854,1856,1857,1859,1865,1867,1868,1870,1871,1874,1911,1913,1917,1919,1920,1922,1923,1924,1925,1926,1927,1928,1929,1931,1933,1936,1938,1939,1940,1941,1942,1943,2002,2003,2011,2012,2014,2015,2017,2018,2019,2020,2021,2022,2023,2024,2025,2027,2028) then VertskommuneHN=0;
-end;
-/*SAS-Kode Fylke*/
+else if BOHF in (24) then BoRHF=24; 
+else if BoHF in (99) then BoRHF=99;
+
+/*
+******************************************************
+4. Fylke
+******************************************************
+*/
+
 if 101<=komnr<=138 then Fylke=1;
 else if 211<=komnr<=239 then Fylke=2;
 else if komnr=301 then Fylke=3;
@@ -85,8 +115,26 @@ else if 1702<=komnr<=1756 then Fylke=17;
 else if 1804<=komnr<=1874 then Fylke=18;
 else if 1901<=komnr<=1943 then Fylke=19;
 else if 2002<=komnr<=2030 then Fylke=20;
-/*SAS-Kode Norge*/
-if BoRHF in (1:4) then Norge=1;
-format borhf borhf. bohf bohf_kort. boshhn boshhn. fylke fylke.  vertskommunehn vertskommuneHN. 
-komnr komnr. bydel bydel_oslo. ermann ermann. Norge Norge.;
+else if KomNr in (2100,2111,2121,2131,2211,2311,2321,9000,9900) then Fylke=24; /*24='Boomr utlandet/Svalbard' */
+else if KomNr in(., 0000,8888,9999) then Fylke=99; /*99='Ukjent/ugyldig kommunenr'*/
+
+/*
+*****************************************************
+5. VertskommHN (Vertskommuner Helse Nord)
+*****************************************************
+*/
+
+if KomNr in (1804 /*Bodø*/
+             1805 /*Narvik*/
+		     1820 /*Alstahaug*/ 
+			 1824 /*Vefsn*/ 
+			 1833 /*Rana*/ 
+			 1860 /*Vestvågøy*/ 
+			 1866 /*Hadsel*/ 
+			 1903 /*Harstad*/
+			 1902 /*Tromsø*/
+			 2004 /*Hammerfest*/ 
+			 2030 /*Sør-Varanger*/) then VertskommHN=1;
+else if KomNr in (1811,1812,1813,1815,1818,1822,1825,1826,1827,1828,1832,1834,1836,1837,1838,1839,1840,1841,1845,1848,1849,1850,1851,1852,1853,1854,1856,1857,1859,1865,1867,1868,1870,1871,1874,1911,1913,1917,1919,1920,1922,1923,1924,1925,1926,1927,1928,1929,1931,1933,1936,1938,1939,1940,1941,1942,1943,2002,2003,2011,2012,2014,2015,2017,2018,2019,2020,2021,2022,2023,2024,2025,2027,2028) then VertskommuneHN=0;
+
 %mend Boomraader;
