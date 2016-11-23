@@ -62,6 +62,14 @@ RUN; */
 %Macro Bobehandler (innDataSett=, utDataSett=);
 Data &Utdatasett;
 Set &Inndatasett;
+
+/*
+Skille Glittre og Feiring i behandlingsstedKode2  da dette ikke er gjort fra NPR.
+Begge rapporterer på org.nr til Feiring (973144383) fra og med 2015.
+*/
+
+if behandlingsstedKode2 in (973144383, 974116561) and tjenesteenhetKode=3200 then behandlingsstedKode2=974116561;
+
 /*
 *******************************************************************************
 2.1 Numerisk kommunenummer og bydel (for Oslo, Stavanger, Bergen og Trondheim)
