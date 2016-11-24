@@ -15,7 +15,7 @@ Fylke=.;
 
 /*
 ********************************************************
-1. BoShHN - OpptaksomrÃ¥der for lokalsykehusene i Helse Nord
+1. BoShHN - Opptaksområder for lokalsykehusene i Helse Nord
 ********************************************************
 */
 
@@ -33,7 +33,7 @@ else if KomNr in (1811,1812,1813,1815,1816,1818,1820,1822,1827,1834,1835) then B
 
 /*
 *********************************************************
-2. BoHF - OpptaksomrÃ¥der for helseforetakene
+2. BoHF - Opptaksområder for helseforetakene
 *********************************************************
 */
 
@@ -79,7 +79,7 @@ else if komNr=9999 then BoHF=99;
 
 /*
 *****************************************************
-3. BoRHF - OpptaksomrÃ¥der for RHF'ene
+3. BoRHF - Opptaksområder for RHF'ene
 *****************************************************
 */
 
@@ -124,17 +124,17 @@ else if KomNr in(., 0000,8888,9999) then Fylke=99; /*99='Ukjent/ugyldig kommunen
 *****************************************************
 */
 
-if KomNr in (1804 /*BodÃ¸*/
+if KomNr in (1804 /*Bodø*/
              1805 /*Narvik*/
 		     1820 /*Alstahaug*/ 
 			 1824 /*Vefsn*/ 
 			 1833 /*Rana*/ 
-			 1860 /*VestvÃ¥gÃ¸y*/ 
+			 1860 /*Vestvågøy*/ 
 			 1866 /*Hadsel*/ 
 			 1903 /*Harstad*/
-			 1902 /*TromsÃ¸*/
+			 1902 /*Tromsø*/
 			 2004 /*Hammerfest*/ 
-			 2030 /*SÃ¸r-Varanger*/) then VertskommHN=1;
+			 2030 /*Sør-Varanger*/) then VertskommHN=1;
 else if KomNr in (1811,1812,1813,1815,1818,1822,1825,1826,1827,1828,1832,1834,1836,1837,1838,1839,1840,1841,1845,1848,1849,1850,1851,1852,1853,1854,1856,1857,1859,1865,1867,1868,1870,1871,1874,1911,1913,1917,1919,1920,1922,1923,1924,1925,1926,1927,1928,1929,1931,1933,1936,1938,1939,1940,1941,1942,1943,2002,2003,2011,2012,2014,2015,2017,2018,2019,2020,2021,2022,2023,2024,2025,2027,2028) then VertskommuneHN=0;
 
 %mend Boomraader;
