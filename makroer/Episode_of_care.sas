@@ -67,8 +67,11 @@ end;
 if brudd=. then EOC_nr_pid=.;
 run;
 
+/*
+Må også sortere på 'overlapp'. Ellers blir det feil hvis inntid og uttid er lik på to opphold.
+*/
 proc sort data=&dsn;
-by pid inndatotid utdatotid;
+by pid inndatotid utdatotid overlapp;
 run;
 
 /*Fyller inn blanke, dvs fyller inn EOC_nr_pid på de som ikke er merket med blanke*/
