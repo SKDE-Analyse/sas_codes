@@ -4,16 +4,11 @@
 Nulle ut variabler som defineres inne i if-løkker
 */
 
-%let debugnavn = debug2;
+%let debugnavn = debug;
 
 data &dsn;
 set &dsn;
-*  EoC_nr_pid =.;
-*  EoC_Intern_nr = .;
-*  innen_t=.;
-*  overlapp=.;
-*  diff=.;
-*  brudd=.;
+drop EoC_nr_pid EoC_Intern_nr innen_t overlapp diff brudd;
 run;
 
 /*nye tidsvariabler, både dato og tidspunkt på døgnet for ut og inn*/
