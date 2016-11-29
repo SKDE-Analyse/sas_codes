@@ -101,16 +101,16 @@ run;
 
 PROC SQL;
 	CREATE TABLE &dsn AS 
-	SELECT *,MAX(EOC_Intern_nr) AS EOC_Antall_i_EOC, min(inndato) as EOC_startdato, max(utdato) as EOC_sluttdato
+	SELECT *,MAX(EOC_Intern_nr) AS EOC_Antall_i_EOC, min(inndato) as EOC_inndato, max(utdato) as EOC_utdato
 	FROM &dsn
 	GROUP BY PID,EOC_nr_pid;
 QUIT;
 
 data &dsn;
 set &dsn;
-EOC_liggetid=EOC_sluttdato-EOC_startdato;
+EOC_liggetid=EOC_utdato-EOC_inndato;
 drop brudd for_innen innen_t lag_utdatotid lead_diff Lead_innen_t lead_pid overlapp;
-format EOC_sluttdato EOC_startdato date10.;
+format EOC_utdato EOC_inndato date10.;
 run;
 
 proc sort data=&dsn;
@@ -119,12 +119,12 @@ run;
 
 data &dsn;
 set &dsn;
-lag_EOC_sluttdato=lag(EOC_sluttdato);
+lag_EOC_utdato=lag(EOC_utdato);
 lag_EOC_nr_pid=lag(EOC_nr_pid);
 lag_EOC_liggetid=lag(EOC_liggetid);
 if pid=lag_pid and lag_EOC_liggetid > 0 then do;
 	if EOC_nr_pid ne lag_EOC_nr_pid &standard_where &tilleggs_where then do;
-		if EOC_startdato-lag_EOC_sluttdato<&ReInn_Tid then ReInnleggelse=1;
+		if EOC_inndato-lag_EOC_utdato<&ReInn_Tid then ReInnleggelse=1;
 	end;
 end;
 run;
@@ -150,10 +150,10 @@ run;
 data &dsn;
 set &dsn;
 %if &debug ne 0 %then %do;
-drop lag_pid lag_EOC_sluttdato lag_EOC_nr_pid lag_EOC_liggetid;
+drop lag_pid lag_EOC_utdato lag_EOC_nr_pid lag_EOC_liggetid;
 %end;
 %else %if &debug eq 0 %then %do;
-drop lag_pid lag_EOC_sluttdato lag_EOC_nr_pid lag_EOC_liggetid ReInnleggelse;
+drop lag_pid lag_EOC_utdato lag_EOC_nr_pid lag_EOC_liggetid ReInnleggelse;
 %end;
 run;
 
