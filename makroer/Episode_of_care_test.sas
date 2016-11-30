@@ -1,4 +1,4 @@
-%macro Episode_of_care_kontroll(branch=master);
+%macro Episode_of_care_test(branch=master);
 
 data testset;
 set npr_utva.eoc_kontroll;
@@ -6,6 +6,7 @@ keep inndato utdato aktivitetskategori3 liggetid hastegrad uttid inntid pid;
 run;
 
 %include "&filbane.makroer\&branch.\episode_of_care.sas";
+
 %episode_of_care(dsn=testset);
 
 %episode_of_care(dsn=testset);
