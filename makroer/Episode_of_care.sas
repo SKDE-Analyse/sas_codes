@@ -1,4 +1,4 @@
-%macro Episode_of_care(dsn=, EoC_tid=28800, forste_hastegrad = 1, debug = 0, behold_datotid=0);
+%macro Episode_of_care(dsn=, EoC_tid=28800, forste_hastegrad = 1, behold_datotid=0, debug = 0);
 
 %let debugnavn = debug;
 
