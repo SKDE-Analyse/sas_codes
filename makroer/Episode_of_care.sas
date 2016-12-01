@@ -1,4 +1,4 @@
-%macro Episode_of_care(dsn=, EoC_tid=28800, debug = 0);
+%macro Episode_of_care(dsn=, EoC_tid=28800, forste_hastegrad = 1, debug = 0, behold_datotid=0);
 
 %let debugnavn = debug;
 
@@ -20,7 +20,7 @@ utdatotid=dhms(utDato,0,0,utTid);
 format inndatotid utdatotid datetime18.;
 run;
 
-%if &debug ne 0 %then %do;
+%if &debug %then %do;
 data &debugnavn.1;
 set &dsn;
 run;
@@ -146,13 +146,33 @@ if EoC_utdatotid - EoC_inndatotid < 28800 then EoC_liggetid = 0;
 drop EoC_brudd EoC_innen_t lag_utdatotid EoC_overlapp;
 run;
 
+/*
+Hastegrad for første opphold, hvis forste_hastegrad = 1, eller første døgnopphold
+*/
 proc sort data=&dsn;
-by EoC_id;
+%if &forste_hastegrad ne 0 %then %do;
+by EoC_id EoC_Intern_nr inndatotid utdatotid;
+%end;
+%else %do;
+by EoC_id aktivitetskategori3 EoC_Intern_nr inndatotid utdatotid;
+%end;
 run;
+
+data &dsn;
+set &dsn;
+by EoC_id;
+if first.EoC_id=1 then forste_hastegrad = hastegrad;
+run;
+
+%if &debug ne 0 %then %do;
+data &debugnavn.8;
+set &dsn;
+run;
+%end;
 
 PROC SQL;
 	CREATE TABLE &dsn AS 
-	SELECT *, min(aktivitetskategori3) as EoC_aktivitetskategori3, min(hastegrad) as EoC_hastegrad
+	SELECT *, min(aktivitetskategori3) as EoC_aktivitetskategori3, min(hastegrad) as EoC_hastegrad, max(forste_hastegrad) as EoC_forste_hastegrad
 	FROM &dsn
 	GROUP BY EoC_id;
 QUIT;
@@ -167,12 +187,16 @@ set &dsn;
 drop lag_pid;
 %end;
 %else %if &debug eq 0 %then %do;
-drop lag_pid EoC_diff inndatotid utdatotid ;
+drop lag_pid EoC_diff inndatotid utdatotid forste_hastegrad;
 %end;
 format EoC_utdato EoC_inndato date10.;
 format EoC_inndatotid EoC_utdatotid datetime18.;
 format EoC_aktivitetskategori3 aktivitetskategori3f.;
-format EoC_hastegrad hastegrad.;
+format EoC_hastegrad EoC_forste_hastegrad hastegrad.;
+%if &behold_datotid = 0 %then %do;
+drop EoC_inndatotid EoC_utdatotid;
+%end;
+
 run;
 
 %mend;
