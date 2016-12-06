@@ -142,7 +142,7 @@ run;
 data &dsn;
 set &dsn;
 EoC_liggetid=EoC_utdato-EoC_inndato;
-if EoC_utdatotid - EoC_inndatotid < 28800 then EoC_liggetid = 0;
+*if EoC_utdatotid - EoC_inndatotid < 28800 then EoC_liggetid = 0;
 drop EoC_brudd EoC_innen_t lag_utdatotid EoC_overlapp;
 run;
 
@@ -172,7 +172,7 @@ run;
 
 PROC SQL;
 	CREATE TABLE &dsn AS 
-	SELECT *, min(aktivitetskategori3) as EoC_aktivitetskategori3, min(hastegrad) as EoC_hastegrad, max(forste_hastegrad) as EoC_forste_hastegrad
+	SELECT *, min(aktivitetskategori3) as EoC_aktivitetskategori3, min(hastegrad) as EoC_hastegrad, max(forste_hastegrad) as EoC_forste_hastegrad, max(uttilstand) as EoC_uttilstand, max(alder) as EoC_alder
 	FROM &dsn
 	GROUP BY EoC_id;
 QUIT;
