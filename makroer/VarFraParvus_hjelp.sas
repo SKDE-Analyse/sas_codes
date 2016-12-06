@@ -3,9 +3,9 @@ options nomlogic nomprint;
 %put =============================================================================================================================;
 %put Hente variable fra Parvus til Magnus - Opprettet 5/10-16 av Petter Otterdal;
 %put For å finne unike prosedyrer/diagnoser o.l. pr pasient pr sykehusopphold i avdelingsoppholdsfila;
-%put VarFraParvus(dsnMagnus=,var_som=,var_avtspes=);
+%put NOTE: VarFraParvus(dsnMagnus=,var_som=,var_avtspes=);
 %put Parametre:;
-%put 1. dsn_Magnus: Datasettet du vil koble variable til. Kan være avdelingsoppholdsfil, sykehusoppholdsfil, avtalespesialistfil eller 
+%put 1. dsnMagnus: Datasettet du vil koble variable til. Kan være avdelingsoppholdsfil, sykehusoppholdsfil, avtalespesialistfil eller 
 kombinasjoner av disse;
 %put 2. var_som: Variable som skal kobles fra avdelingsopphold- eller sykehusoppholdsfil ;
 %put 3. var_avtspes: Variable som skal kobles fra avtalespesialistfil.;
