@@ -7,12 +7,11 @@ Kjører EoC-makroen tre ganger etter hverandre på et test-datasett (npr_utva.ct
 Sammenligner dette datasettet med en referanse (skde_arn.ref_eoc).
 */
 
+%include "&filbane.makroer\&branch.\episode_of_care.sas";
+
 data testset;
 set npr_utva.ctrl_eoc;
-keep aar inndato utdato aktivitetskategori3 liggetid hastegrad uttid inntid pid;
 run;
-
-%include "&filbane.makroer\&branch.\episode_of_care.sas";
 
 %episode_of_care(dsn=testset);
 
@@ -26,6 +25,47 @@ drop pid eoc_id;
 run;
 
 proc compare base=skde_arn.ref_eoc compare=testset BRIEF WARNING LISTVAR;
+
+data testset;
+set npr_utva.ctrl_eoc;
+run;
+
+%episode_of_care(dsn=testset, forste_hastegrad = 0);
+
+data testset;
+set testset;
+drop pid eoc_id;
+run;
+
+proc compare base=skde_arn.ref_eoc2 compare=testset BRIEF WARNING LISTVAR;
+
+data testset;
+set npr_utva.ctrl_eoc;
+run;
+
+%episode_of_care(dsn=testset, behold_datotid = 1);
+
+data testset;
+set testset;
+drop pid eoc_id;
+run;
+
+proc compare base=skde_arn.ref_eoc3 compare=testset BRIEF WARNING LISTVAR;
+
+data testset;
+set npr_utva.ctrl_eoc;
+run;
+
+%episode_of_care(dsn=testset, nulle_liggedogn = 1);
+
+data testset;
+set testset;
+drop pid eoc_id;
+run;
+
+proc compare base=skde_arn.ref_eoc4 compare=testset BRIEF WARNING LISTVAR;
+
+
 
 proc delete data = testset;
 
