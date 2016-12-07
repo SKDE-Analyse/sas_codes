@@ -1,4 +1,4 @@
-%macro Episode_of_care(dsn=, EoC_tid=28800, forste_hastegrad = 1, behold_datotid=0, debug = 0);
+%macro Episode_of_care(dsn=, EoC_tid=28800, forste_hastegrad = 1, behold_datotid=0, debug = 0, nulle_liggedogn = 0);
 
 /* 
 Slette EoC-variabler som lages i denne makroen
@@ -110,9 +110,11 @@ QUIT;
 
 data &dsn;
 set &dsn;
-EoC_liggetid=EoC_utdato-EoC_inndato;
-*if EoC_utdatotid - EoC_inndatotid < 28800 then EoC_liggetid = 0;
-drop EoC_brudd EoC_innen_t lag_utdatotid EoC_overlapp;
+	EoC_liggetid=EoC_utdato-EoC_inndato;
+%if &nulle_liggedogn ne 0 %then %do; * Nulle ut liggetid hvis oppholdet er mindre enn åtte timer;
+	if EoC_utdatotid - EoC_inndatotid < 28800 then EoC_liggetid = 0;
+%end;
+	drop EoC_brudd EoC_innen_t lag_utdatotid EoC_overlapp;
 run;
 
 /*
