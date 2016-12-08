@@ -1,4 +1,4 @@
-%macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=1);
+%macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=1, primaer = alle);
 
 /*
 - Makro for å markere EoC som er en reinnleggelse.
@@ -11,7 +11,10 @@ by pid eoc_inndato eoc_utdato;
 drop EoC_reinnleggelse re_:;
 run;
 
-%if &eks_diag ne 0 %then %do;
+/*
+Ekskludere opphold med gitte diagnoser (Folkehelseinstituttet 2016)
+*/
+%if &eks_diag ne 0 %then %do; 
 data &dsn;
 set &dsn;
 
@@ -44,17 +47,67 @@ PROC SQL;
 QUIT;
 %end;
 
+/*
+Markere linje som eoc_primaer (primæropphold) hvis variablen &primaer er lik én og det er en døgninnleggelse
+(hvis primaer=alle -> markere alle døgnopphold som eoc_primaer)
+*/
 data &dsn;
 set &dsn;
-lag_pid = lag(pid);
-lag_eoc_id = lag(eoc_id);
-lag_EoC_utdato=lag(EoC_utdato);
-lag_eoc_aktivitetskategori3=lag(eoc_aktivitetskategori3);
-if pid=lag_pid and lag_eoc_aktivitetskategori3 > 0 and eoc_id ne lag_eoc_id then do; /* Samme person, ulik EoC , forrige opphold er innleggelse*/
-	if eoc_aktivitetskategori3=1 and eoc_hastegrad=1 and eoc_re_ekskluder ne 1 then do; /* Dette oppholdet er akutt døgninnleggelse */
-		if EoC_inndato-lag_EoC_utdato<&ReInn_Tid then ReInnleggelse=1;
+eoc_primaer = .;
+%if &primaer ne alle %then %do;
+	if &primaer = 1 and eoc_aktivitetskategori3 = 1 then eoc_primaer = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
+%end;
+%else %do;
+	if eoc_aktivitetskategori3 = 1 then eoc_primaer = 1; /* alle døgninnleggelser er aktuelle primæropphold */
+%end;
+run;
+
+/*
+Markere alle linjer i sammen EoC som eoc_primaer, hvis en av linjene er markert som eoc_primaer
+*/ 
+PROC SQL;
+	CREATE TABLE &dsn AS 
+	SELECT *,MAX(eoc_primaer) AS eoc_primaer
+	FROM &dsn
+	GROUP BY EoC_id;
+QUIT;
+
+/*
+Markere reinnleggelser
+(akutte innleggelser mindre enn 30 dager (default) etter en primærinnleggelse)
+*/
+proc sort data = &dsn;
+by pid eoc_id eoc_inndato;
+run;
+
+data &dsn;
+set &dsn;
+
+by pid;
+
+retain _eoc_utdato;
+retain _pid;
+retain _eoc_id;
+
+if first.pid and eoc_primaer = 1 then do;
+	_pid = pid;
+	_eoc_id = eoc_id;
+	_eoc_utdato = eoc_utdato;
+end;
+
+if _pid = pid and _eoc_id ne eoc_id and not first.pid then do;
+	if eoc_aktivitetskategori3 = 1 and eoc_hastegrad = 1 and eoc_re_ekskluder ne 1 and EoC_inndato - _EoC_utdato < &ReInn_Tid then do;
+		ReInnleggelse = 1;
 	end;
 end;
+
+if eoc_primaer = 1 then do;
+	_eoc_utdato = eoc_utdato;
+	_pid = pid;
+	_eoc_id = eoc_id;
+end;
+
+drop _eoc_utdato _pid _eoc_id;
 run;
 
 proc sort data=&dsn;
@@ -70,7 +123,7 @@ QUIT;
 
 data &dsn;
 set &dsn;
-drop ReInnleggelse lag_pid lag_eoc_id lag_EoC_utdato lag_eoc_aktivitetskategori3 re_: eoc_re_ekskluder;
+drop ReInnleggelse re_: eoc_re_ekskluder eoc_primaer;
 run;
 
 %mend;
