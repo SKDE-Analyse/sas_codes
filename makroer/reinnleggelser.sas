@@ -1,4 +1,4 @@
-%macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=1, primaer = alle);
+%macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=1, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd);
 
 /*
 - Makro for å markere EoC som er en reinnleggelse.
@@ -18,13 +18,11 @@ Ekskludere opphold med gitte diagnoser (Folkehelseinstituttet 2016)
 data &dsn;
 set &dsn;
 
-*  array diagnose {*} Hdiag: Bdiag:;
   array diagnose {*} Hdiag:;
   do i=1 to dim(diagnose);
     if substr(diagnose{i},1,1) in ('C') then re_Kreft=1;
     if substr(diagnose{i},1,2) in ('D0') then re_Kreft=1;
     if substr(diagnose{i},1,3) in ('D37','D38','D39','D40','D41','D42','D43','D44','D45','D46','D47','D48') then re_Kreft=1;
-
     if substr(diagnose{i},1,1) in ('V', 'W', 'X', 'Y') then re_ytre=1;
     if substr(diagnose{i},1,2) in ('T1','T2','T3','T6','T7','T9') then re_skade=1;
     if substr(diagnose{i},1,3) in ('T51','T52','T53','T54','T55','T56','T57','T58','T59') then re_skade=1;
@@ -34,12 +32,6 @@ set &dsn;
     if substr(diagnose{i},1,3) in ('Z50','Z51','Z52','Z53','Z55','Z56','Z57','Z58','Z59') then re_faktor=1;
     if substr(diagnose{i},1,3) in ('Z70','Z71','Z72','Z73','Z76','Z77','Z78','Z79') then re_faktor=1;
   end;
-
-*  do i=1 to dim(diagnose);
-*    if substr(diagnose{i},1,2) in ('T4','T8') then re_skade=.;
-*    if substr(diagnose{i},1,3) in ('T50') then re_skade=.;
-*    if substr(diagnose{i},1,3) in ('Z03','Z42','Z47','Z48','Z54','Z74','Z75') then re_faktor=.;
-*  end;
 
   if re_Kreft=1 or re_ytre=1 or re_skade=1 or re_faktor=1 then re_ekskluder = 1;
 drop i;
@@ -54,17 +46,21 @@ QUIT;
 %end;
 
 /*
-Markere linje som eoc_primaer (primæropphold) hvis variablen &primaer er lik én og det er en døgninnleggelse
+Markere linje som eoc_primaer (primæropphold) hvis 
+- variablen &primaer er lik én og 
 (hvis primaer=alle -> markere alle døgnopphold som eoc_primaer)
+- det er en døgninnleggelse og
+- eoc_utdato er innenfor definert tidsperiode (&forste_utdato < eoc_utdato < &siste_utdato) og
+- pasient skrevet ut levende
 */
 data &dsn;
 set &dsn;
 eoc_primaer = .;
 %if &primaer ne alle %then %do;
-	if &primaer = 1 and eoc_aktivitetskategori3 = 1 then eoc_primaer = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
+	if &primaer = 1 and eoc_aktivitetskategori3 = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then eoc_primaer = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
 %end;
 %else %do;
-	if eoc_aktivitetskategori3 = 1 then eoc_primaer = 1; /* alle døgninnleggelser er aktuelle primæropphold */
+	if eoc_aktivitetskategori3 = 1 and &forste_utdato < eoc_utdato < &siste_utdato and EoC_uttilstand = 1 then eoc_primaer = 1; /* alle døgninnleggelser er aktuelle primæropphold */
 %end;
 run;
 
@@ -102,7 +98,7 @@ if first.pid and eoc_primaer = 1 then do;
 end;
 
 if _pid = pid and _eoc_id ne eoc_id and not first.pid then do;
-	if eoc_aktivitetskategori3 = 1 and eoc_hastegrad = 1 and eoc_re_ekskluder ne 1 and EoC_inndato - _EoC_utdato < &ReInn_Tid then do;
+	if eoc_aktivitetskategori3 = 1 and eoc_hastegrad = 1 and eoc_re_ekskluder ne 1 and 0 < EoC_inndato - _EoC_utdato < &reinn_tid then do;
 		ReInnleggelse = 1;
 	end;
 end;
@@ -119,6 +115,10 @@ run;
 proc sort data=&dsn;
 by EoC_id;
 run;
+
+/*
+Markere alle linjer i sammen EoC som EoC_reinnleggelse, hvis en av linjene er markert som ReInnleggelse
+*/ 
 
 PROC SQL;
 	CREATE TABLE &dsn AS 
