@@ -1,8 +1,10 @@
 /*Options symbolgen mlogic mprint;*/
 
-%include "\\tos-sastest-07\SKDE\rateprogram\master\Boomraader.sas";
-%include "\\tos-sastest-07\SKDE\rateprogram\master\BoFormat.sas";
-%include "\\tos-sastest-07\SKDE\rateprogram\develop\rateberegninger.sas";
+%let filbane=\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\;
+%include "&filbane.\rateprogram\master\Boomraader_fo_alt.sas";
+%include "&filbane.\rateprogram\master\BoFormat.sas";
+options sasautos=("&filbane.Makroer\master" SASAUTOS) spool;
+*%include "&filbane.rateberegninger.sas";
 
 /******  DATAGRUNNLAG  ****************************************************************/
 %let Ratefil=skde_kur.ratetest09_17;;
@@ -46,7 +48,9 @@
 %let SluttÅr=2015;
 %Let aar=2013; /* Standardiseringsår defineres her*/
 %Let aldersspenn=in (0:105); /*Definerer det aktuelle aldersspennet: (0:105) --> 0 til 105 år*/
-%Let Alderskategorier=41; /*40, 41, 50, 51 eller 99
+%Let Alderskategorier=30; /*20, 21, 30, 31, 40, 41, 50, 51 eller 99
+							20=2-delt med alle aldre, 21=2-delt KUN med aldre med RV
+							30 3-delt med alle aldre, 31=3-delt KUN med aldre med RV
 							40=4-delt med alle aldre, 41=4-delt KUN med aldre med RV
 							50 5-delt med alle aldre, 51=5-delt KUN med aldre med RV
 							99=Egendefinert(99) */
