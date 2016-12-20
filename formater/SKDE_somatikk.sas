@@ -509,6 +509,64 @@ value INSTITUSJONID_2011_2015F
 
 	/* 2012 */
 
-	/* 2011 */ ;
+	/* 2011 */ 
+
+/* Rehab 2015 */
+      871426902 = 'Godthaab'  
+      888082042 = 'Stamina Helse, Bodø'  
+      912041379 = 'Høyenhall'  
+      915354513 = 'Kastvollen'  
+      932191482 = 'Steffensrud'  
+      934452011 = 'Rauland'  
+      936079857 = 'Nordtun'  
+      937184077 = 'Haugland'  
+      939906746 = 'Selli'  
+      951496502 = 'Ringen'  
+      959678839 = 'Hokksund'  
+      961721652 = 'Muritunet'  
+      964249075 = 'Vikersund'  
+      966867450 = 'Landaasen'  
+      971436875 = 'Beitostølen'  
+     /* 973156829 = 'Rehabilitering Vest as'  - finnes også som Haugesund sanitetsforenings revmatismesykehus */
+      974116464 = 'Betania Malvik'  
+      974116774 = 'Conrad Svendsen Senter'  
+      974157411 = 'Skibotnsenteret'  
+      974568225 = 'Telemark'  
+     /* 974917459 = 'Diabetikersenteret' - finnes også som Norsk diabetikersenter */  
+      974987562 = 'Røysumtunet'  
+      976516745 = 'Valnesfjord'  
+      976547993 = 'Fram Helserehab'  
+      976724895 = 'PTØ-Senteret Hamar'  
+      977155673 = 'Ravneberghaugen'  
+      979757751 = 'Catosenteret'  
+      980395588 = 'Grande'  
+      980684997 = 'Finnmark'  
+      980924076 = 'Nord-Norges Kurbad'  
+      980973549 = 'Skogli'  
+      981027035 = 'Røros'  
+      983213421 = 'Hernes'  
+      983478778 = 'Jeløy kurbad'  
+      984036655 = 'Helgeland Rehabilitering'  
+      985311013 = 'Coperiosenteret'  
+      986358668 = 'Hakadal MSSenter'  
+      986823611 = 'Meråker'  
+      986923845 = 'Namdal'  
+      987552433 = 'Evjeklinikken'  
+      987658584 = 'Bakke'  
+      988351199 = 'Tonsåsen'  
+      988413216 = 'Åstveit'  
+      990772525 = 'Stamina Helse, Tromsø'  
+      991441654 = 'Oppfølgingsenheten Frisk'  
+      992168781 = 'NIMI Ringerike'  
+      993425273 = 'Eiksåsen MSSenter'  
+      994675273 = 'Idrettens Helsesenter'  
+      995111209 = 'Krokeidesenteret_Krokeide'  
+      997808347 = 'Krokeidesenteret_Nærland'  
+      998725186 = 'HLF Briskeby'  
+      999087345 = 'Sørlandets Eiken'
+
+/* Rehab 2014 */
+      980418790 = 'Skibotnsenteret'  
+      999238351 = 'NIMI hjelp24' ;
 
 run;
