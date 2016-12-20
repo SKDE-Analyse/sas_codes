@@ -97,6 +97,7 @@ value INSTITUSJONID_2015F
       995818728 = 'Teres Klinikken Bodø'  
       996860884 = 'Somni Søvnsenter og Spesialisthelsetjenester AS'  
       998396522 = 'Tore Bru' ;
+
    value KJONN
       0 = 'Ikke kjent'  
       1 = 'Mann'  
@@ -1495,6 +1496,27 @@ value pakkeforlop
 1 = 'Ja'
 2 = 'Nei';
 
-
+value ICD_KAP
+      1 = 'Kapittel I Visse infeksjonssykdommer og parasittsykdommer'  
+      2 = 'Kapittel II Svulster'  
+      3 = 'Kapittel III Sykdommer i blod og bloddannende organer'  
+      4 = 'Kapittel IV Endokrine sykdommer, ernæringssykdommer'  
+      5 = 'Kapittel V Psykiske lidelser og atferdsforstyrrelser'  
+      6 = 'Kapittel VI Sykdommer i nervesystemet'  
+      7 = 'Kapittel VII Sykdommer i øyet og øyets omgivelser'  
+      8 = 'Kapittel VIII Sykdommer i øre og ørebensknute'  
+      9 = 'Kapittel IX Sykdommer i sirkulasjonssystemet'  
+      10 = 'Kapittel X Sykdommer i åndedrettssystemet'  
+      11 = 'Kapittel XI Sykdommer i fordøyelsessystemet'  
+      12 = 'Kapittel XII Sykdommer i hud og underhud'  
+      13 = 'Kapittel XIII Sykdommer i muskel/skjelettsystem'  
+      14 = 'Kapittel XIV Sykdommer i urin- og kjønnsorganer'  
+      15 = 'Kapittel XV Svangerskap, fødsel og barseltid'  
+      16 = 'Kapittel XVI Visse tilstander som oppstår i perinatalperioden'  
+      17 = 'Kapittel XVII Medfødte misdannelser, deformiteter'  
+      18 = 'Kapittel XVIII Symptomer, tegn, unormale kliniske funn'  
+      19 = 'Kapittel XIX Skader, forgiftninger'  
+      20 = 'Kapittel XX Ytre årsaker til sykdommer, skader og dødsfall'  
+      21 = 'Kapittel XXI Faktorer som har betydning for helsetilstand' ;
 
 run;
