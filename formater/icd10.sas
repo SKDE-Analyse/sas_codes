@@ -1,5 +1,5 @@
 ﻿proc format;
-value $icd_2015F
+value $icd10F
 '﻿A000'="Kolera som skyldes Vibrio cholerae 01, biovar cholerae"
 'A001'="Kolera som skyldes Vibrio cholerae 01, biovar eltor"
 'A009'="Uspesifisert kolera"
