@@ -77,6 +77,6 @@ else if 80<=alder then alder_ny=5;
 %omraadeNorge;
 %rateberegninger;
 
-*proc datasets nolist;
-*delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd anno;
-*run;
+proc datasets nolist;
+delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd anno;
+run;
