@@ -1,10 +1,8 @@
 /*Options symbolgen mlogic mprint;*/
-
 %let filbane=\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\;
-%include "&filbane.\rateprogram\master\Boomraader_fo_alt.sas";
-%include "&filbane.\rateprogram\master\BoFormat.sas";
 options sasautos=("&filbane.Makroer\master" SASAUTOS) spool;
-*%include "&filbane.rateberegninger.sas";
+%include "&filbane.\rateprogram\master\BoFormat.sas";
+%include "&filbane.\rateprogram\master\rateberegninger.sas";
 
 /******  DATAGRUNNLAG  ****************************************************************/
 %let Ratefil=skde_kur.ratetest09_17;;
@@ -16,7 +14,8 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS) spool;
 /******  HVA ØNSKER DU Å FÅ UT?  **************************************************************/
 /* Ønsker du Årsvariasjonsfigurer og/eller Konfidensintervallfigurer? */
 %let aarsobs=1;/* dersom du ønsker årsobservasjonene med i figur - dersom ikke må denne stå tom */
-%let KIfigur=1;
+%let NorgeSoyle=1; /* dersom du ønsker Norge som søyle i figur - dersom ikke må det stå =0 */
+%let KIfigur=;
 %let Mine_boomraader=; /* Utvalgte områder til figurer - eks: komnr in (1900:1930) eller bydel in (1:15)*/ 
 /* Hvilke bonivåer ønskes? ja eller nei, hvor 1 betyr ja */
 %let kommune=; 		/*Bildefiler*/ %let Fig_AA_kom=; 	%let Fig_KI_kom=;
@@ -78,6 +77,6 @@ else if 80<=alder then alder_ny=5;
 %omraadeNorge;
 %rateberegninger;
 
-proc datasets nolist;
-delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd anno;
-run;
+*proc datasets nolist;
+*delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd anno;
+*run;

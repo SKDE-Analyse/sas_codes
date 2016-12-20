@@ -8,7 +8,8 @@ Value Norge
 
 Value Vertskommune
 1='Vertskommune'
-0='Ikke vertskommune';
+0='Ikke vertskommune'
+8888='Norge';
 
 value BoHF_gammel 
 1='Boomr Helse Finnmark HF' 
@@ -31,7 +32,8 @@ value BoHF_gammel
 22='Boomr Telemark HF' 
 23='Boomr Sørlandet HF' 
 24='Boomr utlandet/Svalbard' 
-99='Ukjent/ugyldig kommunenr';
+99='Ukjent/ugyldig kommunenr'
+8888='Norge';
 
 Value BoHF
 1='Boomr Helse Finnmark HF'
@@ -56,7 +58,8 @@ Value BoHF
 22='Boomr Telemark HF'
 23='Boomr Sørlandet HF'
 24='Boomr utlandet/Svalbard'
-99='Ukjent/ugyldig kommunenr';
+99='Ukjent/ugyldig kommunenr'
+8888='Norge';
 
 Value BoHF_kort
 1='Finnmark'
@@ -81,7 +84,8 @@ Value BoHF_kort
 22='Telemark'
 23='Sørlandet'
 24='Utlandet/Svalbard'
-99='Ukjent/ugyldig kommunenr';
+99='Ukjent/ugyldig kommunenr'
+8888='Norge';
 
 Value Bydel_Oslo
 1='Gamle Oslo'
@@ -101,7 +105,8 @@ Value Bydel_Oslo
 15='Søndre Nordstrand'
 16='Sentrum'
 17='Marka'
-99='Uoppgitt bydel';
+99='Uoppgitt bydel'
+8888='Norge';
 
 value BoRHF
 1='Boomr Helse Nord RHF' 
@@ -109,7 +114,8 @@ value BoRHF
 3='Boomr Helse Vest RHF' 
 4='Boomr Helse Sør-Øst RHF' 
 24='Boomr utlandet/Svalbard' 
-99='Ukjent/ugyldig kommunenr';
+99='Ukjent/ugyldig kommunenr'
+8888='Norge';
 
 value BoShHN
 1='Bor i Kirkenes'
@@ -122,7 +128,8 @@ value BoShHN
 8='Bor i Bodø' 
 9='Bor i Rana' 
 10='Bor i Mosjøen' 
-11='Bor i Sandnessjøen';
+11='Bor i Sandnessjøen'
+8888='Norge';
 
 value fylke
 1 ='Østfold'
@@ -143,11 +150,13 @@ value fylke
 17='Nord-Trøndelag'
 18='Nordland'
 19='Troms Romsa'
-20='Finnmark Finnmárku';
+20='Finnmark Finnmárku'
+8888='Norge';
 
 value vertskommunehn
 1='Vertskommune'
-0='Ikke vertskommune';
+0='Ikke vertskommune'
+8888='Norge';
 
 value komnr
 0='0000 Ugyldig'
@@ -589,6 +598,7 @@ value komnr
 9000='9000 Utenlandske statsborgere uten konvensjonsavtale'
 9900='9900 Utenlandske statsborgere med konvensjonsavtale'
 9999='9999 Ukjent kommunenummer'
+8888='Norge'
 ;
 
 run;

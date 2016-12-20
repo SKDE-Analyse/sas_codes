@@ -422,6 +422,50 @@ Merge &Bo._Agg_rate &Bo._AGG_CV;
 By aar;
 drop SUM_of_Ant_Innbyggere SUM_of_MCV SUM_of_SDCV meancv CV;
 run;
+
+/*Tilpasning til å lage Norge som søyle*/
+PROC SQL;
+   CREATE TABLE NORGE_AGG_RATE2 AS 
+   SELECT aar, Norge, RV_just_rate, Ant_Innbyggere,Ant_Opphold
+      FROM NORGE_AGG_RATE;
+QUIT;
+
+proc transpose data=NORGE_AGG_RATE2 out=NORGE_AGG_RATE3 name=RV_just_rate
+prefix=rate;
+*by &bo notsorted;
+id aar;
+var RV_just_rate;
+run; quit;
+
+data NORGE_AGG_RATE3;
+set NORGE_AGG_RATE3;
+RV_just_rate_sum=rateSnitt;
+drop RV_just_rate;
+aar=9999;
+run;
+
+data NORGE_AGG_RATE4;
+set NORGE_AGG_RATE2;
+where aar=9999;
+drop RV_just_rate;
+run;
+
+proc sql;
+create table NORGE_AGG_RATE5 as
+select *
+from NORGE_AGG_RATE3 left join NORGE_AGG_RATE4
+on NORGE_AGG_RATE3.aar=NORGE_AGG_RATE4.aar;
+quit; title;
+
+data NORGE_AGG_RATE5;
+set NORGE_AGG_RATE5;
+rename Ant_Opphold=&forbruksmal;
+rename Ant_Innbyggere=Innbyggere;
+max=max(of ra:);
+min=min(of ra:);
+Norge=rateSnitt;
+run; 
+/*Slutt tilpasning til å lage Norge som søyle*/
 %mend omraade;
 
 %macro lag_kart;
@@ -1373,6 +1417,8 @@ proc sort data=&bo._aarsvar;
 by descending rateSnitt;
 run;
 
+%if &NorgeSoyle=0 %then %do;
+
 /*data &forbruksmal._&bo; set &bo._aarsvar; run;*/
 
 %include "&filbane.Stiler\stil_figur.sas";
@@ -1405,6 +1451,53 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
         "(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" &SnittOmraade, snitt") 
 	 	/ position=bottomright textattrs=(size=7);
 run;Title; ods listing close; /*ods graphics off;*/
+%end;
+
+/*Alternativ årsvariasjonsfigur*/
+%if &NorgeSoyle=1 %then %do;
+data &bo._aarsvar;
+set &bo._aarsvar NORGE_AGG_RATE5;
+run;
+
+data &bo._aarsvar;
+set &bo._aarsvar;
+if &bo=. then &bo=8888;
+if &bo=8888 then snittrate=ratesnitt;
+run;
+
+proc sort data=&bo._aarsvar;
+by descending rateSnitt;
+run;
+
+ods listing style=stil_figur gpath="%sysfunc(getoption(work))";
+title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, &min_aar - &max_aar";
+proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
+where &Mine_Boomraader;
+hbarparm category=&bo response=RateSnitt / fillattrs=(color=CX95BDE6); 
+hbarparm category=&bo response=Snittrate / fillattrs=(color=CXC3C3C3); 
+/*     Refline &Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=2) name="Ref1";*/
+                %if &Antall_aar>2 and &aarsobs=1 %then %do; scatter x=rate&år1 y=&Bo / markerattrs=(symbol=squarefilled color=black);%end;
+                %if &Antall_aar>2 and &aarsobs=1 %then %do; scatter x=rate&år2 y=&Bo / markerattrs=(symbol=circlefilled color=black); %end;
+                %if &Antall_aar>3 and &aarsobs=1 %then %do; scatter x=rate&år3 y=&Bo / markerattrs=(symbol=trianglefilled color=black);%end;
+                %if &Antall_aar>4 and &aarsobs=1 %then %do; scatter x=rate&år4 y=&Bo / markerattrs=(symbol=Diamondfilled color=black);%end;
+                %if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black);%end;
+                %if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
+%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
+     Yaxistable Innbyggere &forbruksmal /Label labelpos=top location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+     xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
+     inset (
+          %if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &år1" %end;  
+          %if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cf'x}"="   &år2" %end;
+         %if &Antall_aar>3 and &aarsobs=1 %then %do;"(*ESC*){unicode'25b2'x}"="   &år3" %end;
+         %if &Antall_aar>4 and &aarsobs=1 %then %do;"(*ESC*){unicode'2666'x}"="   &år4" %end;
+         %if &Antall_aar>5 and &aarsobs=1 %then %do;"(*ESC*){unicode'0058'x}"="   &år5" %end;
+          %if &Antall_aar>6 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cb'x}"="   &år6" %end;
+        /*"(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" &SnittOmraade, snitt"*/) 
+          / position=bottomright textattrs=(size=7);
+run;Title; ods listing close;
+
+%end;
 
 %mend lag_aarsvarfigur;
 
