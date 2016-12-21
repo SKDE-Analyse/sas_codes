@@ -1298,8 +1298,6 @@ run;
 
 /*data &forbruksmal._&bo; set &bo._aarsvar; run;*/
 
-%include "&filbane.Stiler\stil_figur.sas";
-%include "&filbane.Stiler\Anno_logo_kilde_NPR_SSB.sas";
 
 /*ods graphics on;*/
 ODS Graphics ON /reset=All imagename="AA_&RV_variabelnavn._&bo" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
@@ -1420,9 +1418,6 @@ run;
 %if &NorgeSoyle=0 %then %do;
 
 /*data &forbruksmal._&bo; set &bo._aarsvar; run;*/
-
-%include "&filbane.Stiler\stil_figur.sas";
-%include "&filbane.Stiler\Anno_logo_kilde_NPR_SSB.sas";
 
 /*ods graphics on;*/
 ods listing style=stil_figur gpath="%sysfunc(getoption(work))";

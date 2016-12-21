@@ -4,11 +4,14 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS) spool;
 %include "&filbane.\rateprogram\master\BoFormat.sas";
 %include "&filbane.\rateprogram\master\rateberegninger.sas";
 
+%include "&filbane.Stiler\stil_figur.sas";
+%include "&filbane.Stiler\Anno_logo_kilde_NPR_SSB.sas";
+
 /******  DATAGRUNNLAG  ****************************************************************/
-%let Ratefil=skde_kur.ratetest09_17;;
-%let RV_variabelnavn=ablasjon; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = ablasjon ved hjertearytmi; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = Inngrep; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let Ratefil=skde_kur.ratetest_11_15;
+%let RV_variabelnavn=poli; /*navn på ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = Poliklinikk; /*Brukes til å lage "pene" overskrifter*/
+%Let forbruksmal = Konsultasjoner; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
 %Let innbyggerfil=Innbygg.innb_2004_2015_bydel_allebyer;
 
 /******  HVA ØNSKER DU Å FÅ UT?  **************************************************************/
