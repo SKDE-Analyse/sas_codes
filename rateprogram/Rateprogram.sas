@@ -9,7 +9,7 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS) spool;
 %let RV_variabelnavn=ablasjon; /*navn på ratevariabel i det aggregerte datasettet*/
 %Let ratevariabel = ablasjon ved hjertearytmi; /*Brukes til å lage "pene" overskrifter*/
 %Let forbruksmal = Inngrep; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
-%Let innbyggerfil=Innbygg.innb_2003_2015_bydel;
+%Let innbyggerfil=Innbygg.innb_2004_2015_bydel_allebyer;
 
 /******  HVA ØNSKER DU Å FÅ UT?  **************************************************************/
 /* Ønsker du Årsvariasjonsfigurer og/eller Konfidensintervallfigurer? */
