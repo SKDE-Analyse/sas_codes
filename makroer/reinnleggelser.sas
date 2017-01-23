@@ -1,4 +1,4 @@
-%macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=1, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd);
+%macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd);
 
 /*
 - Makro for å markere EoC som er en reinnleggelse.

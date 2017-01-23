@@ -5,10 +5,10 @@
 %put Makro for å markere EoC som er en reinnleggelse ;
 %put Makroen Episode_of_care må være kjørt før reinnleggelse-makroen;
 %put ;
-%put NOTE: reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=1, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd);
+%put NOTE: reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd);
 %put dsn:             datasett man utfører analysen på;
 %put ReInn_Tid (=30): tidskrav i dager mellom primæropphold og et eventuelt reinnleggelsesopphold;
-%put eks_diag (=1):   Hvis ulik 0, innleggelser som inneholder hoved- eller bi-diagnoser, som brukt av kunnskapssenteret, er ikke en reinnl.;
+%put eks_diag (=0):   Hvis ulik 0, innleggelser som inneholder hoved- eller bi-diagnoser, som brukt av kunnskapssenteret, er ikke en reinnl.;
 %put primaer (=alle): Markere opphold som har primaer = 1 som primæropphold.;
 %put forste_utdato (=0): Kun regne primære innleggelser etter denne dato;
 %put siste_utdato (='31Dec2020'd): Ikke regne primære innleggelser etter denne dato;
