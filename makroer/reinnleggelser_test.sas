@@ -17,20 +17,20 @@ run;
 
 %include "&filbane.makroer\&branch.\reinnleggelser.sas";
 
-%reinnleggelser(dsn=testset1);
+%reinnleggelser(dsn=testset1, eks_diag=1);
 
-%reinnleggelser(dsn=testset2, eks_diag=0);
+%reinnleggelser(dsn=testset2);
 
 data testset1;
 set testset1;
-drop pid eoc_id;
+drop pid eoc_id doddato emigrertdato hdiag hdiag2;
 run;
 
 proc compare base=skde_arn.ref_reinn1 compare=testset1 BRIEF WARNING LISTVAR;
 
 data testset2;
 set testset2;
-drop pid eoc_id;
+drop pid eoc_id doddato emigrertdato hdiag hdiag2;
 run;
 
 proc compare base=skde_arn.ref_reinn2 compare=testset2 BRIEF WARNING LISTVAR;

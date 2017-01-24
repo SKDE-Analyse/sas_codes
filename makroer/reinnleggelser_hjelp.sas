@@ -13,13 +13,16 @@
 %put forste_utdato (=0): Kun regne primære innleggelser etter denne dato;
 %put siste_utdato (='31Dec2020'd): Ikke regne primære innleggelser etter denne dato;
 %put ;
-%put Alle avdelingsopphold i en EoC som er en reinnleggelse blir markert som det (EoC_reinnleggelse = 1);
+%put Makroen produserer følgende 3 variabler;
+%put - reinnleggelse: Alle avdelingsopphold i en EoC som er en reinnleggelse (reinnleggelse = 1);
+%put - primaerinnleggelse: Alle opphold som kan gi en reinnleggelse (primaerinnleggelse = 1);
+%put - primaer_med_reinn: Primæropphold som fører til en reinnleggelse (primaer_med_reinn = 1);
 %put Man kan så i ettertid telle opp antall opphold som er en reinnleggelse.;
 %put ;
 %put Eksempel:;
 %put reinnleggelser(dsn=mittdatasett, ReInn_Tid = 14, primaer = kols, forste_utdato ='18Dec2012', siste_utdato ='17Dec2015'd);
 %put Vil markere alle innleggelser som har kols = 1 som primærinnleggelser;
-%put (variablen kols må være definert på forhånd). Innleggelser med utskrivelsesedato;
+%put (variablen kols må være definert som 1 på forhånd). Innleggelser med utskrivelsesedato;
 %put fra og med 14 dager før nyttår første år til og med 14 dager før nyttår siste år;
 %put teller som primærinnleggelser. Alle akutte innleggelser,;
 %put som ikke har en av de ekskluderte diagnosene, som skjer innen 14 dager;

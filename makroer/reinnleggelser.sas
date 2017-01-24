@@ -43,36 +43,46 @@ PROC SQL;
 	FROM &dsn
 	GROUP BY EoC_id;
 QUIT;
+
 %end;
 
 /*
-Markere linje som eoc_primaer (primæropphold) hvis 
+Markere linje som primaeropphold (primæropphold) hvis 
 - variablen &primaer er lik én og 
-(hvis primaer=alle -> markere alle døgnopphold som eoc_primaer)
+(hvis primaer=alle -> markere alle døgnopphold som primaeropphold)
 - det er en døgninnleggelse og
 - eoc_utdato er innenfor definert tidsperiode (&forste_utdato < eoc_utdato < &siste_utdato) og
 - pasient skrevet ut levende
 */
 data &dsn;
 set &dsn;
-eoc_primaer = .;
+
 %if &primaer ne alle %then %do;
-	if &primaer = 1 and eoc_aktivitetskategori3 = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then eoc_primaer = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
+	primaeropphold = .;
+	if &primaer = 1 and eoc_aktivitetskategori3 = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then primaeropphold = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
+run;
+
 %end;
 %else %do;
-	if eoc_aktivitetskategori3 = 1 and &forste_utdato < eoc_utdato < &siste_utdato and EoC_uttilstand = 1 then eoc_primaer = 1; /* alle døgninnleggelser er aktuelle primæropphold */
-%end;
+	tmp_eoc_primaer = .;
+	if eoc_aktivitetskategori3 = 1 and &forste_utdato < eoc_utdato < &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* alle døgninnleggelser er aktuelle primæropphold */
+drop primaeropphold; * for sikkerhets skyld;
 run;
 
 /*
-Markere alle linjer i sammen EoC som eoc_primaer, hvis en av linjene er markert som eoc_primaer
+Markere alle linjer i sammen EoC som primaeropphold, hvis en av linjene er markert som tmp_eoc_primaer
+(for &primaer = alle vil tmp_eoc_primaer alltid være lik primaeropphold)
 */ 
+
 PROC SQL;
 	CREATE TABLE &dsn AS 
-	SELECT *,MAX(eoc_primaer) AS eoc_primaer
+	SELECT *,MAX(tmp_eoc_primaer) AS primaeropphold
 	FROM &dsn
 	GROUP BY EoC_id;
 QUIT;
+
+%end;
+
 
 /*
 Markere reinnleggelser
@@ -90,26 +100,31 @@ by pid;
 retain _eoc_utdato;
 retain _pid;
 retain _eoc_id;
+retain _eoc_liggetid;
 
-if first.pid and eoc_primaer = 1 then do;
+if first.pid and primaeropphold = 1 then do;
 	_pid = pid;
 	_eoc_id = eoc_id;
 	_eoc_utdato = eoc_utdato;
+	_eoc_liggetid = eoc_liggetid;
 end;
 
 if _pid = pid and _eoc_id ne eoc_id and not first.pid then do;
 	if eoc_aktivitetskategori3 = 1 and eoc_hastegrad = 1 and eoc_re_ekskluder ne 1 and 0 < EoC_inndato - _EoC_utdato < &reinn_tid then do;
-		ReInnleggelse = 1;
+		tmp_ReInnleggelse = 1;
+		tmp_primaer_eoc_id = _eoc_id;
+		tmp_primaer_eoc_liggetid = _eoc_liggetid;
 	end;
 end;
 
-if eoc_primaer = 1 then do;
+if primaeropphold = 1 then do;
 	_eoc_utdato = eoc_utdato;
 	_pid = pid;
 	_eoc_id = eoc_id;
+	_eoc_liggetid = eoc_liggetid;
 end;
 
-drop _eoc_utdato _pid _eoc_id;
+drop _eoc_utdato _pid _eoc_id _eoc_liggetid;
 run;
 
 proc sort data=&dsn;
@@ -117,19 +132,63 @@ by EoC_id;
 run;
 
 /*
-Markere alle linjer i sammen EoC som EoC_reinnleggelse, hvis en av linjene er markert som ReInnleggelse
+Markere alle linjer i sammen EoC som EoC_reinnleggelse, hvis en av linjene er markert som tmp_ReInnleggelse
 */ 
 
 PROC SQL;
 	CREATE TABLE &dsn AS 
-	SELECT *,MAX(ReInnleggelse) AS EoC_reinnleggelse
+	SELECT *,MAX(tmp_ReInnleggelse) AS reinnleggelse, max(tmp_primaer_eoc_id) as primaer_eoc_id, max(tmp_primaer_eoc_liggetid) as primaer_eoc_liggetid
 	FROM &dsn
 	GROUP BY EoC_id;
 QUIT;
 
+/*
+Finne tilbake til de primære opphold som fører til en reinnleggelse
+*/
+data qwerty;
+set &dsn;
+	tmp_primaer_eoc_reinn = 1;
+	eoc_id = primaer_eoc_id;
+	keep eoc_id tmp_primaer_eoc_reinn;
+	where EoC_reinnleggelse = 1 and eoc_intern_nr = 1;
+run;
+
+data &dsn;
+merge &dsn qwerty;
+	by eoc_id;
+run;
+
+proc sql;
+	create table &dsn as
+	select *, max(tmp_primaer_eoc_reinn) as primaer_med_reinn
+	from &dsn
+	group by eoc_id;
+quit;
+
+/*
+Opphold som var en primærinnleggelse men som ikke hadde reinnleggelse,
+og der pasient dør eller emigrerer innen 30 dager, teller ikke som en primærinnleggelse.
+*/
+
 data &dsn;
 set &dsn;
-drop ReInnleggelse re_: eoc_re_ekskluder eoc_primaer;
+
+if doddato ne . then do;
+	if doddato - utdato le 30 and primaer_med_reinn = . and primaeropphold = 1 then primaeropphold = .;
+end;
+
+if emigrertdato ne . then do;
+	if emigrertdato - utdato le 30 and primaer_med_reinn = . and primaeropphold = 1 then primaeropphold = .;
+end;
+
+run;
+
+data &dsn;
+set &dsn;
+	drop tmp_ReInnleggelse eoc_re_ekskluder tmp_primaer_eoc_id tmp_primaer_eoc_liggetid tmp_eoc_primaer tmp_primaer_eoc_reinn primaer_eoc_id primaer_eoc_liggetid;
+	%if &eks_diag ne 0 %then %do; 
+		drop re_Kreft re_ytre re_skade re_faktor re_ekskluder;
+	%end;
 run;
 
 %mend;
