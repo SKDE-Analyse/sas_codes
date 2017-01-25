@@ -50,7 +50,7 @@ QUIT;
 Markere linje som primaeropphold (primæropphold) hvis 
 - variablen &primaer er lik én og 
 (hvis primaer=alle -> markere alle døgnopphold som primaeropphold)
-- det er en døgninnleggelse og
+- det er en døgninnleggelse (kun hvis primaer = alle) og
 - eoc_utdato er innenfor definert tidsperiode (&forste_utdato < eoc_utdato < &siste_utdato) og
 - pasient skrevet ut levende
 */
@@ -59,15 +59,15 @@ set &dsn;
 
 %if &primaer ne alle %then %do;
 	primaeropphold = .;
-	if &primaer = 1 and eoc_aktivitetskategori3 = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then primaeropphold = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
-run;
-
+	if &primaer = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
 %end;
 %else %do;
 	tmp_eoc_primaer = .;
 	if eoc_aktivitetskategori3 = 1 and &forste_utdato < eoc_utdato < &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* alle døgninnleggelser er aktuelle primæropphold */
-drop primaeropphold; * for sikkerhets skyld;
+%end;
+	drop primaeropphold; * for sikkerhets skyld;
 run;
+
 
 /*
 Markere alle linjer i sammen EoC som primaeropphold, hvis en av linjene er markert som tmp_eoc_primaer
@@ -80,9 +80,6 @@ PROC SQL;
 	FROM &dsn
 	GROUP BY EoC_id;
 QUIT;
-
-%end;
-
 
 /*
 Markere reinnleggelser
@@ -167,19 +164,15 @@ quit;
 
 /*
 Opphold som var en primærinnleggelse men som ikke hadde reinnleggelse,
-og der pasient dør eller emigrerer innen 30 dager, teller ikke som en primærinnleggelse.
+og der pasient dør innen 30 dager, teller ikke som en primærinnleggelse.
 */
 
 data &dsn;
 set &dsn;
 
-if doddato ne . then do;
-	if doddato - utdato le 30 and primaer_med_reinn = . and primaeropphold = 1 then primaeropphold = .;
-end;
-
-if emigrertdato ne . then do;
-	if emigrertdato - utdato le 30 and primaer_med_reinn = . and primaeropphold = 1 then primaeropphold = .;
-end;
+	if doddato ne . then do;
+		if doddato - eoc_utdato le 30 and primaer_med_reinn = . and primaeropphold = 1 then primaeropphold = .;
+	end;
 
 run;
 
