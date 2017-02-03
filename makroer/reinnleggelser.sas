@@ -68,7 +68,6 @@ set &dsn;
 	drop primaeropphold; * for sikkerhets skyld;
 run;
 
-
 /*
 Markere alle linjer i sammen EoC som primaeropphold, hvis en av linjene er markert som tmp_eoc_primaer
 (for &primaer = alle vil tmp_eoc_primaer alltid være lik primaeropphold)
@@ -147,12 +146,32 @@ set &dsn;
 	tmp_primaer_eoc_reinn = 1;
 	eoc_id = primaer_eoc_id;
 	keep eoc_id tmp_primaer_eoc_reinn;
-	where EoC_reinnleggelse = 1 and eoc_intern_nr = 1;
+	where reinnleggelse = 1 and eoc_intern_nr = 1;
+run;
+
+/*
+Kun unike eoc_id før kobling med hovedfila, ellers har man ikke kontroll på antall linjer etterpå (dobling av linjer)
+*/
+
+proc sort data = qwerty;
+by eoc_id;
+run;
+
+data qwerty;
+set qwerty;
+by eoc_id;
+if first.eoc_id = 1 then tmp_unik_eoc = 1;
+run;
+
+data qwerty;
+set qwerty;
+where tmp_unik_eoc = 1;
 run;
 
 data &dsn;
 merge &dsn qwerty;
 	by eoc_id;
+	drop primaer_med_reinn tmp_unik_eoc;
 run;
 
 proc sql;
@@ -166,6 +185,7 @@ quit;
 Opphold som var en primærinnleggelse men som ikke hadde reinnleggelse,
 og der pasient dør innen 30 dager, teller ikke som en primærinnleggelse.
 */
+
 
 data &dsn;
 set &dsn;
@@ -183,5 +203,9 @@ set &dsn;
 		drop re_Kreft re_ytre re_skade re_faktor re_ekskluder;
 	%end;
 run;
+
+
+proc datasets nolist;
+delete qwerty:;
 
 %mend;
