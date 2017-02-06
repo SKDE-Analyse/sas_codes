@@ -1,4 +1,4 @@
-%macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd);
+%macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd, kun_innleggelser = 0);
 
 /*
 - Makro for å markere EoC som er en reinnleggelse.
@@ -14,7 +14,8 @@ run;
 /*
 Ekskludere opphold med gitte diagnoser (Folkehelseinstituttet 2016)
 */
-%if &eks_diag ne 0 %then %do; 
+%if &eks_diag ne 0 %then 
+   %do; 
 data &dsn;
 set &dsn;
 
@@ -43,8 +44,7 @@ PROC SQL;
 	FROM &dsn
 	GROUP BY EoC_id;
 QUIT;
-
-%end;
+   %end;
 
 /*
 Markere linje som primaeropphold (primæropphold) hvis 
@@ -57,14 +57,21 @@ Markere linje som primaeropphold (primæropphold) hvis
 data &dsn;
 set &dsn;
 
-%if &primaer ne alle %then %do;
-	primaeropphold = .;
-	if &primaer = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
-%end;
-%else %do;
-	tmp_eoc_primaer = .;
-	if eoc_aktivitetskategori3 = 1 and &forste_utdato < eoc_utdato < &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* alle døgninnleggelser er aktuelle primæropphold */
-%end;
+%if &primaer ne alle and &kun_innleggelser = 0 %then
+   %do;
+      primaeropphold = .;
+      if &primaer = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
+   %end;
+%else %if &primaer ne alle and &kun_innleggelser ne 0 %then
+   %do;
+      primaeropphold = .;
+      if eoc_aktivitetskategori3 = 1 and &primaer = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
+   %end;
+%else 
+   %do;
+      tmp_eoc_primaer = .;
+      if eoc_aktivitetskategori3 = 1 and &forste_utdato < eoc_utdato < &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* alle døgninnleggelser er aktuelle primæropphold */
+   %end;
 	drop primaeropphold; * for sikkerhets skyld;
 run;
 
@@ -199,9 +206,10 @@ run;
 data &dsn;
 set &dsn;
 	drop tmp_ReInnleggelse eoc_re_ekskluder tmp_primaer_eoc_id tmp_primaer_eoc_liggetid tmp_eoc_primaer tmp_primaer_eoc_reinn primaer_eoc_id primaer_eoc_liggetid;
-	%if &eks_diag ne 0 %then %do; 
-		drop re_Kreft re_ytre re_skade re_faktor re_ekskluder;
-	%end;
+	%if &eks_diag ne 0 %then
+      %do; 
+         drop re_Kreft re_ytre re_skade re_faktor re_ekskluder;
+      %end;
 run;
 
 

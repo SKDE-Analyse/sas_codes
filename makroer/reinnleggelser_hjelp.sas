@@ -12,6 +12,7 @@
 %put primaer (=alle): Markere opphold som har primaer = 1 som primæropphold.;
 %put forste_utdato (=0): Kun regne primære innleggelser etter denne dato;
 %put siste_utdato (='31Dec2020'd): Ikke regne primære innleggelser etter denne dato;
+%put kun_innleggelser (= 0): Hvis denne er ulik null, teller kun de som er eoc_aktivitetskategori3 = 1 som en primærinnleggelse;
 %put ;
 %put Makroen produserer følgende 3 variabler;
 %put - reinnleggelse: Alle avdelingsopphold i en EoC som er en reinnleggelse (reinnleggelse = 1);
