@@ -81,5 +81,5 @@ else if 80<=alder then alder_ny=5;
 %rateberegninger;
 
 proc datasets nolist;
-delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd anno;
+delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd;
 run;
