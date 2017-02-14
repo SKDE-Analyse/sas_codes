@@ -1,4 +1,6 @@
 *.html
 Thumbs.db
 *.lnk
+*.docx
+*.xlsx
 
