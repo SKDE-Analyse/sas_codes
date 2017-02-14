@@ -49,7 +49,8 @@ Value BoHF_kort
 	22='Telemark'
 	23='Sørlandet'
 	24='Utlandet/Svalbard'
-	30='Indre Oslo'* Slått sammen Diakonhjemmet og Lovisenberg;
+	25='NORGE'
+	30='Indre Oslo'
 	99='Ukjent/ugyldig kommunenr';
 	 
 Value Bydel

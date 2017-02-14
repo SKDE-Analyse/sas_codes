@@ -42,7 +42,7 @@ value DRGtypeHastegrad
 	2='Akutt medisin' 
 	3='Planlagt kirurgi'
 	4='Akutt kirurgi'
-	9='Annet (DRG_type eller hastegrad missing';
+	9='Annet (DRG_type eller hastegrad missing)';
 
 value ErMann
 	0='Kvinner'

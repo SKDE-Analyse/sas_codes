@@ -1,3 +1,5 @@
+
+
 proc format;
 value $NCSP_2011F
 '﻿AAA00'="Eksplorativ kraniotomi"

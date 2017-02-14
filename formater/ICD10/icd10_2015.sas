@@ -19587,5 +19587,6 @@ value $icd_2015F
 'Z994'="Avhengighet av kunstig hjerte"
 'Z998'="Avhengighet av annet teknisk hjelpemiddel eller innretning"
 'Z999'="Avhengighet av ikke spesifiert teknisk hjelpemiddel eller innretning"
+'XXXX'="Andre diagnoser"
 ;
 run;
