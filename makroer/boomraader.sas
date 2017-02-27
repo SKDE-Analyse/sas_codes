@@ -1,4 +1,13 @@
-%macro Boomraader;
+%macro Boomraader(haraldsplass = 0, indreOslo = 0, bydel = 1);
+
+/*
+Endring Arnfinn 27. feb. 2017
+
+Hvis haraldsplass ne 0: del Bergen i Haraldsplass og Haukeland
+Hvis indreOslo ne 0: Slå sammen Diakonhjemmet og Lovisenberg
+Hvis bydel = 0: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 10, 11, 12 går ikke til Ahus men til Oslo)
+Standardverdier: kjører som før
+*/
 
 /*
 ***********************
@@ -45,29 +54,73 @@ else if BoShHN in (9,10,11,12) then BoHF=4;
 if KomNr in (1632,1633,1702,1703,1711,1714,1717,1718,1719,1721,1724,1725,1736,1738,1739,1740,1742,1743,1744,1748,1749,1750,1751,1755,1756) then BoHF=6;
 else if KomNr in (1567,1612,1613,1617,1620,1621,1622,1624,1627,1630,1634,1635,1636,1638,1640,1644,1648,1653,1657,1662,1663,1664,1665) then BoHF=7;
 else if KomNr in (1601) then do;
-	if Bydel in (160101:160199) then BoHF=7; /*Trondheim - endres ved behov*/
+%if &bydel = 0 %then %do;
+   BoHF = 7;
+%end;
+%else %do;
+   if Bydel in (160101:160199) then BoHF=7; /*Trondheim - endres ved behov*/
+%end;
 end;
 else if KomNr in (1502,1504,1505,1511,1514,1515,1516,1517,1519,1520,1523,1524,1525,1526,1528,1529,1531,1532,1534,1535,1539,1543,1545,1546,1547,1548,1551,
 1554,1557,1560,1563,1566,1571,1573,1576) then BoHF=8;
-else if KomNr in (1401,1411,1412,1413,1416,1417,1418,1419,1420,1421,1422,1424,1426,1428,1429,1430,1431,1432,1433,1438,1439,1441,1443,1444,1445,1449) then BoHF=10;
+else if KomNr in (1401,1411,1412,1413,1416,1417,1418,1419,1420,1421,1422,1424,1426,1428,1429,1430,1431,1432,1433,1438,1439,1441,1443,1444,1445,1449) then BoHF=10; /*1411 Gulen skal f.o.m 1/1-16 høre til Haraldsplass*/
+
+%if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/
 else if KomNr in (1233,1234,1235,1238,1241,1242,1243,1244,1245,1246,1247,1251,1252,1253,1256,1259,1260,1263,1264,1265,1266) then BoHF=11;
 else if KomNr in (1201) then do;
+%if &bydel = 0 %then %do;
+   BoHF = 11;
+%end;
+%else %do;
 	if Bydel in (120101:120199) then BoHF=11; /*Bergen - endres ved behov*/
+%end;
 end;
+%end;
+%else %do;
+else if KomNr in (1233,1234,1235,1238,1241,1243,1244,1245,1246,1247,1251,1259) then BoHF=11; /*Haukeland*/
+else if KomNr in (1242,1252,1253,1256,1260,1263,1264,1265,1266) then BoHF=9; /*Haraldsplass*/ /*1242 Samnanger??*/
+else if KomNr in (1201) then do;
+%if &bydel = 0 %then %do;
+   BoHF = 11;
+%end;
+%else %do;
+	if Bydel in (120103,120104,120105,120106,120107,120199) then BoHF=11;
+	if Bydel in (120101,120102,120108) then BoHF=9;
+%end;
+end;
+%end;
+
 else if KomNr in (1106,1134,1135,1145,1146,1149,1151,1160,1211,1216,1219,1221,1222,1223,1224,1227,1228,1231,1232) then BoHF=12;
 else if KomNr in (1101,1102,1111,1112,1114,1119,1120,1121,1122,1124,1127,1129,1130,1133,1141,1142,1144) then BoHF=13;
 else if komnr in (1103) then do; 
+%if &bydel = 0 %then %do;
+   BoHF = 13;
+%end;
+%else %do;
 	if Bydel in (110301:110399) then BoHF=13; /*Stavanger - endres ved behov*/
+%end;
 end;
 else if KomNr in (101,104,105,106,111,118,119,122,123,124,125,127,128,135,136,137,138) then BoHF=14;
 else if KomNr in (121,211,213,214,215,216,217,221,226,227,228,229,230,231,233,234,235,237,238,239) then BoHF=15;
 else if KomNr in (301) then do;
+%if &bydel = 0 %then %do;
+   BoHF = 30;
+%end;
+%else %do;
 	if bydel in (030110,030111,030112) then BoHF=15;/*AHUS*/
-	* Nov. 2016: Sagene flyttet fra Lovisenberg til OUS;
+	* f.o.m 2015: 030103 Sagene flyttet fra Lovisenberg til OUS;
 	else if bydel in (030103,030108,030109,030113,030114,030115,030117,030199) then BoHF=16;/*OUS*/
+%if &indreOslo = 0 %then %do;
 	else if bydel in (030101,030102,030104,030116) then BoHF=17;/*Lovisenberg*/
 	else if bydel in (030105,030106,030107) then BoHF=18;/*Diakonhjemmet*/
 end;
+%end;
+%else %do;
+   *slå sammen Lovisenberg og Diakonhjemmet til Indre Oslo (BoHF = 31);
+	else if bydel in (030101,030102,030104,030116) then BoHF=31;/*Lovisenberg*/
+	else if bydel in (030105,030106,030107) then BoHF=31;/*Diakonhjemmet*/
+%end; 
+%end;
 else if KomNr in (236,402,403,412,415,417,418,419,420,423,425,426,427,428,429,430,432,434,436,437,438,439,441,501,502,511,512,513,514,515,516,517,519,520,521,
 522,528,529,533,534,536,538,540,541,542,543,544,545) then BoHF=19;
 else if KomNr in (219,220,532,602,604,605,612,615,616,617,618,619,620,621,622,623,624,625,626,627,628,631,632,633,711,713) then BoHF=20;
@@ -85,9 +138,11 @@ else if komNr=9999 then BoHF=99;
 
 If BoHF in (1:4) then BoRHF=1;
 else If BoHF in (6:8) then BoRHF=2;
-else If BoHF in (10:13) then BoRHF=3;
+else If BoHF in (9:13) then BoRHF=3;
 else If BoHF in (14:23) then BoRHF=4;
-else if BOHF in (24) then BoRHF=24; 
+else if BOHF in (24) then BoRHF=24;
+else If BoHF in (30) then BoRHF=4;
+else If BoHF in (31) then BoRHF=4;
 else if BoHF in (99) then BoRHF=99;
 
 /*
