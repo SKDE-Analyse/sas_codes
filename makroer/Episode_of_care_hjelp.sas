@@ -16,7 +16,7 @@
 %put Episode of care omfatter da:;
 %put a. Dersom inndatotid på nytt opphold er før utdatotid på forrige opphold;
 %put b. Dersom nytt opphold er innen x sekunder fra utdatotid på forrige opphold;
-%put Makroen lager 11 (eventuelt 13) nye variabler:;
+%put Makroen lager 12 (eventuelt 14) nye variabler:;
 %put 1.  EoC_nr_pid: Nummererte EoC-opphold pr pid, dersom EoC består av flere opphold har disse samme nummer;
 %put 2.  EoC_id: Unik ID for hver EoC (pid+EoC_nr_pid);
 %put 3.  EoC_Intern_nr: Nummerer oppholdene innenfor hver EoC for hver pid;
@@ -30,5 +30,6 @@
 %put 11. EoC_aktivitetskategori3: 1 hvis ett oppholdene er døgn, 2 hvis ett av oppholdene er dag, 3 hvis ett av oppholdene er poli;
 %put 12. EoC_hastegrad: 1 hvis ett av oppholdene er akutt, 4 ellers;
 %put 13. EoC_forste_hastegrad: Hastegrad for første avdelingsopphold. 1 for akutt, 4 for elektiv;
+%put 14. EoC_uttilstand: max(uttilstand) for oppholdene i en EoC ("som død" hvis ett av oppholdene er "som død");
 %put ==================================================================================;
 %mend;
