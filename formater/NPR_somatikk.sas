@@ -484,7 +484,8 @@ value INSTITUSJONID_2015F
       19 = 'Psykiske lidelser og rusproblemer'  
       21 = 'Skade, forgiftninger og toksiske effekter av medikamenter/andre stoffer, medikamentmisbruk og organiske sinnslidelser fr'  
       22 = 'Forbrenninger'  
-      23 = 'Faktorer som påvirker helsetilstand - andre kontakter med helsetjenesten'  
+      23 = 'Faktorer som påvirker helsetilstand - andre kontakter med helsetjenesten'
+      24 = 'Signifikant multitraume'
       30 = 'Sykdommer i bryst'  
       40 = 'Kategorier på tvers av flere hoveddiagnosegrupper'  
       99 = 'Kategorier for feil og uvanlige diagnose-prosedyrekombinasjoner' ;
