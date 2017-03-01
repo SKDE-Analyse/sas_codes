@@ -1314,7 +1314,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black size=5);%end;
 			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black size=5);%end;
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
-     Yaxistable Innbyggere &forbruksmal /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     Yaxistable &forbruksmal Innbyggere /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset (
@@ -1360,7 +1360,7 @@ hbarparm category=&bo response=Snittrate / fillattrs=(color=CXC3C3C3);
 			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black);%end;
 			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
-     Yaxistable Innbyggere &forbruksmal /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     Yaxistable &forbruksmal Innbyggere /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset (
@@ -1481,7 +1481,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black);%end;
 			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
-     Yaxistable Innbyggere &forbruksmal /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     Yaxistable &forbruksmal Innbyggere /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset (
@@ -1526,7 +1526,7 @@ hbarparm category=&bo response=Snittrate / fillattrs=(color=CXC3C3C3);
 			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black);%end;
 			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
-     Yaxistable Innbyggere &forbruksmal /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     Yaxistable &forbruksmal Innbyggere /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset (
