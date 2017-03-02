@@ -68,25 +68,20 @@ else if KomNr in (1401,1411,1412,1413,1416,1417,1418,1419,1420,1421,1422,1424,14
 %if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/
 else if KomNr in (1233,1234,1235,1238,1241,1242,1243,1244,1245,1246,1247,1251,1252,1253,1256,1259,1260,1263,1264,1265,1266) then BoHF=11;
 else if KomNr in (1201) then do;
-%if &bydel = 0 %then %do;
-   BoHF = 11;
-%end;
-%else %do;
-	if Bydel in (120101:120199) then BoHF=11; /*Bergen - endres ved behov*/
-%end;
+   %if &bydel = 0 %then %do;
+      BoHF = 11;
+   %end;
+   %else %do;
+      if Bydel in (120101:120199) then BoHF=11; /*Bergen - endres ved behov*/
+   %end;
 end;
 %end;
 %else %do;
 else if KomNr in (1233,1234,1235,1238,1241,1243,1244,1245,1246,1247,1251,1259) then BoHF=11; /*Haukeland*/
 else if KomNr in (1242,1252,1253,1256,1260,1263,1264,1265,1266) then BoHF=9; /*Haraldsplass*/ /*1242 Samnanger??*/
 else if KomNr in (1201) then do;
-%if &bydel = 0 %then %do;
-   BoHF = 11;
-%end;
-%else %do;
 	if Bydel in (120103,120104,120105,120106,120107,120199) then BoHF=11;
 	if Bydel in (120101,120102,120108) then BoHF=9;
-%end;
 end;
 %end;
 
@@ -110,17 +105,17 @@ else if KomNr in (301) then do;
 	if bydel in (030110,030111,030112) then BoHF=15;/*AHUS*/
 	* f.o.m 2015: 030103 Sagene flyttet fra Lovisenberg til OUS;
 	else if bydel in (030103,030108,030109,030113,030114,030115,030117,030199) then BoHF=16;/*OUS*/
-%if &indreOslo = 0 %then %do;
-	else if bydel in (030101,030102,030104,030116) then BoHF=17;/*Lovisenberg*/
-	else if bydel in (030105,030106,030107) then BoHF=18;/*Diakonhjemmet*/
+   %if &indreOslo = 0 %then %do;
+      else if bydel in (030101,030102,030104,030116) then BoHF=17;/*Lovisenberg*/
+      else if bydel in (030105,030106,030107) then BoHF=18;/*Diakonhjemmet*/
+   %end;
+   %else %do;
+      *slå sammen Lovisenberg og Diakonhjemmet til Indre Oslo (BoHF = 31);
+      else if bydel in (030101,030102,030104,030116) then BoHF=31;/*Lovisenberg*/
+      else if bydel in (030105,030106,030107) then BoHF=31;/*Diakonhjemmet*/
+   %end; 
+%end;
 end;
-%end;
-%else %do;
-   *slå sammen Lovisenberg og Diakonhjemmet til Indre Oslo (BoHF = 31);
-	else if bydel in (030101,030102,030104,030116) then BoHF=31;/*Lovisenberg*/
-	else if bydel in (030105,030106,030107) then BoHF=31;/*Diakonhjemmet*/
-%end; 
-%end;
 else if KomNr in (236,402,403,412,415,417,418,419,420,423,425,426,427,428,429,430,432,434,436,437,438,439,441,501,502,511,512,513,514,515,516,517,519,520,521,
 522,528,529,533,534,536,538,540,541,542,543,544,545) then BoHF=19;
 else if KomNr in (219,220,532,602,604,605,612,615,616,617,618,619,620,621,622,623,624,625,626,627,628,631,632,633,711,713) then BoHF=20;
