@@ -1,8 +1,15 @@
-/*Options symbolgen mlogic mprint;*/
 %let filbane=\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\;
-options sasautos=("&filbane.Makroer\master" SASAUTOS) spool;
-%include "&filbane.\rateprogram\master\BoFormat.sas";
-%include "&filbane.\rateprogram\master\rateberegninger.sas";
+options sasautos=("&filbane.Makroer\master" SASAUTOS);
+
+/*Options symbolgen mlogic mprint;*/
+
+%include "&filbane.Formater\master\SKDE_somatikk.sas";
+%include "&filbane.Formater\master\NPR_somatikk.sas";
+%include "&filbane.Formater\master\bo.sas";
+%include "&filbane.Formater\master\beh.sas";
+%include "&filbane.Formater\master\komnr.sas";
+
+%include "&filbane.rateprogram\master\rateberegninger.sas";
 
 %include "&filbane.Stiler\stil_figur.sas";
 %include "&filbane.Stiler\Anno_logo_kilde_NPR_SSB.sas";
