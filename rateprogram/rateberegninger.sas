@@ -148,7 +148,7 @@ options locale=NB_NO;
 	if BOHF in (24,99) then BoRHF=.; /*kaster ut Utlandet og Svalbard*/
 	if BoRHF in (1:4) then Norge=1;
 format borhf borhf. bohf bohf_kort. boshhn boshhn. fylke fylke.  vertskommunehn vertskommuneHN. 
-komnr komnr. bydel bydel_oslo. ermann ermann. Norge Norge.;
+komnr komnr. bydel bydel. ermann ermann.;
 	run;
 
 	/* beregne andeler */
