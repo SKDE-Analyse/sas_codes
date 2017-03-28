@@ -27,7 +27,7 @@
 %put (8.  EoC_utdatotid: uttid (dato og tidspunkt) på siste opphold i EoC (hvis behold_datotid ulik 0));
 %put 9.  EoC_aar: år ved utskriving;
 %put 10. EoC_liggetid: tidsdifferanse mellom inndatotid på det første oppholdet og utdatotid på det siste oppholdet i EoC;
-%put 11. EoC_aktivitetskategori3: 1 hvis ett oppholdene er døgn, 2 hvis ett av oppholdene er dag, 3 hvis ett av oppholdene er poli;
+%put 11. EoC_aktivitetskategori3: 1 hvis ett av oppholdene er døgn, eller 2 hvis ett av oppholdene er dag (og ingen døgn), eller 3 hvis oppholdene er kun poli;
 %put 12. EoC_hastegrad: 1 hvis ett av oppholdene er akutt, 4 ellers;
 %put 13. EoC_forste_hastegrad: Hastegrad for første avdelingsopphold. 1 for akutt, 4 for elektiv;
 %put 14. EoC_uttilstand: max(uttilstand) for oppholdene i en EoC ("som død" hvis ett av oppholdene er "som død");

@@ -9,7 +9,7 @@ options nomlogic nomprint;
 kombinasjoner av disse;
 %put 2. var_som: Variable som skal kobles fra avdelingsopphold- eller sykehusoppholdsfil ;
 %put 3. var_avtspes: Variable som skal kobles fra avtalespesialistfil.;
-%put Eksempel: VarFraParvus(dsn=radiusfrakturer,var_som=cyto: komnrhjem2 opphold_ID, var_avtspes=fagLogg komnrhjem2);
+%put Eksempel: VarFraParvus(dsnMagnus=radiusfrakturer,var_som=cyto: komnrhjem2 opphold_ID, var_avtspes=fagLogg komnrhjem2);
 %put -------------------------------------------------------------------------------------------------------------------------------;
 %put De varible du har valgt hentes fra aktuelle filer, kobles med variabelen KoblingsID og legges til inndatasettet ;
 %put Start gjerne med et ferdig utvalg om det er mulig, da vil makroen kjøre raskere og kreve mindre ressurser;
