@@ -13,6 +13,8 @@ Nye tidsvariabler, både dato og tidspunkt på døgnet for ut og inn
 */
 data &dsn;
 set &dsn;
+if inntid=. then inntid=0;
+if uttid=. then uttid=0;
 inndatotid=dhms(innDato,0,0,innTid);
 utdatotid=dhms(utDato,0,0,utTid);
 format inndatotid utdatotid datetime18.;
