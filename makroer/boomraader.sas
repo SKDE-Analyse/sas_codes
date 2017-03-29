@@ -3,9 +3,9 @@
 /*
 Endring Arnfinn 27. feb. 2017
 
-Hvis haraldsplass ne 0: del Bergen i Haraldsplass og Haukeland
+Hvis haraldsplass ne 0: del Bergen i Haraldsplass og Bergen
 Hvis indreOslo ne 0: Slå sammen Diakonhjemmet og Lovisenberg
-Hvis bydel = 0: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 10, 11, 12 går ikke til Ahus men til Oslo)
+Hvis bydel = 0: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo)
 Standardverdier: kjører som før
 */
 
