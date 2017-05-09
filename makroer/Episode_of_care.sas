@@ -131,15 +131,19 @@ by EoC_id aktivitetskategori3 EoC_Intern_nr inndatotid utdatotid;
 %end;
 run;
 
+/*
+EoC_hastegrad regnes kun på innleggelser (AHS, 9. mai 2017)
+*/
 data &dsn;
 set &dsn;
 by EoC_id;
 if first.EoC_id=1 then forste_hastegrad = hastegrad;
+if aktivitetskategori3 = 1 then hastegrad_inn = hastegrad;
 run;
 
 PROC SQL;
 	CREATE TABLE &dsn AS 
-	SELECT *, min(aktivitetskategori3) as EoC_aktivitetskategori3, min(hastegrad) as EoC_hastegrad, max(forste_hastegrad) as EoC_forste_hastegrad, max(uttilstand) as EoC_uttilstand, max(alder) as EoC_alder
+	SELECT *, min(aktivitetskategori3) as EoC_aktivitetskategori3, min(hastegrad_inn) as EoC_hastegrad, max(forste_hastegrad) as EoC_forste_hastegrad, max(uttilstand) as EoC_uttilstand, max(alder) as EoC_alder
 	FROM &dsn
 	GROUP BY EoC_id;
 QUIT;
