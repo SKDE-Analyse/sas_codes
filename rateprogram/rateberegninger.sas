@@ -62,8 +62,71 @@ options locale=NB_NO;
 	set &Ratefil; /*HER MÅ DET AGGREGERTE RATEGRUNNLAGSSETTET SETTES INN */
 		RV=&RV_variabelnavn; /* Definerer RV som ratevariabel */
 	keep RV ermann aar alder komnr bydel;
+	/*endring 11/5-17 Frank Olsen - alder>105-->105*/
+	if alder in (106:115) then alder=105;
 	&aldjust;
 	run;
+	
+/*Nytt pr 11/5-17 - Frank Olsen - tabeller for eksludering*/
+%if &vis_ekskludering=1 %then %do;
+Title "EKSKLUDERING";
+PROC TABULATE DATA=utvalgx FORMAT=NLnum12.0;	
+VAR RV;
+CLASS aar ErMann/	ORDER=UNFORMATTED MISSING;
+TABLE ErMann={LABEL=""} ALL={LABEL="Total kjønn"} aar={LABEL=""} ALL={LABEL="Total år"} ,
+RV={LABEL=""}*Sum={LABEL="Antall"}
+/ BOX={LABEL="Fra utvalgsdatasettet" STYLE={JUST=LEFT VJUST=BOTTOM}};
+RUN; Title;
+
+PROC SQL;
+CREATE TABLE ikke_med_tot AS
+SELECT * FROM UTVALGX
+where komnr=. or komnr not in (0:2031) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
+QUIT;
+
+PROC TABULATE DATA=ikke_med_tot FORMAT=NLnum12.0;	
+VAR RV;
+CLASS aar ErMann/	ORDER=UNFORMATTED MISSING;
+TABLE ErMann={LABEL=""} ALL={LABEL="Total kjønn"} aar={LABEL=""} ALL={LABEL="Total år"} ,
+RV={LABEL=""}*Sum={LABEL="Antall"}
+/ BOX={LABEL="Totalt ekskludert" STYLE={JUST=LEFT VJUST=BOTTOM}};
+RUN;
+
+PROC SQL;
+CREATE TABLE ikke_kom AS
+SELECT * FROM UTVALGX
+where komnr not in (0:2031); 
+QUIT;
+
+PROC TABULATE DATA=ikke_kom FORMAT=NLnum12.0;	
+VAR RV;
+CLASS alder aar ErMann komnr/	ORDER=UNFORMATTED MISSING;
+TABLE ErMann={LABEL=""} ALL={LABEL="Total kjønn"} aar={LABEL=""} ALL={LABEL="Total år"} komnr={LABEL=""} ALL={LABEL="Total komnr"}
+/*alder={LABEL=""} ALL={LABEL="Total alder"}*/,
+RV={LABEL=""}*Sum={LABEL="Antall"}
+/ BOX={LABEL="Kommunenummer utenfor definert område" STYLE={JUST=LEFT VJUST=BOTTOM}};
+RUN;
+
+PROC SQL;
+CREATE TABLE ikke_med AS
+SELECT * FROM UTVALGX
+where (komnr=. or komnr in (0:2031)) and (alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår)); 
+QUIT;
+
+PROC TABULATE DATA=ikke_med FORMAT=NLnum12.0;	
+VAR RV;
+CLASS alder aar ErMann komnr/	ORDER=UNFORMATTED MISSING;
+TABLE ErMann={LABEL=""} ALL={LABEL="Total kjønn"} aar={LABEL=""} ALL={LABEL="Total år"} 
+komnr={LABEL=""} ALL={LABEL="Total komnr"} alder={LABEL=""} ALL={LABEL="Total alder"}
+/*alder={LABEL=""} ALL={LABEL="Total alder"}*/,
+RV={LABEL=""}*Sum={LABEL="Antall"}
+/ BOX={LABEL="Eksluderte pga missing alder, kjønn eller komnr" STYLE={JUST=LEFT VJUST=BOTTOM}};
+RUN;
+
+proc datasets nolist;
+delete ikke:;
+run;
+%end;
 
 	/*----------------------------*/
 
