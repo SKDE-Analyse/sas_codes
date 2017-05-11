@@ -87,6 +87,48 @@ Value BoHF_kort
 99='Ukjent/ugyldig kommunenr'
 8888='Norge';
 
+Value Bydel
+	30101 = 'Gamle Oslo'
+	30102 = 'Grünerløkka'
+	30103 = 'Sagene'
+	30104 = 'St. Hanshaugen'
+	30105 = 'Frogner'
+	30106 = 'Ullern'
+	30107 = 'Vestre Aker'
+	30108 = 'Nordre Aker'
+	30109 = 'Bjerke'
+	30110 = 'Grorud'
+	30111 = 'Stovner'
+	30112 = 'Alna'
+	30113 = 'Østensjø'
+	30114 = 'Nordstrand'
+	30115 = 'Søndre Nordstrand'
+	30116 = 'Sentrum'
+	30117 = 'Marka'
+ 	30199 = 'Uoppgitt bydel Oslo'
+	110301 = 'Hundvåg'
+	110302 = "Tasta"
+	110303 = "Eiganes/Våland"
+	110304 = "Madla"
+	110305 = "Storhaug"
+	110306 = "Hillevåg"
+	110307 = "Hinna"
+	110399 = "Uoppgitt bydel Stavanger"
+	120101 = "Arna"
+	120102 = "Bergenhus"
+	120103 = "Fana"
+	120104 = "Fyllingsdalen"
+	120105 = "Laksevåg"
+	120106 = "Ytrebygda"
+	120107 = "Årstad"
+	120108 = "Åsane"
+	120199 = "Uoppgitt bydel Bergen"
+	160101 = "Midtbyen"
+	160102 = "Østbyen"
+	160103 = "Lerkendal"
+	160104 = "Heimdal"
+	160199 = "Uoppgitt bydel Trondheim";
+	
 Value Bydel_Oslo
 1='Gamle Oslo'
 2='Grünerløkka'
