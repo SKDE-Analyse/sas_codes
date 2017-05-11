@@ -27,6 +27,7 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS);
 %let NorgeSoyle=1; /* dersom du ønsker Norge som søyle i figur - dersom ikke må det stå =0 */
 %let KIfigur=;
 %let Mine_boomraader=; /* Utvalgte områder til figurer - eks: komnr in (1900:1930) eller bydel in (1:15)*/ 
+%let vis_ekskludering=1; /* Vis tabeller for ekskludering*/
 /* Hvilke bonivåer ønskes? ja eller nei, hvor 1 betyr ja */
 %let kommune=; 		/*Bildefiler*/ %let Fig_AA_kom=; 	%let Fig_KI_kom=;
 %let kommune_HN=; 	/*Bildefiler*/ %let Fig_AA_komHN=; 	%let Fig_KI_komHN=;
