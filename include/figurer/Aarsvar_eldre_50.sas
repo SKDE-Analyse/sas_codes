@@ -69,50 +69,8 @@ run;
 
 /*	Lager figur	*/
 
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off HEIGHT=12.0cm ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog"   ;
-/*Title font=arial height=8pt "&arbtittel, kjønns- og aldersjusterte rater pr. 1000 innbyggere, gj. snitt 2013 - 2015             ";*/
-proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=7%);
- hbarparm category=bohf response=rateSnitt / nooutline fillattrs=(color=CX95BDE6); 
- hbarparm category=bohf response=Snittrate /  nooutline fillattrs=(color=CXC3C3C3) ; 
-		scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
-		scatter x=rate2013 y=BOHF / markerattrs=(symbol=circlefilled size=7  color=black); 
-		scatter x=rate2014 y=BOHF / markerattrs=(symbol=trianglefilled size=8  color=black);
-		scatter x=rate2015 y=BOHF / markerattrs=(symbol=Diamondfilled size=7  color=black);
-	Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
-    Yaxistable &varnavn &kol_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-	xaxis label=" Antall pr. 1 000 innbyggere (50 - 74 år)"   labelattrs=(color=black size=7) &xskala offsetmin=0.02 valueattrs=(size=8);
-     inset 
-		(
-	 	"(*ESC*){unicode'25cf'x}"="   2013"
-	 	"(*ESC*){unicode'25b2'x}"="   2014"
-	 	"(*ESC*){unicode'2666'x}"="   2015")/position=bottomright textattrs=(size=9 color=black);
-	/*inset "FT = &FT2" / position=right border textattrs=(size=10);*/
-run;Title; ods listing close; ods graphics off;
-
-
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=png  border=off HEIGHT=12.0cm ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\png"   ;
-
-proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=7%);
- hbarparm category=bohf response=rateSnitt / nooutline fillattrs=(color=CX95BDE6); 
- hbarparm category=bohf response=Snittrate /  nooutline fillattrs=(color=CXC3C3C3) ; 
-		scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
-		scatter x=rate2013 y=BOHF / markerattrs=(symbol=circlefilled size=7  color=black); 
-		scatter x=rate2014 y=BOHF / markerattrs=(symbol=trianglefilled size=8  color=black);
-		scatter x=rate2015 y=BOHF / markerattrs=(symbol=Diamondfilled size=7  color=black);
-	Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
-    Yaxistable &varnavn &kol_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-	xaxis label=" Antall pr. 1 000 innbyggere (50 - 74 år)"   labelattrs=(color=black size=7) &xskala offsetmin=0.02 valueattrs=(size=8);
-     inset 
-		(
-	 	"(*ESC*){unicode'25cf'x}"="   2013"
-	 	"(*ESC*){unicode'25b2'x}"="   2014"
-	 	"(*ESC*){unicode'2666'x}"="   2015")/position=bottomright textattrs=(size=9 color=black);
-	/*inset "FT = &FT2" / position=right border textattrs=(size=10);*/
-run;Title; ods listing close; ods graphics off;
+%let figfil = fig1_yngre;
+%include "&filbane.\include\master\figurer\lag_figur.sas";
 
 
 /*	Sletter datasett	*/

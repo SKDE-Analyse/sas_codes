@@ -84,38 +84,8 @@ proc sort data=&navn_en._andeler;
 by descending andel en_ant;
 run;
 
-
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog"   ;
-/*Title font=arial height=8pt "&arbtittel, gj. snitt 2013-2015           ";*/
-proc sgplot data=&navn_en._andeler noborder noautolegend sganno=anno pad=(Bottom=7%);
-hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6); 
- hbarparm category=bohf response=andel_no / nooutline fillattrs=(color=CXC3C3C3);	
-		scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ; 
-		scatter y=BoHf x=posisjon / datalabel=andel datalabelpos=right markerattrs=(size=0) name="sc" 
-          datalabelattrs=(color=black weight=bold size=8);
-     Yaxistable en_ant antall_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-  xaxis label="Andel"   labelattrs=(size=7 ) offsetmin=0.02 offsetmax=0.02 valueattrs=(size=7);
-     Format andel percent8.0 en_ant antall_to nlnum8.0 ;	
-run;Title; ods listing close; ods graphics off;
-
-
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=png  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\png"   ;
-/*Title font=arial height=8pt "&arbtittel, gj. snitt 2013-2015           ";*/
-proc sgplot data=&navn_en._andeler noborder noautolegend sganno=anno pad=(Bottom=7%);
-hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6); 
- hbarparm category=bohf response=andel_no / nooutline fillattrs=(color=CXC3C3C3);	
-		scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ; 
-		scatter y=BoHf x=posisjon / datalabel=andel datalabelpos=right markerattrs=(size=0) name="sc" 
-          datalabelattrs=(color=black weight=bold size=8);
-     Yaxistable en_ant antall_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-  xaxis label="Andel"   labelattrs=(size=7 ) offsetmin=0.02 offsetmax=0.02 valueattrs=(size=7);
-     Format andel percent8.0 en_ant antall_to nlnum8.0 ;	
-run;Title; ods listing close; ods graphics off;
-
+%let figfil = fig4_eldre;
+%include "&filbane.\include\master\figurer\lag_figur.sas";
 
 Proc datasets nolist;
 delete en to tot;

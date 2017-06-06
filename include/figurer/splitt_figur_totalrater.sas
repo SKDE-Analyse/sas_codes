@@ -110,6 +110,29 @@ by descending &sortering;
 run;
 
 /*Lager figur og lagrer bildefil*/
+
+%let fontst = 7;
+%let mappe = rapport;
+%let bildeformat = pdf;
+
+%include "&filbane.\include\master\figurer\fig2_eldre.sas";
+
+
+%let fontst = 9;
+%let mappe = faktaark;
+%let bildeformat = pdf;
+
+%include "&filbane.\include\master\figurer\fig2_eldre.sas";
+
+
+%let fontst = 7;
+%let mappe = png;
+%let bildeformat = png;
+
+%include "&filbane.\include\master\figurer\fig2_eldre.sas";
+
+
+
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf border=off ;
 ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\Helseatlas\Eldre\&katalog"   ;
 proc sgplot data=smelt  noborder noautolegend sganno=Anno pad=(bottom=6%);

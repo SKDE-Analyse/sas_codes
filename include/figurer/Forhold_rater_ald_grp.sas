@@ -81,6 +81,30 @@ proc sort data=&datasett;
 run;
 
 
+
+%let fontst = 7;
+%let mappe = rapport;
+%let bildeformat = pdf;
+
+%include "&filbane.\include\master\figurer\fig3_eldre.sas";
+
+
+%let fontst = 8;
+%let mappe = faktaark;
+%let bildeformat = pdf;
+
+%include "&filbane.\include\master\figurer\fig3_eldre.sas";
+
+
+%let fontst = 7;
+%let mappe = png;
+%let bildeformat = png;
+
+%include "&filbane.\include\master\figurer\fig3_eldre.sas";
+
+
+
+
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off /*HEIGHT=10.0cm width=10.0cm*/;
 ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog"   ;
 proc sgplot data=&datasett noborder noautolegend sganno=anno pad=(Bottom=10%);
@@ -95,7 +119,7 @@ hbarparm category=bohf response=pros_pos_no / baseline=1 fillattrs=(color=CXC3C3
    xaxis label="Forholdet mellom raten til aldersgruppen 50 - 74 og raten til aldersgruppen 75+ " type=linear labelattrs=(size=7 weight=bold) values=(0 to 2 by 0.1) offsetmin=0.05; 
 
   inset "    FT 75+ år    = &FT_75   " "    FT 50-74 år = &FT_50   "/ border position=&FT_posisjon textattrs=(size=8);
-  	Keylegend 'h1' 'h2' / autoitemsize valueattrs=(size=7) noborder location=outside position=top;
+*  	Keylegend 'h1' 'h2' / autoitemsize valueattrs=(size=7) noborder location=outside position=top;
      Format prosent prosent_no nlnum8.1 forh_tall_norm_no nlnum8.2 rate_syttifem rate_femti nlnum8.1 ;
 		
 run;Title; ods listing close; ods graphics off;
@@ -116,7 +140,7 @@ hbarparm category=bohf response=pros_pos_no / baseline=1 fillattrs=(color=CXC3C3
    xaxis label="Forholdet mellom raten til aldersgruppen 50 - 74 og raten til aldersgruppen 75+ " type=linear labelattrs=(size=7 weight=bold) values=(0 to 2 by 0.1) offsetmin=0.05; 
 
   inset "    FT 75+ år    = &FT_75   " "    FT 50-74 år = &FT_50   "/ border position=&FT_posisjon textattrs=(size=8);
-  	Keylegend 'h1' 'h2' / autoitemsize valueattrs=(size=7) noborder location=outside position=top;
+*  	Keylegend 'h1' 'h2' / autoitemsize valueattrs=(size=7) noborder location=outside position=top;
      Format prosent prosent_no nlnum8.1 forh_tall_norm_no nlnum8.2 rate_syttifem rate_femti nlnum8.1 ;
 		
 run;Title; ods listing close; ods graphics off;

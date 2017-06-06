@@ -99,54 +99,10 @@ by descending &sortering;
 run;
 
 /*Lager figur og lagrer bildefil*/
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf border=off ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\Helseatlas\Eldre\&katalog"   ;
-/*Title font=arial height=8pt "&arbtittel, kjønns- og aldersjusterte rater pr. 1000 innbyggere, &periode ";*/
-proc sgplot data=smelt  noborder noautolegend sganno=Anno pad=(bottom=4%);
 
-hbarparm category=bohf response=tot_RateSnitt / outlineattrs=(color=CX00509E) fillattrs=(color=CX95BDE6) missing name="hp1" legendlabel="&label_to"; 
-hbarparm category=bohf response=Ratesnitt_no / outlineattrs=(color=CX4C4C4C) fillattrs=(color=CXC3C3C3);
-hbarparm category=bohf response=rate_en / outlineattrs=(color=CX00509E) fillattrs=(color=CX00509E) missing name="hp2" legendlabel="&label_en"; 
-hbarparm category=bohf response=rate_en_no / outlineattrs=(color=CX4C4C4C) fillattrs=(color=CX4C4C4C);
-     scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
-     scatter x=plass y=bohf /datalabel=Andel  datalabelpos=right markerattrs=(size=0) 
-        datalabelattrs=(color=white weight=bold size=8);
-xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=7) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=7);
-Keylegend "hp2" "hp1"/ noborder location=inside position=bottomright down=2;
-Yaxistable en_ant to_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) 
-         offsetmax=0.03 offsetmin=0.03 type=discrete discreteorder=data valueattrs=(size=7) ;
+%let figfil = fig2_eldre;
+%include "&filbane.\include\master\figurer\lag_figur.sas";
 
-       
-	/*	inset "FT=&FT2" / position=right textattrs=(size=10);*/
-Format andel percent8. en_ant to_ant ratesnitt_no rate_en_no nlnum10.0 ;
-run;
-ods graphics off;
-
-
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=png border=off ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\Helseatlas\Eldre\&katalog.\png"   ;
-/*Title font=arial height=8pt "&arbtittel, kjønns- og aldersjusterte rater pr. 1000 innbyggere, &periode ";*/
-proc sgplot data=smelt  noborder noautolegend sganno=Anno pad=(bottom=4%);
-
-hbarparm category=bohf response=tot_RateSnitt / outlineattrs=(color=CX00509E) fillattrs=(color=CX95BDE6) missing name="hp1" legendlabel="&label_to"; 
-hbarparm category=bohf response=Ratesnitt_no / outlineattrs=(color=CX4C4C4C) fillattrs=(color=CXC3C3C3);
-hbarparm category=bohf response=rate_en / outlineattrs=(color=CX00509E) fillattrs=(color=CX00509E) missing name="hp2" legendlabel="&label_en"; 
-hbarparm category=bohf response=rate_en_no / outlineattrs=(color=CX4C4C4C) fillattrs=(color=CX4C4C4C);
-     scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
-     scatter x=plass y=bohf /datalabel=Andel  datalabelpos=right markerattrs=(size=0) 
-        datalabelattrs=(color=white weight=bold size=8);
-xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=7) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=7);
-Keylegend "hp2" "hp1"/ noborder location=inside position=bottomright down=2;
-Yaxistable en_ant to_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) 
-         offsetmax=0.03 offsetmin=0.03 type=discrete discreteorder=data valueattrs=(size=7) ;
-
-       
-	/*	inset "FT=&FT2" / position=right textattrs=(size=10);*/
-Format andel percent8. en_ant to_ant ratesnitt_no rate_en_no nlnum10.0 ;
-run;
-ods graphics off;
 
 /* Sletter datasett */
 Proc datasets nolist;

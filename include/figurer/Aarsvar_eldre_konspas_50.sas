@@ -54,6 +54,7 @@ data &varnavn._SAMLET;
 set &varnavn._SAMLET;
 FT2=round((maks/minimum),0.1);
 drop maks minimum;
+Format &varnavn nlnum8.0 &kol_to nlnum8.1 ; 
 run;
 
 Data _null_;
@@ -65,10 +66,30 @@ proc sort data=&varnavn._SAMLET;
 by descending &sortering;
 run;
 
-
-
-
 /*	Lager figur	*/
+
+%let fontst = 7;
+%let mappe = rapport;
+%let bildeformat = pdf;
+
+%include "&filbane.\include\master\figurer\fig1_yngre.sas";
+
+
+%let fontst = 9;
+%let mappe = faktaark;
+%let bildeformat = pdf;
+
+%include "&filbane.\include\master\figurer\fig1_yngre.sas";
+
+
+%let fontst = 7;
+%let mappe = png;
+%let bildeformat = png;
+
+%include "&filbane.\include\master\figurer\fig1_yngre.sas";
+
+
+
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off HEIGHT=12.0cm ;
 ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog"   ;

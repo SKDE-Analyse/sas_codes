@@ -71,6 +71,30 @@ run;
 
 /*	Lager figur	*/
 
+
+
+%let fontst = 7;
+%let mappe = rapport;
+%let bildeformat = pdf;
+
+%include "&filbane.\include\master\figurer\fig1b_eldre.sas";
+
+
+%let fontst = 9;
+%let mappe = faktaark;
+%let bildeformat = pdf;
+
+%include "&filbane.\include\master\figurer\fig1b_eldre.sas";
+
+
+%let fontst = 7;
+%let mappe = png;
+%let bildeformat = png;
+
+%include "&filbane.\include\master\figurer\fig1b_eldre.sas";
+
+
+
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off HEIGHT=12.0cm ;
 ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog"   ;
 proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=7%);
