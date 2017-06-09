@@ -66,7 +66,7 @@ if bohf = 8888 then snittrate = ratesnitt;
 	rate_original=ratesnitt;
 	format en_rate to_rate 8.2  ratesnitt 8.1 ant_innbyggere 8.0;
 	label en_ant="&label_en" antall_to="&label_to";
-	keep Bohf  type Plassering ratesnitt antall_to en_rate Innbyggere Andel en_ant tot_rate rate_en to_rate  labelpos No_snitt norge_snitt Mistext;
+	keep Bohf  type Plassering ratesnitt antall_to en_rate Innbyggere Andel en_ant tot_rate rate_en to_rate tot_ant labelpos No_snitt norge_snitt Mistext;
 run;
 
 

@@ -12,8 +12,8 @@ styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 	vbar alder_gr / response=&verdi /*stat=sum*/ group=ermann groupdisplay=cluster name="Vbar";
 	keylegend "Vbar" / location=outside position=topright noborder titleattrs=(size=&fontst);
     yaxis &yvalues label="&verdinavn" 
-		labelattrs=(size=&fontst weight=bold)  valuesformat=&yformat. valueattrs=(size=&fontst);
-	xaxis fitpolicy=rotate offsetmin=0.035 label='Alder' labelattrs=(size=&fontst weight=bold) valuesformat=&yformat. valueattrs=(size=&fontst);
+		labelattrs=(size=&fontst)  valuesformat=&yformat. valueattrs=(size=&fontst);
+	xaxis fitpolicy=rotate offsetmin=0.035 label='Alder' labelattrs=(size=&fontst) valuesformat=&yformat. valueattrs=(size=&fontst);
 run;
 ods graphics off;
 

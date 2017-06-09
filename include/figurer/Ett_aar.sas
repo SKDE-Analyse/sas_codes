@@ -77,31 +77,6 @@ run;
 
 
 
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off HEIGHT=12.0cm ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog"   ;
-proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=7%);
- hbarparm category=bohf response=rateSnitt / nooutline fillattrs=(color=CX95BDE6); 
- hbarparm category=bohf response=Snittrate / nooutline outlineattrs=(color=darkgrey) fillattrs=(color=CXC3C3C3) ; 
-				Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
-	scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
-    Yaxistable &varnavn &kol_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-	xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)"   labelattrs=(color=black size=7 ) &xskala offsetmin=0.02 valueattrs=(size=8);
-run;Title; ods listing close; ods graphics off;
-
-
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=png  border=off HEIGHT=12.0cm ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\png"   ;
-proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=7%);
- hbarparm category=bohf response=rateSnitt / nooutline fillattrs=(color=CX95BDE6); 
- hbarparm category=bohf response=Snittrate / nooutline outlineattrs=(color=darkgrey) fillattrs=(color=CXC3C3C3) ; 
-				Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
-	scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
-    Yaxistable &varnavn &kol_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-	xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)"   labelattrs=(color=black size=7 ) &xskala offsetmin=0.02 valueattrs=(size=8);
-run;Title; ods listing close; ods graphics off;
-
 /*	Sletter datasett	*/
 
 Proc datasets nolist;

@@ -46,7 +46,7 @@ Run;
 
 proc sql;
    create table &navn_en._andeler as 
-   select *, SUM(ratesnitt) as tot_ratesnitt,sum (liggetid) AS ligget, sum (en_rate) AS rate_en, sum (to_rate) as rate_to, sum (to_ant) as ant_to, sum (en_ant) as ant_en
+   select *, SUM(ratesnitt) as tot_ratesnitt,sum (liggetid) AS ligget, sum (en_rate) AS rate_en, sum (to_rate) as rate_to, sum (to_ant) as tot_ant, sum (en_ant) as ant_en
    from &navn_en._andeler
    group by  Bohf ;
 quit;
@@ -65,12 +65,12 @@ if type=2 then do;
      Ant_opphold=.;
      Innbyggere=.;
 end;
-gj_liggetid = ligget/ant_to;
+gj_liggetid = ligget/tot_ant;
 Andel=rate_en/rate_to;
-label gj_liggetid="Liggetid" ant_to="&label_to." en_ant="&label_en.";
+label gj_liggetid="Liggetid" tot_ant="&label_to." en_ant="&label_en.";
 rate_original=ratesnitt;      
 format en_rate to_rate 8.2  ratesnitt 8.1 ant_innbyggere 8.0;
-keep Bohf en_rate type Plassering Mistext ratesnitt Innbyggere gj_liggetid rate_to rate_en ligget Andel ant_en en_ant ant_to to_ant labelpos  ;
+keep Bohf en_rate type Plassering Mistext ratesnitt Innbyggere gj_liggetid rate_to rate_en ligget Andel ant_en en_ant tot_ant to_ant labelpos  ;
 run;
 
 data &navn_en._andeler;
@@ -104,60 +104,8 @@ proc sort data=&navn_en._andeler;
 by descending andel en_ant;
 run;
 
-
-%let fontst = 7;
-%let mappe = rapport;
-%let bildeformat = pdf;
-
-%include "&filbane.\include\master\figurer\fig4b_eldre.sas";
-
-
-%let fontst = 9;
-%let mappe = faktaark;
-%let bildeformat = pdf;
-
-%include "&filbane.\include\master\figurer\fig4b_eldre.sas";
-
-
-%let fontst = 7;
-%let mappe = png;
-%let bildeformat = png;
-
-%include "&filbane.\include\master\figurer\fig4b_eldre.sas";
-
-
-
-
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog"   ;
-/*Title font=arial height=8pt "&arbtittel, gj. snitt 2013-2015                 ";*/
-proc sgplot data=&navn_en._andeler noborder noautolegend sganno=anno pad=(Bottom=5%);
-hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6); 
- hbarparm category=bohf response=andel_no / nooutline fillattrs=(color=CXC3C3C3);		
-		scatter y=BoHf x=posisjon / datalabel=andel datalabelpos=right markerattrs=(size=0) name="sc" 
-          datalabelattrs=(color=black weight=bold size=8);
-     Yaxistable en_ant ant_to gj_liggetid/Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-  xaxis label="Andel"   labelattrs=(size=7) offsetmin=0.02 offsetmax=0.02 valueattrs=(size=7);
-     Format andel percent8.0 en_ant ant_to  nlnum8.0 gj_liggetid nlnum8.1 ;
-	/*inset "FT = &FT2" / position=right border textattrs=(size=10);*/
-run;Title; ods listing close; ods graphics off;
-
-
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=png  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\png"   ;
-/*Title font=arial height=8pt "&arbtittel, gj. snitt 2013-2015                 ";*/
-proc sgplot data=&navn_en._andeler noborder noautolegend sganno=anno pad=(Bottom=5%);
-hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6); 
- hbarparm category=bohf response=andel_no / nooutline fillattrs=(color=CXC3C3C3);		
-		scatter y=BoHf x=posisjon / datalabel=andel datalabelpos=right markerattrs=(size=0) name="sc" 
-          datalabelattrs=(color=black weight=bold size=8);
-     Yaxistable en_ant ant_to gj_liggetid/Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-  xaxis label="Andel"   labelattrs=(size=7) offsetmin=0.02 offsetmax=0.02 valueattrs=(size=7);
-     Format andel percent8.0 en_ant ant_to  nlnum8.0 gj_liggetid nlnum8.1 ;
-	/*inset "FT = &FT2" / position=right border textattrs=(size=10);*/
-run;Title; ods listing close; ods graphics off;
+%let figfil = fig4b_eldre;
+%include "&filbane.\include\master\figurer\lag_figur.sas";
 
 Proc datasets nolist;
 delete en to tre test;

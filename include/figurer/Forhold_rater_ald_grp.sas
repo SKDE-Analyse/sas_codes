@@ -89,7 +89,7 @@ run;
 %include "&filbane.\include\master\figurer\fig3_eldre.sas";
 
 
-%let fontst = 8;
+%let fontst = 9;
 %let mappe = faktaark;
 %let bildeformat = pdf;
 
@@ -104,46 +104,6 @@ run;
 
 
 
-
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog"   ;
-proc sgplot data=&datasett noborder noautolegend sganno=anno pad=(Bottom=10%);
-hbarparm category=bohf response=pros_neg / baseline=1 fillattrs=(color=CX00509E) missing name="h1" legendlabel="Høyere rate i aldersgruppen 50 - 74"; 
-hbarparm category=bohf response=pros_neg_no / baseline=1 fillattrs=(color=CX4C4C4C);
-hbarparm category=bohf response=pros_pos / baseline=1 fillattrs=(color=CX95BDE6) missing name="h2" legendlabel="Høyere rate i aldersgruppen 75+"; 
-hbarparm category=bohf response=pros_pos_no / baseline=1 fillattrs=(color=CXC3C3C3);	
-	  scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=center markerattrs=(size=0) 
-          datalabelattrs=(color=black weight=bold);
-     Yaxistable rate_femti rate_syttifem /Label location=inside  position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
-   xaxis label="Forholdet mellom raten til aldersgruppen 50 - 74 og raten til aldersgruppen 75+ " type=linear labelattrs=(size=7 weight=bold) values=(0 to 2 by 0.1) offsetmin=0.05; 
-
-  inset "    FT 75+ år    = &FT_75   " "    FT 50-74 år = &FT_50   "/ border position=&FT_posisjon textattrs=(size=8);
-*  	Keylegend 'h1' 'h2' / autoitemsize valueattrs=(size=7) noborder location=outside position=top;
-     Format prosent prosent_no nlnum8.1 forh_tall_norm_no nlnum8.2 rate_syttifem rate_femti nlnum8.1 ;
-		
-run;Title; ods listing close; ods graphics off;
-
-
-ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=png  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\png"   ;
-proc sgplot data=&datasett noborder noautolegend sganno=anno pad=(Bottom=10%);
-hbarparm category=bohf response=pros_neg / baseline=1 fillattrs=(color=CX00509E) missing name="h1" legendlabel="Høyere rate i aldersgruppen 50 - 74"; 
-hbarparm category=bohf response=pros_neg_no / baseline=1 fillattrs=(color=CX4C4C4C);
-hbarparm category=bohf response=pros_pos / baseline=1 fillattrs=(color=CX95BDE6) missing name="h2" legendlabel="Høyere rate i aldersgruppen 75+"; 
-hbarparm category=bohf response=pros_pos_no / baseline=1 fillattrs=(color=CXC3C3C3);
-	
-	  scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=center markerattrs=(size=0) 
-          datalabelattrs=(color=black weight=bold);
-     Yaxistable rate_femti rate_syttifem /Label location=inside  position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
-   xaxis label="Forholdet mellom raten til aldersgruppen 50 - 74 og raten til aldersgruppen 75+ " type=linear labelattrs=(size=7 weight=bold) values=(0 to 2 by 0.1) offsetmin=0.05; 
-
-  inset "    FT 75+ år    = &FT_75   " "    FT 50-74 år = &FT_50   "/ border position=&FT_posisjon textattrs=(size=8);
-*  	Keylegend 'h1' 'h2' / autoitemsize valueattrs=(size=7) noborder location=outside position=top;
-     Format prosent prosent_no nlnum8.1 forh_tall_norm_no nlnum8.2 rate_syttifem rate_femti nlnum8.1 ;
-		
-run;Title; ods listing close; ods graphics off;
 
 
 Proc datasets nolist;

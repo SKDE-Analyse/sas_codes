@@ -10,7 +10,7 @@ ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALY
 proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=4%);
  hbarparm category=bohf response=rateSnitt / nooutline fillattrs=(color=CX95BDE6) barwidth=&soylebredde; 
  hbarparm category=bohf response=Snittrate / nooutline fillattrs=(color=CXC3C3C3) barwidth=&soylebredde; 
-		scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
+		scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0)  datalabelattrs=(color=black size=7);
 		scatter x=rate2013 y=BOHF / markerattrs=(symbol=circlefilled size=9 color=black); 
 		scatter x=rate2014 y=BOHF / markerattrs=(symbol=Squarefilled size=9 color=black);
 		scatter x=rate2015 y=BOHF / markerattrs=(symbol=Diamondfilled size=9 color=black);

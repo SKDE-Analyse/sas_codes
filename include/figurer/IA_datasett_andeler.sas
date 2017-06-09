@@ -1,5 +1,6 @@
 
 
+
 data &varnavn._andeler_IA;
 set &varnavn._andeler;
 bohf_org = bohf;
@@ -9,7 +10,7 @@ data &varnavn._andeler_IA;
 set &varnavn._andeler_IA;
 where en_ant ne .;
 length BoHF_navn $ 20.;
-keep andel innbyggere en_ant antall_to bohf bohf_navn bohf_org;
+keep andel en_ant tot_ant bohf bohf_navn bohf_org;
 BoHF_Navn=vvalue(BoHF);
 run;
 
@@ -23,11 +24,13 @@ Tom_rad = "tom";
 Tom_rute = "tom";
 antall = en_ant;
 rate = andel*100;
+innbyggere = tot_ant;
 format bohf ;
 run;
 
 data skde_pet.IA_&varnavn._andeler;
 set &varnavn._andeler_IA;
+drop ant_to;
 if bohf_org in (1:4) then bohf = bohf_org;
 if bohf_org = 6 then bohf = 5;
 if bohf_org = 7 then bohf = 6;
