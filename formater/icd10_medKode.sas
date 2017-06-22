@@ -19833,6 +19833,7 @@ value $samletF
 'Z994'="Z994 Avhengighet av kunstig hjerte"
 'Z998'="Z998 Avhengighet av annet teknisk hjelpemiddel eller innretning"
 'Z999'="Z999 Avhengighet av ikke spesifiert teknisk hjelpemiddel eller innretning"
+'XXXX'="Andre diagnoser"
 
 ;
-run
+run;

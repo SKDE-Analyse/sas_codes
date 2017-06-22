@@ -342,6 +342,6 @@ value BehRHF_kortest
 2='Midt'
 3='Vest'
 4='Sør-Øst'
-5='Private sykehus';
+5='Privat';
 
 run;

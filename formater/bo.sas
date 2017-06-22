@@ -37,7 +37,7 @@ Value BoHF_kort
 	6='Nord-Trøndelag'
 	7='St. Olavs'
 	8='Møre og Romsdal'
-   9='Haraldsplass'
+	9='Haraldsplass'
 	10='Førde'
 	11='Bergen'
 	12='Fonna'
@@ -55,6 +55,7 @@ Value BoHF_kort
 	24='Utlandet/Svalbard'
 	30='Oslo'
 	31='Indre Oslo'
+	8888='Norge'
 	99='Ukjent/ugyldig kommunenr';
 	 
 Value Bydel
