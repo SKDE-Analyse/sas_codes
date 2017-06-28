@@ -22,7 +22,7 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 		(
 	 	"(*ESC*){unicode'25cf'x}"="   2013"
 	 	"(*ESC*){unicode'25a0'x}"="   2014"
-	 	"(*ESC*){unicode'2666'x}"="   2015")/position=bottomright textattrs=(size=8 color=black);
+	 	"(*ESC*){unicode'2666'x}"="   2015")/position=bottomright textattrs=(size=7 color=black);
 	Format  en_ant pasienter kons_pr_pas nlnum8.0 kons_pr_pas nlnum8.1;
 
 run;

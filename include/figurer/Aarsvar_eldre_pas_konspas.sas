@@ -102,7 +102,7 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
  hbarparm category=bohf response=Snittrate / nooutline fillattrs=(color=CXC3C3C3) ; 
 		scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
 		scatter x=rate2013 y=BOHF / markerattrs=(symbol=circlefilled size=7 color=black); 
-		scatter x=rate2014 y=BOHF / markerattrs=(symbol=trianglefilled size=8 color=black);
+		scatter x=rate2014 y=BOHF / markerattrs=(symbol=trianglefilled size=7 color=black);
 		scatter x=rate2015 y=BOHF / markerattrs=(symbol=Diamondfilled size=7 color=black);
 	Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
     Yaxistable &varnavn pasienter kons_pr_pas /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
@@ -112,7 +112,7 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 		(
 	 	"(*ESC*){unicode'25cf'x}"="   2013"
 	 	"(*ESC*){unicode'25b2'x}"="   2014"
-	 	"(*ESC*){unicode'2666'x}"="   2015")/position=bottomright textattrs=(size=8 color=black);
+	 	"(*ESC*){unicode'2666'x}"="   2015")/position=bottomright textattrs=(size=7 color=black);
 	Format  en_ant pasienter kons_pr_pas nlnum8.0 kons_pr_pas nlnum8.1;
 run;Title; ods listing close; ods graphics off;
 
@@ -124,7 +124,7 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
  hbarparm category=bohf response=Snittrate / nooutline fillattrs=(color=CXC3C3C3) ; 
 		scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
 		scatter x=rate2013 y=BOHF / markerattrs=(symbol=circlefilled size=7 color=black); 
-		scatter x=rate2014 y=BOHF / markerattrs=(symbol=trianglefilled size=8 color=black);
+		scatter x=rate2014 y=BOHF / markerattrs=(symbol=trianglefilled size=7 color=black);
 		scatter x=rate2015 y=BOHF / markerattrs=(symbol=Diamondfilled size=7 color=black);
 	Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
     Yaxistable &varnavn pasienter kons_pr_pas /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
@@ -134,7 +134,7 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 		(
 	 	"(*ESC*){unicode'25cf'x}"="   2013"
 	 	"(*ESC*){unicode'25b2'x}"="   2014"
-	 	"(*ESC*){unicode'2666'x}"="   2015")/position=bottomright textattrs=(size=8 color=black);
+	 	"(*ESC*){unicode'2666'x}"="   2015")/position=bottomright textattrs=(size=7 color=black);
 	Format  en_ant pasienter kons_pr_pas nlnum8.0 kons_pr_pas nlnum8.1;
 run;Title; ods listing close; ods graphics off;
 

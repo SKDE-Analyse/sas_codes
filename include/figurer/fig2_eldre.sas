@@ -13,7 +13,7 @@ hbarparm category=bohf response=Ratesnitt_no / outlineattrs=(color=CX4C4C4C) fil
 hbarparm category=bohf response=rate_en / outlineattrs=(color=CX00509E) fillattrs=(color=CX00509E) missing name="hp2" legendlabel="&label_en" barwidth=&soylebredde; 
 hbarparm category=bohf response=rate_en_no / outlineattrs=(color=CX4C4C4C) fillattrs=(color=CX4C4C4C) barwidth=&soylebredde;
      scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) datalabelattrs=(color=black size=7) ;
-     scatter x=plass y=bohf /datalabel=Andel  datalabelpos=right markerattrs=(size=0) datalabelattrs=(color=white size=8);
+     scatter x=plass y=bohf /datalabel=Andel  datalabelpos=right markerattrs=(size=0) datalabelattrs=(color=white WEIGHT=BOLD size=7);
 xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=&fontst);
 Keylegend "hp2" "hp1"/ noborder location=inside position=bottomright down=2;
 Yaxistable en_ant to_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);

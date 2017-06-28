@@ -55,7 +55,7 @@ hbarparm category=bohf response=rateSnitt / nooutline fillattrs=(color=CX95BDE6)
 hbarparm category=bohf response=Snittrate / nooutline fillattrs=(color=CXC3C3C3) ; 		
      Yaxistable &varnavn &kol_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
     yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
- xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)"   labelattrs=(color=black size=7) &xskala offsetmin=0.02 valueattrs=(size=8); 	
+ xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)"   labelattrs=(color=black size=7) &xskala offsetmin=0.02 valueattrs=(size=7); 	
 run;Title; ods listing close; ods graphics off;
 
 
@@ -66,7 +66,7 @@ hbarparm category=bohf response=rateSnitt / nooutline fillattrs=(color=CX95BDE6)
 hbarparm category=bohf response=Snittrate / nooutline fillattrs=(color=CXC3C3C3) ; 		
      Yaxistable &varnavn &kol_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
     yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
- xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)"   labelattrs=(color=black size=7) &xskala offsetmin=0.02 valueattrs=(size=8); 	
+ xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)"   labelattrs=(color=black size=7) &xskala offsetmin=0.02 valueattrs=(size=7); 	
 run;Title; ods listing close; ods graphics off;
 
 

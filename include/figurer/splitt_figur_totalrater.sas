@@ -143,7 +143,7 @@ hbarparm category=bohf response=rate_en_no / outlineattrs=(color=CX4C4C4C) filla
      scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
      scatter x=plass y=bohf /datalabel=Andel  datalabelpos=right markerattrs=(size=0) 
 
-        datalabelattrs=(color=white weight=bold size=8);
+        datalabelattrs=(color=white  size=7);
 xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=7) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=7);
 Keylegend "hp2" "hp1"/ noborder location=inside position=bottomright down=2;
 Yaxistable en_ant to_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
@@ -163,7 +163,7 @@ hbarparm category=bohf response=rate_en_no / outlineattrs=(color=CX4C4C4C) filla
      scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) ;
      scatter x=plass y=bohf /datalabel=Andel  datalabelpos=right markerattrs=(size=0) 
 
-        datalabelattrs=(color=white weight=bold size=8);
+        datalabelattrs=(color=white  size=7);
 xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=7) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=7);
 Keylegend "hp2" "hp1"/ noborder location=inside position=bottomright down=2;
 Yaxistable en_ant to_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);

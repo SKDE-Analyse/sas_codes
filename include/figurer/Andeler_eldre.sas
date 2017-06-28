@@ -109,17 +109,21 @@ by descending andel en_ant;
 run;
 
 
+%let fontst = 9;
+%let mappe = faktaark;
+%let bildeformat = pdf;
+
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog\faktaark"   ;
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog\&mappe"   ;
 /*Title font=arial height=8pt "&arbtittel, gj. snitt 2013-2015                 ";*/
-proc sgplot data=andeler noborder noautolegend sganno=anno pad=(Bottom=7%);
+proc sgplot data=andeler noborder noautolegend sganno=anno pad=(Bottom=4%);
 hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6); 
  hbarparm category=bohf response=andel_no / nooutline fillattrs=(color=CXC3C3C3);		
 	  scatter y=BoHf x=posisjon / datalabel=andel datalabelpos=left markerattrs=(size=0) name="sc" 
           datalabelattrs=(color=black);
      Yaxistable en_ant antopph /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 ) type=discrete discreteorder=data valueattrs=(size=7);
-  xaxis label="Andel"   labelattrs=(size=7) offsetmin=0.02 valueattrs=(size=7);
+    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst ) type=discrete discreteorder=data valueattrs=(size=&fontst);
+  xaxis label="Andel"   labelattrs=(size=&fontst) offsetmin=0.02 valueattrs=(size=&fontst);
      Format andel percent8.1 en_ant antopph nlnum8.0 ;
 		
 run;Title; ods listing close; ods graphics off;

@@ -18,7 +18,7 @@ hbarparm category=bohf response=minus_tre_tot_no / outlineattrs=(color=CX4C4C4C)
 hbarparm category=bohf response=en_rate / outlineattrs=(color=CX00509E) fillattrs=(color=CX00509E) name='h1' legendlabel="AMD" barwidth=&soylebredde; 
 hbarparm category=bohf response=en_rate_no / outlineattrs=(color=CX4C4C4C) fillattrs=(color=CX4C4C4C) barwidth=&soylebredde;
 scatter x=plass y=bohf /datalabel=Andel datalabelpos=right markerattrs=(size=0) 
-     datalabelattrs=(color=white weight=bold size=8);
+     datalabelattrs=(color=white  size=7);
 Keylegend 'h1' 'h2' 'h3'/ noborder location=inside position=bottomright down=3;
 Yaxistable en_ant to_ant tre_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
 yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst) 
