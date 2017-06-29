@@ -2,9 +2,9 @@
 
 Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
-## Makroer i `rateberegninger.sas`
+## Makroer i *rateberegninger.sas*
 
-### `%macro utvalgx;`
+### *utvalgx*
 
 #### Formål
 
