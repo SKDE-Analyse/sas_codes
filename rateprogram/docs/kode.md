@@ -4,7 +4,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 ## Makroer i *rateberegninger.sas*
 
-### *utvalgx*
+### utvalgx
 
 #### Formål
 
