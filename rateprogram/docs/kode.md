@@ -4,7 +4,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 ## Makroer i *rateberegninger.sas*
 
-### utvalgx
+### **utvalgx**
 
 #### Formål
 
@@ -24,7 +24,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 
 
-### `%macro omraadeNorge;`
+### **omraadeNorge**
 
 #### Formål
 
@@ -43,7 +43,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 #### Annet
 
 
-### `%macro omraade;`
+### **omraade**
 
 #### Formål
 
@@ -61,7 +61,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro lag_kart;`
+### **lag_kart**
 
 #### Formål
 
@@ -79,7 +79,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro omraadeHN;`
+### **omraadeHN**
 
 #### Formål
 
@@ -97,7 +97,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro Todeltalder;`
+### **Todeltalder**
 
 #### Formål
 
@@ -115,7 +115,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro Tredeltalder;`
+### **Tredeltalder**
 
 #### Formål
 
@@ -133,7 +133,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro Firedeltalder;`
+### **Firedeltalder**
 
 #### Formål
 
@@ -151,7 +151,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro Femdeltalder;`
+### **Femdeltalder**
 
 #### Formål
 
@@ -169,7 +169,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro valg_kategorier;`
+### **valg_kategorier**
 
 #### Formål
 
@@ -191,7 +191,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro tabell_1;`
+### **tabell_1**
 
 #### Formål
 
@@ -209,7 +209,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro tabell_1e;`
+### **tabell_1e**
 
 #### Formål
 
@@ -227,7 +227,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro Tabell_CV;`
+### **Tabell_CV**
 
 #### Formål
 
@@ -245,7 +245,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro Tabell_CVe;`
+### **Tabell_CVe**
 
 #### Formål
 
@@ -263,7 +263,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro tabell_3N;`
+### **tabell_3N**
 
 #### Formål
 
@@ -281,7 +281,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro tabell_3Ne;`
+### **tabell_3Ne**
 
 #### Formål
 
@@ -299,7 +299,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro Tabell_3;`
+### **Tabell_3**
 
 #### Formål
 
@@ -317,7 +317,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro Tabell_3e;`
+### **Tabell_3e**
 
 #### Formål
 
@@ -335,7 +335,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro lag_aarsvarbilde;`
+### **lag_aarsvarbilde**
 
 #### Formål
 
@@ -353,7 +353,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro lag_aarsvarfigur;`
+### **lag_aarsvarfigur**
 
 #### Formål
 
@@ -371,7 +371,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro KI_figur;`
+### **KI_figur**
 
 #### Formål
 
@@ -389,7 +389,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro KI_bilde;`
+### **KI_bilde**
 
 #### Formål
 
@@ -407,7 +407,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro lagre_dataNorge;`
+### **lagre_dataNorge**
 
 #### Formål
 
@@ -425,7 +425,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro lagre_dataN;`
+### **lagre_dataN**
 
 #### Formål
 
@@ -443,7 +443,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro lagre_dataHN;`
+### **lagre_dataHN**
 
 #### Formål
 
@@ -461,7 +461,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro aarsvar;`
+### **aarsvar**
 
 #### Formål
 
@@ -479,7 +479,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### `%macro rateberegninger;`
+### **rateberegninger**
 
 
 #### Formål
