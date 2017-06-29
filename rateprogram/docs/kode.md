@@ -2,15 +2,503 @@
 
 Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
-## `rateberegninger.sas`
+## Makroer i `rateberegninger.sas`
 
-### `%macro utvalgx`
+### `%macro utvalgx;`
 
-### `%macro omraadeNorge`
+#### Formål
 
-### `%macro omraade`
+#### Avhengig av følgende variabler
 
-### `%macro lag_kart`
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+
+
+### `%macro omraadeNorge;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+
+### `%macro omraade;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro lag_kart;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro omraadeHN;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro Todeltalder;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro Tredeltalder;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro Firedeltalder;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro Femdeltalder;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro valg_kategorier;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+- `Alderskategorier`
+
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- `Todeltalder`
+- `Tredeltalder`
+- `Firedeltalder`
+- `Femdeltalder`
+
+#### Annet
+
+### `%macro tabell_1;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro tabell_1e;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro Tabell_CV;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro Tabell_CVe;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro tabell_3N;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro tabell_3Ne;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro Tabell_3;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro Tabell_3e;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro lag_aarsvarbilde;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro lag_aarsvarfigur;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro KI_figur;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro KI_bilde;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro lagre_dataNorge;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro lagre_dataN;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro lagre_dataHN;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro aarsvar;`
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+### `%macro rateberegninger;`
+
+
+#### Formål
+
+#### Avhengig av følgende variabler
+
+-
+
+#### Kalles opp av følgende makroer
+
+-
+
+#### Bruker følgende makroer
+
+- 
+
+#### Annet
+
+
 
 ## Utvikling og stabile versjoner
 
