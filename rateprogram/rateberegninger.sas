@@ -1,5 +1,5 @@
 
-%include "\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\Makroer\master\Boomraader.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\Makroer\master\Boomraader.sas";
 
 %macro utvalgx;
 %let aarsvarfigur=1;
@@ -204,10 +204,18 @@ run;
 	proc delete data=alderdef utvalgx;
 	run;
 
-	/*test 13/6-16*/
+   /*
+   Definere macro-variabler for boomraade-makroen,
+   hvis de ikke er definert tidligere
+   */
+   %if %sysevalf(%superq(haraldsplass)=,boolean) %then %let haraldsplass = 0;
+   %if %sysevalf(%superq(indreOslo)=,boolean) %then %let indreOslo = 0;
+   %if %sysevalf(%superq(bydel)=,boolean) %then %let bydel = 1;
+   %if %sysevalf(%superq(barn)=,boolean) %then %let barn = 0;
+   
 	data RV;
 	set RV;
-	%Boomraader;
+	%Boomraader(haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
 	if BOHF in (24,99) then BoRHF=.; /*kaster ut Utlandet og Svalbard*/
 	if BoRHF in (1:4) then Norge=1;
 format borhf borhf. bohf bohf_kort. boshhn boshhn. fylke fylke. komnr komnr. bydel bydel. ermann ermann.;

@@ -1,4 +1,4 @@
-%let filbane=\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\;
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
 options sasautos=("&filbane.Makroer\master" SASAUTOS);
 
 /*Options symbolgen mlogic mprint;*/
@@ -39,7 +39,7 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS);
 %let Verstkommune_HN=;
 /* Dersom du skal ha bilde-filer */
 %let bildeformat=png; /*Format*/
-%let lagring="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Dataverktoy\SAS\Bildefiler"; /*Hvor skal filene lagres*/
+%let lagring="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\Bildefiler"; /*Hvor skal filene lagres*/
 %let hoyde=8.0cm; %let bredde=11.0cm; /*Høyde (8) og Bredde (11) på bildefilene, gjelder kun bilde-filer*/
 %let skala=; /* Skala på x-aksen på figurene - eks: values=(0 to 0.8 by 0.2) */
 
