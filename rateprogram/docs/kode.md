@@ -1,6 +1,6 @@
 # Rateprogram-koden
 
-Dette er for spesielt interesserte.
+Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 ## `rateberegninger.sas`
 
