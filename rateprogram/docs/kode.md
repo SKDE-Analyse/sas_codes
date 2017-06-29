@@ -8,9 +8,22 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. Definerer År1 etc.
+2. 
+
 #### Avhengig av følgende variabler
 
--
+- Ratefil
+- vis_ekskludering
+- innbyggerfil
+- boomraadeN
+- boomraade
+
+#### Definerer følgende variabler
+
+- 
 
 #### Kalles opp av følgende makroer
 
@@ -18,7 +31,17 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+- aldjust
+- valg_kategorier
+- Boomraader (fra makro-mappen)
+
+#### Lager følgende datasett
+
+- utvalgx (slettes)
+- innb_aar (slettes)
+- RV
+- alderdef (slettes)
+- Andel
 
 #### Annet
 
