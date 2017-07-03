@@ -1,6 +1,6 @@
 %macro test_makroer(branch=master);
 
-%let filbane=\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\;
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
 
 %include "&filbane.Formater\master\SKDE_somatikk.sas";
 %include "&filbane.Formater\master\NPR_somatikk.sas";
