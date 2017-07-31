@@ -26,7 +26,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
    - aggregering av innbyggere, gruppert som over 
    - samme ekskludering som over
 6. Legg `innb_aar` til `utvalgX`
-7. Kjør makro [valg_kategorier](#**valg_kategorier**) 
+7. Kjør makro [valg_kategorier](#valg_kategorier) 
 8. ...
    
 #### Avhengig av følgende variabler
