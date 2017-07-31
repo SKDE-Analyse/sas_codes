@@ -1,13 +1,15 @@
-# Rateprogram-koden
-
-Makroer i *rateberegninger.sas*
-
 Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
+# Oversikt over makroene i *rateberegninger.sas*
 
-## utvalgx
+## **utvalgx**
 
 #### Formål
+
+- Lager datasettet `utvalgX`
+   - Aggreregerer opp pasienter ut fra inkluderingskriteriene (hvilke år, alder, etc.)
+   - Henter inn antall innbyggere
+   - Definerer opp boområder
 
 #### "Steg for steg"-beskrivelse
 
@@ -20,25 +22,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 3. Hvis vis_ekskludering = 1 -> lage tabeller over ekskluderte data i datasett
    - Dette burde flyttes ut i egen makro
 4. Aggregerer RV (i `utvalgX`)
-   - grupperer på aar, KomNr, bydel, Alder, ErMann. 
+   - grupperer på `aar, KomNr, bydel, Alder, ErMann`. 
    - ekskluderer data hvis aar utenfor &periode, alder utenfor &aldersspenn, komnr > 2030, og ermann ikke i &kjonn
-5. Lese inn innbyggerfil til `innb_aar`
+5. Lese inn innbyggerfil
    - aggregering av innbyggere, gruppert som over 
    - samme ekskludering som over
-6. Legg `innb_aar` til `utvalgX`
-7. Kjør makro [valg_kategorier](#valg_kategorier) 
-8. ...
+   - legger så innbyggere til `utvalgX`
+6. Definere alderskategorier
+   - kjør makro [valg_kategorier](#valg_kategorier)
+   - kjører `proc means` 
+7. Definerer boområder
+8. Beregner andeler
+   - Er denne nødvendig? Kan ikke se at den "virker".
+   - Lager datasett `Andel`
+
    
 #### Avhengig av følgende variabler
 
-- Ratefil (det aggregerte datasettet)
-- RV_variabelnavn ()
-- vis_ekskludering
-- innbyggerfil
-- boomraadeN
-- boomraade
+- Ratefil (navnet på det aggregerte datasettet)
+- RV_variabelnavn (variablen det skal beregnes rater på)
+- vis_ekskludering (=1 hvis man vil ha ut antall pasienter som er ekskludert)
+- innbyggerfil (navnet på innbyggerfila)
+- boomraadeN (?)
+- boomraade (?)
 
 #### Definerer følgende variabler
+
+(sjekk hvilke som brukes av andre makroer og hvilke som kun er interne)
 
 - aarsvarfigur=1
 - Periode=(&StartÅr:&SluttÅr)
@@ -48,11 +58,11 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Kalles opp av følgende makroer
 
--
+Ingen
 
 #### Bruker følgende makroer
 
-- valg_kategorier
+- [valg_kategorier](#valg_kategorier)
 - Boomraader (fra makro-mappen)
 
 #### Lager følgende datasett
@@ -65,15 +75,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
+Første makro som kjøres direkte i rateprogrammet
+
+
 
 
 ## **omraadeNorge**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -81,18 +109,37 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
+Andre makro som kjøres direkte i rateprogrammet
+
+
 
 
 ## **omraade**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -100,17 +147,35 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
+
+
 
 ## **lag_kart**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -118,17 +183,35 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
+
+
 
 ## **omraadeHN**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -136,17 +219,36 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
 
-## **Todeltalder**
+
+
+
+
+## **Todeltalder Tredeltalder Firedeltalder Femdeltalder**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -154,71 +256,35 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
 
-## **Tredeltalder**
 
-#### Formål
 
-#### Avhengig av følgende variabler
 
--
-
-#### Kalles opp av følgende makroer
-
--
-
-#### Bruker følgende makroer
-
-- 
-
-#### Annet
-
-## **Firedeltalder**
-
-#### Formål
-
-#### Avhengig av følgende variabler
-
--
-
-#### Kalles opp av følgende makroer
-
--
-
-#### Bruker følgende makroer
-
-- 
-
-#### Annet
-
-## **Femdeltalder**
-
-#### Formål
-
-#### Avhengig av følgende variabler
-
--
-
-#### Kalles opp av følgende makroer
-
--
-
-#### Bruker følgende makroer
-
-- 
-
-#### Annet
 
 ## **valg_kategorier**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 - `Alderskategorier`
+
+#### Definerer følgende variabler
 
 
 #### Kalles opp av følgende makroer
@@ -234,13 +300,31 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
+
+
+
 ## **tabell_1**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -248,17 +332,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **tabell_1e**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -266,17 +366,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **Tabell_CV**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -284,17 +400,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **Tabell_CVe**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -302,17 +434,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **tabell_3N**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -320,17 +468,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **tabell_3Ne**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -338,17 +502,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **Tabell_3**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -356,17 +536,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **Tabell_3e**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -374,17 +570,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **lag_aarsvarbilde**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -392,17 +604,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **lag_aarsvarfigur**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -410,17 +638,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **KI_figur**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -428,17 +672,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **KI_bilde**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -446,17 +706,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **lagre_dataNorge**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -464,17 +740,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **lagre_dataN**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -482,17 +774,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **lagre_dataHN**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -500,17 +808,33 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
 
 ## **aarsvar**
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -518,18 +842,37 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
+
+
+
 
 ## **rateberegninger**
 
 
 #### Formål
 
+#### "Steg for steg"-beskrivelse
+
+1. 
+
+#### Avhengig av følgende datasett
+
+-
+
+#### Lager følgende datasett
+
+-
+
 #### Avhengig av følgende variabler
 
 -
+
+#### Definerer følgende variabler
+
 
 #### Kalles opp av følgende makroer
 
@@ -537,9 +880,12 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- 
+-
 
 #### Annet
+
+
+
 
 
 
