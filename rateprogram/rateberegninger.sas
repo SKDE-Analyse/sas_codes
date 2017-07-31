@@ -218,7 +218,7 @@ run;
 	%Boomraader(haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
 	if BOHF in (24,99) then BoRHF=.; /*kaster ut Utlandet og Svalbard*/
 	if BoRHF in (1:4) then Norge=1;
-format borhf borhf. bohf bohf_kort. boshhn boshhn. fylke fylke. komnr komnr. bydel bydel. ermann ermann.;
+format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr komnr. bydel bydel. ermann ermann.;
 	run;
 
 	/* beregne andeler */
