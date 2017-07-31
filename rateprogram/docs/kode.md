@@ -1,21 +1,38 @@
 # Rateprogram-koden
 
+Makroer i *rateberegninger.sas*
+
 Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
-## Makroer i *rateberegninger.sas*
 
-### **utvalgx**
+## utvalgx
 
 #### Formål
 
 #### "Steg for steg"-beskrivelse
 
-1. Definerer År1 etc.
-2. 
-
+1. Definerer Periode, År1 etc.
+2. Lager datasettet utvalgX av &Ratefil
+   - RV = &RV_variabelnavn
+   - keep RV ermann aar alder komnr bydel
+   - alder mellom 106-115 defineres til 105
+   - kjører aldjust (ermann = 1, hvis ikke tom)
+3. Hvis vis_ekskludering = 1 -> lage tabeller over ekskluderte data i datasett
+   - Dette burde flyttes ut i egen makro
+4. Aggregerer RV (i `utvalgX`)
+   - grupperer på aar, KomNr, bydel, Alder, ErMann. 
+   - ekskluderer data hvis aar utenfor &periode, alder utenfor &aldersspenn, komnr > 2030, og ermann ikke i &kjonn
+5. Lese inn innbyggerfil til `innb_aar`
+   - aggregering av innbyggere, gruppert som over 
+   - samme ekskludering som over
+6. Legg `innb_aar` til `utvalgX`
+7. Kjør makro [valg_kategorier](#**valg_kategorier**) 
+8. ...
+   
 #### Avhengig av følgende variabler
 
-- Ratefil
+- Ratefil (det aggregerte datasettet)
+- RV_variabelnavn ()
 - vis_ekskludering
 - innbyggerfil
 - boomraadeN
@@ -23,7 +40,11 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Definerer følgende variabler
 
-- 
+- aarsvarfigur=1
+- Periode=(&StartÅr:&SluttÅr)
+- Antall_aar=%sysevalf(&SluttÅr-&StartÅr+2)
+- År1 etc.
+
 
 #### Kalles opp av følgende makroer
 
@@ -31,7 +52,6 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Bruker følgende makroer
 
-- aldjust
 - valg_kategorier
 - Boomraader (fra makro-mappen)
 
@@ -47,7 +67,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 
 
-### **omraadeNorge**
+## **omraadeNorge**
 
 #### Formål
 
@@ -66,7 +86,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 #### Annet
 
 
-### **omraade**
+## **omraade**
 
 #### Formål
 
@@ -84,7 +104,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **lag_kart**
+## **lag_kart**
 
 #### Formål
 
@@ -102,7 +122,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **omraadeHN**
+## **omraadeHN**
 
 #### Formål
 
@@ -120,7 +140,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **Todeltalder**
+## **Todeltalder**
 
 #### Formål
 
@@ -138,7 +158,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **Tredeltalder**
+## **Tredeltalder**
 
 #### Formål
 
@@ -156,7 +176,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **Firedeltalder**
+## **Firedeltalder**
 
 #### Formål
 
@@ -174,7 +194,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **Femdeltalder**
+## **Femdeltalder**
 
 #### Formål
 
@@ -192,7 +212,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **valg_kategorier**
+## **valg_kategorier**
 
 #### Formål
 
@@ -214,7 +234,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **tabell_1**
+## **tabell_1**
 
 #### Formål
 
@@ -232,7 +252,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **tabell_1e**
+## **tabell_1e**
 
 #### Formål
 
@@ -250,7 +270,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **Tabell_CV**
+## **Tabell_CV**
 
 #### Formål
 
@@ -268,7 +288,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **Tabell_CVe**
+## **Tabell_CVe**
 
 #### Formål
 
@@ -286,7 +306,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **tabell_3N**
+## **tabell_3N**
 
 #### Formål
 
@@ -304,7 +324,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **tabell_3Ne**
+## **tabell_3Ne**
 
 #### Formål
 
@@ -322,7 +342,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **Tabell_3**
+## **Tabell_3**
 
 #### Formål
 
@@ -340,7 +360,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **Tabell_3e**
+## **Tabell_3e**
 
 #### Formål
 
@@ -358,7 +378,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **lag_aarsvarbilde**
+## **lag_aarsvarbilde**
 
 #### Formål
 
@@ -376,7 +396,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **lag_aarsvarfigur**
+## **lag_aarsvarfigur**
 
 #### Formål
 
@@ -394,7 +414,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **KI_figur**
+## **KI_figur**
 
 #### Formål
 
@@ -412,7 +432,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **KI_bilde**
+## **KI_bilde**
 
 #### Formål
 
@@ -430,7 +450,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **lagre_dataNorge**
+## **lagre_dataNorge**
 
 #### Formål
 
@@ -448,7 +468,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **lagre_dataN**
+## **lagre_dataN**
 
 #### Formål
 
@@ -466,7 +486,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **lagre_dataHN**
+## **lagre_dataHN**
 
 #### Formål
 
@@ -484,7 +504,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **aarsvar**
+## **aarsvar**
 
 #### Formål
 
@@ -502,7 +522,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 #### Annet
 
-### **rateberegninger**
+## **rateberegninger**
 
 
 #### Formål
@@ -523,7 +543,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 
 
-## Utvikling og stabile versjoner
+# Utvikling og stabile versjoner
 
 - Branchen (mappen) 'master' er vår stabile versjon.
 - For hver ny oppdatering i master oppdateres versjonnummeret.
