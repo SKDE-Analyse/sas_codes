@@ -4,7 +4,7 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 {: .no_toc}
 
 * auto-gen TOC:
-{:toc: left}
+{:toc}
 
 # Oversikt over makroene i *rateberegninger.sas*
 
