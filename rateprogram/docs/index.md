@@ -12,8 +12,8 @@
 
 ## Beskrivelse av rateprogrammet
 
-[Kodebeskrivelse](kode)
-[Potensielle endringer av rateprogrammet](endringer)
+- [Kodebeskrivelse](kode)
+- [Potensielle endringer av rateprogrammet](endringer)
 
 
 
