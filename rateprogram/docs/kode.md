@@ -1,7 +1,10 @@
 Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
+# Innholdsfortegnelse
+{: .no_toc}
+
 * auto-gen TOC:
-{:toc}
+{:toc: left}
 
 # Oversikt over makroene i *rateberegninger.sas*
 
@@ -85,32 +88,41 @@ Første makro som kjøres direkte i rateprogrammet
 ## **omraadeNorge**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
 {: .no_toc}
+
 1. 
 
 #### Avhengig av følgende datasett
 {: .no_toc}
+
 -
 
 #### Lager følgende datasett
 {: .no_toc}
--
+
+- NORGE_AGG
+- NORGE_AGG_SNITT
 
 #### Avhengig av følgende variabler
 {: .no_toc}
+
 -
 
 #### Definerer følgende variabler
 {: .no_toc}
 
+
 #### Kalles opp av følgende makroer
 {: .no_toc}
+
 -
 
 #### Bruker følgende makroer
 {: .no_toc}
+
 -
 
 #### Annet
