@@ -87,34 +87,34 @@ Første makro som kjøres direkte i rateprogrammet
 #### Formål
 
 #### "Steg for steg"-beskrivelse
-
+{: .no_toc}
 1. 
 
 #### Avhengig av følgende datasett
-
+{: .no_toc}
 -
 
 #### Lager følgende datasett
-
+{: .no_toc}
 -
 
 #### Avhengig av følgende variabler
-
+{: .no_toc}
 -
 
 #### Definerer følgende variabler
-
+{: .no_toc}
 
 #### Kalles opp av følgende makroer
-
+{: .no_toc}
 -
 
 #### Bruker følgende makroer
-
+{: .no_toc}
 -
 
 #### Annet
-
+{: .no_toc}
 Andre makro som kjøres direkte i rateprogrammet
 
 
@@ -178,35 +178,41 @@ Ingen
 ## **lag_kart**
 
 #### Formål
-
+{: .no_toc}
 #### "Steg for steg"-beskrivelse
-
+{: .no_toc}
 1. 
 
 #### Avhengig av følgende datasett
-
+{: .no_toc}
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 
@@ -214,35 +220,44 @@ Ingen
 ## **omraadeHN**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 
@@ -251,35 +266,44 @@ Ingen
 ## **Todeltalder Tredeltalder Firedeltalder Femdeltalder**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 
@@ -288,31 +312,39 @@ Ingen
 ## **valg_kategorier**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 - `Alderskategorier`
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 - `Todeltalder`
 - `Tredeltalder`
@@ -320,6 +352,7 @@ Ingen
 - `Femdeltalder`
 
 #### Annet
+{: .no_toc}
 
 
 
@@ -327,545 +360,689 @@ Ingen
 ## **tabell_1**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **tabell_1e**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **Tabell_CV**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **Tabell_CVe**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **tabell_3N**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **tabell_3Ne**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **Tabell_3**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **Tabell_3e**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **lag_aarsvarbilde**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **lag_aarsvarfigur**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **KI_figur**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **KI_bilde**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **lagre_dataNorge**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **lagre_dataN**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **lagre_dataHN**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 ## **aarsvar**
 
 #### Formål
+{: .no_toc}
 
 #### "Steg for steg"-beskrivelse
+{: .no_toc}
 
 1. 
 
 #### Avhengig av følgende datasett
+{: .no_toc}
 
 -
 
 #### Lager følgende datasett
+{: .no_toc}
 
 -
 
 #### Avhengig av følgende variabler
+{: .no_toc}
 
 -
 
 #### Definerer følgende variabler
+{: .no_toc}
 
 
 #### Kalles opp av følgende makroer
+{: .no_toc}
 
 -
 
 #### Bruker følgende makroer
+{: .no_toc}
 
 -
 
 #### Annet
+{: .no_toc}
 
 
 
