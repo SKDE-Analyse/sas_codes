@@ -79,7 +79,6 @@ Første makro som kjøres direkte i rateprogrammet
 
 
 
-
 ## **omraadeNorge**
 
 #### Formål
@@ -122,32 +121,51 @@ Andre makro som kjøres direkte i rateprogrammet
 
 #### Formål
 
+Selve rateberegningene. Ratene beregnes basert på &bo 
+
 #### "Steg for steg"-beskrivelse
 
-1. 
+Kommer senere...
 
 #### Avhengig av følgende datasett
 
--
+- RV
+- andel
+- NORGE_AGG_RATE
+   - Lages ved å kjøre makro med bo=Norge først. Burde den heller lages i [omraadeNorge](#omraadenorge)-makroen?
 
 #### Lager følgende datasett
 
--
+- RV&Bo
+- &Bo._Agg
+- &Bo._Agg_Snitt
+- alder
+- &Bo._Agg_rate
+- &Bo._AGG_CV
+- NORGE_AGG_RATE2
+- NORGE_AGG_RATE3
+- NORGE_AGG_RATE4
+- NORGE_AGG_RATE5
 
 #### Avhengig av følgende variabler
 
--
+- SluttÅr
+- StartÅr
+- Bo
+- aar
+- forbruksmal
 
 #### Definerer følgende variabler
 
+- Antall_aar
 
 #### Kalles opp av følgende makroer
 
--
+- [rateberegninger](#rateberegninger)
 
 #### Bruker følgende makroer
 
--
+Ingen
 
 #### Annet
 
@@ -855,6 +873,8 @@ Andre makro som kjøres direkte i rateprogrammet
 
 #### Formål
 
+Makro som beregner rater og spytter ut tabeller og figurer.
+
 #### "Steg for steg"-beskrivelse
 
 1. Lager datasettet `Norgeaarsspenn` fra `RV` og henter ut variablene min_aar og max_aar
@@ -926,7 +946,7 @@ Ingen
 
 #### Bruker følgende makroer
 
-- [omraade](#omraade) 
+- [omraade](#omraade) (selve rateberegningene)
 - [tabell_1](#tabell_1) (hvis Vis_tabeller=1,2,3 og tallformat=NLnum) Kjøres for Bo=Norge, Bo=BoRHF, , 
 - [tabell_1e](#tabell_1e) (hvis Vis_tabeller=1,2,3 og tallformat=Excel)
 - [tabell_3N](#tabell_3n) (hvis Vis_tabeller=3 og tallformat=NLnum)
