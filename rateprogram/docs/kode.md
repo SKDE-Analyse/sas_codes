@@ -1,5 +1,8 @@
 Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
+* auto-gen TOC:
+{:toc}
+
 # Oversikt over makroene i *rateberegninger.sas*
 
 ## **utvalgx**
