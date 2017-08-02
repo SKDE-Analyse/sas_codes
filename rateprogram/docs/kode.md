@@ -251,7 +251,21 @@ Makro som beregner rater og spytter ut tabeller og figurer.
    - `alder=(substr(alder_ny,1,((find(alder_ny,'-','i'))-1)))-0;`
 3. Lager tabell over aldersstruktur, basert på datasett `norge_agg_snitt`
 4. Definere variablene Periode, Antall_aar, År1 etc. (dette gjøres også i utvalgX-makroen)
-5. Kaller opp tabell-rutiner, figur-rutiner etc. basert på valg gjort i rateprogrammet (se variabelliste under)
+5. Kaller opp [omraade](#omraade)-makroen, som beregner ratene etc. ut fra `Bo`. `Bo` kan være
+
+|`Bo`        |variabel = 1        |makro       |
+| ---------- | -----------        | ---------- |
+| Norge      |                    | [omraade](#omraade)    |
+| BoRHF      | &RHF=1             | [omraade](#omraade)    |
+| BoHF       | &HF=1              | [omraade](#omraade)    | 
+| BoShHN     | &sykehus_HN=1      | [omraadeHN](#omraadehn)|
+| komnr      | &kommune=1         | [omraade](#omraade)    | 
+| komnr      | &kommune_HN=1      | [omraadeHN](#omraadehn)|
+| fylke      | &fylke=1           | [omraade](#omraade)    |
+| VK         | &Verstkommune_HN=1 | [omraadeHN](#omraadehn)|
+| bydel      | &oslo=1            | [omraade](#omraade)    |
+   
+6. Kaller opp tabell-rutiner, figur-rutiner etc. basert på valg gjort i rateprogrammet (se variabelliste under)
 
 #### Avhengig av følgende datasett
 
