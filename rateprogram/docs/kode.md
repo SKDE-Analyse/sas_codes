@@ -108,9 +108,8 @@ Dele alder inn i kategorier, basert på verdi av `Alderskategorier`
 #### Lager følgende datasett
 {: .no_toc}
 
-Ingen. Legger til variablen `alder_ny` til datasettet utvalgx.
+Ingen (legger til variablen `alder_ny` til datasettet utvalgx)
 
-Ingen (oppdaterer utvalgx)
 
 #### Avhengig av følgende variabler
 {: .no_toc}
