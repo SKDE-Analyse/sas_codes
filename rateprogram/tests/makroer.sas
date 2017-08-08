@@ -13,7 +13,7 @@ Felles makroer for testing og produksjon av test-datasett
 %mend;
 
 
-%macro testAnno(lagReferanse = 0);
+%macro testAnno(lagReferanse = 0, slettDatasett = 1);
 
 %local filbane;
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\;
@@ -30,11 +30,16 @@ set anno;
 run;
 %end;
 
+%if &slettDatasett ne 0 %then %do;
+proc datasets nolist;
+delete anno;
+%end;
+
 
 %mend;
 
 
-%macro testUtvalgX(branch=master, alene = 0, lagReferanse = 0, definerVariabler = 0);
+%macro testUtvalgX(branch=master, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
 
 %if (&alene NE 0) %then %do;
 data anno;
@@ -80,10 +85,16 @@ set andel;
 run;
 %end;
 
+%if &slettDatasett ne 0 %then %do;
+proc datasets nolist;
+delete rv andel anno;
+%end;
+
+
 %mend;
 
 
-%macro testOmraadeNorge(branch=master, alene = 0, lagReferanse = 0, definerVariabler = 0);
+%macro testOmraadeNorge(branch=master, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
 
 %if (&alene NE 0) %then %do;
 data anno;
@@ -134,15 +145,20 @@ data skde_arn.ref_rate_norge_agg;
 set norge_agg;
 run;
 
-data skde_arn.ref_rate_norge_agg;
-set norge_agg;
+data skde_arn.ref_rate_norge_agg_snitt;
+set norge_agg_snitt;
 run;
+%end;
+
+%if &slettDatasett ne 0 %then %do;
+proc datasets nolist;
+delete rv andel anno norge_agg norge_agg_snitt;
 %end;
 
 %mend;
 
 
-%macro testRateberegninger(branch=master, alene = 0, lagReferanse = 0, definerVariabler = 0);
+%macro testRateberegninger(branch=master, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
 
 %if (&alene NE 0) %then %do;
 
@@ -234,6 +250,10 @@ Sammenligne datasettene med referansedatasett
 
 %end;
 
+%if &slettDatasett ne 0 %then %do;
+proc datasets nolist;
+delete rv: andel anno Norge: BoRHF: bohf: BoShHN: komnr: komnrHN: fylke: bydel: alder konsultasjoner_norge;
+%end;
 
 %mend;
 

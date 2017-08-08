@@ -19,16 +19,13 @@ Variabel-valg finnes i tests\definerVariabler.sas
 
 %include "&filbane.rateprogram\&branch\tests\makroer.sas";
 
-%include "&filbane.rateprogram\&branch\tests\definerVariabler.sas";
-%definerVariabler;
+%testAnno(slettDatasett = 0);
 
-%testAnno;
+%testUtvalgX(alene = 0, branch = &branch, slettDatasett = 0, definerVariabler = 1);
 
-%testUtvalgX(alene = 0, branch = &branch);
+%testOmraadeNorge(alene = 0, branch = &branch, slettDatasett = 0, definerVariabler = 0);
 
-%testOmraadeNorge(alene = 0, branch = &branch);
-
-%testRateberegninger(alene = 0, branch = &branch);
+%testRateberegninger(alene = 0, branch = &branch, slettDatasett = 1, definerVariabler = 0);
 
 %mend;
 
