@@ -13,6 +13,7 @@
 ## Beskrivelse av rateprogrammet
 
 - [Kodebeskrivelse](kode)
+- [Prosedyrer for testing av koden](testing)
 - [Potensielle endringer av rateprogrammet](endringer)
 
 
