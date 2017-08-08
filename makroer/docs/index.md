@@ -1,7 +1,3 @@
-# SAS-makroer
-
-Her kommer forhåpentligvis en beskrivelse av de ulike makroene
-
 - [boomraader](boomraader)
 - [Episode_of_care](Episode_of_care)
 - [Hyppigste](Hyppigste)
