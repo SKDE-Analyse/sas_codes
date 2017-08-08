@@ -2,7 +2,9 @@
 %include "\\tos-sas-skde-01\SKDE_SAS\Makroer\master\Boomraader.sas";
 
 %macro utvalgx;
-%let aarsvarfigur=1;
+
+%if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
+
 /*Beregne Âr1, Âr2 osv*/
 %let Periode=(&Start≈r:&Slutt≈r);
 %let Antall_aar=%sysevalf(&Slutt≈r-&Start≈r+2);
@@ -1673,17 +1675,21 @@ run;Title; ods listing close;
 %if &Ut_sett=1 %then %do;
 	data &forbruksmal._S_&bo; set &bo._agg_rate; run;
 %end;
+/*
 %else %do;
 	data &forbruksmal._&bo; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
 %end;
+*/
 %mend lagre_dataN;
 %macro lagre_dataHN;
 %if &Ut_sett=1 %then %do;
 	data &forbruksmal._S_&bo._HN; set &bo._agg_rate; run;
 %end;
+/*
 %else %do;
 	data &forbruksmal._&bo._HN; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
 %end;
+*/
 %mend lagre_dataHN;
 
 %macro aarsvar;
@@ -1817,7 +1823,8 @@ PROC TABULATE DATA=NORGE_AGG_SNITT;
 RUN; Title;
 %end;
 
-%let aarsvarfigur=1;
+%if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
+
 /*Beregne Âr1, Âr2 osv*/
 %let Periode=(&Start≈r:&Slutt≈r);
 %let Antall_aar=%sysevalf(&Slutt≈r-&Start≈r+2);

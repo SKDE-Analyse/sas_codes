@@ -22,7 +22,7 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS);
 %Let innbyggerfil=Innbygg.innb_2004_2015_bydel_allebyer;
 
 /******  HVA ØNSKER DU Å FÅ UT?  **************************************************************/
-/* Ønsker du Årsvariasjonsfigurer og/eller Konfidensintervallfigurer? */
+%let aarsvarfigur=1; /* Ønsker du Årsvariasjonsfigurer og/eller Konfidensintervallfigurer? */
 %let aarsobs=1;/* dersom du ønsker årsobservasjonene med i figur - dersom ikke må denne stå tom */
 %let NorgeSoyle=1; /* dersom du ønsker Norge som søyle i figur - dersom ikke må det stå =0 */
 %let KIfigur=;
