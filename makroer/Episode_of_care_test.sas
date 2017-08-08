@@ -1,4 +1,4 @@
-%macro Episode_of_care_test(branch=master);
+%macro Episode_of_care_test(branch=master, debug = 0);
 
 /*
 Makro for å teste EoC-makro.
@@ -66,7 +66,8 @@ run;
 proc compare base=skde_arn.ref_eoc4 compare=testset BRIEF WARNING LISTVAR;
 
 
-
+%if &debug eq 0 %then %do;
 proc delete data = testset;
+%end;
 
 %mend;
