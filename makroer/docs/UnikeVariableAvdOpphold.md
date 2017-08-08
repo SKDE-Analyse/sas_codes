@@ -1,0 +1,23 @@
+[Ta meg tilbake.](./)
+
+
+# UnikeVariableAvdOpphold
+
+%macro UnikeVariableAvdOpphold_Hjelp;
+options nomlogic nomprint;
+%put =============================================================================================================================;
+%put Unike variabler avd opphold Makro - Opprettet 24/2-16 av Frank Olsen;
+%put For å finne unike prosedyrer/diagnoser o.l. pr pasient pr sykehusopphold i avdelingsoppholdsfila;
+%put UnikeVariableAvdOpphold(variabler=, dsn=, prefix=, extrawhere=);
+%put Parametre:;
+%put 1. variabler: variablene man utfører analysen på, feks nc: eller ncsp: eller hdiag:;
+%put 2. dsn: datasettnavn - datasettet man utfører analysen på;
+%put 3. prefix: Prefix på variablene som telles/lages;
+%put 4. extrawhere: dersom man ønsker noe mer i where-statement, feks alder in (50:60),;
+%put extrawhere må starte med and;
+%put Eksempel: UnikeVariableAvdOpphold(variabler=ncsp:, dsn=tarzan2014_avd, prefix=ncsp_pros, extrawhere=and alder in (10:15));
+%put -------------------------------------------------------------------------------------------------------------------------------;
+%put Det lages et nytt datasett med pid, AgrshoppId, de nye variablene og en antallsvariabel som teller antall pr avdelingsopphold;
+%put Dette datasettet kan merges med sykehusoppholdsfila;
+%put ================================================================================================================================;
+%mend Unikevariableavdopphold_hjelp;
