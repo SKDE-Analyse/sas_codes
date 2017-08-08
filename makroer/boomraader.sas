@@ -1,13 +1,14 @@
-%macro Boomraader(haraldsplass = 0, indreOslo = 0, bydel = 1, barn = 0);
+%macro Boomraader(haraldsplass = 0, indreOslo = 0, bydel = 1, barn = 0, boaar=2015);
 
 /*
-Endring Arnfinn 27. feb. 2017
-
-Hvis haraldsplass ne 0: del Bergen i Haraldsplass og Bergen
-Hvis indreOslo ne 0: Slå sammen Diakonhjemmet og Lovisenberg
-Hvis bydel = 0: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo)
-Hvis opptaksområder med barneavdeling (slå sammen til OUS og Nordland)
-Standardverdier: kjører som før
+Endring Arnfinn 7. aug. 2017:
+- Årsbetinget definisjon av opptaksområde (kun 2015 foreløpig, siden Samdata kun har lagt ut til og med 2015) 
+Endring Arnfinn 27. feb. 2017:
+- Hvis haraldsplass ne 0: del Bergen i Haraldsplass og Bergen
+- Hvis indreOslo ne 0: Slå sammen Diakonhjemmet og Lovisenberg
+- Hvis bydel = 0: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo)
+- Hvis opptaksområder med barneavdeling (slå sammen til OUS og Nordland)
+- Standardverdier: kjører som før
 */
 
 /*
@@ -101,16 +102,21 @@ else if komnr in (1103) then do;
 	if Bydel in (110301:110399) then BoHF=13; /*Stavanger - endres ved behov*/
 %end;
 end;
-else if KomNr in (101,104,105,106,111,118,119,122,123,124,125,127,128,135,136,137,138) then BoHF=14;
-else if KomNr in (121,211,213,214,215,216,217,221,226,227,228,229,230,231,233,234,235,237,238,239) then BoHF=15;
+else if KomNr in (101,104,105,106,111,118,119,122,123,124,125,127,128,135,136,137,138) then BoHF=14; /* Østfold */
+else if KomNr in (121,211,213,214,215,216,217,221,226,227,228,229,230,231,233,234,235,237,238,239) then BoHF=15; /* Ahus*/
 else if KomNr in (301) then do;
 %if &bydel = 0 %then %do; /* Mangler bydel */
    BoHF = 30;
 %end;
 %else %do;
 	if bydel in (030110,030111,030112) then BoHF=15;/*AHUS*/
-	* f.o.m 2015: 030103 Sagene flyttet fra Lovisenberg til OUS;
-	else if bydel in (030103,030108,030109,030113,030114,030115,030117,030199) then BoHF=16;/*OUS*/
+   %if &boaar < 2015 %then %do; /* f.o.m 2015: 030103 Sagene flyttet fra Lovisenberg til OUS */
+      else if bydel in (030103) then BoHF = 31; /* Lovisenberg */
+   %end;
+   %else %do;
+      else if bydel in (030103) then BoHF = 16; /* OUS */
+   %end;
+	else if bydel in (030108,030109,030113,030114,030115,030117,030199) then BoHF=16;/*OUS*/
    %if &indreOslo ne 0 %then %do;
       *slå sammen Lovisenberg og Diakonhjemmet til Indre Oslo (BoHF = 31);
       else if bydel in (030101,030102,030104,030116) then BoHF=31;/*Lovisenberg*/
