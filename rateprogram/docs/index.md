@@ -1,5 +1,3 @@
-# Rateprogrammet
-
 ## Hvordan bruke rateprogrammet
 
 - Ha oppdatert *automacro*, se [her](http://skde.readthedocs.io/en/master/sas.html#laste-inn-var-egen-autocomplete-fil)
