@@ -74,7 +74,7 @@ if EoC_brudd=. then EoC_nr_pid=.;
 run;
 
 proc sort data=&dsn;
-by pid inndatotid utdatotid EoC_overlapp;
+by pid inndatotid utdatotid EoC_overlapp descending EoC_brudd;
 *by pid inndatotid utdatotid;
 run;
 
@@ -139,7 +139,7 @@ set &dsn;
 by EoC_id;
 if first.EoC_id=1 then forste_hastegrad = hastegrad;
 aktkat = aktivitetskategori3;
-if uttilstand ne 1 then aktkat = 1;
+if uttilstand > 1 then aktkat = 1;
 if aktkat = 1 then hastegrad_inn = hastegrad;
 run;
 
