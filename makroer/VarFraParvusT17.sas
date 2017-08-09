@@ -1,7 +1,7 @@
 /*Tilpasset versjon for tilrettelagte sett juni 2017*/
 
 
-%macro VarFraParvus(dsnMagnus=,var_som=,var_avtspes=);
+%macro VarFraParvusT17(dsnMagnus=,var_som=,var_avtspes=);
 
 /*Makro i makro 1: Avdelingsopphold*/
 %macro koble_avd (niva=,aar=);
@@ -78,5 +78,5 @@ run;
 proc datasets nolist;
 delete qwerty:;
 
-%mend VarFraParvus;
+%mend VarFraParvusT17;
 
