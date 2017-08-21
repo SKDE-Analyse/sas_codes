@@ -103,7 +103,7 @@ Alt som ligger mellom `/*!` og `*/` vil legges inn i `docs/minNyeMakro.md` av sc
 
 """
 
-indexFile = open("index.md", "w")
+indexFile = codecs.open("index.md", "w", "utf-8")
 indexFile.write(indexHeading+index)
 indexFile.close()
 

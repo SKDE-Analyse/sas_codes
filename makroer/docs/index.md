@@ -5,13 +5,13 @@ Makroene ligger her:
 ```
 \tos-sas-skde-01\SKDE_SAS\Makroer\master
 ```
-For å bruke de i din egen SAS-kode, legges følgende inn i koden:
+For Ã¥ bruke de i din egen SAS-kode, legges fÃ¸lgende inn i koden:
 ```
 %let filbane=\tos-sas-skde-01\SKDE_SAS\;
 options sasautos=("&filbane.Makroer\master" SASAUTOS);
 ```
 
-Hvis man vil lage en ny makro, lager man en sas-fil som heter det samme som makroen. Makroene dokumenteres direkte i koden. Eksempel på makro, som legges i en fil som heter `minNyeMakro.sas`:
+Hvis man vil lage en ny makro, lager man en sas-fil som heter det samme som makroen. Makroene dokumenteres direkte i koden. Eksempel pÃ¥ makro, som legges i en fil som heter `minNyeMakro.sas`:
 ```
 %macro minNyeMakro(variabel1 = );
 
@@ -26,7 +26,7 @@ sas-kode...
 
 
 
-Alt som ligger mellom `/*!` og `*/` vil legges inn i `docs/minNyeMakro.md` av scriptet `lagDokumentasjon.py` i mappen `docs`. Ved å kjøre dette scriptet og så dytte opp til *github*, vil dokumentasjon legges på nett.
+Alt som ligger mellom `/*!` og `*/` vil legges inn i `docs/minNyeMakro.md` av scriptet `lagDokumentasjon.py` i mappen `docs`. Ved Ã¥ kjÃ¸re dette scriptet og sÃ¥ dytte opp til *github*, vil dokumentasjon legges pÃ¥ nett.
 
 ## Linker til dokumentasjon av de ulike makroene
 
