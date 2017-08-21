@@ -3,6 +3,13 @@
 
 %macro VarFraParvusT17(dsnMagnus=,var_som=,var_avtspes=);
 
+/*!
+
+Se [VarFraParvus](VarFraParvus)
+
+*/
+
+
 /*Makro i makro 1: Avdelingsopphold*/
 %macro koble_avd (niva=,aar=);
 data 	qwerty_avd_&aar;

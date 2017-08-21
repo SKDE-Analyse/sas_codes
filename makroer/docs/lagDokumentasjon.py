@@ -40,25 +40,34 @@ def findSASfiles(folder):
 
    return(SASfiles)
 
+def deleteMD(folder):
+   for fn in os.listdir(folder):
+      if fn.endswith(".md"):
+         os.remove(fn)
 
 folder = "../"   
 listofMacros = findSASfiles(folder)
 
+deleteMD(".")
+
+index = ""
 for i in listofMacros:
-   doc = '''[Ta meg tilbake.](./)
+   heading = '''[Ta meg tilbake.](./)
 
 # {0}
 
 '''.format(i.split(".")[0])
 
-   doc += extractDoc(folder + i)
+   doc = extractDoc(folder + i)
    
-   docFile = open(i.split(".")[0]+".md", "w")
-   docFile.write(doc)
-   docFile.close()
+   if doc != "":
+      index += "- [{0}]({0})\n".format(i.split(".")[0])
+      docFile = open(i.split(".")[0]+".md", "w")
+      docFile.write(heading + doc)
+      docFile.close()
 
+indexFile = open("index.md", "w")
+indexFile.write(index)
+indexFile.close()
 
-   
-
-#print(extractDoc("../Episode_of_care.sas"))
 

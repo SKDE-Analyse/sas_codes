@@ -1,6 +1,5 @@
 [Ta meg tilbake.](./)
 
-
 # reinnleggelser
 
 Reinnleggelser-makro - opprettet av Arnfinn 1. des. 2016 
@@ -30,5 +29,3 @@ fra og med 14 dager før nyttår første år til og med 14 dager før nyttår si
 teller som primærinnleggelser. Alle akutte innleggelser,
 som ikke har en av de ekskluderte diagnosene, som skjer innen 14 dager
 etter en primærinnleggelse, vil bli markert som en reinnleggelse
-
-

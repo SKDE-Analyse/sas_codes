@@ -1,6 +1,5 @@
 [Ta meg tilbake.](./)
 
-
 # VarFraParvus
 
 Hente variable fra Parvus til Magnus - Opprettet 5/10-16 av Petter Otterdal

@@ -1,6 +1,5 @@
 [Ta meg tilbake.](./)
 
-
 # Label_m_info
 
 Label_m_info Makro - Opprettet 30/11-15 av Frank Olsen

@@ -1,6 +1,5 @@
 [Ta meg tilbake.](./)
 
-
 # UnikeVariableAvdOpphold
 
 Unike variabler avd opphold Makro - Opprettet 24/2-16 av Frank Olsen

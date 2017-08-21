@@ -5,8 +5,7 @@
 - [Multippel_test](Multippel_test)
 - [reinnleggelser](reinnleggelser)
 - [type1_type2_bohf](type1_type2_bohf)
-- [Unik_pasient](Unik_pasient)
 - [UnikeVariableAvdOpphold](UnikeVariableAvdOpphold)
+- [Unik_pasient](Unik_pasient)
 - [VarFraParvus](VarFraParvus)
 - [VarFraParvusT17](VarFraParvusT17)
-
