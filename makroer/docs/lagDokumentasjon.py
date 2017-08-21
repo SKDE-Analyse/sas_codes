@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
-
-
 import sys
 import os
+import codecs
 
 def extractDoc(filename):
    macroFile = open(filename, "r")
@@ -62,7 +60,7 @@ for i in listofMacros:
    
    if doc != "":
       index += "- [{0}]({0})\n".format(i.split(".")[0])
-      docFile = open(i.split(".")[0]+".md", "w")
+      docFile = codecs.open(i.split(".")[0]+".md", "w", "utf-8")
       docFile.write(heading + doc)
       docFile.close()
 
