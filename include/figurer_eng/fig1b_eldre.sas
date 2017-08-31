@@ -17,7 +17,7 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 	Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
     Yaxistable &varnavn pasienter kons_pr_pas /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
     yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=&fontst) type=discrete discreteorder=data valueattrs=(size=&fontst);
-	xaxis label="Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=&fontst ) offsetmin=0.02 valueattrs=(size=&fontst);
+	xaxis label="Number per 1,000 inhabitants ((*ESC*){unicode'2265'x}75 years old)" labelattrs=(color=black size=&fontst ) offsetmin=0.02 valueattrs=(size=&fontst);
      inset 
 		(
 	 	"(*ESC*){unicode'25cf'x}"="   2013"

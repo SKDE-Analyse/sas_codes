@@ -89,7 +89,7 @@ if type=2 then do;
 end;
 
 Andel=en_ant/tre_ant;
-label Innbyggere="Innb." antopph="&label_to." en_ant="&label_en.";                     
+label Innbyggere="Inhab." antopph="&label_to." en_ant="&label_en.";                     
 format en_rate to_rate 8.2  ratesnitt 8.1 ant_innbyggere 8.0;
 keep Bohf en_rate type Plassering ratesnitt Innbyggere Andel AntOpph en_ant tre_rate to_ant to_rate tot_ratesnitt labelpos No_snitt norge_snitt;
 run;
@@ -122,8 +122,8 @@ hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6);
 	  scatter y=BoHf x=posisjon / datalabel=andel datalabelpos=left markerattrs=(size=0) name="sc" 
           datalabelattrs=(color=black);
      Yaxistable en_ant antopph /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst ) type=discrete discreteorder=data valueattrs=(size=&fontst);
-  xaxis label="Andel"   labelattrs=(size=&fontst) offsetmin=0.02 valueattrs=(size=&fontst);
+    yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=&fontst ) type=discrete discreteorder=data valueattrs=(size=&fontst);
+  xaxis label="Percentage"   labelattrs=(size=&fontst) offsetmin=0.02 valueattrs=(size=&fontst);
      Format andel percent8.1 en_ant antopph nlnum8.0 ;
 		
 run;Title; ods listing close; ods graphics off;
@@ -139,8 +139,8 @@ hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6);
 	  scatter y=BoHf x=posisjon / datalabel=andel datalabelpos=left markerattrs=(size=0) name="sc" 
           datalabelattrs=(color=black);
      Yaxistable en_ant antopph /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 ) type=discrete discreteorder=data valueattrs=(size=7);
-  xaxis label="Andel"   labelattrs=(size=7) offsetmin=0.02 valueattrs=(size=7);
+    yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=7 ) type=discrete discreteorder=data valueattrs=(size=7);
+  xaxis label="Percentage"   labelattrs=(size=7) offsetmin=0.02 valueattrs=(size=7);
      Format andel percent8.1 en_ant antopph nlnum8.0 ;
 		
 run;Title; ods listing close; ods graphics off;

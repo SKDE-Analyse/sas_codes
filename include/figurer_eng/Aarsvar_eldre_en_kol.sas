@@ -74,7 +74,7 @@ run;
 
 
 %let figfil = fig1e_eldre;
-%include "&filbane.\include\master\figurer\lag_figur.sas";
+%include "&filbane.\include\master\figurer_eng\lag_figur.sas";
 
 
 /*	Sletter datasett	*/

@@ -48,7 +48,7 @@ if type=2 then do;
      Innbyggere=.;
 end;
 Andel=en_rate/tot_ratesnitt;
-label Innbyggere="Innb." to_ant="&label_to." en_ant="&label_en."; 
+label Innbyggere="Inhab." to_ant="&label_to." en_ant="&label_en."; 
 rate_original=ratesnitt;
 Length Mistext $ 10;
 if antopph lt 30 then do;
@@ -101,7 +101,7 @@ run;
 /*Lager figur og lagrer bildefil*/
 
 %let figfil = fig2_eldre;
-%include "&filbane.\include\master\figurer\lag_figur.sas";
+%include "&filbane.\include\master\figurer_eng\lag_figur.sas";
 
 
 /* Sletter datasett */

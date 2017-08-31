@@ -67,7 +67,7 @@ if type=2 then do;
 end;
 gj_liggetid = ligget/tot_ant;
 Andel=rate_en/rate_to;
-label gj_liggetid="Liggetid" tot_ant="&label_to." en_ant="&label_en.";
+label gj_liggetid="Length of stay" tot_ant="&label_to." en_ant="&label_en.";
 rate_original=ratesnitt;      
 format en_rate to_rate 8.2  ratesnitt 8.1 ant_innbyggere 8.0;
 keep Bohf en_rate type Plassering Mistext ratesnitt Innbyggere gj_liggetid rate_to rate_en ligget Andel ant_en en_ant tot_ant to_ant labelpos  ;
@@ -105,7 +105,7 @@ by descending andel en_ant;
 run;
 
 %let figfil = fig4b_eldre;
-%include "&filbane.\include\master\figurer\lag_figur.sas";
+%include "&filbane.\include\master\figurer_eng\lag_figur.sas";
 
 Proc datasets nolist;
 delete en to tre test;

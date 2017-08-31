@@ -22,7 +22,7 @@ if bohf = 8888 then do;
 end;
 posisjon = 0.005;
 
-label d30_&tema._ant='30 dgr.' d365_&tema._ant='365 dgr.' Andel365='Andel 365dgr.';
+label d30_&tema._ant='30 days' d365_&tema._ant='365 days' Andel365='Pct. 365days';
 run;
 
 
@@ -58,21 +58,21 @@ run;
 %let mappe = rapport;
 %let bildeformat = pdf;
 
-%include "&filbane.\include\master\figurer\fig4c_eldre.sas";
+%include "&filbane.\include\master\figurer_eng\fig4c_eldre.sas";
 
 
 %let fontst = 9;
 %let mappe = faktaark;
 %let bildeformat = pdf;
 
-%include "&filbane.\include\master\figurer\fig4c_eldre.sas";
+%include "&filbane.\include\master\figurer_eng\fig4c_eldre.sas";
 
 
 %let fontst = 7;
 %let mappe = png;
 %let bildeformat = png;
 
-%include "&filbane.\include\master\figurer\fig4c_eldre.sas";
+%include "&filbane.\include\master\figurer_eng\fig4c_eldre.sas";
 
 
 

@@ -85,7 +85,7 @@ by descending andel en_ant;
 run;
 
 %let figfil = fig4_eldre;
-%include "&filbane.\include\master\figurer\lag_figur.sas";
+%include "&filbane.\include\master\figurer_eng\lag_figur.sas";
 
 Proc datasets nolist;
 delete en to tot;

@@ -23,7 +23,7 @@ Keylegend 'h1' 'h2' 'h3'/ noborder location=inside position=bottomright down=3;
 Yaxistable en_ant to_ant tre_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
 yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=&fontst) 
          offsetmax=0.03 offsetmin=0.03 type=discrete discreteorder=data valueattrs=(size=&fontst) ;
-xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  
+xaxis label=" Number per 1,000 inhabitants ((*ESC*){unicode'2265'x}75 years old)" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  
 	&xskala valuesformat=nlnum8.0   valueattrs=(size=&fontst);  
 Format andel percent8. en_ant to_ant tre_ant nlnum8.0 ;
 run;

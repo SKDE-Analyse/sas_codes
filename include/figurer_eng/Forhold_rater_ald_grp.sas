@@ -53,7 +53,7 @@ set &datasett;
      Plassering=&MisT_posisjon;
 	 prosent=.;
 end;
-	label rate_femti="Rate 50-74" rate_syttifem="Rate 75+" str_tot_unik='Pasienter 75+' str50pluss_tot_unik='Pasienter 50-74' ; 
+	label rate_femti="Rate 50-74" rate_syttifem="Rate 75+" str_tot_unik='Patients 75+' str50pluss_tot_unik='Patients 50-74' ; 
 run;
 
 
@@ -86,21 +86,21 @@ run;
 %let mappe = rapport;
 %let bildeformat = pdf;
 
-%include "&filbane.\include\master\figurer\fig3_eldre.sas";
+%include "&filbane.\include\master\figurer_eng\fig3_eldre.sas";
 
 
 %let fontst = 9;
 %let mappe = faktaark;
 %let bildeformat = pdf;
 
-%include "&filbane.\include\master\figurer\fig3_eldre.sas";
+%include "&filbane.\include\master\figurer_eng\fig3_eldre.sas";
 
 
 %let fontst = 7;
 %let mappe = png;
 %let bildeformat = png;
 
-%include "&filbane.\include\master\figurer\fig3_eldre.sas";
+%include "&filbane.\include\master\figurer_eng\fig3_eldre.sas";
 
 
 
