@@ -264,8 +264,24 @@ value behSh
       996663191 = 'Helse Bergen, Laboratorie og røntgen Haukeland'  
       996722201 = 'Nordlandssykehuset HF, Habilitering/rehabilitering, Stokmarknes'  
       996860884 = 'Somni Søvnsenter og Spesialisthelsetjenester AS'  
-      998396522 = 'Tore Bru' ;
-
+      998396522 = 'Tore Bru' 
+/*PO: Supplert med nye behandlingssteder gjeldende 2016*/
+	  874044342 = 'Helgelandssykehuset HF Brønnøysund fødestue'  
+      912817318 = 'Somni AS'  
+      914480752 = 'Moloklinikken AS'  
+      915411223 = 'Kalbakkenklinikken AS'  
+      915621457 = 'St Olavs hospital, Ørland'  
+      916269331 = 'A-Medi AS'  
+      916588224 = 'Preventia AS'  
+      974285959 = 'Finnmarkssykehuset, Karasjok'  
+      979873190 = 'Finnmarkssykehuset, Alta'  
+      983974929 = 'Helgelandssykehuset HF'  
+      998558271 = 'Oslo medisinske senter'  
+      999230008 = 'Ifocus øyeklinikk AS'
+	  983974880 = 'Finnmarkssykehuset HF'  ;
+	  
+	  
+	  
 value BehHF 
 1='Finnmarkssykehuset HF' 
 2='UNN HF' 

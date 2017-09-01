@@ -51,6 +51,8 @@ value ErMann
 value Hastegrad
 	1='Akutt'
 	4='Planlagt'
+	2='Ikke akutt, men behandling innen 6 timer'                               
+	3='Venting mellom 6 og 24 timer' 
 	5='Tilbakeføring av pasient fra annet sykehus';
 	  
 value ICD10kap   /*Fra 2014. Bør skaffes nye*/
