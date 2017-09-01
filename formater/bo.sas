@@ -27,6 +27,7 @@ Value BoHF
 	24='Utlandet/Svalbard - bosted'
 	30='Oslo - bosted'
 	31='Indre Oslo - bosted'
+	8888='Norge'
 	99='Ukjent/ugyldig kommunenr';
  
 Value BoHF_kort
@@ -206,6 +207,7 @@ value BoRHF
 3='Helse Vest RHF - bosted' 
 4='Helse Sør-Øst RHF - bosted' 
 24='Utlandet/Svalbard - bosted' 
+8888='Norge'
 99='Ukjent/ugyldig kommunenr';
 
 value BoRHF_kort
@@ -214,6 +216,7 @@ value BoRHF_kort
 3='Helse Vest RHF' 
 4='Helse Sør-Øst RHF' 
 24='Utlandet/Svalbard' 
+8888='Norge'
 99='Ukjent/ugyldig kommunenr';
 
 value BoRHF_kortest
@@ -222,6 +225,7 @@ value BoRHF_kortest
 3='Vest' 
 4='Sør-Øst' 
 24='Utlandet/Svalbard' 
+8888='Norge'
 99='Ukjent/ugyldig kommunenr';
 
  
@@ -236,7 +240,8 @@ value BoShHN
 8='Bodø - bosted' 
 9='Rana - bosted' 
 10='Mosjøen - bosted' 
-11='Sandnessjøen - bosted';
+11='Sandnessjøen - bosted'
+8888='Norge';
 
 value BoShHN_kort
 1='Kirkenes'
@@ -249,7 +254,8 @@ value BoShHN_kort
 8='Bodø' 
 9='Rana' 
 10='Mosjøen' 
-11='Sandnessjøen';
+11='Sandnessjøen'
+8888='Norge';
 
 value fylke
 1 ='Østfold'
@@ -271,7 +277,8 @@ value fylke
 18='Nordland'
 19='Troms Romsa'
 20='Finnmark Finnmárku'
-24='Utlandet/Svalbard - bosted' 
+24='Utlandet/Svalbard - bosted'
+8888='Norge' 
 99='Ukjent/ugyldig kommunenr';
  
 value vertskommHN
