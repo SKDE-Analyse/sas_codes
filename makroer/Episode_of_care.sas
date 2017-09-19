@@ -1,8 +1,10 @@
 %macro Episode_of_care(dsn=, EoC_tid=28800, forste_hastegrad = 1, behold_datotid=0, debug = 0, nulle_liggedogn = 0, kols = 0);
 /*!
 ### Beskrivelse
+
 Inndatasettet må inneholde inndato utdato inntid og uttid
 inntid og uttid må (foreløpig) hentes fra parvus
+
 ```
 %Episode_of_care(dsn=, Eoc_tid=28800, forste_hastegrad=1, behold_datotid=0, debug=0, nulle_liggedogn=0);
 ```
@@ -17,8 +19,8 @@ inntid og uttid må (foreløpig) hentes fra parvus
 6. nulle_liggedogn (=0): Hvis forskjellig fra null, så settes antall EoC_liggedogn til null hvis opphold er <8 timer
 
 Episode of care omfatter da:
-a. Dersom inndatotid på nytt opphold er før utdatotid på forrige opphold
-b. Dersom nytt opphold er innen x sekunder fra utdatotid på forrige opphold
+- Dersom inndatotid på nytt opphold er før utdatotid på forrige opphold
+- Dersom nytt opphold er innen *x* sekunder fra utdatotid på forrige opphold
 
 Makroen lager 12 (eventuelt 14) nye variabler:
 1.  EoC_nr_pid: Nummererte EoC-opphold pr pid, dersom EoC består av flere opphold har disse samme nummer
@@ -39,7 +41,9 @@ Makroen lager 12 (eventuelt 14) nye variabler:
 ### Forfatter
 
 Opprettet 26.10.2016 av Frank Olsen
+
 Endret 26.10.2016 av Frank Olsen
+
 Endret 29.11.2016 av Arnfinn
 
 */
