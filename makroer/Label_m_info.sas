@@ -1,14 +1,18 @@
 %macro Label_m_info(inn_data=, Label_variabel=, Info_variabel=, Info_variabel_tekst= );
 
 /*!
-Label_m_info Makro - Opprettet 30/11-15 av Frank Olsen
-For Ã¥ legge pÃ¥ f.eks n=antall obs i label for boomrÃ¥der i sÃ¸ylediagram
-Label_m_info(inn_data=, Label_variabel=, Info_variabel=, Info_variabel_tekst=)
+- Opprettet 30/11-15 av Frank Olsen
+
+For å legge på f.eks n=antall obs i label for boområder i søylediagram
+```
+%Label_m_info(inn_data=, Label_variabel=, Info_variabel=, Info_variabel_tekst=);
+```
+
 Parametre:
-1. Inn_data: datasett man utfÃ¸rer analysen pÃ¥
-2. Label_variabel: Variabelen man Ã¸nsker Ã¥ legge ekstra informasjon pÃ¥
-3. Info_variabel: Variabelen som har ekstra informasjonen man Ã¸nsker Ã¥ legge pÃ¥
-4. Info_variabel_tekst: Forklaringsteksten for ekstra informasjonen
+1. `Inn_data`: datasett man utfører analysen på
+2. `Label_variabel`: Variabelen man ønsker å legge ekstra informasjon på
+3. `Info_variabel`: Variabelen som har ekstra informasjonen man ønsker å legge på
+4. `Info_variabel_tekst`: Forklaringsteksten for ekstra informasjonen
 */
 
 data &inn_data;

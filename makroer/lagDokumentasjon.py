@@ -98,7 +98,7 @@ sas-kode...
 
 
 
-Alt som ligger mellom `/*!` og `*/` vil legges inn i `docs/minNyeMakro.md` av scriptet `lagDokumentasjon.py` i mappen `docs`. Ved å kjøre dette scriptet og så dytte opp til *github*, vil dokumentasjon legges på nett.
+Alt som ligger mellom `/*!` og `*/` vil legges inn i `docs/minNyeMakro.md` av scriptet `lagDokumentasjon.py`. Ved å kjøre dette scriptet og så dytte opp til *github*, vil dokumentasjon legges på nett.
 
 ## Linker til dokumentasjon av de ulike makroene
 

@@ -1,40 +1,45 @@
 %macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd, kun_innleggelser = 0);
 
 /*!
-Reinnleggelser-makro - opprettet av Arnfinn 1. des. 2016 
-Makro for Ã¥ markere EoC som er en reinnleggelse 
-Makroen Episode_of_care mÃ¥ vÃ¦re kjÃ¸rt fÃ¸r reinnleggelse-makroen
+- opprettet av Arnfinn 1. des. 2016 
 
-reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd)
-dsn:             datasett man utfÃ¸rer analysen pÃ¥
-ReInn_Tid (=30): tidskrav i dager mellom primÃ¦ropphold og et eventuelt reinnleggelsesopphold
-eks_diag (=0):   Hvis ulik 0, innleggelser som inneholder hoved- eller bi-diagnoser, som brukt av kunnskapssenteret, er ikke en reinnl.
-primaer (=alle): Markere opphold som har primaer = 1 som primÃ¦ropphold.
-forste_utdato (=0): Kun regne primÃ¦re innleggelser etter denne dato
-siste_utdato (='31Dec2020'd): Ikke regne primÃ¦re innleggelser etter denne dato
-kun_innleggelser (= 0): Hvis denne er ulik null, teller kun de som er eoc_aktivitetskategori3 = 1 som en primÃ¦rinnleggelse
+Makro for å markere EoC som er en reinnleggelse 
 
-Makroen produserer fÃ¸lgende 3 variabler
-- reinnleggelse: Alle avdelingsopphold i en EoC som er en reinnleggelse (reinnleggelse = 1)
-- primaerinnleggelse: Alle opphold som kan gi en reinnleggelse (primaerinnleggelse = 1)
-- primaer_med_reinn: PrimÃ¦ropphold som fÃ¸rer til en reinnleggelse (primaer_med_reinn = 1)
-Man kan sÃ¥ i ettertid telle opp antall opphold som er en reinnleggelse.
+**Makroen Episode_of_care må være kjørt før reinnleggelse-makroen**
 
-Eksempel:
-reinnleggelser(dsn=mittdatasett, ReInn_Tid = 14, primaer = kols, forste_utdato ='18Dec2012', siste_utdato ='17Dec2015'd)
-Vil markere alle innleggelser som har kols = 1 som primÃ¦rinnleggelser
-(variablen kols mÃ¥ vÃ¦re definert som 1 pÃ¥ forhÃ¥nd). Innleggelser med utskrivelsesedato
-fra og med 14 dager fÃ¸r nyttÃ¥r fÃ¸rste Ã¥r til og med 14 dager fÃ¸r nyttÃ¥r siste Ã¥r
-teller som primÃ¦rinnleggelser. Alle akutte innleggelser,
-som ikke har en av de ekskluderte diagnosene, som skjer innen 14 dager
-etter en primÃ¦rinnleggelse, vil bli markert som en reinnleggelse
+```
+%reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd);
+```
+
+- `dsn`:             datasett man utfører analysen på
+- `ReInn_Tid` (=30): tidskrav i dager mellom primæropphold og et eventuelt reinnleggelsesopphold
+- `eks_diag` (=0):   Hvis ulik 0, innleggelser som inneholder hoved- eller bi-diagnoser, som brukt av kunnskapssenteret, er ikke en reinnl.
+- `primaer` (=alle): Markere opphold som har primaer = 1 som primæropphold.
+- `forste_utdato` (=0): Kun regne primære innleggelser etter denne dato
+- `siste_utdato` (='31Dec2020'd): Ikke regne primære innleggelser etter denne dato
+- `kun_innleggelser` (= 0): Hvis denne er ulik null, teller kun de som er `eoc_aktivitetskategori3 = 1` som en primærinnleggelse
+
+Makroen produserer følgende 3 variabler
+- `reinnleggelse`: Alle avdelingsopphold i en EoC som er en reinnleggelse (reinnleggelse = 1)
+- `primaerinnleggelse`: Alle opphold som kan gi en reinnleggelse (primaerinnleggelse = 1)
+- `primaer_med_reinn`: Primæropphold som fører til en reinnleggelse (primaer_med_reinn = 1)
+
+Man kan så i ettertid telle opp antall opphold som er en reinnleggelse.
+
+### Eksempel:
+```
+%reinnleggelser(dsn=mittdatasett, ReInn_Tid = 14, primaer = kols, forste_utdato ='18Dec2012', siste_utdato ='17Dec2015'd);
+```
+- Vil markere alle innleggelser som har `kols = 1` som primærinnleggelser (variablen `kols` må være definert som 1 på forhånd). 
+- Innleggelser med utskrivelsesedato fra og med 14 dager før nyttår første år til og med 14 dager før nyttår siste år teller som primærinnleggelser. 
+- Alle akutte innleggelser, som ikke har en av de ekskluderte diagnosene, som skjer innen 14 dager etter en primærinnleggelse, vil bli markert som en reinnleggelse
 */
 
 
 /*
-- Makro for Ã¥ markere EoC som er en reinnleggelse.
+- Makro for å markere EoC som er en reinnleggelse.
 - Bruker definisjonen til Kunnskapssenteret.
-- Makroen Episode_of_care mÃ¥ vÃ¦re kjÃ¸rt fÃ¸rst.
+- Makroen Episode_of_care må være kjørt først.
 */
 
 proc sort data=&dsn;
@@ -78,10 +83,10 @@ QUIT;
    %end;
 
 /*
-Markere linje som primaeropphold (primÃ¦ropphold) hvis 
-- variablen &primaer er lik Ã©n og 
-(hvis primaer=alle -> markere alle dÃ¸gnopphold som primaeropphold)
-- det er en dÃ¸gninnleggelse (kun hvis primaer = alle) og
+Markere linje som primaeropphold (primæropphold) hvis 
+- variablen &primaer er lik én og 
+(hvis primaer=alle -> markere alle døgnopphold som primaeropphold)
+- det er en døgninnleggelse (kun hvis primaer = alle) og
 - eoc_utdato er innenfor definert tidsperiode (&forste_utdato < eoc_utdato < &siste_utdato) og
 - pasient skrevet ut levende
 */
@@ -91,24 +96,24 @@ set &dsn;
 %if &primaer ne alle and &kun_innleggelser = 0 %then
    %do;
       primaeropphold = .;
-      if &primaer = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* dÃ¸gninnleggelser med &primaer lik 1 er aktuelle primÃ¦ropphold */
+      if &primaer = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
    %end;
 %else %if &primaer ne alle and &kun_innleggelser ne 0 %then
    %do;
       primaeropphold = .;
-      if eoc_aktivitetskategori3 = 1 and &primaer = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* dÃ¸gninnleggelser med &primaer lik 1 er aktuelle primÃ¦ropphold */
+      if eoc_aktivitetskategori3 = 1 and &primaer = 1 and &forste_utdato le eoc_utdato le &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* døgninnleggelser med &primaer lik 1 er aktuelle primæropphold */
    %end;
 %else 
    %do;
       tmp_eoc_primaer = .;
-      if eoc_aktivitetskategori3 = 1 and &forste_utdato < eoc_utdato < &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* alle dÃ¸gninnleggelser er aktuelle primÃ¦ropphold */
+      if eoc_aktivitetskategori3 = 1 and &forste_utdato < eoc_utdato < &siste_utdato and EoC_uttilstand = 1 then tmp_eoc_primaer = 1; /* alle døgninnleggelser er aktuelle primæropphold */
    %end;
 	drop primaeropphold; * for sikkerhets skyld;
 run;
 
 /*
 Markere alle linjer i sammen EoC som primaeropphold, hvis en av linjene er markert som tmp_eoc_primaer
-(for &primaer = alle vil tmp_eoc_primaer alltid vÃ¦re lik primaeropphold)
+(for &primaer = alle vil tmp_eoc_primaer alltid være lik primaeropphold)
 */ 
 
 PROC SQL;
@@ -120,7 +125,7 @@ QUIT;
 
 /*
 Markere reinnleggelser
-(akutte innleggelser mindre enn 30 dager (default) etter en primÃ¦rinnleggelse)
+(akutte innleggelser mindre enn 30 dager (default) etter en primærinnleggelse)
 */
 proc sort data = &dsn;
 by pid eoc_id eoc_inndato;
@@ -177,7 +182,7 @@ PROC SQL;
 QUIT;
 
 /*
-Finne tilbake til de primÃ¦re opphold som fÃ¸rer til en reinnleggelse
+Finne tilbake til de primære opphold som fører til en reinnleggelse
 */
 data qwerty;
 set &dsn;
@@ -188,7 +193,7 @@ set &dsn;
 run;
 
 /*
-Kun unike eoc_id fÃ¸r kobling med hovedfila, ellers har man ikke kontroll pÃ¥ antall linjer etterpÃ¥ (dobling av linjer)
+Kun unike eoc_id før kobling med hovedfila, ellers har man ikke kontroll på antall linjer etterpå (dobling av linjer)
 */
 
 proc sort data = qwerty;
@@ -220,8 +225,8 @@ proc sql;
 quit;
 
 /*
-Opphold som var en primÃ¦rinnleggelse men som ikke hadde reinnleggelse,
-og der pasient dÃ¸r innen 30 dager, teller ikke som en primÃ¦rinnleggelse.
+Opphold som var en primærinnleggelse men som ikke hadde reinnleggelse,
+og der pasient dør innen 30 dager, teller ikke som en primærinnleggelse.
 */
 
 
