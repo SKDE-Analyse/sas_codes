@@ -1,16 +1,13 @@
 %macro Episode_of_care(dsn=, EoC_tid=28800, forste_hastegrad = 1, behold_datotid=0, debug = 0, nulle_liggedogn = 0, kols = 0);
 /*!
-Episode_of_care Makro 
-- Opprettet 26.10.2016 av Frank Olsen
-- Endret 26.10.2016 av Frank Olsen
-- Endret 29.11.2016 av Arnfinn
-
+### Beskrivelse
 Inndatasettet må inneholde inndato utdato inntid og uttid
 inntid og uttid må (foreløpig) hentes fra parvus
 ```
 %Episode_of_care(dsn=, Eoc_tid=28800, forste_hastegrad=1, behold_datotid=0, debug=0, nulle_liggedogn=0);
 ```
-Parametre:
+
+### Parametre
 
 1. dsn: datasett man utfører analysen på
 2. Eoc_tid (=28800): tidskrav i sekunder (default 28800 er 8 timer) for opphold med tidsdifferanse - må være et tall
@@ -38,6 +35,13 @@ Makroen lager 12 (eventuelt 14) nye variabler:
 12. EoC_hastegrad: 1 hvis ett av oppholdene er akutt, 4 ellers
 13. EoC_forste_hastegrad: Hastegrad for første avdelingsopphold. 1 for akutt, 4 for elektiv
 14. EoC_uttilstand: max(uttilstand) for oppholdene i en EoC ("som død" hvis ett av oppholdene er "som død")
+
+### Forfatter
+
+Opprettet 26.10.2016 av Frank Olsen
+Endret 26.10.2016 av Frank Olsen
+Endret 29.11.2016 av Arnfinn
+
 */
 
 /* 

@@ -1,15 +1,15 @@
 %macro multippel_test(dsn1=,Nobs=,Ntot=,Gruppe=,rate_pr=,tittel=,gr1=,gr2=,print_log=);
 
 /*!
-- Opprettet 29/3-17 av Frank Olsen
-- endret 3/5-17 - Frank Olsen
+### Beskrivelse
 
 For å teste om noen boområders rater er forskjellige fra den totale raten for alle de aktuelle områdene
 ```
 %multippel_test(dsn1=,Nobs=,Ntot=,Gruppe=,rate_pr=,tittel=,gr1=,gr2=,print_log=);
 ```
 
-Parametre:
+### Parametre
+
 1. `dsn1`: datasett man utfører analysen på - som regel ett aggregert sett fra Rateprogrammet
 2. `Nobs`: ratevariabelen - som regel vil det være "RateSnitt"
 3. `Ntot`: Teller i raten, som regel vil dette være "Innbyggere"
@@ -26,6 +26,12 @@ Resultat: tabell med 4 kolonner med p-verdier
 - Kolonne 4: FDR: p-verdier for hvert område ifht til totalen justert for multippel testing vha FDR - False Discovery Rate (vanligste metode)
 
 [Info om metoden](http://support.sas.com/kb/22/571.html)
+
+### Forfatter
+
+Opprettet 29/3-17 av Frank Olsen
+
+Endret 3/5-17 - Frank Olsen
 */
 
 data dsn1;

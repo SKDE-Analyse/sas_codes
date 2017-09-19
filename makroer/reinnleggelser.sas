@@ -1,7 +1,7 @@
 %macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd, kun_innleggelser = 0);
 
 /*!
-- opprettet av Arnfinn 1. des. 2016 
+### Beskrivelse
 
 Makro for å markere EoC som er en reinnleggelse 
 
@@ -10,6 +10,8 @@ Makro for å markere EoC som er en reinnleggelse
 ```
 %reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd);
 ```
+
+### Parametre
 
 - `dsn`:             datasett man utfører analysen på
 - `ReInn_Tid` (=30): tidskrav i dager mellom primæropphold og et eventuelt reinnleggelsesopphold
@@ -33,6 +35,10 @@ Man kan så i ettertid telle opp antall opphold som er en reinnleggelse.
 - Vil markere alle innleggelser som har `kols = 1` som primærinnleggelser (variablen `kols` må være definert som 1 på forhånd). 
 - Innleggelser med utskrivelsesedato fra og med 14 dager før nyttår første år til og med 14 dager før nyttår siste år teller som primærinnleggelser. 
 - Alle akutte innleggelser, som ikke har en av de ekskluderte diagnosene, som skjer innen 14 dager etter en primærinnleggelse, vil bli markert som en reinnleggelse
+
+### Forfatter
+
+Opprettet av Arnfinn 1. des. 2016 
 */
 
 
