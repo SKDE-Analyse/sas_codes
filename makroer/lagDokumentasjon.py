@@ -45,12 +45,13 @@ def findSASfiles(folder):
 def deleteMD(folder):
    for fn in os.listdir(folder):
       if fn.endswith(".md"):
-         os.remove(fn)
+         os.remove(folder+fn)
 
-folder = "../"   
+folder = "./"
 listofMacros = findSASfiles(folder)
 
-deleteMD(".")
+docFolder = "./docs/"
+deleteMD(docFolder)
 
 index = ""
 for i in listofMacros:
@@ -64,7 +65,7 @@ for i in listofMacros:
    
    if doc != "":
       index += "- [{0}]({0})\n".format(i.split(".")[0])
-      docFile = codecs.open(i.split(".")[0]+".md", "w", "utf-8")
+      docFile = codecs.open(docFolder+i.split(".")[0]+".md", "w", "utf-8")
       docFile.write(heading + doc)
       docFile.close()
 
@@ -103,7 +104,7 @@ Alt som ligger mellom `/*!` og `*/` vil legges inn i `docs/minNyeMakro.md` av sc
 
 """
 
-indexFile = codecs.open("index.md", "w", "utf-8")
+indexFile = codecs.open(docFolder+"index.md", "w", "utf-8")
 indexFile.write(indexHeading+index)
 indexFile.close()
 
