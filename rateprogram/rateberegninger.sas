@@ -1675,21 +1675,21 @@ run;Title; ods listing close;
 %if &Ut_sett=1 %then %do;
 	data &forbruksmal._S_&bo; set &bo._agg_rate; run;
 %end;
-/*
+
 %else %do;
 	data &forbruksmal._&bo; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
 %end;
-*/
+
 %mend lagre_dataN;
 %macro lagre_dataHN;
 %if &Ut_sett=1 %then %do;
 	data &forbruksmal._S_&bo._HN; set &bo._agg_rate; run;
 %end;
-/*
+
 %else %do;
 	data &forbruksmal._&bo._HN; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
 %end;
-*/
+
 %mend lagre_dataHN;
 
 %macro aarsvar;

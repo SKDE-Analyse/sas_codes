@@ -27,6 +27,8 @@ Variabel-valg finnes i tests\definerVariabler.sas
 
 %testRateberegninger(alene = 0, branch = &branch, slettDatasett = 1, definerVariabler = 0);
 
+%put ERROR: OK selv om man får disse 7 feilmeldingene (8 med denne)! Skal fikse; 
+
 %mend;
 
 %macro test2(branch = master);
@@ -52,5 +54,6 @@ Test av deler av rateprogrammet hver for seg.
 
 %testUtvalgX(alene = 1, branch = &branch);
 
+%put ERROR: OK selv om man får disse 7 feilmeldingene (8 med denne) Skal fikse!; 
 
 %mend;
