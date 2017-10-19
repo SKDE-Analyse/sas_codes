@@ -1367,12 +1367,17 @@ run;
 proc sort data=&bo._aarsvar;
 by descending rateSnitt;
 run;
+
+
+%if %sysevalf(%superq(figurnavn)=,boolean) %then %let figurnavn = "AA_&RV_variabelnavn._&bo"; 
+
+
 %if &NorgeSoyle=0 %then %do;
 /*data &forbruksmal._&bo; set &bo._aarsvar; run;*/
 
 
 /*ods graphics on;*/
-ODS Graphics ON /reset=All imagename="AA_&RV_variabelnavn._&bo" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
+ODS Graphics ON /reset=All imagename=&figurnavn imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
 ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
 title;
 proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
@@ -1388,7 +1393,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
      Yaxistable &forbruksmal Innbyggere /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
-     xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
+     xaxis display=(nolabel) offsetmin=0.02 &skala valueattrs=(size=7);
      inset (
 		%if &Antall_aar>1 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &år1" %end;  
 	 	%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cf'x}"="   &år2" %end;
@@ -1417,7 +1422,7 @@ proc sort data=&bo._aarsvar;
 by descending rateSnitt;
 run;
 
-ODS Graphics ON /reset=All imagename="AA_&RV_variabelnavn._&bo" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
+ODS Graphics ON /reset=All imagename=&figurnavn imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
 ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
 title;
 proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
