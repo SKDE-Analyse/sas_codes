@@ -4,6 +4,27 @@
 ***********************************************************************
 **********************************************************************/
 
+/* Kobler først på variablene emigrert og dodDato fra egen fil */
+
+/* Merge med sql */
+
+%Macro Merge_dod_emigrert (innDataSett=, utDataSett=);
+
+proc sql;
+create table &utDataSett as
+select &innDataSett..*, emigrertDato, dodDato
+from &innDataSett left join NPR_SKDE.T17_doed_NyEmigrert_kjonn_faar
+on &innDataSett..pid=T17_doed_NyEmigrert_kjonn_faar.pid;
+quit; 
+
+data &utDataSett;
+set &innDataSett;
+label emigrertDato='Emigrert dato - per 20170425 (NPR)';
+label dodDato='Dødedato - per 20170425 (NPR)';
+length DodDato emigrertdato 4;
+run;
+
+%Mend Merge_dod_emigrert;
 
 %Macro Splitte (innDataSett=, utDataSettEN=,utDataSettTO=);
 
@@ -26,6 +47,7 @@ BoHF
 BoRHF
 BoShHN
 Bydel
+DodDato
 drg
 drg_type
 episodeFag
@@ -37,6 +59,7 @@ hdg
 Hdiag:
 ICD10Kap
 Inndato
+InnTid
 InstitusjonId
 intern_kons
 KoblingsID
@@ -45,11 +68,17 @@ korrvekt
 liggetid
 ncmp:
 ncsp:
+ncrp:
 NPRId_reg
+opphold_id
 PID
+polUtforende_1
 UtDato
+UtTid
 utTilstand
+versjon
 ;
+format koblingsID 32.;
 run;
 
 
@@ -67,58 +96,53 @@ aggrshoppID
 Aktivitetskategori
 Aktivitetskategori2
 Aktivitetskategori4
-ald_gr
-Ald_gr5
 alderIDager
 ATC:
 avdOpp_id
 behandlingsstedKode
 behandlingsstedLokal
 behandlingsstedReshID
-/*bydel_alle*/
-bydel_Bergen
-bydel_Oslo
-bydel_Stavanger
-bydel_Trondheim
 bydel2
+bydel_DSF
 cyto:
 dag_kir
 debitor
-DodDato
+
 DRGtypeHastegrad
-EmigrertDato
+emigrertDato
 fagenhetKode
 fagenhetLokal
 fagenhetReshID
 fagomrade
-fodselsar_ident
+fodselsAar_ident
 fodselsvekt
-fodt_mnd_ident
+fodt_mnd
 g_omsorgsniva
 henvType
 ICD10KatBlokk
 innmateHast
-InnTid
+
 inntilstand
-institusjonID_omkodet
 institusjonID_original
 isf_opphold
 kjonn
 kjonn_ident
 KoblingsID
 komNrHjem2
+komNrHjem_DSF
+bydel_DSF
 komp_drg
 kontaktType
 niva
 omsorgsniva
-opphold_id
+
 oppholdstype
 pakkeforlop
 permisjonsdogn
 polIndir
 polIndirekteAktivitet
-polUtforende_1
 polUtforende_2
+polUtforende_3
 RehabType
 relatertKontaktID
 spes_drg
@@ -128,16 +152,39 @@ tell_cyto
 tell_ICD10
 tell_NCMP
 tell_NCSP
+tell_NCRP
 tjenesteenhetKode
 tjenesteenhetLokal
 tjenesteenhetReshID
 trimpkt
 utforendeHelseperson
-UtTid
+
 vekt
-versjon
+
 VertskommHN
+UtskrKlarDato
+tidspunkt_1
+tidspunkt_2
+tidspunkt_3
+tidspunkt_4
+tidspunkt_5
+typeTidspunkt_1
+typeTidspunkt_2
+typeTidspunkt_3
+typeTidspunkt_4
+typeTidspunkt_5
+ant_Tidspunkt
+
+
+henvFraTjeneste
+henvFraInstitusjonID
+frittSykehusvalg
+secondOpinion
+fraSted
+tilSted
+/* delytelse */ /*Kun registrert på 2760 kontakter i 2017*/
 ;
+format koblingsID 32.;
 run;
 
 %Mend Splitte;
