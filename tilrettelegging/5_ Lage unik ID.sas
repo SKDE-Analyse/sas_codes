@@ -1,6 +1,6 @@
-/***********************************************************************************************
+﻿/***********************************************************************************************
 ************************************************************************************************
-MACRO FOR � KOBLINGS_ID 
+MACRO FOR Å KOBLINGS_ID 
 
 ************************************************************************************************
 ***********************************************************************************************/
@@ -19,30 +19,30 @@ data &utDataSett;
 set &innDataSett;
 by PID InnDato Utdato;
 
+If aar = 2016 then do;
+count +1;
+KoblingsID = count + 1711600000000;
+end;
+
 If aar = 2015 then do;
 count +1;
-KoblingsID = count + 11500000000;
+KoblingsID = count + 1711500000000;
 end;
 
 If aar = 2014 then do;
 count +1;
-KoblingsID = count + 11400000000;
+KoblingsID = count + 1711400000000;
 end;
 
 
 If aar = 2013 then do;
 count +1;
-KoblingsID = count + 11300000000;
+KoblingsID = count + 1711300000000;
 end;
 
 If aar = 2012 then do;
 count +1;
-KoblingsID = count + 11200000000;
-end;
-
-If aar = 2011 then do;
-count +1;
-KoblingsID = count + 11100000000;
+KoblingsID = count + 1711200000000;
 end;
 
 run;
@@ -63,30 +63,30 @@ data &utDataSett;
 set &innDataSett;
 by PID InnDato Utdato;
 
+If aar = 2016 then do;
+count +1;
+KoblingsID = count + 1721600000000;
+end;
+
 If aar = 2015 then do;
 count +1;
-KoblingsID = count + 21500000000;
+KoblingsID = count + 1721500000000;
 end;
 
 If aar = 2014 then do;
 count +1;
-KoblingsID = count + 21400000000;
+KoblingsID = count + 1721400000000;
 end;
 
 
 If aar = 2013 then do;
 count +1;
-KoblingsID = count + 21300000000;
+KoblingsID = count + 1721300000000;
 end;
 
 If aar = 2012 then do;
 count +1;
-KoblingsID = count + 21200000000;
-end;
-
-If aar = 2011 then do;
-count +1;
-KoblingsID = count + 21100000000;
+KoblingsID = count + 1721200000000;
 end;
 
 run;

@@ -12,8 +12,8 @@ Innhold:
 ***********************************************************************************************/
 %Macro Konvertering (innDataSett=, utDataSett=);
 Data &Utdatasett;
-Drop kommTjeneste /* kommer i 2016 */ henvFraTjeneste henvFraInstitusjonID frittSykehusvalg secondOpinion polkonAktivitet henvTilTjeneste henvTilInstitusjonID nyTilstand fraSted tilSted 
- ant_tidspunkt typeTidspunkt_: tidspunkt_: gyldig: frittBehandlingsvalg utskrKlarDato ;
+Drop kommTjeneste /* kommer i 2016 */ henvFraTjeneste henvFraInstitusjonID frittSykehusvalg secondOpinion polkonAktivitet henvTilTjeneste henvTilInstitusjonID 
+	nyTilstand fraSted tilSted gyldig: frittBehandlingsvalg  ;
 Set &Inndatasett;
 
 /*
@@ -23,11 +23,15 @@ Set &Inndatasett;
 */
 
 /*Gjenbruk av variabelnavn*/
-PID=NPR_Lopenummer+0;
+PID=lnr+0;
 Rehab=RehabType+0;
-Drop RehabType NPR_Lopenummer;
+Drop RehabType lnr;
 rename Rehab=RehabType;
 
+/* Generere komNr og bydel_org, dropper så bydel slik at den ikke ligger på fila når ny variabel kalt bydel skal genereres i neste makro */
+KomNr=KomNrHjem2+0;
+bydel_org=bydel;
+drop bydel;
 
 /*
 *******************************************************
@@ -37,23 +41,23 @@ rename Rehab=RehabType;
 	/*Datoer*/
 	Inndato1=Input(Inndato,Anydtdte10.);
 	Utdato1=Input(Utdato,Anydtdte10.);
-	EmigrertDato=Input(emigrert_29082016,Anydtdte10.);
-	DodDato=Input(doddato_29082016,Anydtdte10.);
+	UtskrKlarDato1=Input(UtskrKlarDato,Anydtdte10.);
 
-/*	tidspunkt_11=Input(tidspunkt_1,Anydtdte10.);*/
-/*	tidspunkt_21=Input(tidspunkt_2,Anydtdte10.);*/
-/*	tidspunkt_31=Input(tidspunkt_3,Anydtdte10.);*/
-/*	tidspunkt_41=Input(tidspunkt_4,Anydtdte10.);*/
-/*	tidspunkt_51=Input(tidspunkt_5,Anydtdte10.);*/
-/*	UtskrKlarDato1=Input(utskrKlarDato,Anydtdte10.); Disse variablene leses ikke inn før vi eventuelt skal bruke dem i et konkret prosjekt */
+	tidspunkt_11=Input(tidspunkt_1,Anydtdte10.);
+	tidspunkt_21=Input(tidspunkt_2,Anydtdte10.);
+	tidspunkt_31=Input(tidspunkt_3,Anydtdte10.);
+	tidspunkt_41=Input(tidspunkt_4,Anydtdte10.);
+	tidspunkt_51=Input(tidspunkt_5,Anydtdte10.);
 
-	Format Inndato1 Utdato1 emigrertdato doddato /* tidspunkt_11 tidspunkt_21 tidspunkt_31 
-	tidspunkt_41 tidspunkt_51 utskrKlarDato1*/ Eurdfdd10.;
-	Drop Inndato UtDato emigrert_29082016 doddato_29082016 /* tidspunkt_1 tidspunkt_2 tidspunkt_3 
-	tidspunkt_4 tidspunkt_5 utskrKlarDato */;
-	rename Inndato1=Inndato Utdato1=UtDato /* tidspunkt_11=tidspunkt_1 tidspunkt_21=tidspunkt_2 
-		   tidspunkt_31=tidspunkt_3 tidspunkt_41=tidspunkt_4 tidspunkt_51=tidspunkt_5 
-		   UtskrKlardato1=UtskrKlarDato */;
+	/* Disse variablene leses ikke inn før vi eventuelt skal bruke dem i et konkret prosjekt */
+	/* PO 30. mars 2017: Legges til Parvus for å prøves ut i eldreatalaset*/
+
+	Format Inndato1 Utdato1 UtskrKlarDato1 tidspunkt_11 tidspunkt_21 tidspunkt_31 
+	tidspunkt_41 tidspunkt_51 Eurdfdd10.;
+	Drop Inndato UtDato emigrert_29082016 doddato_29082016 UtskrKlarDato tidspunkt_1 tidspunkt_2 tidspunkt_3 
+	tidspunkt_4 tidspunkt_5  ;
+	rename Inndato1=Inndato Utdato1=UtDato UtskrKlarDato1=UtskrKlarDato tidspunkt_11=tidspunkt_1 tidspunkt_21=tidspunkt_2 
+		   tidspunkt_31=tidspunkt_3 tidspunkt_41=tidspunkt_4 tidspunkt_51=tidspunkt_5 ;
 
 	/*Tider*/
 	Inntid1=Input(Inntid, HHMMSS.);
@@ -61,13 +65,6 @@ rename Rehab=RehabType;
 	Format Inntid1 Uttid1 Time8.;
 	Drop Inntid uttid;
 	rename InnTid1=InnTid UtTid1=UtTid;
-
-	/* Indent-variabler per 29082016*/
-	fodselsar_ident=fodselsAar_29082016;
-	kjonn_ident=kjonn_29082016;
-	fodt_mnd_ident=fodt_mnd_29082016;
-	drop fodselsAar_29082016 kjonn_29082016 fodt_mnd_29082016;
-
 
 
 /*
@@ -129,6 +126,13 @@ array ncmp_{20} $ ncmp_1-ncmp_20;
                ncmp{i}=upcase(compress(ncmp_{i}));
           end;
 drop ncmp_: i; 
+
+array ncrp{20} $ ncrp1-ncrp20;
+array ncrp_{20} $ ncrp_1-ncrp_20;
+          do i=1 to 20;
+               ncrp{i}=upcase(compress(ncrp_{i}));
+          end;
+drop ncrp_: i; 
 
 run;
 %Mend Konvertering;

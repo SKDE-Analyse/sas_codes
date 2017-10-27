@@ -1,3 +1,4 @@
+
 /*
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Opprettet av: Linda Leivseth 
@@ -26,36 +27,38 @@ Bområder og behandlingssteder
 ************************************************************************************************
 ***********************************************************************************************/
 
+/* Fjerne dette hvis behandlingsstedKode2 er riktig for Glittre og Feiring */
+
 /* NB! Sjekk om Glittre og Feiring er skilt i behandlingsstedKode2 i data fra og med 2015 */
-/* Syntaks for sjekk og eventuell korrigering:
-PROC TABULATE
-DATA=GLITTRE_FEIRING;
-	WHERE (behandlingsstedKode2 in (973144383, 974116561));
-	CLASS aar /	ORDER=UNFORMATTED MISSING;
-	CLASS tjenesteenhetKode /	ORDER=UNFORMATTED MISSING;
-	CLASS tjenesteenhetLokal /	ORDER=UNFORMATTED MISSING;
-	CLASS behandlingsstedKode2 /	ORDER=UNFORMATTED MISSING;
-	TABLE 
-behandlingsstedKode2*tjenesteenhetKode*tjenesteenhetLokal*ALL={LABEL="Total"},
-N*aar;
-RUN;
-
-data GLITTRE_FEIRING_korr;
-set GLITTRE_FEIRING;
-if behandlingsstedKode2 in (973144383, 974116561) and tjenesteenhetKode=3200 then behandlingsstedKode2=974116561;
-run;
-
-PROC TABULATE
-DATA=GLITTRE_FEIRING_korr;
-	WHERE (behandlingsstedKode2 in (973144383, 974116561));
-	CLASS aar /	ORDER=UNFORMATTED MISSING;
-	CLASS tjenesteenhetKode /	ORDER=UNFORMATTED MISSING;
-	CLASS tjenesteenhetLokal /	ORDER=UNFORMATTED MISSING;
-	CLASS behandlingsstedKode2 /	ORDER=UNFORMATTED MISSING;
-	TABLE 
-behandlingsstedKode2*tjenesteenhetKode*tjenesteenhetLokal*ALL={LABEL="Total"},
-N*aar;
-RUN; */
+/* Syntaks for sjekk og eventuell korrigering:*/
+/*PROC TABULATE*/
+/*DATA=GLITTRE_FEIRING;*/
+/*	WHERE (behandlingsstedKode2 in (973144383, 974116561));*/
+/*	CLASS aar /	ORDER=UNFORMATTED MISSING;*/
+/*	CLASS tjenesteenhetKode /	ORDER=UNFORMATTED MISSING;*/
+/*	CLASS tjenesteenhetLokal /	ORDER=UNFORMATTED MISSING;*/
+/*	CLASS behandlingsstedKode2 /	ORDER=UNFORMATTED MISSING;*/
+/*	TABLE */
+/*behandlingsstedKode2*tjenesteenhetKode*tjenesteenhetLokal*ALL={LABEL="Total"},*/
+/*N*aar;*/
+/*RUN;*/
+/**/
+/*data GLITTRE_FEIRING_korr;*/
+/*set GLITTRE_FEIRING;*/
+/*if behandlingsstedKode2 in (973144383, 974116561) and tjenesteenhetKode=3200 then behandlingsstedKode2=974116561;*/
+/*run;*/
+/**/
+/*PROC TABULATE*/
+/*DATA=GLITTRE_FEIRING_korr;*/
+/*	WHERE (behandlingsstedKode2 in (973144383, 974116561));*/
+/*	CLASS aar /	ORDER=UNFORMATTED MISSING;*/
+/*	CLASS tjenesteenhetKode /	ORDER=UNFORMATTED MISSING;*/
+/*	CLASS tjenesteenhetLokal /	ORDER=UNFORMATTED MISSING;*/
+/*	CLASS behandlingsstedKode2 /	ORDER=UNFORMATTED MISSING;*/
+/*	TABLE */
+/*behandlingsstedKode2*tjenesteenhetKode*tjenesteenhetLokal*ALL={LABEL="Total"},*/
+/*N*aar;*/
+/*RUN; */
 
 /*****************************************************************************************************/
 
@@ -76,29 +79,9 @@ if behandlingsstedKode2 in (973144383, 974116561) and tjenesteenhetKode=3200 the
 *******************************************************************************
 */
 
-KomNr=KomNrHjem2+0;
-
-/*If KomNr=301 then bydel=Bydel2+0; */
-/*if KomNr ne 301 then bydel=.;*/
-/*if komNr=301 and bydel2=. then bydel=99;*/
-
-If KomNr=301 then bydel_Oslo=Bydel2+0; 
-if KomNr ne 301 then bydel_Oslo=0;
-if bydel_Oslo=. then bydel_Oslo=99;
-
-if komNr=1103 then bydel_Stavanger=bydel2+0;
-if komNr ne 1103 then bydel_Stavanger=0;
-if bydel_Stavanger=. then bydel_Stavanger=99;
-
-if komNr=1201 then bydel_Bergen=bydel2+0;
-if komNr ne 1201 then bydel_Bergen=0;
-if bydel_Bergen=. then bydel_Bergen=99;
-
-if komNr=1601 then bydel_Trondheim=bydel2+0;
-if komNr ne 1601 then bydel_Trondheim=0;
-if bydel_Trondheim=. then bydel_Trondheim=99;
-
+bydel2_num=.;
 bydel2_num=bydel2+0;
+bydel=.;
 /* Oslo */
 if komNr=0301 and bydel2_num=01 then bydel=030101; /* Gamle Oslo */
 if komNr=0301 and bydel2_num=02 then bydel=030102; /* Grünerløkka */
@@ -219,8 +202,7 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 *****************************************************
 */
 
-%boomraader;
-
+%boomraader();
 
 /*
 ********************************************************
@@ -228,14 +210,20 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 ********************************************************
 */
 
+ 
+
+	  
+
+
 /************************
 *** Helse Finnmark HF ***
 ************************/
 
-		if behandlingsstedKode2 in (974795930, 974795833, 978296296) then behSh=10; 
+		if behandlingsstedKode2 in (974795930, 974795833, 978296296,974285959,979873190,983974880) then behSh=10; 
 
 		if behandlingsstedKode2=974795930 /*'Finnmarkssykehuset HF, Kirkenes'*/ then BehSh=11; 
-		if behandlingsstedKode2 in (974795833 /*'Finnmarkssykehuset HF, Hammerfest'*/, 978296296 /*Alta helsesenter*/) then BehSh=12;
+		if behandlingsstedKode2 in (974795833 /*'Finnmarkssykehuset HF, Hammerfest'*/, 978296296 /*Alta helsesenter*/,
+			974285959 /*Finnmarkssykehuset, Karasjok*/,979873190 /*'Finnmarkssykehuset, Alta*/) then BehSh=12;
 
 
 
@@ -262,8 +250,7 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 										993562718 /*Nordlandssykehuset HF, Habilitering/rehabilitering, Bodø*/, 
 										993573159 /*Nordlandssykehuset HF, Habilitering/rehabilitering, Gravdal*/, 
 										974049767 /*Steigen fødestue*/, 
-										996722201 /*Nordlandssykehuset HF, Habilitering/rehabilitering, Stokmarknes*/) then behSh=30;
- 
+										996722201 /*Nordlandssykehuset HF, Habilitering/rehabilitering, Stokmarknes*/) then behSh=30; 
 		if behandlingsstedKode2 in (974795361 /*Nordlandssykehuset Bodø*/, 
 									993562718 /*Nordlandssykehuset HF, Habilitering/rehabilitering, Bodø*/, 
 									974049767  /*'Steigen fødestue'*/) then BehSh=33;
@@ -280,11 +267,14 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 
 	if behandlingsstedKode2 in (974795515 /*Helgelandssykehuset HF Mo i Rana*/,
 								974795485 /*Helgelandssykehuset HF Mosjøen*/,
-								974795477 /*Helgelandssykehuset HF Sandnessjøen*/) then BehSh=40;
+								974795477 /*Helgelandssykehuset HF Sandnessjøen*/
+								874044342 /*Helgelandssykehuset HF Brønnøysund fødestue*/,
+								983974929 /*'Helgelandssykehuset HF*/) then BehSh=40;
 
 	if behandlingsstedKode2=974795515 /*Helgelandssykehuset HF Mo i Rana */ then BehSh=41;
 	if behandlingsstedKode2=974795485 /*Helgelandssykehuset HF Mosjøen*/ then BehSh=42;
-	if behandlingsstedKode2=974795477 /*Helgelandssykehuset HF Sandnessjøen*/ then BehSh=43;
+	if behandlingsstedKode2 in (974795477 /*Helgelandssykehuset HF Sandnessjøen*/,
+							   874044342 /*Helgelandssykehuset HF Brønnøysund fødestue*/) then BehSh=43;
 
 
 
@@ -313,7 +303,8 @@ if KomNr in (0,8888,9999) then KomNr=9999;
       								974749815 /*St Olavs hospital, Fysikalsk medisin Lian*/,
   								    995413388 /*St Olavs hospital, Hysnes helsefort*/, 
       								974329506 /*St Olavs hospital, Orkdal*/,
-				     				974749505 /*St Olavs hospital, Røros*/) then behSh=60;
+				     				974749505 /*St Olavs hospital, Røros*/,
+									915621457 /*St Olavs hospital, Ørland*/) then behSh=60; /*St Olav Ørland er bare skrevet til behSh lik 60, ingen spesifisering av lokalisasjon under*/
 
  		if behandlingsstedKode2 in (913461223 /*St Olavs hospital, Fysikalsk medisin Øya*/,
       								973254782 /*St Olavs hospital, Trondsletten habiliteringssenter */, 
@@ -632,7 +623,15 @@ samt Samnanger og kommunene i Nordhordland.*/
 									993240184 /*Aleris Helse AS Tromsø*/,
 									995590794 /*SVC Norge AS*/,
 									995818728 /*Teres Klinikken Bodø*/,
-									996860884 /*Somni Søvnsenter og Spesialisthelsetjenester AS*/) then BehSh=300;	
+									996860884 /*Somni Søvnsenter og Spesialisthelsetjenester AS*/,
+									/*PO: Supplert med nye behandlingssteder for 2016*/
+									912817318 /*Somni AS*/,
+									914480752 /*Moloklinikken AS*/,
+									915411223 /*Kalbakkenklinikken AS*/,
+									916269331 /*A-Medi AS*/,  
+      								916588224 /*Preventia AS*/,  
+     								998558271 /*Oslo medisinske senter*/,  
+      								999230008 /*Ifocus øyeklinikk AS*/) then BehSh=300;	
 
 /*
 *****************************************************************

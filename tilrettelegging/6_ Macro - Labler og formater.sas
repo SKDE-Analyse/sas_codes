@@ -14,8 +14,6 @@ label Aktivitetskategori3='Aktivitetskatgori 3-delt (SAMDATA)'; format Aktivitet
 label Aktivitetskategori4='Aktivitetskatgori 4-delt (SAMDATA)'; format Aktivitetskategori4 AKTIVITETSKATEGORI4F.; 
 
 label Alder='Alder (SKDE)';
-label Ald_gr5 ='Aldersgruppe 5 kategorier (SKDE)'; format Ald_gr5 Ald_5gr.; 
-label ald_gr='Aldersgruppe (NPR)'; format ald_gr ald_gr.; 
 
 label behandlingsstedKode2='Behandlingssted (NPR)'; format behandlingsstedKode2 BEHANDLINGSSTEDKODE2F.; 
 label behandlingsstedKode_original='Behandlingssted som innrapportert, identifiserer stråleterapienheter (NPR-melding)'; format behandlingsstedKode_original; 
@@ -52,11 +50,18 @@ label pakkeforlop='Pakkeforløp kreft (NPR-melding)'; format pakkeforlop pakkefor
 label relatertKontaktID='Id for relaterte kontakter (NPK)';
 label henvType='Utfall av vurdering av henvisningen (NPR-melding)'; format henvType henvType.;
 
+label henvFraTjeneste='Henvist fra tjeneste (NPK)'; format HENVFRATJENESTE HENVFRATJENESTE.;
+label henvFraInstitusjonID='Henvist fra institusjon (NPK)'; /*format HENVFRAINSTITUSJONID HENVFRAINSTITUSJONID.;*/
+label frittSykehusvalg='Fritt sykehusvalg (NPK)'; format FRITTSYKEHUSVALG FRITTSYKEHUSVALG.;
+label secondOpinion='Second Opinion (NPK)'; format SECONDOPINION SECONDOPINION.;
+label fraSted='Fra sted (NPK)'; format frasted frasted.;
+label tilSted='Til sted (NPK)'; format tilsted tilsted.;
+
 label Hastegrad='Hastegrad - akutt/elektivt (SKDE)'; format hastegrad Hastegrad.;
 label DRGtypeHastegrad='Kombinert DRG-type og hastegrad (SKDE)'; format DRGtypeHastegrad DRGtypeHastegrad.; 
  
 label erMann='Er mann (kjønn, mann=1) (SKDE)'; format ErMann ErMann.; 
-label kjonn='Kjønn (NPR)'; format kjonn kjonn.; 
+label kjonn='Kjønn (NPR-melding)'; format kjonn kjonn.; 
 label Fylke='Fylke (pasientens bosted) (SKDE)'; format Fylke fylke.; 
 
 label ICD10Kap='ICD-10 kapittel for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10Kap ICD10Kap.;
@@ -69,11 +74,16 @@ label innTid='Innskrivelsestidspunkt (NPR-melding)'; *format innTid Eurdfdd10.;
 label utTid='Utskrivelsestidspunkt (NPR-melding)'; *format utTid Eurdfdd10.; 
 label innDato='Innskrivelsesdato (NPR-melding)';
 label utDato='Utskrivelsesdato (NPR-melding)';
+label utskrKlarDato='Utskrivningsklar dato (NPR-melding)';
+label tidspunkt_1='Først dato for utskrivingsklar pasient';
+label tidspunkt_2='Andre dato for utskrivingsklar pasient';
+label tidspunkt_3='Tredje dato for utskrivingsklar pasient';
+label tidspunkt_4='Fjerde dato for utskrivingsklar pasient';
+label tidspunkt_5='Femte dato for utskrivingsklar pasient';
 
 label InstitusjonID='Org.nr. til rapporteringsenhet (NPR-melding)'; format InstitusjonId INSTITUSJONID_2011_2015F.;
 label InstitusjonID_original='Org.nr. til rapporteringsenhet, identifiserer stråleterapienheter (NPR-melding)'; format InstitusjonId InstitusjonID_original.; 
 /*format FraInstitusjonId TilInstitusjonId FRAINSTITUSJONID.; label FraInstitusjonId='Fra institusjon'; label TilInstitusjonId='Til institusjon';*/
-label InstitusjonId_omkodet='Org.nr. til rapporteringsenhet, private sykehus med flere org.nr. omkodet (SKDE)'; format InstitusjonId_omkodet INSTITUSJONID_2011_2015F.;
 
 label kontaktType='Kontakttype (NPR-melding)'; format kontaktType kontaktType.; 
 label komNrHjem2='Kommunenummer vasket mot Folkeregisteret (NPR-melding)'; format KomNrHjem2 $KOMNRHJEM2F.; 
@@ -81,11 +91,7 @@ label KomNR='Kommunenummer vasket mot Folkeregisteret, numerisk (NPR-melding/SKD
 label bydel2='Bydel vasket mot Folkeregisteret (NPR)';
 label bydel2_num='Bydel vasket mot Folkeregisteret (NPR), numerisk';
 label bydel='Bydel i Oslo, Bergen, Stavanger og Trondhem vasket mot Folkeregisteret (SKDE)'; format bydel bydel_alle.;
-label bydel_Oslo='Bydel i Oslo vasket mot Folkeregisteret (NPR-melding/SKDE)'; format bydel_Oslo bydel_Oslo.; 
-label bydel_Bergen='Bydel i Bergen vasket mot Folkeregisteret (NPR-melding/SKDE)'; format bydel_Bergen bydel_Bergen.; 
-label bydel_Stavanger='Bydel i Stavanger vasket mot Folkeregisteret (NPR-melding/SKDE)'; format bydel_Stavanger bydel_Stavanger.; 
-label bydel_Trondheim='Bydel i Trondheim vasket mot Folkeregisteret (NPR-melding/SKDE)'; format bydel_Trondheim bydel_Trondheim.; 
-/*label bydel_alle='Bydeler for Oslo, Stavanger, Bergen og Trondheim'; format bydel_alle bydel_alle.;*/
+label bydel_DSF='Bydel fra Folkeregisteret (NPR)';
 
 label g_omsorgsniva='Gammelt omsorgsnivå (NPR)'; format g_omsorgsniva g_omsorgsniva.; 
 label liggetid='Liggetid (NPK og NPR)';
@@ -94,7 +100,7 @@ label oppholdstype='Oppholdstype (NPR-melding)'; format oppholdstype oppholdstyp
 
 label VertskommHN='Vertskommune (HN) (SKDE)'; format VertskommHN VertskommHN.; 
 label tjenesteenhetKode='Avdelingskode (NPR-melding)';
-/*label utskrKlarDager='Liggedøgn som utskrivingsklar (NPR)';*/
+label utskrKlarDager='Liggedøgn som utskrivingsklar (NPR)';
 label versjon='Versjon av NPR-melding (NPR-melding)';
 
 label komp_drg='Kompliserende DRG (NPR)'; format komp_drg komp_drg.; 
@@ -104,11 +110,9 @@ label innTid='Innskrivelsestidspunkt (NPR-melding)';
 label utmnd='Utskrivelsesmåned (NPR)';
 label utTilstand='Tilstand ved utskriving (NPR-melding)'; format utTilstand utTilstand.; 
 
-label fodselsar_ident='Fødselsår fra personnr - ident-info per 29082019 (NPR)';
-label kjonn_ident='Kjønn fra personnr - ident info-per 29082019 (NPR)'; format kjonn_ident kjonn.;   
-label fodt_mnd_ident='Fødselsmåned fra personnr - ident-info per 29082019 (NPR)';
-label emigrertDato='Emigrert dato - ident-info per 29082019 (NPR)';
-label dodDato='Dødedato - ident-info per 29082019 (NPR)';
+label fodselsAar_ident='Fødselsår fra personnr - ident-info fra nasjonal fil (NPR)';
+label kjonn_ident='Kjønn fra personnr - ident info-info fra nasjonal fil (NPR)'; format kjonn_ident kjonn.;   
+label fodt_mnd='Fødselsmåned fra personnr - ident-info fra nasjonal fil (NPR)';
 
 label Hdiag='Hovedtilstand kode 1 (ICD-10/NPR-melding/SKDE)';
 label Hdiag2='Hovedtilstand kode 2 (ICD-10/NPR-melding/SKDE)';
@@ -152,6 +156,14 @@ label ncsp13='NCSP kode 13 (NCSP/NPR-melding/SKDE)'; label ncsp14='NCSP kode 14 
 label ncsp16='NCSP kode 16 (NCSP/NPR-melding/SKDE)'; label ncsp17='NCSP kode 17 (NCSP/NPR-melding/SKDE)'; label ncsp18='NCSP kode 18 (NCSP/NPR-melding/SKDE)'; 
 label ncsp19='NCSP kode 19 (NCSP/NPR-melding/SKDE)'; label ncsp20='NCSP kode 20 (NCSP/NPR-melding/SKDE)';
 
+label ncrp1='NCRP kode 1 (NCRP/NPR-melding/SKDE)'; label ncrp2='NCRP kode 2 (NCRP/NPR-melding/SKDE)'; label ncrp3='NCRP kode 3 (NCRP/NPR-melding/SKDE)';
+label ncrp4='NCRP kode 4 (NCRP/NPR-melding/SKDE)'; label ncrp5='NCRP kode 5 (NCRP/NPR-melding/SKDE)'; label ncrp6='NCRP kode 6 (NCRP/NPR-melding/SKDE)'; 
+label ncrp7='NCRP kode 7 (NCRP/NPR-melding/SKDE)'; label ncrp8='NCRP kode 8 (NCRP/NPR-melding/SKDE)'; label ncrp9='NCRP kode 9 (NCRP/NPR-melding/SKDE)'; 
+label ncrp10='NCRP kode 10 (NCRP/NPR-melding/SKDE)'; label ncrp11='NCRP kode 11 (NCRP/NPR-melding/SKDE)'; label ncrp12='NCRP kode 12 (NCRP/NPR-melding/SKDE)';
+label ncrp13='NCRP kode 13 (NCRP/NPR-melding/SKDE)'; label ncrp14='NCRP kode 14 (NCRP/NPR-melding/SKDE)'; label ncrp15='NCRP kode 15 (NCRP/NPR-melding/SKDE)'; 
+label ncrp16='NCRP kode 16 (NCRP/NPR-melding/SKDE)'; label ncrp17='NCRP kode 17 (NCRP/NPR-melding/SKDE)'; label ncrp18='NCRP kode 18 (NCRP/NPR-melding/SKDE)'; 
+label ncrp19='NCRP kode 19 (NCRP/NPR-melding/SKDE)'; label ncrp20='NCRP kode 20 (NCRP/NPR-melding/SKDE)';
+
 label ATC_1='ATC kode 1 (ATC/NPR-melding)'; 
 label ATC_2='ATC kode 2 (ATC/NPR-melding)'; 
 label ATC_3='ATC kode 3 (ATC/NPR-melding)'; 
@@ -193,6 +205,7 @@ label tell_ATC='Antall ATC-koder innrapportert (NPR)';
 label tell_ICD10='Antall ICD-10-koder innrapportert (NPR)';
 label tell_NCMP='Antall NCMP-koder innrapportert (NPR)';
 label tell_NCSP='Antall NCSP-koder innrapportert (NPR)';
+label tell_NCRP='Antall NCRP-koder innrapportert (NPR)';
 label tell_cyto='Antall cytostatika-koder innrapportert (NPR)';
 
 label KoblingsID='Unik id for påkobling av variabler (SKDE)'; 
