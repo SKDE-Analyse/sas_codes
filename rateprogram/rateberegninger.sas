@@ -1373,8 +1373,6 @@ run;
 
 
 %if &NorgeSoyle=0 %then %do;
-/*data &forbruksmal._&bo; set &bo._aarsvar; run;*/
-
 
 /*ods graphics on;*/
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
@@ -1542,8 +1540,6 @@ run;
 
 %if &NorgeSoyle=0 %then %do;
 
-/*data &forbruksmal._&bo; set &bo._aarsvar; run;*/
-
 /*ods graphics on;*/
 ods listing style=stil_figur gpath="%sysfunc(getoption(work))";
 title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, &min_aar - &max_aar";
@@ -1674,25 +1670,30 @@ run;Title; ods listing close;
 %mend KI_bilde;
 
 %macro lagre_dataNorge;
-	data &forbruksmal._&bo; set &bo._agg_rate; run;
+    %if %sysevalf(%superq(datanavn)=,boolean) %then %let datanavn = &forbruksmal;
+	data &datanavn._&bo; set &bo._agg_rate; run;
 %mend lagre_dataNorge;
+
 %macro lagre_dataN;
+    %if %sysevalf(%superq(datanavn)=,boolean) %then %let datanavn = &forbruksmal;
 %if &Ut_sett=1 %then %do;
-	data &forbruksmal._S_&bo; set &bo._agg_rate; run;
+	data &datanavn._S_&bo; set &bo._agg_rate; run;
 %end;
 
 %else %do;
-	data &forbruksmal._&bo; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
+	data &datanavn._&bo; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
 %end;
 
 %mend lagre_dataN;
+
 %macro lagre_dataHN;
+    %if %sysevalf(%superq(datanavn)=,boolean) %then %let datanavn = &forbruksmal;
 %if &Ut_sett=1 %then %do;
-	data &forbruksmal._S_&bo._HN; set &bo._agg_rate; run;
+	data &datanavn._S_&bo._HN; set &bo._agg_rate; run;
 %end;
 
 %else %do;
-	data &forbruksmal._&bo._HN; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
+	data &datanavn._&bo._HN; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
 %end;
 
 %mend lagre_dataHN;
