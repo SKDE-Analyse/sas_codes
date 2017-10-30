@@ -1369,7 +1369,7 @@ by descending rateSnitt;
 run;
 
 
-%if %sysevalf(%superq(figurnavn)=,boolean) %then %let figurnavn = "AA_&RV_variabelnavn._&bo"; 
+%if %sysevalf(%superq(figurnavn)=,boolean) %then %let figurnavn = AA_&RV_variabelnavn._&bo; 
 
 
 %if &NorgeSoyle=0 %then %do;
@@ -1377,7 +1377,7 @@ run;
 
 
 /*ods graphics on;*/
-ODS Graphics ON /reset=All imagename=&figurnavn imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
+ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
 ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
 title;
 proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
@@ -1422,7 +1422,7 @@ proc sort data=&bo._aarsvar;
 by descending rateSnitt;
 run;
 
-ODS Graphics ON /reset=All imagename=&figurnavn imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
+ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
 ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
 title;
 proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
