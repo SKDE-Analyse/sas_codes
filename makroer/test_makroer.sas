@@ -1,4 +1,12 @@
 %macro test_makroer(branch=master);
+/*!
+Makro som skal teste de andre makroene.
+
+Tester for øyeblikket kun makroene
+- `Episode_of_care`
+- `reinnleggelser`
+*/
+
 
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\;
 

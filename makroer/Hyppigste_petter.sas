@@ -1,5 +1,10 @@
 %macro hyppigste_petter(Ant_i_liste=, VarName=, data_inn=, tillegg_tittel=, Where=);
 
+/*!
+Hva gjør denne annerledes enn `hyppigste`?
+
+*/
+
 data dsn;
 set &data_inn;
 &where;

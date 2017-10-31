@@ -1,0 +1,26 @@
+language: python
+
+python:
+  - "2.7"
+#  - "3.6"
+
+#install:
+#  - pip install -r requirements.txt
+
+before_script:
+  - mkdir docs
+  - cp ./doc/_config.yml ./docs/.
+
+script:
+  - python scripts/lagDokumentasjon.py
+
+deploy:
+  provider: pages                         # Specify the gh-pages deployment method
+  skip_cleanup: true                      # Don't remove files
+  github_token: $GITHUB_TOKEN             # Set in travis-ci.org dashboard
+  local_dir: docs                         # Deploy the docs folder
+  on:
+    branch: master
+
+notifications:
+  email: false

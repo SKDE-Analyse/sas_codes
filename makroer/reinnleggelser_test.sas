@@ -1,6 +1,6 @@
 %macro reinnleggelser_test(branch=master);
 
-/*
+/*!
 Makro for å teste reinnleggelse-makro.
 
 Kjører reinnleggelse-makroen på et test-datasett (npr_utva.ctrl_reinn).

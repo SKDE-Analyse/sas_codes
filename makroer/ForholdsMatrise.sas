@@ -1,4 +1,4 @@
-/*
+/*!
 Inputvariabler: ant_datasett
 
 Datasettene som skal brukes angis med %Let statements før makroen kjøres:

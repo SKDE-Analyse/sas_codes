@@ -1,9 +1,9 @@
 %macro Episode_of_care_test(branch=master, debug = 0);
 
-/*
-Makro for Ã¥ teste EoC-makro.
+/*!
+Makro for å teste EoC-makro.
 
-KjÃ¸rer EoC-makroen tre ganger etter hverandre pÃ¥ et test-datasett (npr_utva.ctrl_eoc).
+Kjører EoC-makroen tre ganger etter hverandre på et test-datasett (npr_utva.ctrl_eoc).
 Sammenligner dette datasettet med en referanse (skde_arn.ref_eoc).
 */
 
