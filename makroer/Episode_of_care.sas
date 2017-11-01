@@ -3,7 +3,6 @@
 ### Beskrivelse
 
 Inndatasettet må inneholde inndato utdato inntid og uttid
-inntid og uttid må (foreløpig) hentes fra parvus
 
 ```
 %Episode_of_care(dsn=, Eoc_tid=28800, forste_hastegrad=1, behold_datotid=0, debug=0, nulle_liggedogn=0);
