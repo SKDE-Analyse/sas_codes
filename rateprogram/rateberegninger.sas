@@ -3,6 +3,82 @@
 
 %macro utvalgx;
 
+/*!
+#### Formål
+
+- Lager datasettet `utvalgX`
+   - Aggreregerer opp pasienter ut fra inkluderingskriteriene (hvilke år, alder, etc.)
+   - Henter inn antall innbyggere
+   - Definerer opp boområder
+
+#### "Steg for steg"-beskrivelse
+
+1. Definerer Periode, År1 etc.
+2. Lager datasettet utvalgX av &Ratefil
+   - RV = &RV_variabelnavn
+   - keep RV ermann aar alder komnr bydel
+   - alder mellom 106-115 defineres til 105
+   - kjører aldjust (ermann = 1, hvis ikke tom)
+3. Hvis vis_ekskludering = 1 -> lage tabeller over ekskluderte data i datasett
+   - Dette burde flyttes ut i egen makro
+4. Aggregerer RV (i `utvalgX`)
+   - grupperer på `aar, KomNr, bydel, Alder, ErMann`. 
+   - ekskluderer data hvis aar utenfor &periode, alder utenfor &aldersspenn, komnr > 2030, og ermann ikke i &kjonn
+5. Lese inn innbyggerfil
+   - aggregering av innbyggere, gruppert som over 
+   - samme ekskludering som over
+   - legger så innbyggere til `utvalgX`
+6. Definere alderskategorier
+   - kjør makro [valg_kategorier](#valg_kategorier)
+   - kjører `proc means` 
+7. Definerer boområder
+8. Beregner andeler
+   - Er denne nødvendig? Kan ikke se at den "virker".
+   - Lager datasett `Andel`
+
+   
+#### Avhengig av følgende variabler
+
+- Ratefil (navnet på det aggregerte datasettet)
+- RV_variabelnavn (variablen det skal beregnes rater på)
+- vis_ekskludering (=1 hvis man vil ha ut antall pasienter som er ekskludert)
+- innbyggerfil (navnet på innbyggerfila)
+- boomraadeN (?)
+- boomraade (?)
+
+#### Definerer følgende variabler
+
+Sjekk hvilke som brukes av andre makroer og hvilke som kun er interne.
+
+- aarsvarfigur=1
+- Periode=(&StartÅr:&SluttÅr)
+- Antall_aar=%sysevalf(&SluttÅr-&StartÅr+2)
+- År1 etc.
+
+
+#### Kalles opp av følgende makroer
+
+Ingen
+
+#### Bruker følgende makroer
+
+- [valg_kategorier](#valg_kategorier)
+- Boomraader (fra makro-mappen)
+
+#### Lager følgende datasett
+
+- utvalgx (slettes)
+- innb_aar (slettes)
+- RV
+- alderdef (slettes)
+- Andel
+
+#### Annet
+
+Første makro som kjøres direkte i rateprogrammet
+
+*/
+
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
 
 /*Beregne år1, år2 osv*/
@@ -254,6 +330,51 @@ Frank Olsen 19/10-15
 */
 
 %macro omraadeNorge;
+
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+- NORGE_AGG
+- NORGE_AGG_SNITT
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+Andre makro som kjøres direkte i rateprogrammet
+*/
+
 	%let Bo=Norge;
 
 /*Makro for beregninger*/
@@ -312,6 +433,61 @@ QUIT;
 
 
 %macro omraade;
+
+/*!
+#### Formål
+
+Selve rateberegningene. Ratene beregnes basert på &bo 
+
+#### "Steg for steg"-beskrivelse
+
+Kommer senere...
+
+#### Avhengig av følgende datasett
+
+- RV
+- andel
+- NORGE_AGG_RATE
+   - Lages ved å kjøre makro med bo=Norge først. Burde den heller lages i [omraadeNorge](#omraadenorge)-makroen?
+
+#### Lager følgende datasett
+
+- RV&Bo
+- &Bo._Agg
+- &Bo._Agg_Snitt
+- alder
+- &Bo._Agg_rate
+- &Bo._AGG_CV
+- NORGE_AGG_RATE2
+- NORGE_AGG_RATE3
+- NORGE_AGG_RATE4
+- NORGE_AGG_RATE5
+
+#### Avhengig av følgende variabler
+
+- SluttÅr
+- StartÅr
+- Bo
+- aar
+- forbruksmal
+
+#### Definerer følgende variabler
+
+- Antall_aar
+
+#### Kalles opp av følgende makroer
+
+- [rateberegninger](#rateberegninger)
+
+#### Bruker følgende makroer
+
+Ingen
+
+#### Annet
+
+*/
+
+
 %let Antall_aar=%sysevalf(&SluttÅr-&StartÅr+2);
 data RV&Bo;
 set RV;
@@ -541,6 +717,48 @@ run;
 %mend omraade;
 
 %macro lag_kart;
+
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 /*finn min og max alder*/
 proc sql;
 create table aldersspenn as
@@ -649,6 +867,49 @@ Title;
 %mend lag_kart;
 
 %macro omraadeHN;
+
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
 
 data RV&Bo;
 set RV;
@@ -952,6 +1213,62 @@ run;
 %Mend Femdeltalder;
 
 %macro valg_kategorier;
+
+/*!
+## **valg_kategorier**
+
+#### Formål
+{: .no_toc}
+
+Dele alder inn i kategorier, basert på verdi av `Alderskategorier`
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. Kjører en av alderinndeling-makroene, basert på verdien av Alderskategorier
+   - Der defineres `Startgr1`, `SluttGr1` etc.
+2. Definerer `alder_ny` til 1, 2 etc. ut fra `Startgr1`, `SluttGr1` etc.
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+- utvalgx
+
+#### Lager følgende datasett
+{: .no_toc}
+
+Ingen (legger til variablen `alder_ny` til datasettet utvalgx)
+
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+- `Alderskategorier`
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+Ingen
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+- [utvalgX](#utvalgx)
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+- [Todeltalder](#todeltalder-tredeltalder-firedeltalder-femdeltalder)
+- [Tredeltalder](#todeltalder-tredeltalder-firedeltalder-femdeltalder)
+- [Firedeltalder](#todeltalder-tredeltalder-firedeltalder-femdeltalder)
+- [Femdeltalder](#todeltalder-tredeltalder-firedeltalder-femdeltalder)
+- `Alderkat` (hvis Alderskategorier = 99; makroen defineres i selve rateprogrammet)
+
+#### Annet
+{: .no_toc}
+
+*/
+
 %if &Alderskategorier=20 %then %do;
 	%Todeltalder;
 	data utvalgx;
@@ -1039,6 +1356,49 @@ run;
 
 %macro tabell_1;
 
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 /*finn min og max alder*/
 /*finn min og max alder*/
 proc sql;
@@ -1090,6 +1450,49 @@ run;
 %mend tabell_1;
 
 %macro tabell_1e;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 
 /*finn min og max alder*/
 /*finn min og max alder*/
@@ -1145,6 +1548,49 @@ run;
 /* Tabeller med ujust og KI*/
 
 %macro Tabell_CV;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 
 Data _null_;
 set aldersspenn;
@@ -1164,6 +1610,49 @@ RUN;
 %mend tabell_cv;
 
 %macro Tabell_CVe;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 
 Data _null_;
 set aldersspenn;
@@ -1183,6 +1672,49 @@ RUN;
 %mend tabell_cve;
 
 %macro tabell_3N;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 
 Data _null_;
 set aldersspenn;
@@ -1203,6 +1735,49 @@ RUN;
 %mend tabell_3N;
 
 %macro tabell_3Ne;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 
 Data _null_;
 set aldersspenn;
@@ -1223,6 +1798,49 @@ RUN;
 %mend tabell_3Ne;
 
 %macro Tabell_3;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 Data _null_;
 set aldersspenn;
 call symput('Min_alder', trim(left(put(minalder,8.))));
@@ -1253,6 +1871,49 @@ RUN;
 %mend Tabell_3;
 
 %macro Tabell_3e;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 Data _null_;
 set aldersspenn;
 call symput('Min_alder', trim(left(put(minalder,8.))));
@@ -1284,6 +1945,49 @@ RUN;
 
 /* årsvariasjonsfigur */
 %macro lag_aarsvarbilde;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 
 proc sql;
 create table aldersspenn as
@@ -1455,6 +2159,50 @@ run;Title; ods listing close;
 %mend lag_aarsvarbilde;
 
 %macro lag_aarsvarfigur;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
+
 /**/
 proc sql;
 create table aldersspenn as
@@ -1620,6 +2368,49 @@ run;Title; ods listing close;
 %mend lag_aarsvarfigur;
 
 %Macro KI_figur;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+
+*/
+
 Data &bo._KI_Fig; set &bo._agg_rate; Where aar=9999; Norge=&Norge; Norge_KI_N=&Norge_KI_N; Norge_KI_O=&Norge_KI_O;
 Label Ant_Innbyggere='Innbyggere' Ant_Opphold=&forbruksmal; format Ant_opphold 8.0; run;
 data &bo._KI_Fig;
@@ -1672,11 +2463,18 @@ run;Title; ods listing close;
 %mend KI_bilde;
 
 %macro lagre_dataNorge;
+/*!
+Beskrivelse
+*/
     %if %sysevalf(%superq(datanavn)=,boolean) %then %let datanavn = &forbruksmal;
-	data &datanavn._&bo; set &bo._agg_rate; run;
+	data &forbruksmal._&bo; set &bo._agg_rate; run;
 %mend lagre_dataNorge;
 
+
 %macro lagre_dataN;
+/*!
+Beskrivelse
+*/
     %if %sysevalf(%superq(datanavn)=,boolean) %then %let datanavn = &forbruksmal;
 %if &Ut_sett=1 %then %do;
 	data &datanavn._S_&bo; set &bo._agg_rate; run;
@@ -1689,6 +2487,9 @@ run;Title; ods listing close;
 %mend lagre_dataN;
 
 %macro lagre_dataHN;
+/*!
+Beskrivelse
+*/
     %if %sysevalf(%superq(datanavn)=,boolean) %then %let datanavn = &forbruksmal;
 %if &Ut_sett=1 %then %do;
 	data &datanavn._S_&bo._HN; set &bo._agg_rate; run;
@@ -1701,6 +2502,48 @@ run;Title; ods listing close;
 %mend lagre_dataHN;
 
 %macro aarsvar;
+/*!
+#### Formål
+{: .no_toc}
+
+#### "Steg for steg"-beskrivelse
+{: .no_toc}
+
+1. 
+
+#### Avhengig av følgende datasett
+{: .no_toc}
+
+-
+
+#### Lager følgende datasett
+{: .no_toc}
+
+-
+
+#### Avhengig av følgende variabler
+{: .no_toc}
+
+-
+
+#### Definerer følgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av følgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker følgende makroer
+{: .no_toc}
+
+-
+
+#### Annet
+{: .no_toc}
+*/
+
 proc sql;
 create table aldersspenn as
 select distinct max(alder) as maxalder, min(alder) as minalder
@@ -1786,6 +2629,119 @@ run;
 %mend aarsvar;
 
 %macro rateberegninger;
+/*!
+#### Formål
+
+Makro som beregner rater og spytter ut tabeller og figurer.
+
+#### "Steg for steg"-beskrivelse
+
+1. Lager datasettet `Norgeaarsspenn` fra `RV` og henter ut variablene min_aar og max_aar
+2. Legger variablen alder til `norge_agg_snitt`
+   - `alder=(substr(alder_ny,1,((find(alder_ny,'-','i'))-1)))-0;`
+3. Lager tabell over aldersstruktur, basert på datasett `norge_agg_snitt`
+4. Definere variablene Periode, Antall_aar, År1 etc. (dette gjøres også i utvalgX-makroen)
+5. Kaller opp [omraade](#omraade)-makroen, som beregner ratene etc. ut fra `Bo`. `Bo` kan være
+
+|`Bo`        |variabel = 1        |makro       |
+| ---------- | -----------        | ---------- |
+| Norge      |                    | [omraade](#omraade)    |
+| BoRHF      | &RHF=1             | [omraade](#omraade)    |
+| BoHF       | &HF=1              | [omraade](#omraade)    | 
+| BoShHN     | &sykehus_HN=1      | [omraadeHN](#omraadehn)|
+| komnr      | &kommune=1         | [omraade](#omraade)    | 
+| komnr      | &kommune_HN=1      | [omraadeHN](#omraadehn)|
+| fylke      | &fylke=1           | [omraade](#omraade)    |
+| VK         | &Verstkommune_HN=1 | [omraadeHN](#omraadehn)|
+| bydel      | &oslo=1            | [omraade](#omraade)    |
+   
+6. Kaller opp tabell-rutiner, figur-rutiner etc. basert på valg gjort i rateprogrammet (se variabelliste under)
+
+#### Avhengig av følgende datasett
+
+- `RV`
+- `norge_agg_snitt`
+
+#### Lager følgende datasett
+
+- Norgeaarsspenn (kun for å finne min_aar og max_aar?)
+
+#### Avhengig av følgende variabler
+
+- tallformat
+- ratevariabel
+- forbruksmal
+- boomraadeN
+- boomraade
+- Vis_tabeller
+- RHF
+- kart
+- aarsvarfigur
+- Fig_AA_RHF
+- KIfigur
+- Fig_KI_RHF
+- HF
+- Fig_AA_HF
+- Fig_KI_HF
+- sykehus_HN
+- Fig_AA_ShHN
+- Fig_KI_ShHN
+- kommune
+- Fig_AA_kom
+- Fig_KI_kom
+- kommune_HN
+- Fig_AA_komHN
+- Fig_KI_komHN
+- fylke
+- Fig_AA_fylke
+- Fig_KI_fylke
+- Verstkommune_HN
+- oslo
+- Fig_AA_Oslo
+- Fig_KI_Oslo
+
+
+#### Definerer følgende variabler
+
+Sjekk hvilke som brukes av andre makroer og hvilke som kun er interne.
+
+- aarsvarfigur (defineres også i [utvalgX](#utvalgx))
+- Periode (defineres også i [utvalgX](#utvalgx))
+- Antall_aar (defineres også i [utvalgX](#utvalgx))
+- År1 etc. (defineres også i [utvalgX](#utvalgx))
+- Bo (brukes i tabell-rutiner og figur-rutiner som kalles opp)
+
+
+#### Kalles opp av følgende makroer
+
+Ingen
+
+#### Bruker følgende makroer
+
+- [omraade](#omraade) (selve rateberegningene)
+- [tabell_1](#tabell_1) (hvis Vis_tabeller=1,2,3 og tallformat=NLnum) Kjøres for Bo=Norge, Bo=BoRHF, , 
+- [tabell_1e](#tabell_1e) (hvis Vis_tabeller=1,2,3 og tallformat=Excel)
+- [tabell_3N](#tabell_3n) (hvis Vis_tabeller=3 og tallformat=NLnum)
+- [tabell_3Ne](#tabell_3ne) (hvis Vis_tabeller=3 og tallformat=Excel)
+- [lagre_dataNorge](#lagre_datanorge)
+- [tabell_CV](#tabell_cv)
+- [tabell_CVe](#tabell_cve)
+- [tabell_3](#tabell_3)
+- [tabell_3e](#tabell_3e)
+- [lag_kart](#lag_kart)
+- [lag_aarsvarbilde](#lag_aarsvarbilde)
+- [lag_aarsvarfigur](#lag_aarsvarfigur)
+- [KI_bilde](#ki_bilde)
+- [KI_figur](#ki_figur)
+- [lagre_dataN](#lagre_datan)
+- [omraadeHN](#omraadehn)
+
+#### Annet
+
+Kjøres som tredje makro av rateprogrammet (etter [utvalgX](#utvalgX) og [omraadeNorge](#omraadeNorge))
+
+*/
+
 proc sql;
 create table Norgeaarsspenn as
 select distinct max(aar) as maxaar, min(aar) as minaar
