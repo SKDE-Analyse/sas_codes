@@ -68,8 +68,7 @@ index = ""
 for i in listofMacros:
    heading = '''[Ta meg tilbake.](./)
 
-# Oversikt over innholdet i filen `{0}`
-'''.format(i)
+# Oversikt over innholdet i filen *{0}*'''.format(i)
 
    heading += '''
 {: .no_toc}
@@ -90,7 +89,7 @@ for i in listofMacros:
       docFile.close()
    else:
       warnings.warn("ADVARSEL: Filen {0} er ikke dokumentert!".format(i))
-      index += "- Filen {} er ikke dokumentert.".format(i)
+      index += "- Filen {} er ikke dokumentert.\n".format(i)
       
 indexHeading = ""
 for i in open("./docs/indexHead.md","r").readlines():
