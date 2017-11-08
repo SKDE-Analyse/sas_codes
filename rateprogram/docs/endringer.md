@@ -2,6 +2,8 @@
 
 [Ta meg tilbake.](./)
 
+Forslag til endringer legges inn som en *issue* [her](https://github.com/SKDE-Analyse/rateprogram/issues) (`New issue`).
+
 ## Overordnet
 
 - Definere variabler, slik at bruker slipper å definere alt før hen kjører rateprogrammet

@@ -7,14 +7,8 @@
 
 - Da vil man få inn kode som kan kjøre rateprogrammet. Pr. 29. juni 2017 ser denne [slik ut](Rateprogram).
 
-
 ## Beskrivelse av rateprogrammet
 
-- [Kodebeskrivelse](kode)
+- [Prosedyrer for utvikling av Koden](kode)
 - [Prosedyrer for testing av koden](testing)
-- [Potensielle endringer av rateprogrammet](endringer)
-
-
-
-
-
+- [Forslag til endringer av rateprogrammet](endringer)

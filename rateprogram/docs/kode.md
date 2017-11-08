@@ -22,5 +22,4 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
   - Hver branch får sin egen mappe
 - All versjon-kontroll og opprettelse av nye versjoner gjøres foreløpig kun av Arnfinn.
 
-# Oversikt over makroene i *rateberegninger.sas*
 
