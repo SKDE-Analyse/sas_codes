@@ -23,13 +23,13 @@ sas-kode...
 %mend;
 ```
 
-Alt som ligger mellom `/*!` og `*/` vil legges inn i `docs/minNyeMakro.md` av scriptet `lagDokumentasjon.py`. Ved å kjøre dette scriptet og så dytte opp til *github*, vil dokumentasjon legges på nett. Med andre ord, dette gjør man i mappen `\\tos-sas-skde-01\SKDE_SAS\Makroer\master` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
+Alt som ligger mellom `/*!` og `*/` vil legges på nett [(her)](http://skde-analyse.github.io/sas_macroer/) etter at man har dyttet alt opp til *github*. Med andre ord, man gjør følgende i mappen `\\tos-sas-skde-01\SKDE_SAS\Makroer\master` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
 ```bash
-./lagDokumentasjon.py
 git status # for å sjekke at alt er som det skal
 git diff # for å sjekke litt ekstra nøye
-git add . # Legg inn filene som skal dyttes opp (her legger vi til alle med `.`)
+git add <filnavn.sas> # Legg inn filene som skal dyttes opp (her legger vi til filen `filnavn.sas`)
 git commit -m 'Min nye fancy makro, med dokumentasjon selvfølgelig' # Skriv en pen commit-beskjed
+git pull --rebase # sørg for at du har siste versjon av makroene
 git push # dytte opp til github
 ```
 
