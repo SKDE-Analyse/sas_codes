@@ -1,3 +1,8 @@
+/*!
+Denne filen inneholder et eksempel på hvordan man kjører rateprogrammet, med en beskrivelse av de ulike variablene
+man kan bruke. Filen skal være kjørbar som et *sas*-program slik den er.
+*/
+
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\;
 options sasautos=("&filbane.Makroer\master" SASAUTOS);
 

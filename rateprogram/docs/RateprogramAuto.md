@@ -1,5 +1,5 @@
 [Tilbake](./)
-```SAS
+```sas
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\;
 options sasautos=("&filbane.Makroer\master" SASAUTOS);
 

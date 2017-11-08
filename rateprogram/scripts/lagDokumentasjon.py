@@ -24,7 +24,7 @@ def extractDoc(filename):
             if i.split()[0] == "%macro":
                 print(i)
                 doc += '''
-# Makro {0}
+## Makro {0}
 
 '''.format(i.split()[1])
         if extract and "*/" in i:
@@ -68,12 +68,13 @@ index = ""
 for i in listofMacros:
    heading = '''[Ta meg tilbake.](./)
 
-# Oversikt over makroene i `{0}`
+# Oversikt over innholdet i filen `{0}`
+{: .no_toc}
 
 '''.format(i)
 
    heading += '''
-# Innholdsfortegnelse
+## Innholdsfortegnelse
 {: .no_toc}
 
 * auto-gen TOC:
@@ -83,12 +84,13 @@ for i in listofMacros:
    doc = extractDoc(folder + i)
    
    if doc != "":
-      index += "- [{0}]({0})\n".format(i.split(".")[0])
+      index += "- [{0}]({1})\n".format(i,i.split(".")[0])
       docFile = codecs.open(docFolder+i.split(".")[0]+".md", "w", "utf-8")
       docFile.write(heading + doc)
       docFile.close()
    else:
       warnings.warn("ADVARSEL: Filen {0} er ikke dokumentert!".format(i))
+      index += "- Filen {} er ikke dokumentert.".format(i)
       
 indexHeading = ""
 for i in open("./docs/indexHead.md","r").readlines():
