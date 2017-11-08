@@ -1,8 +1,6 @@
 .swp
 boomraader_fo_alt.sas
 Thumbs.db
-docs/boFormat.md
-docs/rateberegninger.md
-docs/Rateprogram.md
+docs/*.md
 rateberegninger_Dagkir.sas
 

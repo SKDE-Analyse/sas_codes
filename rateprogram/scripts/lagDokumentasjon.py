@@ -69,11 +69,11 @@ for i in listofMacros:
    heading = '''[Ta meg tilbake.](./)
 
 # Oversikt over innholdet i filen `{0}`
-{: .no_toc}
-
 '''.format(i)
 
    heading += '''
+{: .no_toc}
+
 ## Innholdsfortegnelse
 {: .no_toc}
 
