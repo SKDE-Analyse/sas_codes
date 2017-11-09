@@ -7,15 +7,15 @@ Forholdstall mellom ung og gammel
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat  border=off /*HEIGHT=10.0cm width=10.0cm*/;
 ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\&mappe"   ;
 
-proc sgplot data=&datasett noborder noautolegend sganno=anno pad=(Bottom=4%);
+proc sgplot data=&datasett noborder noautolegend sganno=anno pad=(Bottom=7%);
 hbarparm category=bohf response=pros_neg / baseline=1 fillattrs=(color=CX00509E) missing name="h1" legendlabel="Høyere rate i aldersgruppen 50 - 74" barwidth=&soylebredde; 
 hbarparm category=bohf response=pros_neg_no / baseline=1 fillattrs=(color=CX4C4C4C) barwidth=&soylebredde;
 hbarparm category=bohf response=pros_pos / baseline=1 fillattrs=(color=CX95BDE6) missing name="h2" legendlabel="Høyere rate i aldersgruppen 75+" barwidth=&soylebredde; 
-hbarparm category=bohf response=pros_pos_no / baseline=1 fillattrs=(color=CXC3C3C3) barwidth=&soylebredde;	
+hbarparm category=bohf response=pros_pos_no / baseline=1 fillattrs=(color=CXC3C3C3) barwidth=&soylebredde;
 	  scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=center markerattrs=(size=0) datalabelattrs=(color=black size=7);
-     Yaxistable rate_femti rate_syttifem /Label location=inside  position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
+*     Yaxistable rate_femti rate_syttifem /Label location=inside  position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
     yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=&fontst ) type=discrete discreteorder=data valueattrs=(size=&fontst);
-   xaxis label="Ratio between the rates for the age group 75+ and older and the age group 50-74" type=linear labelattrs=(size=&fontst ) values=(0 to 2 by 0.1) offsetmin=0.05; 
+   xaxis /*label="Relationship between the rate to the age group 50 - 74 and the rate to the age group 75+"*/ type=linear labelattrs=(size=&fontst ) values=(1 to 2 by 0.1) offsetmin=0.05; 
 
      Format prosent prosent_no comma8.1 forh_tall_norm_no comma8.2 rate_syttifem rate_femti comma8.1 ;
 		

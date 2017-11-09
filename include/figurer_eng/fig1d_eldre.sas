@@ -26,7 +26,7 @@ yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=&
 xaxis offsetmin=0.02 OFFSETMAX=0.02  values=(0.0 to 0.10 by 0.01) valuesformat=percent8.0 
          valueattrs=(size=&fontst) /*Display=(Nolabel)*/ label='Andel av totalbefolkningen' labelattrs=(size=&fontst);
 *          inset ("(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"="Norge") /position=bottomright textattrs=(size=7 color=black);
-Format andel percent8. en_ant to_ant nlnum8.0 ;
+Format andel percent8. en_ant to_ant comma8.0 ;
 run;
 ods listing close; 
 ods graphics off;

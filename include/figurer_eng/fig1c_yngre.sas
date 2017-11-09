@@ -15,6 +15,7 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
     Yaxistable &varnavn &kol_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
     yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=&fontst) type=discrete discreteorder=data valueattrs=(size=&fontst);
 	xaxis label=" Number per 1,000 inhabitants (50 - 74 years old)"   labelattrs=(color=black size=&fontst ) &xskala offsetmin=0.02 valueattrs=(size=&fontst);
+   format &varnavn &kol_to comma8.0;
 run;
 ods listing close; ods graphics off;
 

@@ -18,12 +18,13 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 		Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
      Yaxistable &varnavn /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
     yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=&fontst) type=discrete discreteorder=data valueattrs=(size=&fontst);
- xaxis label=" Number per 1,000 inhabitants (50 - 74 years old)" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=&fontst);
+ xaxis label=" Number per 1,000 inhabitants (50 - 74 years old)" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=comma8.0   valueattrs=(size=&fontst);
      inset 
 		(
 	 	"(*ESC*){unicode'25cf'x}"="   2013"
 	 	"(*ESC*){unicode'25a0'x}"="   2014"
 	 	"(*ESC*){unicode'2666'x}"="   2015")/position=bottomright textattrs=(size=&fontst color=black);
-	
+      format rateSnitt &varnavn comma8.0;
+
 run;
 ods listing close; ods graphics off;

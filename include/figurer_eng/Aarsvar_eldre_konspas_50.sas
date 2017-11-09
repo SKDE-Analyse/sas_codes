@@ -54,7 +54,7 @@ data &varnavn._SAMLET;
 set &varnavn._SAMLET;
 FT2=round((maks/minimum),0.1);
 drop maks minimum;
-Format &varnavn nlnum8.0 &kol_to nlnum8.1 ; 
+Format &varnavn comma8.0 &kol_to comma8.1 ; 
 run;
 
 Data _null_;

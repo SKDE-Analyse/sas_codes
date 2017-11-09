@@ -89,7 +89,7 @@ hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6);
      Yaxistable en_ant antall_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
     yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
   xaxis label="Percentage"   labelattrs=(color=black size=7) offsetmin=0.02 valueattrs=(size=7);
-     Format andel percent8.0 en_ant antall_to nlnum8.0 ;		
+     Format andel percent8.0 en_ant antall_to comma8.0 ;		
 run;Title; ods listing close; ods graphics off;
 
 
@@ -105,7 +105,7 @@ hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6);
      Yaxistable en_ant antall_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
     yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
   xaxis label="Percentage"   labelattrs=(color=black size=7) offsetmin=0.02 valueattrs=(size=7);
-     Format andel percent8.0 en_ant antall_to nlnum8.0 ;		
+     Format andel percent8.0 en_ant antall_to comma8.0 ;		
 run;Title; ods listing close; ods graphics off;
 
 

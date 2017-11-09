@@ -1,0 +1,16 @@
+Akutt    = Emerg.
+Andel    = Proportion
+Ant. døgn = Num. days
+Beh.     = Treatm.
+Brudd    = Fract.
+Innb.    = Inhab.
+Inngr.   = Interv.
+Innl.    = Adm.
+Liggetid = Bed days
+Liggetid pr. innl = Bed days per adm.
+Osteos.  = ?
+Pas.     = Pat.
+Planlagt = Planned
+Planlagte innl. = Planned adm.
+Prot.    = ?
+Reinn.   = Readm.

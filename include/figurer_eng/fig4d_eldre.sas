@@ -15,8 +15,8 @@ proc sgplot data=&dsn_var noborder noautolegend sganno=anno pad=(Bottom=7%);
           datalabelattrs=(color=black WEIGHT=BOLD size=7);
      	Yaxistable en_ant tot_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
     	yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=&fontst) type=discrete discreteorder=data valueattrs=(size=&fontst);
-  		xaxis label="Andel"   labelattrs=(size=&fontst) offsetmin=0.02 valueattrs=(size=&fontst);
-     Format andel percent8.0 en_ant tot_ant nlnum8.0 ;		
+  		xaxis label="Proportion"   labelattrs=(size=&fontst) offsetmin=0.02 valueattrs=(size=&fontst);
+     Format andel percent8.0 en_ant tot_ant comma8.0 ;		
 run;
 ods listing close; ods graphics off;
 
