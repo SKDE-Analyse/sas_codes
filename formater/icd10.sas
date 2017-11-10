@@ -19836,17 +19836,17 @@ value $icd10F
 'Z998'="Avhengighet av annet teknisk hjelpemiddel eller innretning"
 'Z999'="Avhengighet av ikke spesifiert teknisk hjelpemiddel eller innretning"
 
-/*Nye formater fra fil icd10/icd10_2016.sas lagt til 08/11/2017 */
+/*Nye formater fra fil icd10/icd10_2016.sas lagt til 10/11/2017 */
 'A970'="Dengue uten varselstegn"
 'A971'="Dengue med varselstegn"
 'A972'="Alvorlig Dengue"
 'A979'="Dengue, uspesifisert"
-'G233'="Multippel systematrofi, cerebellÃ¦re symptomer dominerer [MSA-c]"
-'G835'="Â«Locked-inÂ»-syndrom"
-'L987'="Mye og overflÃ¸dig hud og underhudsvev"
-'P917'="Erhvervet hydrocephalus hos nyfÃ¸dt"
+'G233'="Multippel systematrofi, cerebellære symptomer dominerer [MSA-c]"
+'G835'="«Locked-in»-syndrom"
+'L987'="Mye og overflødig hud og underhudsvev"
+'P917'="Erhvervet hydrocephalus hos nyfødt"
 'Z039'="Observasjon ved mistanke om uspesifisert sykdom eller tilstand (brukes ikke i Norge)"
-'Z917'="Opplysning om kvinnelig kjÃ¸nnslemlestelse i egen sykehistorie"
+'Z917'="Opplysning om kvinnelig kjønnslemlestelse i egen sykehistorie"
 
 ;
 run;
