@@ -19835,5 +19835,18 @@ value $samletF
 'Z999'="Z999 Avhengighet av ikke spesifiert teknisk hjelpemiddel eller innretning"
 'XXXX'="Andre diagnoser"
 
+/*Nye formater fra fil icd10/icd10_2016_medKode.sas lagt til 10/11/2017 */
+'A970'="A970 Dengue uten varselstegn"
+'A971'="A971 Dengue med varselstegn"
+'A972'="A972 Alvorlig Dengue"
+'A979'="A979 Dengue, uspesifisert"
+'G233'="G233 Multippel systematrofi, cerebellære symptomer dominerer [MSA-c]"
+'G835'="G835 «Locked-in»-syndrom"
+'L987'="L987 Mye og overflødig hud og underhudsvev"
+'P917'="P917 Erhvervet hydrocephalus hos nyfødt"
+'Z039'="Z039 Observasjon ved mistanke om uspesifisert sykdom eller tilstand (brukes ikke i Norge)"
+'Z510'="Z510 Strålebehandling (brukes ikke i Norge)."
+'Z917'="Z917 Opplysning om kvinnelig kjønnslemlestelse i egen sykehistorie"
+
 ;
 run;
