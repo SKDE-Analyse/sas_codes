@@ -8,7 +8,6 @@
 
 Hente variable fra Parvus til Magnus 
 
-For å finne unike prosedyrer/diagnoser o.l. pr pasient pr sykehusopphold i avdelingsoppholdsfila
 ```
 %VarFraParvus(dsnMagnus=,var_som=,var_avtspes=);
 ```

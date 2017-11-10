@@ -41,6 +41,7 @@ Fylke
 
 #### Endring Arnfinn 7. aug. 2017:
 - Årsbetinget definisjon av opptaksområde (kun 2015 foreløpig, siden Samdata kun har lagt ut til og med 2015) 
+
 #### Endring Arnfinn 27. feb. 2017:
 - Hvis haraldsplass ne 0: del Bergen i Haraldsplass og Bergen
 - Hvis indreOslo ne 0: Slå sammen Diakonhjemmet og Lovisenberg

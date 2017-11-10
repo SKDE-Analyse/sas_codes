@@ -66,7 +66,6 @@ for i in listofMacros:
    
    heading += '''
 
-## Innholdsfortegnelse
 {: .no_toc}
 
 * auto-gen TOC:
