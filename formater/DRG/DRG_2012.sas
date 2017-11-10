@@ -1,6 +1,5 @@
 proc format;
 value $DRG_2012F
-'drg'="DRG drg DRG-navn"
 '1A'="DRG 1A Intrakraniell operasjon for svulst i sentralnervesystemet"
 '1B'="DRG 1B Annen intrakraniell vaskulær operasjon"
 '1C'="DRG 1C Operasjon for intrakraniell aneurisme, vaskulær anomali eller hemangiom"

@@ -1,8 +1,7 @@
 proc format;
 value drg
 
-/*Nye formater fra fil DRG/DRG_2016.sas lagt til 10/11/2017 */
-
+/* Formater fra fil DRG/DRG_2016.sas lagt til 10/11/2017 */
 '1A'="DRG 1A Intrakraniell operasjon for svulst i sentralnervesystemet"
 '1B'="DRG 1B Annen intrakraniell vaskulær operasjon"
 '1C'="DRG 1C Operasjon for intrakraniell aneurisme, vaskulær anomali eller hemangiom"
@@ -869,10 +868,10 @@ value drg
 '997O'="DRG 997O Tverrfaglig utredning"
 '998O'="DRG 998O Grupperettet pasientopplæring"
 
-/*Nye formater fra fil DRG/DRG_2015.sas lagt til 10/11/2017 */
+/* Formater fra fil DRG/DRG_2015.sas lagt til 10/11/2017 */
 '808S'="DRG 808S Påsetting av prefabrikert ortose"
 
-/*Nye formater fra fil DRG/DRG_2014.sas lagt til 10/11/2017 */
+/* Formater fra fil DRG/DRG_2014.sas lagt til 10/11/2017 */
 '39O'="DRG 39O Operasjoner på linsen, dagkirurgisk behandling"
 '103O'="DRG 103O Hjertetransplantasjon og implantasjon av VAD, dagkirurgisk behandling"
 '187E'="DRG 187E Tannimplantatbehandling"
@@ -883,7 +882,7 @@ value drg
 '492O'="DRG 492O Kjemoterapi m/akutt leukemi som bidiagnose, dagmedisinsk behandling"
 '495O'="DRG 495O Lungetransplantasjon, dagkirurgisk behandling"
 
-/*Nye formater fra fil DRG/DRG_2013.sas lagt til 10/11/2017 */
+/* Formater fra fil DRG/DRG_2013.sas lagt til 10/11/2017 */
 'DD01'="DRG DD01 Annen dagbehandling relatert til tilstander i HDG 01"
 '409A'="DRG 409A Poliklinisk ekstern strålebehandling ved svulst i sentralnervesystemet"
 'DD02'="DRG DD02 Annen dagbehandling relatert til tilstander i HDG 02"
@@ -940,14 +939,14 @@ value drg
 'DD30'="DRG DD30 Annen dagbehandling relatert til tilstander i HDG 30"
 '409N'="DRG 409N Poliklinisk ekstern strålebehandling ved brystkreft"
 
-/*Nye formater fra fil DRG/DRG_2012.sas lagt til 10/11/2017 */
+/* Formater fra fil DRG/DRG_2012.sas lagt til 10/11/2017 */
 'drg'="DRG drg DRG-navn"
 '57'="DRG 57 Tons./adenoid op ekskl -ektomi > 17år"
 '58'="DRG 58 Tons./adenoid op ekskl -ektomi 0-17 år"
 '291'="DRG 291 Eksisjon av median halsfistel eller cyste"
 '291O'="DRG 291O Eksisjon av median halsfistel eller cyste, dagkirurgisk behandling"
 
-/*Nye formater fra fil DRG/DRG_2011.sas lagt til 10/11/2017 */
+/* Formater fra fil DRG/DRG_2011.sas lagt til 10/11/2017 */
 '209A'="DRG 209A Primær proteseoperasjon i hofte/kne/ankel"
 '209B'="DRG 209B Sekundær proteseoperasjon i hofte/kne/ankel og replant i u.eks ekskl av tå"
 '377'="DRG 377 Sykdommer etter forløsning og abort m/operasjon"
