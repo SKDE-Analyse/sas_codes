@@ -1,3 +1,5 @@
+[![Status](https://travis-ci.org/SKDE-Analyse/sas_macroer.svg?branch=master)](https://travis-ci.org/SKDE-Analyse/sas_macroer/builds)
+
 # SAS-makroer utviklet og brukt ved SKDE
 
 Makroene ligger her:
