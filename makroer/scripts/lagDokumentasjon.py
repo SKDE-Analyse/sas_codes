@@ -81,8 +81,7 @@ for i in listofMacros:
       docFile.write(heading + doc)
       docFile.close()
    else:
-      warnings.warn("ADVARSEL: Makroen {0} er ikke dokumentert!".format(i.split(".")[0]))
-
+      warnings.warn("ADVARSEL: Filen {0} er ikke dokumentert!".format(i))
       
 indexHeading = ""
 for i in open("./doc/indexHead.md","r").readlines():
