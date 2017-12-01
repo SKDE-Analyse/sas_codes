@@ -13,19 +13,19 @@ avdelingsoppholdsfil der disse mangler.
 ### Bakgrunn
 
 Fra og med 2016 ligger ikke korrvekt inne i avdelingsoppholdfilen for opphold 
-som blir aggregert i sykehusoppholdsfilen. Disse mÃ¥ derfor hentes inn manuelt 
+som blir aggregert i sykehusoppholdsfilen. Disse må derfor hentes inn manuelt 
 fra sykehusoppholdsfilen. Aggregerte opphold har en variabel (`aggrshoppid`) 
 som kan brukes til identifisere hvilke avdelingsopphold som er utgangspunktet 
 for et sykehusopphold.
 
 ### Bivirkninger
 
-- Variablen `korrvekt` legges til datasettet `&avdfil` pÃ¥ linjer med unike `aggrshoppid ne .`
+- Variablen `korrvekt` legges til datasettet `&avdfil` på linjer med unike `aggrshoppid ne .`
 - Datasettet `&avdfil` sorteres slik at de linjene med `aggrshoppid ne .` legges sist.
 - Henter `aggrshoppid` fra *parvus* og dropper den til slutt. Det vil si at denne 
-  vil fjernes fra datasettet selv om den eventuelt finnes fra fÃ¸r. Gjelder `&avdfil`
-- Datasett i *work* som begynner pÃ¥ `qwerty` slettes.
-- Makroen `VarFraParvus` kjÃ¸res pÃ¥ `&avdfil`, sÃ¥ bivirkninger fra den makroen arves.
+  vil fjernes fra datasettet selv om den eventuelt finnes fra før. Gjelder `&avdfil`
+- Datasett i *work* som begynner på `qwerty` slettes.
+- Makroen `VarFraParvus` kjøres på `&avdfil`, så bivirkninger fra den makroen arves.
 
 ### Forfatter
 
@@ -33,7 +33,7 @@ Opprettet 1/12-17 av Arnfinn
 
 */
 
-/* Ikke rÃ¸r &shofil */
+/* Ikke rør &shofil */
 data qwerty_sho;
 set &shofil;
 run;
@@ -59,14 +59,14 @@ run;
 
 /* 
 Kun beholde linjer fra avd som IKKE inneholder aggrshoppid.
-Denne skal slÃ¥s sammen med qwerty_avd1 til slutt.
+Denne skal slås sammen med qwerty_avd1 til slutt.
 */
 data qwerty_avd2;
 set &avdfil;
 where aggrshoppid = .;
 run;
 
-/* Koble korrvekt pÃ¥ linjer i &avdfil som har aggrshoppid*/
+/* Koble korrvekt på linjer i &avdfil som har aggrshoppid*/
 proc sql;
 create table qwerty_avd1 as
 select *
@@ -83,7 +83,7 @@ set qwerty_avd1;
 if drg ne qwerty_drg then korrvekt = .;
 
 /*
-Fjerne korrvekt hvis den finnes pÃ¥ flere linjer
+Fjerne korrvekt hvis den finnes på flere linjer
 */
 
 proc sort data=qwerty_avd1;
