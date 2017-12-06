@@ -21,7 +21,7 @@ Hente variable fra Parvus til Magnus
 ### Eksempel
 
 ```
-VarFraParvus(dsnMagnus=radiusfrakturer,var_som=cyto: komnrhjem2 opphold_ID, var_avtspes=fagLogg komnrhjem2)
+VarFraParvus(dsnMagnus=radiusfrakturer,var_som=cyto: komnrhjem2, var_avtspes=fagLogg komnrhjem2)
 ```
 
 De varible du har valgt hentes fra aktuelle filer, kobles med variabelen *KoblingsID* og legges til inndatasettet 
