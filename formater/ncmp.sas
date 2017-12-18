@@ -1,5 +1,5 @@
 proc format;
-value ncmp
+value $ncmp
 
 /* Formater fra fil Prosedyrekoder/NCMP_2016_medKode.sas lagt til 10/11/2017 */
 'AAAA00'="AAAA00 EEG overvåking med ekstrakranielle elektroder"
