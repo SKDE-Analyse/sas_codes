@@ -1,16 +1,16 @@
 %macro aggreger(inndata = , utdata = , agg_var = , mappe = work);
 
 /*!
-Makro for Ã¥ aggregere datasett, slik at det kan brukes i rateprogrammet.
-Basert pÃ¥ kode som er brukt i Barnehelseatlaset og Eldrehelseatlaset.
+Makro for å aggregere datasett, slik at det kan brukes i rateprogrammet.
+Basert på kode som er brukt i Barnehelseatlaset og Eldrehelseatlaset.
 
-KjÃ¸res pÃ¥ fÃ¸lgende mÃ¥te:
+Kjøres på følgende måte:
 ```
 %aggreger(inndata = , utdata = , agg_var = , mappe = work);
 ```
 
 ### Variabler
-- `inndata` er det sensitive datasettet som skal aggregeres. MÃ¥ inneholde fÃ¸lgende variabler:
+- `inndata` er det sensitive datasettet som skal aggregeres. Må inneholde følgende variabler:
 
 ```
 aar, ermann, alder, komnr, bydel, 
@@ -18,9 +18,9 @@ eoc_liggetid, eoc_inndato, eoc_utdato,
 off, priv, elektiv, ohjelp, innlegg, poli # disse er 1 eller 0/.
 ```
 
-- `utdata` er navnet pÃ¥ det aggregerte datasettet
-- `agg_var` er variabelen det skal aggregeres pÃ¥. MÃ¥ vÃ¦re 1 eller 0/.
-- `mappe`: navn pÃ¥ mappen der utdatasettet skal lagres (default = work)
+- `utdata` er navnet på det aggregerte datasettet
+- `agg_var` er variabelen det skal aggregeres på. Må være 1 eller 0/.
+- `mappe`: navn på mappen der utdatasettet skal lagres (default = work)
 
 */
 
@@ -71,18 +71,18 @@ set &inndata._&agg_var;
   end;
 run;
 
-%unik_pasient(datasett = &inndata._&agg_var, variabel = tot);
-%unik_pasient_alle_aar(datasett = &inndata._&agg_var, variabel = tot);
-%unik_pasient(datasett = &inndata._&agg_var, variabel = priv);
-%unik_pasient(datasett = &inndata._&agg_var, variabel = off);
-%unik_pasient(datasett = &inndata._&agg_var, variabel = ohjelp);
-%unik_pasient(datasett = &inndata._&agg_var, variabel = elektiv);
-%unik_pasient(datasett = &inndata._&agg_var, variabel = innlegg);
-%unik_pasient(datasett = &inndata._&agg_var, variabel = poli);
-%unik_pasient(datasett = &inndata._&agg_var, variabel = inn_elektiv);
-%unik_pasient(datasett = &inndata._&agg_var, variabel = inn_ohjelp);
-%unik_pasient(datasett = &inndata._&agg_var, variabel = poli_off);
-%unik_pasient(datasett = &inndata._&agg_var, variabel = poli_priv);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = tot);
+%unik_pasient_alle_aar(datasett = &inndata._&agg_var., variabel = tot);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = priv);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = off);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = ohjelp);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = elektiv);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = innlegg);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = poli);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = inn_elektiv);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = inn_ohjelp);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = poli_off);
+%unik_pasient(datasett = &inndata._&agg_var., variabel = poli_priv);
 
 /*
 Aggreger datasettet
@@ -115,17 +115,17 @@ run;
 %macro unik_pasient(datasett = , variabel =);
 
 /* 
-Macro for Ã¥ markere unike pasienter 
+Macro for å markere unike pasienter 
 
 Ny variabel, &variabel._unik, lages i samme datasett
 */
 
-/*1. Sorter pÃ¥ Ã¥r, aktuell hendelse (merkevariabel), PID, InnDato, UtDato;*/
+/*1. Sorter på år, aktuell hendelse (merkevariabel), PID, InnDato, UtDato;*/
 proc sort data=&datasett;
 by aar &variabel pid eoc_inndato eoc_utdato;
 run;
 
-/*2. By-statement sÃ¸rger for at riktig opphold med hendelse velges i kombinasjon med First.-funksjonen og betingelse pÃ¥ hendelse*/
+/*2. By-statement sørger for at riktig opphold med hendelse velges i kombinasjon med First.-funksjonen og betingelse på hendelse*/
 data &datasett;
 set &datasett;
 &variabel._unik = .;
@@ -139,17 +139,17 @@ run;
 %macro unik_pasient_alle_aar(datasett = , variabel =);
 
 /* 
-Macro for Ã¥ markere unike pasienter i hele datasettet
+Macro for å markere unike pasienter i hele datasettet
 
 Ny variabel, Unik_&variabel, lages i samme datasett
 */
 
-/*1. Sorter pÃ¥ aktuell hendelse (merkevariabel), PID, InnDato, UtDato;*/
+/*1. Sorter på aktuell hendelse (merkevariabel), PID, InnDato, UtDato;*/
 proc sort data=&datasett;
 by &variabel pid eoc_inndato eoc_utdato;
 run;
 
-/*2. By-statement sÃ¸rger for at riktig opphold med hendelse velges i kombinasjon med First.-funksjonen og betingelse pÃ¥ hendelse*/
+/*2. By-statement sørger for at riktig opphold med hendelse velges i kombinasjon med First.-funksjonen og betingelse på hendelse*/
 data &datasett;
 set &datasett;
 Unik_&variabel = .;
