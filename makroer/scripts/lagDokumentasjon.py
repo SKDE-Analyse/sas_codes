@@ -64,15 +64,6 @@ for i in listofMacros:
 
 '''.format(i.split(".")[0])
    
-   heading += '''
-
-{: .no_toc}
-
-* auto-gen TOC:
-{:toc}
-
-'''
-
    doc = extractDoc(folder + i)
    
    if doc != "":
