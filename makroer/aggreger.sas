@@ -29,6 +29,56 @@ off, priv, elektiv, ohjelp, innlegg, poli # disse er 1 eller 0/.
 Marker tot, off, etc. for en gitt variabel (&agg_var)
 */
 
+
+
+%macro unik_pasient(datasett = , variabel =);
+
+/* 
+Macro for å markere unike pasienter 
+
+Ny variabel, &variabel._unik, lages i samme datasett
+*/
+
+/*1. Sorter på år, aktuell hendelse (merkevariabel), PID, InnDato, UtDato;*/
+proc sort data=&datasett;
+by aar &variabel pid eoc_inndato eoc_utdato;
+run;
+
+/*2. By-statement sørger for at riktig opphold med hendelse velges i kombinasjon med First.-funksjonen og betingelse på hendelse*/
+data &datasett;
+set &datasett;
+&variabel._unik = .;
+by aar &variabel pid eoc_inndato eoc_utdato;
+if first.pid and &variabel = 1 then &variabel._unik = 1;	
+run;
+
+%mend;
+
+
+%macro unik_pasient_alle_aar(datasett = , variabel =);
+
+/* 
+Macro for å markere unike pasienter i hele datasettet
+
+Ny variabel, Unik_&variabel, lages i samme datasett
+*/
+
+/*1. Sorter på aktuell hendelse (merkevariabel), PID, InnDato, UtDato;*/
+proc sort data=&datasett;
+by &variabel pid eoc_inndato eoc_utdato;
+run;
+
+/*2. By-statement sørger for at riktig opphold med hendelse velges i kombinasjon med First.-funksjonen og betingelse på hendelse*/
+data &datasett;
+set &datasett;
+Unik_&variabel = .;
+by &variabel pid eoc_inndato eoc_utdato;
+if first.pid and &variabel = 1 then &variabel._unik_alleaar=1;	
+run;
+
+%mend;
+
+
 data &inndata._&agg_var;
 set &inndata;
 where &agg_var = 1;
@@ -111,53 +161,6 @@ proc datasets nolist;
 delete &inndata._&agg_var;
 run;
 
-
-%macro unik_pasient(datasett = , variabel =);
-
-/* 
-Macro for å markere unike pasienter 
-
-Ny variabel, &variabel._unik, lages i samme datasett
-*/
-
-/*1. Sorter på år, aktuell hendelse (merkevariabel), PID, InnDato, UtDato;*/
-proc sort data=&datasett;
-by aar &variabel pid eoc_inndato eoc_utdato;
-run;
-
-/*2. By-statement sørger for at riktig opphold med hendelse velges i kombinasjon med First.-funksjonen og betingelse på hendelse*/
-data &datasett;
-set &datasett;
-&variabel._unik = .;
-by aar &variabel pid eoc_inndato eoc_utdato;
-if first.pid and &variabel = 1 then &variabel._unik = 1;	
-run;
-
-%mend;
-
-
-%macro unik_pasient_alle_aar(datasett = , variabel =);
-
-/* 
-Macro for å markere unike pasienter i hele datasettet
-
-Ny variabel, Unik_&variabel, lages i samme datasett
-*/
-
-/*1. Sorter på aktuell hendelse (merkevariabel), PID, InnDato, UtDato;*/
-proc sort data=&datasett;
-by &variabel pid eoc_inndato eoc_utdato;
-run;
-
-/*2. By-statement sørger for at riktig opphold med hendelse velges i kombinasjon med First.-funksjonen og betingelse på hendelse*/
-data &datasett;
-set &datasett;
-Unik_&variabel = .;
-by &variabel pid eoc_inndato eoc_utdato;
-if first.pid and &variabel = 1 then &variabel._unik_alleaar=1;	
-run;
-
-%mend;
 
 
 %mend;
