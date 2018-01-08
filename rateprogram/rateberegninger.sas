@@ -1,6 +1,11 @@
 
 %include "\\tos-sas-skde-01\SKDE_SAS\Makroer\master\Boomraader.sas";
 
+/*!
+Denne filen inneholder alle makroene til rateprogrammet, bortsett fra
+`boomraader`-makroen.
+*/
+
 %macro utvalgx;
 
 /*!
