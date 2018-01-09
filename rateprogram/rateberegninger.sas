@@ -1993,6 +1993,8 @@ RUN;
 
 */
 
+%if %sysevalf(%superq(kolonneTo)=,boolean) %then %let kolonneTo = Innbyggere;
+%if %sysevalf(%superq(figurnavn)=,boolean) %then %let figurnavn = AA_&RV_variabelnavn._&bo; 
 
 proc sql;
 create table aldersspenn as
@@ -2064,21 +2066,18 @@ where aar=9999;
 max=max(of ra:);
 min=min(of ra:);
 Norge=&Norge;
-rename Ant_innbyggere_sum=Innbyggere;
+rename Ant_innbyggere_sum=&kolonneTo;
 rename Ant_opphold_sum=&forbruksmal;
 run;
 
 data &bo._aarsvar;
 set &bo._aarsvar;
-format Innbyggere NLnum12.0 &forbruksmal NLnum12.0;
+format &kolonneTo NLnum12.0 &forbruksmal NLnum12.0;
 run;
 
 proc sort data=&bo._aarsvar;
 by descending rateSnitt;
 run;
-
-
-%if %sysevalf(%superq(figurnavn)=,boolean) %then %let figurnavn = AA_&RV_variabelnavn._&bo; 
 
 
 %if &NorgeSoyle=0 %then %do;
@@ -2098,7 +2097,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black size=5);%end;
 			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black size=5);%end;
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
-     Yaxistable &forbruksmal Innbyggere /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     Yaxistable &forbruksmal &kolonneTo /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala valueattrs=(size=7);
      inset (
@@ -2115,8 +2114,18 @@ run;Title; ods listing close; /*ods graphics off;*/
 
 /*Alternativ årsvariasjonsfigur*/
 %if &NorgeSoyle=1 %then %do;
+
+data tmpNORGE_AGG_RATE5;
+set NORGE_AGG_RATE5;
+rename Innbyggere=&kolonneTo;
+run;
+
 data &bo._aarsvar;
-set &bo._aarsvar NORGE_AGG_RATE5;
+set &bo._aarsvar tmpNORGE_AGG_RATE5;
+run;
+
+proc datasets nolist;
+delete tmpNORGE_AGG_RATE5;
 run;
 
 data &bo._aarsvar;
@@ -2143,7 +2152,7 @@ hbarparm category=&bo response=Snittrate / fillattrs=(color=CXC3C3C3);
 			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black);%end;
 			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
-     Yaxistable &forbruksmal Innbyggere /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     Yaxistable &forbruksmal &kolonneTo /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
 %if &aarsobs=1 %then %do;
@@ -2158,6 +2167,8 @@ hbarparm category=&bo response=Snittrate / fillattrs=(color=CXC3C3C3);
           / position=bottomright textattrs=(size=7);
 %end;
 run;Title; ods listing close;
+
+
 %end;
 
 
