@@ -3,20 +3,20 @@
 data &utDataSett;
 set &innDataSett;
 
-length ncmp: $6;
-length ncsp: $6;
-length cyto_: $6; 
+length ncmp: $7;
+length ncsp: $7;
+length cyto_: $7; 
 
-length bohf borhf boshhn fylke 3;
+length bohf borhf boshhn fylke 4;
 length bydel 6;
-length behhf behrhf behsh 3;
-length hdiag hdiag2 $6;
-length bdiag: $5;
+length behhf behrhf behsh 4;
+length hdiag hdiag2 $7;
+length bdiag: $7;
 length hdiag3tegn $3;
-length aar hastegrad aktivitetskategori: 3;
+length aar hastegrad aktivitetskategori: 4;
 
 length aggrshoppID 5;
-length alderIDager 3;
+length alderIDager 4;
 length behandlingsstedKode: 6;
 length debitor 3;
 
@@ -28,15 +28,15 @@ length fodselsAar_ident 3;
 length fodselsar 4;
 length fodselsvekt 4;
 length fodt_mnd g_omsorgsniva hastegrad hdg henvType ICD10Kap: 3;
-length innmateHast inntilstand intern_kons isf_opphold kjonn kjonn_ident kontaktType liggetid 3;
+length innmateHast inntilstand intern_kons isf_opphold kjonn kjonn_ident kontaktType liggetid 4;
 length inndato utdato InnTid KomNr UtskrKlarDato 4;
 length institusjonID institusjonID_original 6;
-length NPRId_reg omsorgsniva oppholdstype pakkeforlop permisjonsdogn polIndir polIndirekteAktivitet polUtforende_1 polUtforende_2 RehabType stedAktivitet 3;
-length tell_: 3;
-length pid relatertKontaktID 5;
-length trimpkt utforendeHelseperson utTilstand VertskommHN 3;
-length versjon $6;
-length UtTid 4;
+length NPRId_reg omsorgsniva oppholdstype pakkeforlop permisjonsdogn polIndir polIndirekteAktivitet polUtforende_1 polUtforende_2 RehabType stedAktivitet 4;
+length tell_: 4;
+length pid relatertKontaktID 6;
+length trimpkt utforendeHelseperson utTilstand VertskommHN 4;
+length versjon $7;
+length UtTid 5;
 
 format koblingsID 32.;
 
