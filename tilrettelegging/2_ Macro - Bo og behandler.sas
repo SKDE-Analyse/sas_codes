@@ -4,6 +4,7 @@
 Opprettet av: Linda Leivseth 
 Opprettet dato: 06. juni 2015
 Sist modifisert: 04.10.2016 av Linda Leivseth og Petter Otterdal
+Sist modifisert: 05.01.2017 av Linda Leivseth (lagt til missigverdi 99 for manglende info om bydel2)
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -101,6 +102,7 @@ if komNr=0301 and bydel2_num=15 then bydel=030115; /* Søndre Nordstrand */
 if komNr=0301 and bydel2_num=16 then bydel=030116; /* Sentrum */
 if komNr=0301 and bydel2_num=17 then bydel=030117; /* Marka */
 if komNr=0301 and bydel2_num=. then bydel=030199; /* Uoppgitt bydel Oslo */
+if komNr=0301 and bydel2_num=99 then bydel=030199; /* Uoppgitt bydel Oslo */
 
 
 /* Stavanger */
@@ -112,6 +114,7 @@ if komNr=1103 and bydel2_num=05 then bydel=110305; /* Storhaug */
 if komNr=1103 and bydel2_num=06 then bydel=110306; /* Hillevåg */
 if komNr=1103 and bydel2_num=07 then bydel=110307; /* Hinna */
 if komNr=1103 and bydel2_num=. then bydel=110399; /* Uoppgitt bydel Stavanger */
+if komNr=1103 and bydel2_num=99 then bydel=110399; /* Uoppgitt bydel Stavanger */
 
 
 /* Bergen */
@@ -124,6 +127,7 @@ if komNr=1201 and bydel2_num=06 then bydel=120106; /* Ytrebygda */
 if komNr=1201 and bydel2_num=07 then bydel=120107; /* Årstad */
 if komNr=1201 and bydel2_num=08 then bydel=120108; /* Åsane */
 if komNr=1201 and bydel2_num=. then bydel=120199; /* Uoppgitt bydel Bergen */
+if komNr=1201 and bydel2_num=99 then bydel=120199; /* Uoppgitt bydel Bergen */
 
 /* Trondheim */
 if komNr=1601 and bydel2_num=01 then bydel=160101; /* Midtbyen */
@@ -131,6 +135,7 @@ if komNr=1601 and bydel2_num=02 then bydel=160102; /* Østbyen */
 if komNr=1601 and bydel2_num=03 then bydel=160103; /* Lerkendal */
 if komNr=1601 and bydel2_num=04 then bydel=160104; /* Heimdal */
 if komNr=1601 and bydel2_num=. then bydel=160199; /* Uoppgitt bydel Trondheim */
+if komNr=1601 and bydel2_num=99 then bydel=160199; /* Uoppgitt bydel Trondheim */
 
 /* 
 **************************************************/
