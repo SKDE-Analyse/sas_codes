@@ -1,5 +1,5 @@
 proc format;
-value drg
+value $drg
 
 /* Formater fra fil DRG/DRG_2016.sas lagt til 10/11/2017 */
 '1A'="DRG 1A Intrakraniell operasjon for svulst i sentralnervesystemet"

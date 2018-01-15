@@ -139,6 +139,7 @@ value INSTITUSJONID_2015F
       1 = 'Ja'  
       2 = 'Nei' ;
    value $FAGOMRADE
+     '' = 'Manglende registrering'  
      '010' = 'Generell kirurgi'  
      '020' = 'Barnekirurgi (under 15 år)'  
      '030' = 'Gasteroenterologisk kirurgi'  

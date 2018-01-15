@@ -56,6 +56,8 @@ Value BoHF_kort
 	24='Utlandet/Svalbard'
 	30='Oslo'
 	31='Indre Oslo'
+	32='Groruddalen'
+	33='Asker og Bærum'
 	8888='Norge'
 	99='Ukjent/ugyldig kommunenr';
 	 
