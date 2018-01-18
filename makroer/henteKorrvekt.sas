@@ -34,18 +34,18 @@ Opprettet 1/12-17 av Arnfinn
 */
 
 /* Ikke rør &shofil */
-data qwerty_sho;
+data tmp_sho;
 set &shofil;
 run;
 
 /* Hente aggrshoppid fra parvus */
 
-%VarFraParvus(dsnMagnus=&avdfil,var_som=aggrshoppid);
-%VarFraParvus(dsnMagnus=qwerty_sho,var_som=aggrshoppid);
+%VarFraParvus(dsnMagnus=&avdfil, var_som=aggrshoppid);
+%VarFraParvus(dsnMagnus=tmp_sho, var_som=aggrshoppid);
 
 /* Kun beholde linjer fra sho som inneholder aggrshoppid */
-data qwerty_sho;
-set qwerty_sho;
+data tmp_sho;
+set tmp_sho;
 where aggrshoppid ne .;
 qwerty_drg = drg;
 run;
