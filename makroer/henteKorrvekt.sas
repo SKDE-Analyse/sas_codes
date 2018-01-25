@@ -70,8 +70,8 @@ run;
 proc sql;
 create table qwerty_avd1 as
 select *
-from qwerty_avd1, qwerty_sho(keep = aggrshoppid korrvekt qwerty_drg)
-where qwerty_avd1.aggrshoppid = qwerty_sho.aggrshoppid;
+from qwerty_avd1, tmp_sho(keep = aggrshoppid korrvekt qwerty_drg)
+where qwerty_avd1.aggrshoppid = tmp_sho.aggrshoppid;
 quit;
 
 /*
@@ -81,6 +81,7 @@ Fjerne korrvekt hvis drg for avdelingsopphold er ulik drg for sykehusopphold
 data qwerty_avd1;
 set qwerty_avd1;
 if drg ne qwerty_drg then korrvekt = .;
+run;
 
 /*
 Fjerne korrvekt hvis den finnes på flere linjer
@@ -92,7 +93,7 @@ run;
 
 data qwerty_avd1;
 set qwerty_avd1;
-by aggrshoppid;
+by pid aggrshoppid;
 if last.aggrshoppid ne 1 then korrvekt =. ;
 run;
 
