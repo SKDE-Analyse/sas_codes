@@ -1,6 +1,3 @@
-/*Tilpasset versjon for tilrettelagte sett juni 2017*/
-
-
 %macro VarFraParvus(dsnMagnus=,var_som=,var_avtspes=);
 
 /*!
@@ -27,9 +24,11 @@ VarFraParvus(dsnMagnus=radiusfrakturer,var_som=cyto: komnrhjem2, var_avtspes=fag
 De varible du har valgt hentes fra aktuelle filer, kobles med variabelen *KoblingsID* og legges til inndatasettet 
 Start gjerne med et ferdig utvalg om det er mulig, da vil makroen kjøre raskere og kreve mindre ressurser
 
-### Forfatter
+### Endringsoversikt
 
-Opprettet 5/10-16 av Petter Otterdal
+- 5/10-16 Opprettet av Petter Otterdal
+- juni 2017: Tilpasset versjon for tilrettelagte sett (Petter Otterdal)
+
 */
 
 
