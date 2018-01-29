@@ -1,9 +1,9 @@
 %macro reinnleggelser_test(branch=master);
 
 /*!
-Makro for Ã¥ teste reinnleggelse-makro.
+Makro for å teste reinnleggelse-makro.
 
-KjÃ¸rer reinnleggelse-makroen pÃ¥ et test-datasett (npr_utva.ctrl_reinn).
+Kjører reinnleggelse-makroen på et test-datasett (npr_utva.ctrl_reinn).
 Sammenligner dette datasettet med en referanse (skde_arn.ref_reinn1 og 2).
 */
 

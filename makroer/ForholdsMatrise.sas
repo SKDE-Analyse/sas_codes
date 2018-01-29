@@ -1,7 +1,7 @@
 /*!
 Inputvariabler: ant_datasett
 
-Datasettene som skal brukes angis med %Let statements fÃ¸r makroen kjÃ¸res:
+Datasettene som skal brukes angis med %Let statements før makroen kjøres:
 
 %Let dsn1=
 %Let dsn2=
@@ -9,8 +9,8 @@ Datasettene som skal brukes angis med %Let statements fÃ¸r makroen kjÃ¸res:
 %Let dsnXX=
 
 Makro som lager en "matrise" (egentlig en masse nye variabler) hvor 
-antall (personer/episoder/liggedÃ¸gn...) og rater fra to eller flere 
-ulike datasett deles pÃ¥ hverandre ihht tabellene under.
+antall (personer/episoder/liggedøgn...) og rater fra to eller flere 
+ulike datasett deles på hverandre ihht tabellene under.
 
 Eksempel med tre datasett:
 
@@ -31,14 +31,14 @@ Eksempel med tre datasett:
 		  |
 	rate3 |	andel_1_3 = rate1/rate3		andel_2_3 = rate2/rate3		andel_3_3 = rate3/rate3
 
-Makroen lager ogsÃ¥ variablene: 
+Makroen lager også variablene: 
 
 tot_rate=rate1 + rate2
 andel_rate1=rate_1/tot_rate;
 andel_rate2=rate_2/tot_rate;
 tot_antall=antall_1+antall_2;
 
-Kan f.eks brukes til Ã¥ lage tabeller med utfyllende informasjon til hÃ¸yre for en rate/andelsfigur.
+Kan f.eks brukes til å lage tabeller med utfyllende informasjon til høyre for en rate/andelsfigur.
 	
 */
 

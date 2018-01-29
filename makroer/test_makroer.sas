@@ -2,7 +2,7 @@
 /*!
 Makro som skal teste de andre makroene.
 
-Tester for Ã¸yeblikket kun makroene
+Tester for øyeblikket kun makroene
 - `Episode_of_care`
 - `reinnleggelser`
 */
