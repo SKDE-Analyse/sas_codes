@@ -141,7 +141,7 @@ Første makro som kjøres direkte i rateprogrammet
 
 options locale=NB_NO;
 
-	data utvalgX;
+	data tmp1utvalgX;
 	set &Ratefil; /*HER MÅ DET AGGREGERTE RATEGRUNNLAGSSETTET SETTES INN */
 		RV=&RV_variabelnavn; /* Definerer RV som ratevariabel */
 	keep RV ermann aar alder komnr bydel;
@@ -153,7 +153,7 @@ options locale=NB_NO;
 /*Nytt pr 11/5-17 - Frank Olsen - tabeller for eksludering*/
 %if &vis_ekskludering=1 %then %do;
 Title "EKSKLUDERING";
-PROC TABULATE DATA=utvalgx FORMAT=NLnum12.0;	
+PROC TABULATE DATA=tmp1utvalgx FORMAT=NLnum12.0;	
 VAR RV;
 CLASS aar ErMann/	ORDER=UNFORMATTED MISSING;
 TABLE ErMann={LABEL=""} ALL={LABEL="Total kjønn"} aar={LABEL=""} ALL={LABEL="Total år"} ,
@@ -163,7 +163,7 @@ RUN; Title;
 
 PROC SQL;
 CREATE TABLE ikke_med_tot AS
-SELECT * FROM UTVALGX
+SELECT * FROM tmp1UTVALGX
 where komnr=. or komnr not in (0:2031) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
 QUIT;
 
@@ -177,7 +177,7 @@ RUN;
 
 PROC SQL;
 CREATE TABLE ikke_kom AS
-SELECT * FROM UTVALGX
+SELECT * FROM tmp1UTVALGX
 where komnr not in (0:2031); 
 QUIT;
 
@@ -192,7 +192,7 @@ RUN;
 
 PROC SQL;
 CREATE TABLE ikke_med AS
-SELECT * FROM UTVALGX
+SELECT * FROM tmp1UTVALGX
 where (komnr=. or komnr in (0:2031)) and (alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår)); 
 QUIT;
 
@@ -214,14 +214,14 @@ run;
 	/*----------------------------*/
 
 	PROC SQL;
-	   CREATE TABLE utvalgx AS
+	   CREATE TABLE tmp2utvalgx AS
 	   SELECT DISTINCT aar,KomNr,bydel,Alder,ErMann,(SUM(RV)) AS RV
-	      FROM UTVALGX
+	      FROM tmp1UTVALGX
 		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<2031
 	      GROUP BY aar, KomNr, bydel, Alder, ErMann;	  
 	QUIT;
 
-	data innb_aar;
+	data tmp1innb_aar;
 	set &innbyggerfil;
 	keep aar komnr bydel Ermann Alder innbyggere;
 	where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<2031;
@@ -231,33 +231,33 @@ run;
 	PROC SQL;
 	   CREATE TABLE innb_aar AS 
 	   SELECT DISTINCT aar,KomNr, bydel, Alder,ErMann,(SUM(Innbyggere)) AS Innbyggere
-	      FROM innb_aar
+	      FROM tmp1innb_aar
 	      GROUP BY aar, KomNr, Alder, bydel, ErMann;
 	QUIT;
 
 	PROC SQL;
 	 CREATE TABLE utvalgx AS
 	 SELECT *
-	 FROM innb_aar left join utvalgx
-	 ON utvalgx.komnr=innb_aar.komnr and utvalgx.bydel=innb_aar.bydel and utvalgx.aar=innb_aar.aar 
-		and utvalgx.ermann=innb_aar.ermann and utvalgx.alder=innb_aar.alder;
+	 FROM innb_aar left join tmp2utvalgx
+	 ON tmp2utvalgx.komnr=innb_aar.komnr and tmp2utvalgx.bydel=innb_aar.bydel and tmp2utvalgx.aar=innb_aar.aar 
+		and tmp2utvalgx.ermann=innb_aar.ermann and tmp2utvalgx.alder=innb_aar.alder;
 	QUIT; 
 
 	proc datasets nolist;
-	delete innb_aar;
+	delete tmp1innb_aar innb_aar tmp1utvalgx tmp2utvalgx;
 	run;
 
 	/* Definere alderskategorier */
 
 	%valg_kategorier;	
 
-	data RV;
+	data tmpRV;
 	set Utvalgx;
 	where alder_ny ne .; 
 	if RV=. then RV=0;
 	run;
 
-	Proc means data=RV min max noprint;
+	Proc means data=tmpRV min max noprint;
 	var alder;
 	class alder_ny;
 	where alder_ny ne .;
@@ -274,8 +274,8 @@ run;
 	PROC SQL;
 	 CREATE TABLE RV AS
 	 SELECT *
-	 FROM RV left join alderdef
-	 ON RV.alder_ny=alderdef.alder_ny;
+	 FROM tmpRV left join alderdef
+	 ON tmpRV.alder_ny=alderdef.alder_ny;
 	QUIT;
 
 	data RV;
@@ -284,7 +284,7 @@ run;
 	format aar aar.;
 	run;
 
-	proc delete data=alderdef utvalgx;
+	proc delete data=alderdef utvalgx tmpRV;
 	run;
 
    /*
@@ -306,7 +306,7 @@ format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr 
 
 	/* beregne andeler */
 	proc sql;
-	    create table Andel as
+	    create table tmpAndel as
 	    select distinct aar, alderny, ErMann, sum(innbyggere) as innbyggere 
 	    from RV
 		where aar=&aar and &boomraadeN /*test 13/6-16*/
@@ -316,9 +316,12 @@ format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr 
 	proc sql;
 	    create table Andel as
 	    select distinct aar, alderny, ErMann, innbyggere, sum(innbyggere) as N_innbygg, innbyggere/sum(innbyggere) as andel  
-	    from Andel;
+	    from tmpAndel;
 	quit;
 
+    proc delete data=tmpAndel;
+	run;
+    
 	/* legg på boområder */
 	/*%include "\\tos-sastest-07\SKDE\rateprogram\Rateprogram_Boomraader.sas";
 	%include "\\tos-sastest-07\SKDE\rateprogram\Rateprogram_BoFormat.sas";*/
@@ -336,105 +339,7 @@ Frank Olsen 19/10-15
 
 %macro omraadeNorge;
 
-/*!
-#### Formål
-{: .no_toc}
-
-#### "Steg for steg"-beskrivelse
-{: .no_toc}
-
-1. 
-
-#### Avhengig av følgende datasett
-{: .no_toc}
-
--
-
-#### Lager følgende datasett
-{: .no_toc}
-
-- NORGE_AGG
-- NORGE_AGG_SNITT
-
-#### Avhengig av følgende variabler
-{: .no_toc}
-
--
-
-#### Definerer følgende variabler
-{: .no_toc}
-
-
-#### Kalles opp av følgende makroer
-{: .no_toc}
-
--
-
-#### Bruker følgende makroer
-{: .no_toc}
-
--
-
-#### Annet
-{: .no_toc}
-Andre makro som kjøres direkte i rateprogrammet
-*/
-
-	%let Bo=Norge;
-
-/*Makro for beregninger*/
-proc sql;
-    create table &Bo._Agg as
-    select distinct aar, alder_ny, ErMann, &Bo,
-(Sum(RV)) as N_RV, (SUM(Innbyggere)) as N_Innbyggere
-    from RV where &Bo ne .
-    group by aar, alder_ny, ErMann, &Bo;
-quit;
-/*-----------------------------
-Lage gjennomsnitt for perioden
-1. Lage gjennomsnitt
-2. Legge til i BoOmr_Agg
------------------------------*/
-
-PROC SQL;
-   CREATE TABLE &Bo._Agg_Snitt AS 
-   SELECT aar,alder_ny,ErMann,&Bo,(AVG(N_RV)) AS N_RV,(AVG(N_Innbyggere)) AS N_Innbyggere
-      FROM &Bo._Agg
-      GROUP BY alder_ny, ErMann, &Bo;
-QUIT;
-
-data &Bo._Agg_Snitt;
-set &Bo._Agg_Snitt;
-Where aar=&aar;
-aar=9999;
-run;
-
-Data &Bo._Agg;
-set &Bo._Agg &Bo._Agg_Snitt;
-run;
-
-/*------------------
-Aggregere opp innbyggere på BoOmr-nivå
------------------*/ 
-PROC SQL;
-   CREATE TABLE &Bo._Agg AS 
-   SELECT aar, alder_ny, ErMann,&Bo, N_RV, N_Innbyggere, 
-          (SUM(N_RV)) AS RV_tot,(SUM(N_Innbyggere)) AS Innbyggere_tot,(FREQ(N_Innbyggere)) AS Kategorier
-      FROM &Bo._Agg
-      GROUP BY aar, &Bo;
-QUIT;
-
-/* hente inn nasjonale andeler */
-
-PROC SQL;
- CREATE TABLE &Bo._Agg AS
- SELECT *
- FROM &Bo._Agg left join Andel
- ON &Bo._Agg.alder_ny=Andel.alderny;
-QUIT;
-
-
-%mend omraadeNorge;
+%mend;
 
 
 %macro omraade;
@@ -499,7 +404,7 @@ set RV;
 run;
 
 proc sql;
-    create table &Bo._Agg as
+    create table tmp1&Bo._Agg as
     select distinct aar, alder_ny, ErMann, &Bo,
 (Sum(RV)) as N_RV, (SUM(Innbyggere)) as N_Innbyggere
     from RV&Bo where &Bo ne .
@@ -514,7 +419,7 @@ Lage gjennomsnitt for perioden
 PROC SQL;
    CREATE TABLE &Bo._Agg_Snitt AS 
    SELECT aar,alder_ny,ErMann,&Bo,(AVG(N_RV)) AS N_RV,(AVG(N_Innbyggere)) AS N_Innbyggere
-      FROM &Bo._Agg
+      FROM tmp1&Bo._Agg
       GROUP BY alder_ny, ErMann, &Bo;
 QUIT;
 
@@ -524,18 +429,18 @@ Where aar=&aar;
 aar=9999;
 run;
 
-Data &Bo._Agg;
-set &Bo._Agg &Bo._Agg_Snitt;
+Data tmp2&Bo._Agg;
+set tmp1&Bo._Agg &Bo._Agg_Snitt;
 run;
 
 /*------------------
 Aggregere opp innbyggere på BoOmr-nivå
 -----------------*/ 
 PROC SQL;
-   CREATE TABLE &Bo._Agg AS 
+   CREATE TABLE tmp3&Bo._Agg AS 
    SELECT aar, alder_ny, ErMann,&Bo, N_RV, N_Innbyggere, 
           (SUM(N_RV)) AS RV_tot,(SUM(N_Innbyggere)) AS Innbyggere_tot,(FREQ(N_Innbyggere)) AS Kategorier
-      FROM &Bo._Agg
+      FROM tmp2&Bo._Agg
       GROUP BY aar, &Bo;
 QUIT;
 
@@ -555,9 +460,12 @@ quit;
 PROC SQL;
  CREATE TABLE &Bo._Agg AS
  SELECT *
- FROM &Bo._Agg left join Andel
- ON &Bo._Agg.alder_ny=Andel.alderny and &Bo._Agg.ermann=Andel.ermann;
+ FROM tmp3&Bo._Agg left join Andel
+ ON tmp3&Bo._Agg.alder_ny=Andel.alderny and tmp3&Bo._Agg.ermann=Andel.ermann;
 QUIT;
+
+proc delete data=tmp1&Bo._Agg tmp2&Bo._Agg tmp3&Bo._Agg;
+run;
 
 /* Tillegg for SVC */
 
@@ -582,7 +490,7 @@ run;
 
 
 proc sql;
-    create table &Bo._Agg_rate as
+    create table tmp1&Bo._Agg_rate as
     select distinct aar, &Bo, /* ny SVC */ kategorier,
 (sum(rate_RV)) as RV_rate, (sum(just_rate_RV)) as RV_just_rate, 
 (sum(N_Innbyggere)) as Ant_Innbyggere, (sum(N_RV)) as Ant_Opphold,
@@ -593,15 +501,15 @@ quit;
 
 /* Til kartkategorier */
 proc sql;
-    create table &Bo._Agg_rate as
+    create table tmp2&Bo._Agg_rate as
     select distinct aar, &Bo, RV_rate, RV_just_rate, Ant_Innbyggere, Ant_Opphold, SD_rate, SDJUSTRate, /* ny SVC */ ei, kategorier,
 	(mean(RV_just_rate)) as mean 
-	from &Bo._Agg_rate
+	from tmp1&Bo._Agg_rate
 group by aar;
    quit;
 
-data &Bo._Agg_rate;
-set &Bo._Agg_rate;
+data tmp2&Bo._Agg_rate;
+set tmp2&Bo._Agg_rate;
 if aar ne 9999 then do;
 	KI_N=RV_rate-(1.96*SD_rate);
 	KI_O=RV_rate+(1.96*SD_rate);
@@ -648,7 +556,7 @@ PROC SQL;
             (SUM(ei)) AS SUM_of_ei,
 		  /* SUM_of_BoOmråde */ /* ny SVC */
 			(COUNT(&Bo)) AS Boomr
-      FROM &Bo._AGG_Rate
+      FROM tmp2&Bo._AGG_Rate
       GROUP BY aar;
 QUIT;
 
@@ -666,14 +574,17 @@ run;
 
 /* Legge til SD i BoOmr_Agg_rate - funker ikke NBNBN */
 
-proc sort data=&Bo._Agg_rate;
+proc sort data=tmp2&Bo._Agg_rate;
 by aar;
 run;
 
 data &Bo._Agg_rate;
-Merge &Bo._Agg_rate &Bo._AGG_CV;
+Merge tmp2&Bo._Agg_rate &Bo._AGG_CV;
 By aar;
 drop SUM_of_Ant_Innbyggere SUM_of_MCV SUM_of_SDCV meancv CV;
+run;
+
+proc delete data=tmp1&Bo._Agg_rate tmp2&Bo._Agg_rate;
 run;
 
 /*Tilpasning til å lage Norge som søyle*/
@@ -1993,6 +1904,8 @@ RUN;
 
 */
 
+%if %sysevalf(%superq(kolonneTo)=,boolean) %then %let kolonneTo = Innbyggere;
+%if %sysevalf(%superq(figurnavn)=,boolean) %then %let figurnavn = AA_&RV_variabelnavn._&bo; 
 
 proc sql;
 create table aldersspenn as
@@ -2064,21 +1977,18 @@ where aar=9999;
 max=max(of ra:);
 min=min(of ra:);
 Norge=&Norge;
-rename Ant_innbyggere_sum=Innbyggere;
+rename Ant_innbyggere_sum=&kolonneTo;
 rename Ant_opphold_sum=&forbruksmal;
 run;
 
 data &bo._aarsvar;
 set &bo._aarsvar;
-format Innbyggere NLnum12.0 &forbruksmal NLnum12.0;
+format &kolonneTo NLnum12.0 &forbruksmal NLnum12.0;
 run;
 
 proc sort data=&bo._aarsvar;
 by descending rateSnitt;
 run;
-
-
-%if %sysevalf(%superq(figurnavn)=,boolean) %then %let figurnavn = AA_&RV_variabelnavn._&bo; 
 
 
 %if &NorgeSoyle=0 %then %do;
@@ -2098,7 +2008,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black size=5);%end;
 			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black size=5);%end;
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
-     Yaxistable &forbruksmal Innbyggere /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     Yaxistable &forbruksmal &kolonneTo /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala valueattrs=(size=7);
      inset (
@@ -2115,8 +2025,18 @@ run;Title; ods listing close; /*ods graphics off;*/
 
 /*Alternativ årsvariasjonsfigur*/
 %if &NorgeSoyle=1 %then %do;
+
+data tmpNORGE_AGG_RATE5;
+set NORGE_AGG_RATE5;
+rename Innbyggere=&kolonneTo;
+run;
+
 data &bo._aarsvar;
-set &bo._aarsvar NORGE_AGG_RATE5;
+set &bo._aarsvar tmpNORGE_AGG_RATE5;
+run;
+
+proc datasets nolist;
+delete tmpNORGE_AGG_RATE5;
 run;
 
 data &bo._aarsvar;
@@ -2143,7 +2063,7 @@ hbarparm category=&bo response=Snittrate / fillattrs=(color=CXC3C3C3);
 			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black);%end;
 			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
-     Yaxistable &forbruksmal Innbyggere /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     Yaxistable &forbruksmal &kolonneTo /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
 %if &aarsobs=1 %then %do;
@@ -2158,6 +2078,8 @@ hbarparm category=&bo response=Snittrate / fillattrs=(color=CXC3C3C3);
           / position=bottomright textattrs=(size=7);
 %end;
 run;Title; ods listing close;
+
+
 %end;
 
 
@@ -2633,6 +2555,7 @@ by descending rateSnitt;
 run;
 %mend aarsvar;
 
+
 %macro rateberegninger;
 /*!
 #### Formål
@@ -2753,11 +2676,15 @@ select distinct max(aar) as maxaar, min(aar) as minaar
 from RV
 where aar ne 9999;
 quit;
+
 Data _null_;
 set Norgeaarsspenn;
 call symput('Min_aar', trim(left(put(minaar,8.))));
 call symput('Max_aar', trim(left(put(maxaar,8.))));
 run;
+
+%let Bo=Norge; 	
+%omraade;
 
 data norge_agg_snitt;
 set Norge_agg_snitt;
@@ -2817,7 +2744,7 @@ RUN; Title;
 	%let År7=%sysevalf(&StartÅr+6);
 %end;
 
-%let Bo=Norge; 	%omraade; /*må lage egen for Norge*/
+%let Bo=Norge; 	*%omraade; /*må lage egen for Norge*/
 	%if &Vis_tabeller=1 %then %do;
 		%if &tallformat=NLnum %then %do;
 			%tabell_1;
@@ -3191,3 +3118,4 @@ RUN; Title;
 	%end;
 
 %mend rateberegninger;
+
