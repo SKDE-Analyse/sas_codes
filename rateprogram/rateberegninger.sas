@@ -1131,8 +1131,6 @@ run;
 %macro valg_kategorier;
 
 /*!
-## **valg_kategorier**
-
 #### Formål
 {: .no_toc}
 
