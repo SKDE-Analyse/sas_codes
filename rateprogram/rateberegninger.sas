@@ -86,29 +86,7 @@ F¯rste makro som kj¯res direkte i rateprogrammet
 
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
 
-/*Beregne Âr1, Âr2 osv*/
-%let Periode=(&Start≈r:&Slutt≈r);
-%let Antall_aar=%sysevalf(&Slutt≈r-&Start≈r+2);
-%let ≈r1=%sysevalf(&Start≈r);
-%if &Antall_aar ge 2 %then %do;
-	%let ≈r2=%sysevalf(&Start≈r+1);
-%end;
-%if &Antall_aar ge 3 %then %do;
-	%let ≈r3=%sysevalf(&Start≈r+2);
-%end;
-%if &Antall_aar ge 4 %then %do;
-	%let ≈r4=%sysevalf(&Start≈r+3);
-%end;
-%if &Antall_aar ge 5 %then %do;
-	%let ≈r5=%sysevalf(&Start≈r+4);
-%end;
-%if &Antall_aar ge 6 %then %do;
-	%let ≈r6=%sysevalf(&Start≈r+5);
-%end;
-%if &Antall_aar ge 7 %then %do;
-	%let ≈r7=%sysevalf(&Start≈r+6);
-%end;
-
+%definere_aar;
 
 %if &Antall_aar=2 %then %do;
 	proc format; Value aar
@@ -237,10 +215,10 @@ run;
 
 	PROC SQL;
 	 CREATE TABLE utvalgx AS
-	 SELECT *
-	 FROM innb_aar left join tmp2utvalgx
-	 ON tmp2utvalgx.komnr=innb_aar.komnr and tmp2utvalgx.bydel=innb_aar.bydel and tmp2utvalgx.aar=innb_aar.aar 
-		and tmp2utvalgx.ermann=innb_aar.ermann and tmp2utvalgx.alder=innb_aar.alder;
+	 SELECT a.aar, a.KomNr, a.bydel, a.Alder, a.ErMann, b.RV, a.Innbyggere
+	 FROM innb_aar a left join tmp2utvalgx b
+	 ON b.komnr=a.komnr and b.bydel=a.bydel and b.aar=a.aar 
+		and b.ermann=a.ermann and b.alder=a.alder;
 	QUIT; 
 
 	proc datasets nolist;
@@ -273,8 +251,8 @@ run;
 
 	PROC SQL;
 	 CREATE TABLE RV AS
-	 SELECT *
-	 FROM tmpRV left join alderdef
+	 SELECT tmpRV.*, alderdef.aldernytall, alderdef.alderny
+	 FROM tmpRV left join alderdef 
 	 ON tmpRV.alder_ny=alderdef.alder_ny;
 	QUIT;
 
@@ -458,14 +436,12 @@ from andel;
 quit;
 
 PROC SQL;
- CREATE TABLE &Bo._Agg AS
- SELECT *
- FROM tmp3&Bo._Agg left join Andel
- ON tmp3&Bo._Agg.alder_ny=Andel.alderny and tmp3&Bo._Agg.ermann=Andel.ermann;
+ CREATE TABLE tmp4&Bo._Agg AS
+ SELECT a.*, andel
+ FROM tmp3&Bo._Agg a left join Andel b
+ ON a.alder_ny=b.alderny and a.ermann=b.ermann;
 QUIT;
 
-proc delete data=tmp1&Bo._Agg tmp2&Bo._Agg tmp3&Bo._Agg;
-run;
 
 /* Tillegg for SVC */
 
@@ -473,9 +449,12 @@ PROC SQL;
    CREATE TABLE &Bo._AGG AS 
    SELECT *, /* SUM_of_N_RV */ (SUM(N_RV)) AS RV_jN, 
           /* SUM_of_N_Innbyggere */ (SUM(N_Innbyggere)) AS Innbyggere_jN
-      FROM &Bo._AGG
+      FROM tmp4&Bo._AGG
       GROUP BY alder_ny, ermann, aar;
 QUIT;
+
+proc delete data=tmp1&Bo._Agg tmp2&Bo._Agg tmp3&Bo._Agg tmp4&Bo._Agg;
+run;
 
 /* Beregninger */
 
@@ -616,7 +595,7 @@ run;
 
 proc sql;
 create table NORGE_AGG_RATE5 as
-select *
+select NORGE_AGG_RATE3.*, NORGE_AGG_RATE4.Norge, NORGE_AGG_RATE4.Ant_Innbyggere, NORGE_AGG_RATE4.Ant_Opphold
 from NORGE_AGG_RATE3 left join NORGE_AGG_RATE4
 on NORGE_AGG_RATE3.aar=NORGE_AGG_RATE4.aar;
 quit; title;
@@ -1948,6 +1927,7 @@ drop RV_just_rate_Sum;
 aar=9999;
 run;
 
+
 proc sql;
 create table &bo._aarsvar as 
 select *
@@ -2169,13 +2149,12 @@ run; quit;
 data snudd;
 set snudd;
 drop RV_just_rate_Sum;
-aar=9999;
 run;
 
 proc sql;
 create table &bo._aarsvar as 
-select *
-from &bo._fig left join snudd 
+select a.aar, a.rv_just_rate_sum, a.Ant_Opphold_Sum, a.Ant_Innbyggere_Sum, b.*
+from &bo._fig a left join snudd b
 on &bo._fig.&bo=snudd.&bo;
 quit;
 
@@ -2555,6 +2534,47 @@ by descending rateSnitt;
 run;
 %mend aarsvar;
 
+%macro definere_aar;
+
+/*!
+Makro for Â definere de globale makrovariablene
+Periode Antall_aar ≈r1 ≈r2 etc. basert pÂ &Start≈r og &Slutt≈r
+*/
+
+/*Beregne Âr1, Âr2 osv*/
+%global Periode;
+%let Periode=(&Start≈r:&Slutt≈r);
+%global Antall_aar;
+%let Antall_aar=%sysevalf(&Slutt≈r-&Start≈r+2);
+%global ≈r1;
+%let ≈r1=%sysevalf(&Start≈r);
+%if &Antall_aar ge 2 %then %do;
+    %global ≈r2;
+	%let ≈r2=%sysevalf(&Start≈r+1);
+%end;
+%if &Antall_aar ge 3 %then %do;
+    %global ≈r3;
+	%let ≈r3=%sysevalf(&Start≈r+2);
+%end;
+%if &Antall_aar ge 4 %then %do;
+    %global ≈r4;
+	%let ≈r4=%sysevalf(&Start≈r+3);
+%end;
+%if &Antall_aar ge 5 %then %do;
+    %global ≈r5;
+	%let ≈r5=%sysevalf(&Start≈r+4);
+%end;
+%if &Antall_aar ge 6 %then %do;
+    %global ≈r6;
+	%let ≈r6=%sysevalf(&Start≈r+5);
+%end;
+%if &Antall_aar ge 7 %then %do;
+    %global ≈r7;
+	%let ≈r7=%sysevalf(&Start≈r+6);
+%end;
+
+%mend;
+
 
 %macro rateberegninger;
 /*!
@@ -2719,30 +2739,9 @@ PROC TABULATE DATA=NORGE_AGG_SNITT;
 RUN; Title;
 %end;
 
-%if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
+%definere_aar;
 
-/*Beregne Âr1, Âr2 osv*/
-%let Periode=(&Start≈r:&Slutt≈r);
-%let Antall_aar=%sysevalf(&Slutt≈r-&Start≈r+2);
-%let ≈r1=%sysevalf(&Start≈r);
-%if &Antall_aar ge 2 %then %do;
-	%let ≈r2=%sysevalf(&Start≈r+1);
-%end;
-%if &Antall_aar ge 3 %then %do;
-	%let ≈r3=%sysevalf(&Start≈r+2);
-%end;
-%if &Antall_aar ge 4 %then %do;
-	%let ≈r4=%sysevalf(&Start≈r+3);
-%end;
-%if &Antall_aar ge 5 %then %do;
-	%let ≈r5=%sysevalf(&Start≈r+4);
-%end;
-%if &Antall_aar ge 6 %then %do;
-	%let ≈r6=%sysevalf(&Start≈r+5);
-%end;
-%if &Antall_aar ge 7 %then %do;
-	%let ≈r7=%sysevalf(&Start≈r+6);
-%end;
+%if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
 
 %let Bo=Norge; 	*%omraade; /*mÂ lage egen for Norge*/
 	%if &Vis_tabeller=1 %then %do;
