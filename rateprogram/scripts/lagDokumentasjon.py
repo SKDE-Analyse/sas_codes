@@ -24,7 +24,7 @@ def extractDoc(filename):
             if i.split()[0] == "%macro":
                 print(i)
                 doc += '''
-## Makro {0}
+## {0}
 
 '''.format(i.split()[1])
         if extract and "*/" in i:
