@@ -1,4 +1,4 @@
-%let makrobane=\\tos-sas-skde-01\SKDE_SAS\rateprogram\janice\sas;
+%let makrobane=\\tos-sas-skde-01\SKDE_SAS\rateprogram\master\sas;
 %include "\\tos-sas-skde-01\SKDE_SAS\Makroer\master\Boomraader.sas";
 %include "&makrobane\lag_kart.sas";
 %include "&makrobane\omraade.sas";
