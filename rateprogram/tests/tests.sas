@@ -10,7 +10,7 @@ Arnfinn aug. 2017
 
 Test av rateprogrammet i sin helhet. Kjører rateprogrammet fra A til Å.
 
-Variabel-valg finnes i tests\definerVariabler.sas
+Variabel-valg finnes i sas\definerVariabler.sas
 
 */
 
@@ -45,7 +45,7 @@ Test av deler av rateprogrammet hver for seg.
 
 %include "&filbane.rateprogram\&branch\tests\makroer.sas";
 
-%include "&filbane.rateprogram\&branch\tests\definerVariabler.sas";
+%include "&filbane.rateprogram\&branch\sas\definerVariabler.sas";
 %definerVariabler;
 
 %testRateberegninger(alene = 1, branch = &branch);
