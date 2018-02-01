@@ -1,6 +1,12 @@
 /*!
 Denne filen inneholder et eksempel på hvordan man kjører rateprogrammet, med en beskrivelse av de ulike variablene
 man kan bruke. Filen skal være kjørbar som et *sas*-program slik den er.
+
+Den kan også fungere som en test av rateprogrammet. Kjøres slik:
+```
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
+%include "&filbane.rateprogram\master\Rateprogram.sas";
+```
 */
 
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\;
@@ -24,7 +30,7 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS);
 %let RV_variabelnavn=poli; /*navn på ratevariabel i det aggregerte datasettet*/
 %Let ratevariabel = Poliklinikk; /*Brukes til å lage "pene" overskrifter*/
 %Let forbruksmal = Konsultasjoner; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
-%Let innbyggerfil=Innbygg.innb_2004_2015_bydel_allebyer;
+%Let innbyggerfil=Innbygg.innb_2004_2016_bydel_allebyer;
 
 /******  HVA ØNSKER DU Å FÅ UT?  **************************************************************/
 %let aarsvarfigur=1; /* Ønsker du Årsvariasjonsfigurer og/eller Konfidensintervallfigurer? */
@@ -35,11 +41,11 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS);
 %let vis_ekskludering=1; /* Vis tabeller for ekskludering*/
 /* Hvilke bonivåer ønskes? ja eller nei, hvor 1 betyr ja */
 %let kommune=; 		/*Bildefiler*/ %let Fig_AA_kom=; 	%let Fig_KI_kom=;
-%let kommune_HN=; 	/*Bildefiler*/ %let Fig_AA_komHN=; 	%let Fig_KI_komHN=;
-%let fylke=; 		/*Bildefiler*/ %let Fig_AA_fylke=; 	%let Fig_KI_fylke=;
-%let sykehus_HN=; 	/*Bildefiler*/ %let Fig_AA_ShHN=; 	%let Fig_KI_ShHN=;
+%let kommune_HN=1; 	/*Bildefiler*/ %let Fig_AA_komHN=; 	%let Fig_KI_komHN=;
+%let fylke=1; 		/*Bildefiler*/ %let Fig_AA_fylke=; 	%let Fig_KI_fylke=;
+%let sykehus_HN=1; 	/*Bildefiler*/ %let Fig_AA_ShHN=; 	%let Fig_KI_ShHN=;
 %let HF=1; 			/*Bildefiler*/ %let Fig_AA_HF=; 	%let Fig_KI_HF=;
-%let RHF=; 			/*Bildefiler*/ %let Fig_AA_RHF=; 	%let Fig_KI_RHF=;
+%let RHF=1;			/*Bildefiler*/ %let Fig_AA_RHF=; 	%let Fig_KI_RHF=;
 %let Oslo=; 		/*Bildefiler*/ %let Fig_AA_Oslo=; 	%let Fig_KI_Oslo=;
 %let Verstkommune_HN=;
 /* Dersom du skal ha bilde-filer */
@@ -59,9 +65,9 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS);
 %let Ut_sett=; /*Utdata, dersom du ønsker stor tabell med KI osv., --> Ut_sett=1 */
 
 /******  PERIODE OG ALDER  **************************************************************/
-%let StartÅr=2011;
+%let StartÅr=2012;
 %let SluttÅr=2015;
-%Let aar=2013; /* Standardiseringsår defineres her*/
+%Let aar=2015; /* Standardiseringsår defineres her*/
 %Let aldersspenn=in (0:105); /*Definerer det aktuelle aldersspennet: (0:105) --> 0 til 105 år*/
 %Let Alderskategorier=30; /*20, 21, 30, 31, 40, 41, 50, 51 eller 99
 							20=2-delt med alle aldre, 21=2-delt KUN med aldre med RV
@@ -96,3 +102,15 @@ else if 80<=alder then alder_ny=5;
 proc datasets nolist;
 delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd;
 run;
+
+/*
+Teste resultatene mot tidligere resultater
+*/
+
+proc compare base=skde_arn.test_rateprg_bohf compare=konsultasjoner_bohf BRIEF WARNING LISTVAR METHOD=ABSOLUTE;
+proc compare base=skde_arn.test_rateprg_norge compare=konsultasjoner_norge BRIEF WARNING LISTVAR METHOD=ABSOLUTE;
+proc compare base=skde_arn.test_rateprg_borhf compare=konsultasjoner_borhf BRIEF WARNING LISTVAR METHOD=ABSOLUTE;
+proc compare base=skde_arn.test_rateprg_boshhn compare=konsultasjoner_boshhn BRIEF WARNING LISTVAR METHOD=ABSOLUTE;
+proc compare base=skde_arn.test_rateprg_komnr compare=konsultasjoner_komnr BRIEF WARNING LISTVAR METHOD=ABSOLUTE;
+proc compare base=skde_arn.test_rateprg_fylke compare=konsultasjoner_fylke BRIEF WARNING LISTVAR METHOD=ABSOLUTE;
+
