@@ -86,12 +86,11 @@ drop RV_just_rate_Sum;
 aar=9999;
 run;
 
-
 proc sql;
 create table &bo._aarsvar as 
-select *
-from &bo._fig left join snudd 
-on &bo._fig.&bo=snudd.&bo;
+select a.aar, a.rv_just_rate_sum, a.Ant_Opphold_Sum, a.Ant_Innbyggere_Sum, b.*
+from &bo._fig a left join snudd b
+on a.&bo=b.&bo;
 quit;
 
 /*data _null_;
