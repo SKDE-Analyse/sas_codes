@@ -1,7 +1,7 @@
 /*
 Janice Shu 02/02/2018
 
-Made the format for the numbers into macro so that tabell_1 can output both number format depending on what "tallformat" specifies.
+Made the format for the numbers into macro so that tabell_1 can output both number format depending on what "tallformat" specifies. (NLnum or Excel)
 Therefore tabell_1e is now obsolete.
 Similarly for tabell_3Ne, tabell_CVe, tabell_3e
 
@@ -76,8 +76,8 @@ run;
 #### Formål
 {: .no_toc}
 
-Made the format for the numbers into macro so that tabell_1 can output both number format depending on what "tallformat" specifies.
-Therefore tabell_1e is not obsolete.
+Made the format for the numbers into macro so that tabell_1 can output both number format depending on what "tallformat" specifies. (NLnum or Excel)
+Therefore tabell_1e is now obsolete.
 */
 
 

@@ -1,6 +1,6 @@
 %macro definere_format;
 
-%global talltabformat;
+%global talltabformat talltabformat2;
 %if &TallFormat=NLnum %then %do;
   %let talltabformat=NLnum12;
   %let talltabformat2=NLnum8;  
