@@ -22,7 +22,6 @@ def extractDoc(filename):
     for i in macroFileContent:
         if len(i.split()) == 2:
             if i.split()[0] == "%macro":
-                print(i)
                 doc += '''
 ## {0}
 
@@ -48,13 +47,13 @@ def findSASfiles(folder):
          readFile = False
 
       if readFile:
-         SASfiles.append(fn)
+         SASfiles.append(folder + fn)
 
    return(SASfiles)
 
 folder = "./"
-listofMacros = findSASfiles(folder)
-print(listofMacros)
+listofMacros = findSASfiles("./")
+listofMacros += findSASfiles("./sas/")
 
 docFolder = "./docs/"
 
@@ -68,28 +67,21 @@ index = ""
 for i in listofMacros:
    heading = '''[Ta meg tilbake.](./)
 
-# Oversikt over innholdet i filen *{0}*'''.format(i)
+# Oversikt over innholdet i filen *{0}*
 
-   heading += '''
-{: .no_toc}
+'''.format(i)
 
-## Innholdsfortegnelse
-{: .no_toc}
-
-* auto-gen TOC:
-{:toc}
-'''
-
-   doc = extractDoc(folder + i)
+   doc = extractDoc(i)
    
+   filename = i.split("/")[-1]
    if doc != "":
-      index += "- [{0}]({1})\n".format(i,i.split(".")[0])
-      docFile = codecs.open(docFolder+i.split(".")[0]+".md", "w", "utf-8")
+      index += "- [{0}]({1})\n".format(filename,filename.split(".")[0])
+      docFile = codecs.open(docFolder+filename.split(".")[0]+".md", "w", "utf-8")
       docFile.write(heading + doc)
       docFile.close()
    else:
-      warnings.warn("ADVARSEL: Filen {0} er ikke dokumentert!".format(i))
-      index += "- Filen {} er ikke dokumentert.\n".format(i)
+      warnings.warn("ADVARSEL: Filen {0} er ikke dokumentert!".format(filename))
+      index += "- Filen {} er ikke dokumentert.\n".format(filename)
       
 indexHeading = ""
 for i in open("./docs/indexHead.md","r").readlines():

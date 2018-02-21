@@ -1,4 +1,4 @@
-%let makrobane=\\tos-sas-skde-01\SKDE_SAS\rateprogram\janice\sas;
+%let makrobane=\\tos-sas-skde-01\SKDE_SAS\rateprogram\master\sas;
 %include "\\tos-sas-skde-01\SKDE_SAS\Makroer\master\Boomraader.sas";
 %include "&makrobane\lag_kart.sas";
 %include "&makrobane\omraade.sas";
@@ -13,6 +13,7 @@
 %include "&makrobane\lagre_data.sas";
 %include "&makrobane\aarsvar.sas";
 %include "&makrobane\definere_aar.sas";
+%include "&makrobane\definere_format.sas";
 
 
 /*!
@@ -120,15 +121,11 @@ Ingen
 #### Bruker følgende makroer
 
 - [omraade](#omraade) (selve rateberegningene)
-- [tabell_1](#tabell_1) (hvis Vis_tabeller=1,2,3 og tallformat=NLnum) Kjøres for Bo=Norge, Bo=BoRHF, , 
-- [tabell_1e](#tabell_1e) (hvis Vis_tabeller=1,2,3 og tallformat=Excel)
-- [tabell_3N](#tabell_3n) (hvis Vis_tabeller=3 og tallformat=NLnum)
-- [tabell_3Ne](#tabell_3ne) (hvis Vis_tabeller=3 og tallformat=Excel)
+- [tabell_1](#tabell_1) (hvis Vis_tabeller=1,2,3) Kjøres for Bo=Norge, Bo=BoRHF, , 
+- [tabell_CV](#tabell_cv) (hvis Vis_tabeller=2)
+- [tabell_3N](#tabell_3n) (hvis Vis_tabeller=3)
+- [tabell_3](#tabell_3) (hvis Vis_tabeller=3)
 - [lagre_dataNorge](#lagre_datanorge)
-- [tabell_CV](#tabell_cv)
-- [tabell_CVe](#tabell_cve)
-- [tabell_3](#tabell_3)
-- [tabell_3e](#tabell_3e)
 - [lag_kart](#lag_kart)
 - [lag_aarsvarbilde](#lag_aarsvarbilde)
 - [lag_aarsvarfigur](#lag_aarsvarfigur)
@@ -168,92 +165,50 @@ proc sort data=NORGE_AGG_SNITT;
 by alder;
 run;
 
-%if &tallformat=NLnum %then %do;
-title "Aldersstruktur for snitt i perioden (&min_aar-&max_aar), Andeler for &boomraadeN, Rater for &boomraade";
-PROC TABULATE DATA=NORGE_AGG_SNITT;	
-	VAR N_RV N_Innbyggere;
-	CLASS alder_ny /	ORDER=data MISSING;
-	TABLE alder_ny={LABEL=""} all={Label="Totalt"},
-	N_RV={LABEL="&ratevariabel"}*(Sum={LABEL="&forbruksmal"}*F=NLNUM12.0 ColPctSum={LABEL="Andel (%)"}*F=NLNUM8.1*{STYLE={JUST=CENTER}}) 
-	N_Innbyggere={LABEL="Innbyggere"}*(Sum={LABEL="Antall"}*F=NLNUM12.0 ColPctSum={LABEL="Andel (%)"}*F=NLNUM8.1*{STYLE={JUST=CENTER}})
-	/ BOX={LABEL="Alderskategorier"};
-RUN; Title;
-%end;
-
-%if &tallformat=Excel %then %do;
-title "Aldersstruktur for snitt i perioden (&min_aar-&max_aar), Andeler for &boomraadeN, Rater for &boomraade";
-PROC TABULATE DATA=NORGE_AGG_SNITT;	
-	VAR N_RV N_Innbyggere;
-	CLASS alder_ny /	ORDER=data MISSING;
-	TABLE alder_ny={LABEL=""} all={Label="Totalt"},
-	N_RV={LABEL="&ratevariabel"}*(Sum={LABEL="&forbruksmal"}*F=12.0 ColPctSum={LABEL="Andel (%)"}*F=8.1*{STYLE={JUST=CENTER}}) 
-	N_Innbyggere={LABEL="Innbyggere"}*(Sum={LABEL="Antall"}*F=12.0 ColPctSum={LABEL="Andel (%)"}*F=8.1*{STYLE={JUST=CENTER}})
-	/ BOX={LABEL="Alderskategorier"};
-RUN; Title;
-%end;
 
 %definere_aar;
+%definere_format;
+
+
+title "Aldersstruktur for snitt i perioden (&min_aar-&max_aar), Andeler for &boomraadeN, Rater for &boomraade";
+PROC TABULATE DATA=NORGE_AGG_SNITT;	
+	VAR N_RV N_Innbyggere;
+	CLASS alder_ny /	ORDER=data MISSING;
+	TABLE alder_ny={LABEL=""} all={Label="Totalt"},
+	N_RV={LABEL="&ratevariabel"}*(Sum={LABEL="&forbruksmal"}*F=&talltabformat..0 ColPctSum={LABEL="Andel (%)"}*F=&talltabformat2..1*{STYLE={JUST=CENTER}}) 
+	N_Innbyggere={LABEL="Innbyggere"}*(Sum={LABEL="Antall"}*F=&talltabformat..0 ColPctSum={LABEL="Andel (%)"}*F=&talltabformat2..1*{STYLE={JUST=CENTER}})
+	/ BOX={LABEL="Alderskategorier"};
+RUN; Title;
+
+
 
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
 
 %let Bo=Norge; 	*%omraade; /*må lage egen for Norge*/
-	%if &Vis_tabeller=1 %then %do;
-		%if &tallformat=NLnum %then %do;
-			%tabell_1;
-		%end;
-		%if &tallformat=Excel %then %do;
-			%tabell_1e;
-		%end;
-	%end;
+%if &Vis_tabeller=1 %then %do;
+	%tabell_1;
+%end;
 
-	%if &Vis_tabeller=2 %then %do;
-		%if &tallformat=NLnum %then %do;
-			%tabell_1;
-		%end;
-		%if &tallformat=Excel %then %do;
-			%tabell_1e;
-		%end;
-	%end;
+%if &Vis_tabeller=2 %then %do;
+	%tabell_1;
+%end;
 
-	%if &Vis_tabeller=3 %then %do;
-		%if &tallformat=NLnum %then %do;
-			%tabell_1; %tabell_3N;
-		%end;
-		%if &tallformat=Excel %then %do;
-			%tabell_1e; %tabell_3Ne;
-		%end;
-	%end; %lagre_dataNorge;
+%if &Vis_tabeller=3 %then %do;
+	%tabell_1; %tabell_3N;
+%end; 
+	
+%lagre_dataNorge;
 
 	%if &RHF=1 %then %do;
 		%let Bo=BoRHF;
 		%omraade; 
-		%if &Vis_tabeller=1 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e;
-			%end;
-		%end;
-		%if &Vis_tabeller=2 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe;
-			%end;
-		%end;
-		%if &Vis_tabeller=3 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV; %tabell_3;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe; %tabell_3e;
-			%end;
-		%end;
+
+		%lag_tabeller;
+
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end;
+		
 		%if &aarsvarfigur=1 and &Fig_AA_RHF=1 %then %do;
 			%lag_aarsvarbilde;
 		%end;
@@ -272,33 +227,13 @@ RUN; Title;
 	%if &HF=1 %then %do;
 		%let Bo=BoHF;
 		%omraade; 
-		%if &Vis_tabeller=1 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e;
-			%end;
-		%end;
-		%if &Vis_tabeller=2 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe;
-			%end;
-		%end;
-		%if &Vis_tabeller=3 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV; %tabell_3;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe; %tabell_3e;
-			%end;
-		%end;
+
+		%lag_tabeller;
+
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end;
+		
 		%if &aarsvarfigur=1 and &Fig_AA_HF=1 %then %do;
 			%lag_aarsvarbilde;
 		%end;
@@ -317,33 +252,13 @@ RUN; Title;
 	%if &sykehus_HN=1 %then %do;
 		%let Bo=BoShHN;
 		%omraadeHN; 
-		%if &Vis_tabeller=1 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e;
-			%end;
-		%end;
-		%if &Vis_tabeller=2 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe;
-			%end;
-		%end;
-		%if &Vis_tabeller=3 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV; %tabell_3;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe; %tabell_3e;
-			%end;
-		%end;
+
+		%lag_tabeller;
+
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end;
+
 		%if &aarsvarfigur=1 and &Fig_AA_ShHN=1 %then %do;
 			%lag_aarsvarbilde;
 		%end;
@@ -362,33 +277,13 @@ RUN; Title;
 	%if &kommune=1 %then %do;
 		%let Bo=komnr;
 		%omraade; 
-		%if &Vis_tabeller=1 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e;
-			%end;
-		%end;
-		%if &Vis_tabeller=2 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe;
-			%end;
-		%end;
-		%if &Vis_tabeller=3 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV; %tabell_3;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe; %tabell_3e;
-			%end;
-		%end;
+
+		%lag_tabeller;
+
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end;
+
 		%if &aarsvarfigur=1 and &Fig_AA_kom=1 %then %do;
 			%lag_aarsvarbilde;
 		%end;
@@ -407,33 +302,13 @@ RUN; Title;
 	%if &kommune_HN=1 %then %do;
 		%let Bo=komnr;
 		%omraadeHN; 
-		%if &Vis_tabeller=1 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e;
-			%end;
-		%end;
-		%if &Vis_tabeller=2 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe;
-			%end;
-		%end;
-		%if &Vis_tabeller=3 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV; %tabell_3;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe; %tabell_3e;
-			%end;
-		%end;
+
+		%lag_tabeller;
+
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end; 
+
 		%if &aarsvarfigur=1 and &Fig_AA_komHN=1 %then %do;
 			%lag_aarsvarbilde;
 		%end;
@@ -452,33 +327,13 @@ RUN; Title;
 	%if &fylke=1 %then %do;
 		%let Bo=fylke;
 		%omraade; 
-		%if &Vis_tabeller=1 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e;
-			%end;
-		%end;
-		%if &Vis_tabeller=2 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe;
-			%end;
-		%end;
-		%if &Vis_tabeller=3 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV; %tabell_3;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe; %tabell_3e;
-			%end;
-		%end;
+
+		%lag_tabeller;
+
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end;
+
 		%if &aarsvarfigur=1 and &Fig_AA_fylke=1 %then %do;
 			%lag_aarsvarbilde;
 		%end;
@@ -497,63 +352,22 @@ RUN; Title;
 	%if &Verstkommune_HN=1 %then %do;
 		%let Bo=VK;
 		%omraadeHN; 
-		%if &Vis_tabeller=1 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e;
-			%end;
-		%end;
-		%if &Vis_tabeller=2 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe;
-			%end;
-		%end;
-		%if &Vis_tabeller=3 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV; %tabell_3;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe; %tabell_3e;
-			%end;
-		%end; 
+
+		%lag_tabeller;
+
 		%lagre_dataN;
 	%end;
 
-		%if &oslo=1 %then %do;
+	%if &oslo=1 %then %do;
 		%let Bo=bydel;
 		%omraade; 
-		%if &Vis_tabeller=1 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e;
-			%end;
-		%end;
-		%if &Vis_tabeller=2 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe;
-			%end;
-		%end;
-		%if &Vis_tabeller=3 %then %do;
-			%if &tallformat=NLnum %then %do;
-				%tabell_1; %tabell_CV; %tabell_3;
-			%end;
-			%if &tallformat=Excel %then %do;
-				%tabell_1e; %tabell_CVe; %tabell_3e;
-			%end;
-		%end;
+
+		%lag_tabeller;
+
 		%if &kart=1 %then %do;
 			%lag_kart;
 		%end;
+
 		%if &aarsvarfigur=1 and &Fig_AA_Oslo=1 %then %do;
 			%lag_aarsvarbilde;
 		%end;
