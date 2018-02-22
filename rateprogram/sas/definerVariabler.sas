@@ -99,11 +99,11 @@ Definere variabler
 
     %gi_verdi(variabel = Ut_sett, verdi = );
 
-    %gi_verdi(variabel = StartÅr, verdi = 2012);
+    %gi_verdi(variabel = StartÅr, verdi = 2014);
 
     %gi_verdi(variabel = SluttÅr, verdi = 2016);
 
-    %gi_verdi(variabel = aar, verdi = 2014);
+    %gi_verdi(variabel = aar, verdi = 2015);
 
     %gi_verdi(variabel = aldersspenn, verdi = in (0:105));
 
