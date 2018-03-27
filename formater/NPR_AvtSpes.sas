@@ -106,6 +106,7 @@ value KONTAKT
 
 
 value INSTITUSJONID
+      5555 = 'Andre'
       111955 = 'Abildsnes, Audun'  
       111960 = 'Abrahamsen, Pål'  
       111967 = 'Alsos, Mette Vibeke'  
@@ -1785,7 +1786,7 @@ value INSTITUSJONID
       4208203 = 'Skoglund, Hanne'  
       4208210 = 'Bjering, Sidsel'  
       4208211 = 'Birkeland, Mona E. Bors'  
-      4208245 = 'Tälve, Henrik Gösta'  
+      4208245 = 'Tjälve, Henrik Gösta'  
       4208473 = 'Muslibegovic, Leila'  
       4208476 = 'Lind, Evy'  
       4208477 = 'Fløystad, Bjarne'  
