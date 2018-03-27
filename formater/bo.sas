@@ -243,6 +243,7 @@ value BoShHN
 9='Rana - bosted' 
 10='Mosjøen - bosted' 
 11='Sandnessjøen - bosted'
+7777='Helse Nord - bosted'
 8888='Norge';
 
 value BoShHN_kort
@@ -257,6 +258,7 @@ value BoShHN_kort
 9='Rana' 
 10='Mosjøen' 
 11='Sandnessjøen'
+7777='Helse Nord'
 8888='Norge';
 
 value fylke
