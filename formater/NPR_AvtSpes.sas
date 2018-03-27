@@ -1959,7 +1959,7 @@ value INSTITUSJONID
       4210475 = 'Toft, Sidsel Anne'  
       4210476 = 'Gunnarshaug, Marit'  
       4210477 = 'Håland, Sissel'  
-      4210478 = 'Børlie, Trond'  
+      4210478 = 'Børvik, Trond'  
       4210484 = 'Nyland, Gunnar'  
       4210485 = 'Torsfred, Raine Anita'  
       4210487 = 'Husby, Heidi'  
