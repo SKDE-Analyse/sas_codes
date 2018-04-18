@@ -14,6 +14,7 @@
 %include "&makrobane\aarsvar.sas";
 %include "&makrobane\definere_aar.sas";
 %include "&makrobane\definere_format.sas";
+%include "&makrobane\aldersfigur.sas";
 
 
 /*!
@@ -21,11 +22,11 @@ Denne filen inneholder alle makroene til rateprogrammet, bortsett fra
 `boomraader`-makroen.
 */
 
-/* Ny versjon Rateprogram
-Frank Olsen 19/10-15
+%macro omraadeNorge;
+/*!
+Tom makro, for å unngå feilmeldinger i eldre rateprogram-beregninger.
 */
 
-%macro omraadeNorge;
 
 %mend;
 
