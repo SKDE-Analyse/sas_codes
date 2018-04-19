@@ -13,9 +13,9 @@ Kjøres på følgende måte:
 - `inndata` er det sensitive datasettet som skal aggregeres. Må inneholde følgende variabler:
 
 ```
-aar, ermann, alder, komnr, bydel, 
-eoc_liggetid, eoc_inndato, eoc_utdato, 
-off, priv, elektiv, ohjelp, innlegg, poli # disse er 1 eller 0/.
+eoc_aar, ermann, eoc_alder, komnr, bydel, 
+eoc_liggetid, eoc_inndato, eoc_utdato, eoc_id
+off, priv, elektiv, ohjelp, innlegg, poli, &agg_var # disse er 1 eller 0/.
 ```
 
 - `utdata` er navnet på det aggregerte datasettet
@@ -41,14 +41,14 @@ Ny variabel, &variabel._unik, lages i samme datasett
 
 /*1. Sorter på år, aktuell hendelse (merkevariabel), PID, InnDato, UtDato;*/
 proc sort data=&datasett;
-by aar &variabel pid eoc_inndato eoc_utdato;
+by eoc_aar &variabel pid eoc_inndato eoc_utdato;
 run;
 
 /*2. By-statement sørger for at riktig opphold med hendelse velges i kombinasjon med First.-funksjonen og betingelse på hendelse*/
 data &datasett;
 set &datasett;
 &variabel._unik = .;
-by aar &variabel pid eoc_inndato eoc_utdato;
+by eoc_aar &variabel pid eoc_inndato eoc_utdato;
 if first.pid and &variabel = 1 then &variabel._unik = 1;	
 run;
 
@@ -119,6 +119,7 @@ set &inndata._&agg_var;
     if off = 1 then poli_off = 1;
     if priv = 1 then poli_priv = 1;
   end;
+ * rename eoc_aar = aar eoc_alder = alder;
 run;
 
 %unik_pasient(datasett = &inndata._&agg_var., variabel = tot);
@@ -137,7 +138,7 @@ run;
 /*
 Aggreger datasettet
 */
-
+/*
 proc sql;
    create table &mappe..&utdata as 
    select distinct aar, ermann, alder, komnr, bydel,
@@ -156,6 +157,26 @@ proc sql;
    from &inndata._&agg_var
    group by aar, ermann, alder, komnr, bydel;
 quit; run;
+*/
+proc sql;
+   create table &mappe..&utdata as 
+   select distinct (eoc_aar) as aar, ermann, (eoc_alder) as alder, komnr, bydel,
+   SUM(tot) as tot, SUM(tot_unik) as tot_unik, sum(tot_unik_alleaar) as tot_unik_alleaar,
+   SUM(off) as off, SUM(off_unik) as off_unik,
+   SUM(priv) as priv, SUM(priv_unik) as priv_unik,
+   SUM(elektiv) as elek, SUM(elektiv_unik) as elek_unik,
+   SUM(ohjelp) as ohj, SUM(ohjelp_unik) as ohj_unik,
+   SUM(innlegg) as inn, SUM(innlegg_unik) as inn_unik,
+   SUM(inn_elektiv) as inn_elek, SUM(inn_elektiv_unik) as inn_elek_unik,
+   SUM(inn_ohjelp) as inn_ohj, SUM(inn_ohjelp_unik) as inn_ohj_unik,
+   SUM(poli) as poli, SUM(poli_unik) as poli_unik,
+   SUM(poli_off) as poli_off, SUM(poli_off_unik) as poli_off_unik,
+   SUM(poli_priv) as poli_priv, SUM(poli_priv_unik) as poli_priv_unik,
+   SUM(eoc_liggetid) as eoc_liggetid
+   from &inndata._&agg_var
+   group by eoc_aar, ermann, eoc_alder, komnr, bydel;
+quit; run;
+
 
 proc datasets nolist;
 delete &inndata._&agg_var;
