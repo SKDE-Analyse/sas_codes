@@ -182,6 +182,7 @@ delete ikke:;
 run;
 %end;
 
+
 	/*----------------------------*/
 
 	PROC SQL;
@@ -191,6 +192,17 @@ run;
 		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<2031
 	      GROUP BY aar, KomNr, bydel, Alder, ErMann;	  
 	QUIT;
+
+    
+/*
+Lag en figur med aldersprofilen i utvalget
+*/
+%if %sysevalf(%superq(aldersfigur)=,boolean) %then %let aldersfigur = 1;
+%if &aldersfigur=1 %then %do;
+
+%aldersfigur(data = tmp2utvalgx);
+
+%end;
 
 	data tmp1innb_aar;
 	set &innbyggerfil;
