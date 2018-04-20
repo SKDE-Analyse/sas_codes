@@ -1,4 +1,4 @@
-[![Status](https://travis-ci.org/SKDE-Analyse/sas_macroer.svg?branch=master)](https://travis-ci.org/SKDE-Analyse/sas_macroer/builds)
+[![Status](https://travis-ci.org/SKDE-Analyse/sas_makroer.svg?branch=master)](https://travis-ci.org/SKDE-Analyse/sas_makroer/builds)
 
 # SAS-makroer utviklet og brukt ved SKDE
 
@@ -25,7 +25,7 @@ sas-kode...
 %mend;
 ```
 
-Alt som ligger mellom `/*!` og `*/` vil legges på nett [(her)](http://skde-analyse.github.io/sas_macroer/) etter at man har dyttet alt opp til *github*. Med andre ord, man gjør følgende i mappen `\\tos-sas-skde-01\SKDE_SAS\Makroer\master` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
+Alt som ligger mellom `/*!` og `*/` vil legges på nett [(her)](http://skde-analyse.github.io/sas_makroer/) etter at man har dyttet alt opp til *github*. Med andre ord, man gjør følgende i mappen `\\tos-sas-skde-01\SKDE_SAS\Makroer\master` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
 ```bash
 git status # for å sjekke at alt er som det skal
 git diff # for å sjekke litt ekstra nøye
@@ -35,5 +35,5 @@ git pull --rebase # sørg for at du har siste versjon av makroene
 git push # dytte opp til github
 ```
 
-Dokumentasjon kan finnes [her](http://skde-analyse.github.io/sas_macroer/)
+Dokumentasjon kan finnes [her](http://skde-analyse.github.io/sas_makroer/)
 

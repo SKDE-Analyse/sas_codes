@@ -27,7 +27,7 @@ sas-kode...
 
 ## Dokumentasjon av makro
 
-Alt som ligger mellom `/*!` og `*/` vil havne [her](http://skde-analyse.github.io/sas_macroer/) hvis man dytter opp til *github*:
+Alt som ligger mellom `/*!` og `*/` vil havne [her](http://skde-analyse.github.io/sas_makroer/) hvis man dytter opp til *github*:
 ```
 git status # sjekk hva som er endret
 git add <filename> # legg til filer som skal dyttes opp til github 
