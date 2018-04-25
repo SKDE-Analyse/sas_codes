@@ -29,7 +29,7 @@ styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 	keylegend "Vbar" / location=outside position=topright noborder titleattrs=(size=&fontst);
     yaxis &yvalues label="&verdinavn" 
 		labelattrs=(size=&fontst)  valuesformat=&yformat. valueattrs=(size=&fontst);
-	xaxis &xvalues fitpolicy=rotate offsetmin=0.035 label='Alder' labelattrs=(size=&fontst) valuesformat=&yformat. valueattrs=(size=&fontst) display = (novalues);
+	xaxis &xvalues fitpolicy=thin offsetmin=0.035 label='Alder' labelattrs=(size=&fontst) valuesformat=&yformat. valueattrs=(size=&fontst);
 run;
 
 %mend;
