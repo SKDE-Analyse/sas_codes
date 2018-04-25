@@ -1,9 +1,11 @@
+/*!
+Standardiseringsgrupper
 
-/*Standardiseringsgrupper*/
-
-* Inkludere makroer: Todeltalder, Tredeltalder, Firedeltalder, Femdeltalder;
+Inkludere makroer: Todeltalder, Tredeltalder, Firedeltalder, Femdeltalder
+*/
 
 %Macro Todeltalder;
+
 Proc univariate data=utvalgx noprint;
 var alder;
 weight rv;
