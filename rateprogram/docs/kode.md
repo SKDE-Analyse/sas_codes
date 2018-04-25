@@ -2,11 +2,11 @@ Dette er for spesielt interesserte. [Ta meg tilbake.](./)
 
 # Utvikling av rateprogrammet
 
-I mappen 'master' ligger vår stabile versjon av rateprogrammet. Endringer skal helst ikke gjøres direkte her, siden enkelte endringer kan ødelegge rateprogrammet. Vi gjør endringer i separate mapper og dytter opp til [github](https://github.com/SKDE-Analyse/rateprogram) for evaluering av medarbeider, før mappen `master` kan oppdateres.
+I mappen `master` ligger vår stabile versjon av rateprogrammet. Endringer skal helst ikke gjøres direkte her, siden enkelte endringer kan ødelegge rateprogrammet. Vi gjør endringer i separate mapper og dytter opp til [github](https://github.com/SKDE-Analyse/rateprogram) for evaluering av medarbeider, før mappen `master` kan oppdateres.
 
 ## Prosedyre
 
-Denne prosedyren forutsetter at `git` er installert på maskinen og at man har gjort noe ala denne dokumentasjonen: https://skde-analyse.github.io/dokumentasjon/git.html (hvis man har gjort sistnevnte på `p`-disken, trenger man ikke gjøre det på nytt på ny maskin).
+Denne prosedyren forutsetter at [git](https://git-scm.com/) er installert på maskinen og at man har gjort noe ala denne dokumentasjonen: https://skde-analyse.github.io/dokumentasjon/git.html (hvis man har gjort sistnevnte på `p`-disken, trenger man ikke gjøre det på nytt på ny maskin).
 
 1. Opprett en egen mappe med en ny versjon av rateprogrammet. Kan gjøres ved å klone siste versjon av master fra [github](https://github.com/SKDE-Analyse/rateprogram):
 ```
