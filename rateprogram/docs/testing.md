@@ -18,11 +18,11 @@ For å forhindre at man introduserer feil i rateprogrammet skal man teste koden 
 
 Test av rateprogrammet kan kjøres slik:
 ```
-%let versjon = develop;
+%let versjon = <mappe>;
 %include "\\tos-sas-skde-01\SKDE_SAS\rateprogram\&versjon\tests\tests.sas";
 %test1(branch = &versjon);
 ```
-Her kjøres testen på develop-branchen, siden det er her utviklingen skal foregå. Bytt ut `develop` med `master` for å teste master-versjonen.
+Her kjøres testen i rateprogrammet i mappen <mappe>, siden utviklingen ikke skal gjøres direkte i `master`-mappen. Bytt ut <mappe> med `master` for å teste master-versjonen.
 
 Testen vil sammenligne flere datasett, og for hver sammenligning spyttes noe ala dette ut:
 ```
