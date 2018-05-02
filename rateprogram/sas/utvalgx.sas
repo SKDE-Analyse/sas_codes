@@ -79,6 +79,8 @@ Første makro som kjøres direkte i rateprogrammet
 
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
 
+%print_info;
+
 %definere_aar;
 
 %if &Antall_aar=2 %then %do;
