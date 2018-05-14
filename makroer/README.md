@@ -2,6 +2,8 @@
 
 # SAS-makroer utviklet og brukt ved SKDE
 
+## Bruke makroene
+
 Makroene ligger her:
 ```
 \\tos-sas-skde-01\SKDE_SAS\Makroer\master
@@ -12,12 +14,18 @@ For å bruke de i din egen SAS-kode, legges følgende inn i koden:
 options sasautos=("&filbane.Makroer\master" SASAUTOS);
 ```
 
-Hvis man vil lage en ny makro, lager man en sas-fil som heter det samme som makroen. Makroene dokumenteres direkte i koden. Eksempel på makro, som legges i en fil som heter `minNyeMakro.sas`:
+Dokumentasjon om de ulike makroene finnes [her](http://skde-analyse.github.io/sas_makroer/)
+
+## Lage en ny makro
+
+Hvis man vil lage en ny makro, lager man en sas-fil som heter det samme som makroen. Eksempel på makro, som legges i en fil som heter `minNyeMakro.sas`:
 ```
 %macro minNyeMakro(variabel1 = );
 
 /*!
 Min dokumentasjon av makroen minNyeMakro
+
+Makroene dokumenteres direkte i koden.
 */
 
 sas-kode...
@@ -34,6 +42,3 @@ git commit -m 'Min nye fancy makro, med dokumentasjon selvfølgelig' # Skriv en 
 git pull --rebase # sørg for at du har siste versjon av makroene
 git push # dytte opp til github
 ```
-
-Dokumentasjon kan finnes [her](http://skde-analyse.github.io/sas_makroer/)
-

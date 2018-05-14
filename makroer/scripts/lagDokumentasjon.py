@@ -59,26 +59,41 @@ def main():
             raise
 
     index = ""
+    
+    # Make a separate web page for each macro
     for i in listofMacros:
-        heading = '''[Ta meg tilbake.](./)
+        tail = '''
 
+[Ta meg tilbake.](./)
+
+'''
+        heading = '''
 # {0}
 
 '''.format(i.split(".")[0])
-   
+
+        # Extract documentation from sas-file i
         doc = extractDoc(folder + i)
    
         if doc != "":
+            # Add link in index file
             index += "- [{0}]({0})\n".format(i.split(".")[0])
             docFile = codecs.open(docFolder+i.split(".")[0]+".md", "w", "utf-8")
-            docFile.write(heading + doc)
+            docFile.write(heading + doc + tail)
             docFile.close()
         else:
-            warnings.warn("ADVARSEL: Filen {0} er ikke dokumentert!".format(i))
-      
+            warnings.warn("WARNING: File {0} is not documented!".format(i))
+    
+    # Start the index page from the README file
     indexHeading = ""
-    for i in open("./doc/indexHead.md","r").readlines():
+    for i in open("./README.md","r").readlines():
         indexHeading += i
+    
+    indexHeading += '''
+
+## Linker til dokumentasjon av de ulike makroene
+
+'''
 
     indexFile = open(docFolder+"index.md", "w")
     indexFile.write(indexHeading+index)
