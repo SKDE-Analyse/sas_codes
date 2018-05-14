@@ -10,76 +10,79 @@ import errno
 
 def extractDoc(filename):
 
-   # Extract text in file that are
-   # between /*! and */
+    # Extract text in file that are
+    # between /*! and */
    
-   macroFile = codecs.open(filename, "r", "latin-1")
-   macroFileContent = macroFile.readlines()
-   macroFile.close()
+    macroFile = codecs.open(filename, "r", "latin-1")
+    macroFileContent = macroFile.readlines()
+    macroFile.close()
 
-   doc = ""
-   extract = False
-   for i in macroFileContent:
-      if extract and "*/" in i:
-         extract = False
-      if extract:
-         doc += i
-      if "/*!" in i:
-         extract = True
-   return(doc)
+    doc = ""
+    extract = False
+    for i in macroFileContent:
+        
+        if extract and "*/" in i:
+            extract = False
+        if extract:
+            doc += i
+        if "/*!" in i:
+            extract = True
+    return(doc)
 
 def findSASfiles(folder):
-   SASfiles = []
-   for fn in os.listdir(folder):
-      readFile = False
-      try:
-         if fn.endswith(".sas"):
-            readFile = True
-         else:
+    SASfiles = []
+    for fn in os.listdir(folder):
+        readFile = False
+        try:
+            if fn.endswith(".sas"):
+                readFile = True
+            else:
+                readFile = False
+        except:
             readFile = False
-      except:
-         readFile = False
 
-      if readFile:
-         SASfiles.append(fn)
+        if readFile:
+            SASfiles.append(fn)
 
-   return(SASfiles)
+    return(SASfiles)
 
-folder = "./"
-listofMacros = findSASfiles(folder)
+def main():
+  
+    folder = "./"
+    listofMacros = findSASfiles(folder)
 
-docFolder = "./docs/"
+    docFolder = "./docs/"
+    try:
+        os.makedirs(docFolder)
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
 
-try:
-    os.makedirs(docFolder)
-except OSError as e:
-    if e.errno != errno.EEXIST:
-        raise
-
-index = ""
-for i in listofMacros:
-   heading = '''[Ta meg tilbake.](./)
+    index = ""
+    for i in listofMacros:
+        heading = '''[Ta meg tilbake.](./)
 
 # {0}
 
 '''.format(i.split(".")[0])
    
-   doc = extractDoc(folder + i)
+        doc = extractDoc(folder + i)
    
-   if doc != "":
-      index += "- [{0}]({0})\n".format(i.split(".")[0])
-      docFile = codecs.open(docFolder+i.split(".")[0]+".md", "w", "utf-8")
-      docFile.write(heading + doc)
-      docFile.close()
-   else:
-      warnings.warn("ADVARSEL: Filen {0} er ikke dokumentert!".format(i))
+        if doc != "":
+            index += "- [{0}]({0})\n".format(i.split(".")[0])
+            docFile = codecs.open(docFolder+i.split(".")[0]+".md", "w", "utf-8")
+            docFile.write(heading + doc)
+            docFile.close()
+        else:
+            warnings.warn("ADVARSEL: Filen {0} er ikke dokumentert!".format(i))
       
-indexHeading = ""
-for i in open("./doc/indexHead.md","r").readlines():
-   indexHeading += i
+    indexHeading = ""
+    for i in open("./doc/indexHead.md","r").readlines():
+        indexHeading += i
 
-indexFile = open(docFolder+"index.md", "w")
-indexFile.write(indexHeading+index)
-indexFile.close()
+    indexFile = open(docFolder+"index.md", "w")
+    indexFile.write(indexHeading+index)
+    indexFile.close()
 
-
+if __name__ == "__main__":
+    main()
