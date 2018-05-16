@@ -7,7 +7,6 @@ Innhold i macroen:
 	4.1 Retting av ugyldig fødselsår og avleding av aldersgrupper
 	4.2 Definisjon av Alder, Ald_gr og Ald_gr5
 	4.3 Omkoding av KJONN til ErMann 
-	4.4 Omkoding av utgåtte organisasjonsnummer
 	4.5 DRGTypeHastegrad
 
 ************************************************************************************************
@@ -16,6 +15,7 @@ Innhold i macroen:
 %Macro Avledede (innDataSett=, utDataSett=);
 Data &Utdatasett;
 set &Inndatasett;
+
 /*
 ********************************************************
 4.1 Retting av ugyldig fødselsår
@@ -39,6 +39,15 @@ if aar=2014 and fodselsar >2014 then fodselsar=9999;
 if aar=2015 and fodselsar >2015 then fodselsar=9999;
 if aar=2016 and fodselsar >2016 then fodselsar=9999;
 
+%if &avtspes ne 0 %then %do;
+fodselsar_innrapp=fodselsar;
+
+if fodselsar=9999 then fodselsar=fodselsAar_ident09052017;
+if fodselsAar_ident09052017 < 1902 and fodselsAar_ident09052017 ne . then fodselsar=9999;
+
+if utdato lt MDY (1,1,2012) then utdato = .;
+if utdato gt MDY (1,1,2017) then utdato = .;
+%end;
 
 /*
 4.2 Definerer Alder, ald_gr og Ald_gr5
@@ -47,7 +56,6 @@ if aar=2016 and fodselsar >2016 then fodselsar=9999;
 /*Definerer Alder basert på Fodselsår*/
 Alder=aar-fodselsar;
 if fodselsar=9999 then alder=.; /*Ugyldig*/
-
 
 /*
 **************************************************
@@ -59,12 +67,22 @@ else if KJONN=2 /*2 ='Kvinne' */ then ErMann=0;
 else if KJONN in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ErMann=.;
 *drop KJONN; /*Kontrollert ok*/;
 
+%if &avtspes ne 0 %then %do;
+If kjonn not in (1,2) and kjonn_ident09052017 in (1,2) then do;
+	if kjonn_ident09052017 = 1 then ErMann = 1;
+	else if kjonn_ident09052017 = 2 then ErMann = 0;
+end;
 
+ulikt_kjonn=.;
+if kjonn=1 and kjonn_ident09052017=2 then ulikt_kjonn=1;
+if kjonn=2 and kjonn_ident09052017=1 then ulikt_kjonn=1;
+%end;
 
 /****************************************
 *** 4.5 hastegrad og DRGtypeHastegrad ***
 ****************************************/
 
+%if &somatikk ne 0 %then %do;
 hastegrad=.;
 if innmateHast in (1,2,3) then hastegrad=1; /*Akutt*/
 if innmateHast=4 then hastegrad=4; /*Planlagt*/
@@ -76,9 +94,8 @@ else if DRG_type='K' and hastegrad=4 /*Planlagt*/ then DRGtypeHastegrad=3;
 else if DRG_type='K' and hastegrad=1 /*Akutt*/ then DRGtypeHastegrad=4;
 if DRG_TYPE=' ' then DRGtypeHastegrad=9;
 if hastegrad=. then DRGtypeHastegrad=9;
+%end;
 
 run;
 
-
 %Mend Avledede;
-

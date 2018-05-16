@@ -4,7 +4,7 @@
 ***********************************************************************
 **********************************************************************/
 
-/* Kobler fÃ¸rst pÃ¥ variablene emigrert og dodDato fra egen fil */
+/* Kobler først på variablene emigrert og dodDato fra egen fil */
 
 /* Merge med sql */
 
@@ -12,7 +12,12 @@
 
 proc sql;
 create table &utDataSett as
+%if &avtspes ne 0 %then %do;
+select &innDataSett..*, emigrertDato, dodDato, fodselsAar_ident09052017, fodt_mnd_ident09052017, kjonn_ident09052017
+%end;
+%if &somatikk ne 0 %then %do;
 select &innDataSett..*, emigrertDato, dodDato
+%end;
 from &innDataSett left join NPR_SKDE.T17_doed_NyEmigrert_kjonn_faar
 on &innDataSett..pid=T17_doed_NyEmigrert_kjonn_faar.pid;
 quit; 
@@ -20,7 +25,12 @@ quit;
 data &utDataSett;
 set &innDataSett;
 label emigrertDato='Emigrert dato - per 20170425 (NPR)';
-label dodDato='DÃ¸dedato - per 20170425 (NPR)';
+label dodDato='Dødedato - per 20170425 (NPR)';
+%if &avtspes ne 0 %then %do;
+label fodselsAar_ident09052017='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
+label fodt_mnd_ident09052017='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
+label kjonn_ident09052017='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten';
+%end;
 length DodDato emigrertdato 4;
 run;
 
@@ -32,84 +42,115 @@ run;
 1. Datasett med de mest sentrale tilrettelagte variable
 ***/
 Data &UtdatasettEN;
+%if &avtspes ne 0 %then %do;
+retain aar pid inndato utdato ErMann alder koblingsID komnr bydel bohf borhf borhf boshhn hdiag hdiag2 hdiag3tegn bdiag1-bdiag9 ncmp1-ncmp10 ncsp1-ncsp10 ; 
+%end;
+%if &somatikk ne 0 %then %do;
 retain aar pid inndato utdato aktivitetskategori3 ErMann alder koblingsID HDG komnr bydel bohf borhf boshhn behsh behhf behrhf hdiag hdiag2 hdiag3tegn bdiag1-bdiag19 ncmp1-ncmp19 ncsp1-ncsp19 ;
+%end;
 set &Inndatasett;
 keep 
 aar
+%if &somatikk ne 0 %then %do;
 Aktivitetskategori3
+%end;
 Alder
+%if &avtspes ne 0 %then %do;
+AvtSpes
+%end;
 Bdiag:
+%if &somatikk ne 0 %then %do;
 behandlingsstedKode2
 BehHF
 BehRHF
 behSh
+%end;
 BoHF
 BoRHF
 BoShHN
 Bydel
 DodDato
+%if &somatikk ne 0 %then %do;
 drg
 drg_type
-episodeFag
+%end;
+Episodefag
 ErMann
 fodselsar
 Fylke
+%if &somatikk ne 0 %then %do;
 hastegrad
 hdg
+%end;
 Hdiag:
 ICD10Kap
 Inndato
+%if &somatikk ne 0 %then %do;
 InnTid
+%end;
 InstitusjonId
-intern_kons
 KoblingsID
 KomNr
+%if &somatikk ne 0 %then %do;
 korrvekt
 liggetid
+%end;
 ncmp:
 ncsp:
+%if &somatikk ne 0 %then %do;
 ncrp:
+%end;
 NPRId_reg
+%if &somatikk ne 0 %then %do;
 opphold_id
+%end;
+%if &avtspes ne 0 %then %do;
+Normaltariff:
+%end;
 PID
+%if &somatikk ne 0 %then %do;
 polUtforende_1
-UtDato
+%end;
+%if &avtspes ne 0 %then %do;
+SpesialistKomHN
+Tdiag:
+%end;
+Utdato
+%if &somatikk ne 0 %then %do;
 UtTid
 utTilstand
 versjon
+%end;
+%if &avtspes ne 0 %then %do;
+fag_skde
+Komplett
+AvtaleRHF
+%end;
 ;
 format koblingsID 32.;
 run;
 
 
-
-
-/***
-2. Datasett med andre tilrettelagte variable
-***/
 Data &UtdatasettTO;
 retain aar koblingsId;
 set &Inndatasett;
-keep	
+keep
+KoblingsID
 aar
+%if &somatikk ne 0 %then %do;
 aggrshoppID
 Aktivitetskategori
 Aktivitetskategori2
 Aktivitetskategori4
 alderIDager
-ATC:
 avdOpp_id
 behandlingsstedKode
 behandlingsstedLokal
 behandlingsstedReshID
-bydel2
 bydel_DSF
 cyto:
 dag_kir
-debitor
-
 DRGtypeHastegrad
-emigrertDato
 fagenhetKode
 fagenhetLokal
 fagenhetReshID
@@ -119,23 +160,15 @@ fodselsvekt
 fodt_mnd
 g_omsorgsniva
 henvType
-ICD10KatBlokk
-innmateHast
-
 inntilstand
 institusjonID_original
 isf_opphold
-kjonn
 kjonn_ident
-KoblingsID
-komNrHjem2
 komNrHjem_DSF
 bydel_DSF
 komp_drg
-kontaktType
 niva
 omsorgsniva
-
 oppholdstype
 pakkeforlop
 permisjonsdogn
@@ -146,7 +179,6 @@ polUtforende_3
 RehabType
 relatertKontaktID
 spes_drg
-stedAktivitet
 tell_ATC
 tell_cyto
 tell_ICD10
@@ -158,9 +190,7 @@ tjenesteenhetLokal
 tjenesteenhetReshID
 trimpkt
 utforendeHelseperson
-
 vekt
-
 VertskommHN
 UtskrKlarDato
 tidspunkt_1
@@ -174,17 +204,38 @@ typeTidspunkt_3
 typeTidspunkt_4
 typeTidspunkt_5
 ant_Tidspunkt
-
-
 henvFraTjeneste
 henvFraInstitusjonID
 frittSykehusvalg
 secondOpinion
 fraSted
-tilSted
-/* delytelse */ /*Kun registrert pÃ¥ 2760 kontakter i 2017*/
+%end;
+ATC:
+EmigrertDato
+ICD10KatBlokk
+bydel2
+innmateHast
+kjonn
+komnrHjem2
+kontaktType
+stedAktivitet
+TilSted
+debitor
+%if &avtspes ne 0 %then %do;
+Fag
+fagLogg
+hjemmelstr
+kontakt
+tell:
+AvtSpesKomHN
+fodselsAar_ident09052017
+fodt_mnd_ident09052017
+kjonn_ident09052017
+ulikt_kjonn
+%end;
 ;
 format koblingsID 32.;
 run;
 
 %Mend Splitte;
+
