@@ -10,9 +10,10 @@ python:
 before_script:
   - mkdir docs
   - cp ./doc/_config.yml ./docs/.
+  - wget https://raw.githubusercontent.com/SKDE-Analyse/python-scripts/v1.0.0/skde/extract_sas_documentation.py
 
 script:
-  - python scripts/lagDokumentasjon.py
+  - python extract_sas_documentation.py
 
 deploy:
   provider: pages                         # Specify the gh-pages deployment method
