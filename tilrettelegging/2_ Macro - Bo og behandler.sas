@@ -1,13 +1,6 @@
+%Macro Bobehandler (innDataSett=, utDataSett=);
 
-/*
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Opprettet av: Linda Leivseth 
-Opprettet dato: 06. juni 2015
-Sist modifisert: 04.10.2016 av Linda Leivseth og Petter Otterdal
-Sist modifisert: 05.01.2017 av Linda Leivseth (lagt til missigverdi 99 for manglende info om bydel2)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
+/*!
 /***********************************************************************************************
 ************************************************************************************************
 MACRO FOR BOSTED OG BEHANDLER
@@ -27,9 +20,16 @@ Bområder og behandlingssteder
 2.11    SpesialistKomHN og vertskommuner (Vertskommuner Helse Nord)
 2.12    Spesialistenes avtale-RHF 
 ************************************************************************************************
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Opprettet av: Linda Leivseth 
+Opprettet dato: 06. juni 2015
+Sist modifisert: 04.10.2016 av Linda Leivseth og Petter Otterdal
+Sist modifisert: 05.01.2017 av Linda Leivseth (lagt til missigverdi 99 for manglende info om bydel2)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 ***********************************************************************************************/
 
-%Macro Bobehandler (innDataSett=, utDataSett=);
 Data &Utdatasett;
 Set &Inndatasett;
 

@@ -1,9 +1,10 @@
 
-/**************************************
+%Macro LablerFormater (innDataSett=, utDataSett=);
+
+/*!*************************************
 *** 3. Legger på formater og labler ***
 ******'*******************************/
 
-%Macro LablerFormater (innDataSett=, utDataSett=);
 Data &Utdatasett;
 set &Inndatasett;
 

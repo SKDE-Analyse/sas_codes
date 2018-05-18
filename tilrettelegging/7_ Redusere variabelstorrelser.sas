@@ -1,5 +1,13 @@
 %macro reduser_lengde(innDataSett=, utDataSett=);
 
+/*!
+
+Makro for å redusere størrelsen på variabler i datasettet.
+
+Opprinnelig har alle variablene en størrelse på 8 byte. De fleste variablene trenger ikke okkupere så mye plass. 
+
+*/
+
 data &utDataSett;
 set &innDataSett;
 

@@ -1,5 +1,6 @@
+%Macro ICD (innDataSett=, utDataSett=);
 
-/***********************************************************************************************
+/*!**********************************************************************************************
 ************************************************************************************************
 MACRO FOR ICD-KAPITTEL, KATEGORIBLOKK OG HOVEDDIAGNOSE PÅ TRE TEGN
 
@@ -12,7 +13,8 @@ Innhold i syntaxen:
 
 
 
-%Macro ICD (innDataSett=, utDataSett=);
+
+
 Data &Utdatasett;
 Set &Inndatasett;
 

@@ -1,5 +1,7 @@
-﻿
-/***********************************************************************************************
+﻿%Macro Avledede (innDataSett=, utDataSett=);
+
+
+/*!**********************************************************************************************
 ************************************************************************************************
 MACRO FOR AVLEDEDE VARIABLE
 
@@ -12,11 +14,12 @@ Innhold i macroen:
 ************************************************************************************************
 ***********************************************************************************************/
 
-%Macro Avledede (innDataSett=, utDataSett=);
+
+
 Data &Utdatasett;
 set &Inndatasett;
 
-/*
+/*!
 ********************************************************
 4.1 Retting av ugyldig fødselsår
 *********************************************************
@@ -24,9 +27,9 @@ I datasettet er det registrert 27 personer over 110 år, som er høyeste oppnåd
 Wikipedias kronologiske liste over eldste levende personer i Norge siden 1964 (http:
 //no.wikipedia.org/wiki/Liste_over_Norges_eldste_personer#Kronologisk_liste_over_eldste_levende_personer_i_Norge_siden_01.01.1964).
 Høyeste alder i datasetett er 141 år. Feilaktig høy alder kan påvirke gjennomsnittsalder i små strata. Velger derfor å definere 
-alder som ugyldig når oppgitt alder er høyere enn eldste person registret i Norge på dette tidspunktet.*/
+alder som ugyldig når oppgitt alder er høyere enn eldste person registret i Norge på dette tidspunktet.
 
-/*Satte opprinnelig et krav om at personene måtte være bosatt i Norge, ettersom det er her vi har tall for eldste nålevende personer.
+Satte opprinnelig et krav om at personene måtte være bosatt i Norge, ettersom det er her vi har tall for eldste nålevende personer.
 Dette innebærer imidlertid at mange opphold for personer bosatt i utlandet med alder over 110 år, og en særlig opphopning rundt 
 årstallet 1899 (som kan mistenkes være brukt som missing-verdi.Velger derfor også å nullstille alder for utenlandske borgere etter 
 samme regel som for norske*/

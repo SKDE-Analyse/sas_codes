@@ -1,14 +1,16 @@
-/**********************************************************************
+/*!*********************************************************************
 ***********************************************************************
 	6.	Fordele de tilrettelagte variablene i to datasett
 ***********************************************************************
 **********************************************************************/
 
-/* Kobler først på variablene emigrert og dodDato fra egen fil */
+%Macro Merge_dod_emigrert (innDataSett=, utDataSett=);
+/*!
+ Kobler først på variablene emigrert og dodDato fra egen fil 
+ */
 
 /* Merge med sql */
 
-%Macro Merge_dod_emigrert (innDataSett=, utDataSett=);
 
 proc sql;
 create table &utDataSett as
@@ -38,7 +40,7 @@ run;
 
 %Macro Splitte (innDataSett=, utDataSettEN=,utDataSettTO=);
 
-/***
+/*!**
 1. Datasett med de mest sentrale tilrettelagte variable
 ***/
 Data &UtdatasettEN;
