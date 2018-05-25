@@ -151,7 +151,7 @@ else if KomNr in (301) then do;
 %else %do;
 	if bydel in (030110,030111,030112) then BoHF=15;/*AHUS*/
    %if &boaar < 2015 %then %do; /* f.o.m 2015: 030103 Sagene flyttet fra Lovisenberg til OUS */
-      else if bydel in (030103) then BoHF = 31; /* Lovisenberg */
+      else if bydel in (030103) then BoHF = 17; /* Lovisenberg */
    %end;
    %else %do;
       else if bydel in (030103) then BoHF = 16; /* OUS */
@@ -159,8 +159,8 @@ else if KomNr in (301) then do;
 	else if bydel in (030108,030109,030113,030114,030115,030117,030199) then BoHF=16;/*OUS*/
    %if &indreOslo ne 0 %then %do;
       *slå sammen Lovisenberg og Diakonhjemmet til Indre Oslo (BoHF = 31);
-      else if bydel in (030101,030102,030104,030116) then BoHF=31;/*Lovisenberg*/
-      else if bydel in (030105,030106,030107) then BoHF=31;/*Diakonhjemmet*/
+      else if bydel in (030101,030102,030104,030116) then BoHF=31;/*Lovisenberg -> Indre Oslo */
+      else if bydel in (030105,030106,030107) then BoHF=31;/*Diakonhjemmet -> Indre Oslo */
    %end;
    %else %if &barn ne 0 %then %do;
       else if bydel in (030101,030102,030104,030116) then BoHF=16;/*Lovisenberg satt til OUS*/

@@ -1,4 +1,4 @@
-%macro hyppigste(Ant_i_liste=, VarName=, data_inn=, tillegg_tittel=, Where=);
+%macro hyppigste(Ant_i_liste=10, VarName=, data_inn=, tillegg_tittel=, Where=, test = 0);
 /*!
 
 ### Beskrivelse
@@ -9,7 +9,7 @@
 
 ### Parametre
 
-1. `Ant_i_liste`: De *X* hyppigste - sett inn tall for *X*
+1. `Ant_i_liste`: De *X* hyppigste - sett inn tall for *X* (default = 10)
 2. `VarName`: Variabelen man analyserer
 3. `data_inn`: datasett man utfører analysen på
 4. `Tillegg_tittel`: Dersom man ønsker tilleggsinfo i tittel
@@ -17,6 +17,7 @@
 5. `Where` 
   - dersom man trenger et where-statement:
   - Må skrives slik: `Where=Where Borhf=1`
+6. `test`:  Hvis ulik null lagres et datasett &test istedenfor tabell.
 
 ### Forfatter
   
@@ -66,6 +67,7 @@ run;
 %let totaltrang=&totaltrang;
 %let Ovrige=&Ovrige;
 
+%if &test = 0 %then %do;
 Title "Rangering, &Ant_i_liste hyppigste &VarName, &rang_av_total.% av totalt, med &totaltrang av &totalt observasjoner totalt. &tillegg_tittel";
 PROC TABULATE
 DATA=dsn;
@@ -78,6 +80,15 @@ DATA=dsn;
 	PCT_rang={LABEL="Andel &Ant_i_liste hyppigste"}*F=PERCENT8.1*Sum={LABEL=""}
 	/ BOX={LABEL="&Ant_i_liste hyppigste &VarName , &tillegg_tittel " STYLE={JUST=LEFT VJUST=TOP}};
 RUN; title;
+%end;
+
+%if &test ne 0 %then %do;
+/* Lagre datasett for testing */
+data &test;
+set dsn;
+where Rang <= &Ant_i_liste;
+run;
+%end;
 
 proc datasets nolist;
 delete dsn;
