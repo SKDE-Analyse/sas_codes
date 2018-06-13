@@ -56,7 +56,7 @@ run;
 %inkluderFormater;
 
 %if &definerVariabler ne 0 %then %do;
-%include "&filbane.rateprogram\&branch\tests\definerVariabler.sas";
+%include "&filbane.rateprogram\&branch\sas\definerVariabler.sas";
 %definerVariabler;
 %end;
 
