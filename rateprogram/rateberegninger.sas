@@ -16,6 +16,7 @@
 %include "&makrobane\definere_format.sas";
 %include "&makrobane\aldersfigur.sas";
 %include "&makrobane\print_info.sas";
+%include "&makrobane\definere_komnr.sas";
 
 
 /*!

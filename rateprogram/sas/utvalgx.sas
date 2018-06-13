@@ -114,8 +114,24 @@ Første makro som kjøres direkte i rateprogrammet
 
 options locale=NB_NO;
 
+/*
+Definere komnr og bydel basert på bohf hvis datasettet mangler komnr og bydel
+*/
+%if %sysevalf(%superq(manglerKomnr)=,boolean) %then %let manglerKomnr = 0;
+%if &manglerKomnr ne 0 %then %do;
 	data tmp1utvalgX;
 	set &Ratefil; /*HER MÅ DET AGGREGERTE RATEGRUNNLAGSSETTET SETTES INN */
+    run;
+    
+    %definere_Komnr(datasett = tmp1utvalgX);
+    
+	data tmp1utvalgX;
+	set tmp1utvalgX;
+%end;
+%else %do;
+	data tmp1utvalgX;
+	set &Ratefil; /*HER MÅ DET AGGREGERTE RATEGRUNNLAGSSETTET SETTES INN */
+%end;
 		RV=&RV_variabelnavn; /* Definerer RV som ratevariabel */
 	keep RV ermann aar alder komnr bydel;
 	/*endring 11/5-17 Frank Olsen - alder>105-->105*/
