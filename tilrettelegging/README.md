@@ -1,30 +1,28 @@
 # SAS-koder for tilrettelegging av NPR-data
 
 
-## Kjøre tilretteleggingen
+## Kjøre tilretteleggingen av NPR-data
 
 Først må makro-filene inkluderes i prosjektet:
 
 ```
-
-%let kodebane = \\hn.helsenord.no\unn-avdelinger\skde.avd\Analyse\Data\SAS\Tilrettelegging\Somatikk\koder\;
+%let kodebane = \\hn.helsenord.no\unn-avdelinger\skde.avd\Analyse\Data\SAS\Tilrettelegging\saskoder\npr\;
 
 %include "&kodebane.Formater.sas";
 
-%include "&kodebane.1_ Macro - Konvertering og stringrydding.sas";
-%include "&kodebane.2_ Macro - Bo og behandler.sas";
-%include "&kodebane.3_ Macro - ICD10.sas";
-%include "&kodebane.4_ Macro - Øvrige avledede variable.sas";
-%include "&kodebane.5_ Lage unik ID.sas";
-%include "&kodebane.6_ Macro - Labler og formater.sas";
-%include "&kodebane.7_ Redusere variabelstørrelser.sas";
-%include "&kodebane.8_ Dele datasett.sas";
-
+%include "&kodebane.1_Macro-Konvertering_og_stringrydding.sas";
+%include "&kodebane.2_Macro-Bo_og_behandler.sas";
+%include "&kodebane.3_Macro-ICD10.sas";
+%include "&kodebane.4_Macro-Ovrige_avledede_variable.sas";
+%include "&kodebane.5_Macro-Lage_unik_ID.sas";
+%include "&kodebane.6_Macro-Labler_og_formater.sas";
+%include "&kodebane.7_Macro-Redusere_variabelstorrelser.sas";
+%include "&kodebane.8_Macro-Dele_datasett.sas";
 ```
 
 Så inkluderes kjørefilen (da kjøres alle makroene):
 
 ```
-%include "&kodebane.Kjøring av macroer.sas";
+%include "&kodebane.Kjoring_av_macroer.sas";
 ```
 
