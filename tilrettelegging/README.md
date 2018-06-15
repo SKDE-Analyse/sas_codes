@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/SKDE-Analyse/tilrettelegging.svg?branch=master)](https://travis-ci.org/SKDE-Analyse/tilrettelegging)
+[![Doc](https://img.shields.io/badge/Doc--green.svg)](https://skde-analyse.github.io/tilrettelegging)
 
 # SAS-koder for tilrettelegging av NPR-data
 
@@ -37,7 +38,7 @@ Inkludere makro-filen i prosjektet:
 
 Kjør makroen:
 ```
-%leseSSBdata(aar=2018, utdata = TEST, bydel = 0);
+%lesSSBdata(aar=2018, utdata = TEST, bydel = 0);
 ```
 
 Se ellers [SKDE-dokumentasjon](https://skde-analyse.github.io/dokumentasjon/tilrettelegging-av-data.html#tilrettelegging-av-innbyggertall-fra-ssb).
