@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/SKDE-Analyse/tilrettelegging.svg?branch=master)](https://travis-ci.org/SKDE-Analyse/tilrettelegging)
-[![Doc](https://img.shields.io/badge/Doc--green.svg)](https://skde-analyse.github.io/tilrettelegging)
+[![Dokumentasjon](https://img.shields.io/badge/Dokumentasjon--grey.svg)](https://skde-analyse.github.io/tilrettelegging)
 
 # SAS-koder for tilrettelegging av NPR-data
 
