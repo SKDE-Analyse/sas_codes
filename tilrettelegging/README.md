@@ -1,5 +1,6 @@
-# SAS-koder for tilrettelegging av NPR-data
+[![Build Status](https://travis-ci.org/SKDE-Analyse/tilrettelegging.svg?branch=master)](https://travis-ci.org/SKDE-Analyse/tilrettelegging)
 
+# SAS-koder for tilrettelegging av NPR-data
 
 ## Kjøre tilretteleggingen av NPR-data
 
@@ -25,4 +26,19 @@ Så inkluderes kjørefilen (da kjøres alle makroene):
 ```
 %include "&kodebane.Kjoring_av_macroer.sas";
 ```
+
+## Kjøre tilrettelegging av innbyggertall fra SSB
+
+Inkludere makro-filen i prosjektet:
+```
+%let kodebane = \\hn.helsenord.no\unn-avdelinger\skde.avd\Analyse\Data\SAS\Tilrettelegging\saskoder\ssb\;
+%include "&kodebane.lesSSBdata.sas";
+```
+
+Kjør makroen:
+```
+%leseSSBdata(aar=2018, utdata = TEST, bydel = 0);
+```
+
+Se ellers [SKDE-dokumentasjon](https://skde-analyse.github.io/dokumentasjon/tilrettelegging-av-data.html#tilrettelegging-av-innbyggertall-fra-ssb).
 
