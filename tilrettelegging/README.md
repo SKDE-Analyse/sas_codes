@@ -30,15 +30,18 @@ Så inkluderes kjørefilen (da kjøres alle makroene):
 
 ## Kjøre tilrettelegging av innbyggertall fra SSB
 
-Inkludere makro-filen i prosjektet:
+Følgende kode ble kjørt for å legge til innbyggertallene 1. januar 2018:
 ```
 %let kodebane = \\hn.helsenord.no\unn-avdelinger\skde.avd\Analyse\Data\SAS\Tilrettelegging\saskoder\ssb\;
 %include "&kodebane.lesSSBdata.sas";
-```
 
-Kjør makroen:
-```
-%lesSSBdata(aar=2018, utdata = TEST, bydel = 0);
+%lesSSBdata(aar=2018, utdata = bydel, bydel = 1);
+
+%lesSSBdata(aar=2018, utdata = kommune, bydel = 0);
+
+data innbygg.innb_2004_2017_bydel_allebyer;
+set innbygg.innb_2004_2016_bydel_allebyer kommune bydel;
+run;
 ```
 
 Se ellers [SKDE-dokumentasjon](https://skde-analyse.github.io/dokumentasjon/tilrettelegging-av-data.html#tilrettelegging-av-innbyggertall-fra-ssb).
