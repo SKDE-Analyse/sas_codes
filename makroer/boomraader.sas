@@ -39,6 +39,9 @@ Fylke
 
 ### Endringer
 
+#### Endring Arnfinn 18. juni 2018:
+- Lagt til nye kommunenummer for Trøndelag
+
 #### Endring Arnfinn 7. aug. 2017:
 - Årsbetinget definisjon av opptaksområde (kun 2015 foreløpig, siden Samdata kun har lagt ut til og med 2015) 
 
@@ -98,14 +101,22 @@ else if BoShHN in (9,10,11,12) then BoHF=3; /* Helgeland legges under Nordland h
 else if BoShHN in (9,10,11,12) then BoHF=4;
 %end;
 
-if KomNr in (1632,1633,1702,1703,1711,1714,1717,1718,1719,1721,1724,1725,1736,1738,1739,1740,1742,1743,1744,1748,1749,1750,1751,1755,1756) then BoHF=6;
-else if KomNr in (1567,1612,1613,1617,1620,1621,1622,1624,1627,1630,1634,1635,1636,1638,1640,1644,1648,1653,1657,1662,1663,1664,1665) then BoHF=7;
-else if KomNr in (1601) then do;
+/*
+18. juni 2018:
+Indre Fosen (5054) lagt til St. Olavs, siden flest innbyggere sognet tidligere til St.Olavs. 
+- Rissa (1624) : 6 628 innbyggere
+- Leksvik (1718): 3 480 innbyggere
+Ble sannsynligvis også lagt til St. Olavs i 2018 (Styresak 103/17 Helse Midt-Norge, innkalling til styremøte 21.12.17 https://ekstranett.helse-midt.no/1001/Sakspapirer%20for%20utskrift/Sakspapirer%202017-12-21%20samlehefte%20for%20utskrift.pdf Styremøtet ble avlyst):
+*/
+if KomNr in (1632,5019,1633,5020,1702,5004,1703,5005,1711,5034,1714,5035,1717,5036,1718,1719,5037,1721,5038,1724,5039,1725,5040,1736,5041,1738,5042,1739,5043,1740,5044,1742,5045,1743,5046,1744,5047,1748,5048,1749,5049,1750,5050,1751,5051,1755,5052,1756,5053) then BoHF=6;
+else if KomNr in (1567,1612,5011,1613,5012,1617,5013,1620,5014,1621,5015,1622,5016,1624,1627,5017,1630,5018,1634,5021,1635,5022,1636,5023,1638,5024,1640,5025,1644,5026,1648,5027,1653,5028,1657,5029,1662,5030,1663,5031,1664,5032,1665,5033,5054) then BoHF=7;
+else if KomNr in (1601,5001) then do;
 %if &bydel = 0 %then %do;
    BoHF = 7;
 %end;
 %else %do;
    if Bydel in (160101:160199) then BoHF=7; /*Trondheim - endres ved behov*/
+   if Bydel in (500101:500199) then BoHF=7; /*Trondheim - endres ved behov*/
 %end;
 end;
 else if KomNr in (1502,1504,1505,1511,1514,1515,1516,1517,1519,1520,1523,1524,1525,1526,1528,1529,1531,1532,1534,1535,1539,1543,1545,1546,1547,1548,1551,
@@ -175,7 +186,7 @@ end;
 else if KomNr in (236,402,403,412,415,417,418,419,420,423,425,426,427,428,429,430,432,434,436,437,438,439,441,501,502,511,512,513,514,515,516,517,519,520,521,
 522,528,529,533,534,536,538,540,541,542,543,544,545) then BoHF=19;
 else if KomNr in (219,220,532,602,604,605,612,615,616,617,618,619,620,621,622,623,624,625,626,627,628,631,632,633,711,713) then BoHF=20;
-else if KomNr in (701,702,704,706,709,710,714,716,719,720,722,723,728) then BoHF=21;
+else if KomNr in (701,702,704,706,709,710,712,714,715,716,719,720,722,723,728,729) then BoHF=21;
 else if KomNr in (805,806,807,811,814,815,817,819,821,822,826,827,828,829,830,831,833,834) then BoHF=22;
 else if KomNr in (901,904,906,911,912,914,919,926,928,929,935,937,938,940,941,1001,1002,1003,1004,1014,1017,1018,1021,1026,1027,1029,1032,1034,1037,1046) then BoHF=23;
 else if komNr in (9000,9900,2100,2111,2121,2131,2211,2311,2321) then BoHF=24;
