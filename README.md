@@ -5,14 +5,14 @@ En kombinasjon av SAS-kode-repositoriene ved SKDE
 
 ## Hvilke repository er med?
 
-Dette er en kombinasjon av følgende (nå utdaterte) repositorer:
+Dette er en kombinasjon av fÃ¸lgende (nÃ¥ utdaterte) repositorer:
 - https://github.com/SKDE-Analyse/sas_figurer
 - https://github.com/SKDE-Analyse/sas_formater
 - https://github.com/SKDE-Analyse/sas_makroer
 - https://github.com/SKDE-Analyse/tilrettelegging
 - https://github.com/SKDE-Analyse/rateprogram
 
-De har blitt kombinert med [denne fremgangsmåten](https://stackoverflow.com/a/618113):
+De har blitt kombinert med [denne fremgangsmÃ¥ten](https://stackoverflow.com/a/618113):
 ```
 mkdir sas_codes
 cd sas_codes
@@ -49,7 +49,7 @@ Makroene ligger her:
 ```
 \\tos-sas-skde-01\SKDE_SAS\Makroer\master
 ```
-For å bruke de i din egen SAS-kode, legges følgende inn i koden:
+For Ã¥ bruke de i din egen SAS-kode, legges fÃ¸lgende inn i koden:
 ```
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\;
 options sasautos=("&filbane.Makroer\master" SASAUTOS);
@@ -59,19 +59,19 @@ Dokumentasjon om de ulike makroene finnes [her](http://skde-analyse.github.io/sa
 
 ## Lage en ny makro
 
-I korte trekk gjør man følgende
+I korte trekk gjÃ¸r man fÃ¸lgende
 
 1. Kopier mappen `\\tos-sas-skde-01\SKDE_SAS\Makroer\master` og jobb i den kopierte mappen.
 2. Lag en sas-fil som heter det samme som makroen man vil lage.
 3. Lag makroen, og dokumenter den.
 4. Lag en test
-5. Dytt opp til egen `branch` på [github](https://github.com/SKDE-Analyse/sas_makroer) og lag en `pull request` (ev. be [Arnfinn](https://github.com/arnfinn) gjøre det).
-6. Oppdater `\\tos-sas-skde-01\SKDE_SAS\Makroer\master` (`git pull --rebase`, ev. be Arnfinn gjøre det) 
+5. Dytt opp til egen `branch` pÃ¥ [github](https://github.com/SKDE-Analyse/sas_makroer) og lag en `pull request` (ev. be [Arnfinn](https://github.com/arnfinn) gjÃ¸re det).
+6. Oppdater `\\tos-sas-skde-01\SKDE_SAS\Makroer\master` (`git pull --rebase`, ev. be Arnfinn gjÃ¸re det) 
 
 
-### Eksempel på makro
+### Eksempel pÃ¥ makro
 
-Eksempel på makro, som legges i en fil som heter `minNyeMakro.sas`:
+Eksempel pÃ¥ makro, som legges i en fil som heter `minNyeMakro.sas`:
 ```
 %macro minNyeMakro(datasett =, variabel1 = );
 
@@ -88,12 +88,12 @@ sas-kode...
 
 ### Dokumentering av makroen
 
-Legg inn en forklaring om hva makroen gjør rett under `%macro minNyeMakro;`. Start kommentaren med `/*!` (legg merke til `!` etter `/*`). Alt som ligger mellom `/*!` og `*/` vil legges på nett [(her)](http://skde-analyse.github.io/sas_makroer/) etter at man har dyttet alt opp til *github*.
+Legg inn en forklaring om hva makroen gjÃ¸r rett under `%macro minNyeMakro;`. Start kommentaren med `/*!` (legg merke til `!` etter `/*`). Alt som ligger mellom `/*!` og `*/` vil legges pÃ¥ nett [(her)](http://skde-analyse.github.io/sas_makroer/) etter at man har dyttet alt opp til *github*.
 
 
 ### Lage en test til makroen
 
-Når man lager en makro burde man også lage en test. Denne kan så kjøres senere for å sjekke at makroen ikke er blitt ødelagt. en enkel test kan se slik ut:
+NÃ¥r man lager en makro burde man ogsÃ¥ lage en test. Denne kan sÃ¥ kjÃ¸res senere for Ã¥ sjekke at makroen ikke er blitt Ã¸delagt. en enkel test kan se slik ut:
 ```
 %macro minNyeMakro_test(branch = master, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
@@ -109,9 +109,9 @@ proc compare base=skde_tst.ref_minNyeMakro compare=test BRIEF WARNING LISTVAR;
 
 %mend;
 ```
-Her kjører man makroen på en kopi av datasettet `skde_tst.minNyeMakro_start` og tester at det er likt datasettet `skde_tst.ref_minNyeMakro`. Disse to datasettene er lagret på server på forhånd. Se i mappen `tests\` for eksempler på bruk av argumentene `branch`, `debug`, `lagNyRef` og `lagNyStart`. 
+Her kjÃ¸rer man makroen pÃ¥ en kopi av datasettet `skde_tst.minNyeMakro_start` og tester at det er likt datasettet `skde_tst.ref_minNyeMakro`. Disse to datasettene er lagret pÃ¥ server pÃ¥ forhÃ¥nd. Se i mappen `tests\` for eksempler pÃ¥ bruk av argumentene `branch`, `debug`, `lagNyRef` og `lagNyStart`. 
 
-Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn følgende kode i filen `test_makroer.sas`:
+Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg sÃ¥ inn fÃ¸lgende kode i filen `test_makroer.sas`:
 ```
 %include "&filbane.makroer\&branch.\tests\minNyeMakro_test.sas";
 %minNyeMakro_test(branch = &branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
@@ -120,33 +120,33 @@ Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn f
 
 ### Dytte makroen opp til [github](https://github.com/SKDE-Analyse/sas_makroer)
 
-Man gjør følgende i mappen `\\tos-sas-skde-01\SKDE_SAS\Makroer\<min_mappe>` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
+Man gjÃ¸r fÃ¸lgende i mappen `\\tos-sas-skde-01\SKDE_SAS\Makroer\<min_mappe>` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
 ```bash
-git status # for å sjekke at alt er som det skal
-git diff # for å sjekke litt ekstra nøye
-git checkout -b <branchname> # endre branch (bytt ut `<branchname>` med ønsket navn på branch).
+git status # for Ã¥ sjekke at alt er som det skal
+git diff # for Ã¥ sjekke litt ekstra nÃ¸ye
+git checkout -b <branchname> # endre branch (bytt ut `<branchname>` med Ã¸nsket navn pÃ¥ branch).
 git add <filnavn.sas> # Legg inn filene som skal dyttes opp (her legger vi til filen `filnavn.sas`)
 git commit -m 'My new fancy macro, with doc and test' # Skriv en pen commit-beskjed
 git push -u origin branchname # Dytt opp til github
 ```
 
-Gå så inn på [github/branches](https://github.com/SKDE-Analyse/sas_makroer/branches) og trykk på *New pull request* ved siden av din nye branch. Fyll ut og be en kollega se på hva du har gjort (legg inn en *Reviewer*).
+GÃ¥ sÃ¥ inn pÃ¥ [github/branches](https://github.com/SKDE-Analyse/sas_makroer/branches) og trykk pÃ¥ *New pull request* ved siden av din nye branch. Fyll ut og be en kollega se pÃ¥ hva du har gjort (legg inn en *Reviewer*).
 
 
 
 # Rateprogrammet
 
-- Beregner kjønns- og aldersjusterte rater for ulike boområder.
+- Beregner kjÃ¸nns- og aldersjusterte rater for ulike boomrÃ¥der.
 - Utviklet av Frank Olsen
 
 ## Hvordan bruke rateprogrammet
 
 - Ha oppdatert *automacro*, se [her](http://skde-analyse.github.io/dokumentasjon/sas.html#macroer)
-- Åpne et nytt program i SAS, begynn å skriv `rate` og velg `RATEPROGRAM`
+- Ã…pne et nytt program i SAS, begynn Ã¥ skriv `rate` og velg `RATEPROGRAM`
 
 ![Alt text](bilder/automakro.png)
 
-- Da vil man få inn kode som kan kjøre rateprogrammet. Pr. 29. juni 2017 ser denne [slik ut](RateprogramAuto).
+- Da vil man fÃ¥ inn kode som kan kjÃ¸re rateprogrammet. Pr. 29. juni 2017 ser denne [slik ut](RateprogramAuto).
 
 ## Hvordan endre rateprogrammet
 
@@ -158,9 +158,9 @@ Gå så inn på [github/branches](https://github.com/SKDE-Analyse/sas_makroer/branc
 
 # SAS-koder for tilrettelegging av NPR-data
 
-## Kjøre tilretteleggingen av NPR-data
+## KjÃ¸re tilretteleggingen av NPR-data
 
-Først må makro-filene inkluderes i prosjektet:
+FÃ¸rst mÃ¥ makro-filene inkluderes i prosjektet:
 
 ```
 %let kodebane = \\hn.helsenord.no\unn-avdelinger\skde.avd\Analyse\Data\SAS\Tilrettelegging\saskoder\npr\;
@@ -177,15 +177,15 @@ Først må makro-filene inkluderes i prosjektet:
 %include "&kodebane.8_Macro-Dele_datasett.sas";
 ```
 
-Så inkluderes kjørefilen (da kjøres alle makroene):
+SÃ¥ inkluderes kjÃ¸refilen (da kjÃ¸res alle makroene):
 
 ```
 %include "&kodebane.Kjoring_av_macroer.sas";
 ```
 
-## Kjøre tilrettelegging av innbyggertall fra SSB
+## KjÃ¸re tilrettelegging av innbyggertall fra SSB
 
-Følgende kode ble kjørt for å legge til innbyggertallene 1. januar 2018:
+FÃ¸lgende kode ble kjÃ¸rt for Ã¥ legge til innbyggertallene 1. januar 2018:
 ```
 %let kodebane = \\hn.helsenord.no\unn-avdelinger\skde.avd\Analyse\Data\SAS\Tilrettelegging\saskoder\ssb\;
 %include "&kodebane.lesSSBdata.sas";
