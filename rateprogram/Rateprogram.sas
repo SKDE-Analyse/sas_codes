@@ -4,26 +4,26 @@ man kan bruke. Filen skal være kjørbar som et *sas*-program slik den er.
 
 Den kan også fungere som en test av rateprogrammet. Kjøres slik:
 ```
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
-%include "&filbane.rateprogram\master\Rateprogram.sas";
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\master\;
+%include "&filbane.rateprogram\Rateprogram.sas";
 ```
 */
 
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
-options sasautos=("&filbane.Makroer\master" SASAUTOS);
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\master\;
+options sasautos=("&filbane.makroer" SASAUTOS);
 
 /*Options symbolgen mlogic mprint;*/
 
-%include "&filbane.Formater\master\SKDE_somatikk.sas";
-%include "&filbane.Formater\master\NPR_somatikk.sas";
-%include "&filbane.Formater\master\bo.sas";
-%include "&filbane.Formater\master\beh.sas";
-%include "&filbane.Formater\master\komnr.sas";
+%include "&filbane.formater\SKDE_somatikk.sas";
+%include "&filbane.formater\NPR_somatikk.sas";
+%include "&filbane.formater\bo.sas";
+%include "&filbane.formater\beh.sas";
+%include "&filbane.formater\komnr.sas";
 
-%include "&filbane.rateprogram\master\rateberegninger.sas";
+%include "&filbane.rateprogram\rateberegninger.sas";
 
-%include "&filbane.Stiler\stil_figur.sas";
-%include "&filbane.Stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "&filbane.stiler\stil_figur.sas";
+%include "&filbane.stiler\Anno_logo_kilde_NPR_SSB.sas";
 
 /******  DATAGRUNNLAG  ****************************************************************/
 %let Ratefil=skde_kur.ratetest_11_15;

@@ -15,7 +15,7 @@ Sammenligner dette datasettet med en referanse (`skde_tst.ref_reinn1` og `skde_t
 
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\makroer\&branch.\reinnleggelser.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\makroer\reinnleggelser.sas";
 
 /*
 Lage nytt startsett, basert på skde_tst.pseudosens_avd_magnus

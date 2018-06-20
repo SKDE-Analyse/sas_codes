@@ -1,6 +1,6 @@
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
 %let branch = master;
-%include "&filbane.rateprogram\&branch\tests\makroer.sas";
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\;
+%include "&filbane.rateprogram\tests\makroer.sas";
 
 %testAnno(lagReferanse = 1);
 %testUtvalgx(lagReferanse = 1);

@@ -47,26 +47,26 @@ done
 
 Makroene ligger her:
 ```
-\\tos-sas-skde-01\SKDE_SAS\Makroer\master
+\\tos-sas-skde-01\SKDE_SAS\saskoder\master\makroer\
 ```
 For å bruke de i din egen SAS-kode, legges følgende inn i koden:
 ```
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
-options sasautos=("&filbane.Makroer\master" SASAUTOS);
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\master\;
+options sasautos=("&filbane.Makroer" SASAUTOS);
 ```
 
-Dokumentasjon om de ulike makroene finnes [her](http://skde-analyse.github.io/sas_makroer/)
+Dokumentasjon om de ulike makroene finnes [her](http://skde-analyse.github.io/sas_codes/)
 
 ## Lage en ny makro
 
 I korte trekk gjør man følgende
 
-1. Kopier mappen `\\tos-sas-skde-01\SKDE_SAS\Makroer\master` og jobb i den kopierte mappen.
+1. Kopier mappen `\\tos-sas-skde-01\SKDE_SAS\saskoder\master` og jobb i den kopierte mappen.
 2. Lag en sas-fil som heter det samme som makroen man vil lage.
 3. Lag makroen, og dokumenter den.
 4. Lag en test
-5. Dytt opp til egen `branch` på [github](https://github.com/SKDE-Analyse/sas_makroer) og lag en `pull request` (ev. be [Arnfinn](https://github.com/arnfinn) gjøre det).
-6. Oppdater `\\tos-sas-skde-01\SKDE_SAS\Makroer\master` (`git pull --rebase`, ev. be Arnfinn gjøre det) 
+5. Dytt opp til egen `branch` på [github](https://github.com/SKDE-Analyse/sas_codes) og lag en `pull request` (ev. be [Arnfinn](https://github.com/arnfinn) gjøre det).
+6. Oppdater `\\tos-sas-skde-01\SKDE_SAS\saskoder\master` (`git pull --rebase`, ev. be Arnfinn gjøre det) 
 
 
 ### Eksempel på makro
@@ -88,7 +88,7 @@ sas-kode...
 
 ### Dokumentering av makroen
 
-Legg inn en forklaring om hva makroen gjør rett under `%macro minNyeMakro;`. Start kommentaren med `/*!` (legg merke til `!` etter `/*`). Alt som ligger mellom `/*!` og `*/` vil legges på nett [(her)](http://skde-analyse.github.io/sas_makroer/) etter at man har dyttet alt opp til *github*.
+Legg inn en forklaring om hva makroen gjør rett under `%macro minNyeMakro;`. Start kommentaren med `/*!` (legg merke til `!` etter `/*`). Alt som ligger mellom `/*!` og `*/` vil legges på nett [(her)](http://skde-analyse.github.io/sas_codes/) etter at man har dyttet alt opp til *github*.
 
 
 ### Lage en test til makroen
@@ -97,7 +97,7 @@ Når man lager en makro burde man også lage en test. Denne kan så kjøres sene
 ```
 %macro minNyeMakro_test(branch = master, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
-%include "\\tos-sas-skde-01\SKDE_SAS\makroer\&branch.\minNyeMakro.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch.\makroer\minNyeMakro.sas";
 
 data test;
 set skde_tst.minNyeMakro_start;
@@ -113,14 +113,14 @@ Her kjører man makroen på en kopi av datasettet `skde_tst.minNyeMakro_start` o
 
 Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn følgende kode i filen `test_makroer.sas`:
 ```
-%include "&filbane.makroer\&branch.\tests\minNyeMakro_test.sas";
+%include "&filbane.makroer\tests\minNyeMakro_test.sas";
 %minNyeMakro_test(branch = &branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
 ```
 
 
-### Dytte makroen opp til [github](https://github.com/SKDE-Analyse/sas_makroer)
+### Dytte makroen opp til [github](https://github.com/SKDE-Analyse/sas_codes)
 
-Man gjør følgende i mappen `\\tos-sas-skde-01\SKDE_SAS\Makroer\<min_mappe>` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
+Man gjør følgende i mappen `\\tos-sas-skde-01\SKDE_SAS\saskoder\<min_mappe>\` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
 ```bash
 git status # for å sjekke at alt er som det skal
 git diff # for å sjekke litt ekstra nøye
@@ -130,7 +130,7 @@ git commit -m 'My new fancy macro, with doc and test' # Skriv en pen commit-besk
 git push -u origin branchname # Dytt opp til github
 ```
 
-Gå så inn på [github/branches](https://github.com/SKDE-Analyse/sas_makroer/branches) og trykk på *New pull request* ved siden av din nye branch. Fyll ut og be en kollega se på hva du har gjort (legg inn en *Reviewer*).
+Gå så inn på [github/branches](https://github.com/SKDE-Analyse/sas_codes/branches) og trykk på *New pull request* ved siden av din nye branch. Fyll ut og be en kollega se på hva du har gjort (legg inn en *Reviewer*).
 
 
 
@@ -163,7 +163,7 @@ Gå så inn på [github/branches](https://github.com/SKDE-Analyse/sas_makroer/br
 Først må makro-filene inkluderes i prosjektet:
 
 ```
-%let kodebane = \\hn.helsenord.no\unn-avdelinger\skde.avd\Analyse\Data\SAS\Tilrettelegging\saskoder\npr\;
+%let kodebane = \\tos-sas-skde-01\SKDE_SAS\saskoder\tilrettelegging\npr\;
 
 %include "&kodebane.Formater.sas";
 
@@ -187,7 +187,7 @@ Så inkluderes kjørefilen (da kjøres alle makroene):
 
 Følgende kode ble kjørt for å legge til innbyggertallene 1. januar 2018:
 ```
-%let kodebane = \\hn.helsenord.no\unn-avdelinger\skde.avd\Analyse\Data\SAS\Tilrettelegging\saskoder\ssb\;
+%let kodebane = \\tos-sas-skde-01\SKDE_SAS\saskoder\tilrettelegging\ssb\;
 %include "&kodebane.lesSSBdata.sas";
 
 %lesSSBdata(aar=2018, utdata = bydel, bydel = 1);
