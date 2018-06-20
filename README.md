@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/SKDE-Analyse/sas_codes.svg?branch=master)](https://travis-ci.org/SKDE-Analyse/sas_codes)
+[![Dokumentasjon](https://img.shields.io/badge/Dokumentasjon--grey.svg)](https://skde-analyse.github.io/sas_codes)
+
 A combination of "all" the SAS code repositories at SKDE
 
 
