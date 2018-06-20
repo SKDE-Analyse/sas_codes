@@ -1,6 +1,5 @@
-%let branch = master;
-%let makrobane=\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\rateprogram\sas;
-%include "\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\makroer\boomraader.sas";
+%let makrobane=&filbane.rateprogram\sas;
+%include "&filbane.makroer\boomraader.sas";
 %include "&makrobane\lag_kart.sas";
 %include "&makrobane\omraade.sas";
 %include "&makrobane\omraadeHN.sas";

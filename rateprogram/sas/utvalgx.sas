@@ -217,9 +217,7 @@ Lag en figur med aldersprofilen i utvalget
 */
 %if %sysevalf(%superq(aldersfigur)=,boolean) %then %let aldersfigur = 1;
 %if &aldersfigur=1 %then %do;
-
-%aldersfigur(data = tmp2utvalgx);
-
+    %aldersfigur(data = tmp2utvalgx);
 %end;
 
 	data tmp1innb_aar;

@@ -8,6 +8,7 @@ run;
 
 title "Utskrift fra rateprogram (&datenow, &timenow)";
 
+ods text="Filbane:      '&filbane.'";
 ods text="Ratefil:      '&Ratefil.'";
 ods text="Ratevariabel: '&RV_variabelnavn.'";
 ods text="Første del av datasettnavn: '&forbruksmal._'";
