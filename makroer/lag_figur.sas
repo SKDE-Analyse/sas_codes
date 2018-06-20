@@ -210,10 +210,13 @@ run;
 Rateberegninger
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\rateprogram\master\rateberegninger.sas";
-%include "\\tos-sas-skde-01\SKDE_SAS\rateprogram\master\sas\definerVariabler.sas";
-%include "\\tos-sas-skde-01\SKDE_SAS\Stiler\stil_figur.sas";
-%include "\\tos-sas-skde-01\SKDE_SAS\Stiler\Anno_logo_kilde_NPR_SSB.sas";
+%local filbane;
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\master\;
+
+%include "&filbane.rateprogram\rateberegninger.sas";
+%include "&filbane.rateprogram\sas\definerVariabler.sas";
+%include "&filbane.Stiler\stil_figur.sas";
+%include "&filbane.Stiler\Anno_logo_kilde_NPR_SSB.sas";
 
 %let ratefil = tmp_figur;
 

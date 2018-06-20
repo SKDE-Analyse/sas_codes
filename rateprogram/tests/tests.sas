@@ -15,9 +15,8 @@ Variabel-valg finnes i sas\definerVariabler.sas
 */
 
 %local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
-
-%include "&filbane.rateprogram\&branch\tests\makroer.sas";
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\;
+%include "&filbane.rateprogram\tests\makroer.sas";
 
 %testAnno(slettDatasett = 0);
 
@@ -41,11 +40,11 @@ Test av deler av rateprogrammet hver for seg.
 */
 
 %local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\;
 
-%include "&filbane.rateprogram\&branch\tests\makroer.sas";
+%include "&filbane.rateprogram\tests\makroer.sas";
 
-%include "&filbane.rateprogram\&branch\sas\definerVariabler.sas";
+%include "&filbane.rateprogram\sas\definerVariabler.sas";
 %definerVariabler;
 
 %testRateberegninger(alene = 1, branch = &branch);

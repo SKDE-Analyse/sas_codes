@@ -12,25 +12,25 @@ Tester for øyeblikket makroene
 
 */
 
+%local filbane;
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\;
 
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
-
-%include "&filbane.makroer\&branch.\tests\episode_of_care_test.sas";
+%include "&filbane.makroer\tests\episode_of_care_test.sas";
 %episode_of_care_test(branch=&branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
 
-%include "&filbane.makroer\&branch.\tests\reinnleggelser_test.sas";
+%include "&filbane.makroer\tests\reinnleggelser_test.sas";
 %reinnleggelser_test(branch=&branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
 
-%include "&filbane.makroer\&branch.\tests\boomraader_test.sas";
+%include "&filbane.makroer\tests\boomraader_test.sas";
 %boomraader_test(branch=&branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
 
-%include "&filbane.makroer\&branch.\tests\aggreger_test.sas";
+%include "&filbane.makroer\tests\aggreger_test.sas";
 %aggreger_test(branch=&branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
 
-%include "&filbane.makroer\&branch.\tests\unik_pasient_test.sas";
+%include "&filbane.makroer\tests\unik_pasient_test.sas";
 %unik_pasient_test(branch = &branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
 
-%include "&filbane.makroer\&branch.\tests\hyppigste_test.sas";
+%include "&filbane.makroer\tests\hyppigste_test.sas";
 %hyppigste_test(branch = &branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
 
 %mend;

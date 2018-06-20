@@ -14,7 +14,7 @@ Sammenligner datasettene som spyttes ut med referanse-sett (skde_tst.ref_eoc[n])
 
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\makroer\&branch.\episode_of_care.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\makroer\episode_of_care.sas";
 
 
 %if &lagNyStart ne 0 %then %do;

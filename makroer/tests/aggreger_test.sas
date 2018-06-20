@@ -15,7 +15,7 @@ Sammenligner dette datasettet med en referanse (`skde_tst.ref_agg_&navn`).
 
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\makroer\&branch.\aggreger.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\makroer\aggreger.sas";
 
 /*
 Lage nytt startsett, basert på skde_tst.pseudosens_avd_magnus og skde_tst.pseudosens_avtspes_magnus
