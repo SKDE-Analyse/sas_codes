@@ -1,30 +1,33 @@
-[Tilbake](./)
 ```sas
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\;
-options sasautos=("&filbane.Makroer\master" SASAUTOS);
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
+options sasautos=("&filbane\makroer" SASAUTOS);
 
-/*Options symbolgen mlogic mprint;*/
+%include "&filbane\formater\SKDE_somatikk.sas";
+%include "&filbane\formater\NPR_somatikk.sas";
+%include "&filbane\formater\bo.sas";
+%include "&filbane\formater\beh.sas";
+%include "&filbane\formater\komnr.sas";
 
-%include "&filbane.Formater\master\SKDE_somatikk.sas";
-%include "&filbane.Formater\master\NPR_somatikk.sas";
-%include "&filbane.Formater\master\bo.sas";
-%include "&filbane.Formater\master\beh.sas";
-%include "&filbane.Formater\master\komnr.sas";
+%include "&filbane\rateprogram\rateberegninger.sas";
 
-%include "&filbane.rateprogram\master\rateberegninger.sas";
-
-%include "&filbane.Stiler\stil_figur.sas";
-%include "&filbane.Stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "&filbane\stiler\stil_figur.sas";
+%include "&filbane\stiler\Anno_logo_kilde_NPR_SSB.sas";
 
 /******  DATAGRUNNLAG  ****************************************************************/
 %let Ratefil=skde_kur.ratetest_11_15;
 %let RV_variabelnavn=poli; /*navn på ratevariabel i det aggregerte datasettet*/
 %Let ratevariabel = Poliklinikk; /*Brukes til å lage "pene" overskrifter*/
 %Let forbruksmal = Konsultasjoner; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
-%Let innbyggerfil=Innbygg.innb_2004_2015_bydel_allebyer;
+%Let innbyggerfil=Innbygg.innb_2004_2017_bydel_allebyer;
+%let manglerKomnr = 0; /* Hvis ulik 0 -> definere komnr og bydel basert på bohf (brukes hvis komnr mangler i datasettet)*/
+%let aldersfigur = 1; /* Settes til null hvis man ikke vil ha ut aldersdistribusjonen i utvalget */
+%let haraldsplass = 0; /* Settes til ulik null hvis man vil dele Bergen i Haukland og Haraldsplass */
+%let indreOslo = 0; /* Settes til ulik null hvis man vil slå sammen Lovisenberg og diakonhjemmet */
+%let bydel = 1; /* Settes til null hvis man ikke har bydel i datasettet */
+%let barn = 0; /* Settes til ulik null hvis man vil ha opptaksområdestruktur som i barnehelseatlaset */
 
 /******  HVA ØNSKER DU Å FÅ UT?  **************************************************************/
-/* Ønsker du Årsvariasjonsfigurer og/eller Konfidensintervallfigurer? */
+%let aarsvarfigur=1; /* Ønsker du Årsvariasjonsfigurer og/eller Konfidensintervallfigurer? */
 %let aarsobs=1;/* dersom du ønsker årsobservasjonene med i figur - dersom ikke må denne stå tom */
 %let NorgeSoyle=1; /* dersom du ønsker Norge som søyle i figur - dersom ikke må det stå =0 */
 %let KIfigur=;
@@ -32,11 +35,11 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS);
 %let vis_ekskludering=1; /* Vis tabeller for ekskludering*/
 /* Hvilke bonivåer ønskes? ja eller nei, hvor 1 betyr ja */
 %let kommune=; 		/*Bildefiler*/ %let Fig_AA_kom=; 	%let Fig_KI_kom=;
-%let kommune_HN=; 	/*Bildefiler*/ %let Fig_AA_komHN=; 	%let Fig_KI_komHN=;
-%let fylke=; 		/*Bildefiler*/ %let Fig_AA_fylke=; 	%let Fig_KI_fylke=;
-%let sykehus_HN=; 	/*Bildefiler*/ %let Fig_AA_ShHN=; 	%let Fig_KI_ShHN=;
+%let kommune_HN=1; 	/*Bildefiler*/ %let Fig_AA_komHN=; 	%let Fig_KI_komHN=;
+%let fylke=1; 		/*Bildefiler*/ %let Fig_AA_fylke=; 	%let Fig_KI_fylke=;
+%let sykehus_HN=1; 	/*Bildefiler*/ %let Fig_AA_ShHN=; 	%let Fig_KI_ShHN=;
 %let HF=1; 			/*Bildefiler*/ %let Fig_AA_HF=; 	%let Fig_KI_HF=;
-%let RHF=; 			/*Bildefiler*/ %let Fig_AA_RHF=; 	%let Fig_KI_RHF=;
+%let RHF=1;			/*Bildefiler*/ %let Fig_AA_RHF=; 	%let Fig_KI_RHF=;
 %let Oslo=; 		/*Bildefiler*/ %let Fig_AA_Oslo=; 	%let Fig_KI_Oslo=;
 %let Verstkommune_HN=;
 /* Dersom du skal ha bilde-filer */
@@ -56,9 +59,9 @@ options sasautos=("&filbane.Makroer\master" SASAUTOS);
 %let Ut_sett=; /*Utdata, dersom du ønsker stor tabell med KI osv., --> Ut_sett=1 */
 
 /******  PERIODE OG ALDER  **************************************************************/
-%let StartÅr=2011;
+%let StartÅr=2012;
 %let SluttÅr=2015;
-%Let aar=2013; /* Standardiseringsår defineres her*/
+%Let aar=2015; /* Standardiseringsår defineres her*/
 %Let aldersspenn=in (0:105); /*Definerer det aktuelle aldersspennet: (0:105) --> 0 til 105 år*/
 %Let Alderskategorier=30; /*20, 21, 30, 31, 40, 41, 50, 51 eller 99
 							20=2-delt med alle aldre, 21=2-delt KUN med aldre med RV
@@ -87,7 +90,7 @@ else if 80<=alder then alder_ny=5;
 
 /******************************************************************************************/
 %utvalgx;
-%omraadeNorge;
+
 %rateberegninger;
 
 proc datasets nolist;

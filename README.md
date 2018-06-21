@@ -47,12 +47,12 @@ done
 
 Makroene ligger her:
 ```
-\\tos-sas-skde-01\SKDE_SAS\saskoder\master\makroer\
+\\tos-sas-skde-01\SKDE_SAS\felleskoder\master\makroer\
 ```
 For å bruke de i din egen SAS-kode, legges følgende inn i koden:
 ```
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\master\;
-options sasautos=("&filbane.Makroer" SASAUTOS);
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
+options sasautos=("&filbane\Makroer" SASAUTOS);
 ```
 
 Dokumentasjon om de ulike makroene finnes [her](http://skde-analyse.github.io/sas_codes/)
@@ -61,12 +61,12 @@ Dokumentasjon om de ulike makroene finnes [her](http://skde-analyse.github.io/sa
 
 I korte trekk gjør man følgende
 
-1. Kopier mappen `\\tos-sas-skde-01\SKDE_SAS\saskoder\master` og jobb i den kopierte mappen.
+1. Kopier mappen `\\tos-sas-skde-01\SKDE_SAS\felleskoder\master` og jobb i den kopierte mappen.
 2. Lag en sas-fil som heter det samme som makroen man vil lage.
 3. Lag makroen, og dokumenter den.
 4. Lag en test
 5. Dytt opp til egen `branch` på [github](https://github.com/SKDE-Analyse/sas_codes) og lag en `pull request` (ev. be [Arnfinn](https://github.com/arnfinn) gjøre det).
-6. Oppdater `\\tos-sas-skde-01\SKDE_SAS\saskoder\master` (`git pull --rebase`, ev. be Arnfinn gjøre det) 
+6. Oppdater `\\tos-sas-skde-01\SKDE_SAS\felleskoder\master` (`git pull --rebase`, ev. be Arnfinn gjøre det) 
 
 
 ### Eksempel på makro
@@ -97,7 +97,7 @@ Når man lager en makro burde man også lage en test. Denne kan så kjøres sene
 ```
 %macro minNyeMakro_test(branch = master, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
-%include "\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch.\makroer\minNyeMakro.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\minNyeMakro.sas";
 
 data test;
 set skde_tst.minNyeMakro_start;
@@ -113,14 +113,14 @@ Her kjører man makroen på en kopi av datasettet `skde_tst.minNyeMakro_start` o
 
 Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn følgende kode i filen `test_makroer.sas`:
 ```
-%include "&filbane.makroer\tests\minNyeMakro_test.sas";
+%include "&filbane\makroer\tests\minNyeMakro_test.sas";
 %minNyeMakro_test(branch = &branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
 ```
 
 
 ### Dytte makroen opp til [github](https://github.com/SKDE-Analyse/sas_codes)
 
-Man gjør følgende i mappen `\\tos-sas-skde-01\SKDE_SAS\saskoder\<min_mappe>\` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
+Man gjør følgende i mappen `\\tos-sas-skde-01\SKDE_SAS\felleskoder\<min_mappe>\` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
 ```bash
 git status # for å sjekke at alt er som det skal
 git diff # for å sjekke litt ekstra nøye
@@ -146,7 +146,7 @@ Gå så inn på [github/branches](https://github.com/SKDE-Analyse/sas_codes/bran
 
 ![Alt text](bilder/automakro.png)
 
-- Da vil man få inn kode som kan kjøre rateprogrammet. Pr. 29. juni 2017 ser denne [slik ut](RateprogramAuto).
+- Da vil man få inn kode som kan kjøre rateprogrammet. Pr. 21. juni 2018 ser denne [slik ut](RateprogramAuto).
 
 ## Hvordan endre rateprogrammet
 
@@ -163,32 +163,32 @@ Gå så inn på [github/branches](https://github.com/SKDE-Analyse/sas_codes/bran
 Først må makro-filene inkluderes i prosjektet:
 
 ```
-%let kodebane = \\tos-sas-skde-01\SKDE_SAS\saskoder\tilrettelegging\npr\;
+%let kodebane = \\tos-sas-skde-01\SKDE_SAS\felleskoder\tilrettelegging\npr;
 
-%include "&kodebane.Formater.sas";
+%include "&kodebane\Formater.sas";
 
-%include "&kodebane.1_Macro-Konvertering_og_stringrydding.sas";
-%include "&kodebane.2_Macro-Bo_og_behandler.sas";
-%include "&kodebane.3_Macro-ICD10.sas";
-%include "&kodebane.4_Macro-Ovrige_avledede_variable.sas";
-%include "&kodebane.5_Macro-Lage_unik_ID.sas";
-%include "&kodebane.6_Macro-Labler_og_formater.sas";
-%include "&kodebane.7_Macro-Redusere_variabelstorrelser.sas";
-%include "&kodebane.8_Macro-Dele_datasett.sas";
+%include "&kodebane\1_Macro-Konvertering_og_stringrydding.sas";
+%include "&kodebane\2_Macro-Bo_og_behandler.sas";
+%include "&kodebane\3_Macro-ICD10.sas";
+%include "&kodebane\4_Macro-Ovrige_avledede_variable.sas";
+%include "&kodebane\5_Macro-Lage_unik_ID.sas";
+%include "&kodebane\6_Macro-Labler_og_formater.sas";
+%include "&kodebane\7_Macro-Redusere_variabelstorrelser.sas";
+%include "&kodebane\8_Macro-Dele_datasett.sas";
 ```
 
 Så inkluderes kjørefilen (da kjøres alle makroene):
 
 ```
-%include "&kodebane.Kjoring_av_macroer.sas";
+%include "&kodebane\Kjoring_av_macroer.sas";
 ```
 
 ## Kjøre tilrettelegging av innbyggertall fra SSB
 
 Følgende kode ble kjørt for å legge til innbyggertallene 1. januar 2018:
 ```
-%let kodebane = \\tos-sas-skde-01\SKDE_SAS\saskoder\tilrettelegging\ssb\;
-%include "&kodebane.lesSSBdata.sas";
+%let kodebane = \\tos-sas-skde-01\SKDE_SAS\felleskoder\tilrettelegging\ssb;
+%include "&kodebane\lesSSBdata.sas";
 
 %lesSSBdata(aar=2018, utdata = bydel, bydel = 1);
 
