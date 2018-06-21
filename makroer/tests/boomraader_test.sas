@@ -15,7 +15,7 @@ Sammenligner dette datasettet med en referanse (`skde_tst.ref_boomr_&navn`).
 
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\makroer\boomraader.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\boomraader.sas";
 
 /*
 Lage nytt startsett, basert på skde_tst.pseudosens_avd_magnus

@@ -73,7 +73,7 @@ run;
 /*	Lager figur	*/
 
 %let figfil = fig1e_yngre;
-%include "&filbane.\include\figurer_eng\lag_figur.sas";
+%include "&filbane\include\figurer_eng\lag_figur.sas";
 
 
 /*	Sletter datasett	*/

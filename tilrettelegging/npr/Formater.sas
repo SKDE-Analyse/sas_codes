@@ -1,25 +1,25 @@
-﻿%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\master\;
-options sasautos=("&filbane.makroer" SASAUTOS);
+﻿%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
+options sasautos=("&filbane\makroer" SASAUTOS);
 
-%include "&filbane.Formater\Bo.sas";
-%include "&filbane.Formater\Beh.sas";
-%include "&filbane.Formater\KomNr.sas";
-%include "&filbane.Formater\NPR_AvtSpes.sas";
-%include "&filbane.Formater\NPR_somatikk.sas";
-%include "&filbane.Formater\SKDE_somatikk.sas";
+%include "&filbane\formater\Bo.sas";
+%include "&filbane\formater\Beh.sas";
+%include "&filbane\formater\KomNr.sas";
+%include "&filbane\formater\NPR_AvtSpes.sas";
+%include "&filbane\formater\NPR_somatikk.sas";
+%include "&filbane\formater\SKDE_somatikk.sas";
 
 /* ICD-10*/
-%include "&filbane.Formater\icd10.sas";
-%include "&filbane.Formater\hdiag3tegn.sas";
+%include "&filbane\formater\icd10.sas";
+%include "&filbane\formater\hdiag3tegn.sas";
 
 /*NCMP*/
-%include "&filbane.Formater\ncmp.sas";
+%include "&filbane\formater\ncmp.sas";
 
 /*NCSP*/
-%include "&filbane.Formater\ncsp.sas";
+%include "&filbane\formater\ncsp.sas";
 
 /*NCSP*/
-%include "&filbane.Formater\ncrp.sas";
+%include "&filbane\formater\ncrp.sas";
 
 /*DRG*/
-%include "&filbane.Formater\drg.sas";
+%include "&filbane\formater\drg.sas";

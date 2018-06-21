@@ -4,33 +4,36 @@ man kan bruke. Filen skal være kjørbar som et *sas*-program slik den er.
 
 Den kan også fungere som en test av rateprogrammet. Kjøres slik:
 ```
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\master\;
-%include "&filbane.rateprogram\Rateprogram.sas";
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
+%include "&filbane\rateprogram\Rateprogram.sas";
 ```
 */
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
+options sasautos=("&filbane\makroer" SASAUTOS);
 
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\master\;
-options sasautos=("&filbane.makroer" SASAUTOS);
+%include "&filbane\formater\SKDE_somatikk.sas";
+%include "&filbane\formater\NPR_somatikk.sas";
+%include "&filbane\formater\bo.sas";
+%include "&filbane\formater\beh.sas";
+%include "&filbane\formater\komnr.sas";
 
-/*Options symbolgen mlogic mprint;*/
+%include "&filbane\rateprogram\rateberegninger.sas";
 
-%include "&filbane.formater\SKDE_somatikk.sas";
-%include "&filbane.formater\NPR_somatikk.sas";
-%include "&filbane.formater\bo.sas";
-%include "&filbane.formater\beh.sas";
-%include "&filbane.formater\komnr.sas";
-
-%include "&filbane.rateprogram\rateberegninger.sas";
-
-%include "&filbane.stiler\stil_figur.sas";
-%include "&filbane.stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "&filbane\stiler\stil_figur.sas";
+%include "&filbane\stiler\Anno_logo_kilde_NPR_SSB.sas";
 
 /******  DATAGRUNNLAG  ****************************************************************/
 %let Ratefil=skde_kur.ratetest_11_15;
 %let RV_variabelnavn=poli; /*navn på ratevariabel i det aggregerte datasettet*/
 %Let ratevariabel = Poliklinikk; /*Brukes til å lage "pene" overskrifter*/
 %Let forbruksmal = Konsultasjoner; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
-%Let innbyggerfil=Innbygg.innb_2004_2016_bydel_allebyer;
+%Let innbyggerfil=Innbygg.innb_2004_2017_bydel_allebyer;
+%let manglerKomnr = 0; /* Hvis ulik 0 -> definere komnr og bydel basert på bohf (brukes hvis komnr mangler i datasettet)*/
+%let aldersfigur = 1; /* Settes til null hvis man ikke vil ha ut aldersdistribusjonen i utvalget */
+%let haraldsplass = 0; /* Settes til ulik null hvis man vil dele Bergen i Haukland og Haraldsplass */
+%let indreOslo = 0; /* Settes til ulik null hvis man vil slå sammen Lovisenberg og diakonhjemmet */
+%let bydel = 1; /* Settes til null hvis man ikke har bydel i datasettet */
+%let barn = 0; /* Settes til ulik null hvis man vil ha opptaksområdestruktur som i barnehelseatlaset */
 
 /******  HVA ØNSKER DU Å FÅ UT?  **************************************************************/
 %let aarsvarfigur=1; /* Ønsker du Årsvariasjonsfigurer og/eller Konfidensintervallfigurer? */
@@ -96,7 +99,7 @@ else if 80<=alder then alder_ny=5;
 
 /******************************************************************************************/
 %utvalgx;
-%omraadeNorge;
+
 %rateberegninger;
 
 proc datasets nolist;

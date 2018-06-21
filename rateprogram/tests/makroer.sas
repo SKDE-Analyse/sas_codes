@@ -4,11 +4,11 @@ Felles makroer for testing og produksjon av test-datasett
 
 %macro inkluderFormater;
 
-%include "&filbane.formater\SKDE_somatikk.sas";
-%include "&filbane.formater\NPR_somatikk.sas";
-%include "&filbane.formater\bo.sas";
-%include "&filbane.formater\beh.sas";
-%include "&filbane.formater\komnr.sas";
+%include "&filbane\formater\SKDE_somatikk.sas";
+%include "&filbane\formater\NPR_somatikk.sas";
+%include "&filbane\formater\bo.sas";
+%include "&filbane\formater\beh.sas";
+%include "&filbane\formater\komnr.sas";
 
 %mend;
 
@@ -16,10 +16,10 @@ Felles makroer for testing og produksjon av test-datasett
 %macro testAnno(branch=master, lagReferanse = 0, slettDatasett = 1);
 
 %local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\;
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
 
-%include "&filbane.Stiler\stil_figur.sas";
-%include "&filbane.Stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "&filbane\Stiler\stil_figur.sas";
+%include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
 
 %if &lagReferanse = 0 %then %do;
 proc compare base=skde_arn.ref_rate_anno compare=anno BRIEF WARNING LISTVAR;
@@ -48,15 +48,15 @@ run;
 %end;
 
 %local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\;
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
 
-%include "&filbane.makroer\boomraader.sas";
-%include "&filbane.rateprogram\rateberegninger.sas";
+%include "&filbane\makroer\boomraader.sas";
+%include "&filbane\rateprogram\rateberegninger.sas";
 
 %inkluderFormater;
 
 %if &definerVariabler ne 0 %then %do;
-%include "&filbane.rateprogram\sas\definerVariabler.sas";
+%include "&filbane\rateprogram\sas\definerVariabler.sas";
 %definerVariabler;
 %end;
 
@@ -110,15 +110,15 @@ set skde_arn.ref_rate_andel;
 run;
 
 %local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\;
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
 
-%include "&filbane.makroer\boomraader.sas";
-%include "&filbane.rateprogram\rateberegninger.sas";
+%include "&filbane\makroer\boomraader.sas";
+%include "&filbane\rateprogram\rateberegninger.sas";
 
 %inkluderFormater;
 
 %if &definerVariabler ne 0 %then %do;
-%include "&filbane.rateprogram\sas\definerVariabler.sas";
+%include "&filbane\rateprogram\sas\definerVariabler.sas";
 %definerVariabler;
 %end;
 %end;
@@ -189,15 +189,15 @@ set skde_arn.ref_rate_norge_agg_snitt;
 run;
 
 %local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\saskoder\&branch\;
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
 
-%include "&filbane.makroer\boomraader.sas";
-%include "&filbane.rateprogram\rateberegninger.sas";
+%include "&filbane\makroer\boomraader.sas";
+%include "&filbane\rateprogram\rateberegninger.sas";
 
 %inkluderFormater;
 
 %if &definerVariabler ne 0 %then %do;
-%include "&filbane.rateprogram\sas\definerVariabler.sas";
+%include "&filbane\rateprogram\sas\definerVariabler.sas";
 %definerVariabler;
 %end;
 %end;

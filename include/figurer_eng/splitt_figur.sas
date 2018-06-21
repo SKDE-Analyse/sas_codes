@@ -101,7 +101,7 @@ run;
 /*Lager figur og lagrer bildefil*/
 
 %let figfil = fig2_eldre;
-%include "&filbane.\include\figurer_eng\lag_figur.sas";
+%include "&filbane\include\figurer_eng\lag_figur.sas";
 
 
 /* Sletter datasett */
