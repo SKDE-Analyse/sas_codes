@@ -1,6 +1,6 @@
 %macro lag_figur(dsn = , fignavn = , mappe ="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\Bildefiler",  
-rate1 = off, ratenavn1a = , ratenavn1b =, 
-rate2 = priv, ratenavn2a =, ratenavn2b =,
+rate1 = tot, ratenavn1a = , ratenavn1b =, 
+rate2 = , ratenavn2a =, ratenavn2b =,
 rate3 = , ratenavn3a =, ratenavn3b =,
 bildeformat = pdf, fontst = 9, xskala =, xlabel=);
 
@@ -153,6 +153,32 @@ ods graphics off;
 
 %mend;
 
+%macro enkel_figur(dsn =, figurnavn =, bildeformat =, mappe = , fontst =, xskala =);
+
+/* 
+Splittet søyle-figur 
+*/
+
+%let soylebredde = 0.8;
+
+ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat border=off ;
+ODS Listing Image_dpi=300 GPATH=&mappe;
+
+proc sgplot data=&dsn  noborder noautolegend sganno=Anno pad=(bottom=4%);
+hbarparm category=bohf response=RateSnitt / outlineattrs=(color=CX00509E) fillattrs=(color=CX95BDE6) missing barwidth=&soylebredde; 
+hbarparm category=bohf response=snittrate / outlineattrs=(color=CX4C4C4C) fillattrs=(color=CXC3C3C3) missing barwidth=&soylebredde; 
+     scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) datalabelattrs=(color=black size=7) ;
+xaxis label="&xlabel" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=&fontst);
+Yaxistable Konsultasjoner /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
+yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst) 
+         offsetmax=0.03 offsetmin=0.03 type=discrete discreteorder=data valueattrs=(size=&fontst) ;
+
+Format andel percent8. en_ant to_ant  ratesnitt_no rate_en_no nlnum8.0 ;
+run;
+ods graphics off;
+
+%mend;
+
 /* Definere figurnavn, hvis ikke gitt */
 %if %sysevalf(%superq(fignavn)=,boolean) %then %let fignavn = &dsn._&rate1._&rate2;
 
@@ -210,13 +236,10 @@ run;
 Rateberegninger
 */
 
-%local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
-
-%include "&filbane\rateprogram\rateberegninger.sas";
-%include "&filbane\rateprogram\sas\definerVariabler.sas";
-%include "&filbane\Stiler\stil_figur.sas";
-%include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\rateprogram\master\rateberegninger.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\rateprogram\master\sas\definerVariabler.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\Stiler\stil_figur.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\Stiler\Anno_logo_kilde_NPR_SSB.sas";
 
 %let ratefil = tmp_figur;
 
@@ -231,7 +254,7 @@ data &rate1;
 set konsultasjoner_bohf;
 run;
 
-
+%if not %sysevalf(%superq(rate2)=,boolean) %then %do;
 %let RV_variabelnavn = &rate2;
 %utvalgx;
 %rateberegninger;
@@ -239,6 +262,7 @@ run;
 data &rate2;
 set konsultasjoner_bohf;
 run;
+%end;
 
 %if not %sysevalf(%superq(rate3)=,boolean) %then %do;
     %let RV_variabelnavn = &rate3;
@@ -250,9 +274,17 @@ run;
     run;
 %end;
 
+%if not %sysevalf(%superq(rate2)=,boolean) %then %do;
 %samle_datasett(fil_en = &rate1, fil_to = &rate2, fil_tre = &rate3, label_en = &ratenavn1a, label_to = &ratenavn2a, label_tre =);
 
 %splittet_figur(dsn = smelt, figurnavn = &fignavn, bildeformat = &bildeformat, mappe = &mappe, label_en = &ratenavn1a, label_to = &ratenavn2a, label_tre =, fontst = &fontst, xskala = &xskala);
+%end;
+
+%if %sysevalf(%superq(rate2)=,boolean) %then %do;
+%enkel_figur(dsn = &rate1, figurnavn = &fignavn, bildeformat = &bildeformat, mappe = &mappe, fontst = &fontst, xskala = &xskala);
+%end;
+
+
 
 proc datasets nolist;
 delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd;
