@@ -1,6 +1,39 @@
 
 %macro flerniva_fixed_2niva;
 
+/*!
+
+HGLM - Hierarchical generalized linear models
+
+Referanse se: https://support.sas.com/resources/papers/proceedings15/3430-2015.pdf
+
+Outcome: Ablasjon (0,1) Binary/Dikotom
+Individ-nivå:
+- Alder - numerisk, centering ifht snittalder totalt i utvalget
+- Kjønn (0,1)
+
+Kommune-nivå:
+- Utdanning - kategorisk, ordinal (Lav, Middels, Høy)
+- Kommune_alder - gjennomsnittsalder i kommunen, centering av snittalder i hver kommune ifht snittalder totalt i utvalget
+
+## Eksempel
+```
+%let inndatasett=hglm;
+%let utkomme=Ablasjon;
+%let niva2=komnr;
+%let niva2_txt=kommune;
+%let mod1param=0;
+%let mod2param=2;
+%let mod3param=3;
+%let mod2var=ermann alder_p;
+%let mod3var=ermann alder_p alder_k kom_utd;
+
+%flerniva_fixed_2niva;
+```
+
+
+*/
+
 /* Modell 1:  Tom modell uten prediktorer */
 ods trace on;
 ods output ParameterEstimates=mod1PE CovParms=mod1CV FitStatistics=mod1FT;
@@ -13,8 +46,8 @@ run;
 ods trace off;
 
 /*resultat fra 
-Fixed Effects (ParameterEstimates) - Estimate = -2.7515 brukes for Ã¥ bergene p_suksess*
-CovParms brukes til Ã¥ bergene ICC - andel av vraisjon som  skyldes nivÃ¥ 2
+Fixed Effects (ParameterEstimates) - Estimate = -2.7515 brukes for å bergene p_suksess*
+CovParms brukes til å bergene ICC - andel av vraisjon som  skyldes nivå 2
 FitStatistics gir -2LL - beholder kun denne og sletter AIC osv*/
 
 data mod1PE;
@@ -41,7 +74,7 @@ merge mod1:;
 model=1;
 run;
 
-/* Modell 2:  modell med prediktorer pÃ¥ nivÃ¥ 1 */
+/* Modell 2:  modell med prediktorer på nivå 1 */
 ods trace on;
 ods output ParameterEstimates=mod2PE CovParms=mod2CV FitStatistics=mod2FT OddsRatios=mod2OR;
 proc glimmix data=&inndatasett method=laplace noclprint;
@@ -95,7 +128,7 @@ from model2 as a left join mod2OR as b
 on a.effect = b.EffectOR;
 quit; 
 
-/* Modell 3:  modell med prediktorer pÃ¥ nivÃ¥ 1 og nivÃ¥ 2*/
+/* Modell 3:  modell med prediktorer på nivå 1 og nivå 2*/
 ods trace on;
 ods output ParameterEstimates=mod3PE CovParms=mod3CV FitStatistics=mod3FT OddsRatios=mod3OR;
 proc glimmix data=&inndatasett method=laplace noclprint;
