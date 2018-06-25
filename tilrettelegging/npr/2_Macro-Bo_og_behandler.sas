@@ -1,9 +1,7 @@
 %Macro Bobehandler (innDataSett=, utDataSett=);
 
 /*!
-/***********************************************************************************************
-************************************************************************************************
-MACRO FOR BOSTED OG BEHANDLER
+### MACRO FOR BOSTED OG BEHANDLER
 
 Innhold i syntaxen:
 Bområder og behandlingssteder
