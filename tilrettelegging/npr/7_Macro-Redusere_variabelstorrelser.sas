@@ -4,7 +4,7 @@
 
 Makro for å redusere størrelsen på variabler i datasettet.
 
-Opprinnelig har alle variablene en størrelse på 8 byte. De fleste variablene trenger ikke okkupere så mye plass. 
+Opprinnelig har alle variablene en størrelse på 8 byte. De fleste variablene trenger ikke okkupere så mye plass.
 
 */
 
@@ -23,7 +23,7 @@ length behhf behrhf behsh 4;
 length hdiag hdiag2 $7;
 length bdiag: $7;
 %if &avtspes ne 0 %then %do;
-length tdiag: $5;
+length tdiag: $7;
 %end;
 length hdiag3tegn $3;
 length aar 4;

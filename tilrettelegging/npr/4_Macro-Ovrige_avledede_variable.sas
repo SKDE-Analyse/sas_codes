@@ -1,18 +1,20 @@
 ﻿%Macro Avledede (innDataSett=, utDataSett=);
 
 
-/*!**********************************************************************************************
-************************************************************************************************
+/*!
+
 MACRO FOR AVLEDEDE VARIABLE
 
-Innhold i macroen:
-	4.1 Retting av ugyldig fødselsår og avleding av aldersgrupper
-	4.2 Definisjon av Alder, Ald_gr og Ald_gr5
-	4.3 Omkoding av KJONN til ErMann 
-	4.5 DRGTypeHastegrad
+### Innhold i macroen:
+1. Retting av ugyldig fødselsår og avleding av aldersgrupper
+2. Definisjon av Alder, Ald_gr og Ald_gr5
+3. Omkoding av KJONN til ErMann 
+5. DRGTypeHastegrad
 
-************************************************************************************************
-***********************************************************************************************/
+
+### Steg for steg
+
+*/
 
 
 
@@ -20,9 +22,10 @@ Data &Utdatasett;
 set &Inndatasett;
 
 /*!
-********************************************************
-4.1 Retting av ugyldig fødselsår
-*********************************************************
+- Retting av ugyldig fødselsår
+/*
+
+/*
 I datasettet er det registrert 27 personer over 110 år, som er høyeste oppnådde alder for bosatte i Norge i denne perioden, jfr. 
 Wikipedias kronologiske liste over eldste levende personer i Norge siden 1964 (http:
 //no.wikipedia.org/wiki/Liste_over_Norges_eldste_personer#Kronologisk_liste_over_eldste_levende_personer_i_Norge_siden_01.01.1964).
@@ -32,7 +35,8 @@ alder som ugyldig når oppgitt alder er høyere enn eldste person registret i No
 Satte opprinnelig et krav om at personene måtte være bosatt i Norge, ettersom det er her vi har tall for eldste nålevende personer.
 Dette innebærer imidlertid at mange opphold for personer bosatt i utlandet med alder over 110 år, og en særlig opphopning rundt 
 årstallet 1899 (som kan mistenkes være brukt som missing-verdi.Velger derfor også å nullstille alder for utenlandske borgere etter 
-samme regel som for norske*/
+samme regel som for norske
+*/
 
 if aar=2012 and fodselsar < 1902 then fodselsar=9999;
 if aar in (2013,2014,2015,2016) and fodselsar < 1904 then fodselsar=9999;
@@ -52,18 +56,16 @@ if utdato lt MDY (1,1,2012) then utdato = .;
 if utdato gt MDY (1,1,2017) then utdato = .;
 %end;
 
-/*
-4.2 Definerer Alder, ald_gr og Ald_gr5
-**************************************************
+/*!
+- Definerer Alder, ald_gr og Ald_gr5
 */
+
 /*Definerer Alder basert på Fodselsår*/
 Alder=aar-fodselsar;
 if fodselsar=9999 then alder=.; /*Ugyldig*/
 
-/*
-**************************************************
-4.3 Omkoding av KJONN til ErMann 	
-**************************************************
+/*!
+- Omkoding av KJONN til ErMann 	
 */
 if KJONN=1 /*1 ='Mann' */ then ErMann=1;
 else if KJONN=2 /*2 ='Kvinne' */ then ErMann=0;
@@ -81,9 +83,9 @@ if kjonn=1 and kjonn_ident09052017=2 then ulikt_kjonn=1;
 if kjonn=2 and kjonn_ident09052017=1 then ulikt_kjonn=1;
 %end;
 
-/****************************************
-*** 4.5 hastegrad og DRGtypeHastegrad ***
-****************************************/
+/*!
+- hastegrad og DRGtypeHastegrad (kun for somatikk)
+*/
 
 %if &somatikk ne 0 %then %do;
 hastegrad=.;
@@ -101,4 +103,5 @@ if hastegrad=. then DRGtypeHastegrad=9;
 
 run;
 
-%Mend Avledede;
+%mend;
+

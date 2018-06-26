@@ -1,8 +1,7 @@
-/*!*********************************************************************
-***********************************************************************
-	6.	Fordele de tilrettelagte variablene i to datasett
-***********************************************************************
-**********************************************************************/
+/*!
+
+Fordele de tilrettelagte variablene i to datasett
+*/
 
 %Macro Merge_persondata (innDataSett=, utDataSett=);
 /*!
@@ -40,9 +39,25 @@ run;
 
 %Macro Splitte (innDataSett=, utDataSettEN=,utDataSettTO=);
 
-/*!**
-1. Datasett med de mest sentrale tilrettelagte variable
-***/
+/*!
+Splitte datasett i to
+
+Forslag til forbedring av makro: definer de viktigste variablene i et let-statement og kjør keep eller drop på dette. Noe ala dette
+```
+%let viktige = inndato utdato aktivitetskategori3 ErMann alder koblingsID HDG komnr bydel bohf borhf boshhn behsh behhf behrhf hdiag hdiag2 hdiag3tegn bdiag1-bdiag19 ncmp1-ncmp19 ncsp1-ncsp19;
+
+%let viktig_som = ...;
+%let viktig_avtspes = ...;
+
+keep aar pid &viktige KoblingsID;
+``` 
+
+*/
+
+/*!
+- Datasett med de mest sentrale tilrettelagte variable
+*/
+
 Data &UtdatasettEN;
 %if &avtspes ne 0 %then %do;
 retain aar pid inndato utdato ErMann alder koblingsID komnr bydel bohf borhf borhf boshhn hdiag hdiag2 hdiag3tegn bdiag1-bdiag9 ncmp1-ncmp10 ncsp1-ncsp10 ; 
@@ -132,6 +147,9 @@ AvtaleRHF
 format koblingsID 32.;
 run;
 
+/*!
+- Datasett med de andre variablene
+*/
 
 Data &UtdatasettTO;
 retain aar koblingsId;

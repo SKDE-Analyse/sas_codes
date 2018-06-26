@@ -1,15 +1,17 @@
-%Macro ICD (innDataSett=, utDataSett=);
+%macro ICD(innDataSett=, utDataSett=);
 
-/*!**********************************************************************************************
-************************************************************************************************
+/*!
+
 MACRO FOR ICD-KAPITTEL, KATEGORIBLOKK OG HOVEDDIAGNOSE PÅ TRE TEGN
 
-Innhold i syntaxen:
-3.1		ICD10KAP
-3.2 	ICD10KATBLOKK
-3.3		HDIAG3TEGN
-************************************************************************************************
-***********************************************************************************************/
+### Innhold
+1. ICD10KAP
+2. ICD10KATBLOKK
+3. HDIAG3TEGN
+
+
+### Steg for steg
+*/
 
 
 
@@ -19,12 +21,12 @@ Data &Utdatasett;
 Set &Inndatasett;
 
 /*
-************************************************************************************************
-3.1	ICD10KAP
-************************************************************************************************
-/*Definerer hoveddiagnosekap for ICD10 (1 tegn) ut fra oppgitt hoveddiagnose (4 tegn).*/;
+ICD10KAP
+*/
 
-/* Disse kodene er ikke oppdatert siden 2014 - vi må finne/be e-helsedir og lister for hvert år */
+/*!
+- Definerer hoveddiagnosekap for ICD10 (1 tegn) ut fra oppgitt hoveddiagnose (4 tegn). Disse kodene er ikke oppdatert siden 2014 - vi må finne/be e-helsedir og lister for hvert år 
+*/
 
 if substr(Hdiag,1,1) ='A' then ICD10Kap=1; /*Visse infeksjonssykd og parasittsykd*/
 else if substr(Hdiag,1,1)='B' then ICD10Kap=1; /*Visse infeksjonssykd og parasittsykd*/
@@ -73,11 +75,11 @@ else if substr(Hdiag,1,2)='H8' then ICD10Kap=8; /*Sykd i øre og ørebensknute,H60
 else if substr(Hdiag,1,2)='H9' then ICD10Kap=8; /*Sykd i øre og ørebensknute,H60-H95*/
 else ICD10Kap=23; /*Ukjent eller manglende diagnose*/
 
-/*
-************************************************************************************************
-3.2 	ICD10KATBLOKK
-************************************************************************************************
-/*Definerer ICD10 kategoriblokker*/
+/* ICD10KATBLOKK */
+
+/*!
+- Definerer ICD10 kategoriblokker
+*/
 if substr(Hdiag,1,2) ='A0' then ICD10KatBlokk=1 /* A00-A09 Infeksiøse tarmsykdommer */;
 else if substr(Hdiag,1,2)='A1' then ICD10KatBlokk=2 /* A15-A19 Tuberkulose */;
 else if substr(Hdiag,1,2)='A2' then ICD10KatBlokk=3 /* A20-A28 Visse bakterielle zoonoser */;
@@ -319,11 +321,14 @@ else if substr(Hdiag,1,2) in ('U0','U1','U2','U3','U4') then ICD10KatBlokk=223 /
 else if substr(Hdiag,1,2) in ('U8','U9') then ICD10KatBlokk=224 /* U80-U99 Bakterier resistente mot antibiotika */;
 else if substr(Hdiag,1,2) in (' ','Ugyldig') then ICD10KatBlokk=.;
 else ICD10KatBlokk=.;
+
 /*
 ************************************************************************************************
 3.3		Hdiag_3tegn	
 ************************************************************************************************
-/*Definerer hoveddiagnose på 3-tegnsnivå*/;
+/*!
+- Definerer hoveddiagnose på 3-tegnsnivå
+*/
 
 Hdiag3tegn=substr(Hdiag,1,3);
 
@@ -332,7 +337,9 @@ Hdiag3tegn=substr(Hdiag,1,3);
 ************************************************************************************************
 3.7	FAG_SKDE
 ************************************************************************************************
-/*Lager ny harmonisert variabel fra FAG og FAGLOGG. */
+/*!
+- Lager ny harmonisert variabel fra FAG og FAGLOGG (gjelder kun avtalespesialister). 
+*/
 
 %if &avtspes ne 0 %then %do;
 if aar in (2012:2014) then do;
@@ -392,4 +399,4 @@ drop tell_takst;
 
 run;
 
-%Mend ICD;
+%mend;
