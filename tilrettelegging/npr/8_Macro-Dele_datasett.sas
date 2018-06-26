@@ -20,7 +20,7 @@ select &innDataSett..*, emigrertDato, dodDato, fodselsAar_ident19062018, fodt_mn
 %if &somatikk ne 0 %then %do;
 select &innDataSett..*, emigrertDato, dodDato
 %end;
-from &innDataSett left join NPR_SKDE.T18_persondata
+from &innDataSett left join NPR18.T18_persondata
 on &innDataSett..pid=T18_persondata.pid;
 quit; 
 
