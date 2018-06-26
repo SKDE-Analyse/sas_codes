@@ -45,9 +45,8 @@ set &utdata;
 
 /* 
 Ta ut totaltallene for disse kommunene 
-Ta ut linjer der antall innbyggere er null
 */
-where (substr(region,5,2) ne '00') and (Personer > 0);
+where substr(region,5,2) ne '00';
 
 /* Lage bydelsvariabel og endre den til numerisk */
 bydel_string=substr(region,1,6);
@@ -60,9 +59,8 @@ drop bydel_string;
 Ta ut Oslo, Bergen, Trondheim og Stavanger fra kommunefil 
 '0301'=Oslo, '1103'=Stavanger, '1201'=Bergen, 
 '1601'=Trondheim før 2018, '5001'=Trondheim fra 2018
-Ta ut linjer der antall innbyggere er null
 */
-where (not (substr(region,1,4) in ('0301', '1103', '1201', '1601', '5001'))) and (Personer > 0);
+where not (substr(region,1,4) in ('0301', '1103', '1201', '1601', '5001'));
 
 bydel = .;
 
