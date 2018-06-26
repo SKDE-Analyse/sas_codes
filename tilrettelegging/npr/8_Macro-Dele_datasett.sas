@@ -4,7 +4,7 @@
 ***********************************************************************
 **********************************************************************/
 
-%Macro Merge_dod_emigrert (innDataSett=, utDataSett=);
+%Macro Merge_persondata (innDataSett=, utDataSett=);
 /*!
  Kobler først på variablene emigrert og dodDato fra egen fil 
  */
@@ -15,28 +15,28 @@
 proc sql;
 create table &utDataSett as
 %if &avtspes ne 0 %then %do;
-select &innDataSett..*, emigrertDato, dodDato, fodselsAar_ident09052017, fodt_mnd_ident09052017, kjonn_ident09052017
+select &innDataSett..*, emigrertDato, dodDato, fodselsAar_ident19062018, fodt_mnd_ident19062018, kjonn_ident19062018
 %end;
 %if &somatikk ne 0 %then %do;
 select &innDataSett..*, emigrertDato, dodDato
 %end;
-from &innDataSett left join NPR_SKDE.T17_doed_NyEmigrert_kjonn_faar
-on &innDataSett..pid=T17_doed_NyEmigrert_kjonn_faar.pid;
+from &innDataSett left join NPR_SKDE.T18_persondata
+on &innDataSett..pid=T18_persondata.pid;
 quit; 
 
 data &utDataSett;
 set &innDataSett;
-label emigrertDato='Emigrert dato - per 20170425 (NPR)';
-label dodDato='Dødedato - per 20170425 (NPR)';
+label emigrertDato='Emigrert dato - per 19062018 (NPR)';
+label dodDato='Dødedato - per 19062018 (NPR)';
 %if &avtspes ne 0 %then %do;
-label fodselsAar_ident09052017='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
-label fodt_mnd_ident09052017='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
-label kjonn_ident09052017='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten';
+label fodselsAar_ident19062018='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
+label fodt_mnd_ident19062018='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
+label kjonn_ident19062018='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten';
 %end;
-length DodDato emigrertdato 4;
+length dodDato emigrertDato 4;
 run;
 
-%Mend Merge_dod_emigrert;
+%Mend Merge_persondata;
 
 %Macro Splitte (innDataSett=, utDataSettEN=,utDataSettTO=);
 
