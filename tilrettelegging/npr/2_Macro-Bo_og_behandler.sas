@@ -1,48 +1,48 @@
 %Macro Bobehandler (innDataSett=, utDataSett=);
 
 /*!
-### MACRO FOR BOSTED OG BEHANDLER
+MACRO FOR BOSTED OG BEHANDLER
 
-Innhold i syntaxen:
+### Innhold i syntaxen:
 Bområder og behandlingssteder
-2.1		Numerisk kommunenummer og bydel (for Oslo)
-2.2 	BoShHN - Opptaksområder for lokalsykehusene i Helse Nord
-2.3		BoHF - Opptaksområder for helseforetakene
-2.4		BoRHF - Opptaksområder for RHF'ene
-2.5		Fylke
-2.6		Vertskommuner i Helse Nord
-2.7 	Behandlingssteder
-2.8		BehSh - Behandlende sykehus
-2.9		BehHF - Behandlende helseforetak
-2.10	BehRHF - Behandlende regionalt helseforetak
-2.11    SpesialistKomHN og vertskommuner (Vertskommuner Helse Nord)
-2.12    Spesialistenes avtale-RHF 
-************************************************************************************************
+1. Numerisk kommunenummer og bydel (for Oslo)
+2. BoShHN - Opptaksområder for lokalsykehusene i Helse Nord
+3. BoHF - Opptaksområder for helseforetakene
+4. BoRHF - Opptaksområder for RHF'ene
+5. Fylke
+6. Vertskommuner i Helse Nord
+7. Behandlingssteder
+8. BehSh - Behandlende sykehus
+9. BehHF - Behandlende helseforetak
+10. BehRHF - Behandlende regionalt helseforetak
+11. SpesialistKomHN og vertskommuner (Vertskommuner Helse Nord)
+12. Spesialistenes avtale-RHF 
 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+### Logg
+
 Opprettet av: Linda Leivseth 
 Opprettet dato: 06. juni 2015
 Sist modifisert: 04.10.2016 av Linda Leivseth og Petter Otterdal
 Sist modifisert: 05.01.2017 av Linda Leivseth (lagt til missigverdi 99 for manglende info om bydel2)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-***********************************************************************************************/
+
+### Steg for steg
+*/
 
 Data &Utdatasett;
 Set &Inndatasett;
 
+
+
 %if &somatikk ne 0 %then %do;
-/*
-Skille Glittre og Feiring i behandlingsstedKode2  da dette ikke er gjort fra NPR.
-Begge rapporterer på org.nr til Feiring (973144383) fra og med 2015.
+/*!
+- Skille Glittre og Feiring i behandlingsstedKode2  da dette ikke er gjort fra NPR. Begge rapporterer på org.nr til Feiring (973144383) fra og med 2015.
 */
 if behandlingsstedKode2 in (973144383, 974116561) and tjenesteenhetKode=3200 then behandlingsstedKode2=974116561;
 %end;
 
-/*
-*******************************************************************************
-2.1 Numerisk kommunenummer og bydel (for Oslo, Stavanger, Bergen og Trondheim)
-*******************************************************************************
+/*!
+- Numerisk kommunenummer og bydel (for Oslo, Stavanger, Bergen og Trondheim)
 */
 
 bydel2_num=.;
@@ -108,41 +108,15 @@ if KomNr in (1723/*Mosvik*/,1729 /*Inderøy*/) then KomNr=1756 /*Inderøy:Gjelder 
 /*Ukjente kommunenummer*/
 if KomNr in (0,8888,9999) then KomNr=9999; 
 
-/*
-********************************************************
-2.2 BoShHN - Opptaksområder for lokalsykehusene i Helse Nord
-********************************************************
-
-*********************************************************
-2.3 BoHF - Opptaksområder for helseforetakene
-*********************************************************
-
-*****************************************************
-2.4 BoRHF - Opptaksområder for RHF'ene
-*****************************************************
-
-******************************************************
-2.5 Fylke
-******************************************************
-
-*****************************************************
-2.6 VertskommHN (Vertskommuner Helse Nord)
-*****************************************************
+/*!
+- Kjøre boområde-makroen for å definere opptaksområder
 */
-
 %boomraader();
 
 %if &somatikk ne 0 %then %do;
-/*
-********************************************************
-2.7 Behandlende sykehus
-********************************************************
+/*!
+- Definere `behsh` - behandlende sykehus
 */
-
- 
-
-	  
-
 
 /************************
 *** Helse Finnmark HF ***
@@ -562,10 +536,8 @@ samt Samnanger og kommunene i Nordhordland.*/
      								998558271 /*Oslo medisinske senter*/,  
       								999230008 /*Ifocus øyeklinikk AS*/) then BehSh=300;	
 
-/*
-*****************************************************************
-2.8 BehHF - Behandlende helseforetak
-*****************************************************************
+/*!
+- Definere `BehHF` - Behandlende helseforetak
 */
 
 if 10<=BehSh<=19 then BehHF=1/*Finnmarkssykehuset HF*/;
@@ -595,10 +567,8 @@ if 251<=BehSh<=254 then BehHF=25/*Resterende Helse Sør-Øst RHF*/;
 if BehSh=260 then BehHF=26;/*Haraldsplass diakonale sykehus*/
 if BehSh=300 then BehHF=27/*Private sykehus*/;
 
-/*
-*****************************************************************
-2.9 BehRHF - Behandlende regionalt helseforetak
-*****************************************************************
+/*!
+- Definere `BehRHF` - Behandlende regionalt helseforetak
 */
 
 if BehHF in (1,2,3,4) then BehRHF=1;/* Helse Nord RHF */
@@ -609,10 +579,8 @@ if BehHF=27 then BehRHF=5;/* Private sykehus */;
 %end;
 
 %if &avtspes ne 0 %then %do;
-/*
-**************************************************************************
-2.11 Definerer SpesialistKomHN og vertskommuner (Vertskommuner Helse Nord)
-**************************************************************************
+/*!
+- Definerer SpesialistKomHN og vertskommuner (Vertskommuner Helse Nord) for avtalespesialister
 */
 
 
@@ -699,10 +667,8 @@ else AvtSpesKomHN = .;
 
 
 
-/*
-************************************************************************************************
-2.12 Spesialistenes avtale-RHF 
-************************************************************************************************
+/*!
+- Definere spesialistenes avtale-RHF
 */
 /*Egen numerisk variabel for avtaleRHF*/
 If InstitusjonID in (113447,113672,113834,113298,113316,113330,113674,
@@ -809,4 +775,4 @@ Format Avtalerhf Borhf.;
 
 run;
 
-%Mend Bobehandler;
+%mend bobehandler;
