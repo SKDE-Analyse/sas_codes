@@ -3,8 +3,8 @@
 /*!
 Makro for å teste EoC-makro.
 
-Kjører EoC-makroen på et test-datasett (skde_tst.pseudosens_avd_magnus) med ulike parametre.
-Sammenligner datasettene som spyttes ut med referanse-sett (skde_tst.ref_eoc[n]).
+Kjører EoC-makroen på et test-datasett (test.pseudosens_avd_magnus) med ulike parametre.
+Sammenligner datasettene som spyttes ut med referanse-sett (test.ref_eoc[n]).
 
 ## input
 
@@ -21,8 +21,8 @@ Sammenligner datasettene som spyttes ut med referanse-sett (skde_tst.ref_eoc[n])
 /*
 Hente pseudosensitivt datasett
 */
-data skde_tst.eoc_startsett;
-set skde_tst.pseudosens_avd_magnus (drop = Bdiag: drg drg_type episodeFag Hdiag: ICD10Kap  InstitusjonId KoblingsID korrvekt ncmp: ncsp: ncrp: polUtforende_1);
+data test.eoc_startsett;
+set test.pseudosens_avd_magnus (drop = Bdiag: drg drg_type episodeFag Hdiag: ICD10Kap  InstitusjonId KoblingsID korrvekt ncmp: ncsp: ncrp: polUtforende_1);
 run;
 %end;
 
@@ -31,7 +31,7 @@ Sjekk at det er trygt å kjøre EoC makroen flere ganger etter hverandre
 */
 
 data testset;
-set skde_tst.eoc_startsett;
+set test.eoc_startsett;
 run;
 
 %episode_of_care(dsn=testset);
@@ -41,66 +41,66 @@ run;
 %episode_of_care(dsn=testset);
 
 %if &lagNyRef ne 0 %then %do;
-data skde_tst.ref_eoc1;
+data test.ref_eoc1;
 set testset;
 run;
 %end;
 
-proc compare base=skde_tst.ref_eoc1 compare=testset BRIEF WARNING LISTVAR;
+proc compare base=test.ref_eoc1 compare=testset BRIEF WARNING LISTVAR;
 
 /*
 Sjekk forste_hastegrad = 0
 */
 
 data testset;
-set skde_tst.eoc_startsett;
+set test.eoc_startsett;
 run;
 
 %episode_of_care(dsn=testset, forste_hastegrad = 0);
 
 %if &lagNyRef ne 0 %then %do;
-data skde_tst.ref_eoc2;
+data test.ref_eoc2;
 set testset;
 run;
 %end;
 
-proc compare base=skde_tst.ref_eoc2 compare=testset BRIEF WARNING LISTVAR;
+proc compare base=test.ref_eoc2 compare=testset BRIEF WARNING LISTVAR;
 
 /*
 Sjekk at inntid og uttid er korrekt
 */
 
 data testset;
-set skde_tst.eoc_startsett;
+set test.eoc_startsett;
 run;
 
 %episode_of_care(dsn=testset, behold_datotid = 1);
 
 %if &lagNyRef ne 0 %then %do;
-data skde_tst.ref_eoc3;
+data test.ref_eoc3;
 set testset;
 run;
 %end;
 
-proc compare base=skde_tst.ref_eoc3 compare=testset BRIEF WARNING LISTVAR;
+proc compare base=test.ref_eoc3 compare=testset BRIEF WARNING LISTVAR;
 
 /*
 Teste det å nulle liggedøgn for dag og poliklinikk
 */
 
 data testset;
-set skde_tst.eoc_startsett;
+set test.eoc_startsett;
 run;
 
 %episode_of_care(dsn=testset, nulle_liggedogn = 1);
 
 %if &lagNyRef ne 0 %then %do;
-data skde_tst.ref_eoc4;
+data test.ref_eoc4;
 set testset;
 run;
 %end;
 
-proc compare base=skde_tst.ref_eoc4 compare=testset BRIEF WARNING LISTVAR;
+proc compare base=test.ref_eoc4 compare=testset BRIEF WARNING LISTVAR;
 
 
 /*
@@ -108,18 +108,18 @@ Teste det å ikke aggregere poliklinikk i EoC (separer_ut_poli ne 0)
 */
 
 data testset;
-set skde_tst.eoc_startsett;
+set test.eoc_startsett;
 run;
 
 %episode_of_care(dsn=testset, separer_ut_poli = 1);
 
 %if &lagNyRef ne 0 %then %do;
-data skde_tst.ref_eoc5;
+data test.ref_eoc5;
 set testset;
 run;
 %end;
 
-proc compare base=skde_tst.ref_eoc5 compare=testset BRIEF WARNING LISTVAR;
+proc compare base=test.ref_eoc5 compare=testset BRIEF WARNING LISTVAR;
 
 
 /*
@@ -127,18 +127,18 @@ Teste kols = 1
 */
 
 data testset;
-set skde_tst.eoc_startsett;
+set test.eoc_startsett;
 run;
 
 %episode_of_care(dsn=testset, kols = 1);
 
 %if &lagNyRef ne 0 %then %do;
-data skde_tst.ref_eoc6;
+data test.ref_eoc6;
 set testset;
 run;
 %end;
 
-proc compare base=skde_tst.ref_eoc6 compare=testset BRIEF WARNING LISTVAR;
+proc compare base=test.ref_eoc6 compare=testset BRIEF WARNING LISTVAR;
 
 
 /*
@@ -146,18 +146,18 @@ Teste inndeling = 1
 */
 
 data testset;
-set skde_tst.eoc_startsett;
+set test.eoc_startsett;
 run;
 
 %episode_of_care(dsn=testset, inndeling = 1);
 
 %if &lagNyRef ne 0 %then %do;
-data skde_tst.ref_eoc7a;
+data test.ref_eoc7a;
 set testset;
 run;
 %end;
 
-proc compare base=skde_tst.ref_eoc7a compare=testset BRIEF WARNING LISTVAR;
+proc compare base=test.ref_eoc7a compare=testset BRIEF WARNING LISTVAR;
 
 
 /*
@@ -165,18 +165,18 @@ Teste inndeling = 2
 */
 
 data testset;
-set skde_tst.eoc_startsett;
+set test.eoc_startsett;
 run;
 
 %episode_of_care(dsn=testset, inndeling = 2);
 
 %if &lagNyRef ne 0 %then %do;
-data skde_tst.ref_eoc7b;
+data test.ref_eoc7b;
 set testset;
 run;
 %end;
 
-proc compare base=skde_tst.ref_eoc7b compare=testset BRIEF WARNING LISTVAR;
+proc compare base=test.ref_eoc7b compare=testset BRIEF WARNING LISTVAR;
 
 
 /*
@@ -184,18 +184,18 @@ Teste inndeling = 3
 */
 
 data testset;
-set skde_tst.eoc_startsett;
+set test.eoc_startsett;
 run;
 
 %episode_of_care(dsn=testset, inndeling = 3);
 
 %if &lagNyRef ne 0 %then %do;
-data skde_tst.ref_eoc7c;
+data test.ref_eoc7c;
 set testset;
 run;
 %end;
 
-proc compare base=skde_tst.ref_eoc7c compare=testset BRIEF WARNING LISTVAR;
+proc compare base=test.ref_eoc7c compare=testset BRIEF WARNING LISTVAR;
 
 
 %if &debug eq 0 %then %do;

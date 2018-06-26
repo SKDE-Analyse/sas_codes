@@ -100,16 +100,16 @@ Når man lager en makro burde man også lage en test. Denne kan så kjøres sene
 %include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\minNyeMakro.sas";
 
 data test;
-set skde_tst.minNyeMakro_start;
+set test.minNyeMakro_start;
 run;
 
 %minNyeMakro(variabel1 = test);
 
-proc compare base=skde_tst.ref_minNyeMakro compare=test BRIEF WARNING LISTVAR;
+proc compare base=test.ref_minNyeMakro compare=test BRIEF WARNING LISTVAR;
 
 %mend;
 ```
-Her kjører man makroen på en kopi av datasettet `skde_tst.minNyeMakro_start` og tester at det er likt datasettet `skde_tst.ref_minNyeMakro`. Disse to datasettene er lagret på server på forhånd. Se i mappen `tests\` for eksempler på bruk av argumentene `branch`, `debug`, `lagNyRef` og `lagNyStart`. 
+Her kjører man makroen på en kopi av datasettet `test.minNyeMakro_start` og tester at det er likt datasettet `test.ref_minNyeMakro`. Disse to datasettene er lagret på server på forhånd. Se i mappen `tests\` for eksempler på bruk av argumentene `branch`, `debug`, `lagNyRef` og `lagNyStart`. 
 
 Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn følgende kode i filen `test_makroer.sas`:
 ```
