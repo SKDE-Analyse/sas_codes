@@ -1,5 +1,5 @@
 proc format;
-value $F
+value $icd_2017F
 'A000'="Kolera som skyldes Vibrio cholerae 01, biovar cholerae"
 'A001'="Kolera som skyldes Vibrio cholerae 01, biovar eltor"
 'A009'="Uspesifisert kolera"
@@ -19597,4 +19597,4 @@ value $F
 'Z999'="Avhengighet av ikke spesifiert teknisk hjelpemiddel eller innretning"
 
 ;
-run
+run;

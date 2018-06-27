@@ -1300,4 +1300,4 @@ value $NCRP_2016F
 'ZTX6W9'="Radiofarmaka udefinert"
 
 ;
-run
+run;

@@ -9064,4 +9064,4 @@ value $icd_2016F
 'U849'="Resistens mot uspesifisert antimikrobielt legemiddel"
 
 ;
-run
+run;

@@ -755,4 +755,4 @@ value $NCMP_2016F
 'ZWWB01'="Bruk av larynxmaske ved sedering og generell anestesi"
 
 ;
-run
+run;

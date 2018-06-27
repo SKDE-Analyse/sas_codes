@@ -758,4 +758,4 @@ value $NCMP_2017F
 'ZWWB01'="Bruk av larynxmaske ved sedering og generell anestesi"
 
 ;
-run
+run;
