@@ -31,10 +31,10 @@ where kontakt in (4,5);
 */
 
 /*!
-- Lager `pid` fra `lnr` (løpenummer) og sletter `lnr`
+- Lager `pid` fra `lopenr` (løpenummer) og sletter `lopenr`
 */
-PID=lnr+0;
-Drop lnr;
+PID=lopenr+0;
+Drop lopenr;
 
 /*!
 - Gjør `RehabType` numerisk.

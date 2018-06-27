@@ -36,9 +36,9 @@ Set &Inndatasett;
 
 %if &somatikk ne 0 %then %do;
 /*!
-- Skille Glittre og Feiring i behandlingsstedKode2  da dette ikke er gjort fra NPR. Begge rapporterer på org.nr til Feiring (973144383) fra og med 2015.
+- Skille Glittre og Feiring i behandlingssted2  da dette ikke er gjort fra NPR. Begge rapporterer på org.nr til Feiring (973144383) fra og med 2015.
 */
-if behandlingsstedKode2 in (973144383, 974116561) and tjenesteenhetKode=3200 then behandlingsstedKode2=974116561;
+if behandlingssted2 in (973144383, 974116561) and tjenesteenhetKode=3200 then behandlingssted2=974116561;
 %end;
 
 /*!
@@ -122,10 +122,10 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 *** Helse Finnmark HF ***
 ************************/
 
-		if behandlingsstedKode2 in (974795930, 974795833, 978296296,974285959,979873190,983974880) then behSh=10; 
+		if behandlingssted2 in (974795930, 974795833, 978296296,974285959,979873190,983974880) then behSh=10; 
 
-		if behandlingsstedKode2=974795930 /*'Finnmarkssykehuset HF, Kirkenes'*/ then BehSh=11; 
-		if behandlingsstedKode2 in (974795833 /*'Finnmarkssykehuset HF, Hammerfest'*/, 978296296 /*Alta helsesenter*/,
+		if behandlingssted2=974795930 /*'Finnmarkssykehuset HF, Kirkenes'*/ then BehSh=11; 
+		if behandlingssted2 in (974795833 /*'Finnmarkssykehuset HF, Hammerfest'*/, 978296296 /*Alta helsesenter*/,
 			974285959 /*Finnmarkssykehuset, Karasjok*/,979873190 /*'Finnmarkssykehuset, Alta*/) then BehSh=12;
 
 
@@ -134,11 +134,11 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 *** UNN HF ***
 *************/
 
-		if behandlingsstedKode2 in (974795787, 974795639, 974795396) then behSh=20; 
+		if behandlingssted2 in (974795787, 974795639, 974795396) then behSh=20; 
 
-		if behandlingsstedKode2=974795787 /*'UNN Tromsø'*/ then BehSh=21;
-		if behandlingsstedKode2=974795396 /*'UNN Narvik'*/ then BehSh=23;
-		if behandlingsstedKode2=974795639 /*'UNN Harstad'*/ then BehSh=22;
+		if behandlingssted2=974795787 /*'UNN Tromsø'*/ then BehSh=21;
+		if behandlingssted2=974795396 /*'UNN Narvik'*/ then BehSh=23;
+		if behandlingssted2=974795639 /*'UNN Harstad'*/ then BehSh=22;
 
 
 
@@ -146,7 +146,7 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 *** NLSH HF ***
 ***************/
 
-		if behandlingsstedKode2 in (983974910 /*Nordlandssykehuset*/, 
+		if behandlingssted2 in (983974910 /*Nordlandssykehuset*/, 
 									    974795574 /*Nordlandssykehuset Vesterålen*/,
 										974795558 /*Nordlandssykehuset Lofoten*/,
 										974795361 /*Nordlandssykehuset Bodø*/
@@ -154,12 +154,12 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 										993573159 /*Nordlandssykehuset HF, Habilitering/rehabilitering, Gravdal*/, 
 										974049767 /*Steigen fødestue*/, 
 										996722201 /*Nordlandssykehuset HF, Habilitering/rehabilitering, Stokmarknes*/) then behSh=30; 
-		if behandlingsstedKode2 in (974795361 /*Nordlandssykehuset Bodø*/, 
+		if behandlingssted2 in (974795361 /*Nordlandssykehuset Bodø*/, 
 									993562718 /*Nordlandssykehuset HF, Habilitering/rehabilitering, Bodø*/, 
 									974049767  /*'Steigen fødestue'*/) then BehSh=33;
-		if behandlingsstedKode2 in (974795574 /*Nordlandssykehuset Vesterålen*/, 
+		if behandlingssted2 in (974795574 /*Nordlandssykehuset Vesterålen*/, 
 								996722201 /*Nordlandssykehuset HF, Habilitering/rehabilitering, Stokmarknes*/) then BehSh=31;
-		if behandlingsstedKode2 in (974795558 /*Nordlandssykehuset Lofoten*/,
+		if behandlingssted2 in (974795558 /*Nordlandssykehuset Lofoten*/,
 								993573159 /*Nordlandssykehuset HF, Habilitering/rehabilitering, Gravdal*/) then BehSh=32;
 
  
@@ -168,15 +168,15 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 *** Helgelandssykehuset HF ***
 *****************************/
 
-	if behandlingsstedKode2 in (974795515 /*Helgelandssykehuset HF Mo i Rana*/,
+	if behandlingssted2 in (974795515 /*Helgelandssykehuset HF Mo i Rana*/,
 								974795485 /*Helgelandssykehuset HF Mosjøen*/,
 								974795477 /*Helgelandssykehuset HF Sandnessjøen*/
 								874044342 /*Helgelandssykehuset HF Brønnøysund fødestue*/,
 								983974929 /*'Helgelandssykehuset HF*/) then BehSh=40;
 
-	if behandlingsstedKode2=974795515 /*Helgelandssykehuset HF Mo i Rana */ then BehSh=41;
-	if behandlingsstedKode2=974795485 /*Helgelandssykehuset HF Mosjøen*/ then BehSh=42;
-	if behandlingsstedKode2 in (974795477 /*Helgelandssykehuset HF Sandnessjøen*/,
+	if behandlingssted2=974795515 /*Helgelandssykehuset HF Mo i Rana */ then BehSh=41;
+	if behandlingssted2=974795485 /*Helgelandssykehuset HF Mosjøen*/ then BehSh=42;
+	if behandlingssted2 in (974795477 /*Helgelandssykehuset HF Sandnessjøen*/,
 							   874044342 /*Helgelandssykehuset HF Brønnøysund fødestue*/) then BehSh=43;
 
 
@@ -186,13 +186,13 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 ******************************/
 
 
-		if behandlingsstedKode2 in (974753898 /*Helse Nord-Trøndelag HF -  Namsos*/,
+		if behandlingssted2 in (974753898 /*Helse Nord-Trøndelag HF -  Namsos*/,
 								994974270 /*Helse Nord-Trøndelag, Namsos rehabilitering*/,
 								 974754118 /*Helse Nord-Trøndelag HF -  Levanger*/,
 							       994958682/*Helse Nord-Trøndelag, Levanger rehabilitering*/) then BehSh=50;
 
-		if behandlingsstedKode2 in (974753898 /*Helse Nord-Trøndelag HF -  Namsos*/, 994974270 /*Helse Nord-Trøndelag, Namsos rehabilitering*/) then BehSh=51;
-		if behandlingsstedKode2 in (974754118 /*Helse Nord-Trøndelag HF -  Levanger*/, 994958682/*Helse Nord-Trøndelag, Levanger rehabilitering*/) then BehSh=52;
+		if behandlingssted2 in (974753898 /*Helse Nord-Trøndelag HF -  Namsos*/, 994974270 /*Helse Nord-Trøndelag, Namsos rehabilitering*/) then BehSh=51;
+		if behandlingssted2 in (974754118 /*Helse Nord-Trøndelag HF -  Levanger*/, 994958682/*Helse Nord-Trøndelag, Levanger rehabilitering*/) then BehSh=52;
 
 
 
@@ -200,7 +200,7 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 *** St. Olavs hospital HF ***
 ****************************/
 
-		if behandlingsstedKode2 in (913461223 /*St Olavs hospital, Fysikalsk medisin Øya*/,
+		if behandlingssted2 in (913461223 /*St Olavs hospital, Fysikalsk medisin Øya*/,
       								973254782 /*St Olavs hospital, Trondsletten habiliteringssenter */, 
 									974749025 /*St Olavs Hospital, Trondheim*/,
       								974749815 /*St Olavs hospital, Fysikalsk medisin Lian*/,
@@ -209,20 +209,20 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 				     				974749505 /*St Olavs hospital, Røros*/,
 									915621457 /*St Olavs hospital, Ørland*/) then behSh=60; /*St Olav Ørland er bare skrevet til behSh lik 60, ingen spesifisering av lokalisasjon under*/
 
- 		if behandlingsstedKode2 in (913461223 /*St Olavs hospital, Fysikalsk medisin Øya*/,
+ 		if behandlingssted2 in (913461223 /*St Olavs hospital, Fysikalsk medisin Øya*/,
       								973254782 /*St Olavs hospital, Trondsletten habiliteringssenter */, 
 									974749025 /*St Olavs Hospital, Trondheim*/,
       								974749815 /*St Olavs hospital, Fysikalsk medisin Lian*/) then BehSh=61;
-		if behandlingsstedKode2 in (974329506 /*St Olavs hospital, Orkdal*/) then BehSh=62;
-		if behandlingsstedKode2 in (974749505 /*St Olavs hospital, Røros*/) then BehSh=63;
-		if behandlingsstedKode2 in (995413388 /*St Olavs hospital, Hysnes helsefort*/) then BehSh=64;
+		if behandlingssted2 in (974329506 /*St Olavs hospital, Orkdal*/) then BehSh=62;
+		if behandlingssted2 in (974749505 /*St Olavs hospital, Røros*/) then BehSh=63;
+		if behandlingssted2 in (995413388 /*St Olavs hospital, Hysnes helsefort*/) then BehSh=64;
 
 
 /*******************************
 *** Helse Møre og Romsdal HF ***
 *******************************/
 
-		if behandlingsstedKode2 in (974745569 /*Helse Møre og Romsdal HF Molde sjukehus*/,   
+		if behandlingssted2 in (974745569 /*Helse Møre og Romsdal HF Molde sjukehus*/,   
       								974746948 /*Helse Møre og Romsdal HF Kristiansund sjukehus*/,  
       								974747138 /*Helse Møre og Romsdal HF Ålesund sjukehus*/,   
       								974747545 /*Helse Møre og Romsdal HF Volda sjukehus*/, 
@@ -231,33 +231,33 @@ if KomNr in (0,8888,9999) then KomNr=9999;
       								974577216 /*Helse Møre og Romsdal HF, Klinikk for Rehabilitering (Mork)*/,
 								    984038135 /*Helse Møre og Romsdal HF, Voksenhabilitering Molde*/) then BehSh=70;
 
- 		if behandlingsstedKode2 in (974745569 /*Helse Møre og Romsdal HF Molde sjukehus*/, 984038135 /*Helse Møre og Romsdal HF, Voksenhabilitering Molde*/) then BehSh=71;
-		if behandlingsstedKode2 in (974746948 /*Helse Møre og Romsdal HF Kristiansund sjukehus*/) then BehSh=72;
-		if behandlingsstedKode2 in (974747138 /*Helse Møre og Romsdal HF Ålesund sjukehus*/) then BehSh=73;
-		if behandlingsstedKode2 in (974747545 /*Helse Møre og Romsdal HF Volda sjukehus*/) then BehSh=74;
-		if behandlingsstedKode2 in (974576929 /*Helse Møre og Romsdal HF, Nevrohjemmet*/) then BehSh=76;
-		if behandlingsstedKode2 in (974577054 /*Helse Møre og Romsdal HF, Aure rehabiliteringssenter*/) then BehSh=77;
-		if behandlingsstedKode2 in (974577216 /*Helse Møre og Romsdal HF, Klinikk for Rehabilitering (Mork)*/) then BehSh=75;
+ 		if behandlingssted2 in (974745569 /*Helse Møre og Romsdal HF Molde sjukehus*/, 984038135 /*Helse Møre og Romsdal HF, Voksenhabilitering Molde*/) then BehSh=71;
+		if behandlingssted2 in (974746948 /*Helse Møre og Romsdal HF Kristiansund sjukehus*/) then BehSh=72;
+		if behandlingssted2 in (974747138 /*Helse Møre og Romsdal HF Ålesund sjukehus*/) then BehSh=73;
+		if behandlingssted2 in (974747545 /*Helse Møre og Romsdal HF Volda sjukehus*/) then BehSh=74;
+		if behandlingssted2 in (974576929 /*Helse Møre og Romsdal HF, Nevrohjemmet*/) then BehSh=76;
+		if behandlingssted2 in (974577054 /*Helse Møre og Romsdal HF, Aure rehabiliteringssenter*/) then BehSh=77;
+		if behandlingssted2 in (974577216 /*Helse Møre og Romsdal HF, Klinikk for Rehabilitering (Mork)*/) then BehSh=75;
 
 /*********************
 *** Helse Førde HF ***
 *********************/
-		if behandlingsstedKode2 in (983974732 /*Helse Førde HF*/, 
+		if behandlingssted2 in (983974732 /*Helse Førde HF*/, 
 									974743914 /*Helse Førde, Florø*/,
 									974744570 /*Helse Førde, Førde*/, 
 									974745089 /*Helse Førde, Lærdal*/,
       								974745364 /*Helse Førde, Nordfjord*/) then BehSh=90;
 
-		if behandlingsstedKode2 in (974744570 /*Helse Førde, Førde*/) then BehSh=91;
-		if behandlingsstedKode2 in (974745364 /*Helse Førde, Nordfjord*/) then BehSh=92;
-		if behandlingsstedKode2 in (974745089 /*Helse Førde, Lærdal*/) then BehSh=93;
-		if behandlingsstedKode2 in (974743914 /*Helse Førde, Florø*/) then BehSh=91;
+		if behandlingssted2 in (974744570 /*Helse Førde, Førde*/) then BehSh=91;
+		if behandlingssted2 in (974745364 /*Helse Førde, Nordfjord*/) then BehSh=92;
+		if behandlingssted2 in (974745089 /*Helse Førde, Lærdal*/) then BehSh=93;
+		if behandlingssted2 in (974743914 /*Helse Førde, Florø*/) then BehSh=91;
 
 /**********************
 *** Helse Bergen HF ***
 **********************/
 
-		if behandlingsstedKode2 in (874743372 /*Helse Bergen, Kysthospitalet i Hagevik*/,   
+		if behandlingssted2 in (874743372 /*Helse Bergen, Kysthospitalet i Hagevik*/,   
 	      							973923811 /*Helse Bergen, Habilitering Voksne*/, 
  									973925032 /*Bergen legevakt*/, 
       								974557169 /*Helse Bergen, Rehabilitering*/,  
@@ -265,49 +265,49 @@ if KomNr in (0,8888,9999) then KomNr=9999;
       								974743272 /*Helse Bergen, Voss*/, 
 	  								996663191 /*Helse Bergen, Laboratorie og røntgen Haukeland*/) then BehSh=100;
 
-		if behandlingsstedKode2 in (973923811 /*Helse Bergen, Habilitering Voksne*/, 
+		if behandlingssted2 in (973923811 /*Helse Bergen, Habilitering Voksne*/, 
       								974557169 /*Helse Bergen, Rehabilitering*/,  
      								974557746 /*Helse Bergen, Haukeland*/,  
       								996663191 /*Helse Bergen, Laboratorie og røntgen Haukeland*/) then BehSh=101;
-		if behandlingsstedKode2 in (874743372 /*Helse Bergen, Kysthospitalet i Hagevik*/) then BehSh=102;
-		if behandlingsstedKode2 in (974743272 /*Helse Bergen, Voss*/) then BehSh=103;
-		if behandlingsstedKode2 in (973925032 /*Bergen legevakt*/) then BehSh=104;
+		if behandlingssted2 in (874743372 /*Helse Bergen, Kysthospitalet i Hagevik*/) then BehSh=102;
+		if behandlingssted2 in (974743272 /*Helse Bergen, Voss*/) then BehSh=103;
+		if behandlingssted2 in (973925032 /*Bergen legevakt*/) then BehSh=104;
 
 /*********************
 *** Helse Fonna HF ***
 *********************/
-		if behandlingsstedKode2 in (974724774 /*Helse Fonna, Haugesund*/,   
+		if behandlingssted2 in (974724774 /*Helse Fonna, Haugesund*/,   
       								974742985 /*Helse Fonna, Stord*/,
 								    974743086 /*Helse Fonna, Odda*/,  
       								974829029 /*Helse Fonna, Sauda*/,  
       								976248570 /*Helse Fonna, Haugesund Rehabilitering*/, 
       								996328112 /*Helse Fonna, Stord Rehabilitering*/) then BehSh=110;
 
-		if behandlingsstedKode2 in (974743086 /*Helse Fonna, Odda*/) then BehSh=111;
-		if behandlingsstedKode2 in (974742985 /*Helse Fonna, Stord*/, 996328112 /*Helse Fonna, Stord Rehabilitering*/) then BehSh=112;
-		if behandlingsstedKode2 in (974724774 /*Helse Fonna, Haugesund*/,   
+		if behandlingssted2 in (974743086 /*Helse Fonna, Odda*/) then BehSh=111;
+		if behandlingssted2 in (974742985 /*Helse Fonna, Stord*/, 996328112 /*Helse Fonna, Stord Rehabilitering*/) then BehSh=112;
+		if behandlingssted2 in (974724774 /*Helse Fonna, Haugesund*/,   
      								976248570 /*Helse Fonna, Haugesund Rehabilitering*/) then BehSh=113;
-		if behandlingsstedKode2 in (974829029 /*Helse Fonna, Sauda*/) then BehSh=114;
+		if behandlingssted2 in (974829029 /*Helse Fonna, Sauda*/) then BehSh=114;
 
 /*************************
 *** Helse Stavanger HF ***
 *************************/
-		if behandlingsstedKode2 in (873862122 /*Helse Stavanger, Rehabilitering*/, 
+		if behandlingssted2 in (873862122 /*Helse Stavanger, Rehabilitering*/, 
 		      						974624680 /*Helse Stavanger, HABU*/, 
 			        				974703300 /*Helse Stavanger, Stavanger universitetssjukehus*/,
       								974703327 /*Helse Stavanger, Egersund*/) then BehSh=120;
 
-		if behandlingsstedKode2 in (873862122 /*Helse Stavanger, Rehabilitering*/, 
+		if behandlingssted2 in (873862122 /*Helse Stavanger, Rehabilitering*/, 
 		      						974624680 /*Helse Stavanger, HABU*/, 
 			        				974703300 /*Helse Stavanger, Stavanger universitetssjukehus*/) then BehSh=121;
-		if behandlingsstedKode2 in (974703327 /*Helse Stavanger, Egersund*/) then BehSh=122;
+		if behandlingssted2 in (974703327 /*Helse Stavanger, Egersund*/) then BehSh=122;
 
 
 /*************************************
 *** Haraldsplass diakonale sykehus ***
 *************************************/
 
-if behandlingsstedKode2 = 974316285 /*Haraldsplass diakonale sykehus */ then BehSh=260;
+if behandlingssted2 = 974316285 /*Haraldsplass diakonale sykehus */ then BehSh=260;
 /*Haraldsplass diakonale sykehus har eget opptaksområde og er lokalsykehus for bydelene Åsane, Arna, og Bergenhus, 
 samt Samnanger og kommunene i Nordhordland.*/
 
@@ -315,11 +315,11 @@ samt Samnanger og kommunene i Nordhordland.*/
 /********************************
 *** Resterende Helse Vest RHF ***
 ********************************/
-		if behandlingsstedKode2 in (974737779 /*Betanien spesialistpoliklinikk*/, 
+		if behandlingssted2 in (974737779 /*Betanien spesialistpoliklinikk*/, 
 									986106839 /*Haugesund sanitetsforenings revmatismesykehus*/) then BehSh=130;
 
-		if behandlingsstedKode2 in (974737779 /*Betanien spesialistpoliklinikk*/) then BehSh=131;
-		if behandlingsstedKode2 in (986106839 /*Haugesund sanitetsforenings revmatismesykehus*/) then BehSh=132; 
+		if behandlingssted2 in (974737779 /*Betanien spesialistpoliklinikk*/) then BehSh=131;
+		if behandlingssted2 in (986106839 /*Haugesund sanitetsforenings revmatismesykehus*/) then BehSh=132; 
 		/* Bergen legevakt ligger under Helse Bergen HF siden den delen av Bergen legevakt som rapporterer data til NPR 
 		er spesialisthelsetjeneste. Dette er Akuttposten ved Mottaksklinikken ved Haukeland universitetssykehus.  
 		Se http://www.helse-bergen.no/no/OmOss/Avdelinger/mottaksklinikken/Sider/akuttpost.aspx. */
@@ -328,46 +328,46 @@ samt Samnanger og kommunene i Nordhordland.*/
 /**********************
 *** Vestre Viken HF ***
 **********************/
-		if behandlingsstedKode2 in (874606162 /*Vestre Viken, Hallingdal sjukestugu*/, 
+		if behandlingssted2 in (874606162 /*Vestre Viken, Hallingdal sjukestugu*/, 
 									974631326 /*Vestre Viken, Drammen*/,   
       								974631385 /*Vestre Viken, Kongsberg*/,  
       								974631407 /*Vestre Viken, Ringerike*/,  
       								974705788 /*Vestre Viken, Bærum*/) then behSh=140; /*'Vestre Viken HF'*/ 
  
-		if behandlingsstedKode2 in (974631326 /*Vestre Viken, Drammen*/) then behSh=141;
-		if behandlingsstedKode2 in (974631385 /*Vestre Viken, Kongsberg*/) then behSh=144;
-		if behandlingsstedKode2 in (974631407 /*Vestre Viken, Ringerike*/, 874606162 /*Vestre Viken, Hallingdal sjukestugu*/) then behSh=143;
-		if behandlingsstedKode2 in (974705788 /*Vestre Viken, Bærum*/) then behSh=142;
+		if behandlingssted2 in (974631326 /*Vestre Viken, Drammen*/) then behSh=141;
+		if behandlingssted2 in (974631385 /*Vestre Viken, Kongsberg*/) then behSh=144;
+		if behandlingssted2 in (974631407 /*Vestre Viken, Ringerike*/, 874606162 /*Vestre Viken, Hallingdal sjukestugu*/) then behSh=143;
+		if behandlingssted2 in (974705788 /*Vestre Viken, Bærum*/) then behSh=142;
 
 
 /****************************
 *** Sykehuset Telemark HF ***
 ****************************/
-		if behandlingsstedKode2 in (974568209 /*Sykehuset Telemark, Habilitering barn og unge*/,   
+		if behandlingssted2 in (974568209 /*Sykehuset Telemark, Habilitering barn og unge*/,   
       								974568225 /*Sykehuset Telemark, Nordagutu*/,  
       								974633159 /*Sykehuset Telemark, Notodden*/,  
       								974633191 /*Sykehuset Telemark, Skien/Porsgrunn*/,  
       								974798379 /*Sykehuset Telemark, Rjukan*/,  
       								983974155 /*Sykehuset Telemark, Kragerø*/) then BehSh=150; /*'Sykehuset Telemark HF'*/
 
- 		if behandlingsstedKode2 in (974633159 /*Sykehuset Telemark, Notodden*/) then BehSh=153;
-		if behandlingsstedKode2 in (974633191 /*Sykehuset Telemark, Skien/Porsgrunn*/, 
+ 		if behandlingssted2 in (974633159 /*Sykehuset Telemark, Notodden*/) then BehSh=153;
+		if behandlingssted2 in (974633191 /*Sykehuset Telemark, Skien/Porsgrunn*/, 
 									974568209 /*Sykehuset Telemark, Habilitering barn og unge*/	) then BehSh=151;
-		if behandlingsstedKode2 in (974798379 /*Sykehuset Telemark, Rjukan*/) then BehSh=154;
-		if behandlingsstedKode2 in (983974155 /*Sykehuset Telemark, Kragerø*/) then BehSh=152;
-		if behandlingsstedKode2 in (974568225 /*Sykehuset Telemark, Nordagutu*/) then BehSh=155;
+		if behandlingssted2 in (974798379 /*Sykehuset Telemark, Rjukan*/) then BehSh=154;
+		if behandlingssted2 in (983974155 /*Sykehuset Telemark, Kragerø*/) then BehSh=152;
+		if behandlingssted2 in (974568225 /*Sykehuset Telemark, Nordagutu*/) then BehSh=155;
 
 /**************************************
 *** Akershus universitetssykehus HF ***
 **************************************/
 
-		if behandlingsstedKode2=974706490 /*Akershus universitetssykehus*/ then BehSh=160;
+		if behandlingssted2=974706490 /*Akershus universitetssykehus*/ then BehSh=160;
 
 
 /*******************
 *** Innlandet HF ***
 *******************/
-		if behandlingsstedKode2 in (874631752 /*Sykehuset Innlandet, Ottestad*/,   
+		if behandlingssted2 in (874631752 /*Sykehuset Innlandet, Ottestad*/,   
       								874632562 /*Sykehuset Innlandet, Lillehammer*/,  
 									974116650 /*Sykehuset Innlandet, Habiliteringstjenesten i Hedmark, Furnes*/,  
       								974631768 /*Sykehuset Innlandet, Elverum*/,  
@@ -378,22 +378,22 @@ samt Samnanger og kommunene i Nordhordland.*/
       								974725215 /*Sykehuset Innlandet, Tynset*/,
       								975326136 /*Sykehuset Innlandet, Habiliteringstjenesten i Oppland, Lillehammer*/) then BehSh=170;
 
-		if behandlingsstedKode2 in (874631752 /*Sykehuset Innlandet, Ottestad*/	) then BehSh=177;
-		if behandlingsstedKode2 in (874632562 /*Sykehuset Innlandet, Lillehammer*/,  
+		if behandlingssted2 in (874631752 /*Sykehuset Innlandet, Ottestad*/	) then BehSh=177;
+		if behandlingssted2 in (874632562 /*Sykehuset Innlandet, Lillehammer*/,  
 									975326136 /*Sykehuset Innlandet, Habiliteringstjenesten i Oppland, Lillehammer*/) then BehSh=173;
-		if behandlingsstedKode2 in (974631768 /*Sykehuset Innlandet, Elverum*/) then BehSh=171;
-		if behandlingsstedKode2 in (974631776 /*Sykehuset Innlandet, Kongsvinger*/) then BehSh=174;
-		if behandlingsstedKode2 in (974632535 /*Sykehuset Innlandet, Gjøvik*/) then BehSh=172;
-		if behandlingsstedKode2 in (974632543 /*Sykehuset Innlandet, Granheim lungesykehus*/) then BehSh=176;
-		if behandlingsstedKode2 in (974725215 /*Sykehuset Innlandet, Tynset*/) then BehSh=175;
-		if behandlingsstedKode2 in (974724960 /*Sykehuset Innlandet, Hamar*/) then BehSh=178;
-		if behandlingsstedKode2 in (974116650 /*Sykehuset Innlandet, Habiliteringstjenesten i Hedmark, Furnes*/) then BehSh=179; 
+		if behandlingssted2 in (974631768 /*Sykehuset Innlandet, Elverum*/) then BehSh=171;
+		if behandlingssted2 in (974631776 /*Sykehuset Innlandet, Kongsvinger*/) then BehSh=174;
+		if behandlingssted2 in (974632535 /*Sykehuset Innlandet, Gjøvik*/) then BehSh=172;
+		if behandlingssted2 in (974632543 /*Sykehuset Innlandet, Granheim lungesykehus*/) then BehSh=176;
+		if behandlingssted2 in (974725215 /*Sykehuset Innlandet, Tynset*/) then BehSh=175;
+		if behandlingssted2 in (974724960 /*Sykehuset Innlandet, Hamar*/) then BehSh=178;
+		if behandlingssted2 in (974116650 /*Sykehuset Innlandet, Habiliteringstjenesten i Hedmark, Furnes*/) then BehSh=179; 
 
 
 /**********************************
 *** Oslo universitetssykehus HF ***
 **********************************/
-		if behandlingsstedKode2 in (874716782 /*OUS, Rikshospitalet*/,   
+		if behandlingssted2 in (874716782 /*OUS, Rikshospitalet*/,   
       								974588951 /*OUS, Aker*/,   
       								974589087 /*OUS, Oslo legevakt*/,   
       								974589095 /*OUS, Ullevål*/,   
@@ -404,15 +404,15 @@ samt Samnanger og kommunene i Nordhordland.*/
       								975298744 /*OUS, Olafiaklinikken*/,       
 									993467049 /*OUS HF*/) then BehSh=180/*Oslo universitetssykehus HF*/;
 
-		if behandlingsstedKode2 in (874716782 /*OUS, Rikshospitalet*/) then BehSh=181;
-		if behandlingsstedKode2 in (974588951 /*OUS, Aker*/) then BehSh=182;
-		if behandlingsstedKode2 in (974589087 /*OUS, Oslo legevakt*/) then BehSh=183;
-		if behandlingsstedKode2 in (974589095 /*OUS, Ullevål*/) then BehSh=184;
-		if behandlingsstedKode2 in (974705761 /*OUS, Spesialsykehuset for epilepsi*/) then BehSh=185;
-		if behandlingsstedKode2 in (974707152 /*OUS, Radiumhospitalet*/) then BehSh=186;
-		if behandlingsstedKode2 in (974728230 /*OUS, Geilomo barnesykehus*/) then BehSh=187;
-		if behandlingsstedKode2 in (974798263 /*OUS, Voksentoppen*/) then BehSh=188;
-		if behandlingsstedKode2 in (975298744 /*OUS, Olafiaklinikken*/) then BehSh=189;
+		if behandlingssted2 in (874716782 /*OUS, Rikshospitalet*/) then BehSh=181;
+		if behandlingssted2 in (974588951 /*OUS, Aker*/) then BehSh=182;
+		if behandlingssted2 in (974589087 /*OUS, Oslo legevakt*/) then BehSh=183;
+		if behandlingssted2 in (974589095 /*OUS, Ullevål*/) then BehSh=184;
+		if behandlingssted2 in (974705761 /*OUS, Spesialsykehuset for epilepsi*/) then BehSh=185;
+		if behandlingssted2 in (974707152 /*OUS, Radiumhospitalet*/) then BehSh=186;
+		if behandlingssted2 in (974728230 /*OUS, Geilomo barnesykehus*/) then BehSh=187;
+		if behandlingssted2 in (974798263 /*OUS, Voksentoppen*/) then BehSh=188;
+		if behandlingssted2 in (975298744 /*OUS, Olafiaklinikken*/) then BehSh=189;
 
   
 
@@ -420,7 +420,7 @@ samt Samnanger og kommunene i Nordhordland.*/
 *** Sunnaas sykehus HF ***
 *************************/
 
-		if behandlingsstedKode2=974589214 /*Sunnaas sykehus*/ then BehSh=190/*Sunnaas sykehus*/;
+		if behandlingssted2=974589214 /*Sunnaas sykehus*/ then BehSh=190/*Sunnaas sykehus*/;
 
 
 /***************************
@@ -428,60 +428,60 @@ samt Samnanger og kommunene i Nordhordland.*/
 ***************************/
 	/* Lokalisasjoner: Kalnes, Fredrikstad, Moss, Sarpsborg, Halden, Askim og Eidsberg. */
 
-		if behandlingsstedKode2 in (974633698 /*Sykehuset Østfold, Moss*/,
+		if behandlingssted2 in (974633698 /*Sykehuset Østfold, Moss*/,
 									974633752 /*Sykehuset Østfold*/,   
       								974634052 /*Sykehuset Østfold, Fysioterapi*/, 
       								974703734 /*Sykehuset Østfold, Sarpsborg*/) then BehSh=200/*Sykehuset Østfold HF*/;
 
- 		if behandlingsstedKode2 in (974633698 /*Sykehuset Østfold, Moss*/, 974634052 /*Sykehuset Østfold, Fysioterapi*/) then BehSh=201;
-		if behandlingsstedKode2 in (974703734 /*Sykehuset Østfold, Sarpsborg*/) then BehSh=202;
+ 		if behandlingssted2 in (974633698 /*Sykehuset Østfold, Moss*/, 974634052 /*Sykehuset Østfold, Fysioterapi*/) then BehSh=201;
+		if behandlingssted2 in (974703734 /*Sykehuset Østfold, Sarpsborg*/) then BehSh=202;
 
 /***************************
 *** Sørlandet sykehus HF ***
 ***************************/
 
-		if behandlingsstedKode2 in (974595214 /*Sørlandet sykehus, Flekkefjord*/,
+		if behandlingssted2 in (974595214 /*Sørlandet sykehus, Flekkefjord*/,
 							      	974595230 /*Sørlandet sykehus, Rehabilitering Kongsgård*/,
 									974631091 /*Sørlandet sykehus, Arendal*/,
 									974733013 /*Sørlandet sykehus, Kristiansand*/, 
 	        						983975240 /*Sørlandet sykehus HF*/) then BehSh=210;
 
-		if behandlingsstedKode2 in (974595214 /*Sørlandet sykehus, Flekkefjord*/) then BehSh=213;
-		if behandlingsstedKode2 in (974631091 /*Sørlandet sykehus, Arendal*/) then BehSh=212;
-		if behandlingsstedKode2 in (974733013 /*Sørlandet sykehus, Kristiansand*/, 974595230 /*Sørlandet sykehus, Rehabilitering Kongsgård*/) then BehSh=211;
+		if behandlingssted2 in (974595214 /*Sørlandet sykehus, Flekkefjord*/) then BehSh=213;
+		if behandlingssted2 in (974631091 /*Sørlandet sykehus, Arendal*/) then BehSh=212;
+		if behandlingssted2 in (974733013 /*Sørlandet sykehus, Kristiansand*/, 974595230 /*Sørlandet sykehus, Rehabilitering Kongsgård*/) then BehSh=211;
 
 /******************************
 *** Sykehuset i Vestfold HF ***
 ******************************/
 
-		if behandlingsstedKode2 in (974575396 /*Sykehuset i Vestfold, Rehabilitering Stavern*/, 
+		if behandlingssted2 in (974575396 /*Sykehuset i Vestfold, Rehabilitering Stavern*/, 
 								 	974633574 /*Sykehuset i Vestfold*/) then BehSh=220;
 
-		if behandlingsstedKode2 in (974633574 /*Sykehuset i Vestfold, Tønsberg*/) then BehSh=221 ;
-		if behandlingsstedKode2 in (974575396 /*Sykehuset i Vestfold, Rehabilitering Kysthospitalet Stavern*/) then BehSh=222 ;
+		if behandlingssted2 in (974633574 /*Sykehuset i Vestfold, Tønsberg*/) then BehSh=221 ;
+		if behandlingssted2 in (974575396 /*Sykehuset i Vestfold, Rehabilitering Kysthospitalet Stavern*/) then BehSh=222 ;
 
 /***********************************
 *** Diakonhjemmet sykehus ***
 ***********************************/
-		if behandlingsstedKode2 in (974116804 /*Diakonhjemmet sykehus*/) then BehSh=230;
+		if behandlingssted2 in (974116804 /*Diakonhjemmet sykehus*/) then BehSh=230;
 
 /***********************************
 *** Lovisenberg diakonale sykehus **
 ***********************************/
-		if behandlingsstedKode2 in (974207532 /*Lovisenberg diakonale sykehus*/) then BehSh=240;
+		if behandlingssted2 in (974207532 /*Lovisenberg diakonale sykehus*/) then BehSh=240;
 
 /***********************************
 *** Resterende Helse Sør-Øst RHF ***
 ***********************************/
-		if behandlingsstedKode2 in (985962170 /*Martina Hansens Hospital*/,
+		if behandlingssted2 in (985962170 /*Martina Hansens Hospital*/,
 									981275721 /*Betanien hospital*/,
 									985773238 /*Revmatismesykehuset AS, Lillehammer*/, 
 									984630492 /*Oslo kommunale legevakt*/) then BehSh=250;
 
-		if behandlingsstedKode2 in (985962170 /*Martina Hansens Hospital*/) then BehSh=251;
-		if behandlingsstedKode2 in (981275721 /*Betanien hospital*/) then BehSh=252;
-		if behandlingsstedKode2 in (985773238 /*Revmatismesykehuset AS, Lillehammer*/) then BehSh=253;
-		if behandlingsstedKode2=984630492 /*Oslo kommunale legevakt*/ then behSh=254 /*Oslo kommunale legevakt, Observasjonsposten*/;
+		if behandlingssted2 in (985962170 /*Martina Hansens Hospital*/) then BehSh=251;
+		if behandlingssted2 in (981275721 /*Betanien hospital*/) then BehSh=252;
+		if behandlingssted2 in (985773238 /*Revmatismesykehuset AS, Lillehammer*/) then BehSh=253;
+		if behandlingssted2=984630492 /*Oslo kommunale legevakt*/ then behSh=254 /*Oslo kommunale legevakt, Observasjonsposten*/;
 
 		/* Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR 
 		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader.   
@@ -492,7 +492,7 @@ samt Samnanger og kommunene i Nordhordland.*/
 *** Private sykehus ***
 **********************/
 
-		if behandlingsstedKode2 in (813381192 /*Aleris Helse AS Stavanger*/,
+		if behandlingssted2 in (813381192 /*Aleris Helse AS Stavanger*/,
 									879595762 /*Teres Drammen*/,
 									879790522 /*Aleris Helse AS Bergen*/,
 									897351102 /*Akademikliniken Oslo AS*/,
