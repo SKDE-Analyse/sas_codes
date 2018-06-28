@@ -134,8 +134,8 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 *** UNN HF ***
 *************/
 
-		if behandlingssted2 in (974795787, 974795639, 974795396) then behSh=20; 
-
+		if behandlingssted2 in (983974899, 974795787, 974795639, 974795396) then behSh=20; 
+/* 983974899 brukes for innleggelser i 2016 */
 		if behandlingssted2=974795787 /*'UNN Tromsø'*/ then BehSh=21;
 		if behandlingssted2=974795396 /*'UNN Narvik'*/ then BehSh=23;
 		if behandlingssted2=974795639 /*'UNN Harstad'*/ then BehSh=22;
@@ -276,7 +276,8 @@ if KomNr in (0,8888,9999) then KomNr=9999;
 /*********************
 *** Helse Fonna HF ***
 *********************/
-		if behandlingssted2 in (974724774 /*Helse Fonna, Haugesund*/,   
+		if behandlingssted2 in (983974694 /* Helse Fonna HF */,
+                                974724774 /* Helse Fonna, Haugesund*/,   
       								974742985 /*Helse Fonna, Stord*/,
 								    974743086 /*Helse Fonna, Odda*/,  
       								974829029 /*Helse Fonna, Sauda*/,  
@@ -332,9 +333,10 @@ samt Samnanger og kommunene i Nordhordland.*/
 									974631326 /*Vestre Viken, Drammen*/,   
       								974631385 /*Vestre Viken, Kongsberg*/,  
       								974631407 /*Vestre Viken, Ringerike*/,  
-      								974705788 /*Vestre Viken, Bærum*/) then behSh=140; /*'Vestre Viken HF'*/ 
+      								974705788 /*Vestre Viken, Bærum*/,
+                                    974606305 /*Vestre Viken, Habiliteringssenteret Drammen*/) then behSh=140; /*'Vestre Viken HF'*/ 
  
-		if behandlingssted2 in (974631326 /*Vestre Viken, Drammen*/) then behSh=141;
+		if behandlingssted2 in (974631326, 974606305 /*Vestre Viken, Drammen*/) then behSh=141;
 		if behandlingssted2 in (974631385 /*Vestre Viken, Kongsberg*/) then behSh=144;
 		if behandlingssted2 in (974631407 /*Vestre Viken, Ringerike*/, 874606162 /*Vestre Viken, Hallingdal sjukestugu*/) then behSh=143;
 		if behandlingssted2 in (974705788 /*Vestre Viken, Bærum*/) then behSh=142;
@@ -343,7 +345,8 @@ samt Samnanger og kommunene i Nordhordland.*/
 /****************************
 *** Sykehuset Telemark HF ***
 ****************************/
-		if behandlingssted2 in (974568209 /*Sykehuset Telemark, Habilitering barn og unge*/,   
+		if behandlingssted2 in (983975267 /*Sykehuset Telemark HF (innleggelser i 2016)*/,
+                                    974568209 /*Sykehuset Telemark, Habilitering barn og unge*/,   
       								974568225 /*Sykehuset Telemark, Nordagutu*/,  
       								974633159 /*Sykehuset Telemark, Notodden*/,  
       								974633191 /*Sykehuset Telemark, Skien/Porsgrunn*/,  
@@ -361,7 +364,9 @@ samt Samnanger og kommunene i Nordhordland.*/
 *** Akershus universitetssykehus HF ***
 **************************************/
 
-		if behandlingssted2=974706490 /*Akershus universitetssykehus*/ then BehSh=160;
+		if behandlingssted2 in (974706490 /*Akershus universitetssykehus*/, 
+                                974705192 /*Akershus universitetssykehus, Ski*/,
+                                983971636 /*Akershus universitetssykehus HF*/) then BehSh=160;
 
 
 /*******************
@@ -420,7 +425,9 @@ samt Samnanger og kommunene i Nordhordland.*/
 *** Sunnaas sykehus HF ***
 *************************/
 
-		if behandlingssted2=974589214 /*Sunnaas sykehus*/ then BehSh=190/*Sunnaas sykehus*/;
+		if behandlingssted2 in (974589214) /*Sunnaas sykehus*/ then BehSh=190/*Sunnaas sykehus*/;
+		if behandlingssted2 in (914356199) /*Sunnaas sykehus, Nesodden poliklinikk*/ then BehSh=191/*Sunnaas sykehus, Nesodden poliklinikk*/;
+		if behandlingssted2 in (994869736) /*Sunnaas sykehus, Aker poliklinikk*/ then BehSh=192/*Sunnaas sykehus, Aker poliklinikk*/;
 
 
 /***************************
@@ -428,13 +435,15 @@ samt Samnanger og kommunene i Nordhordland.*/
 ***************************/
 	/* Lokalisasjoner: Kalnes, Fredrikstad, Moss, Sarpsborg, Halden, Askim og Eidsberg. */
 
-		if behandlingssted2 in (974633698 /*Sykehuset Østfold, Moss*/,
+		if behandlingssted2 in (983971768 /*Sykehuset Østfold HF*/,
+                                974633698 /*Sykehuset Østfold, Moss*/,
 									974633752 /*Sykehuset Østfold*/,   
-      								974634052 /*Sykehuset Østfold, Fysioterapi*/, 
-      								974703734 /*Sykehuset Østfold, Sarpsborg*/) then BehSh=200/*Sykehuset Østfold HF*/;
+      								974634052 /*Sykehuset Østfold, Fysioterapi*/,
+      								974703734 /*Sykehuset Østfold, Sarpsborg*/,
+                                    974703769 /*Sykehuset Østfold, Habiliteringstjenesten*/) then BehSh=200/*Sykehuset Østfold HF*/;
 
  		if behandlingssted2 in (974633698 /*Sykehuset Østfold, Moss*/, 974634052 /*Sykehuset Østfold, Fysioterapi*/) then BehSh=201;
-		if behandlingssted2 in (974703734 /*Sykehuset Østfold, Sarpsborg*/) then BehSh=202;
+		if behandlingssted2 in (974703734 /*Sykehuset Østfold, Sarpsborg*/, 974703769 /*Sykehuset Østfold, Habiliteringstjenesten*/) then BehSh=202;
 
 /***************************
 *** Sørlandet sykehus HF ***
@@ -455,10 +464,14 @@ samt Samnanger og kommunene i Nordhordland.*/
 ******************************/
 
 		if behandlingssted2 in (974575396 /*Sykehuset i Vestfold, Rehabilitering Stavern*/, 
-								 	974633574 /*Sykehuset i Vestfold*/) then BehSh=220;
+								974633574 /*Sykehuset i Vestfold Tønsberg*/,
+                                899643992 /*Sykehuset i Vestfold, Somatikk Solvang*/,
+                                974117002 /*Sykehuset i Vestfold, Habilitering Solvang*/) then BehSh=220;
 
 		if behandlingssted2 in (974633574 /*Sykehuset i Vestfold, Tønsberg*/) then BehSh=221 ;
 		if behandlingssted2 in (974575396 /*Sykehuset i Vestfold, Rehabilitering Kysthospitalet Stavern*/) then BehSh=222 ;
+        if behandlingssted2 in (899643992 /*Sykehuset i Vestfold, Somatikk Solvang*/) then BehSh=223;
+        if behandlingssted2 in (974117002 /*Sykehuset i Vestfold, Habilitering Solvang*/) then BehSh=224;
 
 /***********************************
 *** Diakonhjemmet sykehus ***
@@ -476,16 +489,16 @@ samt Samnanger og kommunene i Nordhordland.*/
 		if behandlingssted2 in (985962170 /*Martina Hansens Hospital*/,
 									981275721 /*Betanien hospital*/,
 									985773238 /*Revmatismesykehuset AS, Lillehammer*/, 
-									984630492 /*Oslo kommunale legevakt*/) then BehSh=250;
+									984630492, 997506499 /*Oslo kommunale legevakt*/) then BehSh=250;
 
 		if behandlingssted2 in (985962170 /*Martina Hansens Hospital*/) then BehSh=251;
 		if behandlingssted2 in (981275721 /*Betanien hospital*/) then BehSh=252;
 		if behandlingssted2 in (985773238 /*Revmatismesykehuset AS, Lillehammer*/) then BehSh=253;
-		if behandlingssted2=984630492 /*Oslo kommunale legevakt*/ then behSh=254 /*Oslo kommunale legevakt, Observasjonsposten*/;
+		if behandlingssted2 in (984630492, 997506499) /*Oslo kommunale legevakt*/ then behSh=254 /*Oslo kommunale legevakt, Observasjonsposten*/;
 
 		/* Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR 
 		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader.   
-		Se http://www.oslo-universitetssykehus.no/omoss_/avdelinger_/skadelegevakt_. */
+		Se https://oslo-universitetssykehus.no/avdelinger/ortopedisk-klinikk/ortopedisk-avdeling-skadelegevakten */
 
 
 /**********************
@@ -534,7 +547,16 @@ samt Samnanger og kommunene i Nordhordland.*/
 									916269331 /*A-Medi AS*/,  
       								916588224 /*Preventia AS*/,  
      								998558271 /*Oslo medisinske senter*/,  
-      								999230008 /*Ifocus øyeklinikk AS*/) then BehSh=300;	
+      								999230008 /*Ifocus øyeklinikk AS*/,
+                                    812794922 /*Colosseum Mann AS*/,
+                                    817178782 /*Medi 3 Ringvoll Klinikken AS, avd Kirurgi Hobøl*/,
+                                    912011135 /*Medi 3 Ringvoll Klinikken AS, avd Oslo*/,
+                                    914491908 /*Colosseumklinikken medisinske senter AS*/,
+                                    916603290 /*Sandvika Nevrosenter*/,
+                                    924291370 /*EEG Laboratoriet AS*/,
+                                    953164701 /*Volvat medisinske senter AS Oslo - Majorstuen*/,
+                                    993198846 /*Stiftelsen Barnas fysioterapisenter*/
+                                    ) then BehSh=300;	
 
 /*!
 - Definere `BehHF` - Behandlende helseforetak

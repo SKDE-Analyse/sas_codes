@@ -88,6 +88,8 @@ value behSh
 188='OUS, Voksentoppen'
 189='OUS, Olafiaklinikken'
 190='Sunnaas sykehus'
+191='Sunnaas sykehus, Nesodden poliklinikk'
+192='Sunnaas sykehus, Aker poliklinikk'
 200='Sykehuset Østfold HF'
 201='Sykehuset Østfold, Moss'
 202='Sykehuset Østfold, Sarpsborg'
@@ -99,6 +101,8 @@ value behSh
 220='Sykehuset i Vestfold HF'
 221='Sykehuset i Vestfold, Tønsberg'
 222='Sykehuset i Vestfold, Rehabilitering Kysthospitalet Stavern'
+223='Sykehuset i Vestfold, Somatikk Solvang'
+224='Sykehuset i Vestfold, Habilitering Solvang'
 230='Diakonhjemmet sykehus'
 240='Lovisenberg diakonale sykehus'
 250='Resterende Helse Sør-Øst RHF'
@@ -111,7 +115,7 @@ value behSh
 ;
 
 
-	  value BEHANDLINGSSTEDKODE2F
+	  value BEHANDLINGSSTED2F
       813381192 = 'Aleris Helse AS Stavanger'  
       873862122 = 'Helse Stavanger, Rehabilitering'  
       874606162 = 'Vestre Viken, Hallingdal sjukestugu'  
@@ -265,7 +269,7 @@ value behSh
       996722201 = 'Nordlandssykehuset HF, Habilitering/rehabilitering, Stokmarknes'  
       996860884 = 'Somni Søvnsenter og Spesialisthelsetjenester AS'  
       998396522 = 'Tore Bru' 
-/*PO: Supplert med nye behandlingssteder gjeldende 2016*/
+/* PO: Supplert med nye behandlingssteder gjeldende 2016*/
 	  874044342 = 'Helgelandssykehuset HF Brønnøysund fødestue'  
       912817318 = 'Somni AS'  
       914480752 = 'Moloklinikken AS'  
@@ -278,7 +282,29 @@ value behSh
       983974929 = 'Helgelandssykehuset HF'  
       998558271 = 'Oslo medisinske senter'  
       999230008 = 'Ifocus øyeklinikk AS'
-	  983974880 = 'Finnmarkssykehuset HF'  ;
+	  983974880 = 'Finnmarkssykehuset HF'
+/*AHS: noen flere, for utlevering 2018 */
+      899643992 = 'Sykehuset i Vestfold, Somatikk Solvang'
+      974117002 = 'Sykehuset i Vestfold, Habilitering Solvang'
+      983974694 = 'Helse Fonna HF'
+      983975267 = 'Sykehuset Telemark HF'
+/* AHS: Supplert med nye behandlingssteder gjeldende 2017 */
+      812794922	= 'Colosseum Mann AS'
+      817178782	= 'Medi 3 Ringvoll Klinikken AS, avd Kirurgi Hobøl'
+      912011135	= 'Medi 3 Ringvoll Klinikken AS, avd Oslo'
+      914356199	= 'Sunnaas sykehus, Nesodden poliklinikk'
+      914491908	= 'Colosseumklinikken medisinske senter AS'
+      916603290	= 'Sandvika Nevrosenter'
+      924291370	= 'EEG Laboratoriet AS'
+      953164701	= 'Volvat medisinske senter AS Oslo - Majorstuen'
+      974606305	= 'Vestre Viken, Habiliteringssenteret Drammen'
+      974703769	= 'Sykehuset Østfold, Habiliteringstjenesten'
+      974705192	= 'Akershus universitetssykehus, Ski'
+      983971636	= 'Akershus universitetssykehus HF'
+      993198846	= 'Stiftelsen Barnas fysioterapisenter'
+      994869736	= 'Sunnaas sykehus, Aker poliklinikk'
+      997506499	= 'Oslo kommunale legevakt'
+      ;
 	  
 	  
 	  
