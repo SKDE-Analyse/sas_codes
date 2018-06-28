@@ -1,16 +1,16 @@
-ï»¿/*!
-MACROER FOR Ã… KOBLINGS_ID 
+/*!
+MACROER FOR Å KOBLINGS_ID 
 */
 
 %macro KoblingsID(innDataSett=, utDataSett=, fil =);
 
 /*!
-Lager en unik id pÃ¥ hvert opphold, som siden brukes nÃ¥r vi splitter datasettet i to.
+Lager en unik id på hvert opphold, som siden brukes når vi splitter datasettet i to.
 
 ### Input
 - `innDataSett` 
 - `utDataSett` 
-- `fil`: kan vÃ¦re `avd`, `sho` eller `avtspes`
+- `fil`: kan være `avd`, `sho` eller `avtspes`
 */
 
 %if &fil = avd %then %do;
@@ -68,7 +68,7 @@ run;
 /*!
 Lager unik variabel *KoblingsID* for hver linje i avdelingsoppholdsfil
 
-13 siffer. Begynner med 171Ã…R der Ã…R = 16 for 2016 
+13 siffer. Begynner med 171ÅR der ÅR = 16 for 2016 
 
 */
 
@@ -119,7 +119,7 @@ run;
 /*!
 Lager unik variabel *KoblingsID* for hver linje i sykehusoppholdsfil
 
-13 siffer. Begynner med 172Ã…R der Ã…R = 16 for 2016 
+13 siffer. Begynner med 172ÅR der ÅR = 16 for 2016 
 
 */
 
@@ -169,7 +169,7 @@ run;
 /*!
 Lager unik variabel *KoblingsID* for hver linje i avtalespesialistfil
 
-13 siffer. Begynner med 173Ã…R der Ã…R = 16 for 2016 
+13 siffer. Begynner med 173ÅR der ÅR = 16 for 2016 
 
 */
 

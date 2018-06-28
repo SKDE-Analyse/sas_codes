@@ -233,7 +233,7 @@ Tell_normaltariff = Tell_takst;
 drop tell_takst;
 
 /*
-- Dup_tilstand er fem variabler som samler usorterte diagnoser for 25545 kontakter i 2014. Disse er er identifisert med "dupli" som Hdiag. Navner om til Tdiag.
+- Dup_tilstand er fem variabler som samler usorterte diagnoser for 25545 kontakter i 2014. Disse er identifisert med "(dupli" som Hdiag. Navner om til Tdiag.
 */
 
 if aar = 2014 then do;
