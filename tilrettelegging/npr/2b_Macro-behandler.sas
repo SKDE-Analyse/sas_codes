@@ -9,10 +9,9 @@ sykehusoppholdsfilene, basert på variablen `behandlingssted2`.
 data &utdatasett;
 set &inndatasett;
 
-
-  /*
-  - Definere `behsh` - behandlende sykehus
-  */
+/*
+- Definere `behsh` - behandlende sykehus
+*/
 
   /************************
   *** Helse Finnmark HF ***
