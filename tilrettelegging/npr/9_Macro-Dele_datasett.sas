@@ -10,13 +10,19 @@ Splitte datasett i to
 
 Forslag til forbedring av makro: definer de viktigste variablene i et let-statement og kjør keep eller drop på dette. Noe ala dette
 ```
-%let viktige = inndato utdato aktivitetskategori3 ErMann alder koblingsID HDG komnr bydel bohf borhf boshhn behsh behhf behrhf hdiag hdiag2 hdiag3tegn bdiag1-bdiag19 ncmp1-ncmp19 ncsp1-ncsp19;
+%let magnusvar = inndato utdato aktivitetskategori3 ErMann alder koblingsID HDG komnr bydel bohf borhf boshhn behsh behhf behrhf hdiag hdiag2 hdiag3tegn bdiag1-bdiag19 ncmp1-ncmp19 ncsp1-ncsp19;
 
-%let viktig_som = ...;
-%let viktig_avtspes = ...;
+%let magnusvar_sykehus = ...;
+%let magnusvar_avtspes = ...;
 
-keep aar pid &viktige KoblingsID;
-``` 
+...
+keep aar pid &magnusvar &magnusvar_sykehus KoblingsID;
+...
+
+...
+drop &magnusvar &magnusvar_sykehus;
+...
+```
 
 */
 
@@ -26,13 +32,13 @@ keep aar pid &viktige KoblingsID;
 
 Data &UtdatasettEN;
 %if &avtspes ne 0 %then %do;
-retain aar pid inndato utdato ErMann alder koblingsID komnr bydel bohf borhf borhf boshhn hdiag hdiag2 hdiag3tegn bdiag1-bdiag9 ncmp1-ncmp10 ncsp1-ncsp10 ; 
+retain aar pid inndato utdato ErMann alder koblingsID komnr bydel bohf borhf borhf boshhn hdiag hdiag2 hdiag3tegn bdiag1-bdiag9 ncmp1-ncmp10 ncsp1-ncsp10 ;
 %end;
 %if &somatikk ne 0 %then %do;
 retain aar pid inndato utdato aktivitetskategori3 ErMann alder koblingsID HDG komnr bydel bohf borhf boshhn behsh behhf behrhf hdiag hdiag2 hdiag3tegn bdiag1-bdiag19 ncmp1-ncmp19 ncsp1-ncsp19 ;
 %end;
 set &Inndatasett;
-keep 
+keep
 aar
 %if &somatikk ne 0 %then %do;
 Aktivitetskategori3
@@ -224,4 +230,3 @@ format koblingsID 32.;
 run;
 
 %Mend Splitte;
-

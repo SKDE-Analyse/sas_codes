@@ -3,7 +3,7 @@
 /*!
 ### Beskrivelse
 
-Hente variable fra Parvus til Magnus 
+Hente variable fra Parvus til Magnus
 
 ```
 %VarFraParvus(dsnMagnus=,var_som=,var_avtspes=);
@@ -12,7 +12,7 @@ Hente variable fra Parvus til Magnus
 ### Parametre
 
 1. `dsnMagnus`: Datasettet du vil koble variable til. Kan være avdelingsoppholdsfil, sykehusoppholdsfil, avtalespesialistfil eller kombinasjoner av disse
-2. `var_som`: Variable som skal kobles fra avdelingsopphold- eller sykehusoppholdsfil 
+2. `var_som`: Variable som skal kobles fra avdelingsopphold- eller sykehusoppholdsfil
 3. `var_avtspes`: Variable som skal kobles fra avtalespesialistfil.
 
 ### Eksempel
@@ -21,14 +21,14 @@ Hente variable fra Parvus til Magnus
 VarFraParvus(dsnMagnus=radiusfrakturer,var_som=cyto: komnrhjem2, var_avtspes=fagLogg komnrhjem2)
 ```
 
-De varible du har valgt hentes fra aktuelle filer, kobles med variabelen *KoblingsID* og legges til inndatasettet 
+De varible du har valgt hentes fra aktuelle filer, kobles med variabelen *KoblingsID* og legges til inndatasettet
 Start gjerne med et ferdig utvalg om det er mulig, da vil makroen kjøre raskere og kreve mindre ressurser
 
 ### Endringsoversikt
 
 - 5/10-16 Opprettet av Petter Otterdal
 - juni 2017: Tilpasset versjon for tilrettelagte sett (Petter Otterdal)
-
+- juli 2018: tilpasset t18 (Arnfinn)
 */
 
 
@@ -41,10 +41,10 @@ set 	&dsnMagnus;
 run;
 
 proc sql;
-create table qwerty_&niva._&aar as 
+create table qwerty_&niva._&aar as
 select *
-from qwerty_&niva._&aar, npr_skde.t17_PARVUS_&niva._&aar(keep=koblingsID &var_som)
-where qwerty_&niva._&aar..koblingsID=t17_PARVUS_&niva._&aar..koblingsID;
+from qwerty_&niva._&aar, skde18.t18_PARVUS_&niva._&aar(keep=koblingsID &var_som)
+where qwerty_&niva._&aar..koblingsID=t18_PARVUS_&niva._&aar..koblingsID;
 quit;
 %mend; /* koble_avd */
 
@@ -58,10 +58,10 @@ set 	&dsnMagnus;
 run;
 
 proc sql;
-create table qwerty_&niva._&aar as 
+create table qwerty_&niva._&aar as
 select *
-from qwerty_&niva._&aar, npr_skde.t17_PARVUS_&niva._&aar(keep=koblingsID &var_som)
-where qwerty_&niva._&aar..koblingsID=t17_PARVUS_&niva._&aar..koblingsID;
+from qwerty_&niva._&aar, skde18.t18_PARVUS_&niva._&aar(keep=koblingsID &var_som)
+where qwerty_&niva._&aar..koblingsID=t18_PARVUS_&niva._&aar..koblingsID;
 quit;
 %mend; /* koble_sho */
 
@@ -74,10 +74,10 @@ set 	&dsnMagnus;
 run;
 
 proc sql;
-create table qwerty_avtspes_&aar as 
+create table qwerty_avtspes_&aar as
 select *
-from qwerty_avtspes_&aar, npr_skde.t17_PARVUS_avtspes_&aar(keep=koblingsID &var_avtspes)
-where qwerty_avtspes_&aar..koblingsID=t17_PARVUS_avtspes_&aar..koblingsID;
+from qwerty_avtspes_&aar, skde18.t18_PARVUS_avtspes_&aar(keep=koblingsID &var_avtspes)
+where qwerty_avtspes_&aar..koblingsID=t18_PARVUS_avtspes_&aar..koblingsID;
 quit;
 %mend; /* koble_avtspes */
 
@@ -109,4 +109,3 @@ proc datasets nolist;
 delete qwerty:;
 
 %mend; /* VarFraParvus */
-
