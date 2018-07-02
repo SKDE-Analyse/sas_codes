@@ -2,39 +2,66 @@
 /*Makroen lager datasett med oversikt over de løpenr som er assosiert med mer enn ett kjønn/fødselsår, */
 /*enten fordi det er flere kjønn/fødselsår registrert i dataene eller fordi det ikke er samsvar mellom populasjonsdata og aktivitetsdata*/
 /*Må sette datasettnavn. Kan også angi løpenummervariabelnavn og dato for populasjonsdata, hvis dette er en del av variabelnavnene for popdatavariablene*/
-%macro lnr_flere_kjonn_fodeaar(dsn=,lopenr=lopenr,dato_freg=19062018);
+%macro lnr_flere_kjonn_fodeaar(mappe=NPR18.,dsn=, rot=, lopenr=PID,dato_freg=19062018);
 
-%Merge_persondata(innDataSett=&dsn, utDataSett=&dsn._merged, pid=&lopenr);
+data &rot;
+set &mappe.&dsn;
+PID=lopenr+0;
+Keep PID kjonn fodselsar;
+run;
+
+
+
+
+%Merge_persondata(innDataSett=&rot, utDataSett=&rot._merged);
+
 
 /*Sorterer slik at dersom ett lnr er assosiert med mer enn ett kjønn eller ett fødselsår i dataene vil disse lnr få opptre i to eller flere rader, alle andre får en rad pr lnr*/
-Proc sort data=&dsn._merged out=&dsn._dup nodupkey /*dupout=Duplicate*/;
+Proc sort data=&rot._merged out=&rot._dup nodupkey /*dupout=Duplicate*/;
 by &lopenr kjonn kjonn_ident&dato_freg fodselsar fodselsaar_ident&dato_freg;   
 Run;
 
+
 /*Teller antall ganger et lnr opptrer i datasettet*/
 proc sql;
-   create table &dsn._dup as 
+   create table &rot._dup as 
    select *, count(&lopenr) as antall
-   from &dsn._dup
+   from &rot._dup
    group by &lopenr;
 quit;
 
-/*Fjerner alle lnr som opptrer mer enn en gang, og som dermed har registrert mer enn ett kjønn og/eller mer enn ett fødeår*/
-data &dsn._flere;
-set &dsn._dup;
-keep &lopenr kjonn kjonn_ident&dato_freg fodselsar fodselsaar_ident&dato_freg antall aar;
+/*Sorterer på nytt*/
+proc sort data=&rot._dup;
+by &lopenr kjonn kjonn_ident&dato_freg fodselsar fodselsaar_ident&dato_freg;
+quit;
+
+/*Beholder bare lnr som opptrer mer enn en gang, og som dermed har registrert 
+mer enn ett kjønn og/eller mer enn ett fødeår i aktivitetsdata eller i populasjonsdata*/
+data &rot._flere;
+set &rot._dup;
+by &lopenr kjonn kjonn_ident&dato_freg fodselsar fodselsaar_ident&dato_freg;
 where antall>1;
 run;
 
 /*Sorterer på nytt*/
-proc sort data=&dsn._flere;
+proc sort data=&rot._dup;
 by &lopenr kjonn kjonn_ident&dato_freg fodselsar fodselsaar_ident&dato_freg;
 quit;
 
+proc sort data=&rot._dup;
+by PID;
+quit;
+
+data &rot._dup;
+set &rot._dup;
+by PID;
+if first.pid=1 then unik=1;
+run;
+
 /*Lager oversiktsdatasett*/
 PROC SQL;
-   CREATE TABLE &dsn._oversikt AS 
-   SELECT DISTINCT &lopenr,
+   CREATE TABLE &rot._oversikt AS 
+   SELECT DISTINCT &lopenr, unik,
 MAX(kjonn) AS KJ_Max,
 MIN(kjonn) AS KJ_Min,
 MAX(kjonn_ident&dato_freg) AS KJ_Max_Id,
@@ -43,12 +70,12 @@ MAX(fodselsar) AS Faar_Max,
 MIN(fodselsar) AS Faar_Min,            
 MAX(fodselsAar_ident&dato_freg) AS Faar_Max_Id,
 MIN(fodselsAar_ident&dato_freg) AS Faar_Min_Id
-      FROM &dsn._DUP
+      FROM &rot._DUP
       GROUP BY &lopenr;
 QUIT;
 
-data &dsn._oversikt;
-set &dsn._oversikt; 
+data &rot._oversikt;
+set &rot._oversikt; 
 if KJ_Max ne KJ_Min then Kj_ulik=1;
 if KJ_Max_Id ne KJ_Min_Id then Kj_id_ulik=1;
 if Faar_Max ne Faar_Min then Faar_ulik=1;
@@ -60,23 +87,44 @@ if Faar_max_id ne Faar_max then Faar_ulik_rapp_id=1;
 run;
 
 /*Datasett med de som har mer enn ett kjønn/fødselsår registrert i populasjonsdataene*/
-data &dsn._flere_popdata;
-set &dsn._oversikt; 
+data &rot._flere_popdata;
+set &rot._oversikt; 
 where Kj_id_ulik=1 or Faar_id_ulik=1;
 run;
 
-proc sort data=&dsn._flere_popdata;
+proc sort data=&rot._flere_popdata;
 by &lopenr;
 run;
 
 /*Datasett med de hvor kjønn/fødselsår er ulikt i populasjonsdata og aktivitetsdata*/
-data &dsn._ulik_popdata_adata;
-set &dsn._oversikt;
+data &rot._ulik_popdata_adata;
+set &rot._oversikt;
 where Kj_ulik_rapp_id=1 or Faar_ulik_rapp_id=1;
 run;
 
-proc sort data=&dsn._ulik_popdata_adata;
+proc sort data=&rot._ulik_popdata_adata;
 by &lopenr;
 run;
+
+title "&rot";
+PROC TABULATE
+DATA=&rot._OVERSIKT;
+	
+VAR Faar_ulik Faar_id_ulik Kj_ulik_rapp_id Faar_ulik_rapp_id Kj_ulik Kj_id_ulik unik;
+TABLE /* Row Dimension */
+Faar_ulik_rapp_id ={LABEL="Ulikt f�dsels�r i persondata og aktivitetsdata"}
+Kj_ulik_rapp_id ={LABEL="Ulikt kj�nn i persondata og aktivitetsdata"}
+Faar_id_ulik ={LABEL="Mer enn ett f�dsels�r i persondata"}
+Kj_id_ulik ={LABEL="Mer enn ett kj�nn i persondata"}
+Faar_ulik ={LABEL="Mer enn ett f�dsels�r i aktivitetsdata"} 
+Kj_ulik ={LABEL="Mer enn ett kj�nn i aktivitetsdata"}
+unik ={LABEL="Unike PID i aktivitetsdata"} ,
+/* Column Dimension */
+N ={LABEL="Antall"} 		;
+	;
+
+RUN;
+title;
+
 
 %mend lnr_flere_kjonn_fodeaar;
