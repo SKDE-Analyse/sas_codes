@@ -108,6 +108,16 @@ if KomNr in (1723/*Mosvik*/,1729 /*Inderøy*/) then KomNr=1756 /*Inderøy:Gjelder 
 /*Ukjente kommunenummer*/
 if KomNr in (0,8888,9999) then KomNr=9999;
 
+run;
+
+/*!
+- Definere komNr til siste år (pr. 1. januar 2018) ved å kjøre makroen forny_komnr
+*/
+
+%forny_komnr(datasett = &Utdatasett);
+
+Data &Utdatasett;
+Set &Utdatasett;
 /*!
 - Kjøre boområde-makroen for å definere opptaksområder
 */
@@ -121,7 +131,7 @@ run;
 - Kjøre behandler-makroen for å definere behandlende sykehus, HF og RHF
 */
 
-%behandler(innDataSett=&Inndatasett, utDataSett=&Utdatasett);
+%behandler(innDataSett=&Utdatasett;, utDataSett=&Utdatasett);
 
 %end;
 
@@ -132,9 +142,9 @@ run;
 `spesialistkomHN` for avtalespesialister.
 */
 
-%AvtaleRHF_spesialistkomHN(innDataSett=&Inndatasett, utDataSett=&Utdatasett);
+%AvtaleRHF_spesialistkomHN(innDataSett=&Utdatasett;, utDataSett=&Utdatasett);
 
 %end;
 
 
-%mend bobehandler;
+%mend;
