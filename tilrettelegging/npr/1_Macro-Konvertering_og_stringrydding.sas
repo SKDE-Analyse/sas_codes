@@ -17,7 +17,7 @@ Set &Inndatasett;
 
 
 /* AHS
-Gjelder koden under her fremdeles? 
+Gjelder koden under her fremdeles?
 Burde det da eventuelt flyttes ut?
 */
 /*
@@ -62,12 +62,12 @@ drop bydel;
 */
 	Inndato1=Input(Inndato,Anydtdte10.);
 	Utdato1=Input(Utdato,Anydtdte10.);
-    
+
 	Format Inndato1 Utdato1 Eurdfdd10.;
 	Drop Inndato UtDato  ;
 	rename Inndato1=Inndato Utdato1=UtDato;
-    
-    
+
+
 %if &avtspes ne 0 %then %do;
 if utdato lt MDY (1,1,2013) then utdato = .;
 if utdato gt MDY (1,1,2018) then utdato = .;
@@ -87,11 +87,11 @@ if utdato gt MDY (1,1,2018) then utdato = .;
 	tidspunkt_41=Input(tidspunkt_4,Anydtdte10.);
 	tidspunkt_51=Input(tidspunkt_5,Anydtdte10.);
 
-	Format UtskrKlarDato1 tidspunkt_11 tidspunkt_21 tidspunkt_31 
+	Format UtskrKlarDato1 tidspunkt_11 tidspunkt_21 tidspunkt_31
 	tidspunkt_41 tidspunkt_51 Eurdfdd10.;
-	Drop emigrert_29082016 doddato_29082016 UtskrKlarDato tidspunkt_1 tidspunkt_2 tidspunkt_3 
+	Drop emigrert_29082016 doddato_29082016 UtskrKlarDato tidspunkt_1 tidspunkt_2 tidspunkt_3
 	tidspunkt_4 tidspunkt_5  ;
-	rename UtskrKlarDato1=UtskrKlarDato tidspunkt_11=tidspunkt_1 tidspunkt_21=tidspunkt_2 
+	rename UtskrKlarDato1=UtskrKlarDato tidspunkt_11=tidspunkt_1 tidspunkt_21=tidspunkt_2
 		   tidspunkt_31=tidspunkt_3 tidspunkt_41=tidspunkt_4 tidspunkt_51=tidspunkt_5 ;
 
 /*!
@@ -103,7 +103,7 @@ if utdato gt MDY (1,1,2018) then utdato = .;
 	Format Inntid1 Uttid1 Time8.;
 	Drop Inntid uttid;
 	rename InnTid1=InnTid UtTid1=UtTid;
-%end;	
+%end;
 
 /*!
 ###	Fjerner blanke felt og punktum i stringvariable, samt ny navngiving. For 2014 navnes dup_tilstand til Tdiag.
@@ -113,14 +113,14 @@ if utdato gt MDY (1,1,2018) then utdato = .;
 /*!
 - Fjerner blanke felt i DRG-koden og justerer til stor bokstav (upcase)
 */
-DRG=upcase(compress(DRG)); 
+DRG=upcase(compress(DRG));
 %end;
 
 /*!
 - Fjerner punktum i diagnosekoder. OUS har rapportert enkelte diagnosekoder med punktum, eks. `C50.9`.
 */
-if substr(tilstand_1_1,4,1)='.' then substr(tilstand_1_1,4,1)=' '; 
-if substr(tilstand_1_2,4,1)='.' then substr(tilstand_1_2,4,1)=' '; 
+if substr(tilstand_1_1,4,1)='.' then substr(tilstand_1_1,4,1)=' ';
+if substr(tilstand_1_2,4,1)='.' then substr(tilstand_1_2,4,1)=' ';
 
 Tilstand_1_1=compress(Tilstand_1_1,,'s'); /*Fjerner space*/
 Tilstand_1_2=compress(Tilstand_1_2,,'s');
@@ -145,7 +145,7 @@ array Tilstand_{19} $
 	tilstand_11_1 tilstand_12_1 tilstand_13_1 tilstand_14_1 tilstand_15_1 tilstand_16_1 tilstand_17_1 tilstand_18_1 tilstand_19_1 tilstand_20_1;
 		do i=1 to 19;
 %end;
-               if substr(tilstand_{i},4,1)='.' then substr(tilstand_{i},4,1)=' '; 
+               if substr(tilstand_{i},4,1)='.' then substr(tilstand_{i},4,1)=' ';
 			   Tilstand_{i}= compress(tilstand_{i},,'s');
     	end;
 
@@ -171,9 +171,9 @@ array Tilstand{19} $
 %end;
 
         Bdiag{i}=upcase(compress(Tilstand{i}));
-		
+
     	end;
-drop tilstand_: i; 
+drop tilstand_: i;
 
 /*!
 - Fjerner blanke felt i prosedyrevariable, og fjerner underscore (_) i variabelnavn
@@ -190,7 +190,7 @@ array ncsp_{20} $ ncsp_1-ncsp_20;
 %end;
                ncsp{i}=upcase(compress(ncsp_{i}));
           end;
-drop ncsp_: i; 
+drop ncsp_: i;
 
 %if &avtspes ne 0 %then %do;
 array ncmp{10} $ ncmp1-ncmp10;
@@ -204,7 +204,7 @@ array ncmp_{20} $ ncmp_1-ncmp_20;
 %end;
                ncmp{i}=upcase(compress(ncmp_{i}));
           end;
-drop ncmp_: i; 
+drop ncmp_: i;
 
 %if &somatikk ne 0 %then %do;
 array ncrp{20} $ ncrp1-ncrp20;
@@ -236,6 +236,10 @@ drop tell_takst;
 - Dup_tilstand er fem variabler som samler usorterte diagnoser for 25545 kontakter i 2014. Disse er identifisert med "(dupli" som Hdiag. Navner om til Tdiag.
 */
 
+/*
+Juni 2018: vi mangler foreløpig variablene Dup_Tilstand: så kommenterer ut
+*/
+/*
 if aar = 2014 then do;
 	array Tdiag{5} $
  	   Tdiag1-Tdiag5;
@@ -245,10 +249,12 @@ if aar = 2014 then do;
 			do i=1 to 5;
                Tdiag{i}=upcase(compress(Dup_Tilstand{i}));
  	   		end;
-	drop Dup_tilstand_1 - Dup_tilstand_5 i; 
+	drop Dup_tilstand_1 - Dup_tilstand_5 i;
 end;
+*/
 
 %end;
+
 
 run;
 %mend;
