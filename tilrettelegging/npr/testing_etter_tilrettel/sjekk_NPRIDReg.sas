@@ -1,8 +1,9 @@
 /*Makroen lager en tabell for å sjekke NPIdReg-variabelen mot personopplysningsdata*/
 
 %Macro sjekk_NPRIdReg(mappe=, rot=);
+
 data Test_&aar;
-set &mappe.&rot.&aar;
+  set &mappe.&rot.&aar;
 run;
 
 %VarFraParvusT17(dsnMagnus=Test_&aar, var_som=kjonn_ident fodselsaar_ident,var_avtspes=);
@@ -16,26 +17,34 @@ proc format;
       4 = 'Fødselsnummer/ D-nummer mangler.'  
       5 = 'Dødsdato i Det sentrale folkeregister er før inndato.' ;
 quit;
-data Test_&aar;
-Set Test_&aar;
-Tidsdiff=.;
-Dod_for_inndato=.;
-Tidsdiff=doddato-inndato;
-format NPRId_reg NPRId_reg.;
-If tidsdiff ne . then do;
-if Tidsdiff lt 0 then Dod_for_inndato=1;
-end;
-run;
-data Avd_&aar;
-Set Test_&aar;
-where aktivitetskategori3 ne .;
-if nprID_reg ne 4 then do;
-If ermann=. and kjonn_ident not in (0,9) then ulikt_kjonn=1;
-else if Ermann = 0 and kjonn_ident ne 2 then ulikt_kjonn=1;
-else if ermann = 1 and kjonn_ident ne 1 then ulikt_kjonn=1;
 
-if fodselsar ne fodselsaar_ident then ulikt_fodtar=1;
-end;
+data Test_&aar;
+  Set Test_&aar;
+
+  Tidsdiff=.;
+  Dod_for_inndato=.;
+  Tidsdiff=doddato-inndato;
+
+  format NPRId_reg NPRId_reg.;
+
+  If tidsdiff ne . then do;
+    if Tidsdiff lt 0 then Dod_for_inndato=1;
+  end;
+
+run;
+
+data Avd_&aar;
+  Set Test_&aar;
+ 
+  where aktivitetskategori3 ne .;
+  
+  if nprID_reg ne 4 then do;
+           If ermann=.   and kjonn_ident not in (0,9) then ulikt_kjonn=1;
+      else if Ermann = 0 and kjonn_ident ne 2         then ulikt_kjonn=1;
+      else if ermann = 1 and kjonn_ident ne 1         then ulikt_kjonn=1;
+
+      if fodselsar ne fodselsaar_ident then ulikt_fodtar=1;
+  end;
 
 run;
 
