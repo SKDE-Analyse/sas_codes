@@ -20,11 +20,15 @@ Bområder og behandlingssteder
 
 ### Logg
 
-Opprettet av: Linda Leivseth
-Opprettet dato: 06. juni 2015
-Sist modifisert: 04.10.2016 av Linda Leivseth og Petter Otterdal
-Sist modifisert: 05.01.2017 av Linda Leivseth (lagt til missigverdi 99 for manglende info om bydel2)
-
+- Opprettet av: Linda Leivseth
+- Opprettet dato: 06. juni 2015
+- Modifisert 04.10.2016 av Linda Leivseth og Petter Otterdal
+- Modifisert 05.01.2017 av Linda Leivseth (lagt til missigverdi 99 for manglende info om bydel2)
+- Modifisert 16.05.2018 av Arnfinn: Lagt inn avtspes.-kode
+- Modifisert 03.07.2017 av Arnfinn, for tilrettelegging 2018:
+  - Flyttet ut kode for definering av behandlende sykehus etc. (sykehus)
+  - Flyttet ut kode for definering av avtaleRHF etc. (avtalespes.)
+  - Kjører nå `forny_komnr`-makroen
 
 ### Steg for steg
 */
@@ -102,26 +106,28 @@ if komNr=1601 and bydel2_num=04 then bydel=160104; /* Heimdal */
 if komNr=1601 and bydel2_num=. then bydel=160199; /* Uoppgitt bydel Trondheim */
 if komNr=1601 and bydel2_num=99 then bydel=160199; /* Uoppgitt bydel Trondheim */
 
-if KomNr in (1901/*Harstad*/,1915 /*Bjarkøy*/) then KomNr=1903 /*Harstad: Gjelder fra 1. januar 2013, kodes for alle år*/;
-if KomNr in (1723/*Mosvik*/,1729 /*Inderøy*/) then KomNr=1756 /*Inderøy:Gjelder fra 1. januar 2012, kodes for alle år*/;
-
 /*Ukjente kommunenummer*/
 if KomNr in (0,8888,9999) then KomNr=9999;
+
+/* Backup av komnr og bydel før "fornying" */
+Komnr_org = KomNr;
+bydel_org = bydel;
 
 run;
 
 /*!
-- Definere komNr til siste år (pr. 1. januar 2018) ved å kjøre makroen forny_komnr
+- Definere `komNr` til siste år (pr. 1. januar 2018) ved å kjøre makroen
+`forny_komnr`
 */
 
-%forny_komnr(datasett = &Utdatasett);
+%forny_komnr(datasett = &Utdatasett, aar = 2018);
 
 Data &Utdatasett;
 Set &Utdatasett;
 /*!
-- Kjøre boområde-makroen for å definere opptaksområder
+- Kjøre makroen `boomraader` for å definere opptaksområder
 */
-%boomraader();
+%boomraader(haraldsplass = 0, indreOslo = 0, bydel = 1, barn = 0, boaar=2018);
 
 run;
 

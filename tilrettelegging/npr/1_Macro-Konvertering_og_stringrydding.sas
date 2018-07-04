@@ -8,8 +8,6 @@ MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 1. Omkoding av stringer med tall til numeriske variable.
 2. Konvertering av stringer til dato- og tidsvariable
 3. Fjerner blanke felt og punktum i stringvariable, samt ny navngiving
-
-
 */
 
 Data &Utdatasett;
@@ -46,10 +44,10 @@ rename Rehab=RehabType;
 %end;
 
 /*!
-- Generere `komNr` fra `KomNrHjem2` og `bydel_org` fra `bydel`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
+- Generere `komNr` fra `KomNrHjem2` og `bydel_innr` fra `bydel`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
 */
 KomNr=KomNrHjem2+0;
-bydel_org=bydel;
+bydel_innr=bydel;
 drop bydel;
 
 /*!
