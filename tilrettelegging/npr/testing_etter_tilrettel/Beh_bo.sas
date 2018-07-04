@@ -20,25 +20,8 @@ RUN;
 
 %mend behandlingssted;
 
-ods excel file="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\data\SAS\Tilrettelegging\Somatikk\Tilrettelegging_2018\Magnus_Avd_BEH.xlsx";
 
-%behandlingssted (mottatt=T18, aar=2017);
 
-%behandlingssted (mottatt=T17, aar=2016);
-%behandlingssted (mottatt=T18, aar=2016);
-
-%behandlingssted (mottatt=T17, aar=2015);
-%behandlingssted (mottatt=T18, aar=2015);
-
-%behandlingssted (mottatt=T17, aar=2014);
-%behandlingssted (mottatt=T18, aar=2014);
-
-%behandlingssted (mottatt=T17, aar=2013);
-%behandlingssted (mottatt=T18, aar=2013);
-
-%behandlingssted (mottatt=T17, aar=2012);
-
-ods excel close;
 
 /*Haraldsplass Diakonale Sykehus AS er et av tre store private ikke-kommersielle sykehus i Norge. Sykehuset er en del av 
 det offentlige helsetilbudet gjennom driftsavtale med Helse Vest RHF. Sykehuset tilbyr spesialisthelsetjenester innen 
@@ -82,22 +65,3 @@ RUN;
 
 %mend bosted;
 
-ods excel file="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\data\SAS\Tilrettelegging\Somatikk\Tilrettelegging_2018\Magnus_Avd_BO.xlsx";
-
-%bosted (mottatt=T18, aar=2017);
-
-%bosted (mottatt=T17, aar=2016);
-%bosted (mottatt=T18, aar=2016);
-
-%bosted (mottatt=T17, aar=2015);
-%bosted (mottatt=T18, aar=2015);
-
-%bosted (mottatt=T17, aar=2014);
-%bosted (mottatt=T18, aar=2014);
-
-%bosted (mottatt=T17, aar=2013);
-%bosted (mottatt=T18, aar=2013);
-
-%bosted (mottatt=T17, aar=2012);
-
-ods excel close;
