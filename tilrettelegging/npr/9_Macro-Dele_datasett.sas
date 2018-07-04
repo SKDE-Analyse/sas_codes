@@ -215,7 +215,7 @@ TilSted
 debitor
 %if &avtspes ne 0 %then %do;
 Fag
-fagLogg
+Fag_navn
 hjemmelstr
 kontakt
 tell:

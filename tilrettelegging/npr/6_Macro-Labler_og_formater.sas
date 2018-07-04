@@ -239,7 +239,7 @@ label KoblingsID='Unik id for påkobling av variabler (SKDE)';
 %if &avtspes ne 0 %then %do;
 label tell_Normaltariff='Antall normaltariff-koder innrapportert (NPR)';
 label fag='Fagområde 2011-2014';
-label fagLogg='Fagområde 2015';
+label Fag_navn='Fagområde 2015';
 label fag_SKDE='Fagområde, harmonisert 2011-2015 (SKDE)'; format FAG_SKDE FAG_SKDE.;
 label SpesialistKomHN='Kommunenummer for avtalespesialistens praksis';
 label AvtSpesKomHN='Kontakt med avtalespesialist i HN';

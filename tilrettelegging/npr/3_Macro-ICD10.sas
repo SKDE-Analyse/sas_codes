@@ -338,13 +338,13 @@ Hdiag3tegn=substr(Hdiag,1,3);
 3.7	FAG_SKDE
 ************************************************************************************************
 /*!
-- Lager ny harmonisert variabel fra FAG og FAGLOGG (gjelder kun avtalespesialister). 
+- Lager ny harmonisert variabel fra FAG og Fag_navn (gjelder kun avtalespesialister). 
 */
 
 %if &avtspes ne 0 %then %do;
-if aar in (2012:2014) then do;
+if aar in (2013:2014) then do;
 
-/***	2011 - 2014		***/
+/***	2013 og 2014		***/
 
 if Fag = 1 then Fag_SKDE = 1;
 if Fag = 2 then Fag_SKDE = 2;
@@ -367,28 +367,28 @@ if Fag = 31 then Fag_SKDE = 31;
 
 end;
 
-/***	2015og 2016	***/
+/***	2015, 2016 og 2017	***/
 
-if aar in  (2015:2016) then do;
+if aar in  (2015:2017) then do;
 
-if fagLogg = "anestesi" then Fag_SKDE = 1;
-if fagLogg = "barn" then Fag_SKDE = 2;
-if fagLogg = "fys med" then Fag_SKDE = 3;
-if fagLogg = "gyn" then Fag_SKDE = 4;
-if fagLogg = "hud" then Fag_SKDE = 5;
-if substr(fagLogg,1,5)= 'indre' then Fag_SKDE = 6;
-if substr(fagLogg,1,3)= 'kir' then Fag_SKDE = 11;
-if fagLogg = "nevrologi" then Fag_SKDE = 15;
-if fagLogg = "ortopedi" then Fag_SKDE = 16;
-if fagLogg = "plastkir" then Fag_SKDE = 17;
-if fagLogg = "radiologi" then Fag_SKDE = 18;
-if fagLogg = "revma" then Fag_SKDE = 19;
-if fagLogg = "urologi" then Fag_SKDE = 20;
-if fagLogg = "ønh" then Fag_SKDE = 21;
-if fagLogg = "øye" then Fag_SKDE = 22;
-if fagLogg = "onkologi" then Fag_SKDE = 23;
-if fagLogg = "psykiatri" then Fag_SKDE = 30;
-if fagLogg = "psykologi" then Fag_SKDE = 31;
+if Fag_navn = "anestesi" then Fag_SKDE = 1;
+if Fag_navn = "barn" then Fag_SKDE = 2;
+if Fag_navn = "fys med" then Fag_SKDE = 3;
+if Fag_navn = "gyn" then Fag_SKDE = 4;
+if Fag_navn = "hud" then Fag_SKDE = 5;
+if substr(Fag_navn,1,5)= 'indre' then Fag_SKDE = 6;
+if substr(Fag_navn,1,3)= 'kir' then Fag_SKDE = 11;
+if Fag_navn = "nevrologi" then Fag_SKDE = 15;
+if Fag_navn = "ortopedi" then Fag_SKDE = 16;
+if Fag_navn = "plastkir" then Fag_SKDE = 17;
+if Fag_navn = "radiologi" then Fag_SKDE = 18;
+if Fag_navn = "revma" then Fag_SKDE = 19;
+if Fag_navn = "urologi" then Fag_SKDE = 20;
+if Fag_navn = "ønh" then Fag_SKDE = 21;
+if Fag_navn = "øye" then Fag_SKDE = 22;
+if Fag_navn = "onkologi" then Fag_SKDE = 23;
+if Fag_navn = "psykiatri" then Fag_SKDE = 30;
+if Fag_navn = "psykologi" then Fag_SKDE = 31;
 
 end;
 
