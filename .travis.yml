@@ -4,7 +4,7 @@ python:
   - "3.6"
 
 before_script:
-  - wget https://raw.githubusercontent.com/SKDE-Analyse/python-scripts/v1.0.1/skde/extract_sas_documentation.py
+  - wget https://raw.githubusercontent.com/SKDE-Analyse/python-scripts/v1.1.0/skde/extract_sas_documentation.py
 
 script:
   - python extract_sas_documentation.py "makroer" "makroer/tests" "rateprogram" "rateprogram/sas" "rateprogram/tests" "tilrettelegging/npr" "tilrettelegging/ssb"

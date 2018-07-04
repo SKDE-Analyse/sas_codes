@@ -6,4 +6,4 @@
 - [Makroer](makroer)
 - [Rateprogrammet](rateprogram)
 - [Tilrettelegging](tilrettelegging)
-- Se [denne siden](monorepo) for en beskrivelse av hvordan alt ble samlet.
+- Se [denne siden](https://skde-analyse.github.io/sas_codes/monorepo) for en beskrivelse av hvordan alt ble samlet.
