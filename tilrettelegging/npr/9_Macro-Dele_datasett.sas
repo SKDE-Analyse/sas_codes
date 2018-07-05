@@ -26,32 +26,25 @@ bohf
 borhf
 boshhn
 Fylke
-hdiag
-hdiag2
-hdiag3tegn
-%if &somatikk ne 0 %then %do;
-bdiag1-bdiag19
-ncmp1-ncmp20
-ncsp1-ncsp20
-ncrp1-ncrp20
-%end;
-%if &avtspes ne 0 %then %do;
-bdiag1-bdiag9
-ncmp1-ncmp10
-ncsp1-ncsp10
-%end;
-Episodefag
-hastegrad
-ICD10Kap
 NPRId_reg
 fodselsar
 dodDato
 institusjonId
 debitor
+Episodefag
+hastegrad
+ICD10Kap
+hdiag
+hdiag2
+hdiag3tegn
 ;
 
 /* Magnus-variabler som kun finnes i sykehus-fil */
 %let magnusvar_sykehus = 
+bdiag1-bdiag19
+ncmp1-ncmp20
+ncsp1-ncsp20
+ncrp1-ncrp20
 InnTid
 UtTid
 aktivitetskategori3
@@ -74,9 +67,12 @@ versjon
 
 /* Magnus-variabler som kun finnes i avtspes-fil */
 %let magnusvar_avtspes = 
+bdiag1-bdiag9
+ncmp1-ncmp10
+ncsp1-ncsp10
 fag_skde
 Normaltariff1-Normaltariff15
-Tdiag1-Tdiag5 /* Fikk ikke i første utlevering, juni 2018 */
+Tdiag1-Tdiag5 /* Vil mangle for alle år, bortsett fra 2014. */
 AvtaleRHF
 SpesialistKomHN
 Komplett
@@ -97,7 +93,8 @@ AvtSpes
 
 Data &UtdatasettEN;
 retain aar pid &magnusvar koblingsID;
-set &Inndatasett (keep = aar pid &magnusvar koblingsID);
+set &Inndatasett;
+keep aar pid &magnusvar koblingsID;
 format koblingsID 32.;
 run;
 
@@ -106,7 +103,8 @@ run;
 */
 
 Data &UtdatasettTO;
-set &Inndatasett (drop = &magnusvar);
+set &Inndatasett;
+drop &magnusvar;
 format koblingsID 32.;
 run;
 
