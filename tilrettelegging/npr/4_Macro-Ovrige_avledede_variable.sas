@@ -63,11 +63,10 @@ if fodselsar=9999 then alder=.; /*Ugyldig*/
 if KJONN=1 /*1 ='Mann' */ then ErMann=1; /* Mann */
 else if KJONN=2 /*2 ='Kvinne' */ then ErMann=0; /* Kvinne */
 else if KJONN in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ErMann=.;
-*drop KJONN; /*Kontrollert ok*/;
-
 
 /*!
-- Definere hastegrad og DRGtypeHastegrad (kun for somatikk)
+- Definere `hastegrad` og `DRGtypeHastegrad` (kun for somatikk). 
+Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
 */
 
 %if &somatikk ne 0 %then %do;
@@ -82,6 +81,10 @@ else if DRG_type='K' and hastegrad=4 /*Planlagt*/ then DRGtypeHastegrad=3;
 else if DRG_type='K' and hastegrad=1 /*Akutt*/ then DRGtypeHastegrad=4;
 if DRG_TYPE=' ' then DRGtypeHastegrad=9;
 if hastegrad=. then DRGtypeHastegrad=9;
+%end;
+
+%if &avtspes ne 0 %then %do;
+hastegrad=4;
 %end;
 
 run;
