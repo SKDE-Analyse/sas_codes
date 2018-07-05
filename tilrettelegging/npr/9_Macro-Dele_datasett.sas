@@ -45,6 +45,9 @@ hastegrad
 ICD10Kap
 NPRId_reg
 fodselsar
+dodDato
+institusjonId
+debitor
 ;
 
 /* Magnus-variabler som kun finnes i sykehus-fil */
@@ -52,18 +55,20 @@ fodselsar
 InnTid
 UtTid
 aktivitetskategori3
-behandlingsstedKode2
+behandlingssted2
 BehHF
 BehRHF
 behSh
 drg
 drg_type
 HDG
-/*korrvekt*/ /* Ikke fått data i 2018 */
+korrvekt /* Ikke fått data for 2018 */
 liggetid
 opphold_id
 polUtforende_1
 utTilstand /* Fikk ikke i første utlevering, juni 2018 */
+intern_kons
+niva
 versjon
 ;
 
