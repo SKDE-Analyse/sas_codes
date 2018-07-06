@@ -81,28 +81,28 @@ where qwerty_avtspes_&aar..koblingsID=t18_PARVUS_avtspes_&aar..koblingsID;
 quit;
 %mend; /* koble_avtspes */
 
-%koble_avd (niva=avd,aar=2012);
 %koble_avd (niva=avd,aar=2013);
 %koble_avd (niva=avd,aar=2014);
 %koble_avd (niva=avd,aar=2015);
 %koble_avd (niva=avd,aar=2016);
+%koble_avd (niva=avd,aar=2017);
 
-%koble_sho (niva=sho,aar=2012);
 %koble_sho (niva=sho,aar=2013);
 %koble_sho (niva=sho,aar=2014);
 %koble_sho (niva=sho,aar=2015);
 %koble_sho (niva=sho,aar=2016);
+%koble_sho (niva=sho,aar=2017);
 
-%koble_avtspes (niva=avtspes,aar=2012);
 %koble_avtspes (niva=avtspes,aar=2013);
 %koble_avtspes (niva=avtspes,aar=2014);
 %koble_avtspes (niva=avtspes,aar=2015);
 %koble_avtspes (niva=avtspes,aar=2016);
+%koble_avtspes (niva=avtspes,aar=2017);
 
 data &dsnMagnus;
-set  qwerty_avd_2012 qwerty_avd_2013 qwerty_avd_2014 qwerty_avd_2015 qwerty_avd_2016
-	 qwerty_sho_2012 qwerty_sho_2013 qwerty_sho_2014 qwerty_sho_2015 qwerty_sho_2016
-     qwerty_avtspes_2012 qwerty_avtspes_2013 qwerty_avtspes_2014 qwerty_avtspes_2015 qwerty_avtspes_2016;
+set  qwerty_avd_2013 qwerty_avd_2014 qwerty_avd_2015 qwerty_avd_2016 qwerty_avd_2017
+	 qwerty_sho_2013 qwerty_sho_2014 qwerty_sho_2015 qwerty_sho_2016 qwerty_sho_2017
+     qwerty_avtspes_2013 qwerty_avtspes_2014 qwerty_avtspes_2015 qwerty_avtspes_2016 qwerty_avtspes_2017;
 run;
 
 proc datasets nolist;
