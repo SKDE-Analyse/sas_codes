@@ -153,7 +153,7 @@ RUN; Title;
 PROC SQL;
 CREATE TABLE ikke_med_tot AS
 SELECT * FROM tmp1UTVALGX
-where komnr=. or komnr not in (0:2031) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
+where komnr=. or komnr not in (0:5100) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
 QUIT;
 
 PROC TABULATE DATA=ikke_med_tot FORMAT=NLnum12.0;	
@@ -167,7 +167,7 @@ RUN;
 PROC SQL;
 CREATE TABLE ikke_kom AS
 SELECT * FROM tmp1UTVALGX
-where komnr not in (0:2031); 
+where komnr not in (0:2031, 5000:5100); 
 QUIT;
 
 PROC TABULATE DATA=ikke_kom FORMAT=NLnum12.0;	
@@ -182,7 +182,7 @@ RUN;
 PROC SQL;
 CREATE TABLE ikke_med AS
 SELECT * FROM tmp1UTVALGX
-where (komnr=. or komnr in (0:2031)) and (alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår)); 
+where (komnr=. or komnr in (0:2031, 5000:5100)) and (alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår)); 
 QUIT;
 
 PROC TABULATE DATA=ikke_med FORMAT=NLnum12.0;	
@@ -207,7 +207,7 @@ run;
 	   CREATE TABLE tmp2utvalgx AS
 	   SELECT DISTINCT aar,KomNr,bydel,Alder,ErMann,(SUM(RV)) AS RV
 	      FROM tmp1UTVALGX
-		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<2031
+		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<5100
 	      GROUP BY aar, KomNr, bydel, Alder, ErMann;	  
 	QUIT;
 
@@ -223,7 +223,7 @@ Lag en figur med aldersprofilen i utvalget
 	data tmp1innb_aar;
 	set &innbyggerfil;
 	keep aar komnr bydel Ermann Alder innbyggere;
-	where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<2031;
+	where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<5100;
 	&aldjust; 
 	run;
 
