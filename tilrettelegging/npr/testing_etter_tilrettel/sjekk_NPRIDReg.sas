@@ -1,4 +1,4 @@
-/*Makroen lager en tabell for Ã¥ sjekke NPIdReg-variabelen mot personopplysningsdata*/
+/*Makroen lager en tabell for å sjekke NPIdReg-variabelen mot personopplysningsdata*/
 
 %Macro sjekk_NPRIdReg(mappe=, rot=);
 
@@ -6,20 +6,24 @@ data Test_&aar;
   set &mappe.&rot.&aar;
 run;
 
-%VarFraParvusT17(dsnMagnus=Test_&aar, var_som=kjonn_ident fodselsaar_ident,var_avtspes=);
+%include "&filbane.\makroer\VarFraParvusT18_test.sas";
+%VarFraParvusT18_test(dsnMagnus=Test_&aar, var_som=kjonn_ident19062018 fodselsaar_ident19062018,var_avtspes=);
 
 
 proc format;
    value NPRID_REG
-      1 = 'FÃ¸dselsnummer/ D-nummer er ok.'  
-      2 = 'Ulikt kjÃ¸nn i fÃ¸dselsnummer/ D-nummer og i aktivitetsdata.'  
-      3 = 'Ulikt fÃ¸dselsÃ¥r i fÃ¸dselsnummer/ D-nummer og i aktivitetsdata.'  
-      4 = 'FÃ¸dselsnummer/ D-nummer mangler.'  
-      5 = 'DÃ¸dsdato i Det sentrale folkeregister er fÃ¸r inndato.' ;
+      1 = 'Fødselsnummer/ D-nummer er ok.'  
+      2 = 'Ulikt kjønn i fødselsnummer/ D-nummer og i aktivitetsdata.'  
+      3 = 'Ulikt fødselsår i fødselsnummer/ D-nummer og i aktivitetsdata.'  
+      4 = 'Fødselsnummer/ D-nummer mangler.'  
+      5 = 'Dødsdato i Det sentrale folkeregister er før inndato.' ;
 quit;
 
 data Test_&aar;
   Set Test_&aar;
+  
+  rename kjonn_ident19062018=kjonn_ident;
+  rename fodselsaar_ident19062018=fodselsaar_ident;
 
   Tidsdiff=.;
   Dod_for_inndato=.;
@@ -56,6 +60,20 @@ RUN;
 PROC TABULATE DATA=AVD_&aar;
 	CLASS NPRId_reg ulikt_kjonn ulikt_fodtar /	ORDER=UNFORMATTED MISSING;
 	TABLE ulikt_kjonn ulikt_fodtar NPRId_reg,
+	N 		;
+RUN;
+
+PROC TABULATE DATA=AVD_&aar;
+	where kjonn_ident ne .;
+	CLASS ulikt_kjonn  /	ORDER=UNFORMATTED MISSING;
+	TABLE ulikt_kjonn ,
+	N 		;
+RUN;
+
+PROC TABULATE DATA=AVD_&aar;
+	where fodselsaar_ident ne .;
+	CLASS ulikt_fodtar  /	ORDER=UNFORMATTED MISSING;
+	TABLE ulikt_fodtar ,
 	N 		;
 RUN;
 

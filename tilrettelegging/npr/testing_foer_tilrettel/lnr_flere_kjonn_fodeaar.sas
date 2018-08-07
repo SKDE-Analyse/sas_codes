@@ -4,14 +4,12 @@
 /*Må sette datasettnavn. Kan også angi løpenummervariabelnavn og dato for populasjonsdata, hvis dette er en del av variabelnavnene for popdatavariablene*/
 %macro lnr_flere_kjonn_fodeaar(mappe=NPR18.,dsn=, rot=, lopenr=PID,dato_freg=19062018);
 
+
 data &rot;
 set &mappe.&dsn;
 PID=lopenr+0;
 Keep PID kjonn fodselsar;
 run;
-
-
-
 
 %Merge_persondata(innDataSett=&rot, utDataSett=&rot._merged);
 
@@ -61,7 +59,7 @@ run;
 /*Lager oversiktsdatasett*/
 PROC SQL;
    CREATE TABLE &rot._oversikt AS 
-   SELECT DISTINCT &lopenr, unik,
+   SELECT DISTINCT &lopenr, unik, 
 MAX(kjonn) AS KJ_Max,
 MIN(kjonn) AS KJ_Min,
 MAX(kjonn_ident&dato_freg) AS KJ_Max_Id,
@@ -112,12 +110,12 @@ DATA=&rot._OVERSIKT;
 	
 VAR Faar_ulik Faar_id_ulik Kj_ulik_rapp_id Faar_ulik_rapp_id Kj_ulik Kj_id_ulik unik;
 TABLE /* Row Dimension */
-Faar_ulik_rapp_id ={LABEL="Ulikt fdselsr i persondata og aktivitetsdata"}
-Kj_ulik_rapp_id ={LABEL="Ulikt kjnn i persondata og aktivitetsdata"}
-Faar_id_ulik ={LABEL="Mer enn ett fdselsr i persondata"}
-Kj_id_ulik ={LABEL="Mer enn ett kjnn i persondata"}
-Faar_ulik ={LABEL="Mer enn ett fdselsr i aktivitetsdata"} 
-Kj_ulik ={LABEL="Mer enn ett kjnn i aktivitetsdata"}
+Faar_ulik_rapp_id ={LABEL="Ulikt fødselsår i persondata og aktivitetsdata"}
+Kj_ulik_rapp_id ={LABEL="Ulikt kjønn i persondata og aktivitetsdata"}
+Faar_id_ulik ={LABEL="Mer enn ett fødselsår i persondata"}
+Kj_id_ulik ={LABEL="Mer enn ett kjønn i persondata"}
+Faar_ulik ={LABEL="Mer enn ett fødselsår i aktivitetsdata"} 
+Kj_ulik ={LABEL="Mer enn ett kjønn i aktivitetsdata"}
 unik ={LABEL="Unike PID i aktivitetsdata"} ,
 /* Column Dimension */
 N ={LABEL="Antall"} 		;
@@ -128,3 +126,21 @@ title;
 
 
 %mend lnr_flere_kjonn_fodeaar;
+
+/* Makro som gir frekvenser for NPRId_reg, kjønn og fødselsår i aktivitetsdata og persondata */
+
+%macro freq_akt(rot=, dsn=);
+title "&rot";
+proc freq data=NPR18.&dsn;
+table nprId_reg kjonn fodselsar;
+run;
+title;
+%mend freq_akt;
+
+%macro freq_pers(rot=, dsn=, dato_freg=19062018);
+title "&rot";
+proc freq data=NPR18.&dsn;
+table kjonn_ident&dato_freg fodselsAar_ident&dato_freg;
+run;
+title;
+%mend freq_pers;
