@@ -36,18 +36,24 @@ Dette innebærer imidlertid at mange opphold for personer bosatt i utlandet med a
 samme regel som for norske.
 */
 
+if fodselsar > aar then fodselsar=9999;
 if aar in (2013,2014,2015,2016,2017) and fodselsar < 1904 then fodselsar=9999;
-if aar=2013 and fodselsar >2013 then fodselsar=9999;
-if aar=2014 and fodselsar >2014 then fodselsar=9999;
-if aar=2015 and fodselsar >2015 then fodselsar=9999;
-if aar=2016 and fodselsar >2016 then fodselsar=9999;
-if aar=2017 and fodselsar >2017 then fodselsar=9999;
+if aar in (2018) and fodselsar < 1909 then fodselsar=9999;
 
 %if &avtspes ne 0 %then %do;
 
+fodselsar_innrapp=fodselsar;
+
+if fodselsar=9999 then do;
+    fodselsar=fodselsAar_ident19062018;
+    if fodselsar > aar then fodselsar=9999;
+    if aar in (2013,2014,2015,2016,2017) and fodselsar < 1904 then fodselsar=9999;
+end;
+
 if utdato lt MDY (1,1,2013) then utdato = .;
 if utdato ge MDY (1,1,2018) then utdato = .;
-/* Det er fremdeles noen feil i utdato da pasienter som har vært hos avtalespesialist ett er registrer med utdato året etter. */
+/* Det er fremdeles noen feil i utdato da pasienter som har vært hos avtalespesialist ett år
+er registrert med utdato året etter. */
 %end;
 
 /*!
@@ -63,6 +69,19 @@ if fodselsar=9999 then alder=.; /*Ugyldig*/
 if KJONN=1 /*1 ='Mann' */ then ErMann=1; /* Mann */
 else if KJONN=2 /*2 ='Kvinne' */ then ErMann=0; /* Kvinne */
 else if KJONN in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ErMann=.;
+
+%if &avtspes ne 0 %then %do;
+
+If kjonn not in (1,2) and kjonn_ident19062018 in (1,2) then do;
+	if kjonn_ident19062018 = 1 then ErMann = 1;
+	else if kjonn_ident19062018 = 2 then ErMann = 0;
+end;
+
+ulikt_kjonn=.;
+if kjonn=1 and kjonn_ident19062018=2 then ulikt_kjonn=1;
+if kjonn=2 and kjonn_ident19062018=1 then ulikt_kjonn=1;
+
+%end;
 
 /*!
 - Definere `hastegrad` og `DRGtypeHastegrad` (kun for somatikk). 
