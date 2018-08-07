@@ -201,17 +201,18 @@ run;
 %end;
 
 
+%forny_komnr(datasett = tmp1UTVALGX);
 	/*----------------------------*/
 
 	PROC SQL;
 	   CREATE TABLE tmp2utvalgx AS
 	   SELECT DISTINCT aar,KomNr,bydel,Alder,ErMann,(SUM(RV)) AS RV
 	      FROM tmp1UTVALGX
-		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<5100
-	      GROUP BY aar, KomNr, bydel, Alder, ErMann;	  
+		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and komnr in (0:2031, 5000:5100)
+	      GROUP BY aar, KomNr,  Alder, bydel, ErMann;	  
 	QUIT;
 
-    
+   
 /*
 Lag en figur med aldersprofilen i utvalget
 */
@@ -227,6 +228,8 @@ Lag en figur med aldersprofilen i utvalget
 	&aldjust; 
 	run;
 
+%forny_komnr(datasett = tmp1innb_aar);
+
 	PROC SQL;
 	   CREATE TABLE innb_aar AS 
 	   SELECT DISTINCT aar,KomNr, bydel, Alder,ErMann,(SUM(Innbyggere)) AS Innbyggere
@@ -234,13 +237,22 @@ Lag en figur med aldersprofilen i utvalget
 	      GROUP BY aar, KomNr, Alder, bydel, ErMann;
 	QUIT;
 
-	PROC SQL;
-	 CREATE TABLE utvalgx AS
-	 SELECT a.aar, a.KomNr, a.bydel, a.Alder, a.ErMann, b.RV, a.Innbyggere
-	 FROM innb_aar a left join tmp2utvalgx b
-	 ON b.komnr=a.komnr and b.bydel=a.bydel and b.aar=a.aar 
-		and b.ermann=a.ermann and b.alder=a.alder;
-	QUIT; 
+/* merge to keep all lines from both files */
+
+proc sort data=innb_aar;
+ by aar KomNr Alder bydel ErMann;
+run;
+
+proc sort data=tmp2utvalgx;
+ by aar KomNr Alder bydel ErMann;
+run;
+ 
+
+data utvalgx;
+  merge innb_aar(in=a) tmp2utvalgx(in=b);
+  by aar KomNr Alder bydel ErMann;
+  if a or b;
+run;
 
 	proc datasets nolist;
 	delete tmp1innb_aar innb_aar tmp1utvalgx tmp2utvalgx;
@@ -283,8 +295,8 @@ Lag en figur med aldersprofilen i utvalget
 	format aar aar.;
 	run;
 
-	proc delete data=alderdef utvalgx tmpRV;
-	run;
+	*proc delete data=alderdef utvalgx tmpRV;
+	*run;
 
    /*
    Definere macro-variabler for boomraade-makroen,
@@ -318,8 +330,8 @@ format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr 
 	    from tmpAndel;
 	quit;
 
-    proc delete data=tmpAndel;
-	run;
+    *proc delete data=tmpAndel;
+	*run;
     
 	/* legg på boområder */
 	/*%include "\\tos-sastest-07\SKDE\rateprogram\Rateprogram_Boomraader.sas";
