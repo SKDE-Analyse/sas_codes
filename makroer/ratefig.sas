@@ -42,7 +42,7 @@ INPUT FOR HVER FIGUR:
 
 
 /*enkel ratefigur*/
-%macro ratefig(datasett=);
+%macro ratefig(datasett=, aar1=2014, aar2=2015, aar3=2016);
 
 /*Setter aktuelle rater i datasettet til missing hvis antall observasjoner er under grensen (nkrav)*/
 Data &datasett;
@@ -50,7 +50,7 @@ set &datasett;
 Length Mistext $ 10;
 if &rv1 lt &nkrav then do;
      ratesnitt=.;
-	 rate2014=.; rate2015=.; rate2016=.; min=.; max=.;
+	 rate&aar1=.; rate&aar2=.; rate&aar3=.; min=.; max=.;
      Mistext="N<&nkrav";
      Plassering=Norge/100;
 end;
@@ -94,19 +94,19 @@ hbarparm category=bohf response=Snittrate / fillattrs=(color=CXC3C3C3) outlineat
 	scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0);
 %end;
 %if &vis_aarsvar=1 %then %do;
-	%if &ratestart=2014 %then %do;
-	scatter x=rate2014 y=Bohf / markerattrs=(symbol=squarefilled color=black);
-	scatter x=rate2015 y=Bohf / markerattrs=(symbol=circlefilled color=black); 
-	scatter x=rate2016 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
+	%if &ratestart=&aar1 %then %do;
+	scatter x=rate&aar1 y=Bohf / markerattrs=(symbol=squarefilled color=black);
+	scatter x=rate&aar2 y=Bohf / markerattrs=(symbol=circlefilled color=black); 
+	scatter x=rate&aar3 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
 	Highlow Y=Bohf low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); 
 	%end;
-	%if &ratestart=2015 %then %do;
-	scatter x=rate2015 y=Bohf / markerattrs=(symbol=circlefilled color=black); 
-	scatter x=rate2016 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
+	%if &ratestart=&aar2 %then %do;
+	scatter x=rate&aar2 y=Bohf / markerattrs=(symbol=circlefilled color=black); 
+	scatter x=rate&aar3 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
 	Highlow Y=Bohf low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); 
 	%end;
-	%if &ratestart=2016 %then %do;
-	scatter x=rate2016 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
+	%if &ratestart=&aar3 %then %do;
+	scatter x=rate&aar3 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
 	Highlow Y=Bohf low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); 
 	%end;
 %end;
@@ -115,24 +115,24 @@ yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 weight=b
 xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7);
 xaxis label="&xlabel" labelattrs=(size=7 weight=bold);
 %if &vis_aarsvar=1 %then %do;
-	%if &ratestart=2014 %then %do;
+	%if &ratestart=&aar1 %then %do;
 	inset (
-	"(*ESC*){unicode'25a0'x}"="   2014"   
- 	"(*ESC*){unicode'25cf'x}"="   2015" 
- 	"(*ESC*){unicode'25b2'x}"="   2016" 
+	"(*ESC*){unicode'25a0'x}"="   &aar1"   
+ 	"(*ESC*){unicode'25cf'x}"="   &aar2" 
+ 	"(*ESC*){unicode'25b2'x}"="   &aar3" 
 	) 
     / position=bottomright textattrs=(size=7);
 	%end;
-	%if &ratestart=2015 %then %do;
+	%if &ratestart=&aar2 %then %do;
 	inset (
- 	"(*ESC*){unicode'25cf'x}"="   2015" 
- 	"(*ESC*){unicode'25b2'x}"="   2016" 
+ 	"(*ESC*){unicode'25cf'x}"="   &aar2" 
+ 	"(*ESC*){unicode'25b2'x}"="   &aar3" 
 	) 
     / position=bottomright textattrs=(size=7);
 	%end;
-	%if &ratestart=2016 %then %do;
+	%if &ratestart=&aar3 %then %do;
 	inset (
- 	"(*ESC*){unicode'25b2'x}"="   2016" 
+ 	"(*ESC*){unicode'25b2'x}"="   &aar3" 
 	) 
     / position=bottomright textattrs=(size=7);
 	%end;

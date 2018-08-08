@@ -4,7 +4,7 @@
 /* Need to run the 'merge' macro first before running this one.  The output from 'merge' is the input for this */
 /* creates a figure so that first column is rate from dataset1, and second column from dataset2 */
 
-%macro ratefig_todeltSoyle(datasett=);
+%macro ratefig_todeltSoyle(datasett=, aar1=2014, aar2=2015, aar3=2016);
 proc sort data=&datasett;
 by tot_rate;
 run;
@@ -54,13 +54,13 @@ run;
 
 data &datasett;
 set &datasett;
-tot_min=tot_rate_2014;
-if tot_rate_2015 lt tot_min then tot_min = tot_rate_2015;
-if tot_rate_2016 lt tot_min then tot_min = tot_rate_2016;
+tot_min=tot_rate_&aar1;
+if tot_rate_&aar2 lt tot_min then tot_min = tot_rate_&aar2;
+if tot_rate_&aar3 lt tot_min then tot_min = tot_rate_&aar3;
 
-tot_max=tot_rate_2014;
-if tot_rate_2015 gt tot_max then tot_max = tot_rate_2015;
-if tot_rate_2016 gt tot_max then tot_max = tot_rate_2016;
+tot_max=tot_rate_&aar1;
+if tot_rate_&aar2 gt tot_max then tot_max = tot_rate_&aar2;
+if tot_rate_&aar3 gt tot_max then tot_max = tot_rate_&aar3;
 run;
 
 Data _null_;
@@ -94,19 +94,19 @@ hbarparm category=bohf response=nrate_1 / fillattrs=(color=CX4C4C4C);
 			inset "FT1=&FTr1" "FT2=&FTr2" "FT3=&FTr3" / position=right textattrs=(size=10);
 		%end;
 		%if &vis_aarsvar=1 %then %do;
-			%if &ratestart=2014 %then %do;
-			scatter x=tot_rate_2014 y=Bohf / markerattrs=(symbol=squarefilled color=black);
-			scatter x=tot_rate_2015 y=Bohf / markerattrs=(symbol=circlefilled color=black); 
-			scatter x=tot_rate_2016 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
+			%if &ratestart=&aar1 %then %do;
+			scatter x=tot_rate_&aar1 y=Bohf / markerattrs=(symbol=squarefilled color=black);
+			scatter x=tot_rate_&aar2 y=Bohf / markerattrs=(symbol=circlefilled color=black); 
+			scatter x=tot_rate_&aar3 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
 			Highlow Y=Bohf low=tot_Min high=tot_Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); 
 			%end;
-			%if &ratestart=2015 %then %do;
-			scatter x=tot_rate_2015 y=Bohf / markerattrs=(symbol=circlefilled color=black); 
-			scatter x=tot_rate_2016 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
+			%if &ratestart=&aar2 %then %do;
+			scatter x=tot_rate_&aar2 y=Bohf / markerattrs=(symbol=circlefilled color=black); 
+			scatter x=tot_rate_&aar3 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
 			Highlow Y=Bohf low=tot_Min high=tot_Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); 
 			%end;
-			%if &ratestart=2016 %then %do;
-			scatter x=tot_rate_2016 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
+			%if &ratestart=&aar3 %then %do;
+			scatter x=tot_rate_&aar3 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
 			Highlow Y=Bohf low=tot_Min high=tot_Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); 
 			%end;
 		%end;
