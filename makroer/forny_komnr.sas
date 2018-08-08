@@ -14,7 +14,7 @@ pr. 1 januar 2018
 data &datasett;
 set &datasett;
 /*******
- 1988 
+ 1988
 *******/
 %if &aar ge 1988 %then %do;
 if komnr = 717 then komnr = 701; /* Borre -> Borre */
@@ -28,7 +28,7 @@ if komnr = 708 then komnr = 709; /* Stavern -> Larvik */
 if komnr = 707 then komnr = 709; /* Larvik -> Larvik */
 %end;
 /*******
- 1992 
+ 1992
 *******/
 %if &aar ge 1992 %then %do;
 if komnr = 130 then komnr = 105; /* Tune -> Sarpsborg */
@@ -46,7 +46,7 @@ if komnr = 2016 then komnr = 2004; /* Sørøysund -> Hammerfest */
 if komnr = 2001 then komnr = 2004; /* Hammerfest -> Hammerfest */
 %end;
 /*******
- 1994 
+ 1994
 *******/
 %if &aar ge 1994 %then %do;
 if komnr = 134 then komnr = 106; /* Onsøy -> Fredrikstad */
@@ -56,21 +56,21 @@ if komnr = 113 then komnr = 106; /* Borge -> Fredrikstad */
 if komnr = 103 then komnr = 106; /* Fredrikstad -> Fredrikstad */
 %end;
 /*******
- 2002 
+ 2002
 *******/
 %if &aar ge 2002 %then %do;
 if komnr = 718 then komnr = 716; /* Ramnes -> Re */
 /*if komnr = 716 then komnr = 716;*/ /* Våle -> Re */
 %end;
 /*******
- 2005 
+ 2005
 *******/
 %if &aar ge 2005 %then %do;
 if komnr = 1842 then komnr = 1804; /* Skjerstad lagt under Bodø */
 /*if komnr = 1804 then komnr = 1804;*/
 %end;
 /*******
- 2006 
+ 2006
 *******/
 %if &aar ge 2006 %then %do;
 if komnr = 1572 then komnr = 1576; /* Tustna -> Aure */
@@ -79,36 +79,32 @@ if komnr = 1159 then komnr = 1160; /* Ølen -> Vindafjord */
 if komnr = 1154 then komnr = 1160; /* Vindafjord -> Vindafjord */
 %end;
 /*******
- 2008 
+ 2008
 *******/
 %if &aar ge 2008 %then %do;
 if komnr = 1556 then komnr = 1505; /* Frei -> Kristiansund */
 if komnr = 1503 then komnr = 1505; /* Kristiansund -> Kristiansund */
 %end;
 /*******
- 2012 
+ 2012
 *******/
 %if &aar ge 2012 %then %do;
-if komnr = 1729 then komnr = 1756; /* Inderøy -> Inderøy */
-if komnr = 1723 then komnr = 1756; /* Mosvik -> Inderøy */
+  if KomNr in (1723/*Mosvik*/,1729 /*Inderøy*/) then KomNr=1756 /*Inderøy */;
 %end;
 /*******
- 2013 
+ 2013
 *******/
 %if &aar ge 2013 %then %do;
-if komnr = 1915 then komnr = 1903; /* Bjarkøy -> Harstad */
-if komnr = 1901 then komnr = 1903; /* Harstad -> Harstad */
+  if KomNr in (1901/*Harstad*/,1915 /*Bjarkøy*/) then KomNr=1903 /*Harstad*/;
 %end;
 /*******
- 2017 
+ 2017
 *******/
 %if &aar ge 2017 %then %do;
-if komnr = 720 then komnr = 710; /* Stokke -> Sandefjord */
-if komnr = 719 then komnr = 710; /* Andebu -> Sandefjord */
-if komnr = 706 then komnr = 710; /* Sandefjord -> Sandefjord */
+  if komnr in (706 /*Sandefjord*/, 719 /*Andebu*/, 720 /*Stokke*/) then komnr = 710; /*Sandefjord*/
 %end;
 /*******
- 2018 
+ 2018
 *******/
 %if &aar ge 2018 %then %do;
 if komnr = 709 then komnr = 712; /* Larvik -> Larvik */

@@ -1,3 +1,5 @@
+# Rateprogram.sas
+
 ```sas
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
 options sasautos=("&filbane\makroer" SASAUTOS);
@@ -31,16 +33,16 @@ options sasautos=("&filbane\makroer" SASAUTOS);
 %let aarsobs=1;/* dersom du ønsker årsobservasjonene med i figur - dersom ikke må denne stå tom */
 %let NorgeSoyle=1; /* dersom du ønsker Norge som søyle i figur - dersom ikke må det stå =0 */
 %let KIfigur=;
-%let Mine_boomraader=; /* Utvalgte områder til figurer - eks: komnr in (1900:1930) eller bydel in (1:15)*/ 
+%let Mine_boomraader=; /* Utvalgte områder til figurer - eks: komnr in (1900:1930) eller bydel in (1:15)*/
 %let vis_ekskludering=1; /* Vis tabeller for ekskludering*/
 /* Hvilke bonivåer ønskes? ja eller nei, hvor 1 betyr ja */
-%let kommune=; 		/*Bildefiler*/ %let Fig_AA_kom=; 	%let Fig_KI_kom=;
-%let kommune_HN=1; 	/*Bildefiler*/ %let Fig_AA_komHN=; 	%let Fig_KI_komHN=;
-%let fylke=1; 		/*Bildefiler*/ %let Fig_AA_fylke=; 	%let Fig_KI_fylke=;
-%let sykehus_HN=1; 	/*Bildefiler*/ %let Fig_AA_ShHN=; 	%let Fig_KI_ShHN=;
-%let HF=1; 			/*Bildefiler*/ %let Fig_AA_HF=; 	%let Fig_KI_HF=;
-%let RHF=1;			/*Bildefiler*/ %let Fig_AA_RHF=; 	%let Fig_KI_RHF=;
-%let Oslo=; 		/*Bildefiler*/ %let Fig_AA_Oslo=; 	%let Fig_KI_Oslo=;
+%let kommune=;      /*Bildefiler*/ %let Fig_AA_kom=;    %let Fig_KI_kom=;
+%let kommune_HN=1;  /*Bildefiler*/ %let Fig_AA_komHN=;  %let Fig_KI_komHN=;
+%let fylke=1;       /*Bildefiler*/ %let Fig_AA_fylke=;  %let Fig_KI_fylke=;
+%let sykehus_HN=1;  /*Bildefiler*/ %let Fig_AA_ShHN=;   %let Fig_KI_ShHN=;
+%let HF=1;          /*Bildefiler*/ %let Fig_AA_HF=;     %let Fig_KI_HF=;
+%let RHF=1;         /*Bildefiler*/ %let Fig_AA_RHF=;    %let Fig_KI_RHF=;
+%let Oslo=;         /*Bildefiler*/ %let Fig_AA_Oslo=;   %let Fig_KI_Oslo=;
 %let Verstkommune_HN=;
 /* Dersom du skal ha bilde-filer */
 %let bildeformat=png; /*Format*/
@@ -64,13 +66,13 @@ options sasautos=("&filbane\makroer" SASAUTOS);
 %Let aar=2015; /* Standardiseringsår defineres her*/
 %Let aldersspenn=in (0:105); /*Definerer det aktuelle aldersspennet: (0:105) --> 0 til 105 år*/
 %Let Alderskategorier=30; /*20, 21, 30, 31, 40, 41, 50, 51 eller 99
-							20=2-delt med alle aldre, 21=2-delt KUN med aldre med RV
-							30 3-delt med alle aldre, 31=3-delt KUN med aldre med RV
-							40=4-delt med alle aldre, 41=4-delt KUN med aldre med RV
-							50 5-delt med alle aldre, 51=5-delt KUN med aldre med RV
-							99=Egendefinert(99) */
+                            20=2-delt med alle aldre, 21=2-delt KUN med aldre med RV
+                            30 3-delt med alle aldre, 31=3-delt KUN med aldre med RV
+                            40=4-delt med alle aldre, 41=4-delt KUN med aldre med RV
+                            50 5-delt med alle aldre, 51=5-delt KUN med aldre med RV
+                            99=Egendefinert(99) */
 %macro Alderkat; /*Må fylles inn dersom egendefinert alderskategorier*/
-if 0<=alder<=14 then alder_ny=1; 
+if 0<=alder<=14 then alder_ny=1;
 else if 15<=alder<=49 then alder_ny=2;
 else if 50<=alder<=64 then alder_ny=3;
 else if 65<=alder<=79 then alder_ny=4;

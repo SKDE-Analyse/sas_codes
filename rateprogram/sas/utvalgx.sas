@@ -153,7 +153,7 @@ RUN; Title;
 PROC SQL;
 CREATE TABLE ikke_med_tot AS
 SELECT * FROM tmp1UTVALGX
-where komnr=. or komnr not in (0:2031) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
+where komnr=. or komnr not in (0:2031, 5000:5100) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
 QUIT;
 
 PROC TABULATE DATA=ikke_med_tot FORMAT=NLnum12.0;	
@@ -167,7 +167,7 @@ RUN;
 PROC SQL;
 CREATE TABLE ikke_kom AS
 SELECT * FROM tmp1UTVALGX
-where komnr not in (0:2031); 
+where komnr not in (0:2031, 5000:5100); 
 QUIT;
 
 PROC TABULATE DATA=ikke_kom FORMAT=NLnum12.0;	
@@ -182,7 +182,7 @@ RUN;
 PROC SQL;
 CREATE TABLE ikke_med AS
 SELECT * FROM tmp1UTVALGX
-where (komnr=. or komnr in (0:2031)) and (alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår)); 
+where (komnr=. or komnr in (0:2031, 5000:5100)) and (alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår)); 
 QUIT;
 
 PROC TABULATE DATA=ikke_med FORMAT=NLnum12.0;	
@@ -201,17 +201,18 @@ run;
 %end;
 
 
+%forny_komnr(datasett = tmp1UTVALGX);
 	/*----------------------------*/
 
 	PROC SQL;
 	   CREATE TABLE tmp2utvalgx AS
 	   SELECT DISTINCT aar,KomNr,bydel,Alder,ErMann,(SUM(RV)) AS RV
 	      FROM tmp1UTVALGX
-		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<2031
+		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and komnr in (0:2031, 5000:5100)
 	      GROUP BY aar, KomNr, bydel, Alder, ErMann;	  
 	QUIT;
 
-    
+   
 /*
 Lag en figur med aldersprofilen i utvalget
 */
@@ -223,9 +224,11 @@ Lag en figur med aldersprofilen i utvalget
 	data tmp1innb_aar;
 	set &innbyggerfil;
 	keep aar komnr bydel Ermann Alder innbyggere;
-	where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<2031;
+	where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and komnr in (0:2031, 5000:5100);
 	&aldjust; 
 	run;
+
+%forny_komnr(datasett = tmp1innb_aar);
 
 	PROC SQL;
 	   CREATE TABLE innb_aar AS 
@@ -234,13 +237,22 @@ Lag en figur med aldersprofilen i utvalget
 	      GROUP BY aar, KomNr, Alder, bydel, ErMann;
 	QUIT;
 
-	PROC SQL;
-	 CREATE TABLE utvalgx AS
-	 SELECT a.aar, a.KomNr, a.bydel, a.Alder, a.ErMann, b.RV, a.Innbyggere
-	 FROM innb_aar a left join tmp2utvalgx b
-	 ON b.komnr=a.komnr and b.bydel=a.bydel and b.aar=a.aar 
-		and b.ermann=a.ermann and b.alder=a.alder;
-	QUIT; 
+/* merge to keep all lines from both files */
+
+proc sort data=innb_aar;
+ by aar KomNr Alder bydel ErMann;
+run;
+
+proc sort data=tmp2utvalgx;
+ by aar KomNr Alder bydel ErMann;
+run;
+ 
+
+data utvalgx;
+  merge innb_aar(in=a) tmp2utvalgx(in=b);
+  by aar KomNr Alder bydel ErMann;
+  if a or b;
+run;
 
 	proc datasets nolist;
 	delete tmp1innb_aar innb_aar tmp1utvalgx tmp2utvalgx;
@@ -297,6 +309,7 @@ Lag en figur med aldersprofilen i utvalget
    
 	data RV;
 	set RV;
+	/* Definere boområder */
 	%Boomraader(haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
 	if BOHF in (24,99) then BoRHF=.; /*kaster ut Utlandet og Svalbard*/
 	if BoRHF in (1:4) then Norge=1;
@@ -321,13 +334,10 @@ format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr 
     proc delete data=tmpAndel;
 	run;
     
-	/* legg på boområder */
-	/*%include "\\tos-sastest-07\SKDE\rateprogram\Rateprogram_Boomraader.sas";
-	%include "\\tos-sastest-07\SKDE\rateprogram\Rateprogram_BoFormat.sas";*/
+	/* Kun behold de som er i &boomraade */
 	data RV;
 	set RV;
-/*	%Boomraader; test 13/6-16*/
 	where &boomraade;
 	rename alderny=alder_ny;
 	run;
-%mend utvalgx;
+%mend;

@@ -1,15 +1,17 @@
-%Macro ICD (innDataSett=, utDataSett=);
+%macro ICD(innDataSett=, utDataSett=);
 
-/*!**********************************************************************************************
-************************************************************************************************
+/*!
+
 MACRO FOR ICD-KAPITTEL, KATEGORIBLOKK OG HOVEDDIAGNOSE PÅ TRE TEGN
 
-Innhold i syntaxen:
-3.1		ICD10KAP
-3.2 	ICD10KATBLOKK
-3.3		HDIAG3TEGN
-************************************************************************************************
-***********************************************************************************************/
+### Innhold
+1. ICD10KAP
+2. ICD10KATBLOKK
+3. HDIAG3TEGN
+
+
+### Steg for steg
+*/
 
 
 
@@ -19,12 +21,12 @@ Data &Utdatasett;
 Set &Inndatasett;
 
 /*
-************************************************************************************************
-3.1	ICD10KAP
-************************************************************************************************
-/*Definerer hoveddiagnosekap for ICD10 (1 tegn) ut fra oppgitt hoveddiagnose (4 tegn).*/;
+ICD10KAP
+*/
 
-/* Disse kodene er ikke oppdatert siden 2014 - vi må finne/be e-helsedir og lister for hvert år */
+/*!
+- Definerer hoveddiagnosekap for ICD10 (1 tegn) ut fra oppgitt hoveddiagnose (4 tegn). Disse kodene er ikke oppdatert siden 2014 - vi må finne/be e-helsedir og lister for hvert år 
+*/
 
 if substr(Hdiag,1,1) ='A' then ICD10Kap=1; /*Visse infeksjonssykd og parasittsykd*/
 else if substr(Hdiag,1,1)='B' then ICD10Kap=1; /*Visse infeksjonssykd og parasittsykd*/
@@ -73,11 +75,11 @@ else if substr(Hdiag,1,2)='H8' then ICD10Kap=8; /*Sykd i øre og ørebensknute,H60
 else if substr(Hdiag,1,2)='H9' then ICD10Kap=8; /*Sykd i øre og ørebensknute,H60-H95*/
 else ICD10Kap=23; /*Ukjent eller manglende diagnose*/
 
-/*
-************************************************************************************************
-3.2 	ICD10KATBLOKK
-************************************************************************************************
-/*Definerer ICD10 kategoriblokker*/
+/* ICD10KATBLOKK */
+
+/*!
+- Definerer ICD10 kategoriblokker
+*/
 if substr(Hdiag,1,2) ='A0' then ICD10KatBlokk=1 /* A00-A09 Infeksiøse tarmsykdommer */;
 else if substr(Hdiag,1,2)='A1' then ICD10KatBlokk=2 /* A15-A19 Tuberkulose */;
 else if substr(Hdiag,1,2)='A2' then ICD10KatBlokk=3 /* A20-A28 Visse bakterielle zoonoser */;
@@ -319,11 +321,14 @@ else if substr(Hdiag,1,2) in ('U0','U1','U2','U3','U4') then ICD10KatBlokk=223 /
 else if substr(Hdiag,1,2) in ('U8','U9') then ICD10KatBlokk=224 /* U80-U99 Bakterier resistente mot antibiotika */;
 else if substr(Hdiag,1,2) in (' ','Ugyldig') then ICD10KatBlokk=.;
 else ICD10KatBlokk=.;
+
 /*
 ************************************************************************************************
 3.3		Hdiag_3tegn	
 ************************************************************************************************
-/*Definerer hoveddiagnose på 3-tegnsnivå*/;
+/*!
+- Definerer hoveddiagnose på 3-tegnsnivå
+*/
 
 Hdiag3tegn=substr(Hdiag,1,3);
 
@@ -332,12 +337,14 @@ Hdiag3tegn=substr(Hdiag,1,3);
 ************************************************************************************************
 3.7	FAG_SKDE
 ************************************************************************************************
-/*Lager ny harmonisert variabel fra FAG og FAGLOGG. */
+/*!
+- Lager ny harmonisert variabel fra FAG og Fag_navn (gjelder kun avtalespesialister). 
+*/
 
 %if &avtspes ne 0 %then %do;
-if aar in (2012:2014) then do;
+if aar in (2013:2014) then do;
 
-/***	2011 - 2014		***/
+/***	2013 og 2014		***/
 
 if Fag = 1 then Fag_SKDE = 1;
 if Fag = 2 then Fag_SKDE = 2;
@@ -360,28 +367,28 @@ if Fag = 31 then Fag_SKDE = 31;
 
 end;
 
-/***	2015og 2016	***/
+/***	2015, 2016 og 2017	***/
 
-if aar in  (2015:2016) then do;
+if aar in  (2015:2017) then do;
 
-if fagLogg = "anestesi" then Fag_SKDE = 1;
-if fagLogg = "barn" then Fag_SKDE = 2;
-if fagLogg = "fys med" then Fag_SKDE = 3;
-if fagLogg = "gyn" then Fag_SKDE = 4;
-if fagLogg = "hud" then Fag_SKDE = 5;
-if substr(fagLogg,1,5)= 'indre' then Fag_SKDE = 6;
-if substr(fagLogg,1,3)= 'kir' then Fag_SKDE = 11;
-if fagLogg = "nevrologi" then Fag_SKDE = 15;
-if fagLogg = "ortopedi" then Fag_SKDE = 16;
-if fagLogg = "plastkir" then Fag_SKDE = 17;
-if fagLogg = "radiologi" then Fag_SKDE = 18;
-if fagLogg = "revma" then Fag_SKDE = 19;
-if fagLogg = "urologi" then Fag_SKDE = 20;
-if fagLogg = "ønh" then Fag_SKDE = 21;
-if fagLogg = "øye" then Fag_SKDE = 22;
-if fagLogg = "onkologi" then Fag_SKDE = 23;
-if fagLogg = "psykiatri" then Fag_SKDE = 30;
-if fagLogg = "psykologi" then Fag_SKDE = 31;
+if Fag_navn = "anestesi" then Fag_SKDE = 1;
+if Fag_navn = "barn" then Fag_SKDE = 2;
+if Fag_navn = "fys med" then Fag_SKDE = 3;
+if Fag_navn = "gyn" then Fag_SKDE = 4;
+if Fag_navn = "hud" then Fag_SKDE = 5;
+if substr(Fag_navn,1,5)= 'indre' then Fag_SKDE = 6;
+if substr(Fag_navn,1,3)= 'kir' then Fag_SKDE = 11;
+if Fag_navn = "nevrologi" then Fag_SKDE = 15;
+if Fag_navn = "ortopedi" then Fag_SKDE = 16;
+if Fag_navn = "plastkir" then Fag_SKDE = 17;
+if Fag_navn = "radiologi" then Fag_SKDE = 18;
+if Fag_navn = "revma" then Fag_SKDE = 19;
+if Fag_navn = "urologi" then Fag_SKDE = 20;
+if Fag_navn = "ønh" then Fag_SKDE = 21;
+if Fag_navn = "øye" then Fag_SKDE = 22;
+if Fag_navn = "onkologi" then Fag_SKDE = 23;
+if Fag_navn = "psykiatri" then Fag_SKDE = 30;
+if Fag_navn = "psykologi" then Fag_SKDE = 31;
 
 end;
 
@@ -392,4 +399,4 @@ drop tell_takst;
 
 run;
 
-%Mend ICD;
+%mend;
