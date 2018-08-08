@@ -1,15 +1,12 @@
 
 
-%macro rater_felles(privat = 1, kun_total = 0, kun_poli = 0);
+%macro rater_felles(privat = 1, kun_total = 0, kun_poli = 0, Ratefil=helseatl.k_u_&agg_var._18);
 
 /*
 Ikke kjør privat, hvis privat = 0
 */
 
-%let Ratefil=helseatl.k_u_&agg_var._18;
-
 %Let Alderskategorier=30;
-
 
 
 %if &kun_poli = 0 %then %do;

@@ -1,5 +1,5 @@
 
-%macro tabell;
+%macro oversiktstabell_helseatlas;
 * Calculate average age;
 
 data tmp_aldersfig;
