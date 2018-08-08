@@ -13,17 +13,6 @@ MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 Data &Utdatasett;
 Set &Inndatasett;
 
-
-/* AHS
-Gjelder koden under her fremdeles?
-Burde det da eventuelt flyttes ut?
-*/
-/*
-%if &avtspes ne 0 %then %do;
-where kontakt in (4,5);
-%end;
-*/
-
 /*!
 ### Omkoding av stringer med tall til numeriske variable
 */
@@ -87,7 +76,7 @@ if utdato gt MDY (1,1,2018) then utdato = .;
 
 	Format UtskrKlarDato1 tidspunkt_11 tidspunkt_21 tidspunkt_31
 	tidspunkt_41 tidspunkt_51 Eurdfdd10.;
-	Drop emigrert_29082016 doddato_29082016 UtskrKlarDato tidspunkt_1 tidspunkt_2 tidspunkt_3
+	Drop UtskrKlarDato tidspunkt_1 tidspunkt_2 tidspunkt_3
 	tidspunkt_4 tidspunkt_5  ;
 	rename UtskrKlarDato1=UtskrKlarDato tidspunkt_11=tidspunkt_1 tidspunkt_21=tidspunkt_2
 		   tidspunkt_31=tidspunkt_3 tidspunkt_41=tidspunkt_4 tidspunkt_51=tidspunkt_5 ;

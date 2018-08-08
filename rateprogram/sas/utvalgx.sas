@@ -153,7 +153,7 @@ RUN; Title;
 PROC SQL;
 CREATE TABLE ikke_med_tot AS
 SELECT * FROM tmp1UTVALGX
-where komnr=. or komnr not in (0:5100) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
+where komnr=. or komnr not in (0:2031, 5000:5100) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
 QUIT;
 
 PROC TABULATE DATA=ikke_med_tot FORMAT=NLnum12.0;	
@@ -209,7 +209,7 @@ run;
 	   SELECT DISTINCT aar,KomNr,bydel,Alder,ErMann,(SUM(RV)) AS RV
 	      FROM tmp1UTVALGX
 		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and komnr in (0:2031, 5000:5100)
-	      GROUP BY aar, KomNr,  Alder, bydel, ErMann;	  
+	      GROUP BY aar, KomNr, bydel, Alder, ErMann;	  
 	QUIT;
 
    
@@ -224,7 +224,7 @@ Lag en figur med aldersprofilen i utvalget
 	data tmp1innb_aar;
 	set &innbyggerfil;
 	keep aar komnr bydel Ermann Alder innbyggere;
-	where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and 0<komnr<5100;
+	where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and komnr in (0:2031, 5000:5100);
 	&aldjust; 
 	run;
 
@@ -295,8 +295,8 @@ run;
 	format aar aar.;
 	run;
 
-	*proc delete data=alderdef utvalgx tmpRV;
-	*run;
+	proc delete data=alderdef utvalgx tmpRV;
+	run;
 
    /*
    Definere macro-variabler for boomraade-makroen,
@@ -309,6 +309,7 @@ run;
    
 	data RV;
 	set RV;
+	/* Definere boområder */
 	%Boomraader(haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
 	if BOHF in (24,99) then BoRHF=.; /*kaster ut Utlandet og Svalbard*/
 	if BoRHF in (1:4) then Norge=1;
@@ -330,16 +331,13 @@ format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr 
 	    from tmpAndel;
 	quit;
 
-    *proc delete data=tmpAndel;
-	*run;
+    proc delete data=tmpAndel;
+	run;
     
-	/* legg på boområder */
-	/*%include "\\tos-sastest-07\SKDE\rateprogram\Rateprogram_Boomraader.sas";
-	%include "\\tos-sastest-07\SKDE\rateprogram\Rateprogram_BoFormat.sas";*/
+	/* Kun behold de som er i &boomraade */
 	data RV;
 	set RV;
-/*	%Boomraader; test 13/6-16*/
 	where &boomraade;
 	rename alderny=alder_ny;
 	run;
-%mend utvalgx;
+%mend;
