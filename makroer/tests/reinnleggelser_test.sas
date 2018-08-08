@@ -43,19 +43,19 @@ run;
 %reinnleggelser(dsn=testset1, eks_diag=1);
 
 data testset2;
-set test.reinn_ref;
+set test.reinn_start;
 run;
 
 %reinnleggelser(dsn=testset2);
 
 data testset3;
-set test.reinn_ref;
+set test.reinn_start;
 run;
 
 %reinnleggelser(dsn=testset3, ReInn_Tid = 120);
 
 data testset4;
-set test.reinn_ref;
+set test.reinn_start;
 run;
 
 %reinnleggelser(dsn=testset4, kun_innleggelser = 0);
