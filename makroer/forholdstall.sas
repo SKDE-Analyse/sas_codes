@@ -56,5 +56,6 @@ FT3=round((mmax3/mmin3),0.01);
 drop min2 min3 max2 max3 mm:;
 run;
 
-%tabell;
+%oversiktstabell_helseatlas;
+
 %mend forholdstall;

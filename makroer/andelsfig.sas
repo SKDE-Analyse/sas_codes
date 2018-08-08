@@ -7,7 +7,7 @@ I TILLEGG TIL INPUT-VARIABLE SOM FOR RATEFIG ANGIS:
 */
 
 /*Enkel andelsfig*/
-%macro andelsfig(datasett=);
+%macro andelsfig(datasett=, ia = 0);
 
 /*Beregner forholdstall*/
 proc sort data=&datasett;
@@ -96,7 +96,9 @@ run;Title; ods listing close;
 
 
 /*Lagrer dataene fra &datasett i &dsn1 slik at &dsn1 kan brukes til å lage IA*/
-/*
+
+%if &ia ne 0 %then %do;
+
 data &datasett;
 set &datasett;
 keep bohf andel2 &innbyggvar fta:;
@@ -119,7 +121,8 @@ data &dsn1;
 set &dsn1;
 rename andel2=andel &innbyggvar=Innbyggere_andel;
 run;
-*/
+
+%end;
 
 proc datasets nolist;
 delete dsn:;

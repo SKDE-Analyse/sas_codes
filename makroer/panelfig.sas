@@ -1,4 +1,4 @@
-%macro panelfig;
+%macro panelfig(aar1=2014, aar2=2015, aar3=2016);
 
 data norge;
   set &tema.&teknikk._dp_tot_bohf(keep=rate20: bohf);
@@ -12,11 +12,11 @@ data yr&yr(keep=aar Nrate);
   rename rate&yr=Nrate;
 run;
 %mend;
-%trans_N(yr=2014);
-%trans_N(yr=2015);
-%trans_N(yr=2016);
+%trans_N(yr=&aar1);
+%trans_N(yr=&aar2);
+%trans_N(yr=&aar3);
 data N;
-  set yr2014 yr2015 yr2016;
+  set yr&aar1 yr&aar2 yr&aar3;
 run;
 
 
@@ -27,11 +27,11 @@ data yr&yr(keep=aar RV_just_rate BoHF);
   rename rate&yr=RV_just_rate;
 run;
 %mend;
-%trans_hf(yr=2014, innfil=&tema.&teknikk._dp_tot_bohf);
-%trans_hf(yr=2015, innfil=&tema.&teknikk._dp_tot_bohf);
-%trans_hf(yr=2016, innfil=&tema.&teknikk._dp_tot_bohf);
+%trans_hf(yr=&aar1, innfil=&tema.&teknikk._dp_tot_bohf);
+%trans_hf(yr=&aar2, innfil=&tema.&teknikk._dp_tot_bohf);
+%trans_hf(yr=&aar3, innfil=&tema.&teknikk._dp_tot_bohf);
 data hf;
-  set yr2014 yr2015 yr2016;
+  set yr&aar1 yr&aar2 yr&aar3;
     where bohf <> 8888;
 
 run;
