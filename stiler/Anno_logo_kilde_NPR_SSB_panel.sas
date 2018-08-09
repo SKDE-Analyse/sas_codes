@@ -16,7 +16,7 @@ retain
      x1space = "graphpercent"; 
      anchor = "bottomright";
      x1 = 97;  y1 = 11;  width=12;
-     image = "\\tos-sas-skde-01\SKDE_SAS\Stiler\logo\skde.png";
+     image = "\\tos-sas-skde-01\SKDE_SAS\FELLESKODER\MASTER\Stiler\logo\skde.png";
 output; /*Logo*/
      function="text";
      anchor = "bottomleft";

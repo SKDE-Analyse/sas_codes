@@ -11,7 +11,7 @@ retain function "Image";
 	x1 = 98;
 	y1 = 2;
 	width=12;
-	image = "\\tos-sas-skde-01\SKDE_SAS\Stiler\logo\skde.png";
+	image = "\\tos-sas-skde-01\SKDE_SAS\FELLESKODER\MASTER\Stiler\logo\skde.png";
 output; /*Logo*/
 retain function "Image"; 
 	x1space="graphpercent"; 
