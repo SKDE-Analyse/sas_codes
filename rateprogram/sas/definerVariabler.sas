@@ -7,13 +7,13 @@ Definere variabler
 
 
 %macro gi_verdi(variabel = , verdi = );
-%if %sysevalf(%superq(&variabel)=,boolean) %then %do;
+/*%if %sysevalf(%superq(&variabel)=,boolean) %then %do;*/
     %global &variabel;
-	%if %length(&verdi) ne 0 %then %let &variabel = &verdi;
-%end;
+	/*%if %length(&verdi) ne 0 %then*/ %let &variabel = &verdi;
+/*%end;*/
 %mend;
 
-    %gi_verdi(variabel = Ratefil, verdi = skde_kur.ratetest_11_15;);
+    %gi_verdi(variabel = Ratefil, verdi = test.ratetest_11_15;);
 
     %gi_verdi(variabel = RV_variabelnavn, verdi = poli);
     
@@ -21,13 +21,13 @@ Definere variabler
     
     %gi_verdi(variabel = forbruksmal, verdi = Konsultasjoner);
 
-    %gi_verdi(variabel = innbyggerfil, verdi = Innbygg.innb_2004_2016_bydel_allebyer);
+    %gi_verdi(variabel = innbyggerfil, verdi = Innbygg.innb_2004_2017_bydel_allebyer);
     
     %gi_verdi(variabel = aarsvarfigur, verdi = );
     
     %gi_verdi(variabel = aarsobs, verdi = );
     
-    %gi_verdi(variabel = NorgeSoyle, verdi = );
+    %gi_verdi(variabel = NorgeSoyle, verdi = 1);
 
     %gi_verdi(variabel = KIfigur, verdi = );    
 
@@ -41,37 +41,37 @@ Definere variabler
 
     %gi_verdi(variabel = Fig_KI_kom, verdi = );
 
-    %gi_verdi(variabel = kommune_HN, verdi = );
+    %gi_verdi(variabel = kommune_HN, verdi = 1);
 
     %gi_verdi(variabel = Fig_AA_komHN, verdi = );
 
     %gi_verdi(variabel = Fig_KI_komHN, verdi = );
 
-    %gi_verdi(variabel = fylke, verdi = );
+    %gi_verdi(variabel = fylke, verdi = 1);
 
     %gi_verdi(variabel = Fig_AA_fylke, verdi = );
 
     %gi_verdi(variabel = Fig_KI_fylke, verdi = );
 
-    %gi_verdi(variabel = sykehus_HN, verdi = );
+    %gi_verdi(variabel = sykehus_HN, verdi = 1);
 
     %gi_verdi(variabel = Fig_AA_ShHN, verdi = );
 
     %gi_verdi(variabel = Fig_KI_ShHN, verdi = );
 
-    %gi_verdi(variabel = HF, verdi = );
+    %gi_verdi(variabel = HF, verdi = 1);
 
     %gi_verdi(variabel = Fig_AA_HF, verdi = );
 
     %gi_verdi(variabel = Fig_KI_HF, verdi = );
 
-    %gi_verdi(variabel = RHF, verdi = );
+    %gi_verdi(variabel = RHF, verdi = 1);
 
     %gi_verdi(variabel = Fig_AA_RHF, verdi = );
 
     %gi_verdi(variabel = Fig_KI_RHF, verdi = );
 
-    %gi_verdi(variabel = Oslo, verdi = );
+    %gi_verdi(variabel = Oslo, verdi = 1);
 
     %gi_verdi(variabel = Fig_AA_Oslo, verdi = );
 
@@ -99,11 +99,11 @@ Definere variabler
 
     %gi_verdi(variabel = Ut_sett, verdi = );
 
-    %gi_verdi(variabel = Start≈r, verdi = 2014);
+    %gi_verdi(variabel = Start≈r, verdi = 2011);
 
-    %gi_verdi(variabel = Slutt≈r, verdi = 2016);
+    %gi_verdi(variabel = Slutt≈r, verdi = 2015);
 
-    %gi_verdi(variabel = aar, verdi = 2015);
+    %gi_verdi(variabel = aar, verdi = 2014);
 
     %gi_verdi(variabel = aldersspenn, verdi = in (0:105));
 
