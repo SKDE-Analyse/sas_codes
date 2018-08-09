@@ -1,5 +1,5 @@
-/*
-Felles makroer for testing og produksjon av test-datasett
+/*!
+Felles makroer for testing av rateprogrammet. Kan også brukes til produksjon av test-datasett.
 */
 
 %macro inkluderFormater;
@@ -15,8 +15,14 @@ Felles makroer for testing og produksjon av test-datasett
 
 %macro testAnno(branch=master, lagReferanse = 0, slettDatasett = 1);
 
+/*!
+Makro for å teste kode i ../Stiler/ (logo)
+*/
+
 %local filbane;
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
+
+ods text="Test Anno";
 
 %include "&filbane\Stiler\stil_figur.sas";
 %include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
@@ -40,6 +46,13 @@ delete anno;
 
 
 %macro testUtvalgX(branch=master, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
+
+/*!
+Makro for å teste utvalgx-makroen i rateprogrammet.
+*/
+
+ods text="Test UtvalgX";
+
 
 %if (&alene NE 0) %then %do;
 data anno;
@@ -94,71 +107,13 @@ delete rv andel anno;
 %mend;
 
 
-%macro testOmraadeNorge(branch=master, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
-
-%if (&alene NE 0) %then %do;
-data anno;
-set skde_arn.ref_rate_anno;
-run;
-
-data rv;
-set skde_arn.ref_rate_rv;
-run;
-
-data andel;
-set skde_arn.ref_rate_andel;
-run;
-
-%local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
-
-%include "&filbane\makroer\boomraader.sas";
-%include "&filbane\rateprogram\rateberegninger.sas";
-
-%inkluderFormater;
-
-%if &definerVariabler ne 0 %then %do;
-%include "&filbane\rateprogram\sas\definerVariabler.sas";
-%definerVariabler;
-%end;
-%end;
-
-%omraadeNorge;
-
-
-proc sort data=norge_agg;
-by aar alder_ny ermann innbyggere;
-run;
-
-proc sort data=norge_agg_snitt;
-by aar alder_ny ermann;
-run;
-
-
-%if &lagReferanse = 0 %then %do;
-proc compare base=skde_arn.ref_rate_norge_agg compare=norge_agg BRIEF WARNING LISTVAR;
-
-proc compare base=skde_arn.ref_rate_norge_agg_snitt compare=norge_agg_snitt BRIEF WARNING LISTVAR;
-%end;
-%else %do;
-data skde_arn.ref_rate_norge_agg;
-set norge_agg;
-run;
-
-data skde_arn.ref_rate_norge_agg_snitt;
-set norge_agg_snitt;
-run;
-%end;
-
-%if &slettDatasett ne 0 %then %do;
-proc datasets nolist;
-delete rv andel anno norge_agg norge_agg_snitt;
-%end;
-
-%mend;
-
-
 %macro testRateberegninger(branch=master, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
+
+/*!
+Makro for å teste rateberegning-makroen (rateprogrammet)
+*/
+
+ods text="Test Rateberegninger";
 
 %if (&alene NE 0) %then %do;
 
