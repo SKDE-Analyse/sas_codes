@@ -1,4 +1,4 @@
-%macro VarFraParvus(dsnMagnus=,var_som=,var_avtspes=);
+%macro VarFraParvus(dsnMagnus=,var_som=,var_avtspes=, taar = 17);
 
 /*!
 ### Beskrivelse
@@ -11,9 +11,10 @@ Hente variable fra Parvus til Magnus
 
 ### Parametre
 
-1. `dsnMagnus`: Datasettet du vil koble variable til. Kan være avdelingsoppholdsfil, sykehusoppholdsfil, avtalespesialistfil eller kombinasjoner av disse
-2. `var_som`: Variable som skal kobles fra avdelingsopphold- eller sykehusoppholdsfil
-3. `var_avtspes`: Variable som skal kobles fra avtalespesialistfil.
+- `dsnMagnus`: Datasettet du vil koble variable til. Kan være avdelingsoppholdsfil, sykehusoppholdsfil, avtalespesialistfil eller kombinasjoner av disse
+- `var_som`: Variable som skal kobles fra avdelingsopphold- eller sykehusoppholdsfil
+- `var_avtspes`: Variable som skal kobles fra avtalespesialistfil.
+- `taar`: Tilretteleggingsår. 
 
 ### Eksempel
 
@@ -32,77 +33,82 @@ Start gjerne med et ferdig utvalg om det er mulig, da vil makroen kjøre raskere 
 */
 
 
-/*Makro i makro 1: Avdelingsopphold*/
-%macro koble_avd (niva=,aar=);
+/*Makro i makro: Koble til parvus-data*/
+%macro koble_parvus(niva=, aar=);
 
-data 	qwerty_avd_&aar;
-set 	&dsnMagnus;
-	if substrn (koblingsID,3,1)=1 and aar = &aar then output qwerty_&niva._&aar;
-run;
+%if &niva = avd %then %do;
+%let num = 1;
+%let var_par = &var_som;
+%end;
+%if &niva = sho %then %do;
+%let num = 2;
+%let var_par = &var_som;
+%end;
+%if &niva = avtspes %then %do;
+%let num = 3;
+%let var_par = &var_avtspes;
+%end;
 
-proc sql;
-create table qwerty_&niva._&aar as
-select *
-from qwerty_&niva._&aar, skde18.t18_PARVUS_&niva._&aar(keep=koblingsID &var_som)
-where qwerty_&niva._&aar..koblingsID=t18_PARVUS_&niva._&aar..koblingsID;
-quit;
-%mend; /* koble_avd */
+%if &taar = 17 %then %do;
+%let server = npr_skde;
+%let parvus = t17_PARVUS_&niva._&aar;
+%end;
+%if &taar = 18 %then %do;
+%let server = skde18;
+%let parvus = t18_PARVUS_&niva._&aar;
+%end;
 
-
-
-/*Makro i makro 2: Sykehusopphold*/
-%macro koble_sho (niva=,aar=);
-data 	qwerty_sho_&aar;
-set 	&dsnMagnus;
-	if substrn (koblingsID,3,1)=2 and aar = &aar then output qwerty_&niva._&aar;
-run;
-
-proc sql;
-create table qwerty_&niva._&aar as
-select *
-from qwerty_&niva._&aar, skde18.t18_PARVUS_&niva._&aar(keep=koblingsID &var_som)
-where qwerty_&niva._&aar..koblingsID=t18_PARVUS_&niva._&aar..koblingsID;
-quit;
-%mend; /* koble_sho */
-
-
-/*Makro i makro 3: Avtalespesialister*/
-%macro koble_avtspes (niva=,aar=);
 data 	qwerty_&niva._&aar;
 set 	&dsnMagnus;
-	if substrn (koblingsID,3,1)=3 and aar = &aar then output qwerty_avtspes_&aar;
+	if substrn (koblingsID,3,1)=&num and aar = &aar then output qwerty_&niva._&aar;
 run;
 
 proc sql;
-create table qwerty_avtspes_&aar as
+create table qwerty_&niva._&aar as
 select *
-from qwerty_avtspes_&aar, skde18.t18_PARVUS_avtspes_&aar(keep=koblingsID &var_avtspes)
-where qwerty_avtspes_&aar..koblingsID=t18_PARVUS_avtspes_&aar..koblingsID;
+from qwerty_&niva._&aar, &server..&parvus(keep=koblingsID &var_par)
+where qwerty_&niva._&aar..koblingsID=&parvus..koblingsID;
 quit;
-%mend; /* koble_avtspes */
 
-%koble_avd (niva=avd,aar=2013);
-%koble_avd (niva=avd,aar=2014);
-%koble_avd (niva=avd,aar=2015);
-%koble_avd (niva=avd,aar=2016);
-%koble_avd (niva=avd,aar=2017);
+%mend; /* koble_parvus */
 
-%koble_sho (niva=sho,aar=2013);
-%koble_sho (niva=sho,aar=2014);
-%koble_sho (niva=sho,aar=2015);
-%koble_sho (niva=sho,aar=2016);
-%koble_sho (niva=sho,aar=2017);
+%if &taar = 17 %then %do;
+%koble_parvus (niva=avd,aar=2012);
+%end;
+%koble_parvus (niva=avd,aar=2013);
+%koble_parvus (niva=avd,aar=2014);
+%koble_parvus (niva=avd,aar=2015);
+%koble_parvus (niva=avd,aar=2016);
+%if &taar = 18 %then %do;
+%koble_parvus (niva=avd,aar=2017);
+%end;
 
-%koble_avtspes (niva=avtspes,aar=2013);
-%koble_avtspes (niva=avtspes,aar=2014);
-%koble_avtspes (niva=avtspes,aar=2015);
-%koble_avtspes (niva=avtspes,aar=2016);
-%koble_avtspes (niva=avtspes,aar=2017);
+%if &taar = 17 %then %do;
+%koble_parvus (niva=sho,aar=2012);
+%end;
+%koble_parvus (niva=sho,aar=2013);
+%koble_parvus (niva=sho,aar=2014);
+%koble_parvus (niva=sho,aar=2015);
+%koble_parvus (niva=sho,aar=2016);
+%if &taar = 18 %then %do;
+%koble_parvus (niva=sho,aar=2017);
+%end;
+
+%if &taar = 17 %then %do;
+%koble_parvus (niva=avtspes,aar=2012);
+%end;
+%koble_parvus (niva=avtspes,aar=2013);
+%koble_parvus (niva=avtspes,aar=2014);
+%koble_parvus (niva=avtspes,aar=2015);
+%koble_parvus (niva=avtspes,aar=2016);
+%if &taar = 18 %then %do;
+%koble_parvus (niva=avtspes,aar=2017);
+%end;
 
 data &dsnMagnus;
-set  qwerty_avd_2013 qwerty_avd_2014 qwerty_avd_2015 qwerty_avd_2016 qwerty_avd_2017
-	 qwerty_sho_2013 qwerty_sho_2014 qwerty_sho_2015 qwerty_sho_2016 qwerty_sho_2017
-     qwerty_avtspes_2013 qwerty_avtspes_2014 qwerty_avtspes_2015 qwerty_avtspes_2016 qwerty_avtspes_2017;
+set  qwerty_avd_:
+	 qwerty_sho_:
+     qwerty_avtspes_:;
 run;
 
 proc datasets nolist;
