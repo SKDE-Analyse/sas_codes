@@ -4,7 +4,7 @@
 /* Need to run the 'merge' macro first before running this one.  The output from 'merge' is the input for this */
 /* creates a figure so that first column is rate from dataset1, and second column from dataset2 */
 
-%macro ratefig_todeltSoyle(datasett=, aar1=2014, aar2=2015, aar3=2016);
+%macro ratefig_todeltSoyle(datasett=, aar1=2015, aar2=2016, aar3=2017);
 proc sort data=&datasett;
 by tot_rate;
 run;

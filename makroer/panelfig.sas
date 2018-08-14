@@ -1,7 +1,7 @@
-%macro panelfig(aar1=2014, aar2=2015, aar3=2016);
+%macro panelfig(aar1=2013, aar2=2014, aar3=2015, aar4=2016, aar5=2017);
 
 data norge;
-  set &tema.&teknikk._dp_tot_bohf(keep=rate20: bohf);
+  set &tema.&teknikk._dp_tot_bohf_t(keep=rate20: bohf);
   where bohf=8888;
 run;
 
@@ -15,8 +15,10 @@ run;
 %trans_N(yr=&aar1);
 %trans_N(yr=&aar2);
 %trans_N(yr=&aar3);
+%trans_N(yr=&aar4);
+%trans_N(yr=&aar5);
 data N;
-  set yr&aar1 yr&aar2 yr&aar3;
+  set yr&aar1 yr&aar2 yr&aar3 yr&aar4 yr&aar5;
 run;
 
 
@@ -27,11 +29,13 @@ data yr&yr(keep=aar RV_just_rate BoHF);
   rename rate&yr=RV_just_rate;
 run;
 %mend;
-%trans_hf(yr=&aar1, innfil=&tema.&teknikk._dp_tot_bohf);
-%trans_hf(yr=&aar2, innfil=&tema.&teknikk._dp_tot_bohf);
-%trans_hf(yr=&aar3, innfil=&tema.&teknikk._dp_tot_bohf);
+%trans_hf(yr=&aar1, innfil=&tema.&teknikk._dp_tot_bohf_t);
+%trans_hf(yr=&aar2, innfil=&tema.&teknikk._dp_tot_bohf_t);
+%trans_hf(yr=&aar3, innfil=&tema.&teknikk._dp_tot_bohf_t);
+%trans_hf(yr=&aar4, innfil=&tema.&teknikk._dp_tot_bohf_t);
+%trans_hf(yr=&aar5, innfil=&tema.&teknikk._dp_tot_bohf_t);
 data hf;
-  set yr&aar1 yr&aar2 yr&aar3;
+  set yr&aar1 yr&aar2 yr&aar3 yr&aar4 yr&aar5;
     where bohf <> 8888;
 
 run;

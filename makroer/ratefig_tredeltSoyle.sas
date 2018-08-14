@@ -13,42 +13,42 @@
 data &tema._&del1._dp_bohf2;
 set &tema._&del1._dp_tot_bohf;
 RateSnitt&del1.=RateSnitt;
-rate&del1.2014=rate2014;
+rate&del1.2017=rate2017;
 rate&del1.2015=rate2015;
 rate&del1.2016=rate2016;
 if bohf=8888 then do;
 RateSnittN&del1.=RateSnitt;
 end;
 
-keep BoHF RateSnitt&del1. RateSnittN&del1. &tema._&del1._dp_tot Innbyggere rate&del1.2014 rate&del1.2015 rate&del1.2016;
+keep BoHF RateSnitt&del1. RateSnittN&del1. &tema._&del1._dp_tot Innbyggere rate&del1.2017 rate&del1.2015 rate&del1.2016;
 
 run;
 
 data &tema._&del2._dp_bohf2;
 set &tema._&del2._dp_tot_bohf;
 RateSnitt&del2.=RateSnitt;
-rate&del2.2014=rate2014;
+rate&del2.2017=rate2017;
 rate&del2.2015=rate2015;
 rate&del2.2016=rate2016;
 if bohf=8888 then do;
 RateSnittN&del2.=RateSnitt;
 end;
 
-keep BoHF RateSnitt&del2. RateSnittN&del2. &tema._&del2._dp_tot Innbyggere rate&del2.2014 rate&del2.2015 rate&del2.2016;
+keep BoHF RateSnitt&del2. RateSnittN&del2. &tema._&del2._dp_tot Innbyggere rate&del2.2017 rate&del2.2015 rate&del2.2016;
 
 run;
 
 data &tema._&del3._dp_bohf2;
 set &tema._&del3._dp_tot_bohf;
 RateSnitt&del3.=RateSnitt;
-rate&del3.2014=rate2014;
+rate&del3.2017=rate2017;
 rate&del3.2015=rate2015;
 rate&del3.2016=rate2016;
 if bohf=8888 then do;
 RateSnittN&del3.=RateSnitt;
 end;
 
-keep BoHF RateSnitt&del3. RateSnittN&del3. &tema._&del3._dp_tot Innbyggere rate&del3.2014 rate&del3.2015 rate&del3.2016;
+keep BoHF RateSnitt&del3. RateSnittN&del3. &tema._&del3._dp_tot Innbyggere rate&del3.2017 rate&del3.2015 rate&del3.2016;
 
 run;
 
@@ -71,7 +71,7 @@ by BoHF;
 RateSnitt_tot = RateSnitt&del1. + RateSnitt&del2. + RateSnitt&del3.;
 RateSnitt_&del1.&del2. = RateSnitt&del1. + RateSnitt&del2.;
 
-Rate2014_tot = rate&del1.2014 + rate&del2.2014 + rate&del3.2014;
+Rate2017_tot = rate&del1.2017 + rate&del2.2017 + rate&del3.2017;
 Rate2015_tot = rate&del1.2015 + rate&del2.2015 + rate&del3.2015;
 Rate2016_tot = rate&del1.2016 + rate&del2.2016 + rate&del3.2016;
 
@@ -140,12 +140,12 @@ hbarparm category=bohf response=RateSnittN&del1. / fillattrs=(color=CX4C4C4C) ou
 
 *scatter x=pros_plass y=bohf /datalabel=Andel&del1. datalabelpos=right markerattrs=(size=0) datalabelattrs=(color=white weight=bold size=8);
 
-/*	scatter x=rate2014_tot y=Bohf / markerattrs=(symbol=squarefilled color=black) legendlabel="2014";*/
+/*	scatter x=rate2017_tot y=Bohf / markerattrs=(symbol=squarefilled color=black) legendlabel="2017";*/
 /*	scatter x=rate2015_tot y=Bohf / markerattrs=(symbol=circlefilled color=black) legendlabel="2015";*/
 /*	scatter x=rate2016_tot y=Bohf / markerattrs=(symbol=trianglefilled color=black)legendlabel="2016";*/
 /*	Highlow Y=Bohf low=min high=max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);*/
 /*	inset (*/
-/*                "(*ESC*){unicode'25a0'x}"="   2014"  */
+/*                "(*ESC*){unicode'25a0'x}"="   2017"  */
 /*                "(*ESC*){unicode'25cf'x}"="   2015"*/
 /*                "(*ESC*){unicode'25b2'x}"="   2016")*/
 /*	/ position=bottomright textattrs=(size=7);*/
