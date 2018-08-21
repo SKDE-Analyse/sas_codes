@@ -40,8 +40,8 @@ run;
 
 /* Hente aggrshoppid fra parvus */
 
-%VarFraParvus(dsnMagnus=&avdfil, var_som=aggrshoppid);
-%VarFraParvus(dsnMagnus=tmp_sho, var_som=aggrshoppid);
+%VarFraParvus(dsnMagnus=&avdfil, var_som=aggrshoppid, taar = 18);
+%VarFraParvus(dsnMagnus=tmp_sho, var_som=aggrshoppid, taar = 18);
 
 /* Kun beholde linjer fra sho som inneholder aggrshoppid */
 data tmp_sho;
