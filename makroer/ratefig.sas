@@ -42,7 +42,7 @@ INPUT FOR HVER FIGUR:
 
 
 /*enkel ratefigur*/
-%macro ratefig(datasett=, aar1=2017, aar2=2015, aar3=2016);
+%macro ratefig(datasett=, aar1=2015, aar2=2016, aar3=2017);
 
 /*Setter aktuelle rater i datasettet til missing hvis antall observasjoner er under grensen (nkrav)*/
 Data &datasett;
