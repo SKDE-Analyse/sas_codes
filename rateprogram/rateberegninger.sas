@@ -17,6 +17,7 @@
 %include "&makrobane\aldersfigur.sas";
 %include "&makrobane\print_info.sas";
 %include "&makrobane\definere_komnr.sas";
+%include "&makrobane\ekskluderingstabeller.sas";
 
 
 /*!
@@ -139,7 +140,7 @@ Ingen
 
 #### Annet
 
-Kjøres som tredje makro av rateprogrammet (etter [utvalgX](#utvalgX) og [omraadeNorge](#omraadeNorge))
+Kjøres som andre makro av rateprogrammet (etter [utvalgX](#utvalgX))
 
 */
 
