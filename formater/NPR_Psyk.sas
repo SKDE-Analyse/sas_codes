@@ -76,6 +76,9 @@ proc format;
       360 = '´Rus´'  
       365 = '´LAR´'  
       370 = '´Spilleavhengighet´'  
+      410 = 'Allergologi'	/*Ny kode fra 2017*/
+      420 = 'Sykelig overvekt'	/*Ny kode fra 2017*/
+      430 = 'Smertetilstander'	/*Ny kode fra 2017*/
       821 = '‘ Klinisk farmakologi ‘'  
       822 = '‘ Klinisk kjemi ‘'  
       823 = '‘ Medisinsk mikrobiologi ‘'  
@@ -176,6 +179,9 @@ proc format;
      '853' = 'Onkologi'  
      '234' = 'Habilitering voksne'  
      '365' = '´LAR´'  
+     '410' = 'Allergologi'	/*Ny kode fra 2017*/
+     '420' = 'Sykelig overvekt'	/*Ny kode fra 2017*/
+     '430' = 'Smertetilstander'	/*Ny kode fra 2017*/
      '999' = '‘ Ukjent ‘' ;
    value KONTAKTTYPE
       1 = 'Utredning'  

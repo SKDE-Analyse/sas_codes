@@ -182,6 +182,9 @@ value INSTITUSJONID_2015F
      '365' = 'LAR - Legemiddelassistert rehabilitering'  
      '370' = 'Spillavhengighet'  
      '380' = 'Palliativ medisin'  
+     '410' = 'Allergologi'	/*Ny kode fra 2017*/
+     '420' = 'Sykelig overvekt'	/*Ny kode fra 2017*/
+     '430' = 'Smertetilstander'	/*Ny kode fra 2017*/
      '821' = 'Klinisk farmakologi'  
      '822' = 'Medisinsk biokjemi'  
      '823' = 'Medisinsk mikrobiologi'  
@@ -283,6 +286,9 @@ value INSTITUSJONID_2015F
      '365' = 'LAR - Legemiddelassistert rehabilitering'  
      '370' = 'Spillavhengighet'  
      '380' = 'Palliativ medisin'  
+     '410' = 'Allergologi'	/*Ny kode fra 2017*/
+     '420' = 'Sykelig overvekt'	/*Ny kode fra 2017*/
+     '430' = 'Smertetilstander'	/*Ny kode fra 2017*/
      '821' = 'Klinisk farmakologi'  
      '822' = 'Medisinsk biokjemi'  
      '823' = 'Medisinsk mikrobiologi'  
