@@ -236,6 +236,10 @@ if aar = 2014 then do;
 	drop Dup_tilstand_1 - Dup_tilstand_5 i;
 end;
 
+/*
+- Episodefag manglet ledende null for avtalespesialister enkelte år.
+*/
+if length(compress(episodefag)) = 2 then episodefag = compress("0"||episodefag);
 
 %end;
 
