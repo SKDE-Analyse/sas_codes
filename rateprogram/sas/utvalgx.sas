@@ -260,7 +260,7 @@ run;
 format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr komnr. bydel bydel. ermann ermann.;
 	run;
 
-	/* beregne andeler */
+	/* beregne hvilken innbyggerandel (av den nasjonale befolkningen) som befinner seg i hver kjønns-og alderskategori*/
 	proc sql;
 	    create table tmpAndel as
 	    select distinct aar, alderny, ErMann, sum(innbyggere) as innbyggere 
@@ -271,7 +271,7 @@ format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr 
 
 	proc sql;
 	    create table Andel as
-	    select distinct aar, alderny, ErMann, innbyggere, sum(innbyggere) as N_innbygg, innbyggere/sum(innbyggere) as andel  
+	    select distinct aar, alderny, ErMann, innbyggere/sum(innbyggere) as andel  
 	    from tmpAndel;
 	quit;
 
