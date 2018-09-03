@@ -14,8 +14,6 @@ Kommer senere...
 
 - RV
 - andel
-- NORGE_AGG_RATE
-   - Lages ved å kjøre makro med bo=Norge først. Burde den heller lages i [omraadeNorge](#omraadenorge)-makroen?
 
 #### Lager følgende datasett
 
@@ -38,7 +36,7 @@ Kommer senere...
 - aar
 - forbruksmal
 
-#### Definerer følgende variabler
+#### Definerer følgende makro-variabler
 
 - Antall_aar
 
@@ -60,6 +58,7 @@ data RV&Bo;
 set RV;
 run;
 
+/*Aggregerer ratevariabel og innbyggere på boområde, år, alder og kjønn*/
 proc sql;
     create table tmp1&Bo._Agg as
     select distinct aar, alder_ny, ErMann, &Bo,
@@ -75,38 +74,38 @@ Lage gjennomsnitt for perioden
 
 PROC SQL;
    CREATE TABLE &Bo._Agg_Snitt AS 
-   SELECT aar,alder_ny,ErMann,&Bo,(AVG(N_RV)) AS N_RV,(AVG(N_Innbyggere)) AS N_Innbyggere
+   SELECT alder_ny,ErMann,&Bo,(AVG(N_RV)) AS N_RV,(AVG(N_Innbyggere)) AS N_Innbyggere
       FROM tmp1&Bo._Agg
       GROUP BY alder_ny, ErMann, &Bo;
 QUIT;
 
+/*Setter gjennomsnittsår lik 9999*/
 data &Bo._Agg_Snitt;
 set &Bo._Agg_Snitt;
-Where aar=&aar;
 aar=9999;
 run;
 
+/*slår sammen årsspesifikt og gjennomsnittsdatasett*/
 Data tmp2&Bo._Agg;
 set tmp1&Bo._Agg &Bo._Agg_Snitt;
 run;
 
 /*------------------
-Aggregere opp innbyggere på BoOmr-nivå
+Aggregere opp innbyggere på BoOmr-nivå (IKKE kjønn og alder).
+Behøves til rateberegninger og output-fil.
 -----------------*/ 
 PROC SQL;
    CREATE TABLE tmp3&Bo._Agg AS 
    SELECT aar, alder_ny, ErMann,&Bo, N_RV, N_Innbyggere, 
-          (SUM(N_RV)) AS RV_tot,(SUM(N_Innbyggere)) AS Innbyggere_tot,(FREQ(N_Innbyggere)) AS Kategorier
+          (SUM(N_RV)) AS RV_tot,(SUM(N_Innbyggere)) AS Innbyggere_tot,(FREQ(N_Innbyggere)) AS Kategorier		/*Kategorier inneholder antall kjønns/alderskategorier*/
       FROM tmp2&Bo._Agg
       GROUP BY aar, &Bo;
 QUIT;
 
-/* hente inn nasjonale andeler */
+/*VURDERE OM OVENSTÅENDE STEG KAN ERSTATTES (DELVIS?) MED PROC MEANS*/
 
-data andel;
-set andel;
-keep aar alderny ermann andel;
-run;
+/* hente hvilken innbyggerandel (av den nasjonale befolkningen) som befinner seg i hver kjønns-og alderskategori */
+/*Legges inn i nytt datasett sammen med tmp3*/
 
 proc sql;
 create table alder as
@@ -122,16 +121,19 @@ PROC SQL;
 QUIT;
 
 
-/* Tillegg for SVC */
+/*j står for kjønns og alderskategori (sum-tellevariabel)*/
+/*Tar med alt fra tmp4 og legger til noen variabler*/
+/*Datasettet &Bo._AGG brukes videre i rateberegningene*/
 
 PROC SQL;
    CREATE TABLE &Bo._AGG AS 
-   SELECT *, /* SUM_of_N_RV */ (SUM(N_RV)) AS RV_jN, 
-          /* SUM_of_N_Innbyggere */ (SUM(N_Innbyggere)) AS Innbyggere_jN
+   SELECT *, (SUM(N_RV)) AS RV_jN, 
+           (SUM(N_Innbyggere)) AS Innbyggere_jN
       FROM tmp4&Bo._AGG
       GROUP BY alder_ny, ermann, aar;
 QUIT;
 
+/*Legge til mulighet for å beholde i debug-mode?*/
 proc delete data=tmp1&Bo._Agg tmp2&Bo._Agg tmp3&Bo._Agg tmp4&Bo._Agg;
 run;
 
@@ -139,14 +141,21 @@ run;
 
 data &Bo._Agg;
 set &Bo._Agg;
-/* ny SVC */ e_i=RV_jN*(N_Innbyggere/Innbyggere_jN);
+/*
+RV_jN= Antall case i hver kjønns/alderskategori i hvert boområde. 
+N_Innbyggere = Innbyggere i hver kjønns/alderskategori for hvert boområde.  
+Innbyggere_jN = Innbyggere i hver kjønns/alderskategori i Norge
+*/
+
+/*HER FOREGÅR JUSTERINGEN!!!! INDIREKTE JUSTERING MÅ LEGGES INN HER.*/
+	e_i=RV_jN*(N_Innbyggere/Innbyggere_jN);  
 	rate_RV=(RV_tot/Innbyggere_tot)*(&rate_pr/Kategorier); 
 	just_rate_RV=((N_RV/N_Innbyggere)*&rate_pr)*Andel; 
 	SD=(&rate_pr/Innbyggere_tot)*(sqrt(RV_tot))*(1/Kategorier); 
 	VarJust=(N_RV/(N_Innbyggere**2))*(andel**2)*(&rate_pr**2); 
 run;
 
-
+/*Summerer over kjønns/alderskategorier. Sitter igjen med rater/andre variable for hvert boområde og år.*/
 proc sql;
     create table tmp1&Bo._Agg_rate as
     select distinct aar, &Bo, /* ny SVC */ kategorier,
@@ -158,6 +167,7 @@ proc sql;
 quit;
 
 /* Til kartkategorier */
+/*Lager variabel mean som brukes i kartmakro til visuell utforming*/
 proc sql;
     create table tmp2&Bo._Agg_rate as
     select distinct aar, &Bo, RV_rate, RV_just_rate, Ant_Innbyggere, Ant_Opphold, SD_rate, SDJUSTRate, /* ny SVC */ ei, kategorier,
@@ -166,6 +176,7 @@ proc sql;
 group by aar;
    quit;
 
+   /*Legges på konfidensintervall. Konfidensintervallene gir konfidens for justeringen?*/
 data tmp2&Bo._Agg_rate;
 set tmp2&Bo._Agg_rate;
 if aar ne 9999 then do;
@@ -223,14 +234,10 @@ set &Bo._AGG_CV;
 meancv=SUM_of_MCV/SUM_of_Ant_Innbyggere; /* endrer navn fra mean til meanCV */
 SD=sqrt((SUM_of_SDCV/SUM_of_Ant_Innbyggere)-meancv**2);
 CV=SD/meancv;
-/* ny SVC */
 SCV=100*((SUM_of_obs_grunnlag-SUM_of_random_grunnlag)/Boomr);
 OBV=SUM_of_obs_grunnlag;
 RCV=SUM_of_random_grunnlag;
-/*SCV=100*(OBV-RCV);*/
 run;
-
-/* Legge til SD i BoOmr_Agg_rate - funker ikke NBNBN */
 
 proc sort data=tmp2&Bo._Agg_rate;
 by aar;
