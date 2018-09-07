@@ -20,11 +20,11 @@ if bohf=8888 then do;
 RateSnittN&del1.=RateSnitt;
 end;
 
-keep BoHF RateSnitt&del1. RateSnittN&del1. &del1 Innbyggere rate&del1.2017 rate&del1.2015 rate&del1.2016;
+keep BoHF RateSnitt&del1. RateSnittN&del1. &del1. Innbyggere rate&del1.2017 rate&del1.2015 rate&del1.2016;
 
 run;
 
-data del2._bohf2;
+data &del2._bohf2;
 set &del2._bohf;
 RateSnitt&del2.=RateSnitt;
 rate&del2.2017=rate2017;
@@ -34,7 +34,7 @@ if bohf=8888 then do;
 RateSnittN&del2.=RateSnitt;
 end;
 
-keep BoHF RateSnitt&del2. RateSnittN&del2. &del2 Innbyggere rate&del2.2017 rate&del2.2015 rate&del2.2016;
+keep BoHF RateSnitt&del2. RateSnittN&del2. &del2. Innbyggere rate&del2.2017 rate&del2.2015 rate&del2.2016;
 
 run;
 
@@ -48,11 +48,11 @@ if bohf=8888 then do;
 RateSnittN&del3.=RateSnitt;
 end;
 
-keep BoHF RateSnitt&del3. RateSnittN&del3. &del3 Innbyggere rate&del3.2017 rate&del3.2015 rate&del3.2016;
+keep BoHF RateSnitt&del3. RateSnittN&del3. &del3. Innbyggere rate&del3.2017 rate&del3.2015 rate&del3.2016;
 
 run;
 
-proc sort data=del1._bohf2;
+proc sort data=&del1._bohf2;
 by bohf;
 quit;
 
@@ -65,7 +65,7 @@ by bohf;
 quit;
 
 
-data &tema._dp_BOHF;
+data &tema._BOHF;
 merge &del1._bohf2 &del2._bohf2 &del3._bohf2;
 by BoHF;
 RateSnitt_tot = RateSnitt&del1. + RateSnitt&del2. + RateSnitt&del3.;
@@ -89,20 +89,20 @@ max=max(of rate201:);
 min=min(of rate201:);
 run;
 
-proc sort data=&tema._dp_BOHF;
+proc sort data=&tema._BOHF;
 by descending RateSnitt_tot;
 run;
 
 /*Lager rankingtabell*/
-data rank_&tema._dp;
-set &tema._dp_BOHF;
+data rank_&tema;
+set &tema._BOHF;
 where BoHF ne 8888;
-&tema._dp_rank+1;
-keep &tema._dp_rank BoHF;
+&tema._rank+1;
+keep &tema._rank BoHF;
 run;
 
 
-%let dsn_fig=&tema._dp_BOHF;
+%let dsn_fig=&tema._BOHF;
 %let skala=/*values=(0 to 1.5 by 0.5)*/;
 
 *ODS Graphics ON /reset=All imagename="&tema._&type._tredelt_&fignavn" imagefmt=png border=off ;
