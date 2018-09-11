@@ -40,7 +40,7 @@ set &ds;
 if rank=2 then min2=ratesnitt;
 if rank=rader-1 then max2=ratesnitt;
 if rank=3 then min3=ratesnitt;
-if rank=rader-1 then max3=ratesnitt;
+if rank=rader-2 then max3=ratesnitt;
 run;
 
 proc sql;
