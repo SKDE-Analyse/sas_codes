@@ -54,4 +54,6 @@ data KA_t_&forbruksmal;
   beskrivelse="&forbruksmal";
 run;
 
+proc delete data=snittAlder antall highest lowest; run;
+
 %mend;

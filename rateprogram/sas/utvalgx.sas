@@ -198,9 +198,12 @@ data utvalgx;
   if a or b;
 run;
 
+%if %sysevalf(%superq(test)=,boolean) %then %let test = 0;
+%if &test=0 %then %do;
 	proc datasets nolist;
 	delete tmp1innb_aar innb_aar tmp1utvalgx tmp2utvalgx;
 	run;
+%end;
 
 	/* Definere alderskategorier */
 
@@ -239,8 +242,11 @@ run;
 	format aar aar.;
 	run;
 
+%if %sysevalf(%superq(test)=,boolean) %then %let test = 0;
+%if &test=0 %then %do;
 	proc delete data=alderdef utvalgx tmpRV;
 	run;
+%end;	
 
    /*
    Definere macro-variabler for boomraade-makroen,
@@ -275,8 +281,11 @@ format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr 
 	    from tmpAndel;
 	quit;
 
+%if %sysevalf(%superq(test)=,boolean) %then %let test = 0;
+%if &test=0 %then %do;
     proc delete data=tmpAndel;
 	run;
+%end;
     
 	/* Kun behold de som er i &boomraade */
 	data RV;

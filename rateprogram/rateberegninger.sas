@@ -387,5 +387,9 @@ RUN; Title;
 		%lagre_dataN;
 	%end;
 
+%if ut_sett=1 %then %do;
+%dele_tabell;
+%end;
+
 %mend rateberegninger;
 

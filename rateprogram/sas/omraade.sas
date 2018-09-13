@@ -133,9 +133,11 @@ PROC SQL;
       GROUP BY alder_ny, ermann, aar;
 QUIT;
 
-/*Legge til mulighet for å beholde i debug-mode?*/
+%if %sysevalf(%superq(test)=,boolean) %then %let test = 0;
+%if &test=0 %then %do;
 proc delete data=tmp1&Bo._Agg tmp2&Bo._Agg tmp3&Bo._Agg tmp4&Bo._Agg;
 run;
+%end;
 
 /* Beregninger */
 
@@ -244,13 +246,22 @@ by aar;
 run;
 
 data &Bo._Agg_rate;
+retain aar bohf rv_rate RV_just_rate RV_ijust_rate;
 Merge tmp2&Bo._Agg_rate &Bo._AGG_CV;
 By aar;
-drop SUM_of_Ant_Innbyggere SUM_of_MCV SUM_of_SDCV meancv CV;
+
+/* calculate the INDIRECT adjusted rate */
+factor=Ant_Opphold/ei;
+RV_ijust_rate=factor*(SUM_of_Ant_Opphold/SUM_of_Ant_Innbyggere)*&rate_pr;
+
+drop SUM_of_MCV SUM_of_SDCV meancv CV;
 run;
 
+%if %sysevalf(%superq(test)=,boolean) %then %let test = 0;
+%if &test=0 %then %do;
 proc delete data=tmp1&Bo._Agg_rate tmp2&Bo._Agg_rate;
 run;
+%end;
 
 /*Tilpasning til å lage Norge som søyle*/
 PROC SQL;
