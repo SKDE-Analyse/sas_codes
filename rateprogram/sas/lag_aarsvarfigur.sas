@@ -129,8 +129,10 @@ proc sort data=&bo._aarsvar;
 by descending rateSnitt;
 run;
 
-%if &NorgeSoyle=0 %then %do;
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
 
+%if &NorgeSoyle=0 %then %do;
+%if &silent=0 %then %do;
 /*ods graphics on;*/
 ods listing style=stil_figur gpath="%sysfunc(getoption(work))";
 title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, &min_aar - &max_aar";
@@ -159,6 +161,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 	 	/ position=bottomright textattrs=(size=7);
 run;Title; ods listing close; /*ods graphics off;*/
 %end;
+%end;
 
 /*Alternativ årsvariasjonsfigur*/
 %if &NorgeSoyle=1 %then %do;
@@ -176,6 +179,7 @@ proc sort data=&bo._aarsvar;
 by descending rateSnitt;
 run;
 
+%if &silent=0 %then %do;
 ods listing style=stil_figur gpath="%sysfunc(getoption(work))";
 title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, &min_aar - &max_aar";
 proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
@@ -204,7 +208,7 @@ hbarparm category=&bo response=Snittrate / fillattrs=(color=CXC3C3C3);
           / position=bottomright textattrs=(size=7);
 %end;
 run;Title; ods listing close;
-
+%end;
 %end;
 
 %mend lag_aarsvarfigur;

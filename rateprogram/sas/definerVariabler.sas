@@ -123,4 +123,6 @@ Definere variabler
 
     %gi_verdi(variabel = SnittOmraade, verdi = Norge);
 
+    %gi_verdi(variabel = silent, verdi = 1);
+
 %mend;

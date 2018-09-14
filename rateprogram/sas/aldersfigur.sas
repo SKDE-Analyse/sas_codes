@@ -1,9 +1,9 @@
 
 %macro aldersfigur(data =, aarstall =);
 /*!
-Makro for Ã¥ lage aldersstruktur-figur over utvalget.
+Makro for å lage aldersstruktur-figur over utvalget.
 
-For Ã¥ lett kunne se om alderssammensetningen gir mening.
+For å lett kunne se om alderssammensetningen gir mening.
 */
 %local data;
 %local fontst;
@@ -27,6 +27,8 @@ PROC SQL;
       GROUP BY aar, Alder, ErMann;	  
 QUIT;
 
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
+%if &silent=0 %then %do;
 proc sgplot data=tmp_aldersfig noautolegend noborder sganno=anno pad=(Bottom=4% );
 styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 	vbar alder / response=RV stat=mean group=ermann groupdisplay=cluster name="Vbar";
@@ -35,5 +37,6 @@ styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 		labelattrs=(size=&fontst)  valuesformat=&yformat. valueattrs=(size=&fontst);
 	xaxis &xvalues fitpolicy=thin offsetmin=0.035 label='Alder' labelattrs=(size=&fontst) valuesformat=&yformat. valueattrs=(size=&fontst);
 run;
+%end;
 
 %mend;

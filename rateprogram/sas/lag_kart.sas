@@ -111,6 +111,9 @@ run;
 quit;
 Title; %end;*/
 
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
+%if &silent=0 %then %do;
+
 goptions reset=pattern;
 %if &bo=BoRHF %then %do;
 title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
@@ -144,6 +147,8 @@ label RV_just_rate_sum='Rate';
 run;
 quit;
 Title;
+%end;
+
 %end;
 
 %mend lag_kart;

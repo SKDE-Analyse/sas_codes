@@ -44,6 +44,7 @@
 
 %if %sysevalf(%superq(kolonneTo)=,boolean) %then %let kolonneTo = Innbyggere;
 %if %sysevalf(%superq(figurnavn)=,boolean) %then %let figurnavn = AA_&RV_variabelnavn._&bo; 
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
 
 proc sql;
 create table aldersspenn as
@@ -130,7 +131,7 @@ run;
 
 
 %if &NorgeSoyle=0 %then %do;
-
+%if &silent=0 %then %do;
 /*ods graphics on;*/
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
 ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
@@ -160,6 +161,7 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 	 	/ position=bottomright textattrs=(size=7);
 run;Title; ods listing close; /*ods graphics off;*/
 %end;
+%end;
 
 /*Alternativ årsvariasjonsfigur*/
 %if &NorgeSoyle=1 %then %do;
@@ -187,6 +189,7 @@ proc sort data=&bo._aarsvar;
 by descending rateSnitt;
 run;
 
+%if &silent=0 %then %do;
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
 ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
 title;
@@ -216,7 +219,7 @@ hbarparm category=&bo response=Snittrate / fillattrs=(color=CXC3C3C3);
           / position=bottomright textattrs=(size=7);
 %end;
 run;Title; ods listing close;
-
+%end;
 
 %end;
 
