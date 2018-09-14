@@ -78,8 +78,11 @@ Første makro som kjøres direkte i rateprogrammet
 */
 
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
 
+%if &silent=0 %then %do;
 %print_info;
+%end;
 
 %definere_aar;
 
@@ -140,11 +143,8 @@ Definere komnr og bydel basert på bohf hvis datasettet mangler komnr og bydel
 	run;
 	
 /*Nytt pr 11/5-17 - Frank Olsen - tabeller for eksludering*/
-%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
-%if &silent=0 %then %do;
 %if &vis_ekskludering=1 %then %do;
     %ekskluderingstabeller(datasett = tmp1utvalgx);
-%end;
 %end;
 
 %forny_komnr(datasett = tmp1UTVALGX);
