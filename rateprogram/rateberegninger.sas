@@ -18,6 +18,7 @@
 %include "&makrobane\print_info.sas";
 %include "&makrobane\definere_komnr.sas";
 %include "&makrobane\ekskluderingstabeller.sas";
+%include "&makrobane\dele_tabell.sas";
 
 
 /*!
@@ -389,7 +390,7 @@ Title;
 		%lagre_dataN;
 	%end;
 
-%if ut_sett=1 %then %do;
+%if &ut_sett=1 %then %do;
 %dele_tabell;
 %end;
 
