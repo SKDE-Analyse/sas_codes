@@ -46,7 +46,7 @@ if bohf=8888 then SnittRate=RateSnitt;
 if aar=&År1 then output &forbruksmal._tmp&År1.;
 else if aar=&År2 then output &forbruksmal._tmp&År2.;
 else if aar=&År3 then output &forbruksmal._tmp&År3.;
-else output &forbruksmal._tmpSN;
+else if aar=9999 then output &forbruksmal._tmpSN;
 
 run;
 
