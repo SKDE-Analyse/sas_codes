@@ -1,5 +1,7 @@
 %macro print_info();
 
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
+%if &silent=0 %then %do;
 options nodate;
 data _null_;
 call symput ('timenow',put (time(),hhmm.));
@@ -17,5 +19,6 @@ ods text=" ";
 ods text="Periode: &Start≈r - &Slutt≈r";
 ods text="Aldersspenn: '&aldersspenn.'";
 ods text="Alderskategorier: '&Alderskategorier.'";
+%end;
 
 %mend;

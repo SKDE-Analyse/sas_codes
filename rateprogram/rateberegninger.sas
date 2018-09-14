@@ -173,7 +173,8 @@ run;
 %definere_aar;
 %definere_format;
 
-
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
+%if &silent=0 %then %do;
 title "Aldersstruktur for snitt i perioden (&min_aar-&max_aar), Andeler for &boomraadeN, Rater for &boomraade";
 PROC TABULATE DATA=NORGE_AGG_SNITT;	
 	VAR N_RV N_Innbyggere;
@@ -182,8 +183,9 @@ PROC TABULATE DATA=NORGE_AGG_SNITT;
 	N_RV={LABEL="&ratevariabel"}*(Sum={LABEL="&forbruksmal"}*F=&talltabformat..0 ColPctSum={LABEL="Andel (%)"}*F=&talltabformat2..1*{STYLE={JUST=CENTER}}) 
 	N_Innbyggere={LABEL="Innbyggere"}*(Sum={LABEL="Antall"}*F=&talltabformat..0 ColPctSum={LABEL="Andel (%)"}*F=&talltabformat2..1*{STYLE={JUST=CENTER}})
 	/ BOX={LABEL="Alderskategorier"};
-RUN; Title;
-
+RUN; 
+Title;
+%end;
 
 
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;

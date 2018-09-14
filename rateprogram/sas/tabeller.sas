@@ -18,6 +18,7 @@ Created new macro, lag_tabeller, to make the appropriate tabeller based on "vis_
 
 
 */
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
 
 /*finn min og max alder*/
 /*finn min og max alder*/
@@ -42,7 +43,9 @@ PROC TABULATE DATA=&Bo._Agg_Rate out=norgesnitt;
 		sum=' '*(RV_just_rate="&standard rater"*Format=&talltabformat..&rateformat 
 		Ant_Opphold="&forbruksmal"*Format=&talltabformat..0 Ant_Innbyggere='Antall innbyggere'*Format=&talltabformat..0)
 		/BOX={LABEL="&SnittOmraade" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none';
+%if &silent=0 %then %do;
 		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &SnittOmraade";
+%end;
 RUN;
 
 data norgesnitt;
@@ -60,7 +63,9 @@ PROC TABULATE DATA=&Bo._Agg_Rate out=&bo._Fig;
 	TABLE &Bo=' ', sum=' '*(RV_just_rate="&standard rater"*Format=&talltabformat..&rateformat 
 	Ant_Opphold="&forbruksmal"*Format=&talltabformat..0 Ant_Innbyggere='Antall innbyggere'*Format=&talltabformat..0)*aar=' '
 	/BOX={LABEL="&Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none';
+%if &silent=0 %then %do;
 	Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+%end;
 RUN;
 
 data HNsnitt;
@@ -94,6 +99,7 @@ Therefore tabell_1e is now obsolete.
 
 */
 
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
 
 Data _null_;
 set aldersspenn;
@@ -101,6 +107,7 @@ call symput('Min_alder', trim(left(put(minalder,8.))));
 call symput('Max_alder', trim(left(put(maxalder,8.))));
 run;
 
+%if &silent=0 %then %do;
 PROC TABULATE
 DATA=&Bo._Agg_CV Format=&talltabformat..3;
 	VAR CV SCV OBV RCV;
@@ -110,6 +117,7 @@ DATA=&Bo._Agg_CV Format=&talltabformat..3;
 	/BOX={Label="CV - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
 		Title "Variasjonsmål &ratevariabel, &Min_alder - &Max_alder år, &Bo";
 RUN;
+%end;
 %mend tabell_cv;
 
 %macro Tabell_CVe;
@@ -124,6 +132,7 @@ RUN;
 
 */
 
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
 
 Data _null_;
 set aldersspenn;
@@ -131,6 +140,7 @@ call symput('Min_alder', trim(left(put(minalder,8.))));
 call symput('Max_alder', trim(left(put(maxalder,8.))));
 run;
 
+%if &silent=0 %then %do;
 PROC TABULATE DATA=&Bo._Agg_Rate;	
 	VAR Ant_Innbyggere Ant_Opphold RV_rate RV_just_rate SDJUSTRate KI_N_J KI_O_J;
 	CLASS aar /	ORDER=UNFORMATTED MISSING;
@@ -141,6 +151,7 @@ PROC TABULATE DATA=&Bo._Agg_Rate;
 		/BOX={LABEL="Rater - &SnittOmraade" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
 		Title "&standard rater pr &rate_pr innbyggere, &Min_alder - &Max_alder år, &SnittOmraade";
 RUN;
+%end;
 %mend tabell_3N;
 
 %macro tabell_3Ne;
@@ -154,6 +165,7 @@ RUN;
 
 
 */
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
 
 Data _null_;
 set aldersspenn;
@@ -161,6 +173,7 @@ call symput('Min_alder', trim(left(put(minalder,8.))));
 call symput('Max_alder', trim(left(put(maxalder,8.))));
 run;
 
+%if &silent=0 %then %do;
 PROC TABULATE DATA=&Bo._Agg_Rate ;	
 	VAR Ant_Innbyggere Ant_Opphold RV_rate RV_just_rate SDJUSTRate KI_N_J KI_O_J;
 	CLASS &Bo /	ORDER=UNFORMATTED MISSING;
@@ -180,8 +193,10 @@ DATA=&Bo._Agg_CV Format=&talltabformat..3;
 	TABLE aar='',
 	mean=' '*(CV*Format=&talltabformat..3 SCV*Format=&talltabformat..3 OBV*Format=&talltabformat..3 RCV*Format=&talltabformat..3)
 	/BOX={Label="CV - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
+
 		Title "Variasjonsmål &ratevariabel, &Min_alder - &Max_alder år, &Bo";
 RUN;
+%end;
 %mend Tabell_3;
 
 %macro Tabell_3e;
