@@ -5,6 +5,7 @@
 MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 
 ### Innhold
+0. Fjerner (dropper) variabler som vi ikke trenger. 
 1. Omkoding av stringer med tall til numeriske variable.
 2. Konvertering av stringer til dato- og tidsvariable
 3. Fjerner blanke felt og punktum i stringvariable, samt ny navngiving
@@ -12,6 +13,7 @@ MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 
 Data &Utdatasett;
 Set &Inndatasett;
+drop oppholdstype;
 
 /*!
 ### Omkoding av stringer med tall til numeriske variable
@@ -30,6 +32,15 @@ Drop lopenr;
 Rehab=RehabType+0;
 Drop RehabType;
 rename Rehab=RehabType;
+%end;
+
+/*!
+- Gjør `HDG` numerisk.
+*/
+%if &somatikk ne 0 %then %do;
+HDG_num=HDG+0;
+Drop HDG;
+rename HDG_num=HDG;
 %end;
 
 /*!

@@ -1,5 +1,6 @@
 /*
-Formater for variabler generert av SKDE
+Formater for variabler generert av SKDE.
+Oppdatert av Linda Leivseth september 2018. 
 */
 
 proc format;
@@ -51,61 +52,61 @@ value ErMann
 value Hastegrad
 	1='Akutt'
 	4='Planlagt'
-	2='Ikke akutt, men behandling innen 6 timer'                               
-	3='Venting mellom 6 og 24 timer' 
+	/*2='Ikke akutt, men behandling innen 6 timer' */                              
+	/*3='Venting mellom 6 og 24 timer' */
 	5='Tilbakeføring av pasient fra annet sykehus';
 	  
 value ICD10kap   /*Fra 2014. Bør skaffes nye*/
-	1='Visse infeksjonssykd og parasittsykd'
-	2='Svulster'
-	3='Sykd i blod og bloddannende organer'
-	4='Endokrine sykd, ernæringssykd'
-	5='Psyk lidelser og atferdsforstyrrelser'
-	6='Sykd i nervesystemet'
-	7='Sykd i øyet og øyets omgivelser'
-	8='Sykd i øre og ørebensknute'
-	9='Sykd i sirkulasjonssystemet'
-	10='Sykd i åndedrettssystemet'
-	11='Sykd i fordøyelsessystemet'
-	12='Sykd i hud og underhud'
-	13='Sykd i muskel-skjelettsystemet og bindevev'
-	14='Sykdo i urin- og kjønnsorganer'
-	15='Svangerskap, fødsel og barseltid'
-	16='Visse tilstander i perinatalperioden'
-	17='Misdannelser, deformiteter og kromosomavvik'
-	18='Symptom, tegn, lab.funn, annet'
-	19='Skader, forgiftninger mm'
-	20='Ytre årsaker til sykd, skader og død'
-	21='Faktorer med betydning for helsetilstand'
-	22='Koder for spesielle formål'
-	23='Ugyldig diagnosegruppe'; 
+      1 = 'Kap I Visse infeksjonssykdommer og parasittsykdommer (A00-B99)'  
+      2 = 'Kap II Svulster (C00-D48)'  
+      3 = 'Kap III Sykdommer i blod og bloddannende organer og visse tilstander som angår immunsystemet (D50-D89)'  
+      4 = 'Kap IV Endokrine sykdommer, ernæringssykdommer og metabolske forstyrrelse (E00-E90)'  
+      5 = 'Kap V Psykiske lidelser og atferdsforstyrrelser (F00-F99)'  
+      6 = 'Kap VI Sykdommer i nervesystemet (G00-G99)'  
+      7 = 'Kap VII Sykdommer i øyet og øyets omgivelser (H00-H59)'  
+      8 = 'Kap VIII Sykdommer i øre og ørebensknute (processus mastoideus) (H60-H95)'  
+      9 = 'Kap IX Sykdommer i sirkulasjonssystemet (I00-I99)'  
+      10 = 'Kap X Sykdommer i åndedrettssystemet (J00-J99)'  
+      11 = 'Kap XI Sykdommer i fordøyelsessystemet (K00-K93)'  
+      12 = 'Kap XII Sykdommer i hud og underhud (L00-L99)'  
+      13 = 'Kap XIII Sykdommer i muskel-skjelettsystemet og bindevev (M00-M99)'  
+      14 = 'Kap XIV Sykdommer i urin- og kjønnsorganer (N00-N99)'  
+      15 = 'Kap XV Svangerskap, fødsel og barseltid (O00-O99)'  
+      16 = 'Kap XVI Visse tilstander som oppstår i perinatalperioden (P00-P96)'  
+      17 = 'Kap XVII Medfødte misdannelser, deformiteter og kromosomavvik (Q00-Q99)'  
+      18 = 'Kap XVIII Symptomer, tegn, unormale kliniske funn og laboratoriefunn,IKAS (R00-R99)'  
+      19 = 'Kap XIX Skader, forgiftninger og visse andre konsekvenser av ytre årsaker (S00-T98)'  
+      20 = 'Kap XX Ytre årsaker til sykdommer, skader og dødsfall (V0n-Y98)'  
+      21 = 'Kap XXI Faktorer som har betydning for helsetilstand og kontakt med helsetjenesten (Z00-Z99)' 
+	  22='Kap XXII Koder for spesielle formål (U00-U85)'
+	  23='Ugyldig diagnosegruppe';
 
 value ICD10kap_kort
 	1='Infeksjon'
-	2='Svulster'
+	2='Svulst'
 	3='Blod'
-	4='Endokr'
-	5='Psyk'
+	4='Endokrin'
+	5='Psykisk'
 	6='Nerve'
-	7='Oye'
-	8='Ore'
-	9='Sirk'
-	10='Andedr'
-	11='Fordoy'
+	7='Øye'
+	8='Øre'
+	9='Sirkulasjon'
+	10='Åndedrett'
+	11='Fordøyelse'
 	12='Hud'
 	13='Muskel'
 	14='Urin'
-	15='Svskap'
+	15='Svangerskap'
 	16='Perinatal'
-	17='Misdann'
+	17='Misdannelse'
 	18='Symptom'
-	19='Skader'
-	20='YtreArsaker'
-	21='BetydnHelsetilst'
-	22='SpesKoder'
+	19='Skade'
+	20='Ytre årsak'
+	21='Betydning helsetilstand'
+	22='Spesielle koder'
 	23='Ugyldig'; 
 
-value ICD10KatBlokk
+value ICD10KatBlokk /* Denne er gammel og bør oppdateres */
 1='A00-A09 Infeksiøse tarmsykdommer'
 2='A15-A19 Tuberkulose'
 3='A20-A28 Visse bakterielle zoonoser'
@@ -330,8 +331,7 @@ value ICD10KatBlokk
 224='U80-U99 Bakterier resistente mot antibiotika';
 
 
-value INSTITUSJONID_2011_2015F
-	/* 2013 - 2017 */
+value INSTITUSJONID_2013_2017F
 812794922 =	'Colosseum Mann AS'
 813381192 =	'Aleris Helse AS Stavanger'
 879595762 =	'Aleris Helse AS avd Drammen'
@@ -413,7 +413,7 @@ value INSTITUSJONID_2011_2015F
 984630492 =	'Oslo kommunale legevakt'
 985773238 =	'Revmatismesykehuset AS'
 985962170 =	'Martina Hansens Hospital'
-986106839 =	'Haugesund sanitetsforenings revmatismesykehus'
+986106839 =	'Haugesund sanitetsforenings revmatismesykehus (2014)'
 987954167 =	'IbsenSykehuset AS'
 991811869 =	'Kolibri Medical AS'
 993240184 =	'Aleris Helse AS Tromsø'
@@ -423,9 +423,18 @@ value INSTITUSJONID_2011_2015F
 998558271 =	'Oslo Medisinske senter AS'
 999230008 =	'Ifocus øyeklinikk AS'
 
+/* Stråleterapi */
+9745577460 = 'Helse Bergen HF Haukeland - Stråleterapi'
+9745890950 = 'OUS HF Ullevål - Stråleterapi'
+9747033000 = 'Stavanger universitetssjukehus - Stråleterapi'
+9747071520 = 'OUS HF Radiumhospitalet - Stråleterapi'
+9747249600 = 'Sykehuset Innlandet - Stråleterapi'
+9747330130 = 'Sørlandet sykehus - Stråleterapi'
+9747471380 = 'Helse Møre og Romsdal HF Ålesund sjukehus - Stråleterapi'
+9747490250 = 'St. Olavs Hospital HF St.Olavs Hospital - Stråleterapi'
+9747957870 = 'UNN Tromsø - Stråleterapi'
 
-
-/* Rehab 2015 */
+/* Rehab 2015 */ /* Value lables for rehab oppdateres når rehab-filene tilrettelegges */
       871426902 = 'Godthaab'  
       888082042 = 'Stamina Helse, Bodø'  
       912041379 = 'Høyenhall'  
