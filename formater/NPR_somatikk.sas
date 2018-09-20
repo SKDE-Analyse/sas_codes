@@ -1,7 +1,9 @@
 /*
-Formater spyttet ut fra SPSS-til-SAS konverteringen av somatikk-filene til NPR,
-basert på 2015. Kun supplert med fire linjer fra 2012: 
-231 rehabilitering, 232 habilitering, $FAGOMRADE, $EPISODEFAG
+Oppdatert av Linda Leivseth 10. september 2018. 
+
+Formater er hentet fra NPR-melding v. 53.1.1 (gylding for rapportering av årsdata 2017), _NAVN-variabler i data, ISF regelverk 2017, SAMDATA og value labels fra tidligere år. 
+Det ble ikke gjort en slik detaljert gjennomgang ved fjorårets tilreggelegging av data. Det er derfor usikkert når noen av endringene har funnet sted. Selv om det oppgis at en kode eller at en tekst er 
+endret i NPR-melding 53.1.1 (2017) kan endringen ha vært gjort tidligere. 
 */
 
 proc format;
@@ -14,130 +16,61 @@ value NPRID_REG
       4 = 'Fødselsnummer/ D-nummer mangler.'  
       5 = 'Dødsdato i Det sentrale folkeregister er før inndato.' ;
   
-value INSTITUSJONID_2015F
-      813381192 = 'Aleris Helse AS Stavanger'  
-      879595762 = 'Teres Drammen'  
-      879790522 = 'Aleris Helse AS Bergen'  
-      897351102 = 'Akademikliniken Oslo AS'  
-      913269756 = 'Michael Strand'  
-      914263778 = 'Arve Gustavsen'  
-      914751934 = 'Privathospitalet AS'  
-      941455077 = 'Medi 3 AS'  
-      971049456 = 'Mjøskirurgene'  
-      971937548 = 'EEG Labora'  
-      972140295 = 'NIMI AS Avd. Mini Ullevål'  
-      972149519 = 'Teres Rosenborg'  
-      973129856 = 'Volvat medisinske senter AS Oslo'  
-      973144383 = 'LHL-klinikkene Feiring'  
-      973156829 = 'Haugesund sanitetsforenings revmatismesykehus'  
-      973925032 = 'Bergen legevakt'  
-      974116561 = 'LHL-klinikkene Glittre'  
-      974116804 = 'Diakonhjemmet sykehus'  
-      974207532 = 'Lovisenberg diakonale sykehus'  
-      974316285 = 'Haraldsplass diakonale sykehus AS'  
-      974504863 = 'Aleris Helse AS Trondheim'  
-      974518821 = 'Teres Bergen'  
-      974557746 = 'Helse Bergen HF Haukeland'  
-      974577216 = 'Helse Møre og Romsdal HF Klinikk for Rehabilitering (Mork)'  
-      974588951 = 'OUS HF Aker'  
-      974589095 = 'OUS HF Ullevål'  
-      974589214 = 'Sunnaas sykehus'  
-      974633191 = 'Sykehuset Telemark'  
-      974633574 = 'Sykehuset i Vestfold'  
-      974633752 = 'Sykehuset Østfold'  
-      974703300 = 'Stavanger universitetssjukehus'  
-      974705788 = 'Vestre Viken'  
-      974706490 = 'Akershus universitetssykehus'  
-      974724774 = 'Helse Fonna'  
-      974724960 = 'Sykehuset Innlandet'  
-      974733013 = 'Sørlandet sykehus'  
-      974737779 = 'Betanien spesialistpoliklinikk'  
-      974744570 = 'Helse Førde'  
-      974745569 = 'Helse Møre og Romsdal HF Molde sjukehus'  
-      974746948 = 'Helse Møre og Romsdal HF Kristiansund sjukehus'  
-      974747138 = 'Helse Møre og Romsdal HF Ålesund sjukehus'  
-      974747545 = 'Helse Møre og Romsdal HF Volda sjukehus'  
-      974749025 = 'St. Olavs Hospital HF St.Olavs Hospital'  
-      974753898 = 'Helse Nord-Trøndelag HF -  Namsos'  
-      974754118 = 'Helse Nord-Trøndelag HF -  Levanger'  
-      974795361 = 'Nordlandssykehuset Bodø'  
-      974795477 = 'Helgelandssykehuset HF Sandnessjøen'  
-      974795485 = 'Helgelandssykehuset HF Mosjøen'  
-      974795515 = 'Helgelandssykehuset HF Mo i Rana'  
-      974795558 = 'Nordlandssykehuset  Lofoten'  
-      974795574 = 'Nordlandssykehuset Vesterålen'  
-      974795787 = 'UNN Tromsø'  
-      974795833 = 'Finnmarkssykehuset HF Klinikk Hammerfest'  
-      974795930 = 'Finnmarkssykehuset HF Klinikk Kirkenes'  
-      975298744 = 'OUS HF Olafiaklinikken'  
-      975787419 = 'Aleris Helse AS Oslo'  
-      975933210 = 'FysMed-klinkken AS'  
-      975984168 = 'Friskvernklinikken AS'  
-      977208734 = 'Privatsykehuset Haugesund AS'  
-      980693732 = 'Ringvoll klinikken AS'  
-      980859754 = 'Privathospitalet AS'  
-      981096363 = 'Teres Sørlandsparken'  
-      981275721 = 'Betanien hospital'  
-      981406826 = 'Stein Helge Glad Nordahl'  
-      981541499 = 'Teres Colosseum'  
-      982755999 = 'Volvat Stokkan'  
-      983084478 = 'Volvat Tromsø'  
-      983825478 = 'Arve Gustavsen'  
-      983896383 = 'Teres Colosseum Stavanger'  
-      983974910 = 'Nordlandssykehuset'  
-      984630492 = 'Oslo kommunale legevakt'  
-      985773238 = 'Revmatismesykehuset AS'  
-      985962170 = 'Martina Hansens Hospital'  
-      986106839 = 'Haugesund sanitetsforenings revmatismesykehus'  
-      987954167 = 'IbsenSykehuset AS'  
-      989254928 = 'David Simonsen'  
-      991811869 = 'Kolibri Medical AS'  
-      993240184 = 'Aleris Helse AS Tromsø'  
-      995590794 = 'SVC Norge AS'  
-      995818728 = 'Teres Klinikken Bodø'  
-      996860884 = 'Somni Søvnsenter og Spesialisthelsetjenester AS'  
-      998396522 = 'Tore Bru' ;
-
    value KJONN
       0 = 'Ikke kjent'  
       1 = 'Mann'  
       2 = 'Kvinne'  
       9 = 'Ikke spesifisert' ;
+	  
    value HENVFRATJENESTE
       1 = 'Pasienten selv'  
-      2 = 'Fastlege/primærlege'  
-      4 = 'Spesialisthelsetjeneste'  
-      5 = 'Barnehage, skolesektor, PPT'  
-      6 = 'Sosialtjeneste, barnevern'  
-      7 = 'Politi, fengsel, rettsvesen'  
-      8 = 'Rehabiliteringsinstitusjoner, sykehjem'  
+      2 = 'Fastlege/primærlege'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      4 = 'Spesialisthelsetjeneste'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      5 = 'Barnehage, skolesektor, PPT'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      6 = 'Sosialtjeneste, barnevern'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      7 = 'Politi, fengsel, rettsvesen'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      8 = 'Rehabiliteringsinstitusjoner, sykehjem'  /* Utgått før NPR-melding 53.1.1 - 2017 */
       9 = 'Andre tjenester'  
       10 = 'Privatpraktiserede spesialister'  
-      21 = 'Legevakt'  
-      22 = 'Kiropraktor'  
-      23 = 'Manuellterapeut'  
+      21 = 'Legevakt'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      22 = 'Kiropraktor'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      23 = 'Manuellterapeut'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+	  28 = 'Fastlege/primærlege/legevaktslege' /* Ny kode i NPR-melding 53.1.1 - 2017 */
       41 = 'Somatisk spesialisthelsetjeneste'  
       42 = 'Tverrfaglig spesialisert rusbehandling'  
-      43 = 'Distriktspsykiatrisk senter (DPS)'  
-      49 = 'Annen institusjon innen psykisk helsevern'  
-      81 = 'Rehabiliteringsinstitusjoner'  
-      82 = 'Sykehjem' ;
+      43 = 'Distriktspsykiatrisk senter (DPS)'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+	  44 = 'Psykisk helsevern' /* Ny kode i NPR-melding 53.1.1 - 2017 */
+      49 = 'Annen institusjon innen psykisk helsevern'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      81 = 'Rehabiliteringsinstitusjoner'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      82 = 'Sykehjem' /* Utgått før NPR-melding 53.1.1 - 2017 */
+	  88 = 'Andre kommunale tjenester' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
  
    value HENVTYPE
-      1 = 'Utredning'  
-      2 = 'Behandling (eventuelt også inkludert videre utredning)'  
-      3 = 'Kontroll'  
-      4 = 'Generert for Ø-hjelpspasient'  
-      5 = 'Friskt nyfødt barn'  
-      6 = 'Graviditet'  
-      7 = 'Omsorg, botilbud eller annet' ;
+      1 = 'Utredning'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      2 = 'Behandling (eventuelt også inkludert videre utredning)'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      3 = 'Kontroll'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      4 = 'Generert for Ø-hjelpspasient'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      5 = 'Friskt nyfødt barn'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      6 = 'Graviditet'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      7 = 'Omsorg, botilbud eller annet' /* Utgått før NPR-melding 53.1.1 - 2017 */
+	  10 = 'Utredning/behandling' /* Ny kode i NPR-melding 53.1.1 - 2017 */
+	  11 = 'Råd til henviser' /* Ny kode i NPR-melding 53.1.1 - 2017 */
+	  99 = 'Øvrige henvisninger' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
+	  
    value FRITTSYKEHUSVALG
       1 = 'Ja'  
       2 = 'Nei'  
       9 = 'Ukjent' ;
+	  
+   value frittBehandlingsvalg
+	  1 = 'Ja'
+      2 = 'Nei'
+	  9 = 'Ukjent';
+	  
    value SECONDOPINION
       1 = 'Ja'  
       2 = 'Nei' ;
+	  
    value $FAGOMRADE
      '' = 'Manglende registrering'  
      '010' = 'Generell kirurgi'  
@@ -164,8 +97,8 @@ value INSTITUSJONID_2015F
      '210' = 'Anestesiologi'  
      '220' = 'Barnesykdommer'  
      '230' = 'Fysikalsk medisin og (re) habilitering'  
-     '231' = 'Rehabilitering'  
-     '232' = 'Habilitering'  
+     '231' = 'Rehabilitering'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+     '232' = 'Habilitering'   /* Utgått før NPR-melding 53.1.1 - 2017 */
      '233' = 'Habilitering barn og unge'  
      '234' = 'Habilitering voksne'  
      '240' = 'Hud og veneriske sykdommer'  
@@ -196,39 +129,46 @@ value INSTITUSJONID_2015F
      '860' = 'Patologi'  
      '900' = 'Annet'  
      '999' = 'Ukjent' ;
+	 	 
    value HENVTILTJENESTE
       1 = 'Pasienten selv'  
-      2 = 'Fastlege/primærlege'  
-      4 = 'Spesialisthelsetjeneste'  
-      5 = 'Barnehage, skolesektor, PPT'  
-      6 = 'Sosialtjeneste, barnevern'  
-      7 = 'Politi, fengsel, rettsvesen'  
-      8 = 'Rehabiliteringsinstitusjoner, sykehjem'  
+      2 = 'Fastlege/primærlege'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      4 = 'Spesialisthelsetjeneste'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      5 = 'Barnehage, skolesektor, PPT'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      6 = 'Sosialtjeneste, barnevern'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      7 = 'Politi, fengsel, rettsvesen'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      8 = 'Rehabiliteringsinstitusjoner, sykehjem'  /* Utgått før NPR-melding 53.1.1 - 2017 */
       9 = 'Andre tjenester'  
       10 = 'Privatpraktiserede spesialister'  
-      21 = 'Legevakt'  
-      22 = 'Kiropraktor'  
-      23 = 'Manuellterapeut'  
+      21 = 'Legevakt'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      22 = 'Kiropraktor'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      23 = 'Manuellterapeut'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+	  28 = 'Fastlege/primærlege/legevaktslege' /* Ny kode i NPR-melding 53.1.1 - 2017 */
       41 = 'Somatisk spesialisthelsetjeneste'  
       42 = 'Tverrfaglig spesialisert rusbehandling'  
-      43 = 'Distriktspsykiatrisk senter (DPS)'  
-      49 = 'Annen institusjon innen psykisk helsevern'  
-      81 = 'Rehabiliteringsinstitusjoner'  
-      82 = 'Sykehjem' ;
+      43 = 'Distriktspsykiatrisk senter (DPS)'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+	  44 = 'Psykisk helsevern' /* Ny kode i NPR-melding 53.1.1 - 2017 */
+      49 = 'Annen institusjon innen psykisk helsevern'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      81 = 'Rehabiliteringsinstitusjoner'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      82 = 'Sykehjem' /* Utgått før NPR-melding 53.1.1 - 2017 */
+	  88 = 'Andre kommunale tjenester' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
 
    value NYTILSTAND
       1 = 'Første gangs henvisning, ny tilstand'  
       2 = 'Tilstanden er diagnostisert tidligere' ;
+	  
    value DEBITOR
-      1 = 'Ordinær pasient. Opphold finansiert gjennom ISF, HELFO, og ordinær finansiering innen pyskisk helsevern og TSB.'  
+      1 = 'Ordinær pasient. Opphold finansiert gjennom ISF, HELFO, og ordinær finansiering innen psykisk helse og TSB'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       11 = 'Konvensjonspasient behandlet ved ø-hjelp'  
-      12 = 'Pasient fra land uten konvensjonsavtale - selvbetalende'  
-      20 = 'Sykepengeprosjekt - Raskere tilbake'  
+      12 = 'Pasient  fra land uten konvensjonsavtale (selvbetalende)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      20 = 'Sykepengeprosjekt, Raskere tilbake'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       22 = 'Forskningsprogram'  
+	  24 = 'Finansiert (betalt) av kommunen' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
       30 = 'Selvbetalende norsk pasient og selvbetalende konvensjonspasient'  
+	  32 = 'Selvbetalende pasient etter Eus pasientrettighetsdirektiv' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
       40 = 'Anbudspasient finansiert via ISF'  
-	  41 = 'Anbudspasient på avtalen for Helse Øst RHF'                            
-	  42 = 'Anbudspasient på avtalen for Helse Sør RHF' 
+	  41 = 'Anbudspasient på avtalen for Helse Øst RHF' /* Gammel og utgått kode */                          
+	  42 = 'Anbudspasient på avtalen for Helse Sør RHF' /* Gammel og utgått kode */ 
       43 = 'Anbudspasient på avtalen for Helse Vest RHF'  
       44 = 'Anbudspasient på avtalen for Helse Midt-Norge RHF'  
       45 = 'Anbudspasient på avtalen for Helse Nord RHF'  
@@ -236,14 +176,12 @@ value INSTITUSJONID_2015F
       50 = 'Opphold hos avtalespesialist finansiert via ISF'  
       60 = 'Forsikringsfinansiert opphold'  
       70 = 'HELFO formidlet opphold ved fristbrudd'  
-      80 = 'Opphold på avtale med HF eller RHF'  
-      90 = 'Fritt behandlingsvalg (FBV)'  
+      80 = 'Opphold på avtale med HF/RHF. Ikke anbudsavtale' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      90 = 'Godkjent fritt behandlingsvalg (FBV)' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       99 = 'Annet' ;
-	  
-	 
-	  
-	  
+	   	  
    value $EPISODEFAG
+	 '' = 'Manglende registrering'  
      '010' = 'Generell kirurgi'  
      '020' = 'Barnekirurgi (under 15 år)'  
      '030' = 'Gasteroenterologisk kirurgi'  
@@ -268,13 +206,15 @@ value INSTITUSJONID_2015F
      '210' = 'Anestesiologi'  
      '220' = 'Barnesykdommer'  
      '230' = 'Fysikalsk medisin og (re) habilitering'  
-     '231' = 'Rehabilitering'  
-     '232' = 'Habilitering'  
+     '231' = 'Rehabilitering'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+     '232' = 'Habilitering'   /* Utgått før NPR-melding 53.1.1 - 2017 */
      '233' = 'Habilitering barn og unge'  
      '234' = 'Habilitering voksne'  
      '240' = 'Hud og veneriske sykdommer'  
      '250' = 'Nevrologi'  
      '260' = 'Klinisk nevrofysiologi'  
+	 '270' = 'Ukjent fagområde, brukes i 2013 og 2014' /* Finner ikke kodeverdi i NPR-meldig eller på volven.no */
+	 '280' = 'Ukjent fagområde, brukes i 2013 og 2014' /* Finner ikke kodeverdi i NPR-meldig eller på volven.no */
      '290' = 'Øre-nese-hals sykdommer'  
      '300' = 'Øyesykdommer'  
      '310' = 'Psykisk helsevern barn og unge'  
@@ -300,118 +240,103 @@ value INSTITUSJONID_2015F
      '860' = 'Patologi'  
      '900' = 'Annet'  
      '999' = 'Ukjent' ;
+	 
    value FRASTED
-      1 = 'Bosted, arbeidssted'  
+      1 = 'Bosted/arbeidssted'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       2 = 'Skade- eller funnsted'  
       3 = 'Annen helseinstitusjon innen spesialisthelsetjenesten'  
       5 = 'Institusjon i utlandet'  
-      6 = 'Annet, ukjent'  
-      7 = 'Annen somatisk enhet ved egen helseinstitusjon'  
-      8 = 'Annen ikke-somatisk enhet ved egen helseinstitusjon'  
-      9 = 'Ugyldig kode - Sykehotell'  
+      6 = 'Annet, ukjent'  /* Ikke i NPR-melding 53.1.1 */
+      7 = 'Annen (somatisk) enhet ved egen helseinstitusjon'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      8 = 'Annen enhet (ikke somatikk) ved egen helseinstitusjon' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      9 = 'Ugyldig kode - Sykehotell'  /* Ikke i NPR-melding 53.1.1 */
       10 = 'Pasienthotell'  
-      11 = 'Sykehjem, aldershjem'  
-      12 = 'Ugyldig kode - Annen enhet innen TSB ved egen helseinstitusjon'  
-      13 = 'Ugyldig kode - Intermediærenhet/forsterket sykehjem'  
-      14 = 'Ugyldig kode - Kommunal legevakt'  
-      15 = 'Ugyldig kode'  
-      16 = 'Ugyldig kode - Distriktspsykiatrisk senter'  
-      21 = 'Kommunal akutt døgnenhet KAD'  
-      22 = 'Ugyldig kode - Barneverninstitusjon'  
-      23 = 'Ugyldig kode - Beredskapshjem/fosterhjem'  
-      99 = 'Sted identifisert ved rapportering av attributt Fra institusjon'  
-      100 = 'Ugyldig kode - Vanlig bosted med kommunale tjenester'  
-      111 = 'Ugyldig kode - Sykehjem/aldershjem korttidsplass'  
-      112 = 'Ugyldig kode - Sykehjem/aldershjem langtidsplass'  
-      119 = 'Ugyldig kode - Sykehjem, aldershjem annet eller ukjent' ;
+      11 = 'Sykehjem/aldershjem'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      12 = 'Ugyldig kode - Annen enhet innen TSB ved egen helseinstitusjon'  /* Ikke i NPR-melding 53.1.1 */
+      13 = 'Ugyldig kode - Intermediærenhet/forsterket sykehjem'  /* Ikke i NPR-melding 53.1.1 */
+      14 = 'Ugyldig kode - Kommunal legevakt'  /* Ikke i NPR-melding 53.1.1 */
+      15 = 'Ugyldig kode'  /* Ikke i NPR-melding 53.1.1 */
+      16 = 'Ugyldig kode - Distriktspsykiatrisk senter'  /* Ikke i NPR-melding 53.1.1 */
+      21 = 'Kommunal akutt døgnenhet (KAD)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      22 = 'Ugyldig kode - Barneverninstitusjon'  /* Ikke i NPR-melding 53.1.1 */
+	  23 = 'Ugyldig kode - Beredskapshjem/fosterhjem'  /* Ikke i NPR-melding 53.1.1 */
+	  88 = 'Annet'
+	  98 = 'Ukjent'
+      99 = 'Sted identifisert ved rapportering av attributt  Fra institusjon'  
+      100 = 'Ugyldig kode - Vanlig bosted med kommunale tjenester'  /* Ikke i NPR-melding 53.1.1 */
+      111 = 'Ugyldig kode - Sykehjem/aldershjem korttidsplass'  /* Ikke i NPR-melding 53.1.1 */
+      112 = 'Ugyldig kode - Sykehjem/aldershjem langtidsplass'  /* Ikke i NPR-melding 53.1.1 */
+      119 = 'Ugyldig kode - Sykehjem, aldershjem annet eller ukjent' /* Ikke i NPR-melding 53.1.1 */;
+ 
    value INNTILSTAND
       1 = 'Levende ved ankomst til institusjon'  
       2 = 'Død ved ankomst'  
       3 = 'Levende født i sykehus' ;
+	  
    value INNMATEHAST
       1 = 'Akutt = uten opphold / venting'  
       2 = 'Ikke akutt, men behandling innen 6 timer'  
       3 = 'Venting mellom 6 og 24 timer'  
-      4 = 'Planlagt, eller venting over 24 timer' ;
+      4 = 'Planlagt' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+	  5 = 'Tilbakeføring av pasient fra annet sykehus';
+	  
    value TILSTED
-      1 = 'Bosted, arbeidssted'  
+      1 = 'Bosted/arbeidssted'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       2 = 'Skade- eller funnsted'  
       3 = 'Annen helseinstitusjon innen spesialisthelsetjenesten'  
       5 = 'Institusjon i utlandet'  
-      6 = 'Annet, ukjent'  
-      7 = 'Annen somatisk enhet ved egen helseinstitusjon'  
-      8 = 'Annen ikke-somatisk enhet ved egen helseinstitusjon'  
-      9 = 'Ugyldig kode - Sykehotell'  
+      6 = 'Annet, ukjent'  /* Ikke i NPR-melding 53.1.1 */
+      7 = 'Annen (somatisk) enhet ved egen helseinstitusjon'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      8 = 'Annen enhet (ikke somatikk) ved egen helseinstitusjon' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      9 = 'Ugyldig kode - Sykehotell'  /* Ikke i NPR-melding 53.1.1 */
       10 = 'Pasienthotell'  
-      11 = 'Sykehjem-aldershjem'  
-      12 = 'Ugyldig kode - Annen enhet innen TSB - ved egen helseinstitusjon'  
-      13 = 'Ugyldig kode - Intermediærenhet - forsterket sykehjem'  
-      14 = 'Ugyldig kode - Kommunal legevakt'  
-      15 = 'Ugyldig kode - Andre kommunale eller private bo- og hjelpetiltak'  
-      16 = 'Ugyldig kode - Distriktspsykiatrisk senter - DPS'  
-      21 = 'Kommunal akutt døgnenhet KAD'  
-      22 = 'Ugyldig kode - Barneverninstitusjon'  
-      23 = 'Ugyldig kode - Beredskapshjem-fosterhjem'  
-      99 = 'Sted identifisert ved rapportering av attributt Fra institusjon'  
-      100 = 'Ugyldig kode - Vanlig bosted med kommunale tjenester'  
-      111 = 'Ugyldig kode - Sykehjem-aldershjem korttidsplass'  
-      112 = 'Ugyldig kode - Sykehjem-aldershjem langtidsplass'  
-      119 = 'Ugyldig kode - Sykehjem-aldershjem annet eller ukjent' ;
+      11 = 'Sykehjem/aldershjem'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      12 = 'Ugyldig kode - Annen enhet innen TSB ved egen helseinstitusjon'  /* Ikke i NPR-melding 53.1.1 */
+      13 = 'Ugyldig kode - Intermediærenhet/forsterket sykehjem'  /* Ikke i NPR-melding 53.1.1 */
+      14 = 'Ugyldig kode - Kommunal legevakt'  /* Ikke i NPR-melding 53.1.1 */
+      15 = 'Ugyldig kode'  /* Ikke i NPR-melding 53.1.1 */
+      16 = 'Ugyldig kode - Distriktspsykiatrisk senter'  /* Ikke i NPR-melding 53.1.1 */
+      21 = 'Kommunal akutt døgnenhet (KAD)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      22 = 'Ugyldig kode - Barneverninstitusjon'  /* Ikke i NPR-melding 53.1.1 */
+	  23 = 'Ugyldig kode - Beredskapshjem/fosterhjem'  /* Ikke i NPR-melding 53.1.1 */
+	  88 = 'Annet'
+	  98 = 'Ukjent'
+      99 = 'Sted identifisert ved rapportering av attributt  Fra institusjon'  
+      100 = 'Ugyldig kode - Vanlig bosted med kommunale tjenester'  /* Ikke i NPR-melding 53.1.1 */
+      111 = 'Ugyldig kode - Sykehjem/aldershjem korttidsplass'  /* Ikke i NPR-melding 53.1.1 */
+      112 = 'Ugyldig kode - Sykehjem/aldershjem langtidsplass'  /* Ikke i NPR-melding 53.1.1 */
+      119 = 'Ugyldig kode - Sykehjem, aldershjem annet eller ukjent' /* Ikke i NPR-melding 53.1.1 */;
+	  
    value UTTILSTAND
       1 = 'Som levende'  
       2 = 'Som død'  
       3 = 'Suicid' ;
-   value TYPETIDSPUNKT_1F
+	  
+   value TYPETIDSPUNKT
       1 = 'Tidspunkt for varsling til kommunen om innlagt pasient'  
       2 = 'Tidspunkt for når pasient er utskrivningsklar'  
       3 = 'Tidspunkt for varsel til kommunen om utskrivningsklar pasient'  
-      4 = 'Tidspunkt for avmelding av pasient - pasient oppfyller ikke vilkår for å være utskrivningsklar lenger'  
+      4 = 'Tidspunkt for avmelding av pasient'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       6 = 'Tidspunkt for melding til sykehuset om at kommunen ikke kan ta imot pasient'  
       7 = 'Tidspunkt for melding til sykehuset om at kommunen kan ta imot pasient'  
-      12 = 'Tidspunkt for når pasient er overføringsklar - til annen institusjon innen spesialisthelsetjenesten' ;
-   value TYPETIDSPUNKT_2F
-      1 = 'Tidspunkt for varsling til kommunen om innlagt pasient'  
-      2 = 'Tidspunkt for når pasient er utskrivningsklar'  
-      3 = 'Tidspunkt for varsel til kommunen om utskrivningsklar pasient'  
-      4 = 'Tidspunkt for avmelding av pasient - pasient oppfyller ikke vilkår for å være utskrivningsklar lenger'  
-      6 = 'Tidspunkt for melding til sykehuset om at kommunen ikke kan ta imot pasient'  
-      7 = 'Tidspunkt for melding til sykehuset om at kommunen kan ta imot pasient'  
-      12 = 'Tidspunkt for når pasient er overføringsklar - til annen institusjon innen spesialisthelsetjenesten' ;
-   value TYPETIDSPUNKT_3F
-      1 = 'Tidspunkt for varsling til kommunen om innlagt pasient'  
-      2 = 'Tidspunkt for når pasient er utskrivningsklar'  
-      3 = 'Tidspunkt for varsel til kommunen om utskrivningsklar pasient'  
-      4 = 'Tidspunkt for avmelding av pasient - pasient oppfyller ikke vilkår for å være utskrivningsklar lenger'  
-      6 = 'Tidspunkt for melding til sykehuset om at kommunen ikke kan ta imot pasient'  
-      7 = 'Tidspunkt for melding til sykehuset om at kommunen kan ta imot pasient'  
-      12 = 'Tidspunkt for når pasient er overføringsklar - til annen institusjon innen spesialisthelsetjenesten' ;
-   value TYPETIDSPUNKT_4F
-      1 = 'Tidspunkt for varsling til kommunen om innlagt pasient'  
-      2 = 'Tidspunkt for når pasient er utskrivningsklar'  
-      3 = 'Tidspunkt for varsel til kommunen om utskrivningsklar pasient'  
-      4 = 'Tidspunkt for avmelding av pasient - pasient oppfyller ikke vilkår for å være utskrivningsklar lenger'  
-      6 = 'Tidspunkt for melding til sykehuset om at kommunen ikke kan ta imot pasient'  
-      7 = 'Tidspunkt for melding til sykehuset om at kommunen kan ta imot pasient'  
-      12 = 'Tidspunkt for når pasient er overføringsklar - til annen institusjon innen spesialisthelsetjenesten' ;
-   value TYPETIDSPUNKT_5F
-      1 = 'Tidspunkt for varsling til kommunen om innlagt pasient'  
-      2 = 'Tidspunkt for når pasient er utskrivningsklar'  
-      3 = 'Tidspunkt for varsel til kommunen om utskrivningsklar pasient'  
-      4 = 'Tidspunkt for avmelding av pasient - pasient oppfyller ikke vilkår for å være utskrivningsklar lenger'  
-      6 = 'Tidspunkt for melding til sykehuset om at kommunen ikke kan ta imot pasient'  
-      7 = 'Tidspunkt for melding til sykehuset om at kommunen kan ta imot pasient'  
-      12 = 'Tidspunkt for når pasient er overføringsklar - til annen institusjon innen spesialisthelsetjenesten' ;
+      12 = 'Tidspunkt for når pasient er overføringsklar' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+	  31 = 'Helfo varslet om fristbrudd' /* Ny kode i NPR-melding 53.1.1 - 2017 */
+	  32 = 'Avtale med pasient om at Helfo ikke skal varsles om fristbrudd' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
+  
    value G_OMSORGSNIVA
       1 = 'Innleggelse'  
       2 = 'Poliklinisk kontakt' ;
+	  
    value OMSORGSNIVA
       1 = 'Døgnopphold'  
       2 = 'Dagbehandling'  
-      3 = 'Poliklinisk kontakt'  
-      8 = 'Stråle inneliggende' ;
-   value OPPHOLDSTYPE
+      3 = 'Poliklinisk konsultasjon/kontakt'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      8 = 'Poliklinisk kontakt for inneliggende pasient - for stråleterapi' /* Ny tekst i NPR-melding 53.1.1 - 2017 (LL har lagt til "for stråleterapi", se volven.no) */ ;
+	  
+ /*  value OPPHOLDSTYPE - Variabelen er ikke lenger i bruk. Svært få episoder har informasjon om oppholdstype i 2017. 
       1 = 'Heldøgnsopphold'  
-      2 = 'Dagopphold' ;
+      2 = 'Dagopphold' ; */
+	  
    value KONTAKTTYPE
       1 = 'Utredning'  
       2 = 'Behandling'  
@@ -419,14 +344,16 @@ value INSTITUSJONID_2015F
       5 = 'Indirekte pasientkontakt'  
       12 = 'Pasientadministrert behandling'  
       13 = 'Opplæring' ;
+	  
    value STEDAKTIVITET
       1 = 'På egen helseinstitusjon'  
       2 = 'Hos ekstern instans'  
-      3 = 'Telemedisinsk behandling - der behandlende lege er'  
+      3 = 'Telemedisinsk behandling (der behandlende lege er)' /* Ny tekst i NPR-melding 53.1.1 - 2017 */ 
       4 = 'Hjemme hos pasienten'  
       5 = 'Annet ambulant sted'  
-      6 = 'Telemedisinsk behandling - der pasienten er'  
+      6 = 'Telemedisinsk behandling (der pasienten er)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       9 = 'Annet sted' ;
+	  
    value POLKONAKTIVITET
       1 = 'Individualbehandling'  
       2 = 'Parbehandling'  
@@ -436,46 +363,54 @@ value INSTITUSJONID_2015F
       6 = 'Miljøterapi'  
       7 = 'Nettverksterapi'  
       8 = 'Fysisk trening' ;
+	  
    value POLINDIR
       1 = 'Erklæring/uttalelse/melding'  
       2 = 'Møte. Samarbeid (om pasient) med annet helsepersonell'  
-      3 = 'Aktivitetsgruppe'  
+	 22 = 'Samarbeidsmøte (om pasient) med førstelinjetjenesten' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+	 23 = 'Samarbeidsmøte (om pasient) med annen tjeneste' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+	  3 = 'Aktivitetsgruppe'  
       5 = 'Brev'  
       6 = 'e-post'  
       7 = 'Telefon'  
-      8 = 'Tele- eller videokonferanse'  
+	 71 = 'Telefonmøte (om pasient) med førstelinjetjenesten' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+      8 = 'Tele-/videokonferanse'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       11 = 'Telemedisin'  
       12 = 'Telefonsamtale med pasient' 
       21 = 'Teknisk Episode';
-
 
    value INTERN_KONS
       1 = 'Ja'  
       2 = 'Nei'  
       3 = 'Ja, fra psykiatri' ;
-   value $DRG
-     'none' = ' ' ;
-   value $NIVA
+	  
+   value $NIVA /* Ikke oppgitt i utlevering 2018 */
      '' = 'Enavdelingsopphold eller poliklinisk kontakt'  
      'F' = 'Fleravdelingsopphold'  
      'S' = 'Sykehusopphold' ;
-   value $DRG_TYPE
+	 
+   value $DRG_TYPE /* Ikke oppgitt i utlevering 2018 */
      'K' = 'Kirurgisk'  
      'M' = 'Medisinsk' ;
-   value $KOMP_DRG
+	 
+   value $KOMP_DRG /* Ikke oppgitt i utlevering 2018 */
      'J' = 'Ja'  
      'N' = 'Nei' ;
-   value $DAG_KIR
+	 
+   value $DAG_KIR /* Ikke oppgitt i utlevering 2018 */
      'J' = 'Ja'  
      'N' = 'Nei' ;
-   value $SPES_DRG
+	 
+   value $SPES_DRG /* Ikke oppgitt i utlevering 2018 */
      'J' = 'Ja'  
      'N' = 'Nei' ;
-   value REHABTYPE
+	 
+   value REHABTYPE /* Ikke oppgitt i utlevering 2018 */
      1 = 'Vanlig'  
      2 = 'Kompleks'  
      3 = 'Sekundær' ;
-   value HDG
+	 
+   value HDG /* Hentet fra ISF-regleverket 2017 */
       1 = 'Sykdommer i nervesystemet'  
       2 = 'Øyesykdommer'  
       3 = 'Øre-, nese- og halssykdommer'  
@@ -495,14 +430,15 @@ value INSTITUSJONID_2015F
       17 = 'Myeloproliferative sykdommer og lite differensierte svulster'  
       18 = 'Infeksiøse og parasittære sykdommer'  
       19 = 'Psykiske lidelser og rusproblemer'  
-      21 = 'Skade, forgiftninger og toksiske effekter av medikamenter/andre stoffer, medikamentmisbruk og organiske sinnslidelser fr'  
+      21 = 'Skade, forgiftninger og toksiske effekter av medikamenter/andre stoffer, medikamentmisbruk og organiske sinnslidelser fremkalt av disse'  
       22 = 'Forbrenninger'  
       23 = 'Faktorer som påvirker helsetilstand - andre kontakter med helsetjenesten'
       24 = 'Signifikant multitraume'
       30 = 'Sykdommer i bryst'  
       40 = 'Kategorier på tvers av flere hoveddiagnosegrupper'  
       99 = 'Kategorier for feil og uvanlige diagnose-prosedyrekombinasjoner' ;
-   value UTFORENDEHELSEPERSON
+	  
+   value UTFORENDEHELSEPERSON /* Antar denne er lik value label for polUtforende */
       1 = 'Lege'  
       2 = 'Sykepleier'  
       3 = 'Pedagog'  
@@ -518,298 +454,22 @@ value INSTITUSJONID_2015F
       14 = 'Fysioterapeut'  
       15 = 'Klinisk ernæringsfysiolog'  
       16 = 'Radiograf'  
-      17 = 'Tannlege' ;
-   value GYLDIG_ICD_1_1F
+      17 = 'Tannlege' 
+	  18 = 'Ortoptist' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+	  19 = 'Ortopediingeniør' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+	  20 = 'Farmasøyt' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+	  21 = 'Fotterapeut' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
+   
+   value GYLDIG /* Ikke oppgitt i utlevering 2018 */
+      0 = ' ' /* Gjelder kun NCRP i 2017. Fikk vite betydningen fra Marte Kjelvik i NPR. */ 
       1 = 'Gyldig'  
       8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_1_2F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_2_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_3_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_4_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_5_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_6_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_7_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_8_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_9_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_10_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_11_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_12_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_13_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_14_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_15_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_16_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_17_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_18_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_19_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_ICD_20_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_2F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_3F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_4F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_5F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_6F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_7F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_8F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_9F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_10F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_11F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_12F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_13F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_14F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_15F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_16F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_17F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_18F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_19F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCMP_20F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_1F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_2F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_3F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_4F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_5F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_6F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_7F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_8F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_9F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_10F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_11F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_12F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_13F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_14F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_15F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_16F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_17F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_18F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_19F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value GYLDIG_NCSP_20F
-      1 = 'Gyldig'  
-      8 = 'Utgått - må oppdateres'  
-      9 = 'Ugyldig' ;
-   value $CYTO_1F
-     'none' = ' ' ;
-   value $CYTO_2F
-     'none' = ' ' ;
-   value $CYTO_3F
-     'none' = ' ' ;
-   value $CYTO_4F
-     'none' = ' ' ;
-   value $CYTO_5F
-     'none' = ' ' ;
-   value POLUTFORENDE_1F
-      1 = 'Lege'  
-      2 = 'Sykepleier'  
-      3 = 'Pedagog'  
-      4 = 'Psykolog'  
-      5 = 'Sosionom'  
-      6 = 'Barnevernpedagog'  
-      7 = 'Vernepleier'  
-      8 = 'Jordmor'  
-      9 = 'Annet helsepersonell'  
-      11 = 'Audiograf'  
-      12 = 'Bioingeniør'  
-      13 = 'Ergoterapeut'  
-      14 = 'Fysioterapeut'  
-      15 = 'Klinisk ernæringsfysiolog'  
-      16 = 'Radiograf'  
-      17 = 'Tannlege' ;
-   value POLUTFORENDE_2F
-      1 = 'Lege'  
-      2 = 'Sykepleier'  
-      3 = 'Pedagog'  
-      4 = 'Psykolog'  
-      5 = 'Sosionom'  
-      6 = 'Barnevernpedagog'  
-      7 = 'Vernepleier'  
-      8 = 'Jordmor'  
-      9 = 'Annet helsepersonell'  
-      11 = 'Audiograf'  
-      12 = 'Bioingeniør'  
-      13 = 'Ergoterapeut'  
-      14 = 'Fysioterapeut'  
-      15 = 'Klinisk ernæringsfysiolog'  
-      16 = 'Radiograf'  
-      17 = 'Tannlege' ;
-   value ISF_OPPHOLD
+      9 = 'Ugyldig' ;	  
+    
+   value ISF_OPPHOLD /* Ikke oppgitt i utlevering 2018 */
       1 = 'Ja'  
       2 = 'Nei' ;
+	  
    value AKTIVITETSKATEGORI
       0 = 'Innlagt rehab'  
       1 = 'Innlagt mer enn 2 lgd'  
@@ -821,90 +481,23 @@ value INSTITUSJONID_2015F
       7 = 'Polikl kjemoterapi'  
       8 = 'Polikl stråleterapi'  
       9 = 'Dialyse 0 lgd' ;
+	  
    value AKTIVITETSKATEGORI2F
       1 = 'Innlagt'  
       2 = 'Poliklinisk konsultasjon' ;
+	  
    value AKTIVITETSKATEGORI3F
       1 = 'Døgnopphold'  
       2 = 'Dagbehandling'  
       3 = 'Poliklinisk konsultasjon' ;
+	  
    value AKTIVITETSKATEGORI4F
       1 = 'Innlagt'  
       2 = 'Innlagt dagbehandling'  
       3 = 'Kirurgisk dagbehandling'  
       4 = 'Poliklinisk konsultasjon' ;
-   value INSTITUSJONID_ORIGINAL
-      813381192 = 'Aleris Helse AS avd Stavanger'  
-      879595762 = 'Aleris Helse AS avd Drammen'  
-      879790522 = 'Aleris Helse AS avd Bergen'  
-      897351102 = 'Akademikliniken Oslo AS'  
-      914751934 = 'Privathospitalet Fana Medisinske senter AS'  
-      941455077 = 'Medi 3 Ålesund AS'  
-      971049456 = 'Mjøs kirurgene lege og spesialistsenter AS'  
-      971937548 = 'EEG Laboratoriet AS'  
-      972140295 = 'NIMI AS avd Mini Ullevål'  
-      972149519 = 'Aleris Helse AS avd Rosenborgklinikken'  
-      973129856 = 'Volvat Medisinske senter AS Oslo - Majorstuen'  
-      973144383 = 'LHL-klinikkene Feiring'  
-      973156829 = 'Haugesund sanitetsforenings revmatismesykehus'  
-      973925032 = 'Bergen legevakt'  
-      974116804 = 'Diakonhjemmets sykehus'  
-      974207532 = 'Lovisenberg diakonale sykehus'  
-      974316285 = 'Haraldsplass diakonale sykehus'  
-      974504863 = 'Aleris Helse AS avd Trondheim'  
-      974518821 = 'Aleris Helse AS avd Nesstun'  
-      974557746 = 'Haukeland universitetssykehus'  
-      974577216 = 'Mork rehabiliteringssenter'  
-      974589095 = 'Oslo universitetssykehus'  
-      974589214 = 'Sunnaas sykehus'  
-      974633191 = 'Sykehuset Telemark'  
-      974633574 = 'Sykehuset i Vestfold'  
-      974633752 = 'Sykehuset Østfold Kalnes'  
-      974703300 = 'Stavanger universitetssykehus'  
-      974705788 = 'Vestre Viken'  
-      974706490 = 'Akershus universitetssykehus'  
-      974724774 = 'Haugesund sjukehus'  
-      974724960 = 'Sykehuset Innlandet'  
-      974733013 = 'Sørlandet Sykehus HF, Kristiansand'  
-      974737779 = 'Betanien spesialistpoliklinikk og laboratorium'  
-      974744570 = 'Helse Førde'  
-      974745569 = 'Molde sjukehus'  
-      974746948 = 'Kristiansund sjukehus'  
-      974747138 = 'Ålesund sjukehus'  
-      974747545 = 'Volda sjukehus'  
-      974749025 = 'St. Olavs hospital'  
-      974753898 = 'Sykehuset Namsos'  
-      974754118 = 'Sykehuset Levanger'  
-      974795477 = 'Helgelandssykehuset Sandnessjøen'  
-      974795485 = 'Helgelandssykehuset Mosjøen'  
-      974795515 = 'Helgelandssykehuset Rana'  
-      974795787 = 'Universitetssykehuset Nord-Norge'  
-      974795833 = 'Klinikk Hammerfest'  
-      974795930 = 'Klinikk Kirkenes'  
-      975787419 = 'Aleris Helse AS avd Oslo'  
-      975933210 = 'FysMed-Klinikken'  
-      975984168 = 'Unicare Friskvernklinikken AS'  
-      977208734 = 'Privatsykehuset Haugesund AS'  
-      980693732 = 'Ringvollklinikken avd. Hobøl'  
-      981096363 = 'Aleris Helse AS avd Kristiansand'  
-      981275721 = 'Betanien hospital Telemark'  
-      981541499 = 'Aleris Helse AS Colosseum'  
-      982755999 = 'Volvat Medisinske senter Nord og Midt-Norge avd Stokkan'  
-      983084478 = 'Volvat Medisinske senter Nord og Midt-Norge avd Tromsø'  
-      983896383 = 'Aleris Helse AS avd Paradis'  
-      983974910 = 'Nordlandssykehuset HF'  
-      984630492 = 'Oslo kommunale legevakt'  
-      985773238 = 'Revmatismesykehuset, NKS. Lillehammer'  
-      985962170 = 'Martina Hansens Hospital'  
-      987954167 = 'IbsenSykehuset'  
-      991811869 = 'Kolibri Medical'  
-      993240184 = 'Aleris Helse AS avd Tromsø'  
-      995818728 = 'Aleris Helse AS avd Bodø'  
-      996860884 = '00' ;
 	  
-	  
-	  
-   value $KOMNRHJEM2F
+   value $KOMNRHJEM2F /* Ikke oppdatert */
      '0000' = 'Ugyldig'  
      '9000' = 'Utenlandske statsborgere uten konvensjonsavtale'  
      '9900' = 'Utenlandske statsborgere med konvensjonsavtale'  
@@ -1346,41 +939,31 @@ value INSTITUSJONID_2015F
      '1859' = 'Flakstad'  
      '9999' = 'Ukjent kommunenummer' ;
   
-
-value kommTjeneste
-1 = 'Kommunale hjemmetjenester'
-2 = 'Kommunal omsorgsbolig' 
-3 = 'Sykehjem korttidsplass'
-4 = 'Sykehjem langtidsplass'
-5 = 'Kommunal ø-hjelp enhet'
-6 = 'Andre kommunale tjenester'
-9 = 'Ukjent';
-
 value pakkeforlop
 1 = 'Ja'
 2 = 'Nei';
 
-value ICD_KAP
-      1 = 'Kapittel I Visse infeksjonssykdommer og parasittsykdommer'  
-      2 = 'Kapittel II Svulster'  
-      3 = 'Kapittel III Sykdommer i blod og bloddannende organer'  
-      4 = 'Kapittel IV Endokrine sykdommer, ernæringssykdommer'  
-      5 = 'Kapittel V Psykiske lidelser og atferdsforstyrrelser'  
-      6 = 'Kapittel VI Sykdommer i nervesystemet'  
-      7 = 'Kapittel VII Sykdommer i øyet og øyets omgivelser'  
-      8 = 'Kapittel VIII Sykdommer i øre og ørebensknute'  
-      9 = 'Kapittel IX Sykdommer i sirkulasjonssystemet'  
-      10 = 'Kapittel X Sykdommer i åndedrettssystemet'  
-      11 = 'Kapittel XI Sykdommer i fordøyelsessystemet'  
-      12 = 'Kapittel XII Sykdommer i hud og underhud'  
-      13 = 'Kapittel XIII Sykdommer i muskel/skjelettsystem'  
-      14 = 'Kapittel XIV Sykdommer i urin- og kjønnsorganer'  
-      15 = 'Kapittel XV Svangerskap, fødsel og barseltid'  
-      16 = 'Kapittel XVI Visse tilstander som oppstår i perinatalperioden'  
-      17 = 'Kapittel XVII Medfødte misdannelser, deformiteter'  
-      18 = 'Kapittel XVIII Symptomer, tegn, unormale kliniske funn'  
-      19 = 'Kapittel XIX Skader, forgiftninger'  
-      20 = 'Kapittel XX Ytre årsaker til sykdommer, skader og dødsfall'  
-      21 = 'Kapittel XXI Faktorer som har betydning for helsetilstand' ;
+value ICD_KAP /* Sjekket mot og oppdatert basert på ICD-10 versjon 2017 på ehelse.no */
+      1 = 'Kapittel I Visse infeksjonssykdommer og parasittsykdommer (A00-B99)'  
+      2 = 'Kapittel II Svulster (C00-D48)'  
+      3 = 'Kapittel III Sykdommer i blod og bloddannende organer og visse tilstander som angår immunsystemet (D50-D89)'  
+      4 = 'Kapittel IV Endokrine sykdommer, ernæringssykdommer og metabolske forstyrrelse (E00-E90)'  
+      5 = 'Kapittel V Psykiske lidelser og atferdsforstyrrelser (F00-F99)'  
+      6 = 'Kapittel VI Sykdommer i nervesystemet (G00-G99)'  
+      7 = 'Kapittel VII Sykdommer i øyet og øyets omgivelser (H00-H59)'  
+      8 = 'Kapittel VIII Sykdommer i øre og ørebensknute (processus mastoideus) (H60-H95)'  
+      9 = 'Kapittel IX Sykdommer i sirkulasjonssystemet (I00-I99)'  
+      10 = 'Kapittel X Sykdommer i åndedrettssystemet (J00-J99)'  
+      11 = 'Kapittel XI Sykdommer i fordøyelsessystemet (K00-K93)'  
+      12 = 'Kapittel XII Sykdommer i hud og underhud (L00-L99)'  
+      13 = 'Kapittel XIII Sykdommer i muskel-skjelettsystemet og bindevev (M00-M99)'  
+      14 = 'Kapittel XIV Sykdommer i urin- og kjønnsorganer (N00-N99)'  
+      15 = 'Kapittel XV Svangerskap, fødsel og barseltid (O00-O99)'  
+      16 = 'Kapittel XVI Visse tilstander som oppstår i perinatalperioden (P00-P96)'  
+      17 = 'Kapittel XVII Medfødte misdannelser, deformiteter og kromosomavvik (Q00-Q99)'  
+      18 = 'Kapittel XVIII Symptomer, tegn, unormale kliniske funn og laboratoriefunn,IKAS (R00-R99)'  
+      19 = 'Kapittel XIX Skader, forgiftninger og visse andre konsekvenser av ytre årsaker (S00-T98)'  
+      20 = 'Kapittel XX Ytre årsaker til sykdommer, skader og dødsfall (V0n-Y98)'  
+      21 = 'Kapittel XXI Faktorer som har betydning for helsetilstand og kontakt med helsetjenesten (Z00-Z99)' ;
 
 run;

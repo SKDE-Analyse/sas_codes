@@ -1,13 +1,13 @@
 /*Makroen lager en tabell for å sjekke NPIdReg-variabelen mot personopplysningsdata*/
 
-%Macro sjekk_NPRIdReg(mappe=, rot=);
+%Macro sjekk_NPRIdReg_avtSpes(mappe=, rot=);
 
 data Test_&aar;
   set &mappe.&rot.&aar;
 run;
 
 %include "&filbane.\makroer\VarFraParvus.sas";
-%VarFraParvus(dsnMagnus=Test_&aar, var_som=kjonn_ident19062018 fodselsaar_ident19062018,var_avtspes=);
+%VarFraParvus(dsnMagnus=Test_&aar, var_som=,var_avtspes=kjonn_ident19062018 fodselsaar_ident19062018);
 
 
 proc format;
@@ -40,7 +40,7 @@ run;
 data Avd_&aar;
   Set Test_&aar;
  
-  where aktivitetskategori3 ne .;
+ /* where aktivitetskategori3 ne .;*/
   
   if nprID_reg ne 4 then do;
            If ermann=.   and kjonn_ident not in (0,9) then ulikt_kjonn=1;
@@ -77,4 +77,4 @@ PROC TABULATE DATA=AVD_&aar;
 	N 		;
 RUN;
 
-%Mend sjekk_NPRIdReg;
+%Mend sjekk_NPRIdReg_avtSpes;
