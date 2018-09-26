@@ -1,4 +1,6 @@
-﻿%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
+﻿/*%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;*/
+
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\tilrettelegging2018;
 options sasautos=("&filbane\makroer" SASAUTOS);
 
 %include "&filbane\formater\Bo.sas";
@@ -7,6 +9,7 @@ options sasautos=("&filbane\makroer" SASAUTOS);
 %include "&filbane\formater\NPR_AvtSpes.sas";
 %include "&filbane\formater\NPR_somatikk.sas";
 %include "&filbane\formater\SKDE_somatikk.sas";
+%include "&filbane\formater\InstitusjonId.sas";
 
 /* ICD-10*/
 %include "&filbane\formater\icd10.sas";

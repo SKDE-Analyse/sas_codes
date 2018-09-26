@@ -208,9 +208,6 @@ Definere spesialistenes avtale-RHF
   4211964,4212201,4212923,4213011,4213408,4213811,4213833,4213866,4214014,4214017,4214047,
   4214048,4214100,4214292) then AVtaleRHF=4; /*Helse Sør-Øst-RHF*/
 
-
-  Format Avtalerhf Borhf.;
-
 run;
 
 %mend;
