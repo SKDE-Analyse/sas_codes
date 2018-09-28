@@ -281,6 +281,7 @@ value fylke
 18='Nordland'
 19='Troms Romsa'
 20='Finnmark Finnmárku'
+50='Trøndelag'
 24='Utlandet/Svalbard - bosted'
 8888='Norge' 
 99='Ukjent/ugyldig kommunenr';
