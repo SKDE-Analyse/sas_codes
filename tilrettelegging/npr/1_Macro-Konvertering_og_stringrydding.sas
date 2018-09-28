@@ -67,6 +67,17 @@ drop bydel;
 	Format Inndato1 Utdato1 Eurdfdd10.;
 	Drop Inndato UtDato  ;
 	rename Inndato1=Inndato Utdato1=UtDato;
+	
+	/*!
+- Konvertere `Inntid` og `uttid` til klokkeslett
+*/
+	/*Tider*/
+	Inntid1=Input(Inntid, HHMMSS.);
+	Uttid1=Input(uttid, HHMMSS.);
+	Format Inntid1 Uttid1 Time8.;
+	Drop Inntid uttid;
+	rename InnTid1=InnTid UtTid1=UtTid;
+
 
 
 %if &somatikk ne 0 %then %do;
@@ -89,16 +100,7 @@ drop bydel;
 	tidspunkt_4 tidspunkt_5  ;
 	rename UtskrKlarDato1=UtskrKlarDato tidspunkt_11=tidspunkt_1 tidspunkt_21=tidspunkt_2
 		   tidspunkt_31=tidspunkt_3 tidspunkt_41=tidspunkt_4 tidspunkt_51=tidspunkt_5 ;
-
-/*!
-- Konvertere `Inntid` og `uttid` til klokkeslett
-*/
-	/*Tider*/
-	Inntid1=Input(Inntid, HHMMSS.);
-	Uttid1=Input(uttid, HHMMSS.);
-	Format Inntid1 Uttid1 Time8.;
-	Drop Inntid uttid;
-	rename InnTid1=InnTid UtTid1=UtTid;
+		   
 %end;
 
 /*!
