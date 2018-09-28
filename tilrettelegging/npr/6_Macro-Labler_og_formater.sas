@@ -286,7 +286,7 @@ label fag_SKDE='Fagfelt for avtalespesialisen - harmonisert 2013-2017 (SKDE)'; f
 label SpesialistKomHN='Kommunenummer for avtalespesialistens praksis i Helse Nord (SKDE)';
 label AvtSpesKomHN='Kontakt med avtalespesialist i HN (SKDE)';
 label AvtSpes='Kontakt hos avtalespesialist (SKDE)'; format avtSpes avtSpes.;
-label AvtaleRHF='RHF-et spesialisten har avtale med (NPR)'; format avtaleRHF boRHF.;
+label AvtaleRHF='RHF-et spesialisten har avtale med (NPR)'; format avtaleRHF boRHF_kort.;
 label Normaltariff1='Normaltariff kode 1 (Normaltariff for avtalespesialister)'; label Normaltariff2='Normaltariff kode 2 (Normaltariff for avtalespesialister)'; 
 label Normaltariff3='Normaltariff kode 3 (Normaltariff for avtalespesialister)'; label Normaltariff4='Normaltariff kode 4 (Normaltariff for avtalespesialister)';
 label Normaltariff5='Normaltariff kode 5 (Normaltariff for avtalespesialister)'; label Normaltariff6='Normaltariff kode 6 (Normaltariff for avtalespesialister)'; 

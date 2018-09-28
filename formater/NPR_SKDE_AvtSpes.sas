@@ -9,12 +9,6 @@ Proc format;
 
  value avtSpes
 	  1 = 'Hos avtalespesialist';
-	  
- value avtaleRHF.
-	1='Helse Nord RHF' 
-	2='Helse Midt-Norge RHF' 
-	3='Helse Vest RHF' 
-	4='Helse Sør-Øst RHF';
 
  value FAG_SKDE
       1 = 'Anestesi'  
