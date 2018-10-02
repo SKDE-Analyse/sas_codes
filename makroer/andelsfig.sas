@@ -7,7 +7,7 @@ I TILLEGG TIL INPUT-VARIABLE SOM FOR RATEFIG ANGIS:
 */
 
 /*Enkel andelsfig*/
-%macro andelsfig(datasett=, ia = 0);
+%macro andelsfig(datasett=, ia = 0, bildeformat=png);
 
 /*Beregner forholdstall*/
 proc sort data=&datasett;
@@ -72,7 +72,7 @@ proc sort data=&datasett;
 by descending &andel;
 run;
 
-ODS Graphics ON /reset=All imagename="&tema._&type._andel_&fignavn" imagefmt=png border=off ;
+ODS Graphics ON /reset=All imagename="&tema._&type._andel_&fignavn" imagefmt=&bildeformat border=off ;
 ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 title "&tittel";
 proc sgplot data=&datasett noborder noautolegend sganno=anno pad=(Bottom=5%);
