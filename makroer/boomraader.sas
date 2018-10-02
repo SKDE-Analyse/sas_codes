@@ -219,7 +219,7 @@ else if komnr=301 then Fylke=3;
 else if 402<=komnr<=441 then Fylke=4;
 else if 501<=komnr<=545 then Fylke=5;
 else if 602<=komnr<=633 then Fylke=6;
-else if 701<=komnr<=728 then Fylke=7;
+else if 701<=komnr<=729 then Fylke=7;
 else if 805<=komnr<=834 then Fylke=8;
 else if 901<=komnr<=941 then Fylke=9;
 else if 1001<=komnr<=1046 then Fylke=10;
@@ -232,6 +232,7 @@ else if 1702<=komnr<=1756 then Fylke=17;
 else if 1804<=komnr<=1874 then Fylke=18;
 else if 1901<=komnr<=1943 then Fylke=19;
 else if 2002<=komnr<=2030 then Fylke=20;
+else if 5001<=komnr<=5054 then Fylke=50;
 else if KomNr in (2100,2111,2121,2131,2211,2311,2321,9000,9900) then Fylke=24; /*24='Boomr utlandet/Svalbard' */
 else if KomNr in(., 0000,8888,9999) then Fylke=99; /*99='Ukjent/ugyldig kommunenr'*/
 

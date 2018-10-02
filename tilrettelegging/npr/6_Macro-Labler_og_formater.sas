@@ -19,8 +19,8 @@ label Fylke='Fylke (pasientens bosted) (SKDE)'; format Fylke fylke.;
 label ICD10Kap='ICD-10 kapittel for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10Kap ICD10Kap.;
 label ICD10KatBlokk='ICD-10 kategoriblokk for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10KatBlokk ICD10KatBlokk.; 
 label innmateHast='Hastegrad ved ankomst (NPR-melding)'; format innmateHast innmateHast.; 
-label innDato='Innskrivelsesdato (NPR-melding)';
-label utDato='Utskrivelsesdato (NPR-melding)';
+label innDato='Innskrivelsesdato (NPR-melding)'; format innDato Eurdfdd10.;
+label utDato='Utskrivelsesdato (NPR-melding), utDato=innDato for avtSpes'; format utDato Eurdfdd10.;
 label InstitusjonID='Org.nr. til rapporteringsenhet (NPR-melding)'; format InstitusjonId INSTITUSJONID_2013_2017F.;
 label KomNR='Kommunenummer vasket mot Folkeregisteret, numerisk (NPR-melding/SKDE)'; 
 label KomNr_org='Innrapportert kommunenummer, numerisk (NPR-melding/SKDE)'; 
@@ -65,6 +65,26 @@ label tell_ICD10='Antall ICD-10-koder innrapportert (NPR)';
 label tell_NCMP='Antall NCMP-koder innrapportert (NPR)';
 label tell_NCSP='Antall NCSP-koder innrapportert (NPR)';
 label KoblingsID='Unik id for påkobling av variabler (SKDE)'; 
+label tilSted='Til sted (NPK)'; format tilsted tilsted.;
+label VertskommHN='Vertskommune (HN) (SKDE)'; format VertskommHN VertskommHN.; 
+label bydel2_num='Bydel vasket mot Folkeregisteret (NPR), numerisk';
+label bydel_innr='Bydel, innrapportert (SKDE), numerisk';
+label bydel_org='Bydel, backup av bydel2 (SKDE), numerisk';
+label episodeFag='Fagområde for Episoden (NPR-melding)'; format episodeFag $fagomrade.;
+label fraSted='Fra sted (NPK)'; format frasted frasted.; 
+label Hastegrad='Hastegrad - akutt/elektivt (SKDE)'; format hastegrad Hastegrad.;
+label henvFraTjeneste='Henvist fra tjeneste (NPR-melding)'; format HENVFRATJENESTE HENVFRATJENESTE.;
+label innTid='Innskrivelsestidspunkt (NPR-melding)'; 
+label kontaktType='Kontakttype (NPR-melding)'; format kontaktType kontaktType.; 
+label omsorgsniva='Omsorgsnivå (NPR-melding)'; format omsorgsniva omsorgsniva.; 
+label polIndirekteAktivitet='polIndirekteAktivitet (NPK)'; format polIndirekteAktivitet POLINDIR.;
+label polIndir='Indirekte aktiviteter (NPR-melding)'; format polIndir POLINDIR.;
+label stedAktivitet='Sted for aktivitet (NPR-melding)'; format STEDAKTIVITET STEDAKTIVITET.;
+label utTid='Utskrivelsestidspunkt (NPR-melding)'; 
+label sh_reg='Sykehusregion - pasientens bosted (NPR)';
+label polkonAktivitet='Aktivitetstype (NPR-melding)'; format polkonAktivitet POLKONAKTIVITET.;
+label komNrHjem2='Kommunenummer vasket mot Folkeregisteret (NPR-melding)'; format KomNrHjem2 $KOMNRHJEM2F.; 
+label komNrHjem='Kommunenummer, innrapportert (NPR-melding)'; 
 
 %if &somatikk ne 0 %then %do;
 label Aktivitetskategori='Aktivitetskatgori 10-delt (SAMDATA)'; format Aktivitetskategori AKTIVITETSKATEGORI.; 
@@ -83,12 +103,10 @@ label dag_kir='Dagkirurgisk DRG (NPK)'; format dag_kir $DAG_KIR.;
 label spes_drg='Spesifikk DRG (NPK)'; format SPES_DRG $SPES_DRG.;
 label rehabType='Type rehabilitering (NPK)'; format rehabType REHABTYPE.;
 label utforendeHelseperson='Utførende helsepersonell (NPR-melding)'; format utforendeHelseperson UTFORENDEHELSEPERSON.;
-label polIndirekteAktivitet='polIndirekteAktivitet (NPK)'; format polIndirekteAktivitet POLINDIR.;
-label polIndir='Indirekte aktiviteter (NPR-melding)'; format polIndir POLINDIR.;
 label aggrshoppID='Id for aggregert sykehusopphold (NPK)'; 
 label hdg='Hoveddiagnosegruppe (NPK)'; format HDG HDG.; 
 label nyTilstand='Ny Tilstand (NPR-melding)';
-label polkonAktivitet='Aktivitetstype (NPR-melding)'; format polkonAktivitet POLKONAKTIVITET.;
+
 
 /* NPK */ /* Variable label basert på informasjon i ISF-regelverk 2017, poengberegningsreglene og informasjon fra Eva K. Håndlykken i NPR. Ikke bekreftet av Helsedirektoratete. Noe usikkerhet rundt innhold i variablene. */
 label npkopphold_poengsum='DRGBasispoeng pluss tilleggspoeng og fradragspoeng (NPK)'; 
@@ -109,16 +127,13 @@ label pakkeforlop='Pakkeforløp kreft (NPR-melding)'; format pakkeforlop pakkefor
 label relatertKontaktID='Id for relaterte kontakter (NPK)';
 label henvType='Utfall av vurdering av henvisningen (NPR-melding)'; format henvType henvType.;
 
-label henvFraTjeneste='Henvist fra tjeneste (NPR-melding)'; format HENVFRATJENESTE HENVFRATJENESTE.;
 label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENESTE HENVTILTJENESTE.;
 label henvFraInstitusjonID='Henvist fra institusjon (NPK)'; /*format HENVFRAINSTITUSJONID HENVFRAINSTITUSJONID.;*/
 label frittSykehusvalg='Fritt sykehusvalg (NPK)'; format FRITTSYKEHUSVALG FRITTSYKEHUSVALG.;
 label frittBehandlingsvalg='Fritt behandlingsvalg (NPK)'; format FRITTBehandlingsvalg frittBehandlingsvalg.;
 label secondOpinion='Second Opinion (NPK)'; format SECONDOPINION SECONDOPINION.;
-label fraSted='Fra sted (NPK)'; format frasted frasted.;
-label tilSted='Til sted (NPK)'; format tilsted tilsted.;
 
-label Hastegrad='Hastegrad - akutt/elektivt (SKDE)'; format hastegrad Hastegrad.;
+
 label DRGtypeHastegrad='Kombinert DRG-type og hastegrad (SKDE)'; format DRGtypeHastegrad DRGtypeHastegrad.; 
 /*label behandlingsstedKode2='Behandlingssted (NPR)'; */
 /*label behandlingsstedKode_original='Behandlingssted som innrapportert, identifiserer stråleterapienheter (NPR-melding)'; format behandlingsstedKode_original; */
@@ -128,8 +143,7 @@ label behRHF='Behandlende RHF (SKDE)'; format BehRHF behRHF.;
 label BehSh='Behandlende sykehus (SKDE)'; format BehSh BehSh.; 
 label innmnd='Innskrivelsesmåned (NPR)'; 
 label utmnd='Utskrivelsesmåned (NPR)';
-label innTid='Innskrivelsestidspunkt (NPR-melding)'; *format innTid Eurdfdd10.; 
-label utTid='Utskrivelsestidspunkt (NPR-melding)'; *format utTid Eurdfdd10.; 
+
 label utskrKlarDato='Utskrivningsklar dato - dato valgt av (NPR)';
 label utskrKlarDato2='Utskrivningsklar dato - alternativ dato valgt av NPR (NPR)';
 label tidspunkt_1='Første dato for utskrivingsklar pasient';
@@ -144,21 +158,14 @@ label typeTidspunkt_4='Type tidspukt for fjerde dato for utskrivingsklar pasient
 label typeTidspunkt_5='Type tidspukt for femte dato for utskrivingsklar pasient (NPR-melding)'; 
 label ant_tidspunkt='Antall tidspunkt for utskrivningsklar pasient';
 label InstitusjonID_original='Org.nr. til rapporteringsenhet, identifiserer stråleterapienheter (NPR-melding)'; format InstitusjonId INSTITUSJONID_2013_2017F.;
-label kontaktType='Kontakttype (NPR-melding)'; format kontaktType kontaktType.; 
-label komNrHjem2='Kommunenummer vasket mot Folkeregisteret (NPR-melding)'; format KomNrHjem2 $KOMNRHJEM2F.; 
-label komNrHjem='Kommunenummer, innrapportert (NPR-melding)'; 
+
 label komNr_org='Backup av komNrHjem2 (SKDE)';
-label bydel2_num='Bydel vasket mot Folkeregisteret (NPR), numerisk';
-label bydel_innr='Bydel, innrapportert (SKDE), numerisk';
-label bydel_org='Bydel, backup av bydel2 (SKDE), numerisk';
+
 label bydel_DSF='Bydel fra Folkeregisteret (NPR)';
 label g_omsorgsniva='Gammelt omsorgsnivå (NPR)'; format g_omsorgsniva g_omsorgsniva.; 
 label liggetid='Liggetid (NPK og NPR)';
 label liggetid_periode='Liggetid i utskrivelsesåret (NPR)';
-label omsorgsniva='Omsorgsnivå (NPR-melding)'; format omsorgsniva omsorgsniva.; 
-label oppholdstype='Oppholdstype (NPR-melding)'; format oppholdstype oppholdstype.; 
 
-label VertskommHN='Vertskommune (HN) (SKDE)'; format VertskommHN VertskommHN.; 
 label tjenesteenhetKode='Avdelingskode (NPR-melding)';
 label utskrKlarDager='Liggedøgn som utskrivingsklar (NPR)';
 label versjon='Versjon av NPR-melding (NPR-melding)';
@@ -253,10 +260,8 @@ label versjon='Versjon av NPR-melding (NPR-melding)';
 label fodselsvekt='Fødselsvekt (NPR-melding)';
 label alderIDager='Alder i dager per startdato for episoden (barn < 1 år) (NPR-melding)';
 label fagomrade='Fagområde for henvisningen (NPR-melding)'; format fagomrade $fagomrade.; 
-label episodeFag='Fagområde for Episoden (NPR-melding)'; format episodeFag $fagomrade.; 
 label permisjonsdogn='Permisjonsdøgn (NPR-melding)';
 label inntilstand='Tilstand ved ankomst (NPR-melding)'; format inntilstand inntilstand.;
-label stedAktivitet='Sted for aktivitet (NPR-melding)'; format STEDAKTIVITET STEDAKTIVITET.;
 label intern_kons='Intern konsultasjon på inneliggende pasient (NPR)'; format INTERN_KONS INTERN_KONS.;
 label tjenesteenhetKode='Tjenesteenhet kode (NPR-melding)';
 label tjenesteenhetLokal='Tjenesteenhet navn (NPR-melding)';
@@ -269,32 +274,36 @@ label behandlingsstedLokal='Behandlingssted navn (NPR-melding)';
 label behandlingsstedReshID='Behandlingssted ReshID (NPR-melding)';
 label tell_NCRP='Antall NCRP-koder innrapportert (NPR)';
 label tell_cyto='Antall cytostatika-koder innrapportert (NPR)';
-label sh_reg='Sykehusregion - pasientens bosted (NPR)';
 label hf='Behandlende helseforetak (NPR)';
 %end;
 
 %if &avtspes ne 0 %then %do;
 label tell_Normaltariff='Antall normaltariff-koder innrapportert (NPR)';
-label fag='Fagområde 2011-2014';
-label Fag_navn='Fagområde 2015';
-label fag_SKDE='Fagområde, harmonisert 2011-2015 (SKDE)'; format FAG_SKDE FAG_SKDE.;
-label SpesialistKomHN='Kommunenummer for avtalespesialistens praksis';
-label AvtSpesKomHN='Kontakt med avtalespesialist i HN';
-label AvtSpes='Kontakt med avtalespesialist';
-label AvtRHF='RHFet spesialisten har avtale med';
-label Normaltariff1='Normaltariff kode 1'; label Normaltariff2='Normaltariff kode 2';
-label Normaltariff3='Normaltariff kode 3'; label Normaltariff4='Normaltariff kode 4';
-label Normaltariff5='Normaltariff kode 5'; label Normaltariff6='Normaltariff kode 6';
-label Normaltariff7='Normaltariff kode 7'; label Normaltariff8='Normaltariff kode 8';
-label Normaltariff9='Normaltariff kode 9'; label Normaltariff10='Normaltariff kode 10';
-label Normaltariff11='Normaltariff kode 11'; label Normaltariff12='Normaltariff kode 12';
-label Normaltariff13='Normaltariff kode 13'; label Normaltariff14='Normaltariff kode 14';
-label Normaltariff15='Normaltariff kode 15';
-label Tdiag1='Diagnose som ikke kan sorteres i H/Bi kode 1'; label Tdiag2='Diagnose som ikke kan sorteres i H/Bi kode 2';
-label Tdiag3='Diagnose som ikke kan sorteres i H/Bi kode 3'; label Tdiag4='Diagnose som ikke kan sorteres i H/Bi kode 4';
-label Tdiag5='Diagnose som ikke kan sorteres i H/Bi kode 5';
-label tilSted='Til sted (NPK)'; format tilsted tilsted.;
-label ulikt_kjonn='Ulikt kjønn i innrapportert data og i f.nr./D-nr.)';
+label fag='Fagfelt for avtalespesialisen 2013-2014 (NPR)';
+label Fag_navn='Fagfelt for avtalespesialisen (NPR)';
+label fagLogg='Fagfelt for avtalespesialisen - mangler data (NPR)';
+label fag_SKDE='Fagfelt for avtalespesialisen - harmonisert 2013-2017 (SKDE)'; format FAG_SKDE FAG_SKDE.;
+label SpesialistKomHN='Kommunenummer for avtalespesialistens praksis i Helse Nord (SKDE)';
+label AvtSpesKomHN='Kontakt med avtalespesialist i HN (SKDE)';
+label AvtSpes='Kontakt hos avtalespesialist (SKDE)'; format avtSpes avtSpes.;
+label AvtaleRHF='RHF-et spesialisten har avtale med (NPR)'; format avtaleRHF boRHF_kort.;
+label Normaltariff1='Normaltariff kode 1 (Normaltariff for avtalespesialister)'; label Normaltariff2='Normaltariff kode 2 (Normaltariff for avtalespesialister)'; 
+label Normaltariff3='Normaltariff kode 3 (Normaltariff for avtalespesialister)'; label Normaltariff4='Normaltariff kode 4 (Normaltariff for avtalespesialister)';
+label Normaltariff5='Normaltariff kode 5 (Normaltariff for avtalespesialister)'; label Normaltariff6='Normaltariff kode 6 (Normaltariff for avtalespesialister)'; 
+label Normaltariff7='Normaltariff kode 7 (Normaltariff for avtalespesialister)'; label Normaltariff8='Normaltariff kode 8 (Normaltariff for avtalespesialister)';
+label Normaltariff9='Normaltariff kode 9 (Normaltariff for avtalespesialister)'; label Normaltariff10='Normaltariff kode 10 (Normaltariff for avtalespesialister)'; 
+label Normaltariff11='Normaltariff kode 11 (Normaltariff for avtalespesialister)'; label Normaltariff12='Normaltariff kode 12 (Normaltariff for avtalespesialister)';
+label Normaltariff13='Normaltariff kode 13 (Normaltariff for avtalespesialister)'; label Normaltariff14='Normaltariff kode 14 (Normaltariff for avtalespesialister)'; 
+label Normaltariff15='Normaltariff kode 15 (Normaltariff for avtalespesialister)';
+label Tdiag1='Diagnose som ikke kan sorteres i H/Bi kode 1 (ICD-10/NPR)'; label Tdiag2='Diagnose som ikke kan sorteres i H/Bi kode 2 (ICD-10/NPR)'; 
+label Tdiag3='Diagnose som ikke kan sorteres i H/Bi kode 3 (ICD-10/NPR)'; label Tdiag4='Diagnose som ikke kan sorteres i H/Bi kode 4 (ICD-10/NPR)'; 
+label Tdiag5='Diagnose som ikke kan sorteres i H/Bi kode 5 (ICD-10/NPR)';
+label ulikt_kjonn='Ulikt kjønn i innrapportert data og i f.nr./D-nr. (SKDE)';
+label utDato_org='Utskrivelsesdato innrapportert (NPR-melding)'; format utDato Eurdfdd10.;
+label Komplett = 'Komplettheten i innrapportert data (NPR)'; format komplett komplett.;
+label hjemmelstr ='Hjemmelstørrelse i prosent (NPR)';
+label kontakt ='Kontakttype, f.eks. enkel, spesialist eller lysbehandling (NPR)'
+label sektor ='Sektor for avtalespesialisten'; format sektor $sektor.;
 
 %end;
 

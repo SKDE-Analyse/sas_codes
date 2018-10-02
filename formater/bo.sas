@@ -200,7 +200,12 @@ value bydel_alle
 160102 = "02 Østbyen"
 160103 = "03 Lerkendal"
 160104 = "04 Heimdal"
-160199 = "Uoppgitt bydel Trondheim" ;
+160199 = "Uoppgitt bydel Trondheim" 
+500101 = "01 Midtbyen"
+500102 = "02 Østbyen"
+500103 = "03 Lerkendal"
+500104 = "04 Heimdal"
+500199 = "Uoppgitt bydel Trondheim" ;
 
  
 value BoRHF
@@ -281,6 +286,7 @@ value fylke
 18='Nordland'
 19='Troms Romsa'
 20='Finnmark Finnmárku'
+50='Trøndelag'
 24='Utlandet/Svalbard - bosted'
 8888='Norge' 
 99='Ukjent/ugyldig kommunenr';

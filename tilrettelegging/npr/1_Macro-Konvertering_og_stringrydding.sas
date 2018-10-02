@@ -13,8 +13,11 @@ MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 
 Data &Utdatasett;
 Set &Inndatasett;
-drop oppholdstype;
 
+/* Sletter variabler vi ikke trenger fra somatikkfilene. */
+%if &somatikk ne 0 %then %do;
+drop oppholdstype;
+%end;
 /*!
 ### Omkoding av stringer med tall til numeriske variable
 */
@@ -64,12 +67,18 @@ drop bydel;
 	Format Inndato1 Utdato1 Eurdfdd10.;
 	Drop Inndato UtDato  ;
 	rename Inndato1=Inndato Utdato1=UtDato;
+	
+	/*!
+- Konvertere `Inntid` og `uttid` til klokkeslett
+*/
+	/*Tider*/
+	Inntid1=Input(Inntid, HHMMSS.);
+	Uttid1=Input(uttid, HHMMSS.);
+	Format Inntid1 Uttid1 Time8.;
+	Drop Inntid uttid;
+	rename InnTid1=InnTid UtTid1=UtTid;
 
 
-%if &avtspes ne 0 %then %do;
-if utdato lt MDY (1,1,2013) then utdato = .;
-if utdato gt MDY (1,1,2018) then utdato = .;
-%end;
 
 %if &somatikk ne 0 %then %do;
 
@@ -91,16 +100,7 @@ if utdato gt MDY (1,1,2018) then utdato = .;
 	tidspunkt_4 tidspunkt_5  ;
 	rename UtskrKlarDato1=UtskrKlarDato tidspunkt_11=tidspunkt_1 tidspunkt_21=tidspunkt_2
 		   tidspunkt_31=tidspunkt_3 tidspunkt_41=tidspunkt_4 tidspunkt_51=tidspunkt_5 ;
-
-/*!
-- Konvertere `Inntid` og `uttid` til klokkeslett
-*/
-	/*Tider*/
-	Inntid1=Input(Inntid, HHMMSS.);
-	Uttid1=Input(uttid, HHMMSS.);
-	Format Inntid1 Uttid1 Time8.;
-	Drop Inntid uttid;
-	rename InnTid1=InnTid UtTid1=UtTid;
+		   
 %end;
 
 /*!
@@ -214,6 +214,8 @@ drop ncrp_: i;
 %end;
 
 %if &avtspes ne 0 %then %do;
+
+drop cyto: atc:;
 /*!
 - Fjerner blanke felt i takstvariable, og navner om til Normaltariff1-15
 */
@@ -256,4 +258,22 @@ if length(compress(episodefag)) = 2 then episodefag = compress("0"||episodefag);
 
 
 run;
+
+/* For avtalespesialister: Renavner utDato til utDato_org for å ta vare på innrapportert utDato og setter utDato = innDato. */
+%if &avtspes ne 0 %then %do;
+Data &Utdatasett;
+Set &Utdatasett;
+
+rename utDato=utDato_org; /* Renavner innrapportert utDato til utDato_org for avtalespesialister. */
+
+run; 
+
+Data &Utdatasett;
+Set &Utdatasett;
+
+utdato=.;
+utDato=innDato; /* På grunn av feil i innrapportert utDato settes utDato for avtalespesialister til innDato. */
+run; 
+%end;
+
 %mend;
