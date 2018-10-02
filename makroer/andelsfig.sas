@@ -7,7 +7,7 @@ I TILLEGG TIL INPUT-VARIABLE SOM FOR RATEFIG ANGIS:
 */
 
 /*Enkel andelsfig*/
-%macro andelsfig(datasett=, ia = 0, bildeformat=png);
+%macro andelsfig(datasett=, ia = 0, bildeformat=png, noxlabel=0);
 
 /*Beregner forholdstall*/
 proc sort data=&datasett;
@@ -86,8 +86,13 @@ hbarparm category=bohf response=andel_norge / fillattrs=(color=CXC3C3C3);
 		keylegend "hp1" "hp2"/ location=inside position=bottomright down=2 noborder titleattrs=(size=6);
 	 Yaxistable &tabellvariable / Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
-     xaxis /*display=(nolabel)*/ offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
-	 	%if &vis_ft=1 %then %do; 
+	 %if &noxlabel=1 %then %do;
+	 xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
+     %end;
+	 %else %do;
+	 xaxis offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
+	 %end;
+	 %if &vis_ft=1 %then %do; 
 			inset "FTa1 = &FTA1" "FTa2 = &FTa2" "FTa3 = &FTa3" / position=right textattrs=(size=10);
 		%end;
 		Label &labeltabell;
