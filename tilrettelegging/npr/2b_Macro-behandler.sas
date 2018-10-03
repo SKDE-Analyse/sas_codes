@@ -212,10 +212,10 @@ set &inndatasett;
   *** Resterende Helse Vest RHF ***
   ********************************/
   		if behandlingssted2 in (974737779 /*Betanien spesialistpoliklinikk*/,
-  									986106839 /*Haugesund sanitetsforenings revmatismesykehus*/) then BehSh=130;
+  									986106839, 973156829 /*Haugesund sanitetsforenings revmatismesykehus*/) then BehSh=130;
 
   		if behandlingssted2 in (974737779 /*Betanien spesialistpoliklinikk*/) then BehSh=131;
-  		if behandlingssted2 in (986106839 /*Haugesund sanitetsforenings revmatismesykehus*/) then BehSh=132;
+  		if behandlingssted2 in (986106839, 973156829 /*Haugesund sanitetsforenings revmatismesykehus*/) then BehSh=132;
   		/* Bergen legevakt ligger under Helse Bergen HF siden den delen av Bergen legevakt som rapporterer data til NPR
   		er spesialisthelsetjeneste. Dette er Akuttposten ved Mottaksklinikken ved Haukeland universitetssykehus.
   		Se http://www.helse-bergen.no/no/OmOss/Avdelinger/mottaksklinikken/Sider/akuttpost.aspx. */
@@ -412,7 +412,6 @@ set &inndatasett;
   									972149519 /*Teres Rosenborg*/,
   									973129856 /*Volvat medisinske senter AS Oslo*/,
   									973144383 /*LHL-klinikkene Feiring*/,
-  									973156829 /*Haugesund sanitetsforenings revmatismesykehus*/,
   									974116561 /*LHL-klinikkene Glittre*/,
   									974504863 /*Aleris Helse AS Trondheim*/,
   									974518821 /*Teres Bergen*/,
