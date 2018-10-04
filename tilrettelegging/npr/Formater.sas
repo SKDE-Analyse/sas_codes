@@ -4,7 +4,7 @@ options sasautos=("&filbane\makroer" SASAUTOS);
 %include "&filbane\formater\Bo.sas";
 %include "&filbane\formater\Beh.sas";
 %include "&filbane\formater\KomNr.sas";
-%include "&filbane\formater\NPR_SKDE_AvtSpes.sas";
+%include "&filbane\formater\NPR_AvtSpes.sas";
 %include "&filbane\formater\NPR_somatikk.sas";
 %include "&filbane\formater\SKDE_somatikk.sas";
 %include "&filbane\formater\InstitusjonId.sas";
