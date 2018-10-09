@@ -74,7 +74,7 @@ proc sort data=&datasett;
 by descending tot_rate;
 run;
 
-ODS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=png border=off ;
+ODS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=&bildeformat border=off ;
 *DS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=png border=off ;
 ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 title "&tittel";
