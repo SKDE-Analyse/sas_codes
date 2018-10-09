@@ -42,7 +42,7 @@ INPUT FOR HVER FIGUR:
 
 
 /*enkel ratefigur*/
-%macro ratefig(datasett=, aar1=2015, aar2=2016, aar3=2017);
+%macro ratefig(datasett=, aar1=2015, aar2=2016, aar3=2017, bildeformat=png, noxlabel=0);
 
 /*Setter aktuelle rater i datasettet til missing hvis antall observasjoner er under grensen (nkrav)*/
 Data &datasett;
@@ -112,8 +112,12 @@ hbarparm category=bohf response=Snittrate / fillattrs=(color=CXC3C3C3) outlineat
 %end;
 Yaxistable &tabellvariable /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
 yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
-xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7);
-xaxis label="&xlabel" labelattrs=(size=7 weight=bold);
+%if &noxlabel=1 %then %do;
+	xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
+ %end;
+%else %do;
+	 xaxis offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
+%end;
 %if &vis_aarsvar=1 %then %do;
 	%if &ratestart=&aar1 %then %do;
 	inset (
