@@ -1,4 +1,4 @@
-%macro henteKorrvekt(avdfil =, shofil = );
+%macro henteKorrvekt(avdfil =, shofil =, taar = 18);
 
 /*!
 ### Beskrivelse
@@ -40,8 +40,8 @@ run;
 
 /* Hente aggrshoppid fra parvus */
 
-%VarFraParvus(dsnMagnus=&avdfil, var_som=aggrshoppid, taar = 18);
-%VarFraParvus(dsnMagnus=tmp_sho, var_som=aggrshoppid, taar = 18);
+%VarFraParvus(dsnMagnus=&avdfil, var_som=aggrshoppid, taar = &taar);
+%VarFraParvus(dsnMagnus=tmp_sho, var_som=aggrshoppid, taar = &taar);
 
 /* Kun beholde linjer fra sho som inneholder aggrshoppid */
 data tmp_sho;
