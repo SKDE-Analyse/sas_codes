@@ -75,7 +75,7 @@ run;
 ODS Graphics ON /reset=All imagename="&tema._&type._andel_&fignavn" imagefmt=&bildeformat border=off ;
 ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 title "&tittel";
-proc sgplot data=&datasett noborder noautolegend sganno=anno pad=(Bottom=5%);
+proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
 hbarparm category=bohf response=&andel / fillattrs=(color=CX95BDE6) missing; 
 hbarparm category=bohf response=andel_norge / fillattrs=(color=CXC3C3C3);
 	%if &vis_misstxt=1 %then %do;

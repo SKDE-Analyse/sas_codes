@@ -82,7 +82,7 @@ run;
 ODS Graphics ON /reset=All imagename="&tema._&type._rate_&fignavn" imagefmt=&bildeformat border=off ;
 ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 title "&tittel";
-proc sgplot data=&datasett noborder noautolegend sganno=anno pad=(Bottom=5%);
+proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
 %if &vis_misstxt ne 1 %then %do;
 hbarparm category=bohf response=Ratesnitt2 / fillattrs=(color=CX95BDE6) missing outlineattrs=(color=black);
 %end; 

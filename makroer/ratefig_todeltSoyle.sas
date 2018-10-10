@@ -78,7 +78,7 @@ ODS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=&b
 *DS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=png border=off ;
 ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 title "&tittel";
-proc sgplot data=&datasett noborder noautolegend sganno=anno pad=(Bottom=5%);
+proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
 hbarparm category=bohf response=tot_rate / fillattrs=(color=CX95BDE6) missing name="hp1" legendlabel="&label_2"; 
 hbarparm category=bohf response=Ntot_rate / fillattrs=(color=CXC3C3C3);
 hbarparm category=bohf response=rate_1 / fillattrs=(color=CX00509E) missing name="hp2" legendlabel="&label_1"; 
