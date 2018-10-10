@@ -113,7 +113,6 @@ run;
     %let beh = behsh;
 %end;
 
-
 proc sort data=&dsn;
 by tmp_poli pid inndatotid utdatotid;
 run;
@@ -241,27 +240,21 @@ by EoC_id aktivitetskategori3 EoC_Intern_nr inndatotid utdatotid;
 %end;
 run;
 
-/*
-EoC_hastegrad regnes kun på innleggelser (AHS, 9. mai 2017)
-*/
 data &dsn;
 set &dsn;
 by EoC_id;
+/* To avoid setting eoc_hastegrad to missing, since "." is less than 0 */
+tmp_hastegrad = hastegrad;
+if hastegrad = . then tmp_hastegrad = 99;
 if first.EoC_id=1 then forste_hastegrad = hastegrad;
 aktkat = aktivitetskategori3;
 if uttilstand > 1 then aktkat = 1;
-if aktkat = 1 then hastegrad_inn = hastegrad;
 run;
 
 PROC SQL;
 	CREATE TABLE &dsn AS 
 	SELECT *, min(aktkat) as EoC_aktivitetskategori3, 
-   %if &kols eq 0 %then %do;
-   min(hastegrad_inn) as EoC_hastegrad, 
-   %end;
-   %else %do;
-   min(hastegrad) as EoC_hastegrad, 
-   %end;
+   min(tmp_hastegrad) as EoC_hastegrad, 
    max(forste_hastegrad) as EoC_forste_hastegrad, max(uttilstand) as EoC_uttilstand, max(alder) as EoC_alder
 	FROM &dsn
 	GROUP BY EoC_id;
@@ -273,11 +266,12 @@ run;
 
 data &dsn;
 set &dsn;
+if EoC_hastegrad = 99 then EoC_hastegrad = .;
 %if &debug ne 0 %then %do;
 drop lag_pid;
 %end;
 %else %if &debug eq 0 %then %do;
-drop lag_pid EoC_diff inndatotid utdatotid forste_hastegrad aktkat hastegrad_inn tmp_poli;
+drop lag_pid EoC_diff inndatotid utdatotid forste_hastegrad aktkat tmp_poli;
 %end;
 format EoC_utdato EoC_inndato date10.;
 format EoC_inndatotid EoC_utdatotid datetime18.;
@@ -285,6 +279,7 @@ format EoC_aktivitetskategori3 aktivitetskategori3f.;
 format EoC_hastegrad EoC_forste_hastegrad hastegrad.;
 %if &behold_datotid = 0 %then %do;
 drop EoC_inndatotid EoC_utdatotid;
+drop tmp_hastegrad;
 %end;
 
 run;
