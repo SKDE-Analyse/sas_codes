@@ -79,6 +79,8 @@ Andel&del1.=RateSnitt&del1./RateSnitt_tot;
 Andel&del2.=RateSnitt&del2./RateSnitt_tot;
 Andel&del3.=RateSnitt&del3./RateSnitt_tot;
 
+tot_antall=&del1 + &del2 + &del3;
+
 pros_plass= + 0.01;/* avstand fra x=0, eventuelt RateSnitt_tot -0.02 hvis ETTER søylen */;
 if bohf=8888 then do;
 RateSnittN_tot = RateSnittN&del1. + RateSnittN&del2. + RateSnittN&del3.;
@@ -140,7 +142,7 @@ hbarparm category=bohf response=RateSnittN&del1. / fillattrs=(color=CX4C4C4C) ou
 	 xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
 	 %end;
 		Label &labeltabell;
-		Format Andel&del1. Andel&del2. Andel&del3. nlpct8.0;
+		Format Andel&del1. Andel&del2. Andel&del3. nlpct8.0 tot_antall nlnum8.0  &formattabell;
 
 run;
 Title; 
