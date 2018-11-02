@@ -24,7 +24,7 @@ set &datasett;
 if tot_raterank=2 then min2=tot_rate;
 if tot_raterank=rader-1 then max2=tot_rate;
 if tot_raterank=3 then min3=tot_rate;
-if tot_raterank=rader-1 then max3=tot_rate;
+if tot_raterank=rader-2 then max3=tot_rate;
 run;
 
 proc sql;
