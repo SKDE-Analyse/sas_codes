@@ -5,8 +5,14 @@
 
 %macro ratefig_todeltSoyle(datasett=, aar1=2015, aar2=2016, aar3=2017, bildeformat=png, noxlabel=0);
 
+proc sql;
+   create table &datasett._to as 
+   select *, max(ntot_rate) as Norge_tot_rate
+from &datasett;
+quit;
+
 data &datasett._to;
-set &datasett;
+set &datasett._to;
 Length Mistextrate $ 10;
 tot_rate2=tot_rate;
 plass_rate=Norge_tot_rate/100;
