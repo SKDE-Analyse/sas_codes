@@ -39,4 +39,9 @@ styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 run;
 %end;
 
+proc datasets nolist;
+delete tmp_aldersfig;
+run;
+
+
 %mend;
