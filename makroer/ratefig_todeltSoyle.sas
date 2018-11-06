@@ -26,6 +26,7 @@ if tot_antall<&nkrav then do;
 	rate_1=.;
 	rate_2=.;
 	rate_3=.;
+	andel_rate1=.;
 	Misstextrate="N<&nkrav";
 end;
 run;
