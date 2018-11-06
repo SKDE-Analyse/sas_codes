@@ -2,6 +2,61 @@
 Felles makroer for testing av rateprogrammet. Kan også brukes til produksjon av test-datasett.
 */
 
+%macro sammenlignData(fil =, lagReferanse = 0, crit =);
+
+%if &lagReferanse = 0 %then %do;
+
+/* Hent data fra disk */
+proc import datafile = "&filbane\rateprogram\tests\data\&fil..csv" out=ref_&fil dbms=csv replace;
+run;
+
+/*
+Lagre som csv og importer tilbake igjen, for å få mest mulig likt utgangspunkt
+*/
+
+data tmp;
+set &fil; 
+/* Fjern alle formater før lagring */
+FORMAT _ALL_ ; 
+run;
+
+proc export data=tmp outfile="&filbane\rateprogram\tests\data\tmp.csv" dbms=csv replace;
+run;
+proc import datafile = "&filbane\rateprogram\tests\data\tmp.csv" out=test_&fil dbms=csv replace;
+run;
+
+/*
+Sammenlign nye data med referansedata 
+*/
+proc compare base=ref_&fil compare=test_&fil BRIEF WARNING LISTVAR &crit;
+run;
+
+/* Slett datasett */
+proc datasets nolist;
+delete tmp test_&fil ref_&fil;
+run;
+
+%end;
+%else %do;
+
+
+data &fil;
+set &fil;
+/* Fjern alle formater før lagring */
+FORMAT _ALL_ ; 
+run;
+
+/*
+Lagre data på disk
+*/
+proc export data=&fil outfile="&filbane\rateprogram\tests\data\&fil..csv" dbms=csv replace;
+run;
+
+%end;
+
+%mend;
+
+
 %macro inkluderFormater;
 
 %include "&filbane\formater\SKDE_somatikk.sas";
@@ -12,35 +67,26 @@ Felles makroer for testing av rateprogrammet. Kan også brukes til produksjon av
 
 %mend;
 
-
 %macro testAnno(branch=master, lagReferanse = 0, slettDatasett = 1);
 
 /*!
 Makro for å teste kode i ../Stiler/ (logo)
 */
 
+ods text="Test Anno";
+
 %local filbane;
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
-
-ods text="Test Anno";
 
 %include "&filbane\Stiler\stil_figur.sas";
 %include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
 
-%if &lagReferanse = 0 %then %do;
-proc compare base=skde_arn.ref_rate_anno compare=anno BRIEF WARNING LISTVAR;
-%end;
-%else %do;
-data skde_arn.ref_rate_anno;
-set anno;
-run;
-%end;
+%sammenlignData(fil = anno, lagReferanse = &lagReferanse);
 
 %if &slettDatasett ne 0 %then %do;
 proc datasets nolist;
 delete anno;
 %end;
-
 
 %mend;
 
@@ -53,15 +99,14 @@ Makro for å teste utvalgx-makroen i rateprogrammet.
 
 ods text="Test UtvalgX";
 
-
-%if (&alene NE 0) %then %do;
-data anno;
-set skde_arn.ref_rate_anno;
-run;
-%end;
-
 %local filbane;
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
+
+%if (&alene ne 0) %then %do;
+/* Importere datasettet "anno" fra disk, hvis anno-makroen ikke er kjørt først */
+proc import datafile = "&filbane\rateprogram\tests\data\anno.csv" out=anno dbms=csv replace;
+run;
+%end;
 
 %include "&filbane\makroer\boomraader.sas";
 %include "&filbane\rateprogram\rateberegninger.sas";
@@ -84,25 +129,22 @@ proc sort data=andel;
 by alderny ermann;
 run;
 
+/* Filen RV er for stor til å inkluderes i repo, så ligger på server */
 %if &lagReferanse = 0 %then %do;
-proc compare base=skde_arn.ref_rate_rv compare=rv BRIEF WARNING LISTVAR;
-proc compare base=skde_arn.ref_rate_andel compare=andel BRIEF WARNING LISTVAR;
+proc compare base=test.ref_rate_rv compare=rv BRIEF WARNING LISTVAR;
 %end;
 %else %do;
-data skde_arn.ref_rate_rv;
+data test.ref_rate_rv;
 set rv;
 run;
-
-data skde_arn.ref_rate_andel;
-set andel;
-run;
 %end;
+
+%sammenlignData(fil = andel, lagReferanse = &lagReferanse);
 
 %if &slettDatasett ne 0 %then %do;
 proc datasets nolist;
 delete rv andel anno;
 %end;
-
 
 %mend;
 
@@ -115,36 +157,11 @@ Makro for å teste rateberegning-makroen (rateprogrammet)
 
 ods text="Test Rateberegninger";
 
-%if (&alene NE 0) %then %do;
-
-/*
-Lese datasett fra disk som brukes videre i rateberegninger-makroen
-
-Det vil da være mulig å kjøre denne makroen uavhengig av om man har kjørt de makroene som kommer tidligere i rateprogrammet
-*/
-
-data anno;
-set skde_arn.ref_rate_anno;
-run;
-
-data rv;
-set skde_arn.ref_rate_rv;
-run;
-
-data andel;
-set skde_arn.ref_rate_andel;
-run;
-
-data norge_agg;
-set skde_arn.ref_rate_norge_agg;
-run;
-
-data norge_agg_snitt;
-set skde_arn.ref_rate_norge_agg_snitt;
-run;
-
 %local filbane;
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
+
+
+%if (&alene ne 0) %then %do;
 
 %include "&filbane\makroer\boomraader.sas";
 %include "&filbane\rateprogram\rateberegninger.sas";
@@ -155,11 +172,35 @@ run;
 %include "&filbane\rateprogram\sas\definerVariabler.sas";
 %definerVariabler;
 %end;
+
+/*
+Lese datasett fra disk som brukes videre i rateberegninger-makroen
+
+Det vil da være mulig å kjøre denne makroen uavhengig av om man har kjørt de makroene som kommer tidligere i rateprogrammet
+*/
+
+proc import datafile = "&filbane\rateprogram\tests\data\anno.csv" out=anno dbms=csv replace;
+run;
+
+data rv;
+set test.ref_rate_rv;
+run;
+
+proc import datafile = "&filbane\rateprogram\tests\data\andel.csv" out=andel dbms=csv replace;
+run;
+
 %end;
 
+%let kommune=; 
+%let kommune_HN=1; 
+%let fylke=1; 
+%let sykehus_HN=1; 
+%let HF=1; 	
+%let RHF=1; 
+%let Oslo=1; 
+%let Verstkommune_HN=;
 
 %rateberegninger;
-
 
 /*
 Må endre navn på datasett for kun HN sine kommuner
@@ -171,7 +212,6 @@ run;
 data komnrHN_agg_cv;
 set komnr_agg_cv;
 run;
-
 
 /*
 Kjører makroen for alle kommuner, ikke kun HN
@@ -207,7 +247,8 @@ Sammenligne datasettene med referansedatasett
 
 %if &slettDatasett ne 0 %then %do;
 proc datasets nolist;
-delete rv: andel anno Norge: BoRHF: bohf: BoShHN: komnr: komnrHN: fylke: bydel: alder konsultasjoner_norge;
+delete rv: andel anno Norge: BoRHF: bohf: BoShHN: komnr: komnrHN: fylke: bydel: 
+alder konsultasjoner_norge snudd hnsnitt aldersspenn konsultasjoner:;
 %end;
 
 %mend;
@@ -215,7 +256,7 @@ delete rv: andel anno Norge: BoRHF: bohf: BoShHN: komnr: komnrHN: fylke: bydel: 
 %macro lagreDatasett(bolist=);
 
 /*
-Loop over alle boomr�dene
+Lagre datasettene i repo ved å loope over alle boområdene
 */
 
 %local nwords;
@@ -226,24 +267,21 @@ Loop over alle boomr�dene
 %let nwords=%sysfunc(countw(&bolist));
 %do i=1 %to &nwords;
 	%let bo =  %scan(&bolist, &i);
-	data skde_arn.ref_rate_&Bo._AGG_CV;
-	set &Bo._AGG_CV;
-	run;
 
-	proc sort data=skde_arn.ref_rate_&Bo._Agg_cv;
+	proc sort data=&Bo._Agg_cv;
 	by aar boomr;
 	run;
 
-	data skde_arn.ref_rate_&Bo._Agg_rate;
-	set &Bo._Agg_rate;
-	run;
+	%sammenlignData(fil =&Bo._Agg_cv, lagReferanse = 1);
 
    %let boSort = &bo;
    %if &bo = komnrHN %then %let boSort = komnr;
    
-	proc sort data=skde_arn.ref_rate_&Bo._Agg_rate;
+	proc sort data=&Bo._Agg_rate;
 	by aar &bosort;
 	run;
+
+	%sammenlignData(fil =&Bo._Agg_rate, lagReferanse = 1);
 
 %end;
 
@@ -252,7 +290,7 @@ Loop over alle boomr�dene
 %macro sjekkeDatasett(bolist=);
 
 /*
-Loop over alle boområdene
+Sjekk alle datasettene mot referanse ved å loope over alle boområdene
 */
 
 %local nwords;
@@ -262,22 +300,22 @@ Loop over alle boområdene
 
 %let nwords=%sysfunc(countw(&bolist));
 %do i=1 %to &nwords;
-	%let bo =  %scan(&bolist, &i);
+   %let bo =  %scan(&bolist, &i);
 
-	proc sort data=&Bo._AGG_CV;
-	by aar boomr;
-	run;
+   proc sort data=&Bo._AGG_CV;
+   by aar boomr;
+   run;
 
-   proc compare base=skde_arn.ref_rate_&Bo._AGG_CV compare=&Bo._AGG_CV BRIEF WARNING LISTVAR CRITERION=0.00001;
+   %sammenlignData(fil =&Bo._Agg_cv, lagReferanse = 0, crit =  CRITERION=0.00001);
 
    %let boSort = &bo;
    %if &bo = komnrHN %then %let boSort = komnr;
    
-	proc sort data=&Bo._Agg_rate;
-	by aar &boSort;
-	run;
+   proc sort data=&Bo._Agg_rate;
+   by aar &boSort;
+   run;
 
-   proc compare base=skde_arn.ref_rate_&Bo._Agg_rate compare=&Bo._Agg_rate BRIEF WARNING LISTVAR CRITERION=0.00001;
+   %sammenlignData(fil =&Bo._Agg_rate, lagReferanse = 0, crit =  CRITERION=0.00001);
 
 %end;
 
