@@ -36,6 +36,9 @@ run;
 
 
 %if &bo=Norge %then %do;
+%if &silent ne 0 %then %do;
+ods select none;
+%end;
 PROC TABULATE DATA=&Bo._Agg_Rate out=norgesnitt;	
 	VAR RV_just_rate Ant_Opphold Ant_Innbyggere;
 	CLASS aar /	ORDER=UNFORMATTED MISSING;
@@ -47,6 +50,10 @@ PROC TABULATE DATA=&Bo._Agg_Rate out=norgesnitt;
 		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &SnittOmraade";
 %end;
 RUN;
+%if &silent ne 0 %then %do;
+ods select all;
+%end;
+
 
 data norgesnitt;
 set norgesnitt;
@@ -56,6 +63,9 @@ run;
 %end;
 
 %if &bo ne Norge %then %do;
+%if &silent ne 0 %then %do;
+ods select none;
+%end;
 PROC TABULATE DATA=&Bo._Agg_Rate out=&bo._Fig;	
 	VAR RV_just_rate Ant_Opphold Ant_Innbyggere;
 	CLASS &Bo /	ORDER=UNFORMATTED MISSING;
@@ -67,6 +77,9 @@ PROC TABULATE DATA=&Bo._Agg_Rate out=&bo._Fig;
 	Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &Bo";
 %end;
 RUN;
+%if &silent ne 0 %then %do;
+ods select all;
+%end;
 
 data HNsnitt;
 set &bo._Fig;
@@ -118,6 +131,7 @@ DATA=&Bo._Agg_CV Format=&talltabformat..3;
 		Title "Variasjonsmål &ratevariabel, &Min_alder - &Max_alder år, &Bo";
 RUN;
 %end;
+
 %mend tabell_cv;
 
 %macro Tabell_CVe;
@@ -152,6 +166,7 @@ PROC TABULATE DATA=&Bo._Agg_Rate;
 		Title "&standard rater pr &rate_pr innbyggere, &Min_alder - &Max_alder år, &SnittOmraade";
 RUN;
 %end;
+
 %mend tabell_3N;
 
 %macro tabell_3Ne;

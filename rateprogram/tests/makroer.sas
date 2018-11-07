@@ -99,6 +99,8 @@ Makro for å teste utvalgx-makroen i rateprogrammet.
 
 ods text="Test UtvalgX";
 
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 1;
+
 %local filbane;
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
 
@@ -117,7 +119,6 @@ run;
 %include "&filbane\rateprogram\sas\definerVariabler.sas";
 %definerVariabler;
 %end;
-
 
 %utvalgx;
 
@@ -156,6 +157,8 @@ Makro for å teste rateberegning-makroen (rateprogrammet)
 */
 
 ods text="Test Rateberegninger";
+
+%if %sysevalf(%superq(silent)=,boolean) %then %let silent = 1;
 
 %local filbane;
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
