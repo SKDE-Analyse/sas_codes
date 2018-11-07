@@ -1,28 +1,49 @@
 /*!
-Felles makroer for testing av rateprogrammet. Kan ogsÃ¥ brukes til produksjon av test-datasett.
+Felles makroer for testing av rateprogrammet. Kan også brukes til produksjon av test-datasett.
 */
 
 %macro sammenlignData(fil =, lagReferanse = 0, crit =);
 
-%if &lagReferanse = 0 %then %do;
+/*!
+Makro for å sammenligne to datasett, der referansedatasettet ligger i mappa `&filbane\tests\data\`.
 
-/* Hent data fra disk */
-proc import datafile = "&filbane\rateprogram\tests\data\&fil..csv" out=ref_&fil dbms=csv replace;
+*/
+
+%if &lagReferanse ne 0 %then %do;
+/*
+Lagre data på disk
+*/
+
+data tmp;
+set &fil;
+/* Fjern alle formater før lagring */
+FORMAT _ALL_ ; 
+run;
+
+/* Lagre data som csv på disk */
+proc export data=tmp outfile="&filbane\tests\data\&fil..csv" dbms=csv replace;
+run;
+
+%end; /* &lagReferanse ne 0 */
+
+/* Hent referansedata fra disk */
+proc import datafile = "&filbane\tests\data\&fil..csv" out=ref_&fil dbms=csv replace;
 run;
 
 /*
-Lagre som csv og importer tilbake igjen, for Ã¥ fÃ¥ mest mulig likt utgangspunkt
+Lagre som csv og importer tilbake igjen, for å få mest mulig likt utgangspunkt
 */
 
 data tmp;
 set &fil; 
-/* Fjern alle formater fÃ¸r lagring */
+/* Fjern alle formater før lagring */
 FORMAT _ALL_ ; 
 run;
 
-proc export data=tmp outfile="&filbane\rateprogram\tests\data\tmp.csv" dbms=csv replace;
+/* Skriv data til csv på work og importer data fra samme fil, for å få tilsvarende data som referanse */
+proc export data=tmp outfile="%sysfunc(pathname(work))\tmp.csv" dbms=csv replace;
 run;
-proc import datafile = "&filbane\rateprogram\tests\data\tmp.csv" out=test_&fil dbms=csv replace;
+proc import datafile = "%sysfunc(pathname(work))\tmp.csv" out=test_&fil dbms=csv replace;
 run;
 
 /*
@@ -35,24 +56,6 @@ run;
 proc datasets nolist;
 delete tmp test_&fil ref_&fil;
 run;
-
-%end;
-%else %do;
-
-
-data &fil;
-set &fil;
-/* Fjern alle formater fÃ¸r lagring */
-FORMAT _ALL_ ; 
-run;
-
-/*
-Lagre data pÃ¥ disk
-*/
-proc export data=&fil outfile="&filbane\rateprogram\tests\data\&fil..csv" dbms=csv replace;
-run;
-
-%end;
 
 %mend;
 
@@ -70,7 +73,7 @@ run;
 %macro testAnno(branch=master, lagReferanse = 0, slettDatasett = 1);
 
 /*!
-Makro for Ã¥ teste kode i ../Stiler/ (logo)
+Makro for å teste kode i ../Stiler/ (logo)
 */
 
 ods text="Test Anno";
@@ -94,7 +97,7 @@ delete anno;
 %macro testUtvalgX(branch=master, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
 
 /*!
-Makro for Ã¥ teste utvalgx-makroen i rateprogrammet.
+Makro for å teste utvalgx-makroen i rateprogrammet.
 */
 
 ods text="Test UtvalgX";
@@ -105,8 +108,8 @@ ods text="Test UtvalgX";
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
 
 %if (&alene ne 0) %then %do;
-/* Importere datasettet "anno" fra disk, hvis anno-makroen ikke er kjÃ¸rt fÃ¸rst */
-proc import datafile = "&filbane\rateprogram\tests\data\anno.csv" out=anno dbms=csv replace;
+/* Importere datasettet "anno" fra disk, hvis anno-makroen ikke er kjørt først */
+proc import datafile = "&filbane\tests\data\anno.csv" out=anno dbms=csv replace;
 run;
 %end;
 
@@ -130,7 +133,7 @@ proc sort data=andel;
 by alderny ermann;
 run;
 
-/* Filen RV er for stor til Ã¥ inkluderes i repo, sÃ¥ ligger pÃ¥ server */
+/* Filen RV er for stor til å inkluderes i repo, så ligger på server */
 %if &lagReferanse = 0 %then %do;
 proc compare base=test.ref_rate_rv compare=rv BRIEF WARNING LISTVAR;
 %end;
@@ -153,7 +156,7 @@ delete rv andel anno;
 %macro testRateberegninger(branch=master, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
 
 /*!
-Makro for Ã¥ teste rateberegning-makroen (rateprogrammet)
+Makro for å teste rateberegning-makroen (rateprogrammet)
 */
 
 ods text="Test Rateberegninger";
@@ -179,17 +182,17 @@ ods text="Test Rateberegninger";
 /*
 Lese datasett fra disk som brukes videre i rateberegninger-makroen
 
-Det vil da vÃ¦re mulig Ã¥ kjÃ¸re denne makroen uavhengig av om man har kjÃ¸rt de makroene som kommer tidligere i rateprogrammet
+Det vil da være mulig å kjøre denne makroen uavhengig av om man har kjørt de makroene som kommer tidligere i rateprogrammet
 */
 
-proc import datafile = "&filbane\rateprogram\tests\data\anno.csv" out=anno dbms=csv replace;
+proc import datafile = "&filbane\tests\data\anno.csv" out=anno dbms=csv replace;
 run;
 
 data rv;
 set test.ref_rate_rv;
 run;
 
-proc import datafile = "&filbane\rateprogram\tests\data\andel.csv" out=andel dbms=csv replace;
+proc import datafile = "&filbane\tests\data\andel.csv" out=andel dbms=csv replace;
 run;
 
 %end;
@@ -206,7 +209,7 @@ run;
 %rateberegninger;
 
 /*
-MÃ¥ endre navn pÃ¥ datasett for kun HN sine kommuner
+Må endre navn på datasett for kun HN sine kommuner
 */
 data komnrHN_agg_rate;
 set komnr_agg_rate;
@@ -217,7 +220,7 @@ set komnr_agg_cv;
 run;
 
 /*
-KjÃ¸rer makroen for alle kommuner, ikke kun HN
+Kjører makroen for alle kommuner, ikke kun HN
 */
 
 %let kommune=1; 
@@ -259,7 +262,7 @@ alder konsultasjoner_norge snudd hnsnitt aldersspenn konsultasjoner:;
 %macro lagreDatasett(bolist=);
 
 /*
-Lagre datasettene i repo ved Ã¥ loope over alle boomrÃ¥dene
+Lagre datasettene i repo ved å loope over alle boområdene
 */
 
 %local nwords;
@@ -293,7 +296,7 @@ Lagre datasettene i repo ved Ã¥ loope over alle boomrÃ¥dene
 %macro sjekkeDatasett(bolist=);
 
 /*
-Sjekk alle datasettene mot referanse ved Ã¥ loope over alle boomrÃ¥dene
+Sjekk alle datasettene mot referanse ved å loope over alle boområdene
 */
 
 %local nwords;
