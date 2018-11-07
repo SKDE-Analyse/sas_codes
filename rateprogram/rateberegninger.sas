@@ -1,5 +1,6 @@
 %let makrobane=&filbane\rateprogram\sas;
 %include "&filbane\makroer\boomraader.sas";
+%include "&filbane\makroer\forny_komnr.sas";
 %include "&makrobane\lag_kart.sas";
 %include "&makrobane\omraade.sas";
 %include "&makrobane\omraadeHN.sas";
