@@ -10,12 +10,13 @@ Sammenligner dette datasettet med en referanse (`test.ref_agg_&navn`).
 
 - `branch = master`: Bestemmer hvilken aggreger-makro som kjøres (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset_:`.
-- `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.agg_start` på nytt.
-- `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_agg_&navn` på nytt.
+- `lagNyRef = 0` Hvis ulik null, lage referansedatasettene `test.ref_agg_&navn` på nytt.
+- `lagNyStart = 0`: Hvis ulik null, lage startdatasettet `test.agg_start` på nytt.
 
 */
 
 %include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\aggreger.sas";
+%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\tests\makroer.sas";
 
 /*
 Lage nytt startsett, basert på test.pseudosens_avd_magnus og test.pseudosens_avtspes_magnus
@@ -74,18 +75,12 @@ set test.agg_start;
 kontakt = 1;
 run;
 
-%aggreger(inndata = tmp, utdata = testset_&navn, agg_var = kontakt);
+%aggreger(inndata = tmp, utdata = agg_&navn, agg_var = kontakt);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_agg_&navn;
-set testset_&navn;
-run;
-%end;
-
-proc compare base=test.ref_agg_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
+%sammenlignData(fil = agg_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = tmp testset_&navn;
+proc delete data = tmp agg_&navn;
 %end;
 
 /*
@@ -102,18 +97,12 @@ array diagnose {*} Hdiag:;
 	end;
 run;
 
-%aggreger(inndata = tmp, utdata = testset_&navn, agg_var = kreft);
+%aggreger(inndata = tmp, utdata = agg_&navn, agg_var = kreft);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_agg_&navn;
-set testset_&navn;
-run;
-%end;
-
-proc compare base=test.ref_agg_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
+%sammenlignData(fil = agg_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = tmp testset_&navn;
+proc delete data = tmp agg_&navn;
 %end;
 
 /*
@@ -127,18 +116,12 @@ set test.agg_start (drop = elektiv ohjelp priv off innlegg poli);
 kontakt = 1;
 run;
 
-%aggreger(inndata = tmp, utdata = testset_&navn, agg_var = kontakt);
+%aggreger(inndata = tmp, utdata = agg_&navn, agg_var = kontakt);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_agg_&navn;
-set testset_&navn;
-run;
-%end;
-
-proc compare base=test.ref_agg_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
+%sammenlignData(fil = agg_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = tmp testset_&navn;
+proc delete data = tmp agg_&navn;
 %end;
 
 
