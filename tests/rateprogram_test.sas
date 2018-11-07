@@ -1,9 +1,8 @@
 
-%macro test_rateprogram(branch = master, lag_ref = 0);
+%macro rateprogram_test(branch = master, lag_ref = 0);
 /*!
 Kjør tester av rateprogrammet
 */
-
 
 %include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\tests\makroer.sas";
 %include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\tests\makroer_rateprogram.sas";
