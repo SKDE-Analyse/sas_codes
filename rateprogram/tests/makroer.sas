@@ -2,74 +2,6 @@
 Felles makroer for testing av rateprogrammet. Kan også brukes til produksjon av test-datasett.
 */
 
-%macro sammenlignData(fil =, lagReferanse = 0, crit =);
-
-/*!
-Makro for å sammenligne to datasett, der referansedatasettet ligger i mappa `&filbane\tests\data\`.
-
-*/
-
-%if &lagReferanse ne 0 %then %do;
-/*
-Lagre data på disk
-*/
-
-data tmp;
-set &fil;
-/* Fjern alle formater før lagring */
-FORMAT _ALL_ ; 
-run;
-
-/* Lagre data som csv på disk */
-proc export data=tmp outfile="&filbane\tests\data\&fil..csv" dbms=csv replace;
-run;
-
-%end; /* &lagReferanse ne 0 */
-
-/* Hent referansedata fra disk */
-proc import datafile = "&filbane\tests\data\&fil..csv" out=ref_&fil dbms=csv replace;
-run;
-
-/*
-Lagre som csv og importer tilbake igjen, for å få mest mulig likt utgangspunkt
-*/
-
-data tmp;
-set &fil; 
-/* Fjern alle formater før lagring */
-FORMAT _ALL_ ; 
-run;
-
-/* Skriv data til csv på work og importer data fra samme fil, for å få tilsvarende data som referanse */
-proc export data=tmp outfile="%sysfunc(pathname(work))\tmp.csv" dbms=csv replace;
-run;
-proc import datafile = "%sysfunc(pathname(work))\tmp.csv" out=test_&fil dbms=csv replace;
-run;
-
-/*
-Sammenlign nye data med referansedata 
-*/
-proc compare base=ref_&fil compare=test_&fil BRIEF WARNING LISTVAR &crit;
-run;
-
-/* Slett datasett */
-proc datasets nolist;
-delete tmp test_&fil ref_&fil;
-run;
-
-%mend;
-
-
-%macro inkluderFormater;
-
-%include "&filbane\formater\SKDE_somatikk.sas";
-%include "&filbane\formater\NPR_somatikk.sas";
-%include "&filbane\formater\bo.sas";
-%include "&filbane\formater\beh.sas";
-%include "&filbane\formater\komnr.sas";
-
-%mend;
-
 %macro testAnno(branch=master, lagReferanse = 0, slettDatasett = 1);
 
 /*!
@@ -83,6 +15,7 @@ ods text="Test Anno";
 
 %include "&filbane\Stiler\stil_figur.sas";
 %include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "&filbane\tests\makroer.sas";
 
 %sammenlignData(fil = anno, lagReferanse = &lagReferanse);
 
@@ -107,20 +40,21 @@ ods text="Test UtvalgX";
 %local filbane;
 %let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
 
-%if (&alene ne 0) %then %do;
-/* Importere datasettet "anno" fra disk, hvis anno-makroen ikke er kjørt først */
-proc import datafile = "&filbane\tests\data\anno.csv" out=anno dbms=csv replace;
-run;
-%end;
-
 %include "&filbane\makroer\boomraader.sas";
 %include "&filbane\rateprogram\rateberegninger.sas";
+%include "&filbane\tests\makroer.sas";
 
 %inkluderFormater;
 
 %if &definerVariabler ne 0 %then %do;
 %include "&filbane\rateprogram\sas\definerVariabler.sas";
 %definerVariabler;
+%end;
+
+%if (&alene ne 0) %then %do;
+/* Importere datasettet "anno" fra disk, hvis anno-makroen ikke er kjørt først */
+proc import datafile = "&filbane\tests\data\anno.csv" out=anno dbms=csv replace;
+run;
 %end;
 
 %utvalgx;
@@ -171,6 +105,7 @@ ods text="Test Rateberegninger";
 
 %include "&filbane\makroer\boomraader.sas";
 %include "&filbane\rateprogram\rateberegninger.sas";
+%include "&filbane\tests\makroer.sas";
 
 %inkluderFormater;
 
@@ -195,7 +130,7 @@ run;
 proc import datafile = "&filbane\tests\data\andel.csv" out=andel dbms=csv replace;
 run;
 
-%end;
+%end; /* %if (&alene ne 0) */
 
 %let kommune=; 
 %let kommune_HN=1; 
@@ -239,7 +174,7 @@ Kjører makroen for alle kommuner, ikke kun HN
 Sammenligne datasettene med referansedatasett
 */
 
-   %sjekkeDatasett(bolist = Norge BoRHF bohf BoShHN komnr komnrHN fylke bydel);
+   %sjekkeBoDatasett(bolist = Norge BoRHF bohf BoShHN komnr komnrHN fylke bydel);
 
 %end;
 %else %do;
@@ -247,7 +182,7 @@ Sammenligne datasettene med referansedatasett
    Lagre det siste referansedatasettet
 */
 
-   %lagreDatasett(bolist = Norge BoRHF bohf BoShHN komnr komnrHN fylke bydel);
+   %lagreBoDatasett(bolist = Norge BoRHF bohf BoShHN komnr komnrHN fylke bydel);
 
 %end;
 
@@ -259,7 +194,7 @@ alder konsultasjoner_norge snudd hnsnitt aldersspenn konsultasjoner:;
 
 %mend;
 
-%macro lagreDatasett(bolist=);
+%macro lagreBoDatasett(bolist=);
 
 /*
 Lagre datasettene i repo ved å loope over alle boområdene
@@ -293,7 +228,7 @@ Lagre datasettene i repo ved å loope over alle boområdene
 
 %mend;
 
-%macro sjekkeDatasett(bolist=);
+%macro sjekkeBoDatasett(bolist=);
 
 /*
 Sjekk alle datasettene mot referanse ved å loope over alle boområdene
