@@ -1,4 +1,4 @@
-/*Ratefigur med todelt sÃ¸yle, eks andel off/privat eller andel kreft/ikke kreft*/
+/*Ratefigur med todelt søyle, eks andel off/privat eller andel kreft/ikke kreft*/
 
 /* Need to run the 'merge' macro first before running this one.  The output from 'merge' is the input for this */
 /* creates a figure so that first column is rate from dataset1, and second column from dataset2 */
@@ -124,7 +124,7 @@ hbarparm category=bohf response=nrate_1 / fillattrs=(color=CX4C4C4C);
         datalabelattrs=(color=white weight=bold size=8);
 		keylegend "hp2" "hp1"/ location=inside position=bottomright down=2 noborder titleattrs=(size=6);
 	 Yaxistable &tabellvariable /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
-     yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+     yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
 	 %if &noxlabel=1 %then %do;
      xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
 	 %end;
