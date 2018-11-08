@@ -17,6 +17,7 @@ run;
 data &datasett._to;
 set &datasett;
 andel2=&andel;
+if bohf=8888 then andel_norge=&andel;
 drop andelrank rader;
 run;
 
@@ -50,7 +51,8 @@ run;
 
 proc sql;
    create table &datasett._FT as 
-   select *, max(min1) as mmin1, max(max1) as mmax1, max(min2) as mmin2, max(max2) as mmax2, max(min3) as mmin3, max(max3) as mmax3
+   select *, max(min1) as mmin1, max(max1) as mmax1, max(min2) as mmin2, max(max2) as mmax2, max(min3) as mmin3, max(max3) as mmax3,
+   max(andel_norge) as andelN
    from &datasett._FT;
 quit;
 
@@ -61,7 +63,6 @@ FTa2=round((mmax2/mmin2),0.01);
 FTa3=round((mmax3/mmin3),0.01);
 drop max1 min1 min2 min3 max2 max3 mm:;
 plass=andelN/100;
-if bohf=8888 then andel_norge=&andel;
 run;
 
 /*Setter sammen modifisert inndatasett og datasett med forholdstall*/
@@ -109,11 +110,11 @@ hbarparm category=bohf response=andel_norge / fillattrs=(color=CXC3C3C3);
 	%if &vis_misstxt=1 %then %do;
 		scatter x=plass y=bohf /datalabel=Misstxt datalabelpos=right markerattrs=(size=0) ; 
 	%end;
-	scatter x=plass y=bohf /datalabel=&Andel datalabelpos=right markerattrs=(size=0) 
+	scatter x=plass y=bohf /datalabel=andel2 datalabelpos=right markerattrs=(size=0) 
         datalabelattrs=(color=white weight=bold size=8);
 		keylegend "hp1" "hp2"/ location=inside position=bottomright down=2 noborder titleattrs=(size=6);
 	 Yaxistable &tabellvariable / Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
-     yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+     yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
 	 %if &noxlabel=1 %then %do;
 	 xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
      %end;
@@ -124,7 +125,7 @@ hbarparm category=bohf response=andel_norge / fillattrs=(color=CXC3C3C3);
 			inset "FTa1 = &FTA1" "FTa2 = &FTa2" "FTa3 = &FTa3" / position=right textattrs=(size=10);
 		%end;
 		Label &labeltabell;
-		Format &formattabell &andel andel_norge &andelformat;
+		Format &formattabell &andel andel2 andel_norge &andelformat;
 run;Title; ods listing close;
 
 
