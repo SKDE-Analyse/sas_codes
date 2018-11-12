@@ -73,17 +73,17 @@ Test default
 
 %let navn = default;
 
-data tmp;
+data agg_tmp;
 set test.agg_start;
 kontakt = 1;
 run;
 
-%aggreger(inndata = tmp, utdata = agg_&navn, agg_var = kontakt);
+%aggreger(inndata = agg_tmp, utdata = agg_&navn, agg_var = kontakt);
 
 %sammenlignData(fil = agg_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = tmp agg_&navn;
+proc delete data = agg_tmp agg_&navn;
 %end;
 
 /*
@@ -92,7 +92,7 @@ Test kreft
 
 %let navn = kreft;
 
-data tmp;
+data agg_tmp;
 set test.agg_start;
 array diagnose {*} Hdiag:;
 	do i=1 to dim(diagnose);
@@ -100,12 +100,12 @@ array diagnose {*} Hdiag:;
 	end;
 run;
 
-%aggreger(inndata = tmp, utdata = agg_&navn, agg_var = kreft);
+%aggreger(inndata = agg_tmp, utdata = agg_&navn, agg_var = kreft);
 
 %sammenlignData(fil = agg_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = tmp agg_&navn;
+proc delete data = agg_tmp agg_&navn;
 %end;
 
 /*
@@ -114,17 +114,17 @@ Test uten elektiv, ohjelp, priv, off, innlegg og poli
 
 %let navn = redusert;
 
-data tmp;
+data agg_tmp;
 set test.agg_start (drop = elektiv ohjelp priv off innlegg poli);
 kontakt = 1;
 run;
 
-%aggreger(inndata = tmp, utdata = agg_&navn, agg_var = kontakt);
+%aggreger(inndata = agg_tmp, utdata = agg_&navn, agg_var = kontakt);
 
 %sammenlignData(fil = agg_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = tmp agg_&navn;
+proc delete data = agg_tmp agg_&navn;
 %end;
 
 
