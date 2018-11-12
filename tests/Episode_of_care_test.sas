@@ -14,7 +14,6 @@ Sammenligner datasettene som spyttes ut med referanse-sett (test.ref_eoc[n]).
 
 */
 
-
 /* Definere filbane */
 %let filbane = %definer_filbane(branch = &branch);
 
@@ -33,176 +32,120 @@ run;
 Sjekk at det er trygt å kjøre EoC makroen flere ganger etter hverandre
 */
 
-data testset;
+data eoc1;
 set test.eoc_startsett;
 run;
 
-%episode_of_care(dsn=testset);
+%episode_of_care(dsn=eoc1);
 
-%episode_of_care(dsn=testset);
+%sammenlignData(fil = eoc1, lagReferanse = &lagNyRef);
 
-%episode_of_care(dsn=testset);
+%episode_of_care(dsn=eoc1);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_eoc1;
-set testset;
-run;
-%end;
+%sammenlignData(fil = eoc1, lagReferanse = 0);
 
-proc compare base=test.ref_eoc1 compare=testset BRIEF WARNING LISTVAR;
+%episode_of_care(dsn=eoc1);
+
+%sammenlignData(fil = eoc1, lagReferanse = 0);
 
 /*
 Sjekk forste_hastegrad = 0
 */
 
-data testset;
+data eoc2;
 set test.eoc_startsett;
 run;
 
-%episode_of_care(dsn=testset, forste_hastegrad = 0);
+%episode_of_care(dsn=eoc2, forste_hastegrad = 0);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_eoc2;
-set testset;
-run;
-%end;
-
-proc compare base=test.ref_eoc2 compare=testset BRIEF WARNING LISTVAR;
+%sammenlignData(fil = eoc2, lagReferanse = &lagNyRef);
 
 /*
 Sjekk at inntid og uttid er korrekt
 */
 
-data testset;
+data eoc3;
 set test.eoc_startsett;
 run;
 
-%episode_of_care(dsn=testset, behold_datotid = 1);
+%episode_of_care(dsn=eoc3, behold_datotid = 1);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_eoc3;
-set testset;
-run;
-%end;
-
-proc compare base=test.ref_eoc3 compare=testset BRIEF WARNING LISTVAR;
+%sammenlignData(fil = eoc3, lagReferanse = &lagNyRef);
 
 /*
 Teste det å nulle liggedøgn for dag og poliklinikk
 */
 
-data testset;
+data eoc4;
 set test.eoc_startsett;
 run;
 
-%episode_of_care(dsn=testset, nulle_liggedogn = 1);
+%episode_of_care(dsn=eoc4, nulle_liggedogn = 1);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_eoc4;
-set testset;
-run;
-%end;
-
-proc compare base=test.ref_eoc4 compare=testset BRIEF WARNING LISTVAR;
-
+%sammenlignData(fil = eoc4, lagReferanse = &lagNyRef);
 
 /*
 Teste det å ikke aggregere poliklinikk i EoC (separer_ut_poli ne 0)
 */
 
-data testset;
+data eoc5;
 set test.eoc_startsett;
 run;
 
-%episode_of_care(dsn=testset, separer_ut_poli = 1);
+%episode_of_care(dsn=eoc5, separer_ut_poli = 1);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_eoc5;
-set testset;
-run;
-%end;
-
-proc compare base=test.ref_eoc5 compare=testset BRIEF WARNING LISTVAR;
-
+%sammenlignData(fil = eoc5, lagReferanse = &lagNyRef);
 
 /*
 Teste kols = 1
 */
 
-data testset;
+data eoc6;
 set test.eoc_startsett;
 run;
 
-%episode_of_care(dsn=testset, kols = 1);
+%episode_of_care(dsn=eoc6, kols = 1);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_eoc6;
-set testset;
-run;
-%end;
-
-proc compare base=test.ref_eoc6 compare=testset BRIEF WARNING LISTVAR;
-
+%sammenlignData(fil = eoc6, lagReferanse = &lagNyRef);
 
 /*
 Teste inndeling = 1 
 */
 
-data testset;
+data eoc7a;
 set test.eoc_startsett;
 run;
 
-%episode_of_care(dsn=testset, inndeling = 1);
+%episode_of_care(dsn=eoc7a, inndeling = 1);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_eoc7a;
-set testset;
-run;
-%end;
-
-proc compare base=test.ref_eoc7a compare=testset BRIEF WARNING LISTVAR;
-
+%sammenlignData(fil = eoc7a, lagReferanse = &lagNyRef);
 
 /*
 Teste inndeling = 2
 */
 
-data testset;
+data eoc7b;
 set test.eoc_startsett;
 run;
 
-%episode_of_care(dsn=testset, inndeling = 2);
+%episode_of_care(dsn=eoc7b, inndeling = 2);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_eoc7b;
-set testset;
-run;
-%end;
-
-proc compare base=test.ref_eoc7b compare=testset BRIEF WARNING LISTVAR;
-
+%sammenlignData(fil = eoc7b, lagReferanse = &lagNyRef);
 
 /*
 Teste inndeling = 3
 */
 
-data testset;
+data eoc7c;
 set test.eoc_startsett;
 run;
 
-%episode_of_care(dsn=testset, inndeling = 3);
+%episode_of_care(dsn=eoc7c, inndeling = 3);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_eoc7c;
-set testset;
-run;
-%end;
-
-proc compare base=test.ref_eoc7c compare=testset BRIEF WARNING LISTVAR;
-
+%sammenlignData(fil = eoc7c, lagReferanse = &lagNyRef);
 
 %if &debug eq 0 %then %do;
-proc delete data = testset startsett;
+proc delete data = eoc1 eoc2 eoc3 eoc4 eoc5 eoc6 eoc7a eoc7b eoc7c;
 %end;
 
 %mend;
