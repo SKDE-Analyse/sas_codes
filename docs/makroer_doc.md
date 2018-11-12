@@ -55,25 +55,30 @@ Når man lager en makro burde man også lage en test. Denne kan så kjøres sene
 
 %include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\minNyeMakro.sas";
 
-data test;
+data makronavn1;
 set test.minNyeMakro_start;
 run;
 
-%minNyeMakro(variabel1 = test);
+%minNyeMakro(datasett = makronavn1);
 
-proc compare base=test.ref_minNyeMakro compare=test BRIEF WARNING LISTVAR;
+%sammenlignData(fil = makronavn1, lagReferanse = &lagNyRef);
 
 %mend;
 ```
 
-Her kjører man makroen på en kopi av datasettet `test.minNyeMakro_start` og tester at det er likt datasettet `test.ref_minNyeMakro`. Disse to datasettene er lagret på server på forhånd. Se i mappen `tests\` for eksempler på bruk av argumentene `branch`, `debug`, `lagNyRef` og `lagNyStart`.
+Her kjører man makroen på en kopi av datasettet `test.minNyeMakro_start` og tester at resultatet `makronavn1` er likt en referanse. Referansedatasettet er lagret som `tests\data\makronavn1.csv`, og ny referanse lages hvis testen kjøres med `lagNyRef ne 0`. Se i mappen `tests\` for eksempler på bruk av argumentene `branch`, `debug`, `lagNyRef` og `lagNyStart`.
 
-Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn følgende kode i filen `test_makroer.sas`:
+Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn følgende kode i filen `tests\tests.sas`:
 
 ```SAS
+/* Øverst i filen */
 %include "&filbane\makroer\tests\minNyeMakro_test.sas";
-%minNyeMakro_test(branch = &branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
+
+/* Inne i makroen test*/
+%minNyeMakro_test(branch = &branch, lagNyRef = &lag_ny_referanse);
 ```
+
+
 
 ### Dytte makroen opp til [github](https://github.com/SKDE-Analyse/sas_codes)
 
