@@ -1,6 +1,64 @@
 /*!
-Felles makroer for testing av sas-kode.
+Hovedtestfil som leser inn alle testene, slik at disse kan kjøres.
+Inneholder også felles makroer som testene bruker.
+
+Hentes inn på følgende måte:
+
+```
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
+%include "&filbane\tests\tests.sas";
+```
 */
+
+/* Inkluder alle testene */
+%include "&filbane\tests\aggreger_test.sas";
+%include "&filbane\tests\boomraader_test.sas";
+%include "&filbane\tests\Episode_of_care_test.sas";
+%include "&filbane\tests\hyppigste_test.sas";
+%include "&filbane\tests\rateprogram_test.sas";
+%include "&filbane\tests\reinnleggelser_test.sas";
+%include "&filbane\tests\unik_pasient_test.sas";
+
+%macro test(branch = master, lag_ny_referanse = 0);
+/*!
+Makro som kjører alle testene
+*/
+
+%aggreger_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%boomraader_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%Episode_of_care_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%hyppigste_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%reinnleggelser_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%unik_pasient_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%rateprogram_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+
+%mend;
+
+/*!
+## Felles makroer for testing av sas-kode.
+*/
+
+%macro definer_filbane(branch = null);
+/*!
+Makro for å definere filbane.
+
+Vil definere filbane hvis branch er definert, eller hvis filbane ikke tidligere er definert.
+
+*/
+
+%if &branch ne null %then %do;
+%local filbane;
+%let filbane = \\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
+%end;
+%else %do;
+    /* Definer filbane til master hvis filbane ikke er definert tidligere */
+    %if %sysevalf(%superq(filbane)=,boolean) %then %do;
+    %let filbane = \\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
+    %end;
+%end;
+
+&filbane.
+%mend;
 
 %macro sammenlignData(fil =, lagReferanse = 0, crit =);
 
