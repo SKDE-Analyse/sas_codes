@@ -15,7 +15,6 @@ Sammenligner dette datasettet med en referanse (`test.ref_hyppigste_&navn`).
 
 */
 
-
 /* Definere filbane */
 %let filbane = %definer_filbane(branch = &branch);
 
@@ -46,26 +45,15 @@ proc delete data = tmp;
 
 #### Test default
 
-Kjører med `%hyppigste(VarName=hdiag, data_inn=test.hyppigste_start, test = testset_&navn);`
+Kjører med `%hyppigste(VarName=hdiag, data_inn=test.hyppigste_start, test = hyppigste_&navn);`
 
 */
 
 %let navn = default;
 
-%hyppigste(VarName=hdiag, data_inn=test.hyppigste_start, test = testset_&navn);
+%hyppigste(VarName=hdiag, data_inn=test.hyppigste_start, test = hyppigste_&navn);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_hyppigste_&navn;
-set testset_&navn;
-run;
-%end;
-
-proc compare base=test.ref_hyppigste_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
-
-%if &debug = 0 %then %do;
-proc delete data = testset_&navn;
-%end;
-
+%sammenlignData(fil = hyppigste_&navn, lagReferanse = &lagNyRef);
 
 /*!
 #### Test Ant_i_liste
@@ -76,20 +64,9 @@ Kjører med `Ant_i_liste = 20`
 
 %let navn = Ant_i_liste;
 
-%hyppigste(Ant_i_liste = 20, VarName=hdiag, data_inn=test.hyppigste_start, test = testset_&navn);
+%hyppigste(Ant_i_liste = 20, VarName=hdiag, data_inn=test.hyppigste_start, test = hyppigste_&navn);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_hyppigste_&navn;
-set testset_&navn;
-run;
-%end;
-
-proc compare base=test.ref_hyppigste_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
-
-%if &debug = 0 %then %do;
-proc delete data = testset_&navn;
-%end;
-
+%sammenlignData(fil = hyppigste_&navn, lagReferanse = &lagNyRef);
 
 /*!
 #### Test VarName
@@ -100,20 +77,9 @@ Kjører med `VarName=behsh`
 
 %let navn = VarName;
 
-%hyppigste(Ant_i_liste = 10, VarName=behsh, data_inn=test.hyppigste_start, test = testset_&navn);
+%hyppigste(Ant_i_liste = 10, VarName=behsh, data_inn=test.hyppigste_start, test = hyppigste_&navn);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_hyppigste_&navn;
-set testset_&navn;
-run;
-%end;
-
-proc compare base=test.ref_hyppigste_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
-
-%if &debug = 0 %then %do;
-proc delete data = testset_&navn;
-%end;
-
+%sammenlignData(fil = hyppigste_&navn, lagReferanse = &lagNyRef);
 
 /*!
 #### Test where
@@ -124,19 +90,14 @@ Kjører med `Where=Where Behrhf=1`
 
 %let navn = where;
 
-%hyppigste(Ant_i_liste = 10, VarName=hdiag, data_inn=test.hyppigste_start, test = testset_&navn, Where=Where Behrhf=1);
+%hyppigste(Ant_i_liste = 10, VarName=hdiag, data_inn=test.hyppigste_start, test = hyppigste_&navn, Where=Where Behrhf=1);
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_hyppigste_&navn;
-set testset_&navn;
-run;
-%end;
+%sammenlignData(fil = hyppigste_&navn, lagReferanse = &lagNyRef);
 
-proc compare base=test.ref_hyppigste_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
+/* Slett midlertidige datasett */
 
 %if &debug = 0 %then %do;
-proc delete data = testset_&navn;
+proc delete data = hyppigste_default hyppigste_VarName hyppigste_Ant_i_liste hyppigste_where;
 %end;
-
 
 %mend;
