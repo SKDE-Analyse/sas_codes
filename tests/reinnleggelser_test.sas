@@ -1,4 +1,4 @@
-%macro reinnleggelser_test(branch = master, debug = 0, lagNyRef = 0, lagNyStart = 0);
+%macro reinnleggelser_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste reinnleggelse-makro.
@@ -15,7 +15,10 @@ Sammenligner dette datasettet med en referanse (`test.ref_reinn1` og `test.ref_r
 
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\reinnleggelser.sas";
+/* Definere filbane */
+%let filbane = %definer_filbane(branch = &branch);
+
+%include "&filbane\makroer\reinnleggelser.sas";
 
 /*
 Lage nytt startsett, basert på test.pseudosens_avd_magnus

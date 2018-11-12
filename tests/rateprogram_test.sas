@@ -1,20 +1,22 @@
 
-%macro rateprogram_test(branch = master, lag_ref = 0);
+%macro rateprogram_test(branch = null, lagNyRef = 0);
 /*!
 Kjør tester av rateprogrammet
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\tests\makroer.sas";
-%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\tests\makroer_rateprogram.sas";
+/* Definere filbane */
+%let filbane = %definer_filbane(branch = &branch);
+
+%include "&filbane\tests\makroer_rateprogram.sas";
 
 /*
 Test av rateprogrammet hver for seg, uavhengig av rekkefølge
 
 Referansedatasettene lages her, hvis bedt om.
 */
-%testAnno(branch = &branch, slettDatasett = 1, lagReferanse = &lag_ref);
-%testUtvalgX(alene = 1, branch = &branch, slettDatasett = 1, lagReferanse = &lag_ref);
-%testRateberegninger(alene = 1, branch = &branch, slettDatasett = 1, lagReferanse = &lag_ref);
+%testAnno(branch = &branch, slettDatasett = 1, lagReferanse = &lagNyRef);
+%testUtvalgX(alene = 1, branch = &branch, slettDatasett = 1, lagReferanse = &lagNyRef);
+%testRateberegninger(alene = 1, branch = &branch, slettDatasett = 1, lagReferanse = &lagNyRef);
 
 
 /*

@@ -1,4 +1,4 @@
-%macro Episode_of_care_test(branch=master, debug = 0, lagNyRef = 0, lagNyStart = 0);
+%macro Episode_of_care_test(branch=null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste EoC-makro.
@@ -14,8 +14,11 @@ Sammenligner datasettene som spyttes ut med referanse-sett (test.ref_eoc[n]).
 
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\episode_of_care.sas";
 
+/* Definere filbane */
+%let filbane = %definer_filbane(branch = &branch);
+
+%include "&filbane\makroer\episode_of_care.sas";
 
 %if &lagNyStart ne 0 %then %do;
 /*

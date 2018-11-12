@@ -2,7 +2,7 @@
 Felles makroer for testing av rateprogrammet. Kan også brukes til produksjon av test-datasett.
 */
 
-%macro testAnno(branch=master, lagReferanse = 0, slettDatasett = 1);
+%macro testAnno(branch=null, lagReferanse = 0, slettDatasett = 1);
 
 /*!
 Makro for å teste kode i ../Stiler/ (logo)
@@ -10,12 +10,11 @@ Makro for å teste kode i ../Stiler/ (logo)
 
 ods text="Test Anno";
 
-%local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
+/* Definere filbane */
+%let filbane = %definer_filbane(branch = &branch);
 
 %include "&filbane\Stiler\stil_figur.sas";
 %include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
-%include "&filbane\tests\makroer.sas";
 
 %sammenlignData(fil = anno, lagReferanse = &lagReferanse);
 
@@ -27,7 +26,7 @@ delete anno;
 %mend;
 
 
-%macro testUtvalgX(branch=master, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
+%macro testUtvalgX(branch=null, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
 
 /*!
 Makro for å teste utvalgx-makroen i rateprogrammet.
@@ -37,12 +36,11 @@ ods text="Test UtvalgX";
 
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 1;
 
-%local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
+/* Definere filbane */
+%let filbane = %definer_filbane(branch = &branch);
 
 %include "&filbane\makroer\boomraader.sas";
 %include "&filbane\rateprogram\rateberegninger.sas";
-%include "&filbane\tests\makroer.sas";
 
 %inkluderFormater;
 
@@ -87,7 +85,7 @@ delete rv andel anno;
 %mend;
 
 
-%macro testRateberegninger(branch=master, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
+%macro testRateberegninger(branch=null, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
 
 /*!
 Makro for å teste rateberegning-makroen (rateprogrammet)
@@ -97,15 +95,13 @@ ods text="Test Rateberegninger";
 
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 1;
 
-%local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
-
+/* Definere filbane */
+%let filbane = %definer_filbane(branch = &branch);
 
 %if (&alene ne 0) %then %do;
 
 %include "&filbane\makroer\boomraader.sas";
 %include "&filbane\rateprogram\rateberegninger.sas";
-%include "&filbane\tests\makroer.sas";
 
 %inkluderFormater;
 

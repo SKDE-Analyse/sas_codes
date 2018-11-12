@@ -1,22 +1,25 @@
-%macro aggreger_test(branch = master, debug = 0, lagNyRef = 0, lagNyStart = 0);
+%macro aggreger_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste aggreger-makro.
 
 Kjører aggreger-makroen på et test-datasett (`test.agg_start`).
-Sammenligner dette datasettet med en referanse (`test.ref_agg_&navn`).
+Sammenligner dette datasettet med en referanse (`tests/data/agg_&navn.csv`).
 
 ### Parametre
 
 - `branch = master`: Bestemmer hvilken aggreger-makro som kjøres (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset_:`.
-- `lagNyRef = 0` Hvis ulik null, lage referansedatasettene `test.ref_agg_&navn` på nytt.
+- `lagNyRef = 0` Hvis ulik null, lage referansedatasettene `tests/data/agg_&navn.csv` på nytt.
 - `lagNyStart = 0`: Hvis ulik null, lage startdatasettet `test.agg_start` på nytt.
 
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\aggreger.sas";
-%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\tests\makroer.sas";
+
+/* Definere filbane */
+%let filbane = %definer_filbane(branch = &branch);
+
+%include "&filbane\makroer\aggreger.sas";
 
 /*
 Lage nytt startsett, basert på test.pseudosens_avd_magnus og test.pseudosens_avtspes_magnus

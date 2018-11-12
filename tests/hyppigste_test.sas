@@ -1,4 +1,4 @@
-%macro hyppigste_test(branch = master, debug = 0, lagNyRef = 0, lagNyStart = 0);
+%macro hyppigste_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste hyppigste-makro.
@@ -15,7 +15,11 @@ Sammenligner dette datasettet med en referanse (`test.ref_hyppigste_&navn`).
 
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\hyppigste.sas";
+
+/* Definere filbane */
+%let filbane = %definer_filbane(branch = &branch);
+
+%include "&filbane\makroer\hyppigste.sas";
 
 /*
 Lage nytt startsett, basert på test.pseudosens_avd_magnus og test.pseudosens_avtspes_magnus

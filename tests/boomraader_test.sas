@@ -1,4 +1,4 @@
-%macro boomraader_test(branch = master, debug = 0, lagNyRef = 0, lagNyStart = 0);
+%macro boomraader_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste boomraader-makro.
@@ -15,7 +15,10 @@ Sammenligner dette datasettet med en referanse (`test.ref_boomr_&navn`).
 
 */
 
-%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\boomraader.sas";
+/* Definere filbane */
+%let filbane = %definer_filbane(branch = &branch);
+
+%include "&filbane\makroer\boomraader.sas";
 
 /*
 Lage nytt startsett, basert på test.pseudosens_avd_magnus
