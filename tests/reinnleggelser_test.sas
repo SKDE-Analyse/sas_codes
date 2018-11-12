@@ -39,76 +39,41 @@ proc delete data = tmp;
 
 %end; /* lagNyStart */
 
-data testset1;
+data reinn1;
 set test.reinn_start;
 run;
 
-%reinnleggelser(dsn=testset1, eks_diag=1);
+%reinnleggelser(dsn=reinn1, eks_diag=1);
 
-data testset2;
+%sammenlignData(fil = reinn1, lagReferanse = &lagNyRef);
+
+data reinn2;
 set test.reinn_start;
 run;
 
-%reinnleggelser(dsn=testset2);
+%reinnleggelser(dsn=reinn2);
 
-data testset3;
+%sammenlignData(fil = reinn2, lagReferanse = &lagNyRef);
+
+data reinn3;
 set test.reinn_start;
 run;
 
-%reinnleggelser(dsn=testset3, ReInn_Tid = 120);
+%reinnleggelser(dsn=reinn3, ReInn_Tid = 120);
 
-data testset4;
+%sammenlignData(fil = reinn3, lagReferanse = &lagNyRef);
+
+data reinn4;
 set test.reinn_start;
 run;
 
-%reinnleggelser(dsn=testset4, kun_innleggelser = 0);
+%reinnleggelser(dsn=reinn4, kun_innleggelser = 0);
 
+%sammenlignData(fil = reinn4, lagReferanse = &lagNyRef);
 
-/*
-Lag ny referanse
-*/
-%if &lagNyRef ne 0 %then %do;
-
-data test.ref_reinn1;
-set testset1;
-run;
-
-data test.ref_reinn2;
-set testset2;
-run;
-
-data test.ref_reinn3;
-set testset3;
-run;
-
-data test.ref_reinn4;
-set testset4;
-run;
-
-%end; /* lagNyRef */
-
-/*
-Test eks_diag = 1
-*/
-proc compare base=test.ref_reinn1 compare=testset1 BRIEF WARNING LISTVAR;
-
-/*
-Test default
-*/
-proc compare base=test.ref_reinn2 compare=testset2 BRIEF WARNING LISTVAR;
-
-/*
-Test ReInn_Tid = 120
-*/
-proc compare base=test.ref_reinn3 compare=testset3 BRIEF WARNING LISTVAR;
-
-/*
-Test kun_innleggelser = 0
-*/
-proc compare base=test.ref_reinn4 compare=testset4 BRIEF WARNING LISTVAR;
 
 %if &debug = 0 %then %do;
-proc delete data = testset1 testset2 testset3 testset4;
+proc delete data = reinn1 reinn2 reinn3 reinn4;
 %end;
 
 %mend;
