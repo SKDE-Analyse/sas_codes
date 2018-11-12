@@ -79,7 +79,7 @@ run;
 
 %if &slettDatasett ne 0 %then %do;
 proc datasets nolist;
-delete rv andel anno;
+delete rv andel anno tmp_aldersfig;
 %end;
 
 %mend;

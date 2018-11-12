@@ -14,10 +14,9 @@ Test av rateprogrammet hver for seg, uavhengig av rekkefølge
 
 Referansedatasettene lages her, hvis bedt om.
 */
-%testAnno(branch = &branch, slettDatasett = 1, lagReferanse = &lagNyRef);
-%testUtvalgX(alene = 1, branch = &branch, slettDatasett = 1, lagReferanse = &lagNyRef);
 %testRateberegninger(alene = 1, branch = &branch, slettDatasett = 1, lagReferanse = &lagNyRef);
-
+%testUtvalgX(alene = 1, branch = &branch, slettDatasett = 1, lagReferanse = &lagNyRef);
+%testAnno(branch = &branch, slettDatasett = 1, lagReferanse = &lagNyRef);
 
 /*
 Test av rateprogrammet i sin helhet. Kjører rateprogrammet fra A til Å.

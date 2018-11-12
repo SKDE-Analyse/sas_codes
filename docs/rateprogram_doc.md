@@ -16,4 +16,3 @@
 
 - [Prosedyrer for utvikling av koden](kode)
 - [Prosedyrer for testing av koden](testing)
-- [Forslag til endringer av rateprogrammet](endringer)
