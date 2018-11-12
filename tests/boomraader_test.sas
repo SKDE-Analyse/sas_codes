@@ -42,140 +42,102 @@ proc delete data = tmp;
 Test default
 */
 
-%let num = default;
+%let navn = default;
 
-data testset_&num;
+data boomr_&navn;
 set test.boomr_start;
 %boomraader();
 run;
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_boomr_&num;
-set testset_&num;
-run;
-%end;
-
-proc compare base=test.ref_boomr_&num. compare=testset_&num. BRIEF WARNING LISTVAR;
+%sammenlignData(fil = boomr_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = testset_&num;
+proc delete data = boomr_&navn;
 %end;
 
 /*
 Test haraldsplass = 1
 */
 
-%let num = haraldsplass;
+%let navn = haraldsplass;
 
-data testset_&num;
+data boomr_&navn;
 set test.boomr_start;
 %boomraader(haraldsplass = 1, indreOslo = 0, bydel = 1, barn = 0, boaar=2015);
 run;
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_boomr_&num;
-set testset_&num;
-run;
-%end;
-
-proc compare base=test.ref_boomr_&num. compare=testset_&num. BRIEF WARNING LISTVAR;
+%sammenlignData(fil = boomr_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = testset_&num;
+proc delete data = boomr_&navn;
 %end;
 
 /*
 Test indreOslo = 1
 */
 
-%let num = indreOslo;
+%let navn = indreOslo;
 
-data testset_&num;
+data boomr_&navn;
 set test.boomr_start;
 %boomraader(haraldsplass = 0, indreOslo = 1, bydel = 1, barn = 0, boaar=2015);
 run;
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_boomr_&num;
-set testset_&num;
-run;
-%end;
-
-proc compare base=test.ref_boomr_&num. compare=testset_&num. BRIEF WARNING LISTVAR;
+%sammenlignData(fil = boomr_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = testset_&num;
+proc delete data = boomr_&navn;
 %end;
 
 /*
 Test bydel = 0
 */
 
-%let num = bydel;
+%let navn = bydel;
 
-data testset_&num;
+data boomr_&navn;
 set test.boomr_start;
 %boomraader(haraldsplass = 0, indreOslo = 0, bydel = 0, barn = 0, boaar=2015);
 run;
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_boomr_&num;
-set testset_&num;
-run;
-%end;
-
-proc compare base=test.ref_boomr_&num. compare=testset_&num. BRIEF WARNING LISTVAR;
+%sammenlignData(fil = boomr_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = testset_&num;
+proc delete data = boomr_&navn;
 %end;
 
 /*
 Test barn = 1
 */
 
-%let num = barn;
+%let navn = barn;
 
-data testset_&num;
+data boomr_&navn;
 set test.boomr_start;
 %boomraader(haraldsplass = 0, indreOslo = 0, bydel = 1, barn = 1, boaar=2015);
 run;
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_boomr_&num;
-set testset_&num;
-run;
-%end;
-
-proc compare base=test.ref_boomr_&num. compare=testset_&num. BRIEF WARNING LISTVAR;
+%sammenlignData(fil = boomr_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = testset_&num;
+proc delete data = boomr_&navn;
 %end;
-
 
 /*
 Test boaar = 2012
 */
 
-%let num = boaar;
+%let navn = boaar;
 
-data testset_&num;
+data boomr_&navn;
 set test.boomr_start;
 %boomraader(haraldsplass = 0, indreOslo = 0, bydel = 1, barn = 0, boaar = 2012);
 run;
 
-%if &lagNyRef ne 0 %then %do;
-data test.ref_boomr_&num;
-set testset_&num;
-run;
-%end;
-
-proc compare base=test.ref_boomr_&num. compare=testset_&num. BRIEF WARNING LISTVAR;
+%sammenlignData(fil = boomr_&navn, lagReferanse = &lagNyRef);
 
 %if &debug = 0 %then %do;
-proc delete data = testset_&num;
+proc delete data = boomr_&navn;
 %end;
-
 
 %mend;
