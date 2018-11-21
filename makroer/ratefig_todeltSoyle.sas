@@ -3,7 +3,7 @@
 /* Need to run the 'merge' macro first before running this one.  The output from 'merge' is the input for this */
 /* creates a figure so that first column is rate from dataset1, and second column from dataset2 */
 
-%macro ratefig_todeltSoyle(datasett=, aar1=2015, aar2=2016, aar3=2017, bildeformat=png, noxlabel=0);
+%macro ratefig_todeltSoyle(datasett=, aar1=2015, aar2=2016, aar3=2017, bildeformat=png, noxlabel=0, bohf_format=BoHF_kort);
 
 proc sql;
    create table &datasett._to as 
@@ -97,6 +97,16 @@ if tot_rate_&aar3 lt tot_min then tot_min = tot_rate_&aar3;
 tot_max=tot_rate_&aar1;
 if tot_rate_&aar2 gt tot_max then tot_max = tot_rate_&aar2;
 if tot_rate_&aar3 gt tot_max then tot_max = tot_rate_&aar3;
+
+
+*create 3 variables that look exactly like bohf;
+*use them to draw scatter plot (årsvariasion) so that we can use the label for keylegend;
+bohf&aar1=bohf;
+bohf&aar2=bohf;
+bohf&aar3=bohf;
+label bohf&aar1="&aar1" bohf&aar2="&aar2" bohf&aar3="&aar3";
+format bohf&aar1 bohf&aar2 bohf&aar3 &bohf_format..;
+
 run;
 
 Data _null_;
@@ -115,10 +125,10 @@ ODS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=&b
 ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 title "&tittel";
 proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
-hbarparm category=bohf response=tot_rate2 / fillattrs=(color=CX95BDE6) missing name="hp1" legendlabel="&label_2"; 
-hbarparm category=bohf response=Ntot_rate / fillattrs=(color=CXC3C3C3);
-hbarparm category=bohf response=rate_1 / fillattrs=(color=CX00509E) missing name="hp2" legendlabel="&label_1"; 
-hbarparm category=bohf response=nrate_1 / fillattrs=(color=CX4C4C4C);
+hbarparm category=bohf response=tot_rate2 / fillattrs=(color=CX95BDE6) missing name="hp1" legendlabel="&label_2" outlineattrs=(color=CX00509E); 
+hbarparm category=bohf response=Ntot_rate / fillattrs=(color=CXC3C3C3) outlineattrs=(color=CX4C4C4C);
+hbarparm category=bohf response=rate_1 / fillattrs=(color=CX00509E) missing name="hp2" legendlabel="&label_1" outlineattrs=(color=CX00509E); 
+hbarparm category=bohf response=nrate_1 / fillattrs=(color=CX4C4C4C) outlineattrs=(color=CX4C4C4C);
 	scatter x=plass_rate y=bohf /datalabel=Misstextrate datalabelpos=right markerattrs=(size=0) ;
 	scatter x=plass_rate y=bohf /datalabel=andel_rate1 datalabelpos=right markerattrs=(size=0) 
         datalabelattrs=(color=white weight=bold size=8);
@@ -136,19 +146,22 @@ hbarparm category=bohf response=nrate_1 / fillattrs=(color=CX4C4C4C);
 		%end;
 		%if &vis_aarsvar=1 %then %do;
 			%if &ratestart=&aar1 %then %do;
-			scatter x=tot_rate_&aar1 y=Bohf / markerattrs=(symbol=squarefilled color=black);
-			scatter x=tot_rate_&aar2 y=Bohf / markerattrs=(symbol=circlefilled color=black); 
-			scatter x=tot_rate_&aar3 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
+			scatter x=tot_rate_&aar3 y=Bohf&aar3 / markerattrs=(symbol=circle       color=black size=9) name="y3"; 
+			scatter x=tot_rate_&aar2 y=Bohf&aar2 / markerattrs=(symbol=circlefilled color=grey  size=7) name="y2"; 
+			scatter x=tot_rate_&aar1 y=bohf&aar1 / markerattrs=(symbol=circlefilled color=black size=5) name="y1";
 			Highlow Y=Bohf low=tot_Min high=tot_Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); 
+			*keylegend "y1" "y2" "y3" / across=1 position=bottomright location=inside noborder valueattrs=(size=7);
 			%end;
 			%if &ratestart=&aar2 %then %do;
-			scatter x=tot_rate_&aar2 y=Bohf / markerattrs=(symbol=circlefilled color=black); 
-			scatter x=tot_rate_&aar3 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
+			scatter x=tot_rate_&aar3 y=Bohf&aar3 / markerattrs=(symbol=circle       color=black size=9) name="y3"; 
+			scatter x=tot_rate_&aar2 y=Bohf&aar2 / markerattrs=(symbol=circlefilled color=grey  size=7) name="y2"; 
 			Highlow Y=Bohf low=tot_Min high=tot_Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); 
+			*keylegend "y1" "y2" "y3" / across=1 position=bottomright location=inside noborder valueattrs=(size=7);
 			%end;
 			%if &ratestart=&aar3 %then %do;
-			scatter x=tot_rate_&aar3 y=Bohf / markerattrs=(symbol=trianglefilled color=black); 
+			scatter x=tot_rate_&aar3 y=Bohf&aar3 / markerattrs=(symbol=circle       color=black size=9) name="y3"; 
 			Highlow Y=Bohf low=tot_Min high=tot_Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); 
+			*keylegend "y1" "y2" "y3" / across=1 position=bottomright location=inside noborder valueattrs=(size=7);
 			%end;
 		%end;
 		Label &labeltabell;

@@ -112,13 +112,13 @@ ODS Graphics ON /reset=All imagename="&tema._&type._tredelt_&fignavn" imagefmt=&
 ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 title "&tittel";
 proc sgplot data=&dsn_fig noborder noautolegend sganno=&anno pad=(Bottom=5%);
-hbarparm category=bohf response=RateSnitt_tot / fillattrs=(color=CX95BDE6) outlineattrs=(color=black) missing name="hp1" legendlabel="&label_3";
-hbarparm category=bohf response=RateSnitt_12 / fillattrs=(color=CX568BBF) outlineattrs=(color=black) missing name="hp2" legendlabel="&label_2";
-hbarparm category=bohf response=RateSnitt&del1. / fillattrs=(color=CX00509E) outlineattrs=(color=black) missing name="hp3" legendlabel="&label_1" ; 
+hbarparm category=bohf response=RateSnitt_tot / fillattrs=(color=CX95BDE6) outlineattrs=(color=CX00509E) missing name="hp1" legendlabel="&label_3";
+hbarparm category=bohf response=RateSnitt_12 / fillattrs=(color=CX568BBF) outlineattrs=(color=CX00509E) missing name="hp2" legendlabel="&label_2";
+hbarparm category=bohf response=RateSnitt&del1. / fillattrs=(color=CX00509E) outlineattrs=(color=CX00509E) missing name="hp3" legendlabel="&label_1" ; 
 
-hbarparm category=bohf response=RateSnittN_tot / fillattrs=(color=CXC3C3C3) outlineattrs=(color=black); 
-hbarparm category=bohf response=RateSnittN_12 / fillattrs=(color=CX969696) outlineattrs=(color=black);
-hbarparm category=bohf response=RateSnittN&del1. / fillattrs=(color=CX4C4C4C) outlineattrs=(color=black);
+hbarparm category=bohf response=RateSnittN_tot / fillattrs=(color=CXC3C3C3) outlineattrs=(color=CX4C4C4C); 
+hbarparm category=bohf response=RateSnittN_12 / fillattrs=(color=CX969696) outlineattrs=(color=CX4C4C4C);
+hbarparm category=bohf response=RateSnittN&del1. / fillattrs=(color=CX4C4C4C) outlineattrs=(color=CX4C4C4C);
 
 *scatter x=pros_plass y=bohf /datalabel=Andel&del1. datalabelpos=right markerattrs=(size=0) datalabelattrs=(color=white weight=bold size=8);
 
