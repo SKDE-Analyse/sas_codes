@@ -2,7 +2,7 @@
 * each of them will form each of the 3 PARTS in the figure (not the total!);
 * the files need to have names that end with "_dp_tot_bohf" (dp stands for diagnose, prosedyre);
 
-%macro ratefig_tredeltSoyle(del1= ,del2=, del3=, bildeformat=png, noxlabel=0);
+%macro ratefig_tredeltSoyle(del1=, del2=, del3=, bildeformat=png, noxlabel=0,sprak=no);
 /*********************************************************/
 /* Lag tredelt figur for tilstandskoder (diagnosegruppe) */
 /*********************************************************/
@@ -108,8 +108,8 @@ run;
 %let skala=/*values=(0 to 1.5 by 0.5)*/;
 
 *ODS Graphics ON /reset=All imagename="&tema._&type._tredelt_&fignavn" imagefmt=png border=off ;
-ODS Graphics ON /reset=All imagename="&tema._&type._tredelt_&fignavn" imagefmt=&bildeformat border=off ;
-ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
+ODS Graphics ON /reset=All imagename="&tema._&type._tredelt_&fignavn" imagefmt=&bildeformat border=off height=500px;
+ODS Listing Image_dpi=500 GPATH="&bildelagring.&mappe";
 title "&tittel";
 proc sgplot data=&dsn_fig noborder noautolegend sganno=&anno pad=(Bottom=5%);
 hbarparm category=bohf response=RateSnitt_tot / fillattrs=(color=CX95BDE6) outlineattrs=(color=CX00509E) missing name="hp1" legendlabel="&label_3";
@@ -133,13 +133,21 @@ hbarparm category=bohf response=RateSnittN&del1. / fillattrs=(color=CX4C4C4C) ou
 /*	/ position=bottomright textattrs=(size=7);*/
 
 	keylegend "hp3" "hp2" "hp1"/ location=outside position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
-	 Yaxistable &tabellvariable/Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
-     yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+	 Yaxistable &tabellvariable/Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
+    
+
+	%if &sprak=no %then %do;
+      yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+	%end;
+	%else %if &sprak=en %then %do;
+      yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+	%end;
+
      %if &noxlabel=1 %then %do;
-	 xaxis display=(nolabel) offsetmin=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
+	 xaxis display=(nolabel) offsetmin=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 	 %end;
 	 %else %do;
-	 xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
+	 xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 	 %end;
 		Label &labeltabell;
 		Format Andel&del1. Andel&del2. Andel&del3. nlpct8.0 tot_antall nlnum8.0  &formattabell;

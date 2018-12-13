@@ -6,7 +6,7 @@
 Hente variable fra Parvus til Magnus
 
 ```
-%VarFraParvus(dsnMagnus=,var_som=,var_avtspes=);
+%VarFraParvus(dsnMagnus=,var_som=,var_avtspes=,taar= );
 ```
 
 ### Parametre

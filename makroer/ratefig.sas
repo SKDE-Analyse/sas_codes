@@ -42,7 +42,7 @@ INPUT FOR HVER FIGUR:
 
 
 /*enkel ratefigur*/
-%macro ratefig(datasett=, aar1=2015, aar2=2016, aar3=2017, bildeformat=png, noxlabel=0, bohf_format=BoHF_kort);
+%macro ratefig(datasett=, aar1=2015, aar2=2016, aar3=2017, bildeformat=png, noxlabel=0, bohf_format=BoHF_kort,sprak=no);
 
 /*Setter aktuelle rater i datasettet til missing hvis antall observasjoner er under grensen (nkrav)*/
 Data &datasett;
@@ -89,14 +89,14 @@ run;
 %end;
 
 ODS Graphics ON /reset=All imagename="&tema._&type._rate_&fignavn" imagefmt=&bildeformat border=off ;
-ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
+ODS Listing Image_dpi=500 GPATH="&bildelagring.&mappe";
 title "&tittel";
 
 proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
 
 %if &vis_misstxt=1 %then %do;
   hbarparm category=bohf response=RateSnitt / fillattrs=(color=CX95BDE6) missing outlineattrs=(color=grey); /*BoHFene*/
-  scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0);
+  scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) datalabelattrs=(size=8pt);
 %end; 
 %else %do;
   hbarparm category=bohf response=Ratesnitt2 / fillattrs=(color=CX95BDE6) missing outlineattrs=(color=grey);
@@ -127,18 +127,24 @@ hbarparm category=bohf response=Snittrate / fillattrs=(color=CXC3C3C3) outlineat
 %end;
 
 %if &noxlabel=1 %then %do;
-	xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
+	xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 %end;
 %else %do;
-	 xaxis offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
+	 xaxis offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 %end;
 
 %if &vis_ft=1 %then %do; 
 	inset "FT1 = &FT1" "FT2 = &FT2" "FT3 = &FT3" / position=right textattrs=(size=9) valuealign=right; 
 %end;
 
-Yaxistable &tabellvariable /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
-yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+Yaxistable &tabellvariable /Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
+
+%if &sprak=no %then %do;
+    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+%end;
+%else %if &sprak=en %then %do;
+    yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+%end;
 
 Label &labeltabell;
 Format &formattabell;

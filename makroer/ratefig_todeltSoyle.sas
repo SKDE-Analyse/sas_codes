@@ -3,7 +3,7 @@
 /* Need to run the 'merge' macro first before running this one.  The output from 'merge' is the input for this */
 /* creates a figure so that first column is rate from dataset1, and second column from dataset2 */
 
-%macro ratefig_todeltSoyle(datasett=, aar1=2015, aar2=2016, aar3=2017, bildeformat=png, noxlabel=0, bohf_format=BoHF_kort);
+%macro ratefig_todeltSoyle(datasett=, aar1=2015, aar2=2016, aar3=2017, bildeformat=png, noxlabel=0, bohf_format=BoHF_kort, sprak=no);
 
 proc sql;
    create table &datasett._to as 
@@ -120,31 +120,38 @@ proc sort data=&datasett;
 by descending tot_rate2;
 run;
 
-ODS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=&bildeformat border=off ;
+ODS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=&bildeformat border=off height=500px;
 *DS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=png border=off ;
-ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
+ODS Listing Image_dpi=500 GPATH="&bildelagring.&mappe";
 title "&tittel";
 proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
 hbarparm category=bohf response=tot_rate2 / fillattrs=(color=CX95BDE6) missing name="hp1" legendlabel="&label_2" outlineattrs=(color=CX00509E); 
 hbarparm category=bohf response=Ntot_rate / fillattrs=(color=CXC3C3C3) outlineattrs=(color=CX4C4C4C);
 hbarparm category=bohf response=rate_1 / fillattrs=(color=CX00509E) missing name="hp2" legendlabel="&label_1" outlineattrs=(color=CX00509E); 
 hbarparm category=bohf response=nrate_1 / fillattrs=(color=CX4C4C4C) outlineattrs=(color=CX4C4C4C);
-	scatter x=plass_rate y=bohf /datalabel=Misstextrate datalabelpos=right markerattrs=(size=0) ;
+	scatter x=plass_rate y=bohf /datalabel=Misstextrate datalabelpos=right markerattrs=(size=0) datalabelattrs=(size=8pt);
 	scatter x=plass_rate y=bohf /datalabel=andel_rate1 datalabelpos=right markerattrs=(size=0) 
         datalabelattrs=(color=white weight=bold size=8);
-		keylegend "hp2" "hp1"/ location=inside position=bottomright down=2 noborder titleattrs=(size=6);
-	 Yaxistable &tabellvariable /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
-     yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+		keylegend "hp2" "hp1"/ location=inside position=bottomright down=2 noborder titleattrs=(size=7);
+	 Yaxistable &tabellvariable /Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
+
+	 %if &sprak=no %then %do;
+     yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+	 %end;
+	 %else %if &sprak=en %then %do;
+     yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+	 %end;
+
 	 %if &noxlabel=1 %then %do;
-     xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
+     xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 	 %end;
 	 %else %do;
-	 xaxis offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=7) label="&xlabel" labelattrs=(size=7 weight=bold);
+	 xaxis offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 	 %end;
 	 	%if &vis_ft=1 %then %do;
 			inset "FT1=&FTr1" "FT2=&FTr2" "FT3=&FTr3" / position=right textattrs=(size=10);
 		%end;
-		%if &vis_aarsvar=1 %then %do;
+		%if &vis_aarsvar_todelt=1 and &vis_misstxt ne 1 %then %do;
 			%if &ratestart=&aar1 %then %do;
 			scatter x=tot_rate_&aar3 y=Bohf&aar3 / markerattrs=(symbol=circle       color=black size=9) name="y3"; 
 			scatter x=tot_rate_&aar2 y=Bohf&aar2 / markerattrs=(symbol=circlefilled color=grey  size=7) name="y2"; 

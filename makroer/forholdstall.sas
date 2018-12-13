@@ -1,4 +1,4 @@
-%macro forholdstall (ds=&forbruksmal._bohf, krav=&nkrav);
+%macro forholdstall (ds=&forbruksmal._bohf, nkrav=&nkrav);
 
 /*Lager kopi av inndatasett, navner om variabel som gir antall obs*/
 data &ds._to;
@@ -31,11 +31,11 @@ proc sort data=&ds._to;
 by ratesnitt;
 run;
 
-/*Lager datasett hvor kun opptaksområder med antall obs som overstiger &krav er med*/
+/*Lager datasett hvor kun opptaksområder med antall obs som overstiger &nkrav er med*/
 /*Lager rank variabel som angir bohf med høyeste/laveste rate*/
 data &ds._FT;
 set &ds._to;
-where antall ge &krav;
+where antall ge &nkrav;
 rank+1;
 run;
 
