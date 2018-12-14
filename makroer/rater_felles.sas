@@ -1,6 +1,6 @@
 
 
-%macro rater_felles(privat = 1, kun_total = 0, kun_poli = 0, Ratefil=helseatl.k_u_&agg_var._18);
+%macro rater_felles(privat = 1, kun_total = 0, kun_poli = 0, innlegg = 1, hastegrad = 1, unik = 1, Ratefil=helseatl.k_u_&agg_var._18);
 
 /*
 Ikke kjør privat, hvis privat = 0
@@ -89,6 +89,7 @@ run;
 /************
  * Personer *
  ************/
+ %if &unik ne 0 %then %do;
 
  %if &kun_poli = 0 %then %do;
 /******  tot_unik  ****************************************************************/
@@ -138,6 +139,8 @@ run;
 
 %forholdstall;
 
+%end; /* unik ne 0*/
+
 %if &privat ne 0 %then %do;
 /******  priv_unik  ****************************************************************/
 %let RV_variabelnavn= priv_unik; /*navn på ratevariabel i det aggregerte datasettet*/
@@ -158,6 +161,8 @@ run;
 /******************
  * Akutt/planlagt *
  ******************/
+
+%if &hastegrad ne 0 %then %do;
 
 /******  elek  ****************************************************************/
 %let RV_variabelnavn= elek; /*navn på ratevariabel i det aggregerte datasettet*/
@@ -190,10 +195,13 @@ run;
 
 %forholdstall;
 
+%end; /* hastegrad ne 0 */
+
 /****************
  * Innleggelser *
  ****************/
 
+%if &innlegg ne 0 %then %do;
 
  /******  inn  ****************************************************************/
 %let RV_variabelnavn= inn; /*navn på ratevariabel i det aggregerte datasettet*/
@@ -225,6 +233,8 @@ delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd ;
 run;
 
 %forholdstall;
+
+%end; /* innlegg ne 0 */
 
 %end;
 %end;
