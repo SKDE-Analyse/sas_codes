@@ -89,7 +89,7 @@ run;
 %end;
 
 ODS Graphics ON /reset=All imagename="&tema._&type._rate_&fignavn" imagefmt=&bildeformat border=off ;
-ODS Listing Image_dpi=500 GPATH="&bildelagring.&mappe";
+ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 title "&tittel";
 
 proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);

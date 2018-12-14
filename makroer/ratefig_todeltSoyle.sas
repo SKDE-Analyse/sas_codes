@@ -122,7 +122,7 @@ run;
 
 ODS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=&bildeformat border=off height=500px;
 *DS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=png border=off ;
-ODS Listing Image_dpi=500 GPATH="&bildelagring.&mappe";
+ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 title "&tittel";
 proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
 hbarparm category=bohf response=tot_rate2 / fillattrs=(color=CX95BDE6) missing name="hp1" legendlabel="&label_2" outlineattrs=(color=CX00509E); 
