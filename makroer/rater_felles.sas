@@ -2,10 +2,6 @@
 
 %macro rater_felles(privat = 1, kun_total = 0, kun_poli = 0, innlegg = 1, hastegrad = 1, unik = 1, Ratefil=helseatl.k_u_&agg_var._18);
 
-/*
-Ikke kjør privat, hvis privat = 0
-*/
-
 %Let Alderskategorier=30;
 
 %if &kun_poli = 0 %then %do;
@@ -27,6 +23,23 @@ delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd ;
 run;
 
 %forholdstall;
+
+ %if &unik ne 0 %then %do;
+/******  tot_unik  ****************************************************************/
+%let RV_variabelnavn= tot_unik; /*navn på ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+
+%utvalgx;
+%omraadeNorge;
+%rateberegninger;
+
+proc datasets nolist;
+delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd ;
+run;
+
+%forholdstall;
+%end; /* &unik ne 0 */
 
 %end; /* kun_poli = 0 */
 
@@ -90,23 +103,6 @@ run;
  * Personer *
  ************/
  %if &unik ne 0 %then %do;
-
- %if &kun_poli = 0 %then %do;
-/******  tot_unik  ****************************************************************/
-%let RV_variabelnavn= tot_unik; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
-
-%utvalgx;
-%omraadeNorge;
-%rateberegninger;
-
-proc datasets nolist;
-delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd ;
-run;
-
-%forholdstall;
-%end; /* &kun_poli = 0 */
 
 /******  poli_unik  ****************************************************************/
 %let RV_variabelnavn= poli_unik; /*navn på ratevariabel i det aggregerte datasettet*/
