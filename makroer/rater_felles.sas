@@ -28,7 +28,7 @@ run;
 
 %forholdstall;
 
-%end;
+%end; /* kun_poli = 0 */
 
 %if &kun_total = 0 %then %do;
 
@@ -83,7 +83,7 @@ delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd ;
 run;
 
 %forholdstall;
-%end;
+%end; /* &privat ne 0 */
 
 
 /************
@@ -106,7 +106,7 @@ delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd ;
 run;
 
 %forholdstall;
-%end;
+%end; /* &kun_poli = 0 */
 
 /******  poli_unik  ****************************************************************/
 %let RV_variabelnavn= poli_unik; /*navn på ratevariabel i det aggregerte datasettet*/
@@ -139,7 +139,7 @@ run;
 
 %forholdstall;
 
-%end; /* unik ne 0*/
+%end; /* &kun_poli = 0 */
 
 %if &privat ne 0 %then %do;
 /******  priv_unik  ****************************************************************/
@@ -156,7 +156,9 @@ delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd ;
 run;
 
 %forholdstall;
-%end;
+%end; /* &privat ne 0 */
+
+%end; /* &unik ne 0 */
 
 /******************
  * Akutt/planlagt *
@@ -236,7 +238,6 @@ run;
 
 %end; /* innlegg ne 0 */
 
-%end;
-%end;
+%end; /* &kun_total = 0 */
 
 %mend;
