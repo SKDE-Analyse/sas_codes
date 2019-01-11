@@ -1,4 +1,4 @@
-%macro forholdstall (ds=&forbruksmal._bohf);
+%macro forholdstall (ds=&forbruksmal._bohf, tab=1);
 
 /*Lager kopi av inndatasett, navner om variabel som gir antall obs*/
 data &ds._to;
@@ -112,6 +112,8 @@ proc datasets nolist;
 delete &ds._to &ds._FT;
 run;
 
+%if &tab=1 %then %do;
 %oversiktstabell_helseatlas;
+%end;
 
 %mend forholdstall;
