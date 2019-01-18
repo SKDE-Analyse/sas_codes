@@ -115,6 +115,10 @@ proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
 	 	hbarparm category=bohf response=andel2 / fillattrs=(color=CX95BDE6) outlineattrs=(color=grey) missing; /*BoHFene*/
 		scatter x=plass y=bohf /datalabel=Misstxt datalabelpos=right markerattrs=(size=0) datalabelattrs=(size=8pt); 	
 	%end;
+	%if &vis_misstxt ne 1 %then %do;
+	 	hbarparm category=bohf response=&andel / fillattrs=(color=CX95BDE6) outlineattrs=(color=grey) missing; /*BoHFene*/
+	%end;
+	
 	hbarparm category=bohf response=andel_norge / fillattrs=(color=CXC3C3C3) outlineattrs=(color=grey); /*Norge*/	
 
 	scatter x=plass y=bohf /datalabel=andel2 datalabelpos=right markerattrs=(size=0) datalabelattrs=(color=&labelcol weight=bold size=8);
