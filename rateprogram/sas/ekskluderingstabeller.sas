@@ -179,7 +179,7 @@ RV={LABEL=""}*Sum={LABEL="Antall"}
 RUN;
 
 proc datasets nolist;
-delete ikke:;
+delete ikke: qwerty_data;
 run;
 
 %mend;
