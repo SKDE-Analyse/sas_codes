@@ -45,7 +45,6 @@ Det er umulig å dekke alle mulige scenarier, men her er en liste over hva man b
 
 - Forskjellig alderskategorier (kjører kun med Alderskategorier = 30 foreløpig)
 - Kun aldersjustering (aldjust=Ermann=1)
-- Verstkommune_HN = 1 (fungerer foreløpig ikke)
 - Velge ut noen boområder (f.eks Mine_boomraader = komnr in (1900:1930))
 - Kun ett kjønn (f.eks kjonn=(0))
 - Annen nevner (f.eks rate_pr=100000)

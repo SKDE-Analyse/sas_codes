@@ -138,7 +138,7 @@ run;
 %let HF=1; 	
 %let RHF=1; 
 %let Oslo=1; 
-%let Verstkommune_HN=;
+%let Vertskommune_HN=1;
 
 %rateberegninger;
 
@@ -164,7 +164,7 @@ Kjører makroen for alle kommuner, ikke kun HN
 %let HF=; 	
 %let RHF=; 
 %let Oslo=; 
-%let Verstkommune_HN=;
+%let Vertskommune_HN=;
 
 %rateberegninger;
 
@@ -173,7 +173,7 @@ Kjører makroen for alle kommuner, ikke kun HN
 Sammenligne datasettene med referansedatasett
 */
 
-   %sjekkeBoDatasett(bolist = Norge BoRHF bohf BoShHN komnr komnrHN fylke bydel);
+   %sjekkeBoDatasett(bolist = Norge BoRHF bohf BoShHN komnr komnrHN fylke bydel VK);
 
 %end;
 %else %do;
@@ -181,13 +181,13 @@ Sammenligne datasettene med referansedatasett
    Lagre det siste referansedatasettet
 */
 
-   %lagreBoDatasett(bolist = Norge BoRHF bohf BoShHN komnr komnrHN fylke bydel);
+   %lagreBoDatasett(bolist = Norge BoRHF bohf BoShHN komnr komnrHN fylke bydel VK);
 
 %end;
 
 %if &slettDatasett ne 0 %then %do;
 proc datasets nolist;
-delete rv: andel anno Norge: BoRHF: bohf: BoShHN: komnr: komnrHN: fylke: bydel: 
+delete rv: andel anno Norge: BoRHF: bohf: BoShHN: komnr: komnrHN: fylke: bydel: VK:
 alder konsultasjoner_norge snudd hnsnitt aldersspenn konsultasjoner:;
 %end;
 

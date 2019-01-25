@@ -47,8 +47,8 @@
 
 data RV&Bo;
 set RV;
-If VertskommuneHN=1 then VK=1;
-else if VertskommuneHN ne 1 then VK=0;
+If VertskommHN=1 then VK=1;
+else if VertskommHN ne 1 then VK=0;
 Where BoRHF=1;
 run;
 
