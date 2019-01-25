@@ -77,7 +77,7 @@ Definere variabler
 
     %gi_verdi(variabel = Fig_KI_Oslo, verdi = );
 
-    %gi_verdi(variabel = Verstkommune_HN, verdi = );
+    %gi_verdi(variabel = Vertskommune_HN, verdi = );
 
     %gi_verdi(variabel = bildeformat, verdi = png);
 

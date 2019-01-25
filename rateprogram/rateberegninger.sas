@@ -1,4 +1,5 @@
 %let makrobane=&filbane\rateprogram\sas;
+%put WARNING: test;
 %include "&filbane\makroer\boomraader.sas";
 %include "&filbane\makroer\forny_komnr.sas";
 %include "&makrobane\lag_kart.sas";
@@ -60,7 +61,7 @@ Makro som beregner rater og spytter ut tabeller og figurer.
 | komnr      | &kommune=1         | [omraade](#omraade)    | 
 | komnr      | &kommune_HN=1      | [omraadeHN](#omraadehn)|
 | fylke      | &fylke=1           | [omraade](#omraade)    |
-| VK         | &Verstkommune_HN=1 | [omraadeHN](#omraadehn)|
+| VK         | &Vertskommune_HN=1 | [omraadeHN](#omraadehn)|
 | bydel      | &oslo=1            | [omraade](#omraade)    |
    
 6. Kaller opp tabell-rutiner, figur-rutiner etc. basert på valg gjort i rateprogrammet (se variabelliste under)
@@ -103,7 +104,7 @@ Makro som beregner rater og spytter ut tabeller og figurer.
 - fylke
 - Fig_AA_fylke
 - Fig_KI_fylke
-- Verstkommune_HN
+- Vertskommune_HN
 - oslo
 - Fig_AA_Oslo
 - Fig_KI_Oslo
@@ -357,11 +358,23 @@ Title;
 		%lagre_dataN;
 	%end;
 
-	%if &Verstkommune_HN=1 %then %do;
+	%if &Vertskommune_HN=1 %then %do;
 		%let Bo=VK;
 		%omraadeHN; 
 
 		%lag_tabeller;
+
+		%if &kart=1 %then %do;
+            %put ERROR: Kart fungerer ikke med Vertskommune_HN=1;
+		%end;
+
+		%if &aarsvarfigur=1 %then %do;
+			%lag_aarsvarfigur;
+		%end;
+
+		%if &KIfigur=1 %then %do;
+			%KI_figur;
+		%end; 
 
 		%lagre_dataN;
 	%end;
@@ -373,7 +386,7 @@ Title;
 		%lag_tabeller;
 
 		%if &kart=1 %then %do;
-			%lag_kart;
+            %put ERROR: Kart fungerer ikke med oslo=1;
 		%end;
 
 		%if &aarsvarfigur=1 and &Fig_AA_Oslo=1 %then %do;

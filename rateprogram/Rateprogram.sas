@@ -50,7 +50,7 @@ options sasautos=("&filbane\makroer" SASAUTOS);
 %let HF=1; 			/*Bildefiler*/ %let Fig_AA_HF=; 	%let Fig_KI_HF=;
 %let RHF=1;			/*Bildefiler*/ %let Fig_AA_RHF=; 	%let Fig_KI_RHF=;
 %let Oslo=; 		/*Bildefiler*/ %let Fig_AA_Oslo=; 	%let Fig_KI_Oslo=;
-%let Verstkommune_HN=;
+%let Vertskommune_HN=;
 /* Dersom du skal ha bilde-filer */
 %let bildeformat=png; /*Format*/
 %let lagring="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\Bildefiler"; /*Hvor skal filene lagres*/
