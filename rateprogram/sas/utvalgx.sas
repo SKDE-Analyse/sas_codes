@@ -79,6 +79,7 @@ Første makro som kjøres direkte i rateprogrammet
 
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
+%if %sysevalf(%superq(Vertskommune_HN)=,boolean) %then %let Vertskommune_HN = ;
 
 %if &silent=0 %then %do;
 %print_info;
