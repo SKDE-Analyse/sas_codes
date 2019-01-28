@@ -3,7 +3,7 @@
 /* Need to run the 'merge' macro first before running this one.  The output from 'merge' is the input for this */
 /* creates a figure so that first column is rate from dataset1, and second column from dataset2 */
 
-%macro ratefig_todeltSoyle(datasett=, aar1=2015, aar2=2016, aar3=2017, bildeformat=png, noxlabel=0, bohf_format=BoHF_kort, sprak=no);
+%macro ratefig_todeltSoyle(datasett=, aar1=2015, aar2=2016, aar3=2017, bildeformat=png, noxlabel=0, bohf_format=BoHF_kort, sprak=no, legendplace=location=inside position=bottomright down=2);
 
 proc sql;
    create table &datasett._to as 
@@ -132,7 +132,7 @@ hbarparm category=bohf response=nrate_1 / fillattrs=(color=CX4C4C4C) outlineattr
 	scatter x=plass_rate y=bohf /datalabel=Misstextrate datalabelpos=right markerattrs=(size=0) datalabelattrs=(size=8pt);
 	scatter x=plass_rate y=bohf /datalabel=andel_rate1 datalabelpos=right markerattrs=(size=0) 
         datalabelattrs=(color=white weight=bold size=8);
-		keylegend "hp2" "hp1"/ location=inside position=bottomright down=2 noborder titleattrs=(size=7);
+		keylegend "hp2" "hp1"/ &legendplace noborder titleattrs=(size=7);
 	 Yaxistable &tabellvariable /Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
 
 	 %if &sprak=no %then %do;
