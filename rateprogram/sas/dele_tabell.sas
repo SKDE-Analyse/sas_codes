@@ -235,9 +235,8 @@ quit;
 %dele(just=ujust);
 
 
-
-
-proc delete data=&forbruksmal._tmp&År1 &forbruksmal._tmp&År2 &forbruksmal._tmp&År3 &forbruksmal._tmpSN;
-run;
+proc datasets lib=work nolist;
+  delete &forbruksmal._tmp:;
+quit;
 
 %mend dele_tabell;
