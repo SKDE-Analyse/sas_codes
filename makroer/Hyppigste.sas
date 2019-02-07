@@ -1,4 +1,4 @@
-%macro hyppigste(Ant_i_liste=10, VarName=, data_inn=, tillegg_tittel=, Where=, test = 0);
+%macro hyppigste(Ant_i_liste=10, VarName=, data_inn=, tillegg_tittel=, Where=, test = 0, by = 0);
 /*!
 
 ### Beskrivelse
@@ -71,6 +71,9 @@ run;
 Title "Rangering, &Ant_i_liste hyppigste &VarName, &rang_av_total.% av totalt, med &totaltrang av &totalt observasjoner totalt. &tillegg_tittel";
 PROC TABULATE
 DATA=dsn;
+    %if &by ne 0 %then %do;
+    by &by;
+    %end;
 	WHERE( Rang <= &Ant_i_liste);	
 	VAR antall PCT_tot PCT_rang;
 	CLASS Rang &varName/	ORDER=FORMATTED MISSING;
