@@ -66,7 +66,7 @@ by descending &sortby;
 run;
 
 ODS Graphics ON /reset=All imagename="&tema._&type._andel100_&fignavn" imagefmt=&bildeformat border=off width=640px height=500px;
-ODS Listing Image_dpi=500 GPATH="&bildelagring.&mappe";
+ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 proc sgplot data=qwerty_m noborder noautolegend sganno=anno pad=(Bottom=5%);
 
 hbarparm category=bohf response=andel_alle / fillattrs=(color=CX95BDE6)  outlineattrs=(color=CX00509E) missing name="hp1" legendlabel="&label_alle"; 

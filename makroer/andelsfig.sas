@@ -106,8 +106,8 @@ proc sort data=&datasett;
 by descending andel2;
 run;
 
-ODS Graphics ON /reset=All imagename="&tema._&type._andel_&fignavn" imagefmt=&bildeformat border=off ;
-ODS Listing Image_dpi=500 GPATH="&bildelagring.&mappe";
+ODS Graphics ON /reset=All imagename="&tema._&type._andel_&fignavn" imagefmt=&bildeformat border=off  height=500px;
+ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
 title "&tittel";
 proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
 
@@ -141,10 +141,10 @@ proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
 
 	Yaxistable &tabellvariable / Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
 	%if &sprak=no %then %do;
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=8);
 	%end;
 	%else %if &sprak=en %then %do;
-    yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+    yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=8);
 	%end;
 	Label &labeltabell;
 	Format &formattabell &andel andel2 andel_norge &andelformat;

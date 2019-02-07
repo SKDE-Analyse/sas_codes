@@ -81,7 +81,7 @@ by descending rateSnitt;
 run;
 %end;
 
-/*Hvis vi vil fjerne rater med lav n bruker vi rateSnitt2*/
+/*Hvis vi ikke vil fjerne rater med lav n bruker vi rateSnitt2*/
 %if &vis_misstxt ne 1 %then %do;
 proc sort data=&datasett;
 by descending rateSnitt2;
