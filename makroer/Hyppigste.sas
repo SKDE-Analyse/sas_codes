@@ -32,12 +32,23 @@ set &data_inn;
 &where;
 run;
 
+%if &by ne 0 %then %do;
+PROC SQL;
+   CREATE TABLE dsn AS 
+   SELECT DISTINCT &by,&VarName,(COUNT(&VarName)) AS antall
+      FROM dsn 
+      GROUP BY &by, &VarName;
+QUIT;
+%end;
+
+%if &by = 0 %then %do;
 PROC SQL;
    CREATE TABLE dsn AS 
    SELECT DISTINCT &VarName,(COUNT(&VarName)) AS antall
       FROM dsn 
       GROUP BY &VarName;
 QUIT;
+%end;
 
 proc rank data=dsn out=dsn descending ties=low;
    var antall; ranks Rang;
