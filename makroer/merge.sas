@@ -42,11 +42,11 @@
 	quit;
 	data dsn3;
 	set &dsn3;
-	antall_3=&rv3; rate_3=ratesnitt;
+	antall_3=&rv3; rate_3=ratesnitt; rate_3_&aar1=rate&aar1; rate_3_&aar2=rate&aar2; rate_3_&aar3=rate&aar3;
 	run;
 	proc sql;
 	create table dsn1 as
-	select dsn1.*,dsn3.antall_3,dsn3.rate_3
+	select dsn1.*,dsn3.antall_3,dsn3.rate_3,dsn3.rate_3_&aar1,dsn3.rate_3_&aar2,dsn3.rate_3_&aar3
 	from dsn1 left join dsn3
 	on dsn1.bohf=dsn3.bohf;
 	quit;
@@ -69,11 +69,11 @@
 	quit;
 	data dsn3;
 	set &dsn3;
-	antall_3=&rv3; rate_3=ratesnitt;
+	antall_3=&rv3; rate_3=ratesnitt; rate_3_&aar1=rate&aar1; rate_3_&aar2=rate&aar2; rate_3_&aar3=rate&aar3;
 	run;
 	proc sql;
 	create table dsn1 as
-	select dsn1.*,dsn3.antall_3,dsn3.rate_3
+	select dsn1.*,dsn3.antall_3,dsn3.rate_3,dsn3.rate_3_&aar1,dsn3.rate_3_&aar2,dsn3.rate_3_&aar3
 	from dsn1 left join dsn3
 	on dsn1.bohf=dsn3.bohf;
 	quit;
@@ -106,11 +106,11 @@
 	quit;
 	data dsn3;
 	set &dsn3;
-	antall_3=&rv3; rate_3=ratesnitt;
+	antall_3=&rv3; rate_3=ratesnitt; rate_3_&aar1=rate&aar1; rate_3_&aar2=rate&aar2; rate_3_&aar3=rate&aar3;
 	run;
 	proc sql;
 	create table dsn1 as
-	select dsn1.*,dsn3.antall_3,dsn3.rate_3
+	select dsn1.*,dsn3.antall_3,dsn3.rate_3,dsn3.rate_3_&aar1,dsn3.rate_3_&aar2,dsn3.rate_3_&aar3
 	from dsn1 left join dsn3
 	on dsn1.bohf=dsn3.bohf;
 	quit;
@@ -153,11 +153,11 @@
 	quit;
 	data dsn3;
 	set &dsn3;
-	antall_3=&rv3; rate_3=ratesnitt;
+	antall_3=&rv3; rate_3=ratesnitt; rate_3_&aar1=rate&aar1; rate_3_&aar2=rate&aar2; rate_3_&aar3=rate&aar3;
 	run;
 	proc sql;
 	create table dsn1 as
-	select dsn1.*,dsn3.antall_3,dsn3.rate_3
+	select dsn1.*,dsn3.antall_3,dsn3.rate_3,dsn3.rate_3_&aar1,dsn3.rate_3_&aar2,dsn3.rate_3_&aar3
 	from dsn1 left join dsn3
 	on dsn1.bohf=dsn3.bohf;
 	quit;
