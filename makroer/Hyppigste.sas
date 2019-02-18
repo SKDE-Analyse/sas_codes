@@ -39,6 +39,19 @@ PROC SQL;
       FROM dsn 
       GROUP BY &by, &VarName;
 QUIT;
+
+proc rank data=dsn out=dsn descending ties=low;
+by &by;
+   var antall; ranks Rang;
+run;
+
+proc sql noprint;
+select sum(antall) into :totalt
+from dsn group by &by; quit;
+
+proc sql noprint;
+select sum(antall) into :totaltrang
+from dsn group by &by; where rang le &Ant_i_liste; quit;
 %end;
 
 %if &by = 0 %then %do;
@@ -48,7 +61,6 @@ PROC SQL;
       FROM dsn 
       GROUP BY &VarName;
 QUIT;
-%end;
 
 proc rank data=dsn out=dsn descending ties=low;
    var antall; ranks Rang;
@@ -61,6 +73,7 @@ from dsn; quit;
 proc sql noprint;
 select sum(antall) into :totaltrang
 from dsn where rang le &Ant_i_liste; quit;
+%end;
 
 data dsn;
 set dsn;
