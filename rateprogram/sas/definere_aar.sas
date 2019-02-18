@@ -39,5 +39,34 @@ Periode Antall_aar ≈r1 ≈r2 etc. basert pÂ &Start≈r og &Slutt≈r
 	%let ≈r7=%sysevalf(&Start≈r+6);
 %end;
 
+%if &Antall_aar=2 %then %do;
+	proc format; Value aar
+	&≈r1="&≈r1" 9999='Snitt';	run;
+%end;
+%if &Antall_aar=3 %then %do;
+	proc format; Value aar
+	&≈r1="&≈r1" &≈r2="&≈r2" 9999='Snitt';	run;
+%end;
+%if &Antall_aar=4 %then %do;
+	proc format; Value aar
+	&≈r1="&≈r1"	&≈r2="&≈r2" &≈r3="&≈r3" 9999='Snitt';	run;
+%end;
+%if &Antall_aar=5 %then %do;
+	proc format; Value aar
+	&≈r1="&≈r1"	&≈r2="&≈r2" &≈r3="&≈r3"	&≈r4="&≈r4" 9999='Snitt';	run;
+%end;
+%if &Antall_aar=6 %then %do;
+	proc format; Value aar
+	&≈r1="&≈r1"	&≈r2="&≈r2" &≈r3="&≈r3" &≈r4="&≈r4" &≈r5="&≈r5"	9999='Snitt';	run;
+%end;
+%if &Antall_aar=7 %then %do;
+	proc format; Value aar
+	&≈r1="&≈r1"	&≈r2="&≈r2" &≈r3="&≈r3"	&≈r4="&≈r4" &≈r5="&≈r5"	&≈r6="&≈r6" 9999='Snitt';	run;
+%end;
+%if &Antall_aar=8 %then %do;
+	proc format; Value aar
+	&≈r1="&≈r1"	&≈r2="&≈r2" &≈r3="&≈r3"	&≈r4="&≈r4" &≈r5="&≈r5"	&≈r6="&≈r6" &≈r7="&≈r7" 9999='Snitt';	run;
+%end;
+
 %mend;
 

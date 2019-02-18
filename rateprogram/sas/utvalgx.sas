@@ -87,35 +87,6 @@ Første makro som kjøres direkte i rateprogrammet
 
 %definere_aar;
 
-%if &Antall_aar=2 %then %do;
-	proc format; Value aar
-	&År1="&År1" 9999='Snitt';	run;
-%end;
-%if &Antall_aar=3 %then %do;
-	proc format; Value aar
-	&År1="&År1" &År2="&År2" 9999='Snitt';	run;
-%end;
-%if &Antall_aar=4 %then %do;
-	proc format; Value aar
-	&År1="&År1"	&År2="&År2" &År3="&År3" 9999='Snitt';	run;
-%end;
-%if &Antall_aar=5 %then %do;
-	proc format; Value aar
-	&År1="&År1"	&År2="&År2" &År3="&År3"	&År4="&År4" 9999='Snitt';	run;
-%end;
-%if &Antall_aar=6 %then %do;
-	proc format; Value aar
-	&År1="&År1"	&År2="&År2" &År3="&År3" &År4="&År4" &År5="&År5"	9999='Snitt';	run;
-%end;
-%if &Antall_aar=7 %then %do;
-	proc format; Value aar
-	&År1="&År1"	&År2="&År2" &År3="&År3"	&År4="&År4" &År5="&År5"	&År6="&År6" 9999='Snitt';	run;
-%end;
-%if &Antall_aar=8 %then %do;
-	proc format; Value aar
-	&År1="&År1"	&År2="&År2" &År3="&År3"	&År4="&År4" &År5="&År5"	&År6="&År6" &År7="&År7" 9999='Snitt';	run;
-%end;
-
 options locale=NB_NO;
 
 /*

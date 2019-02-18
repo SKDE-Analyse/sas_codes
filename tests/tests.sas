@@ -19,6 +19,13 @@ Hentes inn på følgende måte:
 %include "&filbane\tests\reinnleggelser_test.sas";
 %include "&filbane\tests\unik_pasient_test.sas";
 
+/* Inkluder formater */
+
+%include "&filbane\formater\SKDE_somatikk.sas";
+%include "&filbane\formater\NPR_somatikk.sas";
+%include "&filbane\formater\bo.sas";
+%include "&filbane\formater\beh.sas";
+
 %macro test(branch = master, lag_ny_referanse = 0);
 /*!
 Makro som kjører alle testene
