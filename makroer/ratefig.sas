@@ -140,10 +140,10 @@ hbarparm category=bohf response=Snittrate / fillattrs=(color=CXC3C3C3) outlineat
 Yaxistable &tabellvariable /Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
 
 %if &sprak=no %then %do;
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+    yaxis display=(noticks noline) label='Bosatte i opptaksområdene' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
 %end;
 %else %if &sprak=en %then %do;
-    yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+    yaxis display=(noticks noline) label='Hospital referral areas' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
 %end;
 
 Label &labeltabell;
