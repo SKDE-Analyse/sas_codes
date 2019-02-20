@@ -2,11 +2,13 @@
 Hovedtestfil som leser inn alle testene, slik at disse kan kjøres.
 Inneholder også felles makroer som testene bruker.
 
-Hentes inn på følgende måte:
+Hentes inn og kjøres på følgende måte:
 
 ```
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
+%let branch = master;
+%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
 %include "&filbane\tests\tests.sas";
+%test(branch = &branch);
 ```
 */
 
@@ -26,7 +28,7 @@ Hentes inn på følgende måte:
 %include "&filbane\formater\bo.sas";
 %include "&filbane\formater\beh.sas";
 
-%macro test(branch = master, lag_ny_referanse = 0);
+%macro test(branch = master, lag_ny_referanse = 0, debug = 0);
 /*!
 Makro som kjører alle testene
 */
@@ -74,6 +76,10 @@ Makro for å sammenligne to datasett, der referansedatasettet ligger i mappa `&fi
 
 */
 
+%if &debug ne 0 %then %do;
+ods text="Sammenligner datasett &fil.";
+%end;
+
 %if &lagReferanse ne 0 %then %do;
 /*
 Lagre data på disk
@@ -114,13 +120,17 @@ run;
 /*
 Sammenlign nye data med referansedata 
 */
-proc compare base=ref_&fil compare=test_&fil BRIEF WARNING LISTVAR &crit;
+proc compare base=ref_&fil compare=test_&fil NOPRINT WARNING LISTVAR &crit;
 run;
 
 /* Slett datasett */
 proc datasets nolist;
 delete tmp test_&fil ref_&fil;
 run;
+
+%if &debug ne 0 %then %do;
+ods text="Ferdig sammeligne fil &fil.";
+%end;
 
 %mend;
 
