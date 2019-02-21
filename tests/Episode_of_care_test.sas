@@ -97,18 +97,6 @@ run;
 %sammenlignData(fil = eoc5, lagReferanse = &lagNyRef);
 
 /*
-Teste kols = 1
-*/
-
-data eoc6;
-set test.eoc_startsett;
-run;
-
-%episode_of_care(dsn=eoc6, kols = 1);
-
-%sammenlignData(fil = eoc6, lagReferanse = &lagNyRef);
-
-/*
 Teste inndeling = 1 
 */
 
