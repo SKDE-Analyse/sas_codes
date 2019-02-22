@@ -5,7 +5,6 @@ forste_hastegrad = 1,
 behold_datotid=0, 
 debug = 0, 
 nulle_liggedogn = 0, 
-kols = 0, 
 inndeling = 0,
 separer_ut_poli = 0
 );
@@ -103,6 +102,12 @@ if aktivitetskategori3 not in (1,2) then tmp_poli = 1;
 format inndatotid utdatotid datetime18.;
 run;
 
+%if &debug ne 0 %then %do;
+data &dsn.debug_1;
+set &dsn;
+run;
+%end;
+
 %if &inndeling = 1 %then %do;
     %let beh = behrhf;
 %end;
@@ -116,6 +121,12 @@ run;
 proc sort data=&dsn;
 by tmp_poli pid inndatotid utdatotid;
 run;
+
+%if &debug ne 0 %then %do;
+data &dsn.debug_2;
+set &dsn;
+run;
+%end;
 
 data &dsn(drop = tmp_utdatotid);
 set &dsn;
@@ -147,9 +158,21 @@ end;
 format lag_utdatotid datetime18. EoC_diff time10.;
 run;
 
+%if &debug ne 0 %then %do;
+data &dsn.debug_3;
+set &dsn;
+run;
+%end;
+
 proc sort data=&dsn;
 by tmp_poli pid inndatotid utdatotid;
 run;
+
+%if &debug ne 0 %then %do;
+data &dsn.debug_3b;
+set &dsn;
+run;
+%end;
 
 /* Markere opphold som ikke skal inngå i EoC fra forrige linje som brudd i EoC */
 data &dsn;
@@ -165,10 +188,22 @@ if tmp_poli = 1 then EoC_brudd=1;
 
 run;
 
+%if &debug ne 0 %then %do;
+data &dsn.debug_4;
+set &dsn;
+run;
+%end;
+
 /*Nummerere EoC-oppholdene*/
 proc sort data=&dsn;
 by pid tmp_poli EoC_brudd inndatotid utdatotid;
 run;
+
+%if &debug ne 0 %then %do;
+data &dsn.debug_4b;
+set &dsn;
+run;
+%end;
 
 data &dsn;
 set &dsn;
@@ -180,10 +215,22 @@ end;
 if EoC_brudd=. then EoC_nr_pid=.;
 run;
 
+%if &debug ne 0 %then %do;
+data &dsn.debug_5;
+set &dsn;
+run;
+%end;
+
 proc sort data=&dsn;
 by pid inndatotid utdatotid EoC_overlapp descending EoC_brudd;
 *by pid inndatotid utdatotid;
 run;
+
+%if &debug ne 0 %then %do;
+data &dsn.debug_5b;
+set &dsn;
+run;
+%end;
 
 /*Fyller inn blanke, dvs fyller inn EoC_nr_pid på de som ikke er merket med blanke*/
 data &dsn;
@@ -194,6 +241,11 @@ else tempvar = EoC_nr_pid;
 drop tempvar;
 run;
 
+%if &debug ne 0 %then %do;
+data &dsn.debug_6;
+set &dsn;
+run;
+%end;
 
 /* Gir alle EoC en unik id, basert på pid og eoc-nummer */
 data &dsn;
@@ -201,9 +253,21 @@ set &dsn;
 EoC_id = pid*1000 + EoC_nr_pid;
 run;
 
+%if &debug ne 0 %then %do;
+data &dsn.debug_7;
+set &dsn;
+run;
+%end;
+
 proc sort data=&dsn;
 by pid EoC_nr_pid inndatotid utdatotid;
 run;
+
+%if &debug ne 0 %then %do;
+data &dsn.debug_7b;
+set &dsn;
+run;
+%end;
 
 data &dsn;
 set &dsn;
@@ -212,12 +276,24 @@ if first.EoC_nr_pid=1 then EoC_Intern_nr=0; /*Nummerer oppholdene innenfor hver 
 	EoC_Intern_nr+1;
 run;
 
+%if &debug ne 0 %then %do;
+data &dsn.debug_8;
+set &dsn;
+run;
+%end;
+
 PROC SQL;
 	CREATE TABLE &dsn AS 
 	SELECT *,MAX(EoC_Intern_nr) AS EoC_Antall_i_EoC, min(inndato) as EoC_inndato, max(utdato) as EoC_utdato, min(inndatotid) as EoC_inndatotid, max(utdatotid) as EoC_utdatotid, max(aar) as EoC_aar
 	FROM &dsn
 	GROUP BY PID,EoC_nr_pid;
 QUIT;
+
+%if &debug ne 0 %then %do;
+data &dsn.debug_9;
+set &dsn;
+run;
+%end;
 
 data &dsn;
 set &dsn;
@@ -227,6 +303,12 @@ set &dsn;
 %end;
 	drop EoC_brudd EoC_innen_t lag_utdatotid EoC_overlapp;
 run;
+
+%if &debug ne 0 %then %do;
+data &dsn.debug_10;
+set &dsn;
+run;
+%end;
 
 /*
 Hastegrad for første opphold, hvis forste_hastegrad = 1, eller første døgnopphold
@@ -240,6 +322,12 @@ by EoC_id aktivitetskategori3 EoC_Intern_nr inndatotid utdatotid;
 %end;
 run;
 
+%if &debug ne 0 %then %do;
+data &dsn.debug_10b;
+set &dsn;
+run;
+%end;
+
 data &dsn;
 set &dsn;
 by EoC_id;
@@ -251,6 +339,12 @@ aktkat = aktivitetskategori3;
 if uttilstand > 1 then aktkat = 1;
 run;
 
+%if &debug ne 0 %then %do;
+data &dsn.debug_11;
+set &dsn;
+run;
+%end;
+
 PROC SQL;
 	CREATE TABLE &dsn AS 
 	SELECT *, min(aktkat) as EoC_aktivitetskategori3, 
@@ -260,9 +354,21 @@ PROC SQL;
 	GROUP BY EoC_id;
 QUIT;
 
+%if &debug ne 0 %then %do;
+data &dsn.debug_12;
+set &dsn;
+run;
+%end;
+
 proc sort data=&dsn;
 by pid EoC_nr_pid EoC_Intern_nr inndatotid utdatotid;
 run;
+
+%if &debug ne 0 %then %do;
+data &dsn.debug_12b;
+set &dsn;
+run;
+%end;
 
 data &dsn;
 set &dsn;
