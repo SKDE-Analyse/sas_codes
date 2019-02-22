@@ -96,15 +96,16 @@ run;
 
 %sammenlignData(fil = eoc5, lagReferanse = &lagNyRef);
 
+
 /*
-Teste kols = 1
+Test av bug i "separer_ut_poli = 1". Vil ikke fungere før issue #52 (https://github.com/SKDE-Analyse/sas_codes/issues/52) er fikset.
 */
 
 data eoc6;
-set test.eoc_startsett;
+set test.eoc_poli;
 run;
 
-%episode_of_care(dsn=eoc6, kols = 1);
+%episode_of_care(dsn=eoc6, separer_ut_poli = 1);
 
 %sammenlignData(fil = eoc6, lagReferanse = &lagNyRef);
 
