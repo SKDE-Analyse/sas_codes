@@ -222,8 +222,7 @@ run;
 %end;
 
 proc sort data=&dsn;
-by pid inndatotid utdatotid EoC_overlapp descending EoC_brudd;
-*by pid inndatotid utdatotid;
+by pid tmp_poli inndatotid utdatotid EoC_overlapp descending EoC_brudd;
 run;
 
 %if &debug ne 0 %then %do;
