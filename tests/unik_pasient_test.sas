@@ -65,7 +65,7 @@ set testset_&navn;
 run;
 %end;
 
-proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. NOPRINT WARNING LISTVAR;
+proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
 
 %if &debug = 0 %then %do;
 proc delete data = testset_&navn;
@@ -93,7 +93,7 @@ set testset_&navn;
 run;
 %end;
 
-proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. NOPRINT WARNING LISTVAR;
+proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
 
 %if &debug = 0 %then %do;
 proc delete data = testset_&navn;
@@ -120,7 +120,7 @@ set testset_&navn;
 run;
 %end;
 
-proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. NOPRINT WARNING LISTVAR;
+proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
 
 %if &debug = 0 %then %do;
 proc delete data = testset_&navn;
@@ -148,7 +148,7 @@ set testset_&navn;
 run;
 %end;
 
-proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. NOPRINT WARNING LISTVAR;
+proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
 
 %if &debug = 0 %then %do;
 proc delete data = testset_&navn;
@@ -176,7 +176,7 @@ set testset_&navn;
 run;
 %end;
 
-proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. NOPRINT WARNING LISTVAR;
+proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
 
 %if &debug = 0 %then %do;
 proc delete data = testset_&navn;
@@ -204,7 +204,7 @@ set testset_&navn;
 run;
 %end;
 
-proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. NOPRINT WARNING LISTVAR;
+proc compare base=test.ref_unik_pasient_&navn. compare=testset_&navn. BRIEF WARNING LISTVAR;
 
 %if &debug = 0 %then %do;
 proc delete data = testset_&navn;

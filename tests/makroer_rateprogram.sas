@@ -8,6 +8,8 @@ Felles makroer for testing av rateprogrammet. Kan også brukes til produksjon av 
 Makro for å teste kode i ../Stiler/ (logo)
 */
 
+ods text="Test Anno";
+
 /* Definere filbane */
 %let filbane = %definer_filbane(branch = &branch);
 
@@ -29,6 +31,8 @@ delete anno;
 /*!
 Makro for å teste utvalgx-makroen i rateprogrammet.
 */
+
+ods text="Test UtvalgX";
 
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 1;
 
@@ -61,20 +65,14 @@ proc sort data=andel;
 by alderny ermann;
 run;
 
-%if &debug ne 0 %then %do;
-ods text="Sammenligner datasett rv";
-%end;
 /* Filen RV er for stor til å inkluderes i repo, så ligger på server */
 %if &lagReferanse = 0 %then %do;
-proc compare base=test.ref_rate_rv compare=rv NOPRINT WARNING LISTVAR;
+proc compare base=test.ref_rate_rv compare=rv BRIEF WARNING LISTVAR;
 %end;
 %else %do;
 data test.ref_rate_rv;
 set rv;
 run;
-%end;
-%if &debug ne 0 %then %do;
-ods text="Ferdig sammeligne fil rv";
 %end;
 
 %sammenlignData(fil = andel, lagReferanse = &lagReferanse);
@@ -95,6 +93,8 @@ delete tmp_aldersfig;
 /*!
 Makro for å teste rateberegning-makroen (rateprogrammet)
 */
+
+ods text="Test Rateberegninger";
 
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 1;
 
