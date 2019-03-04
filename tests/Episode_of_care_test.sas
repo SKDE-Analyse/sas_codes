@@ -109,6 +109,15 @@ run;
 
 %sammenlignData(fil = eoc6, lagReferanse = &lagNyRef);
 
+data eoc6b;
+set test.eoc_poli;
+run;
+
+%episode_of_care(dsn=eoc6b, separer_ut_poli = 0);
+
+%sammenlignData(fil = eoc6b, lagReferanse = &lagNyRef);
+
+
 /*
 Teste inndeling = 1 
 */
