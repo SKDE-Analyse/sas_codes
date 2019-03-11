@@ -31,8 +31,7 @@
    - kjører `proc means` 
 7. Definerer boområder
 8. Beregner andeler
-   - Er denne nødvendig? Kan ikke se at den "virker".
-   - Lager datasett `Andel`
+   - Lager datasett `Andel`, som brukes i justering i omraade-makroen.
 
    
 #### Avhengig av følgende variabler
@@ -245,7 +244,7 @@ format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr 
 	    create table tmpAndel as
 	    select distinct aar, alderny, ErMann, sum(innbyggere) as innbyggere 
 	    from RV
-		where aar=&aar and &boomraadeN /*test 13/6-16*/
+		where aar=&aar and &boomraadeN 
 	    group by aar, alderny, ErMann;
 	quit;
 

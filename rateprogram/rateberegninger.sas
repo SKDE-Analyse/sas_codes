@@ -193,19 +193,10 @@ Title;
 
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
 
-%let Bo=Norge; 	*%omraade; /*må lage egen for Norge*/
-%if &Vis_tabeller=1 %then %do;
-	%tabell_1;
-%end;
+%let Bo=Norge; /*må lage egen for Norge*/
 
-%if &Vis_tabeller=2 %then %do;
-	%tabell_1;
-%end;
+%lag_tabeller;
 
-%if &Vis_tabeller=3 %then %do;
-	%tabell_1; %tabell_3N;
-%end; 
-	
 %lagre_dataNorge;
 
 	%if &RHF=1 %then %do;

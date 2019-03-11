@@ -90,11 +90,6 @@ from &bo._fig left join snudd
 on &bo._fig.&bo=snudd.&bo;
 quit;
 
-/*data _null_;
-set norgesnitt;
-call symput('Norge',(rv_just_rate_sum));
-run;*/
-
 data _null_;
 set Norge_agg_rate;
 If Aar=9999 then do;

@@ -149,7 +149,7 @@ N_Innbyggere = Innbyggere i hver kjønns/alderskategori for hvert boområde.
 Innbyggere_jN = Innbyggere i hver kjønns/alderskategori i Norge
 */
 
-/*HER FOREGÅR JUSTERINGEN!!!! INDIREKTE JUSTERING MÅ LEGGES INN HER.*/
+/*HER FOREGÅR DEN DIREKTE JUSTERINGEN!!!! */
 	e_i=RV_jN*(N_Innbyggere/Innbyggere_jN);  
 	rate_RV=(RV_tot/Innbyggere_tot)*(&rate_pr/Kategorier); 
 	just_rate_RV=((N_RV/N_Innbyggere)*&rate_pr)*Andel; 
