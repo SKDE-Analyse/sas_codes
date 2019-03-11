@@ -60,7 +60,7 @@ set norgesnitt;
 keep aar RV_just_rate_sum;
 where aar=9999;
 run;
-%end;
+%end; /* %if &bo=Norge */
 
 %if &bo ne Norge %then %do;
 %if &silent ne 0 %then %do;
@@ -86,20 +86,9 @@ set &bo._Fig;
 keep aar RV_just_rate_sum;
 where aar=9999 /*and BoRHF=1*/;/*MÅ FIXES*/
 run;
-%end;
+%end; /* %if &bo=Norge */
+
 %mend tabell_1;
-
-%macro tabell_1e;
-/*!
-#### Formål
-{: .no_toc}
-
-Made the format for the numbers into macro so that tabell_1 can output both number format depending on what "tallformat" specifies. (NLnum or Excel)
-Therefore tabell_1e is now obsolete.
-*/
-
-
-%mend tabell_1e;
 
 
 /* Tabeller med ujust og KI*/
@@ -134,10 +123,6 @@ RUN;
 
 %mend tabell_cv;
 
-%macro Tabell_CVe;
-
-%mend tabell_cve;
-
 %macro tabell_3N;
 /*!
 #### Formål
@@ -156,11 +141,14 @@ run;
 
 %if &silent=0 %then %do;
 PROC TABULATE DATA=&Bo._Agg_Rate;	
-	VAR Ant_Innbyggere Ant_Opphold RV_rate RV_just_rate SDJUSTRate KI_N_J KI_O_J;
+	VAR Ant_Innbyggere Ant_Opphold RV_rate RV_just_rate RV_ijust_rate SDJUSTRate KI_N_J KI_O_J;
 	CLASS aar /	ORDER=UNFORMATTED MISSING;
 	TABLE aar='',
-		sum=''*(Ant_Innbyggere='Innbyggere'*Format=&talltabformat..0 Ant_Opphold="&forbruksmal"*Format=&talltabformat..0 RV_rate='Ujust.rate'*Format=&talltabformat..&rateformat 
-		RV_just_rate='Just.rate'*Format=&talltabformat..&rateformat SDJUSTRate='Std.avvik'*Format=&talltabformat..3
+		sum=''*(Ant_Innbyggere='Innbyggere'*Format=&talltabformat..0 Ant_Opphold="&forbruksmal"*Format=&talltabformat..0 
+        RV_rate='Ujust.rate'*Format=&talltabformat..&rateformat 
+		RV_just_rate='Dir.just.rate'*Format=&talltabformat..&rateformat 
+        RV_ijust_rate='Ind.just.rate'*Format=&talltabformat..&rateformat 
+        SDJUSTRate='Std.avvik'*Format=&talltabformat..3
 		KI_N_J='Nedre KI'*Format=&talltabformat..3 KI_O_J='Øvre KI'*Format=&talltabformat..3 ) 
 		/BOX={LABEL="Rater - &SnittOmraade" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
 		Title "&standard rater pr &rate_pr innbyggere, &Min_alder - &Max_alder år, &SnittOmraade";
@@ -168,10 +156,6 @@ RUN;
 %end;
 
 %mend tabell_3N;
-
-%macro tabell_3Ne;
-
-%mend tabell_3Ne;
 
 %macro Tabell_3;
 /*!
@@ -190,12 +174,16 @@ run;
 
 %if &silent=0 %then %do;
 PROC TABULATE DATA=&Bo._Agg_Rate ;	
-	VAR Ant_Innbyggere Ant_Opphold RV_rate RV_just_rate SDJUSTRate KI_N_J KI_O_J;
+	VAR Ant_Innbyggere Ant_Opphold RV_rate RV_just_rate RV_ijust_rate SDJUSTRate KI_N_J KI_O_J;
 	CLASS &Bo /	ORDER=UNFORMATTED MISSING;
 	CLASS aar /	ORDER=UNFORMATTED MISSING;
 	TABLE aar=''*&Bo='',
-		sum=''*(Ant_Innbyggere='Innbyggere'*Format=&talltabformat..0 Ant_Opphold="&forbruksmal"*Format=&talltabformat..0 RV_rate='Ujust.rate'*Format=&talltabformat..&rateformat 
-		RV_just_rate='Just.rate'*Format=&talltabformat..&rateformat SDJUSTRate='Std.avvik'*Format=&talltabformat..3
+		sum=''*(Ant_Innbyggere='Innbyggere'*Format=&talltabformat..0 
+        Ant_Opphold="&forbruksmal"*Format=&talltabformat..0 
+        RV_rate='Ujust.rate'*Format=&talltabformat..&rateformat 
+		RV_just_rate='Dir.just.rate'*Format=&talltabformat..&rateformat 
+        RV_ijust_rate='Ind.just.rate'*Format=&talltabformat..&rateformat 
+        SDJUSTRate='Std.avvik'*Format=&talltabformat..3
 		KI_N_J='Nedre KI'*Format=&talltabformat..3 KI_O_J='Øvre KI'*Format=&talltabformat..3 )  
 		/BOX={LABEL="Rater - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
 		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &Bo";
@@ -213,11 +201,6 @@ DATA=&Bo._Agg_CV Format=&talltabformat..3;
 RUN;
 %end;
 %mend Tabell_3;
-
-%macro Tabell_3e;
-
-
-%mend Tabell_3e;
 
 %macro lag_tabeller;
 
