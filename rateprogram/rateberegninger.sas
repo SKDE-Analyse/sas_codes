@@ -1,5 +1,4 @@
 %let makrobane=&filbane\rateprogram\sas;
-%put WARNING: test;
 %include "&filbane\makroer\boomraader.sas";
 %include "&filbane\makroer\forny_komnr.sas";
 %include "&makrobane\lag_kart.sas";

@@ -96,7 +96,6 @@ call symput('Min_alder', trim(left(put(minalder,8.))));
 call symput('Max_alder', trim(left(put(maxalder,8.))));
 run;
 
-%put WARNING: Bo: &bo;
 %if &silent=0 and &bo ne Norge %then %do;
 PROC TABULATE
 DATA=&Bo._Agg_CV Format=&talltabformat..3;
@@ -167,16 +166,16 @@ ods select all;
 
 %macro lag_tabeller;
 
-	%if &Vis_tabeller=1 %then %do;	
+	%if &Vis_tabeller ge 1 %then %do;	
 		%tabell_1;
 	%end;
 		
-	%if &Vis_tabeller=2 %then %do;	
-		%tabell_1; %tabell_CV;	
+	%if &Vis_tabeller ge 2 %then %do;	
+		%tabell_CV;	
 	%end;
 		
-	%if &Vis_tabeller=3 %then %do;	
-		%tabell_1; %tabell_CV; %tabell_3;	
+	%if &Vis_tabeller ge 3 %then %do;	
+		%tabell_3;	
 	%end;
 
 %mend;
