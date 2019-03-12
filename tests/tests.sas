@@ -26,18 +26,28 @@ Hentes inn på følgende måte:
 %include "&filbane\formater\bo.sas";
 %include "&filbane\formater\beh.sas";
 
+%include "&filbane\makroer\deleteAll.sas";
+
 %macro test(branch = master, lag_ny_referanse = 0);
 /*!
 Makro som kjører alle testene
 */
 
+%deleteAll;
 %aggreger_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%deleteAll;
 %boomraader_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%deleteAll;
 %Episode_of_care_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%deleteAll;
 %hyppigste_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%deleteAll;
 %reinnleggelser_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%deleteAll;
 %unik_pasient_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%deleteAll;
 %rateprogram_test(branch = &branch, lagNyRef = &lag_ny_referanse);
+%deleteAll;
 
 %mend;
 

@@ -15,7 +15,6 @@ Sammenligner dette datasettet med en referanse (`tests/data/agg_&navn.csv`).
 
 */
 
-
 /* Definere filbane */
 %let filbane = %definer_filbane(branch = &branch);
 
@@ -30,6 +29,8 @@ etter eoc.
 data tmp;
 set test.pseudosens_avd_magnus test.pseudosens_avtspes_magnus;
 run;
+
+%include "&filbane\makroer\episode_of_care.sas";
 
 %episode_of_care(dsn = tmp);
 
