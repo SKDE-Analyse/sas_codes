@@ -3,7 +3,6 @@
 %include "&filbane\makroer\forny_komnr.sas";
 %include "&makrobane\lag_kart.sas";
 %include "&makrobane\omraade.sas";
-%include "&makrobane\omraadeHN.sas";
 %include "&makrobane\utvalgx.sas";
 %include "&makrobane\lag_aarsvarbilde.sas";
 %include "&makrobane\lag_aarsvarfigur.sas";
