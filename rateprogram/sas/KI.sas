@@ -52,13 +52,13 @@ set &bo._KI_Fig;
 format Ant_Innbyggere NLnum12.0 Ant_Opphold NLnum12.0;
 run;
 
-proc sort data=&bo._KI_Fig; by descending RV_just_rate; run;
+proc sort data=&bo._KI_Fig; by descending &rate_var; run;
 
 ods listing style=stil_figur;
 title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, rate med 95% KI, &min_aar - &max_aar";
 proc sgplot data=&bo._KI_Fig noborder noautolegend sganno=anno pad=(Bottom=5%);
 where &Mine_Boomraader;
-hbarparm category=&bo response=RV_just_rate / limitlower=KI_N_J limitupper=KI_O_J Limitattrs=(Color=black) fillattrs=(color=CX95BDE6); 
+hbarparm category=&bo response=&rate_var / limitlower=KI_N_J limitupper=KI_O_J Limitattrs=(Color=black) fillattrs=(color=CX95BDE6); 
 	 Refline Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=1);
 	 Refline Norge_KI_N / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
 	 Refline Norge_KI_O / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
@@ -79,13 +79,13 @@ set &bo._KI_Fig;
 format Ant_Innbyggere NLnum12.0 Ant_Opphold NLnum12.0;
 run;
 
-proc sort data=&bo._KI_Fig; by descending RV_just_rate; run;
+proc sort data=&bo._KI_Fig; by descending &rate_var; run;
 
 ODS Graphics ON /reset=All imagename="KI_&RV_variabelnavn._&bo" imagefmt=&bildeformat  border=off HEIGHT=&hoyde width=&bredde;
 ODS Listing style=stil_figur Image_dpi=300 GPATH=&lagring;
 proc sgplot data=&bo._KI_Fig noborder noautolegend sganno=anno pad=(Bottom=5%);
 where &Mine_Boomraader;
-hbarparm category=&bo response=RV_just_rate / limitlower=KI_N_J limitupper=KI_O_J Limitattrs=(Color=black) fillattrs=(color=CX95BDE6); 
+hbarparm category=&bo response=&rate_var / limitlower=KI_N_J limitupper=KI_O_J Limitattrs=(Color=black) fillattrs=(color=CX95BDE6); 
 	 Refline Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=1);
 	 Refline Norge_KI_N / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
 	 Refline Norge_KI_O / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);

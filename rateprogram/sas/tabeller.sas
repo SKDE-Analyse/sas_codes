@@ -20,7 +20,6 @@ Makro for å lage tabell over rater, kontakter og innbyggere i de ulike boområder
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
 
 /*finn min og max alder*/
-/*finn min og max alder*/
 proc sql;
 create table aldersspenn as
 select distinct max(alder) as maxalder, min(alder) as minalder
@@ -37,7 +36,7 @@ ods select none;
 %end;
 
 PROC TABULATE DATA=&Bo._Agg_Rate out=&bo._Fig;	
-	VAR RV_just_rate Ant_Opphold Ant_Innbyggere;
+	VAR &rate_var Ant_Opphold Ant_Innbyggere;
 	CLASS aar /	ORDER=UNFORMATTED MISSING;
 %if &bo = Norge %then %do;
 	TABLE aar='',
@@ -46,7 +45,7 @@ PROC TABULATE DATA=&Bo._Agg_Rate out=&bo._Fig;
 	CLASS &Bo /	ORDER=UNFORMATTED MISSING;
 	TABLE &Bo=' ', 
 %end;
-    sum=' '*(RV_just_rate="&standard rater"*Format=&talltabformat..&rateformat 
+    sum=' '*(&rate_var="&standard rater"*Format=&talltabformat..&rateformat 
 	Ant_Opphold="&forbruksmal"*Format=&talltabformat..0 
 %if &bo = Norge %then %do;
     Ant_Innbyggere='Antall innbyggere'*Format=&talltabformat..0)
@@ -67,7 +66,7 @@ ods select all;
 %if &bo ne Norge %then %do;
 data HNsnitt;
 set &bo._Fig;
-keep aar RV_just_rate_sum;
+keep aar &rate_var._sum;
 where aar=9999 /*and BoRHF=1*/;/*MÅ FIXES*/
 run;
 %end;

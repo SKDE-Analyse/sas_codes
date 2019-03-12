@@ -67,19 +67,19 @@ run;
 
 data &bo._fig;
 set &bo._fig;
-keep aar &bo rv_just_rate_sum Ant_Opphold_Sum Ant_Innbyggere_Sum;
+keep aar &bo &rate_var._sum Ant_Opphold_Sum Ant_Innbyggere_Sum;
 run;
 
-proc transpose data=&bo._fig out=snudd name=RV_just_rate_Sum
+proc transpose data=&bo._fig out=snudd name=&rate_var._Sum
 prefix=rate;
 by &bo notsorted;
 id aar;
-var RV_just_rate_Sum;
+var &rate_var._Sum;
 run; quit;
 
 data snudd;
 set snudd;
-drop RV_just_rate_Sum;
+drop &rate_var._Sum;
 aar=9999;
 run;
 
@@ -93,7 +93,7 @@ quit;
 data _null_;
 set Norge_agg_rate;
 If Aar=9999 then do;
-call symput('Norge',(rv_just_rate));
+call symput('Norge',(&rate_var));
 Call symput('Norge_KI_N',(KI_N_J));
 Call symput('Norge_KI_O',(KI_O_J));
 end;
