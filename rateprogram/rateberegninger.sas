@@ -1,10 +1,8 @@
 %let makrobane=&filbane\rateprogram\sas;
-%put WARNING: test;
 %include "&filbane\makroer\boomraader.sas";
 %include "&filbane\makroer\forny_komnr.sas";
 %include "&makrobane\lag_kart.sas";
 %include "&makrobane\omraade.sas";
-%include "&makrobane\omraadeHN.sas";
 %include "&makrobane\utvalgx.sas";
 %include "&makrobane\lag_aarsvarbilde.sas";
 %include "&makrobane\lag_aarsvarfigur.sas";
@@ -193,19 +191,10 @@ Title;
 
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
 
-%let Bo=Norge; 	*%omraade; /*må lage egen for Norge*/
-%if &Vis_tabeller=1 %then %do;
-	%tabell_1;
-%end;
+%let Bo=Norge; /*må lage egen for Norge*/
 
-%if &Vis_tabeller=2 %then %do;
-	%tabell_1;
-%end;
+%lag_tabeller;
 
-%if &Vis_tabeller=3 %then %do;
-	%tabell_1; %tabell_3N;
-%end; 
-	
 %lagre_dataNorge;
 
 	%if &RHF=1 %then %do;
@@ -260,7 +249,7 @@ Title;
 
 	%if &sykehus_HN=1 %then %do;
 		%let Bo=BoShHN;
-		%omraadeHN; 
+		%omraade(HN = 1); 
 
 		%lag_tabeller;
 
@@ -310,7 +299,7 @@ Title;
 
 	%if &kommune_HN=1 %then %do;
 		%let Bo=komnr;
-		%omraadeHN; 
+		%omraade(HN = 1); 
 
 		%lag_tabeller;
 
@@ -360,7 +349,7 @@ Title;
 
 	%if &Vertskommune_HN=1 %then %do;
 		%let Bo=VK;
-		%omraadeHN; 
+		%omraade(HN = 1); 
 
 		%lag_tabeller;
 

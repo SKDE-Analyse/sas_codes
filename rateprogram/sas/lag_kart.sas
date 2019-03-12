@@ -59,9 +59,9 @@ run;
 
 data &Bo._Agg_rate;
 set &Bo._Agg_rate;
-if (MEAN-SD)<RV_just_rate<(MEAN+SD) then RV_kart=2;
-if (MEAN-SD)>=RV_just_rate then RV_kart=1;
-if (MEAN+SD)<=RV_just_rate then RV_kart=3;
+if (MEAN-SD)<&rate_var<(MEAN+SD) then RV_kart=2;
+if (MEAN-SD)>=&rate_var then RV_kart=1;
+if (MEAN+SD)<=&rate_var then RV_kart=3;
 if SDJUSTRate=. then RV_kart=.;
 run;
 
@@ -120,8 +120,8 @@ title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Sni
 proc gmap data=&Bo._fig map=&kart_&Bo&kartaar density=1;
 where aar=9999;
 id &bo;
-choro RV_just_rate_sum/levels=4;
-label RV_just_rate_sum='Rate';
+choro &rate_var._sum/levels=4;
+label &rate_var._sum='Rate';
 run;
 quit;
 Title;
@@ -131,8 +131,8 @@ title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Sni
 proc gmap data=&Bo._fig map=&kart_&Bo&kartaar density=1;
 where aar=9999;
 id &bo;
-choro RV_just_rate_sum/levels=5;
-label RV_just_rate_sum='Rate';
+choro &rate_var._sum/levels=5;
+label &rate_var._sum='Rate';
 run;
 quit;
 Title;
@@ -142,8 +142,8 @@ title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Sni
 proc gmap data=&Bo._fig map=&kart_&Bo&kartaar anno=skdekart.oslo_txt_anno density=1;
 where aar=9999;
 id &bo;
-choro RV_just_rate_sum / levels=5 anno=skdekart.oslo_hf_anno;
-label RV_just_rate_sum='Rate';
+choro &rate_var._sum / levels=5 anno=skdekart.oslo_hf_anno;
+label &rate_var._sum='Rate';
 run;
 quit;
 Title;

@@ -16,11 +16,11 @@ Beskrivelse
     %if %sysevalf(%superq(datanavn)=,boolean) %then %let datanavn = &forbruksmal;
 %if &Ut_sett=1 %then %do;
 	data &datanavn._S_&bo; set &bo._agg_rate; run;
-	data &datanavn._&bo; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
+	data &datanavn._&bo; set &bo._aarsvar; drop aar &rate_var._sum; run;
 %end;
 
 %else %do;
-	data &datanavn._&bo; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
+	data &datanavn._&bo; set &bo._aarsvar; drop aar &rate_var._sum; run;
 %end;
 
 %mend lagre_dataN;
@@ -34,11 +34,11 @@ Aldri brukes?
     %if %sysevalf(%superq(datanavn)=,boolean) %then %let datanavn = &forbruksmal;
 %if &Ut_sett=1 %then %do;
 	data &datanavn._S_&bo._HN; set &bo._agg_rate; run;
-	data &datanavn._&bo._HN; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
+	data &datanavn._&bo._HN; set &bo._aarsvar; drop aar &rate_var._sum; run;
 %end;
 
 %else %do;
-	data &datanavn._&bo._HN; set &bo._aarsvar; drop aar rv_just_rate_sum; run;
+	data &datanavn._&bo._HN; set &bo._aarsvar; drop aar &rate_var._sum; run;
 %end;
 
 %mend lagre_dataHN;

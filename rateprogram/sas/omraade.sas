@@ -1,5 +1,5 @@
 
-%macro omraade;
+%macro omraade(HN = 0);
 
 /*!
 #### Formål
@@ -52,10 +52,22 @@ Ingen
 
 */
 
+/* Definer justering til direkte justering, hvis ikke definert */
+%if %sysevalf(%superq(justering)=,boolean) %then %let justering = 1;
+
+%global rate_var;
+%if &justering = 0 %then %let rate_var = rv_rate;
+%if &justering = 1 %then %let rate_var = rv_just_rate;
+%if &justering = 2 %then %let rate_var = rv_ijust_rate;
 
 %let Antall_aar=%sysevalf(&SluttÅr-&StartÅr+2);
 data RV&Bo;
 set RV;
+%if &HN = 1 %then %do;
+If VertskommHN=1 then VK=1;
+else if VertskommHN ne 1 then VK=0;
+Where BoRHF=1;
+%end;
 run;
 
 /*Aggregerer ratevariabel og innbyggere på boområde, år, alder og kjønn*/
@@ -149,7 +161,7 @@ N_Innbyggere = Innbyggere i hver kjønns/alderskategori for hvert boområde.
 Innbyggere_jN = Innbyggere i hver kjønns/alderskategori i Norge
 */
 
-/*HER FOREGÅR JUSTERINGEN!!!! INDIREKTE JUSTERING MÅ LEGGES INN HER.*/
+/*HER FOREGÅR DEN DIREKTE JUSTERINGEN!!!! */
 	e_i=RV_jN*(N_Innbyggere/Innbyggere_jN);  
 	rate_RV=(RV_tot/Innbyggere_tot)*(&rate_pr/Kategorier); 
 	just_rate_RV=((N_RV/N_Innbyggere)*&rate_pr)*Andel; 
@@ -161,7 +173,7 @@ run;
 proc sql;
     create table tmp1&Bo._Agg_rate as
     select distinct aar, &Bo, /* ny SVC */ kategorier,
-(sum(rate_RV)) as RV_rate, (sum(just_rate_RV)) as RV_just_rate, 
+(sum(rate_RV)) as RV_rate, (sum(just_rate_RV)) as rv_just_rate, 
 (sum(N_Innbyggere)) as Ant_Innbyggere, (sum(N_RV)) as Ant_Opphold,
 (sum(SD)) as SD_rate, (sqrt(sum(VarJust))) as SDJUSTRate, /* ny SVC */ (sum(e_i)) as ei 
     from &Bo._Agg
@@ -172,8 +184,8 @@ quit;
 /*Lager variabel mean som brukes i kartmakro til visuell utforming*/
 proc sql;
     create table tmp2&Bo._Agg_rate as
-    select distinct aar, &Bo, RV_rate, RV_just_rate, Ant_Innbyggere, Ant_Opphold, SD_rate, SDJUSTRate, /* ny SVC */ ei, kategorier,
-	(mean(RV_just_rate)) as mean 
+    select distinct aar, &Bo, RV_rate, rv_just_rate, Ant_Innbyggere, Ant_Opphold, SD_rate, SDJUSTRate, /* ny SVC */ ei, kategorier,
+	(mean(rv_just_rate)) as mean 
 	from tmp1&Bo._Agg_rate
 group by aar;
    quit;
@@ -184,23 +196,23 @@ set tmp2&Bo._Agg_rate;
 if aar ne 9999 then do;
 	KI_N=RV_rate-(1.96*SD_rate);
 	KI_O=RV_rate+(1.96*SD_rate);
-	KI_N_J=RV_just_rate-(1.96*SDJUSTRate);
-	KI_O_J=RV_just_rate+(1.96*SDJUSTRate);
+	KI_N_J=rv_just_rate-(1.96*SDJUSTRate);
+	KI_O_J=rv_just_rate+(1.96*SDJUSTRate);
 end;
 If aar=9999 then do; /*Etter innspill fra HelseVest (Jofrid) - KI for snitt skal ganges med 1/rot(antall_år) */
 /*	KI_N=(1/(sqrt((&antall_aar-1))))*(RV_rate-(1.96*SD_rate));*/
 /*	KI_O=(1/(sqrt((&antall_aar-1))))*(RV_rate+(1.96*SD_rate));*/
-/*	KI_N_J=(1/(sqrt((&antall_aar-1))))*(RV_just_rate-(1.96*SDJUSTRate));*/
-/*	KI_O_J=(1/(sqrt((&antall_aar-1))))*(RV_just_rate+(1.96*SDJUSTRate));*/
+/*	KI_N_J=(1/(sqrt((&antall_aar-1))))*(rv_just_rate-(1.96*SDJUSTRate));*/
+/*	KI_O_J=(1/(sqrt((&antall_aar-1))))*(rv_just_rate+(1.96*SDJUSTRate));*/
 
 	KI_N=(RV_rate-((1/(sqrt((&antall_aar-1))))*(1.96*SD_rate)));
 	KI_O=(RV_rate+((1/(sqrt((&antall_aar-1))))*(1.96*SD_rate)));
-	KI_N_J=(RV_just_rate-((1/(sqrt((&antall_aar-1))))*(1.96*SDJUSTRate)));
-	KI_O_J=(RV_just_rate+((1/(sqrt((&antall_aar-1))))*(1.96*SDJUSTRate)));
+	KI_N_J=(rv_just_rate-((1/(sqrt((&antall_aar-1))))*(1.96*SDJUSTRate)));
+	KI_O_J=(rv_just_rate+((1/(sqrt((&antall_aar-1))))*(1.96*SDJUSTRate)));
 
 end;
-MCV=RV_just_rate*Ant_Innbyggere;
-SDCV=RV_just_rate**2*Ant_Innbyggere;
+MCV=rv_just_rate*Ant_Innbyggere;
+SDCV=rv_just_rate**2*Ant_Innbyggere;
 /* ny alternativ SVC */ 
 obs_grunnlag=((Ant_Opphold-ei)/ei)**2;
 random_grunnlag=1/ei;
@@ -233,7 +245,7 @@ QUIT;
 
 data &Bo._AGG_CV;
 set &Bo._AGG_CV;
-meancv=SUM_of_MCV/SUM_of_Ant_Innbyggere; /* endrer navn fra mean til meanCV */
+meancv=SUM_of_MCV/SUM_of_Ant_Innbyggere;
 SD=sqrt((SUM_of_SDCV/SUM_of_Ant_Innbyggere)-meancv**2);
 CV=SD/meancv;
 SCV=100*((SUM_of_obs_grunnlag-SUM_of_random_grunnlag)/Boomr);
@@ -266,28 +278,28 @@ run;
 /*Tilpasning til å lage Norge som søyle*/
 PROC SQL;
    CREATE TABLE NORGE_AGG_RATE2 AS 
-   SELECT aar, Norge, RV_just_rate, Ant_Innbyggere,Ant_Opphold
+   SELECT aar, Norge, &rate_var, Ant_Innbyggere,Ant_Opphold
       FROM NORGE_AGG_RATE;
 QUIT;
 
-proc transpose data=NORGE_AGG_RATE2 out=NORGE_AGG_RATE3 name=RV_just_rate
+proc transpose data=NORGE_AGG_RATE2 out=NORGE_AGG_RATE3 name=&rate_var
 prefix=rate;
 *by &bo notsorted;
 id aar;
-var RV_just_rate;
+var &rate_var;
 run; quit;
 
 data NORGE_AGG_RATE3;
 set NORGE_AGG_RATE3;
-RV_just_rate_sum=rateSnitt;
-drop RV_just_rate;
+&rate_var._sum=rateSnitt;
+drop &rate_var;
 aar=9999;
 run;
 
 data NORGE_AGG_RATE4;
 set NORGE_AGG_RATE2;
 where aar=9999;
-drop RV_just_rate;
+drop &rate_var;
 run;
 
 proc sql;
