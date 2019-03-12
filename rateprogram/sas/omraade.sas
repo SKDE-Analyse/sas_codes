@@ -1,21 +1,21 @@
 
-%macro omraade;
+%macro omraade(HN = 0);
 
 /*!
-#### Formål
+#### FormÃ¥l
 
-Selve rateberegningene. Ratene beregnes basert på &bo 
+Selve rateberegningene. Ratene beregnes basert pÃ¥ &bo 
 
 #### "Steg for steg"-beskrivelse
 
 Kommer senere...
 
-#### Avhengig av følgende datasett
+#### Avhengig av fÃ¸lgende datasett
 
 - RV
 - andel
 
-#### Lager følgende datasett
+#### Lager fÃ¸lgende datasett
 
 - RV&Bo
 - &Bo._Agg
@@ -28,23 +28,23 @@ Kommer senere...
 - NORGE_AGG_RATE4
 - NORGE_AGG_RATE5
 
-#### Avhengig av følgende variabler
+#### Avhengig av fÃ¸lgende variabler
 
-- SluttÅr
-- StartÅr
+- SluttÃ…r
+- StartÃ…r
 - Bo
 - aar
 - forbruksmal
 
-#### Definerer følgende makro-variabler
+#### Definerer fÃ¸lgende makro-variabler
 
 - Antall_aar
 
-#### Kalles opp av følgende makroer
+#### Kalles opp av fÃ¸lgende makroer
 
 - [rateberegninger](#rateberegninger)
 
-#### Bruker følgende makroer
+#### Bruker fÃ¸lgende makroer
 
 Ingen
 
@@ -53,12 +53,17 @@ Ingen
 */
 
 
-%let Antall_aar=%sysevalf(&SluttÅr-&StartÅr+2);
+%let Antall_aar=%sysevalf(&SluttÃ…r-&StartÃ…r+2);
 data RV&Bo;
 set RV;
+%if &HN = 1 %then %do;
+If VertskommHN=1 then VK=1;
+else if VertskommHN ne 1 then VK=0;
+Where BoRHF=1;
+%end;
 run;
 
-/*Aggregerer ratevariabel og innbyggere på boområde, år, alder og kjønn*/
+/*Aggregerer ratevariabel og innbyggere pÃ¥ boomrÃ¥de, Ã¥r, alder og kjÃ¸nn*/
 proc sql;
     create table tmp1&Bo._Agg as
     select distinct aar, alder_ny, ErMann, &Bo,
@@ -79,32 +84,32 @@ PROC SQL;
       GROUP BY alder_ny, ErMann, &Bo;
 QUIT;
 
-/*Setter gjennomsnittsår lik 9999*/
+/*Setter gjennomsnittsÃ¥r lik 9999*/
 data &Bo._Agg_Snitt;
 set &Bo._Agg_Snitt;
 aar=9999;
 run;
 
-/*slår sammen årsspesifikt og gjennomsnittsdatasett*/
+/*slÃ¥r sammen Ã¥rsspesifikt og gjennomsnittsdatasett*/
 Data tmp2&Bo._Agg;
 set tmp1&Bo._Agg &Bo._Agg_Snitt;
 run;
 
 /*------------------
-Aggregere opp innbyggere på BoOmr-nivå (IKKE kjønn og alder).
-Behøves til rateberegninger og output-fil.
+Aggregere opp innbyggere pÃ¥ BoOmr-nivÃ¥ (IKKE kjÃ¸nn og alder).
+BehÃ¸ves til rateberegninger og output-fil.
 -----------------*/ 
 PROC SQL;
    CREATE TABLE tmp3&Bo._Agg AS 
    SELECT aar, alder_ny, ErMann,&Bo, N_RV, N_Innbyggere, 
-          (SUM(N_RV)) AS RV_tot,(SUM(N_Innbyggere)) AS Innbyggere_tot,(FREQ(N_Innbyggere)) AS Kategorier		/*Kategorier inneholder antall kjønns/alderskategorier*/
+          (SUM(N_RV)) AS RV_tot,(SUM(N_Innbyggere)) AS Innbyggere_tot,(FREQ(N_Innbyggere)) AS Kategorier		/*Kategorier inneholder antall kjÃ¸nns/alderskategorier*/
       FROM tmp2&Bo._Agg
       GROUP BY aar, &Bo;
 QUIT;
 
-/*VURDERE OM OVENSTÅENDE STEG KAN ERSTATTES (DELVIS?) MED PROC MEANS*/
+/*VURDERE OM OVENSTÃ…ENDE STEG KAN ERSTATTES (DELVIS?) MED PROC MEANS*/
 
-/* hente hvilken innbyggerandel (av den nasjonale befolkningen) som befinner seg i hver kjønns-og alderskategori */
+/* hente hvilken innbyggerandel (av den nasjonale befolkningen) som befinner seg i hver kjÃ¸nns-og alderskategori */
 /*Legges inn i nytt datasett sammen med tmp3*/
 
 proc sql;
@@ -121,7 +126,7 @@ PROC SQL;
 QUIT;
 
 
-/*j står for kjønns og alderskategori (sum-tellevariabel)*/
+/*j stÃ¥r for kjÃ¸nns og alderskategori (sum-tellevariabel)*/
 /*Tar med alt fra tmp4 og legger til noen variabler*/
 /*Datasettet &Bo._AGG brukes videre i rateberegningene*/
 
@@ -144,12 +149,12 @@ run;
 data &Bo._Agg;
 set &Bo._Agg;
 /*
-RV_jN= Antall case i hver kjønns/alderskategori i hvert boområde. 
-N_Innbyggere = Innbyggere i hver kjønns/alderskategori for hvert boområde.  
-Innbyggere_jN = Innbyggere i hver kjønns/alderskategori i Norge
+RV_jN= Antall case i hver kjÃ¸nns/alderskategori i hvert boomrÃ¥de. 
+N_Innbyggere = Innbyggere i hver kjÃ¸nns/alderskategori for hvert boomrÃ¥de.  
+Innbyggere_jN = Innbyggere i hver kjÃ¸nns/alderskategori i Norge
 */
 
-/*HER FOREGÅR DEN DIREKTE JUSTERINGEN!!!! */
+/*HER FOREGÃ…R DEN DIREKTE JUSTERINGEN!!!! */
 	e_i=RV_jN*(N_Innbyggere/Innbyggere_jN);  
 	rate_RV=(RV_tot/Innbyggere_tot)*(&rate_pr/Kategorier); 
 	just_rate_RV=((N_RV/N_Innbyggere)*&rate_pr)*Andel; 
@@ -157,7 +162,7 @@ Innbyggere_jN = Innbyggere i hver kjønns/alderskategori i Norge
 	VarJust=(N_RV/(N_Innbyggere**2))*(andel**2)*(&rate_pr**2); 
 run;
 
-/*Summerer over kjønns/alderskategorier. Sitter igjen med rater/andre variable for hvert boområde og år.*/
+/*Summerer over kjÃ¸nns/alderskategorier. Sitter igjen med rater/andre variable for hvert boomrÃ¥de og Ã¥r.*/
 proc sql;
     create table tmp1&Bo._Agg_rate as
     select distinct aar, &Bo, /* ny SVC */ kategorier,
@@ -178,7 +183,7 @@ proc sql;
 group by aar;
    quit;
 
-   /*Legges på konfidensintervall. Konfidensintervallene gir konfidens for justeringen?*/
+   /*Legges pÃ¥ konfidensintervall. Konfidensintervallene gir konfidens for justeringen?*/
 data tmp2&Bo._Agg_rate;
 set tmp2&Bo._Agg_rate;
 if aar ne 9999 then do;
@@ -187,7 +192,7 @@ if aar ne 9999 then do;
 	KI_N_J=RV_just_rate-(1.96*SDJUSTRate);
 	KI_O_J=RV_just_rate+(1.96*SDJUSTRate);
 end;
-If aar=9999 then do; /*Etter innspill fra HelseVest (Jofrid) - KI for snitt skal ganges med 1/rot(antall_år) */
+If aar=9999 then do; /*Etter innspill fra HelseVest (Jofrid) - KI for snitt skal ganges med 1/rot(antall_Ã¥r) */
 /*	KI_N=(1/(sqrt((&antall_aar-1))))*(RV_rate-(1.96*SD_rate));*/
 /*	KI_O=(1/(sqrt((&antall_aar-1))))*(RV_rate+(1.96*SD_rate));*/
 /*	KI_N_J=(1/(sqrt((&antall_aar-1))))*(RV_just_rate-(1.96*SDJUSTRate));*/
@@ -225,7 +230,7 @@ PROC SQL;
             (SUM(Ant_Opphold)) AS SUM_of_Ant_Opphold,
 		/* SUM_of_ei */ /* ny SVC */
             (SUM(ei)) AS SUM_of_ei,
-		  /* SUM_of_BoOmråde */ /* ny SVC */
+		  /* SUM_of_BoOmrÃ¥de */ /* ny SVC */
 			(COUNT(&Bo)) AS Boomr
       FROM tmp2&Bo._AGG_Rate
       GROUP BY aar;
@@ -263,7 +268,7 @@ proc delete data=tmp1&Bo._Agg_rate tmp2&Bo._Agg_rate;
 run;
 %end;
 
-/*Tilpasning til å lage Norge som søyle*/
+/*Tilpasning til Ã¥ lage Norge som sÃ¸yle*/
 PROC SQL;
    CREATE TABLE NORGE_AGG_RATE2 AS 
    SELECT aar, Norge, RV_just_rate, Ant_Innbyggere,Ant_Opphold
@@ -305,5 +310,5 @@ max=max(of ra:);
 min=min(of ra:);
 Norge=rateSnitt;
 run; 
-/*Slutt tilpasning til å lage Norge som søyle*/
+/*Slutt tilpasning til Ã¥ lage Norge som sÃ¸yle*/
 %mend omraade;

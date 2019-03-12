@@ -250,7 +250,7 @@ Title;
 
 	%if &sykehus_HN=1 %then %do;
 		%let Bo=BoShHN;
-		%omraadeHN; 
+		%omraade(HN = 1); 
 
 		%lag_tabeller;
 
@@ -300,7 +300,7 @@ Title;
 
 	%if &kommune_HN=1 %then %do;
 		%let Bo=komnr;
-		%omraadeHN; 
+		%omraade(HN = 1); 
 
 		%lag_tabeller;
 
@@ -350,7 +350,7 @@ Title;
 
 	%if &Vertskommune_HN=1 %then %do;
 		%let Bo=VK;
-		%omraadeHN; 
+		%omraade(HN = 1); 
 
 		%lag_tabeller;
 
