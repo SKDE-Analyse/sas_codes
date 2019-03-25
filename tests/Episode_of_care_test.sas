@@ -155,7 +155,7 @@ run;
 %sammenlignData(fil = eoc7c, lagReferanse = &lagNyRef);
 
 %if &debug eq 0 %then %do;
-proc delete data = eoc1 eoc2 eoc3 eoc4 eoc5 eoc6 eoc7a eoc7b eoc7c;
+proc delete data = eoc1 eoc2 eoc3 eoc4 eoc5 eoc6 eoc6b eoc7a eoc7b eoc7c;
 %end;
 
 %mend;
