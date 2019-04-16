@@ -1,6 +1,6 @@
 
 
-%macro rater_felles(privat = 1, kun_total = 0, kun_poli = 0, innlegg = 1, hastegrad = 1, unik = 1, Ratefil=helseatl.k_u_&agg_var._18);
+%macro rater_felles(offentlig=1, privat = 1, kun_total = 0, kun_poli = 0, innlegg = 1, hastegrad = 1, unik = 1, Ratefil=helseatl.k_u_&agg_var._18);
 
 %Let Alderskategorier=30;
 
@@ -64,6 +64,7 @@ run;
 
 %forholdstall;
 
+%if &offentlig ne 0 %then %do;
 
 /******  poli_off  ****************************************************************/
 %let RV_variabelnavn= poli_off; /*navn på ratevariabel i det aggregerte datasettet*/
@@ -79,6 +80,8 @@ delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd ;
 run;
 
 %forholdstall;
+
+%end; /* &offentlig ne 0 */
 
 
 %if &privat ne 0 %then %do;
@@ -120,6 +123,8 @@ run;
 %forholdstall;
 
 %if &kun_poli = 0 %then %do;
+%if &offentlig ne 0 %then %do;
+
 /******  off_unik  ****************************************************************/
 %let RV_variabelnavn= off_unik; /*navn på ratevariabel i det aggregerte datasettet*/
 %Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
@@ -135,6 +140,7 @@ run;
 
 %forholdstall;
 
+%end; /* &offentlig ne 0 */
 %end; /* &kun_poli = 0 */
 
 %if &privat ne 0 %then %do;
