@@ -107,6 +107,18 @@ run;
 %let dsn_fig=&tema._BOHF;
 %let skala=/*values=(0 to 1.5 by 0.5)*/;
 
+
+%if &sprak=no %then %do;
+	%let opptak_txt = 'Opptaksområde';
+	%let format_percent = nlpct8.0;
+	%let format_num = nlnum8.0;
+%end;
+%else %if &sprak=en %then %do;
+	%let opptak_txt = 'Hospital referral area';
+	%let format_percent = percent8.0;
+	%let format_num = comma8.0;
+%end;
+
 *ODS Graphics ON /reset=All imagename="&tema._&type._tredelt_&fignavn" imagefmt=png border=off ;
 ODS Graphics ON /reset=All imagename="&tema._&type._tredelt_&fignavn" imagefmt=&bildeformat border=off height=500px;
 ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
@@ -120,28 +132,11 @@ hbarparm category=bohf response=RateSnittN_tot / fillattrs=(color=CXC3C3C3) outl
 hbarparm category=bohf response=RateSnittN_12 / fillattrs=(color=CX969696) outlineattrs=(color=CX4C4C4C);
 hbarparm category=bohf response=RateSnittN&del1. / fillattrs=(color=CX4C4C4C) outlineattrs=(color=CX4C4C4C);
 
-*scatter x=pros_plass y=bohf /datalabel=Andel&del1. datalabelpos=right markerattrs=(size=0) datalabelattrs=(color=white weight=bold size=8);
-
-/*	scatter x=rate2017_tot y=Bohf / markerattrs=(symbol=squarefilled color=black) legendlabel="2017";*/
-/*	scatter x=rate2015_tot y=Bohf / markerattrs=(symbol=circlefilled color=black) legendlabel="2015";*/
-/*	scatter x=rate2016_tot y=Bohf / markerattrs=(symbol=trianglefilled color=black)legendlabel="2016";*/
-/*	Highlow Y=Bohf low=min high=max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);*/
-/*	inset (*/
-/*                "(*ESC*){unicode'25a0'x}"="   2017"  */
-/*                "(*ESC*){unicode'25cf'x}"="   2015"*/
-/*                "(*ESC*){unicode'25b2'x}"="   2016")*/
-/*	/ position=bottomright textattrs=(size=7);*/
-
 	keylegend "hp3" "hp2" "hp1"/ location=outside position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
 	 Yaxistable &tabellvariable/Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
     
 
-	%if &sprak=no %then %do;
-      yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
-	%end;
-	%else %if &sprak=en %then %do;
-      yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
-	%end;
+    yaxis display=(noticks noline) label=&opptak_txt labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
 
      %if &noxlabel=1 %then %do;
 	 xaxis display=(nolabel) offsetmin=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
@@ -150,7 +145,7 @@ hbarparm category=bohf response=RateSnittN&del1. / fillattrs=(color=CX4C4C4C) ou
 	 xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 	 %end;
 		Label &labeltabell;
-		Format Andel&del1. Andel&del2. Andel&del3. nlpct8.0 tot_antall nlnum8.0  &formattabell;
+		Format Andel&del1. Andel&del2. Andel&del3. &format_percent tot_antall &format_num  &formattabell;
 
 run;
 Title; 

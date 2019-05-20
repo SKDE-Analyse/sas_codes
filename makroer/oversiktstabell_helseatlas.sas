@@ -25,20 +25,20 @@ run;
 
 * Extract lowest and highest rates;
 
-proc sort data=&forbruksmal._bohf out=&forbruksmal._bohf_tmp;
+proc sort data=&forbruksmal._bohf out=bohf_tmp;
   by rateSnitt;
   where antall ge &nkrav; /*nkrav is a global macro variables in the Settings for figurer*/
 run;
 
 data highest(keep=HighRate HighOmrade);
-  set &forbruksmal._bohf_tmp;
+  set bohf_tmp;
   by FT;
   if last.ft=1 then output;
   rename rateSnitt=HighRate BoHF=HighOmrade;
 run;
 
 data lowest(keep=LowRate LowOmrade);
-  set &forbruksmal._bohf_tmp;
+  set bohf_tmp;
   by ft;
   if first.ft=1 then output;
   rename rateSnitt=LowRate BoHF=LowOmrade;
@@ -55,6 +55,6 @@ data KA_t_&forbruksmal;
   beskrivelse="&forbruksmal";
 run;
 
-proc delete data=snittAlder antall highest lowest &forbruksmal._bohf_tmp; run;
+proc delete data=snittAlder antall highest lowest bohf_tmp; run;
 
 %mend;
