@@ -17,6 +17,6 @@ output; /*Logo*/
 	x1 = 1;
 	width=150;
 	textsize = 8;
-	label = "Kilde: MFR";
+	label = "Source: MFR";
 output;/*Kilde*/
 run;

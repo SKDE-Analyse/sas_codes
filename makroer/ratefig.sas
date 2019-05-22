@@ -130,7 +130,7 @@ hbarparm category=bohf response=Snittrate / fillattrs=(color=CXC3C3C3) outlineat
 	xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 %end;
 %else %do;
-	 xaxis offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
+	 xaxis offsetmin=0.02 offsetmax=0.04 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 %end;
 
 %if &vis_ft=1 %then %do; 
