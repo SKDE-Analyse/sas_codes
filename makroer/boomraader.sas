@@ -3,9 +3,9 @@
 /*!
 ### Beskrivelse
 
-Definerer boområder ut fra komnr og bydel
+Definerer boomrÃ¥der ut fra komnr og bydel
 
-**OBS: Denne makroen må kjøres inne i et datasteg** slik:
+**OBS: Denne makroen mÃ¥ kjÃ¸res inne i et datasteg** slik:
 ```
 data ut;
 set inn;
@@ -13,7 +13,7 @@ set inn;
 run;
 ```
 
-Makroen kjører med følgende verdier, hvis ikke annet er gitt:
+Makroen kjÃ¸rer med fÃ¸lgende verdier, hvis ikke annet er gitt:
 ```
 %Boomraader(haraldsplass = 0, indreOslo = 0, bydel = 1, barn = 0, boaar=2015);
 ```
@@ -21,14 +21,14 @@ Makroen kjører med følgende verdier, hvis ikke annet er gitt:
 ### Parametre
 
 - Hvis `haraldsplass ne 0`: del Bergen i Haraldsplass og Bergen
-- Hvis `indreOslo ne 0`: Slå sammen Diakonhjemmet og Lovisenberg
-- Hvis `bydel = 0`: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo)
-- Hvis `barn ne 0`: Lager boområder som i det første barnehelseatlaset
-- `boaar = ?`: Opptaksområdene kan endres over år. `boaar` velger hvilket år vi tar utgangspunkt i. Foreløpig kun Sagene, som ble flyttet fra Lovisenberg til OUS i 2015. Kjør med `boaar=2014` eller mindre hvis man vil ha Sagene til Lovisenberg.
+- Hvis `indreOslo ne 0`: SlÃ¥ sammen Diakonhjemmet og Lovisenberg
+- Hvis `bydel = 0`: Vi mangler bydel og mÃ¥ bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 gÃ¥r ikke til Ahus men til Oslo)
+- Hvis `barn ne 0`: Lager boomrÃ¥der som i det fÃ¸rste barnehelseatlaset
+- `boaar = ?`: OpptaksomrÃ¥dene kan endres over Ã¥r. `boaar` velger hvilket Ã¥r vi tar utgangspunkt i. ForelÃ¸pig kun Sagene, som ble flyttet fra Lovisenberg til OUS i 2015. KjÃ¸r med `boaar=2014` eller mindre hvis man vil ha Sagene til Lovisenberg.
 
 ### Annet
 
-Følgende variabler nulles ut i begynnelsen av makroen, og lages av makroen:
+FÃ¸lgende variabler nulles ut i begynnelsen av makroen, og lages av makroen:
 ```
 BoShHN
 VertskommHN
@@ -40,17 +40,17 @@ Fylke
 ### Endringer
 
 #### Endring Arnfinn 18. juni 2018:
-- Lagt til nye kommunenummer for Trøndelag
+- Lagt til nye kommunenummer for TrÃ¸ndelag
 
 #### Endring Arnfinn 7. aug. 2017:
-- Årsbetinget definisjon av opptaksområde (kun 2015 foreløpig, siden Samdata kun har lagt ut til og med 2015) 
+- Ã…rsbetinget definisjon av opptaksomrÃ¥de (kun 2015 forelÃ¸pig, siden Samdata kun har lagt ut til og med 2015) 
 
 #### Endring Arnfinn 27. feb. 2017:
 - Hvis haraldsplass ne 0: del Bergen i Haraldsplass og Bergen
-- Hvis indreOslo ne 0: Slå sammen Diakonhjemmet og Lovisenberg
-- Hvis bydel = 0: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo)
-- Hvis opptaksområder med barneavdeling (slå sammen til OUS og Nordland)
-- Standardverdier: kjører som før
+- Hvis indreOslo ne 0: SlÃ¥ sammen Diakonhjemmet og Lovisenberg
+- Hvis bydel = 0: Vi mangler bydel og mÃ¥ bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 gÃ¥r ikke til Ahus men til Oslo)
+- Hvis opptaksomrÃ¥der med barneavdeling (slÃ¥ sammen til OUS og Nordland)
+- Standardverdier: kjÃ¸rer som fÃ¸r
 */
 
 
@@ -69,7 +69,7 @@ Fylke=.;
 
 /*
 ********************************************************
-1. BoShHN - Opptaksområder for lokalsykehusene i Helse Nord
+1. BoShHN - OpptaksomrÃ¥der for lokalsykehusene i Helse Nord
 ********************************************************
 */
 
@@ -87,7 +87,7 @@ else if KomNr in (1811,1812,1813,1815,1816,1818,1820,1822,1827,1834,1835) then B
 
 /*
 *********************************************************
-2. BoHF - Opptaksområder for helseforetakene
+2. BoHF - OpptaksomrÃ¥der for helseforetakene
 *********************************************************
 */
 
@@ -95,7 +95,7 @@ If BoShHN in (1,2) then BoHF=1;
 else if BoShHN in (3,4,5) then BoHF=2;
 else if BoShHN in (6,7,8) then BoHF=3;
 %if &barn ne 0 %then %do;
-else if BoShHN in (9,10,11,12) then BoHF=3; /* Helgeland legges under Nordland hvis vi ser på barn*/
+else if BoShHN in (9,10,11,12) then BoHF=3; /* Helgeland legges under Nordland hvis vi ser pÃ¥ barn*/
 %end;
 %else %do;
 else if BoShHN in (9,10,11,12) then BoHF=4;
@@ -106,10 +106,10 @@ else if BoShHN in (9,10,11,12) then BoHF=4;
 Indre Fosen (5054) lagt til St. Olavs, siden flest innbyggere sognet tidligere til St.Olavs. 
 - Rissa (1624) : 6 628 innbyggere
 - Leksvik (1718): 3 480 innbyggere
-Ble sannsynligvis også lagt til St. Olavs i 2018 (Styresak 103/17 Helse Midt-Norge, innkalling til styremøte 21.12.17 https://ekstranett.helse-midt.no/1001/Sakspapirer%20for%20utskrift/Sakspapirer%202017-12-21%20samlehefte%20for%20utskrift.pdf Styremøtet ble avlyst):
+Ble sannsynligvis ogsÃ¥ lagt til St. Olavs i 2018 (Styresak 103/17 Helse Midt-Norge, innkalling til styremÃ¸te 21.12.17 https://ekstranett.helse-midt.no/1001/Sakspapirer%20for%20utskrift/Sakspapirer%202017-12-21%20samlehefte%20for%20utskrift.pdf StyremÃ¸tet ble avlyst):
 */
 if KomNr in (1632,5019,1633,5020,1702,5004,1703,5005,1711,5034,1714,5035,1717,5036,1718,1719,5037,1721,5038,1724,5039,1725,5040,1736,5041,1738,5042,1739,5043,1740,5044,1742,5045,1743,5046,1744,5047,1748,5048,1749,5049,1750,5050,1751,5051,1755,5052,1756,5053) then BoHF=6;
-else if KomNr in (1567,1612,5011,1613,5012,1617,5013,1620,5014,1621,5015,1622,5016,1624,1627,5017,1630,5018,1634,5021,1635,5022,1636,5023,1638,5024,1640,5025,1644,5026,1648,5027,1653,5028,1657,5029,1662,5030,1663,5031,1664,5032,1665,5033,5054) then BoHF=7;
+else if KomNr in (1567,5061,1612,5011,1613,5012,1617,5013,1620,5014,1621,5015,1622,5016,1624,1627,5017,1630,5018,1634,5021,1635,5022,1636,5023,1638,5024,1640,5025,1644,5026,1648,5027,1653,5028,1657,5029,1662,5030,1663,5031,1664,5032,1665,5033,5054) then BoHF=7;
 else if KomNr in (1601,5001) then do;
 %if &bydel = 0 %then %do;
    BoHF = 7;
@@ -121,7 +121,7 @@ else if KomNr in (1601,5001) then do;
 end;
 else if KomNr in (1502,1504,1505,1511,1514,1515,1516,1517,1519,1520,1523,1524,1525,1526,1528,1529,1531,1532,1534,1535,1539,1543,1545,1546,1547,1548,1551,
 1554,1557,1560,1563,1566,1571,1573,1576) then BoHF=8;
-else if KomNr in (1401,1411,1412,1413,1416,1417,1418,1419,1420,1421,1422,1424,1426,1428,1429,1430,1431,1432,1433,1438,1439,1441,1443,1444,1445,1449) then BoHF=10; /*1411 Gulen skal f.o.m 1/1-16 høre til Haraldsplass*/
+else if KomNr in (1401,1411,1412,1413,1416,1417,1418,1419,1420,1421,1422,1424,1426,1428,1429,1430,1431,1432,1433,1438,1439,1441,1443,1444,1445,1449) then BoHF=10; /*1411 Gulen skal f.o.m 1/1-16 hÃ¸re til Haraldsplass*/
 
 %if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/
 else if KomNr in (1233,1234,1235,1238,1241,1242,1243,1244,1245,1246,1247,1251,1252,1253,1256,1259,1260,1263,1264,1265,1266) then BoHF=11;
@@ -153,7 +153,7 @@ else if komnr in (1103) then do;
 	if Bydel in (110301:110399) then BoHF=13; /*Stavanger - endres ved behov*/
 %end;
 end;
-else if KomNr in (101,104,105,106,111,118,119,122,123,124,125,127,128,135,136,137,138) then BoHF=14; /* Østfold */
+else if KomNr in (101,104,105,106,111,118,119,122,123,124,125,127,128,135,136,137,138) then BoHF=14; /* Ã˜stfold */
 else if KomNr in (121,211,213,214,215,216,217,221,226,227,228,229,230,231,233,234,235,237,238,239) then BoHF=15; /* Ahus*/
 else if KomNr in (301) then do;
 %if &bydel = 0 %then %do; /* Mangler bydel */
@@ -169,7 +169,7 @@ else if KomNr in (301) then do;
    %end;
 	else if bydel in (030108,030109,030113,030114,030115,030117,030199) then BoHF=16;/*OUS*/
    %if &indreOslo ne 0 %then %do;
-      *slå sammen Lovisenberg og Diakonhjemmet til Indre Oslo (BoHF = 31);
+      *slÃ¥ sammen Lovisenberg og Diakonhjemmet til Indre Oslo (BoHF = 31);
       else if bydel in (030101,030102,030104,030116) then BoHF=31;/*Lovisenberg -> Indre Oslo */
       else if bydel in (030105,030106,030107) then BoHF=31;/*Diakonhjemmet -> Indre Oslo */
    %end;
@@ -194,7 +194,7 @@ else if komNr=9999 then BoHF=99;
 
 /*
 *****************************************************
-3. BoRHF - Opptaksområder for RHF'ene
+3. BoRHF - OpptaksomrÃ¥der for RHF'ene
 *****************************************************
 */
 
@@ -232,7 +232,7 @@ else if 1702<=komnr<=1756 then Fylke=17;
 else if 1804<=komnr<=1874 then Fylke=18;
 else if 1901<=komnr<=1943 then Fylke=19;
 else if 2002<=komnr<=2030 then Fylke=20;
-else if 5001<=komnr<=5054 then Fylke=50;
+else if 5001<=komnr<=5061 then Fylke=50;
 else if KomNr in (2100,2111,2121,2131,2211,2311,2321,9000,9900) then Fylke=24; /*24='Boomr utlandet/Svalbard' */
 else if KomNr in(., 0000,8888,9999) then Fylke=99; /*99='Ukjent/ugyldig kommunenr'*/
 
@@ -242,17 +242,17 @@ else if KomNr in(., 0000,8888,9999) then Fylke=99; /*99='Ukjent/ugyldig kommunen
 *****************************************************
 */
 
-if KomNr in (1804 /*Bodø*/
+if KomNr in (1804 /*BodÃ¸*/
              1805 /*Narvik*/
 		     1820 /*Alstahaug*/ 
 			 1824 /*Vefsn*/ 
 			 1833 /*Rana*/ 
-			 1860 /*Vestvågøy*/ 
+			 1860 /*VestvÃ¥gÃ¸y*/ 
 			 1866 /*Hadsel*/ 
 			 1903 /*Harstad*/
-			 1902 /*Tromsø*/
+			 1902 /*TromsÃ¸*/
 			 2004 /*Hammerfest*/ 
-			 2030 /*Sør-Varanger*/) then VertskommHN=1;
+			 2030 /*SÃ¸r-Varanger*/) then VertskommHN=1;
 else if KomNr in (1811,1812,1813,1815,1818,1822,1825,1826,1827,1828,1832,1834,1836,1837,1838,1839,1840,1841,1845,1848,1849,1850,1851,1852,1853,1854,1856,1857,1859,1865,1867,1868,1870,1871,1874,1911,1913,1917,1919,1920,1922,1923,1924,1925,1926,1927,1928,1929,1931,1933,1936,1938,1939,1940,1941,1942,1943,2002,2003,2011,2012,2014,2015,2017,2018,2019,2020,2021,2022,2023,2024,2025,2027,2028) then VertskommHN=0;
 
 %mend Boomraader;

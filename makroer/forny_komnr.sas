@@ -171,6 +171,13 @@ if komnr = 1755 then komnr = 5052;
 if komnr = 1756 then komnr = 5053;
 %end;
 
+/*******
+ 2019
+*******/
+%if &aar ge 2019 %then %do;
+if komnr = 1567 then komnr = 5061; /* Rindal skifter fylke 1/1.2019 - Rindal inngår i St.Olavs HF */
+%end;
+
 run;
 
 %mend;
