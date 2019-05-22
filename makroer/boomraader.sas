@@ -77,12 +77,13 @@ Fylke=.;
 Nesseby, Sør-Varanger, Vadsø, Vardø, Tana, Berlevåg, Båtsfjord og Gamvik. */
 if KomNr in (2002, /* Vardø */
              2003, /* Vadsø */
+             2022, /* Lebesby */
              2023, /* Gamvik */
              2024, /* Berlevåg */
              2025, /* Tana */
              2027, /* Nesseby */
              2028, /* Båtsfjord */
-             2030 /* Sør-Varanger */
+             2030  /* Sør-Varanger */
              ) then BoShHN=1;
 /* Hammerfest sykehus er lokalsykehus for befolkningen i Vest-Finnmark som omfatter kommunene
 Hammerfest, Kautokeino, Alta, Loppa, Hasvik, Kvalsund, Måsøy, Nordkapp, Porsanger og Karasjok */
@@ -95,8 +96,7 @@ else if KomNr in (2004, /* Hammerfest */
                   2018, /* Måsøy */
                   2019, /* Nordkapp */
                   2020, /* Porsanger */
-                  2021, /* Karasjok */
-                  2022 /* Lebesby */
+                  2021  /* Karasjok */
                   ) then BoShHN=2;
 else if KomNr in (1902,1922,1924,1925,1926,1927,1928,1929,1931,1933,1936,1938,1939,1940,1941,1942,1943) then BoShHN=3;
 else if KomNr in (1851,1852,1903,1911,1913,1917) then BoShHN=4;
