@@ -1,4 +1,4 @@
-%macro forholdstall (ds=&forbruksmal._bohf, tab=1);
+%macro forholdstall (ds=&forbruksmal._bohf, tab=0);
 
 /*Lager kopi av inndatasett, navner om variabel som gir antall obs*/
 data &ds._to;
@@ -16,7 +16,7 @@ run;
    from &ds._to;
    quit;*/
 
-/*Lager ny variabel for ratesnitt sÃ¥ vi beholder verdiene for bohf med fÃ¥ observasjoner*/
+/*Lager ny variabel for ratesnitt så vi beholder verdiene for bohf med få observasjoner*/
 data &ds._to;
 set &ds._to;
 ratesnitt2=ratesnitt;
@@ -31,8 +31,8 @@ proc sort data=&ds._to;
 by ratesnitt;
 run;
 
-/*Lager datasett hvor kun opptaksomrÃ¥der med antall obs som overstiger &nkrav er med*/
-/*Lager rank variabel som angir bohf med hÃ¸yeste/laveste rate*/
+/*Lager datasett hvor kun opptaksområder med antall obs som overstiger &nkrav er med*/
+/*Lager rank variabel som angir bohf med høyeste/laveste rate*/
 data &ds._FT;
 set &ds._to;
 where antall ge &nkrav;
@@ -85,7 +85,7 @@ merge &ds._to &ds._FT;
 by bohf;
 run;
 
-/*Sorterer etter antall for Ã¥ fylle inn FT der hvor verdien mangler (BoHF med fÃ¥ obs)*/
+/*Sorterer etter antall for å fylle inn FT der hvor verdien mangler (BoHF med få obs)*/
 proc sort data=&ds;
 by descending antall;
 quit;
