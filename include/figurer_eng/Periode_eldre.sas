@@ -49,7 +49,7 @@ run;
 /*	Lager figur	*/
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog"   ;
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\helseatlas\eldre\&katalog"   ;
 proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=7%);
 hbarparm category=bohf response=rateSnitt / nooutline fillattrs=(color=CX95BDE6); ; 
 hbarparm category=bohf response=Snittrate / nooutline fillattrs=(color=CXC3C3C3) ; 		
@@ -60,7 +60,7 @@ run;Title; ods listing close; ods graphics off;
 
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=png  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\png"   ;
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\helseatlas\eldre\&katalog.\png"   ;
 proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=7%);
 hbarparm category=bohf response=rateSnitt / nooutline fillattrs=(color=CX95BDE6); ; 
 hbarparm category=bohf response=Snittrate / nooutline fillattrs=(color=CXC3C3C3) ; 		

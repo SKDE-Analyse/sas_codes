@@ -5,7 +5,7 @@
 %let soylebredde = 0.8;
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat  border=off;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\&mappe";
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\helseatlas\eldre\&katalog.\&mappe";
 
 proc sgplot data=&data noautolegend noborder sganno=anno pad=(Bottom=4% );
 styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);

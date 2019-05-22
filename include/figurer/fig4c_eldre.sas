@@ -5,7 +5,7 @@ Andel død
 %let soylebredde = 0.8;
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat  border=off /*HEIGHT=10.0cm width=10.0cm*/ HEIGHT=12.0cm ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\&mappe"   ;
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\helseatlas\eldre\&katalog.\&mappe"   ;
 
 proc sgplot data=samlefig noborder noautolegend sganno=anno pad=(Bottom=4%);
 hbarparm category=bohf response=andel30 / nooutline fillattrs=(color=CX95BDE6) barwidth=&soylebredde; 

@@ -5,7 +5,7 @@ Splittet søyle-figur
 %let soylebredde = 0.8;
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat border=off ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\Helseatlas\Eldre\&katalog.\&mappe";
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\Helseatlas\Eldre\&katalog.\&mappe";
 
 proc sgplot data=smelt  noborder noautolegend sganno=Anno pad=(bottom=4%);
 hbarparm category=bohf response=tot_RateSnitt / outlineattrs=(color=CX00509E) fillattrs=(color=CX95BDE6) missing name="hp1" legendlabel="&label_to" barwidth=&soylebredde; 

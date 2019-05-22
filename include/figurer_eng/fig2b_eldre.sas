@@ -7,7 +7,7 @@ Splittet søyle-figur - befolkningssammensetningen
 options locale=NB_no;
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat border=off ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\Helseatlas\Eldre\&katalog.\&mappe";
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\Helseatlas\Eldre\&katalog.\&mappe";
 
 Proc sgplot data=innb sganno=Anno Pad=(Bootiom=4%)noautolegend noborder;
 styleattrs datacontrastcolors=(CX00509E) datacolors=(CX95BDE6 CX00509E);

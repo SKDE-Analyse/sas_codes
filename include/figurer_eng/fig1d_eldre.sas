@@ -6,7 +6,7 @@ Alderssammensetning
 
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat border=off ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\&mappe";
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\helseatlas\eldre\&katalog.\&mappe";
 
 proc sgplot data=smelt  noborder noautolegend sganno=Anno pad=(bottom=3%);
 

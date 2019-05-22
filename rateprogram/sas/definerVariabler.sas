@@ -81,7 +81,7 @@ Definere variabler
 
     %gi_verdi(variabel = bildeformat, verdi = png);
 
-    %gi_verdi(variabel = lagring, verdi = "\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\Bildefiler");
+    %gi_verdi(variabel = lagring, verdi = "\\hn.helsenord.no\RHF\SKDE\Analyse\Data\SAS\Bildefiler");
 
     %gi_verdi(variabel = hoyde, verdi = 8.0cm);
 

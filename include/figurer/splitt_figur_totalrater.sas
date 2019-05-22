@@ -134,7 +134,7 @@ run;
 
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf border=off ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\Helseatlas\Eldre\&katalog"   ;
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\Helseatlas\Eldre\&katalog"   ;
 proc sgplot data=smelt  noborder noautolegend sganno=Anno pad=(bottom=6%);
 hbarparm category=bohf response=tot_RateSnitt / outlineattrs=(color=CX00509E) fillattrs=(color=CX95BDE6) missing name="hp1" legendlabel="&label_to"; 
 hbarparm category=bohf response=Ratesnitt_no / outlineattrs=(color=CX4C4C4C) fillattrs=(color=CXC3C3C3);
@@ -154,7 +154,7 @@ run;
 ods graphics off;
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=png border=off ;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\Helseatlas\Eldre\&katalog.\png"   ;
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\Helseatlas\Eldre\&katalog.\png"   ;
 proc sgplot data=smelt  noborder noautolegend sganno=Anno pad=(bottom=6%);
 hbarparm category=bohf response=tot_RateSnitt / outlineattrs=(color=CX00509E) fillattrs=(color=CX95BDE6) missing name="hp1" legendlabel="&label_to"; 
 hbarparm category=bohf response=Ratesnitt_no / outlineattrs=(color=CX4C4C4C) fillattrs=(color=CXC3C3C3);

@@ -1,4 +1,4 @@
-%macro lag_figur(dsn = , fignavn = , mappe ="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\Bildefiler",  
+%macro lag_figur(dsn = , fignavn = , mappe ="\\hn.helsenord.no\RHF\SKDE\Analyse\Data\SAS\Bildefiler",  
 rate1 = off, ratenavn1a = , ratenavn1b =, 
 rate2 = priv, ratenavn2a =, ratenavn2b =,
 rate3 = , ratenavn3a =, ratenavn3b =,
@@ -14,7 +14,7 @@ Makro for å lage ratefigur. Makroen bruker rateprogrammet for å lage rater.
 - `dsn`: datasettet med (aggregerte) date. Må inneholde følgende variabler: alder, ermann, komnr, bydel, "rate1", "rate2", der
 navnene på "rate1" og "rate2" sendes inn som egne argumenter.
 - `fignavn` (=&dsn._&rate1._&rate2, hvis ikke oppgitt): figurnavn 
-- `mappe` (= "\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Data\SAS\Bildefiler"): mappen der figur skal lagres
+- `mappe` (= "\\hn.helsenord.no\RHF\SKDE\Analyse\Data\SAS\Bildefiler"): mappen der figur skal lagres
 
 */
 

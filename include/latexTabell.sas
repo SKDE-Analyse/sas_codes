@@ -5,7 +5,7 @@ SAS template for å lage LaTeX-tabeller av SAS-tabeller. Brukes som følger:
 %include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\master\include\latexTabell.sas";
 
 ods tagsets.tablesonlylatex tagset=event1
-file="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\...\filename.tex"   (notop nobot) style=journal;
+file="\\hn.helsenord.no\RHF\SKDE\ANALYSE\helseatlas\...\filename.tex"   (notop nobot) style=journal;
 
 PROC TABULATE  ORDEr=data DATA=tabell; 
 	class  nmr nmr_to;

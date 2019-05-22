@@ -10,7 +10,7 @@ retain function "Image";
 	x1 =99.9;
 	y1 =0.2;
 	/*width=30;*/
-	image = "\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Prosjekter\Lise\NarvikHarstad\UNN_logo2.png";
+	image = "\\hn.helsenord.no\RHF\SKDE\Analyse\Prosjekter\Lise\NarvikHarstad\UNN_logo2.png";
 output; /*Logo*/
 	function = "text";
 	anchor = "bottomleft";
@@ -33,7 +33,7 @@ retain function "Image";
 	x1 =99.9;
 	y1 =0.2;
 	/*width=30;*/
-	image = "\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Prosjekter\Lise\NarvikHarstad\UNN_logo2.png";
+	image = "\\hn.helsenord.no\RHF\SKDE\Analyse\Prosjekter\Lise\NarvikHarstad\UNN_logo2.png";
 output; /*Logo*/
 	function = "text";
 	anchor = "bottomleft";

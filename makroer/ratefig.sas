@@ -4,7 +4,7 @@
 
 /*OVERORDNET INPUT:
 
-%let bildelagring=\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\Analyse\Helseatlas\Kols\Figurer\;
+%let bildelagring=\\hn.helsenord.no\RHF\SKDE\Analyse\Helseatlas\Kols\Figurer\;
 
 options locale=NB_no;
 %let vis_ekskludering=0;

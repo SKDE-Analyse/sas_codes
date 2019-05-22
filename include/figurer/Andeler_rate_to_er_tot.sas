@@ -78,7 +78,7 @@ run;
 
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=pdf  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog"   ;
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\helseatlas\eldre\&katalog"   ;
 /*Title font=arial height=8pt "&arbtittel, gj. snitt 2013-2015                 ";*/
 proc sgplot data=&navn_en._andeler noborder noautolegend sganno=anno pad=(Bottom=7%);
 hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6); 
@@ -94,7 +94,7 @@ run;Title; ods listing close; ods graphics off;
 
 
 ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=png  border=off /*HEIGHT=10.0cm width=10.0cm*/;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\helseatlas\eldre\&katalog.\png"   ;
+ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\ANALYSE\helseatlas\eldre\&katalog.\png"   ;
 /*Title font=arial height=8pt "&arbtittel, gj. snitt 2013-2015                 ";*/
 proc sgplot data=&navn_en._andeler noborder noautolegend sganno=anno pad=(Bottom=7%);
 hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6); 

@@ -5,6 +5,9 @@ Makro for å lese Excel-fil med innbyggertall fra SSB
 
 Følgende må gjøres før denne makroen kjøres
 1. Last ned data fra SSB som *Semikolonseparert med overskrift (csv)*.
+Velg: Tabell - Visining 1 og lagre fil som Semikolonseparert med overskrift (CSV)
+	a. Kommune: tabell 07459: Alders- og kjønnsfordeling i kommuner, fylker og hele landets befolkning (K) 1986 - 2019
+	b. Bydel: tabell 10826: Alders- og kjønnsfordeling for befolkningen i de 4 største byene (B) 2001 - 2019
 2. Åpne csv-fil i Excel
   - Fjern i to øverste radene
   - Erstatt `kjønn` med `kjonn` og `Personer ÅÅÅÅ` med `Personer`
@@ -27,7 +30,7 @@ Makroen gjør følgende:
 %end;
 
 /* Lese excel-fil */
-%let filepath="\\hn.helsenord.no\UNN-Avdelinger\SKDE.avd\ANALYSE\Data\SAS\Tilrettelegging\Innbyggere\&fignavn.";
+%let filepath="\\hn.helsenord.no\RHF\SKDE\ANALYSE\Data\SAS\Tilrettelegging\Innbyggere\&fignavn.";
 %let sheet=Personer;
 proc import 
     out =&utdata
