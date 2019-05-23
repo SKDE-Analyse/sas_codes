@@ -120,6 +120,16 @@ proc sort data=&datasett;
 by descending tot_rate2;
 run;
 
+%if &sprak=no %then %do;
+	%let opptak_txt = 'Bosatte i opptaksområdene';
+	%let format_percent = nlpct8.1;
+%end;
+%else %if &sprak=en %then %do;
+	%let opptak_txt = 'Hospital referral area';
+	%let format_percent = percent8.1;
+%end;
+
+
 ODS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=&bildeformat border=off height=500px;
 *DS Graphics ON /reset=All imagename="&tema._&type._todelt_&fignavn" imagefmt=png border=off ;
 ODS Listing Image_dpi=300 GPATH="&bildelagring.&mappe";
@@ -135,12 +145,7 @@ hbarparm category=bohf response=nrate_1 / fillattrs=(color=CX4C4C4C) outlineattr
 		keylegend "hp2" "hp1"/ &legendplace noborder titleattrs=(size=7);
 	 Yaxistable &tabellvariable /Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
 
-	 %if &sprak=no %then %do;
-	 yaxis display=(noticks noline) label='Bosatte i opptaksområdene' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
-	 %end;
-	 %else %if &sprak=en %then %do;
-     yaxis display=(noticks noline) label='Hospital referral area' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
-	 %end;
+     yaxis display=(noticks noline) label=&opptak_txt labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
 
 	 %if &noxlabel=1 %then %do;
      xaxis display=(nolabel) offsetmin=0.02 offsetmax=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
@@ -172,7 +177,7 @@ hbarparm category=bohf response=nrate_1 / fillattrs=(color=CX4C4C4C) outlineattr
 			%end;
 		%end;
 		Label &labeltabell;
-		Format &formattabell andel_rate1 nandel_rate1 nlpct8.1;
+		Format &formattabell andel_rate1 nandel_rate1 &format_percent;
 run;Title; ods listing close;
 proc datasets nolist;
 delete dsn: &datasett._to &datasett._FT;
