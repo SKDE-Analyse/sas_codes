@@ -1,4 +1,4 @@
-%macro henteKorrvekt(avdfil =, shofil =, taar = 18);
+%macro henteKorrvekt(avdfil =, shofil =, taar = 19);
 
 /*!
 ### Beskrivelse
