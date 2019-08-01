@@ -98,9 +98,41 @@ else if KomNr in (2004, /* Hammerfest */
                   2020, /* Porsanger */
                   2021  /* Karasjok */
                   ) then BoShHN=2;
-else if KomNr in (1902,1922,1924,1925,1926,1927,1928,1929,1931,1933,1936,1938,1939,1940,1941,1942,1943) then BoShHN=3;
-else if KomNr in (1851,1852,1903,1911,1913,1917) then BoShHN=4;
-else if KomNr in (1805,1853,1854,1919,1920,1923) then BoShHN=5;
+/* UNN Tromsø */
+else if KomNr in (1902, /* Tromsø */
+                  1922, /* Bardu */
+                  1924, /* Målselv */
+                  1925, /* Sørreisa */
+                  1926, /* Dyrøy */
+                  1927, /* Tranøy */
+                  1928, /* Torsken */
+                  1929, /* Berg */
+                  1931, /* Lenvik */
+                  1933, /* Balsfjord */
+                  1936, /* Karlsøy */
+                  1938, /* Lyngen */
+                  1939, /* Storfjord */
+                  1940, /* Kåfjord */
+                  1941, /* Skjervøy */
+                  1942, /* Nordreisa */
+                  1943 /* Kvænangen */
+                  ) then BoShHN=3;
+/* UNN Harstad */
+else if KomNr in (1851, /* Lødingen */
+                  1852, /* Tjeldsund */
+                  1903, /* Harstad */
+                  1911, /* Kvæfjord */
+                  1913, /* Skånland */
+                  1917 /* Ibestad */
+                  ) then BoShHN=4;
+/* UNN Narvik */
+else if KomNr in (1805, /* Narvik */
+                  1853, /* Evenes */
+                  1854, /* Ballangen */
+                  1919, /* Gratangen */
+                  1920, /* Lavangen */
+                  1923 /* Salangen */
+                  ) then BoShHN=5;
 else if KomNr in (1866,1867,1868,1870,1871) then BoShHN=6;
 else if KomNr in (1859,1860,1865,1874) then BoShHN=7;
 else if KomNr in (1804,1837,1838,1839,1840,1841,1845,1848,1849,1850,1856,1857) then BoShHN=8;
