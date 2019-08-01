@@ -8,6 +8,9 @@ value behSh
 21='UNN Tromsø'
 22='UNN Harstad'
 23='UNN Narvik'
+24='UNN Storslett'/*JS 23/07/19 -ny i 2018 */
+25='UNN Bardu'/*JS 23/07/19 -ny i 2018 */
+26='UNN Finnsnes'/*JS 23/07/19 -ny i 2018 */
 30='NLSH HF'
 31='NLSH Vesterålen'
 32='NLSH Lofoten'
@@ -24,7 +27,8 @@ value behSh
 62='St. Olavs hospital, Orkdal'
 63='St. Olavs hospital, Røros'
 64='St. Olavs hospital, Hysnes helsefort'
-70='Helse Møre og Romsdal HF' 
+65='St. Olavs hospital, rehab Ørland' /*JS 23/07/19 -ny i 2018 */
+70='Helse Møre og Romsdal HF'  
 71='Molde sjukehus'
 72='Kristiansund sykehus'
 73='Ålesund sjukehus'
@@ -32,6 +36,7 @@ value behSh
 75='Mork Rehabiliteringssenter'
 76='Nevrohjemmet rehabiliteringssenter'
 77='Aure rehabiliteringssenter'
+78='Ålesund habilitering' /*JS 23/07/19 -ny i 2018 */
 90='Helse Førde HF'
 91='Førde sjukehus'
 92='Nordfjord sjukehus'
@@ -93,6 +98,7 @@ value behSh
 200='Sykehuset Østfold HF'
 201='Sykehuset Østfold, Moss'
 202='Sykehuset Østfold, Sarpsborg'
+203='Sykehuset Østfold, Askim' /*JS 23/07/19 -ny i 2018 */
 210='Sørlandet sykehus HF'
 211='Sørlandet sykehus, Kristiansand'  
 212='Sørlandet sykehus, Arendal'
@@ -304,6 +310,35 @@ value behSh
       993198846	= 'Stiftelsen Barnas fysioterapisenter'
       994869736	= 'Sunnaas sykehus, Aker poliklinikk'
       997506499	= 'Oslo kommunale legevakt'
+
+/* JS: Supplert med nye behandlingssteder gjeldende 2018 */
+821847052	= 'Universitetssykehuset Nord-Norge HF avd Storslett- somatikk'
+912419223	= 'Volvat medisinske senter AS Oslo - sentrum'
+912777294	= 'Helse Møre og Romsdal HF seksjon vaksenhabilitering Ålesund'
+914607493	= 'Colosseumklinikken Medisinske senter AS'
+916126611	= 'Helse Møre og Romsdal HF seksjon for habilitering barn og unge Ålesund'
+918289593	= 'Volvat medisinske senter AS Moss'
+919028513	= 'LHL-sykehuset Vestfold'
+919729333	= 'Aleris Helse AS avd Ålesund'
+919749547	= 'Volvat medisinske senter AS Bergen-Åsane'
+920196357	= 'St Olavs Hospital HF rehabilitering Ørlandet'
+920248829	= 'LHL sykehuset Gardermoen'
+920970893	= 'Kolbotn Hjertesenter AS'
+921008104	= 'Evjeklinikken AS'
+921837755	= 'Universitetssykehuset Nord-Norge HF avd Bardu- somatikk'
+921837798	= 'Universitetssykehuset Nord-Norge HF avd Finnsnes- somatikk'
+964249075	= 'Vikersund bad rehabiliteringssenter AS'
+974183749	= 'Volvat medisinske senter AS Fredrikstad'
+974633221	= 'Sykehuset Telemark HF Porsgrunn - somatikk'
+974633655	= 'Sykehuset Østfold HF Askim - somatikk'
+976343506	= 'Volvat medisinske senter AS Bergen - Lagunen'
+987621249	= 'Ibsensykehuset Gjøvik AS'
+988192996	= 'N.K.S. Helsehus Akershus AS'
+991133720	= 'Oslo hjerteklinikk AS'
+995111209	= 'LHL-klinikkene Bergen'
+996891216	= 'Sørlandet sykehus HF rehabilitering Arendal'
+997512189	= 'Helse Bergen HF seksjon for behandlingshjelpemidler medisinsk-teknisk avd Haukeland'
+
       ;
 	  
 	  
