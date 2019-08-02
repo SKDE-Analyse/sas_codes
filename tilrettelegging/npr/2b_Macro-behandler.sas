@@ -35,7 +35,10 @@ set &inndatasett;
   		if behandlingssted2=974795396 /*'UNN Narvik'*/ then BehSh=23;
   		if behandlingssted2=974795639 /*'UNN Harstad'*/ then BehSh=22;
 
-
+/* behandlingssted2 in 2018, added by JS 23-07-2019*/
+if behandlingssted2=821847052 /*UNN HF AVD STORSLETT- SOMATIKK*/ then behsh=24;
+if behandlingssted2=921837755 /*UNN HF AVD BARDU- SOMATIKK*/     then behsh=25;
+if behandlingssted2=921837798 /*UNN HF AVD FINNSNES- SOMATIKK*/  then behsh=26;
 
   /**************
   *** NLSH HF ***
@@ -112,6 +115,8 @@ set &inndatasett;
   		if behandlingssted2 in (974749505 /*St Olavs hospital, Røros*/) then BehSh=63;
   		if behandlingssted2 in (995413388 /*St Olavs hospital, Hysnes helsefort*/) then BehSh=64;
 
+/* behandlingssted2 in 2018, added by JS 23-07-2019*/
+if behandlingssted2=920196357 /*ST OLAVS HOSPITAL HF REHABILITERING ØRLANDET*/ then behsh=65;
 
   /*******************************
   *** Helse Møre og Romsdal HF ***
@@ -134,6 +139,13 @@ set &inndatasett;
   		if behandlingssted2 in (974577054 /*Helse Møre og Romsdal HF, Aure rehabiliteringssenter*/) then BehSh=77;
   		if behandlingssted2 in (974577216 /*Helse Møre og Romsdal HF, Klinikk for Rehabilitering (Mork)*/) then BehSh=75;
 
+
+/* behandlingssted2 in 2018, added by JS 23-07-2019*/
+if behandlingssted2=912777294 /*HELSE MØRE OG ROMSDAL HF SEKSJON VAKSENHABILITERING ÅLESUND*/ then behsh=78;
+if behandlingssted2=916126611 /*HELSE MØRE OG ROMSDAL HF SEKSJON FOR HABILITERING BARN OG UNGE ÅLESUND*/ then behsh=78;
+
+
+
   /*********************
   *** Helse Førde HF ***
   *********************/
@@ -147,6 +159,8 @@ set &inndatasett;
   		if behandlingssted2 in (974745364 /*Helse Førde, Nordfjord*/) then BehSh=92;
   		if behandlingssted2 in (974745089 /*Helse Førde, Lærdal*/) then BehSh=93;
   		if behandlingssted2 in (974743914 /*Helse Førde, Florø*/) then BehSh=91;
+
+
 
   /**********************
   *** Helse Bergen HF ***
@@ -167,6 +181,12 @@ set &inndatasett;
   		if behandlingssted2 in (874743372 /*Helse Bergen, Kysthospitalet i Hagevik*/) then BehSh=102;
   		if behandlingssted2 in (974743272 /*Helse Bergen, Voss*/) then BehSh=103;
   		if behandlingssted2 in (973925032 /*Bergen legevakt*/) then BehSh=104;
+
+/* behandlingssted2 in 2018, added by JS 23-07-2019*/
+
+if behandlingssted2=997512189 /*HELSE BERGEN HF SEKSJON FOR BEHANDLINGSHJELPEMIDLER MEDISINSK-TEKNISK AVD HAUKELAND*/then behsh=101;
+
+
 
   /*********************
   *** Helse Fonna HF ***
@@ -255,6 +275,12 @@ set &inndatasett;
   		if behandlingssted2 in (983974155 /*Sykehuset Telemark, Kragerø*/) then BehSh=152;
   		if behandlingssted2 in (974568225 /*Sykehuset Telemark, Nordagutu*/) then BehSh=155;
 
+
+/* behandlingssted2 in 2018, added by JS 23-07-2019*/
+if behandlingssted2=974633221 /*SYKEHUSET TELEMARK HF PORSGRUNN - SOMATIKK*/then behsh=150;
+
+
+
   /**************************************
   *** Akershus universitetssykehus HF ***
   **************************************/
@@ -340,6 +366,9 @@ set &inndatasett;
    		if behandlingssted2 in (974633698 /*Sykehuset Østfold, Moss*/, 974634052 /*Sykehuset Østfold, Fysioterapi*/) then BehSh=201;
   		if behandlingssted2 in (974703734 /*Sykehuset Østfold, Sarpsborg*/, 974703769 /*Sykehuset Østfold, Habiliteringstjenesten*/) then BehSh=202;
 
+/* behandlingssted2 in 2018, added by JS 23-07-2019*/
+if behandlingssted2=974633655 /*SYKEHUSET ØSTFOLD HF ASKIM - SOMATIKK*/then behsh=203;
+
   /***************************
   *** Sørlandet sykehus HF ***
   ***************************/
@@ -353,6 +382,9 @@ set &inndatasett;
   		if behandlingssted2 in (974595214 /*Sørlandet sykehus, Flekkefjord*/) then BehSh=213;
   		if behandlingssted2 in (974631091 /*Sørlandet sykehus, Arendal*/) then BehSh=212;
   		if behandlingssted2 in (974733013 /*Sørlandet sykehus, Kristiansand*/, 974595230 /*Sørlandet sykehus, Rehabilitering Kongsgård*/) then BehSh=211;
+
+/* behandlingssted2 in 2018, added by JS 23-07-2019*/
+if behandlingssted2=996891216 /*SØRLANDET SYKEHUS HF REHABILITERING ARENDAL*/then behsh=212;
 
   /******************************
   *** Sykehuset i Vestfold HF ***
@@ -449,7 +481,28 @@ set &inndatasett;
                                       916603290 /*Sandvika Nevrosenter*/,
                                       924291370 /*EEG Laboratoriet AS*/,
                                       953164701 /*Volvat medisinske senter AS Oslo - Majorstuen*/,
-                                      993198846 /*Stiftelsen Barnas fysioterapisenter*/
+                                      993198846 /*Stiftelsen Barnas fysioterapisenter*/,
+
+/* behandlingssted2 in 2018, added by JS 23-07-2019*/
+									  919729333 /*ALERIS HELSE AS AVD ÅLESUND*/ ,
+									  912419223 /*VOLVAT MEDISINSKE SENTER AS OSLO - SENTRUM*/,
+									  918289593	/*VOLVAT MEDISINSKE SENTER AS MOSS*/,
+									  919749547	/*VOLVAT MEDISINSKE SENTER AS BERGEN-ÅSANE*/,
+									  974183749	/*VOLVAT MEDISINSKE SENTER AS FREDRIKSTAD*/,
+									  976343506	/*VOLVAT MEDISINSKE SENTER AS BERGEN - LAGUNEN*/,
+									  995111209 /*LHL-KLINIKKENE BERGEN*/,
+									  919028513	/*LHL-SYKEHUSET VESTFOLD*/,
+									  920248829	/*LHL SYKEHUSET GARDERMOEN*/,
+									  914607493	/*COLOSSEUMKLINIKKEN MEDISINSKE SENTER AS*/,
+									  920970893	/*KOLBOTN HJERTESENTER AS*/,
+									  921008104	/*EVJEKLINIKKEN AS*/,
+									  964249075	/*VIKERSUND BAD REHABILITERINGSSENTER AS*/,
+									  987621249	/*IBSENSYKEHUSET GJØVIK AS*/,
+									  988192996	/*N.K.S. HELSEHUS AKERSHUS AS*/,
+									  991133720	/*OSLO HJERTEKLINIKK AS*/
+
+
+
                                       ) then BehSh=300;
 
   /*
