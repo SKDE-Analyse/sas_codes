@@ -10,7 +10,7 @@ De fleste variablene trenger ikke okkupere så mye plass.
 */
 
 data &utDataSett;
-set &innDataSett;
+
 
 length ncmp: $7;
 length ncsp: $7;
@@ -20,11 +20,6 @@ length bohf borhf boshhn fylke 4;
 length bydel 6;
 %if &somatikk ne 0 %then %do;
 length behhf behrhf behsh 4;
-%end;
-length hdiag hdiag2 $7;
-length bdiag: $7;
-%if &avtspes ne 0 %then %do;
-length tdiag: $7;
 %end;
 length hdiag3tegn $3;
 length aar 4;
@@ -37,7 +32,7 @@ length institusjonID  6;
 length NPRId_reg stedAktivitet 4;
 length tell_: 4;
 length pid 6;
-length versjon $7;
+
 %if &somatikk ne 0 %then %do;
 length hastegrad aktivitetskategori: 4;
 
@@ -47,7 +42,6 @@ length behandlingsstedKode: 6;
 length debitor 3;
 
 length drg $4;
-length drg_type $1;
 length DRGtypeHastegrad 3;
 length fodselsAar_ident 3;
 length fodselsvekt 4;
@@ -64,6 +58,7 @@ length UtTid 5;
 length ald_gr: 3;
 %end;
 
+set &innDataSett;
 format koblingsID 32.;
 
 run;
