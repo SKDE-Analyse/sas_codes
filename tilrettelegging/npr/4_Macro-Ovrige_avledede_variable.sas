@@ -106,6 +106,8 @@ if hastegrad=. then DRGtypeHastegrad=9;
 
 %if &avtspes ne 0 %then %do;
 hastegrad=4;
+omsorgsniva_org=omsorgsniva;
+omsorgsniva=3; /*JS - 16.07.19 hard code all avtspes activities to poli*/
 
 /*
 ************************************************************************************************
