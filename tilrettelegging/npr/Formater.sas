@@ -1,6 +1,4 @@
-﻿%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
-options sasautos=("&filbane\makroer" SASAUTOS);
-
+﻿
 %include "&filbane\formater\Bo.sas";
 %include "&filbane\formater\Beh.sas";
 %include "&filbane\formater\KomNr.sas";
