@@ -1,266 +1,85 @@
-/**********************************************************************
-***********************************************************************
-Kjøre makroene for 2012-2016 - AVDELINGSOPPHOLD
-***********************************************************************
-**********************************************************************/
+/*!
+Denne filen kjører all tilrettelegging.
+
+
+*/
+
+%macro kjor_tilrettelegg(aar =, fil =, sektor =, taar =);
+
+%Konvertering     (innDataSett=npr&taar..&fil., utDataSett=work_&aar.);
+%Merge_persondata (innDataSett=work_&aar., utDataSett=work_&aar.);
+%Bobehandler      (innDataSett=work_&aar., utDataSett=work_&aar.);
+%ICD              (innDataSett=work_&aar., utDataSett=work_&aar.);
+%Avledede         (innDataSett=work_&aar., utDataSett=work_&aar.);
+%KoblingsID       (innDataSett=work_&aar., utDataSett=work_&aar., fil=&sektor.);
+%LablerFormater   (innDataSett=work_&aar., utDataSett=work_&aar.);
+%reduser_lengde   (innDataSett=work_&aar., utDataSett=work_&aar.);
+%if &avtspes=1 %then %do;
+%splitt_avtspes(datasett =work_&aar., utsett = skde&taar..T&taar._extra_&sektor._20&aar.);
+%end;
+%Splitte          (innDataSett=work_&aar., utDataSettEN=skde&taar..T&taar._magnus_&sektor._20&aar.,utDataSettTO=skde&taar..T&taar._parvus_&sektor._20&aar.);
+
+%mend;
+
+/* Definer tilretteleggingsåret*/
+%let taar = 19;
+
+%include "&filbane\tilrettelegging\npr\Formater.sas";
+%include "&filbane\tilrettelegging\npr\1_Macro-Konvertering_og_stringrydding.sas";
+%include "&filbane\tilrettelegging\npr\2_Macro-Bo_og_behandler.sas";
+%include "&filbane\tilrettelegging\npr\2b_Macro-behandler.sas";
+%include "&filbane\tilrettelegging\npr\2c_Macro-AvtaleRHF.sas";
+%include "&filbane\tilrettelegging\npr\3_Macro-ICD10.sas";
+%include "&filbane\tilrettelegging\npr\4_Macro-Ovrige_avledede_variable.sas";
+%include "&filbane\tilrettelegging\npr\5_Macro-Lage_unik_ID.sas";
+%include "&filbane\tilrettelegging\npr\6_Macro-Labler_og_formater.sas";
+%include "&filbane\tilrettelegging\npr\7_Macro-Redusere_variabelstorrelser.sas";
+%include "&filbane\tilrettelegging\npr\8_Macro-Merge_persondata.sas";
+%include "&filbane\tilrettelegging\npr\8b_Macro-splitt_avtspes.sas";
+%include "&filbane\tilrettelegging\npr\9_Macro-Dele_datasett.sas";
+%include "&filbane\tilrettelegging\npr\fag_skde.sas";
+
+/************************************
+*************************************
+Kjøre makroene for avdelingsopphold
+*************************************
+*************************************/
 
 %let avtspes = 0;
 %let somatikk = 1;
 
-/***********
-*** 2016 ***
-***********/
+%kjor_tilrettelegg(fil=m&taar._avd20%sysevalf(&taar-1)_utleveringsfil, aar=%sysevalf(&taar-1), sektor=avd, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._avd20%sysevalf(&taar-2)_utleveringsfil, aar=%sysevalf(&taar-2), sektor=avd, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._avd20%sysevalf(&taar-3)_utleveringsfil, aar=%sysevalf(&taar-3), sektor=avd, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._avd20%sysevalf(&taar-4)_utleveringsfil, aar=%sysevalf(&taar-4), sektor=avd, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._avd20%sysevalf(&taar-5)_utleveringsfil, aar=%sysevalf(&taar-5), sektor=avd, taar = &taar.);
 
-%Konvertering (innDataSett=NPR_data.M17_avd2016_Utleveringsfil, utDataSett=work_2016);
-%Bobehandler (innDataSett=work_2016, utDataSett=work_2016);
-%ICD (innDataSett=work_2016, utDataSett=work_2016);
-%Avledede (innDataSett=work_2016, utDataSett=work_2016);
-%KoblingsID_avd (innDataSett=work_2016, utDataSett=work_2016);
-%LablerFormater (innDataSett=work_2016, utDataSett=work_2016);
-%reduser_lengde (innDataSett=work_2016, utDataSett=work_2016);
-%Merge_persondata (innDataSett=work_2016, utDataSett=work_2016);
-%Splitte (innDataSett=work_2016, utDataSettEN=npr_skde.T17_Magnus_Avd_2016,utDataSettTO=npr_skde.T17_Parvus_Avd_2016);
-
-
-proc contents data=npr_skde.T17_Magnus_Avd_2016;
-proc contents data=npr_skde.T17_Parvus_Avd_2016;
-
-/***********
-*** 2015 ***
-***********/
-
-%Konvertering (innDataSett=NPR_data.M17_avd2015_Utleveringsfil, utDataSett=work_2015);
-%Bobehandler (innDataSett=work_2015, utDataSett=work_2015);
-%ICD (innDataSett=work_2015, utDataSett=work_2015);
-%Avledede (innDataSett=work_2015, utDataSett=work_2015);
-%KoblingsID_avd (innDataSett=work_2015, utDataSett=work_2015);
-%LablerFormater (innDataSett=work_2015, utDataSett=work_2015);
-%reduser_lengde (innDataSett=work_2015, utDataSett=work_2015);
-%Merge_persondata (innDataSett=work_2015, utDataSett=work_2015);
-%Splitte (innDataSett=work_2015, utDataSettEN=npr_skde.T17_Magnus_Avd_2015,utDataSettTO=npr_skde.T17_Parvus_Avd_2015);
-
-
-proc contents data=npr_skde.T17_Magnus_Avd_2015;
-proc contents data=npr_skde.T17_Parvus_Avd_2015;
-
-/***********
-*** 2014 ***
-***********/
-
-%Konvertering (innDataSett=NPR_data.M17_avd2014_Utleveringsfil, utDataSett=work_2014);
-%Bobehandler (innDataSett=work_2014, utDataSett=work_2014);
-%ICD (innDataSett=work_2014, utDataSett=work_2014);
-%Avledede (innDataSett=work_2014, utDataSett=work_2014);
-%KoblingsID_avd (innDataSett=work_2014, utDataSett=work_2014);
-%LablerFormater (innDataSett=work_2014, utDataSett=work_2014);
-%reduser_lengde (innDataSett=work_2014, utDataSett=work_2014);
-%Merge_persondata (innDataSett=work_2014, utDataSett=work_2014);
-%Splitte (innDataSett=work_2014, utDataSettEN=npr_skde.T17_Magnus_Avd_2014,utDataSettTO=npr_skde.T17_Parvus_Avd_2014);
-
-proc contents data=npr_skde.T17_Magnus_Avd_2014;
-proc contents data=npr_skde.T17_Parvus_Avd_2014;
-
-/***********
-*** 2013 ***
-***********/
-
-%Konvertering (innDataSett=NPR_data.M17_avd2013_Utleveringsfil, utDataSett=work_2013);
-%Bobehandler (innDataSett=work_2013, utDataSett=work_2013);
-%ICD (innDataSett=work_2013, utDataSett=work_2013);
-%Avledede (innDataSett=work_2013, utDataSett=work_2013);
-%KoblingsID_avd (innDataSett=work_2013, utDataSett=work_2013);
-%LablerFormater (innDataSett=work_2013, utDataSett=work_2013);
-%reduser_lengde (innDataSett=work_2013, utDataSett=work_2013);
-%Merge_persondata (innDataSett=work_2013, utDataSett=work_2013);
-%Splitte (innDataSett=work_2013, utDataSettEN=npr_skde.T17_Magnus_Avd_2013,utDataSettTO=npr_skde.T17_Parvus_Avd_2013);
-
-
-proc contents data=npr_skde.T17_Magnus_Avd_2013;
-proc contents data=npr_skde.T17_Parvus_Avd_2013;
-
-/***********
-*** 2012 ***
-***********/
-
-%Konvertering (innDataSett=NPR_data.M17_avd2012_Utleveringsfil, utDataSett=work_2012);
-%Bobehandler (innDataSett=work_2012, utDataSett=work_2012);
-%ICD (innDataSett=work_2012, utDataSett=work_2012);
-%Avledede (innDataSett=work_2012, utDataSett=work_2012);
-%KoblingsID_avd (innDataSett=work_2012, utDataSett=work_2012);
-%LablerFormater (innDataSett=work_2012, utDataSett=work_2012);
-%reduser_lengde (innDataSett=work_2012, utDataSett=work_2012);
-%Merge_persondata (innDataSett=work_2012, utDataSett=work_2012);
-%Splitte (innDataSett=work_2012, utDataSettEN=npr_skde.T17_Magnus_Avd_2012,utDataSettTO=npr_skde.T17_Parvus_Avd_2012);
-
-
-proc contents data=npr_skde.T17_Magnus_Avd_2012;
-proc contents data=npr_skde.T17_Parvus_Avd_2012;
-
-/**********************************************************************
-***********************************************************************
-Kjøre makroene for 2012-2016 - SYKEHUSOPPHOLD
-***********************************************************************
-**********************************************************************/
+/**********************************
+***********************************
+Kjøre makroene for sykehusopphold
+***********************************
+***********************************/
 
 %let avtspes = 0;
 %let somatikk = 1;
 
-/***********
-*** 2016 ***
-***********/
+%kjor_tilrettelegg(fil=m&taar._sho20%sysevalf(&taar-1)_utleveringsfil, aar=%sysevalf(&taar-1), sektor=sho, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._sho20%sysevalf(&taar-2)_utleveringsfil, aar=%sysevalf(&taar-2), sektor=sho, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._sho20%sysevalf(&taar-3)_utleveringsfil, aar=%sysevalf(&taar-3), sektor=sho, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._sho20%sysevalf(&taar-4)_utleveringsfil, aar=%sysevalf(&taar-4), sektor=sho, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._sho20%sysevalf(&taar-5)_utleveringsfil, aar=%sysevalf(&taar-5), sektor=sho, taar = &taar.);
 
-%Konvertering (innDataSett=NPR_data.M17_sho2016_Utleveringsfil, utDataSett=work_2016);
-%Bobehandler (innDataSett=work_2016, utDataSett=work_2016);
-%ICD (innDataSett=work_2016, utDataSett=work_2016);
-%Avledede (innDataSett=work_2016, utDataSett=work_2016);
-%KoblingsID_sho (innDataSett=work_2016, utDataSett=work_2016);
-%LablerFormater (innDataSett=work_2016, utDataSett=work_2016);
-%reduser_lengde (innDataSett=work_2016, utDataSett=work_2016);
-%Merge_persondata (innDataSett=work_2016, utDataSett=work_2016);
-%Splitte (innDataSett=work_2016, utDataSettEN=npr_skde.T17_Magnus_SHO_2016,utDataSettTO=npr_skde.T17_Parvus_SHO_2016);
-
-proc contents data=npr_skde.T17_Magnus_SHO_2016;
-proc contents data=npr_skde.T17_Parvus_SHO_2016;
-
-/***********
-*** 2015 ***
-***********/;
-
-%Konvertering (innDataSett=NPR_data.M17_sho2015_Utleveringsfil, utDataSett=work_2015);
-%Bobehandler (innDataSett=work_2015, utDataSett=work_2015);
-%ICD (innDataSett=work_2015, utDataSett=work_2015);
-%Avledede (innDataSett=work_2015, utDataSett=work_2015);
-%KoblingsID_sho (innDataSett=work_2015, utDataSett=work_2015);
-%LablerFormater (innDataSett=work_2015, utDataSett=work_2015);
-%reduser_lengde (innDataSett=work_2015, utDataSett=work_2015);
-%Merge_persondata (innDataSett=work_2015, utDataSett=work_2015);
-%Splitte (innDataSett=work_2015, utDataSettEN=npr_skde.T17_Magnus_SHO_2015,utDataSettTO=npr_skde.T17_Parvus_SHO_2015);
-
-proc contents data=npr_skde.T17_Magnus_SHO_2015;
-proc contents data=npr_skde.T17_Parvus_SHO_2015;
-
-
-/*/************/
-/**** 2014 ****/
-/************/*;
-%Konvertering (innDataSett=NPR_data.M17_sho2014_Utleveringsfil, utDataSett=work_2014);
-%Bobehandler (innDataSett=work_2014, utDataSett=work_2014);
-%ICD (innDataSett=work_2014, utDataSett=work_2014);
-%Avledede (innDataSett=work_2014, utDataSett=work_2014);
-%KoblingsID_sho (innDataSett=work_2014, utDataSett=work_2014);
-%LablerFormater (innDataSett=work_2014, utDataSett=work_2014);
-%reduser_lengde (innDataSett=work_2014, utDataSett=work_2014);
-%Merge_persondata (innDataSett=work_2014, utDataSett=work_2014);
-%Splitte (innDataSett=work_2014, utDataSettEN=npr_skde.T17_Magnus_SHO_2014,utDataSettTO=npr_skde.T17_Parvus_SHO_2014);
-proc contents data=npr_skde.T17_Magnus_SHO_2014;
-proc contents data=npr_skde.T17_Parvus_SHO_2014;
-
-/***********
-*** 2013 ***
-***********/
-
-%Konvertering (innDataSett=NPR_data.M17_sho2013_Utleveringsfil, utDataSett=work_2013);
-%Bobehandler (innDataSett=work_2013, utDataSett=work_2013);
-%ICD (innDataSett=work_2013, utDataSett=work_2013);
-%Avledede (innDataSett=work_2013, utDataSett=work_2013);
-%KoblingsID_sho (innDataSett=work_2013, utDataSett=work_2013);
-%LablerFormater (innDataSett=work_2013, utDataSett=work_2013);
-%reduser_lengde (innDataSett=work_2013, utDataSett=work_2013);
-%Merge_persondata (innDataSett=work_2013, utDataSett=work_2013);
-%Splitte (innDataSett=work_2013, utDataSettEN=npr_skde.T17_Magnus_SHO_2013,utDataSettTO=npr_skde.T17_Parvus_SHO_2013);
-proc contents data=npr_skde.T17_Magnus_SHO_2013;
-proc contents data=npr_skde.T17_Parvus_SHO_2013;
-
-
-/***********
-*** 2012 ***
-***********/
-
-%Konvertering (innDataSett=NPR_data.M17_sho2012_Utleveringsfil, utDataSett=work_2012);
-%Bobehandler (innDataSett=work_2012, utDataSett=work_2012);
-%ICD (innDataSett=work_2012, utDataSett=work_2012);
-%Avledede (innDataSett=work_2012, utDataSett=work_2012);
-%KoblingsID_sho (innDataSett=work_2012, utDataSett=work_2012);
-%LablerFormater (innDataSett=work_2012, utDataSett=work_2012);
-%reduser_lengde (innDataSett=work_2012, utDataSett=work_2012);
-%Merge_persondata (innDataSett=work_2012, utDataSett=work_2012);
-%Splitte (innDataSett=work_2012, utDataSettEN=npr_skde.T17_Magnus_SHO_2012,utDataSettTO=npr_skde.T17_Parvus_SHO_2012);
-proc contents data=npr_skde.T17_Magnus_SHO_2012;
-proc contents data=npr_skde.T17_Parvus_SHO_2012;
-
-
-/**********************************************************************
-***********************************************************************
-Kjøre makroene for 2012-2016 - AVTALESPESIALISTER
-***********************************************************************
-**********************************************************************/
+/*************************************
+**************************************
+Kjøre makroene for avtalespesialister
+**************************************
+**************************************/
 
 %let avtspes = 1;
 %let somatikk = 0;
 
-/***********
-*** 2012 ***
-***********/
-
-
-%Konvertering (Inndatasett=Npr_data.M17_AvtspesSom2012_Utl_fil, Utdatasett=PrivSpes2012);
-%Merge_persondata(innDataSett=PrivSpes2012, utDataSett=PrivSpes2012);
-%Bo_Beh (Inndatasett=PrivSpes2012, Utdatasett=PrivSpes2012);
-%Avledede (Inndatasett=PrivSpes2012, Utdatasett=PrivSpes2012);
-%formater (Inndatasett=PrivSpes2012, Utdatasett=PrivSpes2012);
-%KoblingsID (Inndatasett=PrivSpes2012, Utdatasett=PrivSpes2012);
-%reduser_lengde (Inndatasett=PrivSpes2012, Utdatasett=PrivSpes2012);
-%Splitte (Inndatasett=Privspes2012, UtdatasettEN=npr_skde.T17_Magnus_AvtSpes_2012,UtdatasettTO=npr_skde.T17_Parvus_AvtSpes_2012);
-
-/***********
-*** 2013 ***
-***********/
-
-%Konvertering (Inndatasett=Npr_data.M17_AvtspesSom2013_Utl_fil, Utdatasett=PrivSpes2013);
-%Merge_persondata(innDataSett=PrivSpes2013, utDataSett=PrivSpes2013);
-%Bo_Beh (Inndatasett=PrivSpes2013, Utdatasett=PrivSpes2013);
-%Avledede (Inndatasett=PrivSpes2013, Utdatasett=PrivSpes2013);
-%formater (Inndatasett=PrivSpes2013, Utdatasett=PrivSpes2013);
-%KoblingsID (Inndatasett=PrivSpes2013, Utdatasett=PrivSpes2013);
-%reduser_lengde (Inndatasett=PrivSpes2013, Utdatasett=PrivSpes2013);
-%Splitte (Inndatasett=Privspes2013, UtdatasettEN=npr_skde.T17_Magnus_AvtSpes_2013,UtdatasettTO=npr_skde.T17_Parvus_AvtSpes_2013);
-
-/***********
-*** 2014 ***
-***********/
-
-%Konvertering (Inndatasett=Npr_data.M17_AvtspesSom2014_Utl_fil, Utdatasett=PrivSpes2014);
-%Merge_persondata(innDataSett=PrivSpes2014, utDataSett=PrivSpes2014);
-%Bo_Beh (Inndatasett=PrivSpes2014, Utdatasett=PrivSpes2014);
-%Avledede (Inndatasett=PrivSpes2014, Utdatasett=PrivSpes2014);
-%formater (Inndatasett=PrivSpes2014, Utdatasett=PrivSpes2014);
-%KoblingsID (Inndatasett=PrivSpes2014, Utdatasett=PrivSpes2014);
-%reduser_lengde (Inndatasett=PrivSpes2014, Utdatasett=PrivSpes2014);
-%Splitte (Inndatasett=Privspes2014, UtdatasettEN=npr_skde.T17_Magnus_AvtSpes_2014,UtdatasettTO=npr_skde.T17_Parvus_AvtSpes_2014);
-
-/***********
-*** 2015 ***
-***********/
-
-%Konvertering (Inndatasett=Npr_data.M17_AvtspesSom2015_Utl_fil, Utdatasett=PrivSpes2015);
-%Merge_persondata(innDataSett=PrivSpes2015, utDataSett=PrivSpes2015);
-%Bo_Beh (Inndatasett=PrivSpes2015, Utdatasett=PrivSpes2015);
-%Avledede (Inndatasett=PrivSpes2015, Utdatasett=PrivSpes2015);
-%formater (Inndatasett=PrivSpes2015, Utdatasett=PrivSpes2015);
-%KoblingsID (Inndatasett=PrivSpes2015, Utdatasett=PrivSpes2015);
-%reduser_lengde (Inndatasett=PrivSpes2015, Utdatasett=PrivSpes2015);
-%Splitte (Inndatasett=Privspes2015, UtdatasettEN=npr_skde.T17_Magnus_AvtSpes_2015,UtdatasettTO=npr_skde.T17_Parvus_AvtSpes_2015);
-
-/***********
-*** 2016 ***
-***********/
-
-%Konvertering (Inndatasett=Npr_data.M17_AvtspesSom2016_Utl_fil, Utdatasett=PrivSpes2016);
-%Merge_persondata(innDataSett=PrivSpes2016, utDataSett=PrivSpes2016);
-%Bo_Beh (Inndatasett=PrivSpes2016, Utdatasett=PrivSpes2016);
-%Avledede (Inndatasett=PrivSpes2016, Utdatasett=PrivSpes2016);
-%formater (Inndatasett=PrivSpes2016, Utdatasett=PrivSpes2016);
-%KoblingsID (Inndatasett=PrivSpes2016, Utdatasett=PrivSpes2016);
-%reduser_lengde (Inndatasett=PrivSpes2016, Utdatasett=PrivSpes2016);
-%Splitte (Inndatasett=Privspes2016, UtdatasettEN=npr_skde.T17_Magnus_AvtSpes_2016,UtdatasettTO=npr_skde.T17_Parvus_AvtSpes_2016);
-
+%kjor_tilrettelegg(fil=m&taar._avtspessom20%sysevalf(&taar-1)_utl_fil, aar=%sysevalf(&taar-1), sektor=avtspes, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._avtspessom20%sysevalf(&taar-2)_utl_fil, aar=%sysevalf(&taar-2), sektor=avtspes, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._avtspessom20%sysevalf(&taar-3)_utl_fil, aar=%sysevalf(&taar-3), sektor=avtspes, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._avtspessom20%sysevalf(&taar-4)_utl_fil, aar=%sysevalf(&taar-4), sektor=avtspes, taar = &taar.);
+%kjor_tilrettelegg(fil=m&taar._avtspessom20%sysevalf(&taar-5)_utl_fil, aar=%sysevalf(&taar-5), sektor=avtspes, taar = &taar.);
