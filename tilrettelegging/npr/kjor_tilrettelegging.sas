@@ -25,18 +25,18 @@ Denne filen kjører all tilrettelegging.
 %let taar = 19;
 
 %include "&filbane\tilrettelegging\npr\Formater.sas";
-%include "&filbane\tilrettelegging\npr\1_Macro-Konvertering_og_stringrydding.sas";
-%include "&filbane\tilrettelegging\npr\2_Macro-Bo_og_behandler.sas";
-%include "&filbane\tilrettelegging\npr\2b_Macro-behandler.sas";
-%include "&filbane\tilrettelegging\npr\2c_Macro-AvtaleRHF.sas";
-%include "&filbane\tilrettelegging\npr\3_Macro-ICD10.sas";
-%include "&filbane\tilrettelegging\npr\4_Macro-Ovrige_avledede_variable.sas";
-%include "&filbane\tilrettelegging\npr\5_Macro-Lage_unik_ID.sas";
-%include "&filbane\tilrettelegging\npr\6_Macro-Labler_og_formater.sas";
-%include "&filbane\tilrettelegging\npr\7_Macro-Redusere_variabelstorrelser.sas";
-%include "&filbane\tilrettelegging\npr\8_Macro-Merge_persondata.sas";
-%include "&filbane\tilrettelegging\npr\8b_Macro-splitt_avtspes.sas";
-%include "&filbane\tilrettelegging\npr\9_Macro-Dele_datasett.sas";
+%include "&filbane\tilrettelegging\npr\konvertering.sas";
+%include "&filbane\tilrettelegging\npr\bobehandler.sas";
+%include "&filbane\tilrettelegging\npr\behandler.sas";
+%include "&filbane\tilrettelegging\npr\avtaleRHF_spesialistkomHN.sas";
+%include "&filbane\tilrettelegging\npr\icd10.sas";
+%include "&filbane\tilrettelegging\npr\avledede.sas";
+%include "&filbane\tilrettelegging\npr\koblingsID.sas";
+%include "&filbane\tilrettelegging\npr\lablerFormater.sas";
+%include "&filbane\tilrettelegging\npr\reduser_lengde.sas";
+%include "&filbane\tilrettelegging\npr\merge_persondata.sas";
+%include "&filbane\tilrettelegging\npr\splitt_avtspes.sas";
+%include "&filbane\tilrettelegging\npr\splitte.sas";
 %include "&filbane\tilrettelegging\npr\fag_skde.sas";
 
 /************************************
