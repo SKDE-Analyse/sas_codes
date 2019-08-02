@@ -106,6 +106,13 @@ if komNr=1601 and bydel2_num=04 then bydel=160104; /* Heimdal */
 if komNr=1601 and bydel2_num=. then bydel=160199; /* Uoppgitt bydel Trondheim */
 if komNr=1601 and bydel2_num=99 then bydel=160199; /* Uoppgitt bydel Trondheim */
 
+if komNr=5001 and bydel2_num=01 then bydel=500101; /* Midtbyen */
+if komNr=5001 and bydel2_num=02 then bydel=500102; /* Østbyen */
+if komNr=5001 and bydel2_num=03 then bydel=500103; /* Lerkendal */
+if komNr=5001 and bydel2_num=04 then bydel=500104; /* Heimdal */
+if komNr=5001 and bydel2_num=. then bydel=500199; /* Uoppgitt bydel Trondheim */
+if komNr=5001 and bydel2_num=99 then bydel=500199; /* Uoppgitt bydel Trondheim */
+
 /*Ukjente kommunenummer*/
 if KomNr in (0,8888,9999) then KomNr=9999;
 
@@ -120,7 +127,7 @@ run;
 `forny_komnr`
 */
 
-%forny_komnr(datasett = &Utdatasett, aar = 2018);
+%forny_komnr(datasett = &Utdatasett, aar = 2019);
 
 Data &Utdatasett;
 Set &Utdatasett;
@@ -137,7 +144,7 @@ run;
 - Kjøre behandler-makroen for å definere behandlende sykehus, HF og RHF
 */
 
-%behandler(innDataSett=&Utdatasett;, utDataSett=&Utdatasett);
+%behandler(innDataSett=&Utdatasett, utDataSett=&Utdatasett);
 
 %end;
 
