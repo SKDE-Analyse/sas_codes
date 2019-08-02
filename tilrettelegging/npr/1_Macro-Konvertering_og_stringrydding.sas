@@ -9,6 +9,7 @@ MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 1. Omkoding av stringer med tall til numeriske variable.
 2. Konvertering av stringer til dato- og tidsvariable
 3. Fjerner blanke felt og punktum i stringvariable, samt ny navngiving
+4. Lager Hdiag / Bdiag
 */
 
 Data &Utdatasett;
@@ -23,10 +24,10 @@ drop oppholdstype;
 */
 
 /*!
-- Lager `pid` fra `lopenr` (løpenummer) og sletter `lopenr`
+- Lager `pid` fra `LNr` (løpenummer) og sletter `LNr`
 */
-PID=lopenr+0;
-Drop lopenr;
+PID=LNr+0;
+Drop LNr;
 
 /*!
 - Gjør `RehabType` numerisk.
@@ -132,6 +133,17 @@ Tilstand_1_1=compress(Tilstand_1_1,,'s'); /*Fjerner space*/
 /*!
 - Fjerner blanke felt i diagnosevariable, justerer til stor bokstav (upcase) og navner om til hdiag/bdiag.
 */
+
+
+/* 12Jul2019 JS - det ligger ICD-10-koder i ATC_1 -- ATC_5 i 2014.  Koden ATC_1 er identisk med koden i tilstand_1_1, og ATC_2 er identisk med koden i tilstand_1_2.
+   Flytter ACT_2 til ATC_5 til tilstand_2_1 til tilstand_4_1 som Bdiag */
+
+ if &avtspes=1 and ATC_1 ne '' then do;
+   tilstand_2_1=ATC_3;
+   tilstand_3_1=ATC_4;
+   tilstand_4_1=ATC_5;
+ end;  
+
 %if &avtspes ne 0 %then %do;
 array Tilstand_{9} $
 	tilstand_2_1 tilstand_3_1 tilstand_4_1 tilstand_5_1 tilstand_6_1 tilstand_7_1 tilstand_8_1 tilstand_9_1 tilstand_10_1;
@@ -215,7 +227,7 @@ drop ncrp_: i;
 
 %if &avtspes ne 0 %then %do;
 
-drop cyto: atc:;
+drop cyto:;
 /*!
 - Fjerner blanke felt i takstvariable, og navner om til Normaltariff1-15
 */
@@ -237,7 +249,7 @@ drop tell_takst;
 Disse er identifisert med "(dupli" som Hdiag. Navner om til Tdiag.
 */
 
-if aar = 2014 then do;
+if aar in  (2014,2018) then do;
 	array Tdiag{5} $
  	   Tdiag1-Tdiag5;
 
@@ -253,6 +265,7 @@ end;
 - Episodefag manglet ledende null for avtalespesialister enkelte år.
 */
 if length(compress(episodefag)) = 2 then episodefag = compress("0"||episodefag);
+if episodefag in ("0","950") then episodefag=999;
 
 %end;
 
@@ -273,6 +286,9 @@ Set &Utdatasett;
 
 utdato=.;
 utDato=innDato; /* På grunn av feil i innrapportert utDato settes utDato for avtalespesialister til innDato. */
+
+if inndato lt MDY (1,1,2014) or inndato ge MDY (1,1,2019) then delete; /*10Jul2019 JS - Inndato før 1.1.2014 og etter 31.12.2018 bør slettes.*/
+aar=year(inndato);
 run; 
 %end;
 
