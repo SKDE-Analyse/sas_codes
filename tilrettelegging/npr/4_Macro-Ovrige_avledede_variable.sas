@@ -6,7 +6,7 @@
 MACRO FOR AVLEDEDE VARIABLE
 
 ### Innhold i macroen:
-1. Retting av ugyldig fødselsår og avleding av aldersgrupper
+1. Retting av ugyldig fÃ¸dselsÃ¥r og avleding av aldersgrupper
 2. Definisjon av Alder, Ald_gr og Ald_gr5
 3. Omkoding av KJONN til ErMann
 5. DRGTypeHastegrad
@@ -20,49 +20,51 @@ Data &Utdatasett;
 set &Inndatasett;
 
 /*!
-- Retting av ugyldig fødselsår
+- Retting av ugyldig fÃ¸dselsÃ¥r
 /*
 
 /*
-I datasettet er det registrert 27 personer over 110 år, som er høyeste oppnådde alder for bosatte i Norge i denne perioden, jfr.
+I datasettet er det registrert 27 personer over 110 Ã¥r, som er hÃ¸yeste oppnÃ¥dde alder for bosatte i Norge i denne perioden, jfr.
 Wikipedias kronologiske liste over eldste levende personer i Norge siden 1964 (http:
 //no.wikipedia.org/wiki/Liste_over_Norges_eldste_personer#Kronologisk_liste_over_eldste_levende_personer_i_Norge_siden_01.01.1964).
-Høyeste alder i datasetett er 141 år. Feilaktig høy alder kan påvirke gjennomsnittsalder i små strata. Velger derfor å definere
-alder som ugyldig når oppgitt alder er høyere enn eldste person registret i Norge på dette tidspunktet.
+HÃ¸yeste alder i datasetett er 141 Ã¥r. Feilaktig hÃ¸y alder kan pÃ¥virke gjennomsnittsalder i smÃ¥ strata. Velger derfor Ã¥ definere
+alder som ugyldig nÃ¥r oppgitt alder er hÃ¸yere enn eldste person registret i Norge pÃ¥ dette tidspunktet.
 
-Satte opprinnelig et krav om at personene måtte være bosatt i Norge, ettersom det er her vi har tall for eldste nålevende personer.
-Dette innebærer imidlertid at mange opphold for personer bosatt i utlandet med alder over 110 år, og en særlig opphopning rundt
-årstallet 1899 (som muligens er feilkoding av 1999 eller missing-verdi).Velger derfor også å nullstille alder for utenlandske borgere etter
+Satte opprinnelig et krav om at personene mÃ¥tte vÃ¦re bosatt i Norge, ettersom det er her vi har tall for eldste nÃ¥levende personer.
+Dette innebÃ¦rer imidlertid at mange opphold for personer bosatt i utlandet med alder over 110 Ã¥r, og en sÃ¦rlig opphopning rundt
+Ã¥rstallet 1899 (som muligens er feilkoding av 1999 eller missing-verdi).Velger derfor ogsÃ¥ Ã¥ nullstille alder for utenlandske borgere etter
 samme regel som for norske.
 */
 
-if fodselsar > aar then fodselsar=9999;
-if aar in (2013,2014,2015,2016,2017) and fodselsar < 1904 then fodselsar=9999;
-if aar in (2018) and fodselsar < 1909 then fodselsar=9999;
-
-%if &avtspes ne 0 %then %do;
-
 fodselsar_innrapp=fodselsar;
+fodt_mnd_org=fodt_mnd;
 
-if fodselsar=9999 then do;
-    fodselsar=fodselsAar_ident19062018;
-    if fodselsar > aar then fodselsar=9999;
-    if aar in (2013,2014,2015,2016,2017) and fodselsar < 1904 then fodselsar=9999;
+/* JS 17/07/2019- If year and month from persondata is available and valid, then use it as primary source */
+/*10Jul2019 JS - bruker Persondata nÃ¥r fodselsar er ugyldig for alt, ikke bare avtspes*/
+tmp_alder=aar-fodtAar_DSF_190619;
+if fodtAar_DSF_190619 > 1900 and 0 <= tmp_alder <= 110 then 
+do;
+  fodselsar=fodtAar_DSF_190619;
+  if  1 <= fodtMnd_DSF_190619 <= 12
+  then fodt_mnd=fodtMnd_DSF_190619;
 end;
 
-if utdato lt MDY (1,1,2013) then utdato = .;
-if utdato ge MDY (1,1,2018) then utdato = .;
-/* Det er fremdeles noen feil i utdato da pasienter som har vært hos avtalespesialist ett år
-er registrert med utdato året etter. */
-%end;
+/* if fÃ¸dselsÃ¥r is still invalid */
+if fodselsar > aar or fodselsar=. then fodselsar=9999;
+if aar-fodselsar > 110 then fodselsar=9999;
+
+
+if utdato lt MDY (1,1,2014) then utdato = .;
+if utdato ge MDY (1,1,2019) then utdato = .;
 
 /*!
-- Definerer Alder basert på Fodselsår
+- Definerer Alder basert pÃ¥ FodselsÃ¥r
 */
 
 Alder=aar-fodselsar;
 if fodselsar=9999 then alder=.; /*Ugyldig*/
 
+drop tmp_alder;
 /*!
 - Omkoding av KJONN til ErMann
 */
@@ -72,14 +74,14 @@ else if KJONN in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ErMann=.;
 
 %if &avtspes ne 0 %then %do;
 
-If kjonn not in (1,2) and kjonn_ident19062018 in (1,2) then do;
-	if kjonn_ident19062018 = 1 then ErMann = 1;
-	else if kjonn_ident19062018 = 2 then ErMann = 0;
+If kjonn not in (1,2) and kjonn_DSF_190619 in (1,2) then do;
+	if kjonn_DSF_190619 = 1 then ErMann = 1;
+	else if kjonn_DSF_190619 = 2 then ErMann = 0;
 end;
 
 ulikt_kjonn=.;
-if kjonn=1 and kjonn_ident19062018=2 then ulikt_kjonn=1;
-if kjonn=2 and kjonn_ident19062018=1 then ulikt_kjonn=1;
+if kjonn=1 and kjonn_DSF_190619=2 then ulikt_kjonn=1;
+if kjonn=2 and kjonn_DSF_190619=1 then ulikt_kjonn=1;
 
 %end;
 
@@ -92,7 +94,7 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
 hastegrad=.;
 if innmateHast in (1,2,3) then hastegrad=1; /*Akutt*/
 if innmateHast=4 then hastegrad=4; /*Planlagt*/
-if innmateHast=5 then hastegrad=5; /*Tilbakeføring av pasient fra annet sykehus (gjelder fra 2016)*/
+if innmateHast=5 then hastegrad=5; /*TilbakefÃ¸ring av pasient fra annet sykehus (gjelder fra 2016)*/
 
 if DRG_type='M' and hastegrad=4 /*Planlagt*/ then DRGtypeHastegrad=1;
 else if DRG_type='M' and hastegrad=1 /*Akutt*/ then DRGtypeHastegrad=2;
@@ -155,8 +157,8 @@ if Fag_navn = "plastkir" then Fag_SKDE = 17;
 if Fag_navn = "radiologi" then Fag_SKDE = 18;
 if Fag_navn = "revma" then Fag_SKDE = 19;
 if Fag_navn = "urologi" then Fag_SKDE = 20;
-if Fag_navn = "ønh" then Fag_SKDE = 21;
-if Fag_navn = "øye" then Fag_SKDE = 22;
+if Fag_navn = "Ã¸nh" then Fag_SKDE = 21;
+if Fag_navn = "Ã¸ye" then Fag_SKDE = 22;
 if Fag_navn = "onkologi" then Fag_SKDE = 23;
 if Fag_navn = "psykiatri" then Fag_SKDE = 30;
 if Fag_navn = "psykologi" then Fag_SKDE = 31;
@@ -166,13 +168,13 @@ end;
 if Fag_SKDE=. then do;
 if institusjonID=113166 then FAG_SKDE=11; /* Morten Andersen - 'Kirurgi, urologi' */
 if institusjonID=113255 then FAG_SKDE=11; /* Einar Christiansen - 'Kirurgi, urologi' */ 
-if institusjonID=113284 then FAG_SKDE=21; /* Sverre Dølvik - 'ØNH' */
-if institusjonID=113342 then FAG_SKDE=11; /* Øyvind Gallefoss - 'Kirurgi, ortopedi' */ 
+if institusjonID=113284 then FAG_SKDE=21; /* Sverre DÃ¸lvik - 'Ã˜NH' */
+if institusjonID=113342 then FAG_SKDE=11; /* Ã˜yvind Gallefoss - 'Kirurgi, ortopedi' */ 
 if institusjonID=113381 then FAG_SKDE=11; /* Arve Gustavsen - 'Kirurgi, urologi' */
 if institusjonID=113507 then FAG_SKDE=11; /* Trygve Kase - 'Kirurgi, ortopedi' */ 
-if institusjonID=113660 then FAG_SKDE=21; /* Stein Helge Glad Nordahl - 'ØNH' */ 
-if institusjonID=113756 then FAG_SKDE=22; /* David Simonsen - 'Øye' */
-if institusjonID=113805 then FAG_SKDE=21; /* Michael Strand - 'ØNH' */
+if institusjonID=113660 then FAG_SKDE=21; /* Stein Helge Glad Nordahl - 'Ã˜NH' */ 
+if institusjonID=113756 then FAG_SKDE=22; /* David Simonsen - 'Ã˜ye' */
+if institusjonID=113805 then FAG_SKDE=21; /* Michael Strand - 'Ã˜NH' */
 end;
 
 tell_Normaltariff = tell_takst;
