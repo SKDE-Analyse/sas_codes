@@ -167,21 +167,16 @@ if Fag_navn = "psykologi" then Fag_SKDE = 31;
 
 end;
 
-if Fag_SKDE=. then do;
-if institusjonID=113166 then FAG_SKDE=11; /* Morten Andersen - 'Kirurgi, urologi' */
-if institusjonID=113255 then FAG_SKDE=11; /* Einar Christiansen - 'Kirurgi, urologi' */ 
-if institusjonID=113284 then FAG_SKDE=21; /* Sverre Dølvik - 'ØNH' */
-if institusjonID=113342 then FAG_SKDE=11; /* Øyvind Gallefoss - 'Kirurgi, ortopedi' */ 
-if institusjonID=113381 then FAG_SKDE=11; /* Arve Gustavsen - 'Kirurgi, urologi' */
-if institusjonID=113507 then FAG_SKDE=11; /* Trygve Kase - 'Kirurgi, ortopedi' */ 
-if institusjonID=113660 then FAG_SKDE=21; /* Stein Helge Glad Nordahl - 'ØNH' */ 
-if institusjonID=113756 then FAG_SKDE=22; /* David Simonsen - 'Øye' */
-if institusjonID=113805 then FAG_SKDE=21; /* Michael Strand - 'ØNH' */
+if aar in (2018) or Fag_SKDE=. then do;
+/*
+Kjør makroen 'fag_skde' i filen fag_skde.sas.
+Definerer fag_skde ut ifra institusjonID
+*/
+%fag_skde;
 end;
 
-tell_Normaltariff = tell_takst;
 AvtSpes=1;
-drop tell_takst;
+
 %end;
 
 
