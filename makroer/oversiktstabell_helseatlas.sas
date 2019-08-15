@@ -1,6 +1,9 @@
 
-%macro oversiktstabell_helseatlas(justering=&just);
+%macro oversiktstabell_helseatlas;
 * Calculate average age;
+
+/* Definer justering til direkte justering, hvis ikke definert */
+%if %sysevalf(%superq(justering)=,boolean) %then %let justering = 1;
 
 data tmp_aldersfig;
   set tmp_aldersfig;
@@ -15,19 +18,19 @@ quit;
 
 * Decide which rate file to use depending on the adjustment method (direct, indirect, unadjusted);
 
-%if &just=just %then %do;
+%if &justering=1 %then %do;
 data forbruksmal_bohf;
   set &forbruksmal._bohf;
   antall=&forbruksmal;
 run;
 %end;
-%else %if &just=ijust %then %do;
+%else %if &justering=2 %then %do;
 data forbruksmal_bohf;
   set &forbruksmal._ijust_bohf;
   antall=&forbruksmal;
 run;
 %end;
-%else %if &just=ujust %then %do;
+%else %if &justering=0 %then %do;
 data forbruksmal_bohf;
   set &forbruksmal._ujust_bohf;
   antall=&forbruksmal;
