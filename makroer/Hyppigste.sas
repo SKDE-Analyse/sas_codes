@@ -19,6 +19,10 @@
   - Må skrives slik: `Where=Where Borhf=1`
 6. `test`:  Hvis ulik null lagres et datasett &test istedenfor tabell.
 
+7.`by` : create the list for subgroups.  For example by=bohf
+   - 5/6-19 however this does not seem to calculate the percents correctly!!  need to revisit the code.
+   - totalt and totaltrang are not assigned properly????
+
 ### Forfatter
   
 Opprettet 30/11-15 av Frank Olsen
