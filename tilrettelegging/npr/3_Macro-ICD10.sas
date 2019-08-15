@@ -25,7 +25,7 @@ ICD10KAP
 */
 
 /*!
-- Definerer hoveddiagnosekap for ICD10 (1 tegn) ut fra oppgitt hoveddiagnose (4 tegn). Disse kodene er ikke oppdatert siden 2014 - vi må finne/be e-helsedir og lister for hvert år 
+- Definerer hoveddiagnosekap for ICD10 (1 tegn) ut fra oppgitt hoveddiagnose (4 tegn). Disse kodene er ikke oppdatert siden 2014 - vi må finne/be e-helsedir om lister for hvert år 
 */
 
 if substr(Hdiag,1,1) ='A' then ICD10Kap=1; /*Visse infeksjonssykd og parasittsykd*/
