@@ -190,6 +190,7 @@ Title;
 
 
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
+%if %sysevalf(%superq(Vertskommune_HN)=,boolean) %then %let Vertskommune_HN = 0;
 
 %let Bo=Norge; /*må lage egen for Norge*/
 
