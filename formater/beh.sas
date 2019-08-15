@@ -8,9 +8,6 @@ value behSh
 21='UNN Tromsø'
 22='UNN Harstad'
 23='UNN Narvik'
-24='UNN Storslett'/*JS 23/07/19 -ny i 2018 */
-25='UNN Bardu'/*JS 23/07/19 -ny i 2018 */
-26='UNN Finnsnes'/*JS 23/07/19 -ny i 2018 */
 30='NLSH HF'
 31='NLSH Vesterålen'
 32='NLSH Lofoten'
@@ -27,7 +24,7 @@ value behSh
 62='St. Olavs hospital, Orkdal'
 63='St. Olavs hospital, Røros'
 64='St. Olavs hospital, Hysnes helsefort'
-65='St. Olavs hospital, rehab Ørland' /*JS 23/07/19 -ny i 2018 */
+65='St. Olavs hospital, Ørland'
 70='Helse Møre og Romsdal HF'  
 71='Molde sjukehus'
 72='Kristiansund sykehus'
@@ -36,7 +33,6 @@ value behSh
 75='Mork Rehabiliteringssenter'
 76='Nevrohjemmet rehabiliteringssenter'
 77='Aure rehabiliteringssenter'
-78='Ålesund habilitering' /*JS 23/07/19 -ny i 2018 */
 90='Helse Førde HF'
 91='Førde sjukehus'
 92='Nordfjord sjukehus'
@@ -98,7 +94,7 @@ value behSh
 200='Sykehuset Østfold HF'
 201='Sykehuset Østfold, Moss'
 202='Sykehuset Østfold, Sarpsborg'
-203='Sykehuset Østfold, Askim' /*JS 23/07/19 -ny i 2018 */
+203='Sykehuset Østfold, Askim'
 210='Sørlandet sykehus HF'
 211='Sørlandet sykehus, Kristiansand'  
 212='Sørlandet sykehus, Arendal'
