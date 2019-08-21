@@ -17,6 +17,6 @@ output; /*Logo*/
 	x1 = 1;
 	width=150;
 	textsize = 8;
-	label = "Source: MBRN";
+	label = "Source: KUHR/NPR";
 output;/*Kilde*/
 run;
