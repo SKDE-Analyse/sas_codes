@@ -4,9 +4,6 @@
 Kjør tester av rateprogrammet
 */
 
-/* Definere filbane */
-%let filbane = %definer_filbane(branch = &branch);
-
 %include "&filbane\tests\makroer_rateprogram.sas";
 
 /*

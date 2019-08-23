@@ -1,28 +1,15 @@
 # SAS-makroer utviklet og brukt ved SKDE
 
-## Bruke makroene
-
-Makroene ligger her:
-
-    \\tos-sas-skde-01\SKDE_SAS\felleskoder\master\makroer\
-
-For å bruke de i din egen SAS-kode, legges følgende inn i koden:
-
-    %let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
-    options sasautos=("&filbane\Makroer" SASAUTOS);
-
-Dokumentasjon om de ulike makroene finnes [her](http://skde-analyse.github.io/sas_codes/)
-
 ## Lage en ny makro
 
 I korte trekk gjør man følgende
 
-1. Kopier mappen `\\tos-sas-skde-01\SKDE_SAS\felleskoder\master` og jobb i den kopierte mappen.
+1. Kopier mappen `felleskoder\master` og jobb i den kopierte mappen.
 2. Lag en sas-fil som heter det samme som makroen man vil lage.
 3. Lag makroen, og dokumenter den.
 4. Lag en test
-5. Dytt opp til egen `branch` på [github](https://github.com/SKDE-Analyse/sas_codes) og lag en `pull request` (ev. be [Arnfinn](https://github.com/arnfinn) gjøre det).
-6. Oppdater `\\tos-sas-skde-01\SKDE_SAS\felleskoder\master` (`git pull --rebase`, ev. be Arnfinn gjøre det)
+5. Dytt opp til egen `branch` på [github](https://github.com/SKDE-Analyse/sas_codes) og lag en `pull request`.
+6. Oppdater `felleskoder\master` (`git pull --rebase`, ev. be Arnfinn gjøre det)
 
 ### Eksempel på makro
 
@@ -53,7 +40,7 @@ Når man lager en makro burde man også lage en test. Denne kan så kjøres sene
 ```SAS
 %macro minNyeMakro_test(branch = master, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
-%include "\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch\makroer\minNyeMakro.sas";
+%include "&filbane\makroer\minNyeMakro.sas";
 
 data makronavn1;
 set test.minNyeMakro_start;
@@ -82,7 +69,7 @@ Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn 
 
 ### Dytte makroen opp til [github](https://github.com/SKDE-Analyse/sas_codes)
 
-Man gjør følgende i mappen `\\tos-sas-skde-01\SKDE_SAS\felleskoder\<min_mappe>\` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
+Man gjør følgende i mappen `SKDE_SAS\felleskoder\<min_mappe>\` med *git-bash* etter at man har lagd en makro og dokumentert den (eventuelt endret dokumentasjonen i en makro):
 
 ```bash
 git status # for å sjekke at alt er som det skal

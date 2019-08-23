@@ -14,9 +14,6 @@ Sammenligner datasettene som spyttes ut med referanse-sett (test.ref_eoc[n]).
 
 */
 
-/* Definere filbane */
-%let filbane = %definer_filbane(branch = &branch);
-
 %include "&filbane\makroer\episode_of_care.sas";
 
 %if &lagNyStart ne 0 %then %do;

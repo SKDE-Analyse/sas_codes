@@ -15,9 +15,6 @@ Sammenligner dette datasettet med en referanse (`test.ref_unik_pasient_&navn`).
 
 */
 
-/* Definere filbane */
-%let filbane = %definer_filbane(branch = &branch);
-
 %include "&filbane\makroer\unik_pasient.sas";
 
 /*

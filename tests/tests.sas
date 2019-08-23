@@ -1,13 +1,6 @@
 /*!
 Hovedtestfil som leser inn alle testene, slik at disse kan kjøres.
 Inneholder også felles makroer som testene bruker.
-
-Hentes inn på følgende måte:
-
-```
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
-%include "&filbane\tests\tests.sas";
-```
 */
 
 /* Inkluder alle testene */
@@ -54,28 +47,6 @@ Makro som kjører alle testene
 /*!
 ## Felles makroer for testing av sas-kode.
 */
-
-%macro definer_filbane(branch = null);
-/*!
-Makro for å definere filbane.
-
-Vil definere filbane hvis branch er definert, eller hvis filbane ikke tidligere er definert.
-
-*/
-
-%if &branch ne null %then %do;
-%local filbane;
-%let filbane = \\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
-%end;
-%else %do;
-    /* Definer filbane til master hvis filbane ikke er definert tidligere */
-    %if %sysevalf(%superq(filbane)=,boolean) %then %do;
-    %let filbane = \\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
-    %end;
-%end;
-
-&filbane.
-%mend;
 
 %macro sammenlignData(fil =, lagReferanse = 0, crit =);
 
