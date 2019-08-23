@@ -36,25 +36,26 @@ Dette innebærer imidlertid at mange opphold for personer bosatt i utlandet med a
 samme regel som for norske.
 */
 
-if fodselsar > aar then fodselsar=9999;
-if aar in (2013,2014,2015,2016,2017) and fodselsar < 1904 then fodselsar=9999;
-if aar in (2018) and fodselsar < 1909 then fodselsar=9999;
-
-%if &avtspes ne 0 %then %do;
-
 fodselsar_innrapp=fodselsar;
+fodt_mnd_org=fodt_mnd;
 
-if fodselsar=9999 then do;
-    fodselsar=fodselsAar_ident19062018;
-    if fodselsar > aar then fodselsar=9999;
-    if aar in (2013,2014,2015,2016,2017) and fodselsar < 1904 then fodselsar=9999;
+/* JS 17/07/2019- If year and month from persondata is available and valid, then use it as primary source */
+/*10Jul2019 JS - bruker Persondata når fodselsar er ugyldig for alt, ikke bare avtspes*/
+tmp_alder=aar-fodtAar_DSF_190619;
+if fodtAar_DSF_190619 > 1900 and 0 <= tmp_alder <= 110 then 
+do;
+  fodselsar=fodtAar_DSF_190619;
+  if  1 <= fodtMnd_DSF_190619 <= 12
+  then fodt_mnd=fodtMnd_DSF_190619;
 end;
 
-if utdato lt MDY (1,1,2013) then utdato = .;
-if utdato ge MDY (1,1,2018) then utdato = .;
-/* Det er fremdeles noen feil i utdato da pasienter som har vært hos avtalespesialist ett år
-er registrert med utdato året etter. */
-%end;
+/* if fødselsår is still invalid */
+if fodselsar > aar or fodselsar=. then fodselsar=9999;
+if aar-fodselsar > 110 then fodselsar=9999;
+
+
+if utdato lt MDY (1,1,2014) then utdato = .;
+if utdato ge MDY (1,1,2019) then utdato = .;
 
 /*!
 - Definerer Alder basert på Fodselsår
@@ -63,6 +64,7 @@ er registrert med utdato året etter. */
 Alder=aar-fodselsar;
 if fodselsar=9999 then alder=.; /*Ugyldig*/
 
+drop tmp_alder;
 /*!
 - Omkoding av KJONN til ErMann
 */
@@ -72,14 +74,14 @@ else if KJONN in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ErMann=.;
 
 %if &avtspes ne 0 %then %do;
 
-If kjonn not in (1,2) and kjonn_ident19062018 in (1,2) then do;
-	if kjonn_ident19062018 = 1 then ErMann = 1;
-	else if kjonn_ident19062018 = 2 then ErMann = 0;
+If kjonn not in (1,2) and kjonn_DSF_190619 in (1,2) then do;
+	if kjonn_DSF_190619 = 1 then ErMann = 1;
+	else if kjonn_DSF_190619 = 2 then ErMann = 0;
 end;
 
 ulikt_kjonn=.;
-if kjonn=1 and kjonn_ident19062018=2 then ulikt_kjonn=1;
-if kjonn=2 and kjonn_ident19062018=1 then ulikt_kjonn=1;
+if kjonn=1 and kjonn_DSF_190619=2 then ulikt_kjonn=1;
+if kjonn=2 and kjonn_DSF_190619=1 then ulikt_kjonn=1;
 
 %end;
 
@@ -104,6 +106,8 @@ if hastegrad=. then DRGtypeHastegrad=9;
 
 %if &avtspes ne 0 %then %do;
 hastegrad=4;
+omsorgsniva_org=omsorgsniva;
+omsorgsniva=3; /*JS - 16.07.19 hard code all avtspes activities to poli*/
 
 /*
 ************************************************************************************************
@@ -163,21 +167,16 @@ if Fag_navn = "psykologi" then Fag_SKDE = 31;
 
 end;
 
-if Fag_SKDE=. then do;
-if institusjonID=113166 then FAG_SKDE=11; /* Morten Andersen - 'Kirurgi, urologi' */
-if institusjonID=113255 then FAG_SKDE=11; /* Einar Christiansen - 'Kirurgi, urologi' */ 
-if institusjonID=113284 then FAG_SKDE=21; /* Sverre Dølvik - 'ØNH' */
-if institusjonID=113342 then FAG_SKDE=11; /* Øyvind Gallefoss - 'Kirurgi, ortopedi' */ 
-if institusjonID=113381 then FAG_SKDE=11; /* Arve Gustavsen - 'Kirurgi, urologi' */
-if institusjonID=113507 then FAG_SKDE=11; /* Trygve Kase - 'Kirurgi, ortopedi' */ 
-if institusjonID=113660 then FAG_SKDE=21; /* Stein Helge Glad Nordahl - 'ØNH' */ 
-if institusjonID=113756 then FAG_SKDE=22; /* David Simonsen - 'Øye' */
-if institusjonID=113805 then FAG_SKDE=21; /* Michael Strand - 'ØNH' */
+if aar in (2018) or Fag_SKDE=. then do;
+/*
+Kjør makroen 'fag_skde' i filen fag_skde.sas.
+Definerer fag_skde ut ifra institusjonID
+*/
+%fag_skde;
 end;
 
-tell_Normaltariff = tell_takst;
 AvtSpes=1;
-drop tell_takst;
+
 %end;
 
 

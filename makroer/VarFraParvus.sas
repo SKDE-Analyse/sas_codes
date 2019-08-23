@@ -1,4 +1,4 @@
-%macro VarFraParvus(dsnMagnus=,var_som=,var_avtspes=, taar = 18);
+%macro VarFraParvus(dsnMagnus=,var_som=,var_avtspes=, taar = 19);
 
 /*!
 ### Beskrivelse
@@ -30,6 +30,7 @@ Start gjerne med et ferdig utvalg om det er mulig, da vil makroen kjøre raskere 
 - 5/10-16 Opprettet av Petter Otterdal
 - juni 2017: Tilpasset versjon for tilrettelagte sett (Petter Otterdal)
 - juli 2018: tilpasset t18 (Arnfinn)
+- juli 2019: tilpasset t19; fjernet t17 (Arnfinn)
 */
 
 
@@ -49,13 +50,13 @@ Start gjerne med et ferdig utvalg om det er mulig, da vil makroen kjøre raskere 
 %let var_par = &var_avtspes;
 %end;
 
-%if &taar = 17 %then %do;
-%let server = npr_skde;
-%let parvus = t17_PARVUS_&niva._&aar;
-%end;
 %if &taar = 18 %then %do;
 %let server = skde18;
 %let parvus = t18_PARVUS_&niva._&aar;
+%end;
+%if &taar = 19 %then %do;
+%let server = skde19;
+%let parvus = t19_PARVUS_&niva._&aar;
 %end;
 
 data 	qwerty_&niva._&aar;
@@ -72,37 +73,37 @@ quit;
 
 %mend; /* koble_parvus */
 
-%if &taar = 17 %then %do;
-%koble_parvus (niva=avd,aar=2012);
-%end;
+%if &taar = 18 %then %do;
 %koble_parvus (niva=avd,aar=2013);
+%end;
 %koble_parvus (niva=avd,aar=2014);
 %koble_parvus (niva=avd,aar=2015);
 %koble_parvus (niva=avd,aar=2016);
-%if &taar = 18 %then %do;
 %koble_parvus (niva=avd,aar=2017);
+%if &taar = 19 %then %do;
+%koble_parvus (niva=avd,aar=2018);
 %end;
 
-%if &taar = 17 %then %do;
-%koble_parvus (niva=sho,aar=2012);
-%end;
+%if &taar = 18 %then %do;
 %koble_parvus (niva=sho,aar=2013);
+%end;
 %koble_parvus (niva=sho,aar=2014);
 %koble_parvus (niva=sho,aar=2015);
 %koble_parvus (niva=sho,aar=2016);
-%if &taar = 18 %then %do;
 %koble_parvus (niva=sho,aar=2017);
+%if &taar = 19 %then %do;
+%koble_parvus (niva=sho,aar=2018);
 %end;
 
-%if &taar = 17 %then %do;
-%koble_parvus (niva=avtspes,aar=2012);
-%end;
+%if &taar = 18 %then %do;
 %koble_parvus (niva=avtspes,aar=2013);
+%end;
 %koble_parvus (niva=avtspes,aar=2014);
 %koble_parvus (niva=avtspes,aar=2015);
 %koble_parvus (niva=avtspes,aar=2016);
-%if &taar = 18 %then %do;
 %koble_parvus (niva=avtspes,aar=2017);
+%if &taar = 19 %then %do;
+%koble_parvus (niva=avtspes,aar=2018);
 %end;
 
 data &dsnMagnus;

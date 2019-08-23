@@ -13,18 +13,23 @@ Lager en unik id på hvert opphold, som siden brukes når vi splitter datasettet i
 - `fil`: kan være `avd`, `sho` eller `avtspes`
 */
 
-%if &fil = avd %then %do;
+%if %lowcase(&fil) = avd %then %do;
 %let prenum = 1810000000000;
 %end;
-%if &fil = sho %then %do;
+%if %lowcase(&fil) = sho %then %do;
 %let prenum = 1820000000000;
 %end;
-%if &fil = avtspes %then %do;
+%if %lowcase(&fil) = avtspes %then %do;
 %let prenum = 1830000000000;
 %end;
 
 Data &Utdatasett;
 set &Inndatasett;
+
+If aar = 2018 then do;
+i + 1;
+KoblingsID = &prenum. + i + 1800000000;
+end;
 
 If aar = 2017 then do;
 i + 1;

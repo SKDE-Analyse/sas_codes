@@ -11,8 +11,8 @@ set &InnData;
 ********************************************************
 */
 
-PID=lopenr+0;
-Drop lopenr;
+PID=LNr+0;
+Drop LNr;
 
 /*
 *******************************************************
@@ -22,10 +22,10 @@ Drop lopenr;
 
 /*Datoer*/
 
-emigrertDato=Input(emigrertdato19062018,Anydtdte10.);
-DodDato=Input(doddato19062018,Anydtdte10.);
+emigrertDato=Input(emigrertDato_DSF_190619,Anydtdte10.);
+DodDato=Input(dodDato_DSF_190619,Anydtdte10.);
 format emigrertDato dodDato Eurdfdd10.;
-Drop emigrertdato19062018 doddato19062018;
+Drop emigrertDato_DSF_190619 dodDato_DSF_190619;
 
 run;
 
