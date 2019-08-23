@@ -210,9 +210,6 @@ run;
 Rateberegninger
 */
 
-%local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
-
 %include "&filbane\rateprogram\rateberegninger.sas";
 %include "&filbane\rateprogram\sas\definerVariabler.sas";
 %include "&filbane\Stiler\stil_figur.sas";

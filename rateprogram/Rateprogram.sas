@@ -4,11 +4,9 @@ man kan bruke. Filen skal være kjørbar som et *sas*-program slik den er.
 
 Den kan også fungere som en test av rateprogrammet. Kjøres slik:
 ```
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
 %include "&filbane\rateprogram\Rateprogram.sas";
 ```
 */
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
 options sasautos=("&filbane\makroer" SASAUTOS);
 
 %include "&filbane\formater\SKDE_somatikk.sas";

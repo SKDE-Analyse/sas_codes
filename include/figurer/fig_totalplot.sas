@@ -5,7 +5,7 @@ Totalplot-figur
 */
 
 Options locale=NB_no mlogic symbolgen mprint;
-%include "\\tos-sas-skde-01\SKDE_SAS\Stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
 
 ODS Graphics ON / imagemap reset=All imagename="&figurnavn" imagefmt=&bildeformat  border=off width=14.0cm height=10.0cm;
 ODS Listing style=Stil_figur Image_dpi=300 

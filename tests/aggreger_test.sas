@@ -15,9 +15,6 @@ Sammenligner dette datasettet med en referanse (`tests/data/agg_&navn.csv`).
 
 */
 
-/* Definere filbane */
-%let filbane = %definer_filbane(branch = &branch);
-
 %include "&filbane\makroer\aggreger.sas";
 
 /*

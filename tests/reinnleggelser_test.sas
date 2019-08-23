@@ -15,9 +15,6 @@ Sammenligner dette datasettet med en referanse (`test.ref_reinn1` og `test.ref_r
 
 */
 
-/* Definere filbane */
-%let filbane = %definer_filbane(branch = &branch);
-
 %include "&filbane\makroer\reinnleggelser.sas";
 
 /*
