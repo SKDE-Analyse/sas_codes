@@ -12,9 +12,6 @@ Tester for øyeblikket makroene
 
 */
 
-%local filbane;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
-
 %include "&filbane\makroer\tests\episode_of_care_test.sas";
 %episode_of_care_test(branch=&branch, lagNyRef = &lagNyRef, lagNyStart = &lagNyStart);
 

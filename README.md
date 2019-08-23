@@ -14,7 +14,7 @@ Ved å kjøre følgende kode vil alle testene i "branchen" `master` kjøres:
 
 ```
 %let branch = master;
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\&branch;
+%let filbane=<...>\felleskoder\&branch;
 %include "&filbane\tests\tests.sas";
 %test(branch = &branch);
 ```

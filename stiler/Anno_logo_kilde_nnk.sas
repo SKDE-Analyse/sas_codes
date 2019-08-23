@@ -11,7 +11,7 @@ retain function "Image";
 	x1 = 98;
 	y1 = 2;
 	width=12;
-	image = "\\tos-sas-skde-01\SKDE_Felles\RightCare\Bilder\SKDE_logo\SKDE_figur.jpg";
+	image = "&filbane\RightCare\Bilder\SKDE_logo\SKDE_figur.jpg";
 output; /*Logo*/
 function = "text";
 	anchor = "bottomleft";

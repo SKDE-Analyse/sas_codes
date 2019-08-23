@@ -10,9 +10,6 @@ Makro for å teste kode i ../Stiler/ (logo)
 
 ods text="Test Anno";
 
-/* Definere filbane */
-%let filbane = %definer_filbane(branch = &branch);
-
 %include "&filbane\Stiler\stil_figur.sas";
 %include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
 
@@ -35,9 +32,6 @@ Makro for å teste utvalgx-makroen i rateprogrammet.
 ods text="Test UtvalgX";
 
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 1;
-
-/* Definere filbane */
-%let filbane = %definer_filbane(branch = &branch);
 
 %include "&filbane\makroer\boomraader.sas";
 %include "&filbane\rateprogram\rateberegninger.sas";
@@ -97,9 +91,6 @@ Makro for å teste rateberegning-makroen (rateprogrammet)
 ods text="Test Rateberegninger";
 
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 1;
-
-/* Definere filbane */
-%let filbane = %definer_filbane(branch = &branch);
 
 %if (&alene ne 0) %then %do;
 

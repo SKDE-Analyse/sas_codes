@@ -5,7 +5,7 @@
 Først må makro-filene inkluderes i prosjektet:
 
 ```SAS
-%let kodebane = \\tos-sas-skde-01\SKDE_SAS\felleskoder\tilrettelegging\npr;
+%let kodebane = &filbane\tilrettelegging\npr;
 
 %include "&kodebane\Formater.sas";
 
@@ -30,7 +30,7 @@ Så inkluderes kjørefilen (da kjøres alle makroene):
 Følgende kode ble kjørt for å legge til innbyggertallene 1. januar 2018:
 
 ```SAS
-%let kodebane = \\tos-sas-skde-01\SKDE_SAS\felleskoder\tilrettelegging\ssb;
+%let kodebane = &filbane\tilrettelegging\ssb;
 %include "&kodebane\lesSSBdata.sas";
 
 %lesSSBdata(aar=2018, utdata = bydel, bydel = 1);

@@ -10,13 +10,13 @@ retain function "Image";
 	x1 = 98;
 	y1 = 2;
 	width=12;
-	image = "\\tos-sas-skde-01\SKDE_SAS\FELLESKODER\MASTER\Stiler\logo\skde.png";
+	image = "&filbane\Stiler\logo\skde.png";
 output; /*Logo*/
 	function = "text";
 	anchor = "bottomleft";
 	x1 = 1;
 	width=150;
 	textsize = 8;
-	label = "Source: MFR";
+	label = "Source: MBRN";
 output;/*Kilde*/
 run;

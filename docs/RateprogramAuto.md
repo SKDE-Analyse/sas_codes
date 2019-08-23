@@ -1,7 +1,6 @@
 # Rateprogram.sas
 
 ```sas
-%let filbane=\\tos-sas-skde-01\SKDE_SAS\felleskoder\master;
 options sasautos=("&filbane\makroer" SASAUTOS);
 
 %include "&filbane\formater\SKDE_somatikk.sas";
