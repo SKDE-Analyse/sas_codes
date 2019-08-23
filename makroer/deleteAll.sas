@@ -16,8 +16,7 @@ Makro som sletter alle makro-variabler, slik at man slipper å restarte SAS EG.
          	  from dictionary.macros
             	      where scope='GLOBAL' 
 			   and not name contains 'SYS_SQL_IP_'
-			   and not name contains 'FILBANE'
-			   and not name contains 'BRANCH';
+			   and not name in ('FILBANE', 'BRANCH');
    	quit;
  
    	%symdel &vars;
