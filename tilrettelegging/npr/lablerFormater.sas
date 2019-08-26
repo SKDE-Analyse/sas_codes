@@ -106,7 +106,7 @@ label dag_kir='Dagkirurgisk DRG (NPK)'; format dag_kir $DAG_KIR.;
 label spes_drg='Spesifikk DRG (NPK)'; format SPES_DRG $SPES_DRG.;
 label rehabType='Type rehabilitering (NPK)'; format rehabType REHABTYPE.;
 label utforendeHelseperson='Utførende helsepersonell (NPR-melding)'; format utforendeHelseperson UTFORENDEHELSEPERSON.;
-label aggrshoppID='Id for aggregert sykehusopphold (NPK)'; 
+label aggrshoppID_LNr='Id for aggregert sykehusopphold (NPK)'; 
 label hdg='Hoveddiagnosegruppe (NPK)'; format HDG HDG.; 
 label nyTilstand='Ny Tilstand (NPR-melding)';
 

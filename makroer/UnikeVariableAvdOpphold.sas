@@ -31,15 +31,15 @@ Opprettet 24/2-16 av Frank Olsen
 
 data &dsn._trp;
 set &dsn;
-where niva='F' and aggrshoppid ne . &extrawhere;
-keep pid aggrshoppid &variabler;
+where niva='F' and aggrshoppID_LNr ne . &extrawhere;
+keep pid aggrshoppID_LNr &variabler;
 run;
 
 proc sort data=&dsn._trp;
-by pid aggrshoppid &variabler; run;
+by pid aggrshoppID_LNr &variabler; run;
 
 proc transpose data=&dsn._trp out=&dsn._trp1 prefix=&prefix;
-by pid aggrshoppid &variabler;
+by pid aggrshoppID_LNr &variabler;
 var &variabler;
 run;
 
@@ -49,11 +49,11 @@ set &dsn._trp1;
 run;
 
 proc sort data=&dsn._trp1 nodupkey;
-by pid aggrshoppid group &prefix.1;
+by pid aggrshoppID_LNr group &prefix.1;
 run;
 
 proc transpose data=&dsn._trp1 out=&dsn._&prefix (drop=_:) prefix=&prefix;
-by pid aggrshoppid;
+by pid aggrshoppID_LNr;
 var &prefix.1;
 run;
 

@@ -36,7 +36,6 @@ length pid 6;
 %if &somatikk ne 0 %then %do;
 length hastegrad aktivitetskategori: 4;
 
-length aggrshoppID 5;
 length alderIDager 4;
 length behandlingsstedKode: 6;
 length debitor 3;
