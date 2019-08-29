@@ -14,8 +14,8 @@ PROC TABULATE  ORDEr=data DATA=tabell;
 	alder_Mean='Alder, gj. snitt'*F=Numeric6.1 Kvinneandel*F=PERCENT6.1
 	min_rate='Laveste rate'*F=Numeric6.1 maks_rate='Høyeste rate'*F=Numeric6.1 FT*F=Numeric6.1 FT2*F=Numeric6.1 
 	min_bohf='BoHf med laveste rate'*F=BoHF_kort. maks_bohf='Bohf med høyeste rate'*F=BoHF_kort.  ;
-	
-RUN;Title;
+RUN;
+ods tagsets.tablesonlylatex close;
 ```
 
 */
