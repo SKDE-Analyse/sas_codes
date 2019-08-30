@@ -300,7 +300,7 @@ set &dsn;
 %if &nulle_liggedogn ne 0 %then %do; * Nulle ut liggetid hvis oppholdet er mindre enn åtte timer;
 	if EoC_utdatotid - EoC_inndatotid < 28800 then EoC_liggetid = 0;
 %end;
-	drop EoC_brudd EoC_innen_t lag_utdatotid EoC_overlapp;
+	drop EoC_brudd lag_utdatotid EoC_overlapp;
 run;
 
 %if &debug ne 0 %then %do;
