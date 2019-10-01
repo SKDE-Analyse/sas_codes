@@ -133,12 +133,57 @@ else if KomNr in (1805, /* Narvik */
                   1920, /* Lavangen */
                   1923 /* Salangen */
                   ) then BoShHN=5;
-else if KomNr in (1866,1867,1868,1870,1871) then BoShHN=6;
-else if KomNr in (1859,1860,1865,1874) then BoShHN=7;
-else if KomNr in (1804,1837,1838,1839,1840,1841,1845,1848,1849,1850,1856,1857) then BoShHN=8;
-else if KomNr in (1828,1832,1833,1836) then BoShHN=9;
-else if KomNr in (1824,1825,1826) then BoShHN=10;
-else if KomNr in (1811,1812,1813,1815,1816,1818,1820,1822,1827,1834,1835) then BoShHN=11;
+/* Vesterålen */
+else if KomNr in (1866, /* Hadsel */
+                  1867, /* Bø */
+                  1868, /* Øksnes */
+                  1870, /* Sortland */
+                  1871 /* Andøy */
+                  ) then BoShHN=6;
+/* Lofoten */
+else if KomNr in (1859, /* Flakstad */
+                  1860, /* Vestvågøy */
+                  1865, /* Vågan */
+                  1874 /* Moskenes */
+                  ) then BoShHN=7;
+/* Bodø */
+else if KomNr in (1804, /* Bodø */
+                  1837, /* Meløy */
+                  1838, /* Gildeskål */
+                  1839, /* Beiarn */
+                  1840, /* Saltdal */
+                  1841, /* Fauske */
+                  1845, /* Sørfold */
+                  1848, /* Steigen */
+                  1849, /* Hamarøy */
+                  1850, /* Tysfjord */
+                  1856, /* Røst */
+                  1857 /* Værøy */
+                  ) then BoShHN=8;
+/* Rana */
+else if KomNr in (1828, /* Nesna */
+                  1832, /* Hemnes */
+                  1833, /* Rana */
+                  1836 /* Rødøy */
+                  ) then BoShHN=9;
+/* Mosjøen */
+else if KomNr in (1824, /* Vefsn */
+                  1825, /* Grane */
+                  1826 /* Hattfjelldal */
+                  ) then BoShHN=10;
+/* Sandnessjøen */
+else if KomNr in (1811, /* Bindal */
+                  1812, /* Sømna */
+                  1813, /* Brønnøy */
+                  1815, /* Vega */
+                  1816, /* Vevelstad */
+                  1818, /* Herøy */
+                  1820, /* Alstahaug */
+                  1822, /* Leirfjord */
+                  1827, /* Dønna */
+                  1834, /* Lurøy */
+                  1835 /* Træna */
+                  ) then BoShHN=11;
 
 /*
 *********************************************************
