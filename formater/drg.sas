@@ -961,5 +961,11 @@ value $drg
 '417'="DRG 417 Sepsis ved sydommer i HDG 18 0-17 år"
 '801S'="DRG 801S Poliklinisk diagnostisk intervensjon ved tilstander i nervesystemet"
 
+/* Formater fra DRG 2018  lagt til 03/09/2019 */
+'224P' =	"Brudd op på humerus/albue/underarm ekskl skulderprotese, dagkirurgisk behandling"
+'224Q' =	"Op på humerus/albue/underarm ekskl skulderprotese og op bruddbehandling, dagkirurgisk behandling"
+'224A' =	"Brudd op på humerus/albue/underarm ekskl skulderprotese u/bk"
+'224B' =	"Op på humerus/albue/underarm ekskl skulderprotese og op bruddbehandling u/bk"
+
 ;
 run;
