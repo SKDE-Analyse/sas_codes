@@ -19,15 +19,16 @@
   - Må skrives slik: `Where=Where Borhf=1`
 6. `test`:  Hvis ulik null lagres et datasett &test istedenfor tabell.
 
-7.`by` : create the list for subgroups.  For example by=bohf
-   - 5/6-19 however this does not seem to calculate the percents correctly!!  need to revisit the code.
-   - totalt and totaltrang are not assigned properly????
-
+7.`by` : create the list for subgroups:
+   - Må skrives slik: 'by=bohf'
+   
 ### Forfatter
   
 Opprettet 30/11-15 av Frank Olsen
 
 Endret 4/1-16 av Frank Olsen
+
+Ebdret 25/10-19 av Janice Shu : new argument 'by'
 */
 
 
@@ -49,13 +50,55 @@ by &by;
    var antall; ranks Rang;
 run;
 
-proc sql noprint;
-select sum(antall) into :totalt
-from dsn group by &by; quit;
+proc sql;
+create table totalt as
+select &by, sum(antall) as by_totalt
+from dsn 
+group by &by; 
+quit;
 
-proc sql noprint;
-select sum(antall) into :totaltrang
-from dsn group by &by; where rang le &Ant_i_liste; quit;
+proc sql;
+create table totaltrang as
+select &by, sum(antall) as by_totaltrang
+from dsn 
+where rang le &Ant_i_liste
+group by &by; 
+ 
+quit;
+
+proc sort data=dsn;  by &by; run;
+
+data dsn;
+merge dsn totalt totaltrang;
+by &by;
+PCT_tot=antall/by_totalt;
+PCT_rang_tot=100*(by_totaltrang/by_totalt);
+call symput ('rang_av_total',round(PCT_rang_tot));
+rest=(by_totalt-by_totaltrang);
+call symput ('Ovrige',rest);
+PCT_rang=antall/by_totaltrang;
+call symput ('totalt',by_totalt);
+call symput ('totaltrang',by_totaltrang);
+run;
+
+
+Title "Rangering, &Ant_i_liste hyppigste &VarName. by &by.. &tillegg_tittel";
+PROC TABULATE
+DATA=dsn;
+    %if &by ne 0 %then %do;
+    by &by;
+    %end;
+	WHERE( Rang <= &Ant_i_liste);	
+	VAR antall PCT_tot PCT_rang by_totalt;
+	CLASS Rang &varName/	ORDER=FORMATTED MISSING;
+	TABLE Rang={LABEL=""}*&varName={LABEL="" STYLE(CLASSLEV)={NOBREAKSPACE=ON}} ALL={LABEL="Totalt &Ant_i_liste hyppigste"},
+	antall={LABEL="Antall"}*F=12.0*Sum={LABEL=""} 
+	by_totalt={LABEL="Totalt &by"}*F=12.0*mean={LABEL=""} 
+	PCT_tot={LABEL="Andel av total"}*F=PERCENT8.1*Sum={LABEL=""} 
+	PCT_rang={LABEL="Andel &Ant_i_liste hyppigste"}*F=PERCENT8.1*Sum={LABEL=""}
+	/ BOX={LABEL="&Ant_i_liste hyppigste &VarName , &tillegg_tittel " STYLE={JUST=LEFT VJUST=TOP}};
+RUN; title;
+
 %end;
 
 %if &by = 0 %then %do;
@@ -77,7 +120,7 @@ from dsn; quit;
 proc sql noprint;
 select sum(antall) into :totaltrang
 from dsn where rang le &Ant_i_liste; quit;
-%end;
+
 
 data dsn;
 set dsn;
@@ -95,7 +138,6 @@ run;
 %let totaltrang=&totaltrang;
 %let Ovrige=&Ovrige;
 
-%if &test = 0 %then %do;
 Title "Rangering, &Ant_i_liste hyppigste &VarName, &rang_av_total.% av totalt, med &totaltrang av &totalt observasjoner totalt. &tillegg_tittel";
 PROC TABULATE
 DATA=dsn;
