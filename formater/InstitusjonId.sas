@@ -168,6 +168,17 @@ value INSTITUSJONID_2013_2017F
       980418790 = 'Skibotnsenteret'  
       999238351 = 'NIMI AS'
 
+/* Rehab 2018 */ /* 29.10.2019 JS : add new private rehab institutions */
+
+912663272	= 'MyWorkout'
+913220684	= 'LHL Trondheim'
+918686967	= 'Kastvollen'
+919553480	= 'Unicare Helsefort'
+921008104	= 'Evjeklinikken'
+974917459	= 'Diabetikersenteret'
+976867017	= 'PTØ-Gardermoen'
+984756712	= 'Friskgården'
+
 /* JS: Supplert med nye institusjonID / behandlingssteder gjeldende 2018 */
 821847052	= 'Universitetssykehuset Nord-Norge HF avd Storslett- somatikk'
 912419223	= 'Volvat medisinske senter AS Oslo - sentrum'
