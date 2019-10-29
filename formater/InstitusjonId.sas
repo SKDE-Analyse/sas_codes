@@ -174,7 +174,6 @@ value INSTITUSJONID_2013_2017F
 913220684	= 'LHL Trondheim'
 918686967	= 'Kastvollen'
 919553480	= 'Unicare Helsefort'
-921008104	= 'Evjeklinikken'
 974917459	= 'Diabetikersenteret'
 976867017	= 'PTØ-Gardermoen'
 984756712	= 'Friskgården'
