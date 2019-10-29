@@ -195,7 +195,7 @@ value INSTITUSJONID_2013_2017F
 921008104	= 'Evjeklinikken AS'
 921837755	= 'Universitetssykehuset Nord-Norge HF avd Bardu- somatikk'
 921837798	= 'Universitetssykehuset Nord-Norge HF avd Finnsnes- somatikk'
-964249075	= 'Vikersund bad rehabiliteringssenter AS'
+/*964249075	= 'Vikersund bad rehabiliteringssenter AS'*/ /*allerede i rehab*/
 974183749	= 'Volvat medisinske senter AS Fredrikstad'
 974633221	= 'Sykehuset Telemark HF Porsgrunn - somatikk'
 974633655	= 'Sykehuset Østfold HF Askim - somatikk'
