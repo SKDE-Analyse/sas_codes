@@ -167,12 +167,13 @@ value INSTITUSJONID_2013_2017F
       980418790 = 'Skibotnsenteret'  
       999238351 = 'NIMI AS'
 
-/* Rehab 2018 */ /* 29.10.2019 JS : add new private rehab institutions */
+      /* Rehab 2018 */ /* 29.10.2019 JS : add new private rehab institutions */
 
 912663272	= 'MyWorkout'
 913220684	= 'LHL Trondheim'
 918686967	= 'Kastvollen'
 919553480	= 'Unicare Helsefort'
+921008104	= 'Evjeklinikken'
 974917459	= 'Diabetikersenteret'
 976867017	= 'PTØ-Gardermoen'
 984756712	= 'Friskgården'
@@ -193,7 +194,6 @@ value INSTITUSJONID_2013_2017F
 921008104	= 'Evjeklinikken AS'
 921837755	= 'Universitetssykehuset Nord-Norge HF avd Bardu- somatikk'
 921837798	= 'Universitetssykehuset Nord-Norge HF avd Finnsnes- somatikk'
-/*964249075	= 'Vikersund bad rehabiliteringssenter AS'*/ /*allerede i rehab*/
 974183749	= 'Volvat medisinske senter AS Fredrikstad'
 974633221	= 'Sykehuset Telemark HF Porsgrunn - somatikk'
 974633655	= 'Sykehuset Østfold HF Askim - somatikk'
