@@ -191,7 +191,7 @@ value INSTITUSJONID_2013_2017F
 920196357	= 'St Olavs Hospital HF rehabilitering Ørlandet'
 920248829	= 'LHL sykehuset Gardermoen'
 920970893	= 'Kolbotn Hjertesenter AS'
-921008104	= 'Evjeklinikken AS'
+/*921008104	= 'Evjeklinikken AS'*/
 921837755	= 'Universitetssykehuset Nord-Norge HF avd Bardu- somatikk'
 921837798	= 'Universitetssykehuset Nord-Norge HF avd Finnsnes- somatikk'
 974183749	= 'Volvat medisinske senter AS Fredrikstad'
