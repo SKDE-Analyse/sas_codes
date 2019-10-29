@@ -200,9 +200,9 @@ value INSTITUSJONID_2013_2017F
 974633655	= 'Sykehuset Østfold HF Askim - somatikk'
 976343506	= 'Volvat medisinske senter AS Bergen - Lagunen'
 987621249	= 'Ibsensykehuset Gjøvik AS'
-988192996	= 'N.K.S. Helsehus Akershus AS'
+/*988192996	= 'N.K.S. Helsehus Akershus AS'*/
 991133720	= 'Oslo hjerteklinikk AS'
-995111209	= 'LHL-klinikkene Bergen'
+/*995111209	= 'LHL-klinikkene Bergen'*/
 996891216	= 'Sørlandet sykehus HF rehabilitering Arendal'
 997512189	= 'Helse Bergen HF seksjon for behandlingshjelpemidler medisinsk-teknisk avd Haukeland'
 	  
