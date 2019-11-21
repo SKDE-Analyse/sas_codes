@@ -122,7 +122,6 @@ value INSTITUSJONID_2013_2017F
       951496502 = 'Ringen'  
       959678839 = 'Hokksund'  
       961721652 = 'Muritunet'  
-      964249075 = 'Vikersund'  
       966867450 = 'Landaasen'  
       971436875 = 'Beitostølen'  
      /* 973156829 = 'Rehabilitering Vest as'  - finnes også som Haugesund sanitetsforenings revmatismesykehus */
