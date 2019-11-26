@@ -2,7 +2,7 @@
 
 /*!
 Skriv om kommunenummer til siste kommunestruktur
-pr. 1 januar 2018
+pr. 1 januar 2019
 
 ### Input
 
