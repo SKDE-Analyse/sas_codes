@@ -1,5 +1,9 @@
 %global aldersspenn;
 %macro alders_oppslag(utvalg=, datasett = helseatl.alders_oppslagstabell);
+/*!
+Blablalba
+*/
+
 data _null_;
     set &datasett;
 
