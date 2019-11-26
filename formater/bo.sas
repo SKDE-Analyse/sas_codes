@@ -341,6 +341,15 @@ value BoHF_gammel_kort
 24='Utlandet/Svalbard' 
 99='Ukjent/ugyldig kommunenr';
 
+value bo_hs
+1='Asker/Bærum'
+2='VV-rest'
+3='OUS-rest'
+4='Grorud'
+5='AHUS-rest'
+6='Resten'
+8888='Norge';
+
  
 run;
  
