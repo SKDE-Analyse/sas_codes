@@ -51,7 +51,7 @@ end;
   put NL;
   put "\vspace*{10 px}" NL;
   put "\begin{scriptsize}" NL "\begin{tabularx}{\textwidth}";
-  finish:
+    finish:
   put "\midrule" NL "\end{tabularx}" NL "\end{scriptsize}";
   put NL;
  end;
@@ -101,9 +101,9 @@ end;
   do /if exists( $colspan) | exists ( $cell_align );
   put "\multicolumn{";
   put colspan /if $colspan;
-  put "1" /if ^$colspan;
+  put "c" /if ^$colspan;
   put "}{";
-  put "l" /if ^$instacked;
+  put "c" /if ^$instacked;
  /*put just;
  put "|" /if ^$instacked;*/
   put "}{";
