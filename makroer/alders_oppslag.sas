@@ -1,5 +1,8 @@
 %global aldersspenn;
 %macro alders_oppslag(utvalg=, datasett = helseatl.alders_oppslagstabell);
+/* !
+This macro makes a dataset with min and max age limits of the incoming file
+*/
 data _null_;
     set &datasett;
 
