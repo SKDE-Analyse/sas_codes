@@ -40,7 +40,7 @@ proc sort data=inngrep_totskulderkir_bohf;
 run;
 
 ODS Graphics ON /reset=All imagename="totskulderkir" imagefmt=png border=off height=500px;
-ODS Listing Image_dpi=300 GPATH="\\hn.helsenord.no\RHF\SKDE\Analyse\Data\SAS\Kurs\Internkurs\Resultater";
+ODS Listing Image_dpi=300 GPATH="&mappe";
 title "Antall Skulderoperasjoner";
 
 proc sgplot data=inngrep_totskulderkir_bohf noborder noautolegend sganno=&anno pad=(Bottom=5%);
