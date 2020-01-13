@@ -1,15 +1,15 @@
-%macro univsh(dsn =, behandlingssted2 = 0);
+%macro univsh(dsn =);
 
 /*!
 Markerer universitetssykehus (BehUSh)
 
-Følgende sykehus er definert som universitetssykehus 1 (BehUSh = 1):
-- UNN Tromsø
+FÃ¸lgende sykehus er definert som universitetssykehus 1 (BehUSh = 1):
+- UNN TromsÃ¸
 - St. Olavs hospital Trondheim
 - Haukeland
-- Oslo universitetssykehus (Rikshospitalet, Ullevål, Radiumhospitalet)
+- Oslo universitetssykehus (Rikshospitalet, UllevÃ¥l, Radiumhospitalet)
 
-Følgende sykehus er definert som universitetssykehus 2 (BehUSh = 2):
+FÃ¸lgende sykehus er definert som universitetssykehus 2 (BehUSh = 2):
 - Stavanger universitetssykehus
 - Akershus universitetssykehus
 
@@ -26,13 +26,13 @@ value BehUSh
 data &dsn;
 set &dsn;
 
-if BehSh in (21, /* UNN Tromsø */
+if BehSh in (21, /* UNN TromsÃ¸ */
              61, /* St. Olavs hospital Trondheim */
              101, /* Haukeland */
              180, /* Oslo universitetssykehus HF */
              181, /* OUS, Rikshospitalet */
              182, /* OUS, Aker */
-             184, /* OUS, Ullevål */
+             184, /* OUS, UllevÃ¥l */
              186 /* OUS, Radiumhospitalet */
              ) then BehUSh = 1;
 else if BehSh in (121, /* Stavanger universitetssykehus */
