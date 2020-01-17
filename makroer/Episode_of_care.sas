@@ -250,6 +250,7 @@ run;
 data &dsn;
 set &dsn;
 EoC_id = pid*1000 + EoC_nr_pid;
+format EoC_id 16.;
 run;
 
 %if &debug ne 0 %then %do;
