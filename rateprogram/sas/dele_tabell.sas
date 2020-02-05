@@ -7,11 +7,13 @@
    OUT: &forbruksmal._JUST._BOHF  (sex/age adjusted)
         &forbruksmal._UJUST._BOHF (unadjusted)
         &forbruksmal._IJUST._BOHF (indirect adjusted)
+
+update: 03/02/2020 JS - change the input argument niva for macro dele from hardcoding 'bohf' to using the dynamic bo nivå '&bo' that gets passed in from the main program
 */
 
 %macro dele_tabell;
 
-%macro dele(just=, niva=bohf);
+%macro dele(just=, niva=&bo);
 /*LAGER DATASETT MED JUSTERTE RATER*/
 %if &just=just %then %do;
 %let rv_var=RV_just_rate;
