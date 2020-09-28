@@ -206,6 +206,7 @@ else if aar=&År4 then output &forbruksmal._tmp&År4.;
 else if aar=&År5 then output &forbruksmal._tmp&År5.;
 else if aar=9999 then output &forbruksmal._tmpSN;
 
+format Innbyggere NLnum12.0 &forbruksmal NLnum12.0;
 run;
 
 proc sql;
