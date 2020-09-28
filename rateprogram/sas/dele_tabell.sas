@@ -9,6 +9,8 @@
         &forbruksmal._IJUST._BOHF (indirect adjusted)
 
 update: 03/02/2020 JS - change the input argument niva for macro dele from hardcoding 'bohf' to using the dynamic bo nivå '&bo' that gets passed in from the main program
+
+update: 28/09/2020 JS - use left join rather than inner join to create ijust, ujust, and just files so that all område with snitt present in all the tables
 */
 
 %macro dele_tabell;
@@ -85,12 +87,22 @@ run;
 
 proc sql;
   create table  &forbruksmal._&just._&niva as
-  select d.&niva, Rate&År1, Rate&År2, Ratesnitt, Ratesnitt2, d.Innbyggere, d.&forbruksmal, SnittRate,
-         min(Rate&År1,Rate&År2) as min, max(Rate&År1,Rate&År2) as max
-  from &forbruksmal._tmp&År1 a, &forbruksmal._tmp&År2 b,  &forbruksmal._tmpSN d
-  where a.&niva=b.&niva=d.&niva
+  select d.&niva, Rate&År1, Rate&År2, Rate&År3, Ratesnitt, Ratesnitt2, d.Innbyggere, d.&forbruksmal, SnittRate,
+         min(Rate&År1,Rate&År2,Rate&År3) as min, max(Rate&År1,Rate&År2,Rate&År3) as max
+  from &forbruksmal._tmpSN d 
+  
+  left join &forbruksmal._tmp&År1 a
+  on d.&niva=a.&niva
+
+  left join &forbruksmal._tmp&År2 b
+  on d.&niva=b.&niva
+
+  left join &forbruksmal._tmp&År3 c
+  on d.&niva=c.&niva
+
   order by Ratesnitt2 desc;
 quit;
+
 %end;
 
 %if &antall_aar=4 %then %do;
