@@ -1,0 +1,143 @@
+vertskommune;komnr;sykehus;skde_lnr;orgnr;east;north
+0906 Arendal;0906;Sørlandet sykehus, Arendal;1;974 631 091;135962;6497626
+1004 Flekkefjord;1004;Sørlandet sykehus, Flekkefjord (Lister);2;974 595 214;12281;6492192
+1002 Mandal;1002;Sørlandet sykehus, Mandal;3;;55137;6456955
+1001 Kristiansand;1001;Sørlandet sykehus, Kristiansand;4;974 733 013;87459;6468491
+0815 Kragerø;0815;Sykehuset Telemark, Kragerø;5;983 974 155;175534;6540192
+0805 Porsgrunn;0805;Sykehuset Telemark, Porsgrunn;6;;194324;6566841
+0806 Skien;0806;Sykehuset Telemark, Skien;7;974 633 191;191381;6574068
+0709 Larvik;0709;Sykehuset i Vestfold, Larvik;8;;215396;6556566
+0706 Sandefjord;0706;Sykehuset i Vestfold, Sandefjord;9;;226156;6564822
+0701 Horten kommune;0701;Sykehuset i Vestfold, Horten;10;;243018;6594875
+0704 Tønsberg;0704;Sykehuset i Vestfold, Tønsberg;11;974 633 574;238947;6579244
+0602 Drammen;0602;Sykehuset Buskerud, Drammen;12;974 631 326;230221;6633267
+0605 Ringerike;0605;Ringerike sykehus, Hønefoss;13;974 631 407;236738;6677407
+0619 Ål;0619;Ringerike sykehus, Hallingdal sjukestugu;14;874 606 162;148405;6738836
+0604 Kongsberg;0604;Blefjell sykehus, Kongsberg;15;974 631 385;199215;6626844
+0807 Notodden;0807;Blefjell sykehus, Notodden;16;974 633 159;175641;6617165
+0826 Tinn;0826;Blefjell sykehus, Rjukan;17;974 798 379;142408;6655363
+0826 Tinn;0826;Blefjell sykehus, Tinn fødestue;18;;142408;6655363
+0301 Oslo;0301;Rikshospitalet, Oslo;19;874 716 782;260767;6653361
+0301 Oslo;0301;Rikshospitalet, Hjertesenteret i Oslo;20;;262273;6650558
+0709 Larvik kommune;0709;Rikshospitalet, Spesialsykehuset for rehabilitering, Stavern;21;974 575 396;214585;6549200
+1001 Kristiansand;1001;Rikshospitalet, Spesialsykehuset for rehabilitering, Kr.Sand;22;974 595 230;89923;6467736
+0219 Bærum;0219;Rikshospitalet, Spesialsykehus for epilepsi;23;974 705 761;250455;6649203
+0620 Hol kommune;0620;Rikshospitalet, Geilomo barnesykehus Hol;24;974 728 230;128930;6730952
+0301 Oslo;0301;Rikshospitalet, Voksentoppen astma og allergisenter;25;974 798 263;258032;6656899
+0301 Oslo;0301;Radiumhospitalet, Oslo;26;974 707 152;257601;6651644
+0806 Skien;0806;Betanien hospital, Skien;27;981 275 721;191625;6575851
+0301 Oslo;0301;Aker universitetssykehus, Oslo;28;974 588 951;264858;6652008
+0213 Ski;0213;Aker universitetssykehus, Ski;29;;266359;6628267
+0230 Lørenskog;0230;Akershus universitetssykehus, Lørenskog;30;974 706 490;276344;6650654
+0237 Eidsvoll;0237;Akershus universitetssykehus, Stensby;31;;290227;6700096
+0231 Skedsmo;0231;Akershus universitetssykehus, Lillestrom;32;;279455;6652658
+0219 Bærum;0219;Sykehuset Asker og Bærum, Bærum;33;974 705 788;248940;6648617
+0104 Moss;0104;Sykehuset Østfold, Moss;34;;255996;6597965
+0105 Sarpshorg;0105;Sykehuset Østfold, Sarpshorg;35;;278426;6578348
+0106 Fredrikstad;0106;Sykehuset Østfold, Fredrikstad;36;974 633 752;268126;6571259
+0124 Askim;0124;Sykehuset Østfold, Askim;37;;283298;6611704
+0101 Halden;0101;Sykehuset Østfold, Halden;38;;292646;6560095
+0501 Lillehammer;0501;Sykehuset Innlandet, Lillehammer;39;874 632 562;256189;6783749
+0427 Elverum;0427;Sykehuset Innlandet, Elverum;40;974 631 768;313915;6753901
+0502 Gjøvik;0502;Sykehuset Innlandet, Sykehuset Innlandet, Gjøvik;41;974 632 535;265066;6748562
+0403 Hamar;0403;Sykehuset Innlandet, Hamar;42;;286272;6746731
+0437 Tynset;0437;Sykehuset Innlandet, Tynset;43;974 725 215;280826;6911469
+0402 Kongsvinger;0402;Sykehuset Innlandet, Kongsvinger;44;974 631 776;333358;6676892
+0522 Gausdal;0522;Sykehuset Innlandet, Granheim lungesenter Follebu;45;974 632 543;247098;6795625
+0216 Nesodden;0216;Sunnaas sykehus, Nesodden;46;974 589 214;255705;6641028
+0301 Oslo;0301;Ullevål sykehus, Oslo;47;974 589 095;261768;6652048
+0301 Oslo;0301;Lovisenberg Diakonale sykehus, Oslo;48;974 207 532;262404.0;6651625
+0301 Oslo;0301;Diakonhjemmet sykehus, Oslo;49;974 116 804;260069;6652183
+0501 Lillehammer;0501;Revmatismesykehuset, Lillehammer;50;973 254 979;256314;6783721
+0219 Bærum;0219;Martine Hansens hospital, Bærum;51;974 116 588;248772;6648558
+0542 Nord-Aurdal kommune;0542;Valdres fødestugo, Fagernes;52;;188725;6775023
+0514 Lom;0514;Lom helseheim, Lom;53;;161736;6872183
+0517 Sel;0517;Sel DMS, Otta;54;;212308;6862013
+1103 Stavanger;1103;Helse Stavanger, Universitetssykehuset Stavanger;55;974 703 300;-32079;6571748
+1101 Egersund;1101;Helse Stavanger, Eigersund;56;;-23042;6515590
+1103 Stavanger;1103;Helse Stavanger, Rehabiliteringstjenesten i Rogaland;57;873 862 122;-34260;6572524
+1201 Bergen ;1201;Helse Bergen, Haukeland Universitetssjukehus;58;974 557 746;-30641;6732065
+1235 Voss ;1235;Helse Bergen, Voss sjukehus;59;974 743 272;31538;6752564
+1243 Os;1243;Helse Bergen, Kysthospitalet i Hagevik;60;874 743 372;-31555;6710219
+1201 Bergen ;1201;Haraldsplass diakonale sykehus, Bergen;61;974 316 285;-30064;6732529
+1106 Haugesund ;1106;Haugesund Sanitetssykehus for revmatisme, Haugesund;62;973 156 829;-51226;6611810
+1201 Bergen ;1201;Hospitalet Betanien, Bergen ;63;974 737 779;-31248;6731349
+1106 Haugesund ;1106;Helse Fonna, Haugesund ;64;974 724 774;-50551;6625933
+1221 Stord ;1221;Helse Fonna, Stord ;65;974 742 985;-31324;6666464
+1228 Odda ;1228;Helse Fonna, Odda ;66;974 743 086;30251;6688065
+1432 Førde ;1432;Helse Førde, Førde ;67;974 744 570;15561;6847865
+1443 Eid ;1443;Helse Førde, Nordfjord ;68;;27213;6897832
+1422 Lærdal ;1422;Helse Førde, Lærdal ;69;;97316;6797215
+1502 Molde ;1502;Helse Nordmøre og Romsdal, Molde ;70;974 745 569;98959;6980787
+1503 Kristiansund ;1503;Helse Nordmøre og Romsdal, Kristiansund;71;974 746 948;133421;7018473
+1703 Namsos;1703;Helse Nord-Trøndelag, Namsos;72;974 753 898;331918;7154747
+1719 Levanger;1719;Helse Nord-Trøndelag, Levanger;73;974 754 118;316916;7073690
+1504 Ålesund ;1504;Helse Sunnmøre, Ålesund ;74;974 747 138;52987;6956023
+1519 Volda;1519;Helse Sunnmøre, Volda ;75;974 747 545;36725;6922805
+1519 Volda;1519;Helse Sunnmøre, Mork rehabsenter;76;974 577 216;33426;6924944
+1601 Trondheim ;1601;St. Olav's Hospital, Trondheim ;77;974 749 025;269914;7040767
+1504 Ålesund ;1504;Helse Sunnmøre, Ålesund, Nevrohjemmet rehabilitering;78;974 576 929;54034;6955572
+1640 Røros ;1640;St. Olav's Hospital, Røros sykehus;79;;313978;6943691
+1638 Orkdal ;1638;St. Olav's Hospital, Orkanger ;80;974 329 506;241757;7028551
+1601 Trondheim ;1601;St. Olav's Hospital, Hjerteklinikken St.Elisabeth;81;;269914;7040767
+1621 Ørland kommune;1621;St. Olav's Hospital, Fosen DMS;82;;235891;7073115
+1714 Stjørdal kommune;1714;St. Olav's Hospital, Stjørdal  DMS;83;;297336;7044341
+1601 Trondheim ;1601;St. Olav's Hospital, Munkvoll Rehabiliteringssenter;84;;268427;7038707
+2030 Sør- Varanger ;2030;Helse Finnmark, Kirkenes;85;974 795 930;1078139;7807181
+2004 Hammerfest;2004;Helse Finnmark, Hammerfest;86;974 795 833;819365;7863799
+1902 Tromsø ;1902;Universitetssykehuset Nord-Norge, Tromsø ;87;974 795 787;654309;7735656
+1901 Harstad ;1901;Hålogalandssykehuset HF avd Harstad;88;974 795 639;561564;7643410
+1805 Narvik ;1805;Hålogalandssykehuset HF avd Narvik;89;974 795 396;598920;7594070
+1804 Bodø;1804;Nordlandssykehuset, Bodø;90;974 795 361;474026;7463102;
+1866 Hadsel;1866;Nordlandssykehuset, Stokmarknes;91;974 795 574;496386;7605319
+1860 Vestvågøy ;1860;Nordlandssykehuset, Gravdal;92;974 795 558;439153;7556925;;
+1833 Rana;1833;Helgelandssykehuset, Mo i Rana;93;974 795 515;463487;7356478
+1824 Vefsn ;1824;Helgelandssykehuset, Mosjøen;94;974 795 485;418321;7302236
+1820 Alstahaug ;1820;Helgelandssykehuset, Sandnessjøen;95;974 795 477;391957;7323949
+1813 Brønnøy kommune;1813;Helgelandssykehuset, Spesialistpoliklinikken Brønnøysund;96;;370626;7263131
+1813 Brønnøy kommune;1813;Helgelandssykehuset, Brønnøy fødestue;97;;370626;7263131
+1848 Steigen kommune;1848;Nordlandssykehuset, Steigen fødestue;98;974 049 767;500652;7517833
+1931 Lenvik kommune;1931;Universitetssykehuset Nord-Norge, Fødestua i Midt-Troms;99;976 979 648;619054;7683401
+1931 Lenvik kommune;1931;Universitetssykehuset Nord-Norge, DMS Midt-Troms;100;;619054;7683401
+1940 Kåfjord kommune;1940;Universitetssykehuset Nord-Norge, Kåfjord sykehjem;101;;727961;7720763
+1941 Skjervøy kommune;1941;Universitetssykehuset Nord-Norge, Skjervøy sykehjem;102;;727609;7780237
+1942 Nordreisa kommune;1942;Universitetssykehuset Nord-Norge, Helsesenter Sonjatun;103;979 931 395;732643;7751333
+1943 Kvænangen kommune;1943;Universitetssykehuset Nord-Norge, Kvænangen sykehjem;104;;769296;7774547
+2002 Vardø;2002;Helse Finnmark, Vardø alders og sykehjem;105;;1097099;7887132
+2003 Vadsø kommune;2003;Helse Finnmark, Vadsø helsesenter;106;;1055473;7842766
+2011 Guovdageaidnu Kautokeino kommune;2011;Helse Finnmark, Kautokeino alders og sykehjem;107;;820512;7676521
+2012 Alta kommune;2012;Helse Finnmark, Alta helsesenter, avd sykestue;108;;815538;7783836
+2014 Loppa;2014;Helse Finnmark, Øksfjord helsesenter/sykehjem ;109;;776647;7810022
+2015 Hasvik kommune;2015;Helse Finnmark, Hasvik helsesenter;110;;766568;7835791
+2018 Måsøy kommune;2018;Helse Finnmark, Havøysund helsesenter;111;;849741;7904930
+2019 Nordkapp kommune;2019;Helse Finnmark, Nordkapp helsesenter;112;;897719;7910996
+2020 Porsanger Porsángu Porsanki kommune;2020;Helse Finnmark,Porsanger helsetun;113;;877319;7802567
+2021 Kárásjohka Karasjok kommune;2021;Helse Finnmark, Karasjok helsesenter;114;;909903;7742383
+2022 Lebesby kommune;2022;Helse Finnmark, Kjøllefjord helsesenter;115;;947365;7916936
+2023 Gamvik kommune;2023;Helse Finnmark, Mehamn helsesenter;116;;963170;7930570
+2024 Berlevåg kommune;2024;Helse Finnmark, Berlevåg sykestue;117;;1011482;7920864
+2025 Deatnu Tana kommune;2025;Helse Finnmark, Tana helsesenter;118;;994692;7841831
+2027 Unjarga Nesseby kommune;2027;Helse Finnmark, Nesseby helsesenter;119;;1011427;7843164
+2028 Båtsfjord kommune;2028;Helse Finnmark, Båtsfjord helsesenter;120;;1039636;7902391
+0301 Oslo;0301;Volvat medisinske senter, Oslo;121;973 129 856;259999;6651820
+0403 Hamar;0403;Volvat medisinske senter, Hamar;122;;287136;6746452
+0106 Fredrikstad;0106;Volvat medisinske senter, Fredrikstad;123;;267904;6571007
+0722 Nøtterøy;0722;Volvat medisinske senter, Vestskogen;124;;237522;6575876
+1201 Bergen ;1201;Volvat medisinske senter Bergen;125;;-33485;6723473
+1504 Ålesund ;1504;Medi 3 Ålesund;126;941 455 077;45594;6957808
+0124 Askim kommune;0124;Ringvollklinikken Askim;127;980 693 732;283298;6611704
+0301 Oslo;0301;Colosseumklinikken, Oslo;128;981 420 365;260323;6651467
+1601 Trondheim ;1601;Klinikk Stokkan, Trondheim;129;982 746 868;270366;7042266
+0502 Gjøvik;0502;Mjøs-kirurgene, Gjøvik;130;971 049 456;265592;6748187
+1902 Tromsø ;1902;Klinikk Stokkan, Tromsø;131;982 838 339;653619;7732092
+1103 Stavanger;1103;Colosseumklinikken, Stavanger;132;983 887 473;-31585;6572199
+1601 Trondheim ;1601;Moxnessklinikken, Trondheim;133;984 922 701;270591;7042128
+1201 Bergen ;1201;Bergen kirurgiske sykehus, Bergen;134;974 498 251;-31567;6726072
+0237 Eidsvoll kommune;0237;Feiringklinikken, Feiring;135;981 113 950;289263;6710828
+0233 Nittedal kommune;0233;Glittreklinikken, Hakadal;136;974 116 561;271034;6671075
+0301 Oslo;0301;Aleris sykehuset, Oslo;137;975 787 419;260120;6649737
+1201 Bergen ;1201;Aleris, Bergen;138;979 230 281;-31934;6734903
+1601 Trondheim ;1601;Aleris, Trondheim;139;874 435 252;271295;7042133
+0602 Drammen;0602;Drammen private sykehus, Drammen;140;979 419 643;230639;6632944
+1201 Bergen ;1201;Bergen Spine Senter, Bergen;141;985 766 924;-30186;6732355
+1634 Oppdal kommune;1634;Oppdal helsesenter, Oppdal;142;;227712;6952113
