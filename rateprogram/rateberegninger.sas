@@ -198,7 +198,7 @@ Title;
 %lagre_dataNorge;
 
 	%if &RHF=1 %then %do;
-		%let Bo=BoRHF;
+		%let Bo=Bo_UF;
 		%omraade; 
 
 		%lag_tabeller;
@@ -323,7 +323,7 @@ Title;
 	%end;
 
 	%if &fylke=1 %then %do;
-		%let Bo=fylke;
+		%let Bo=BoUF;
 		%omraade; 
 
 		%lag_tabeller;

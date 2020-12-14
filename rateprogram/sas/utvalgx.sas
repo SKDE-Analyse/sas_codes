@@ -229,11 +229,12 @@ run;
    %if %sysevalf(%superq(indreOslo)=,boolean) %then %let indreOslo = 0;
    %if %sysevalf(%superq(bydel)=,boolean) %then %let bydel = 1;
    %if %sysevalf(%superq(barn)=,boolean) %then %let barn = 0;
+   %if %sysevalf(%superq(finnunn)=,boolean) %then %let finnunn = 0;
    
 	data RV;
 	set RV;
 	/* Definere boområder */
-	%Boomraader(haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
+	%Boomraader(haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn, finnunn = &finnunn);
 	if BOHF in (24,99) then BoRHF=.; /*kaster ut Utlandet og Svalbard*/
 	if BoRHF in (1:4) then Norge=1;
 format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr komnr. bydel bydel. ermann ermann.;

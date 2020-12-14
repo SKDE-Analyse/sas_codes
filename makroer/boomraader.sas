@@ -1,4 +1,9 @@
-%macro Boomraader(haraldsplass = 0, indreOslo = 0, bydel = 1, barn = 0, boaar=2015);
+%macro Boomraader(haraldsplass = 0,
+                  indreOslo = 0,
+                  bydel = 1,
+                  barn = 0,
+                  boaar=2015,
+                  finnunn = 0);
 
 /*!
 ### Beskrivelse
@@ -65,7 +70,10 @@ VertskommHN=.;
 BoHF=.;
 BoRHF=.;
 Fylke=.;
-
+%if &finnunn ne 0 %then %do;
+BoUF = .;
+BoUNNFinnmark = .;
+%end;
 
 /*
 ********************************************************
@@ -277,5 +285,28 @@ if KomNr in (1804 /*Bodø*/
 			 2004 /*Hammerfest*/ 
 			 2030 /*Sør-Varanger*/) then VertskommHN=1;
 else if KomNr in (1811,1812,1813,1815,1818,1822,1825,1826,1827,1828,1832,1834,1836,1837,1838,1839,1840,1841,1845,1848,1849,1850,1851,1852,1853,1854,1856,1857,1859,1865,1867,1868,1870,1871,1874,1911,1913,1917,1919,1920,1922,1923,1924,1925,1926,1927,1928,1929,1931,1933,1936,1938,1939,1940,1941,1942,1943,2002,2003,2011,2012,2014,2015,2017,2018,2019,2020,2021,2022,2023,2024,2025,2027,2028) then VertskommHN=0;
+
+%if &finnunn ne 0 %then %do;
+/*
+Boområder i Finnmarksykehuset HF - BoUF
+*/
+
+If boshhn=1 then do;
+     If komnr=2030 then BoUF=1;
+     else boUF=2;
+end;
+if boshhn=2 then do;
+     if komnr=2012 then BoUF=3;
+     else if komnr=2004 then BoUF=4;
+     else boUF=5;
+end;
+
+/*
+Boområdet UNN HF og Finnmarksykehuset HF
+*/
+
+If bohf in (1,2) then Bo_UF=1;
+
+%end;
 
 %mend Boomraader;
