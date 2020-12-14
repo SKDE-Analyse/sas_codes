@@ -177,7 +177,7 @@ value behSh
       974632543 = 'Sykehuset Innlandet, Granheim lungesykehus'  
       974633159 = 'Sykehuset Telemark, Notodden'  
       974633191 = 'Sykehuset Telemark, Skien/Porsgrunn'  
-      974633574 = 'Sykehuset i Vestfold'  
+      974633574 = 'Sykehuset i Vestfold HF, somatikk Tønsberg'  
       974633698 = 'Sykehuset Østfold, Moss'  
       974633752 = 'Sykehuset Østfold'  
       974634052 = 'Sykehuset Østfold, Fysioterapi'  
@@ -335,7 +335,7 @@ value behSh
 996891216	= 'Sørlandet sykehus HF rehabilitering Arendal'
 997512189	= 'Helse Bergen HF seksjon for behandlingshjelpemidler medisinsk-teknisk avd Haukeland'
 
-      ;
+     ;
 	  
 	  
 	  
