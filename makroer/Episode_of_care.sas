@@ -177,11 +177,9 @@ run;
 /* Markere opphold som ikke skal inngå i EoC fra forrige linje som brudd i EoC */
 data &dsn;
 set &dsn;
-%if &inndeling ne 0 %then %do;
-if (pid=lag_pid and (EoC_diff>=&EoC_tid or &beh ne lag_beh)) or (Pid ne lag_pid and EoC_diff=.) then EoC_brudd=1;
-%end;
-%else %do;
 if (pid=lag_pid and EoC_diff>=&EoC_tid) or (Pid ne lag_pid and EoC_diff=.) then EoC_brudd=1;
+%if &inndeling ne 0 %then %do;
+  if (pid=lag_pid and &beh ne lag_beh) then EoC_brudd=1;
 %end;
 
 if tmp_poli = 1 then EoC_brudd=1;
@@ -298,7 +296,7 @@ run;
 data &dsn;
 set &dsn;
 	EoC_liggetid=EoC_utdato-EoC_inndato;
-%if &nulle_liggedogn ne 0 %then %do; * Nulle ut liggetid hvis oppholdet er mindre enn åtte timer;
+%if &nulle_liggedogn ne 0 %then %do; /* Nulle ut liggetid hvis oppholdet er mindre enn åtte timer */
 	if EoC_utdatotid - EoC_inndatotid < 28800 then EoC_liggetid = 0;
 %end;
 	drop EoC_brudd lag_utdatotid EoC_overlapp;
@@ -373,6 +371,8 @@ run;
 data &dsn;
 set &dsn;
 if EoC_hastegrad = 99 then EoC_hastegrad = .;
+/* Nulle liggedøgn hvis poliklinisk kontakt */
+if EoC_aktivitetskategori3 = 3 then EoC_liggetid = 0;
 %if &debug ne 0 %then %do;
 drop lag_pid;
 %end;
