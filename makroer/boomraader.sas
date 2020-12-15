@@ -1,17 +1,10 @@
-%macro Boomraader(haraldsplass = 0, indreOslo = 0, bydel = 1, barn = 0, boaar=2015);
+%macro Boomraader(dsn=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn = 0, boaar=2015);
 
 /*!
 ### Beskrivelse
 
 Definerer boområder ut fra komnr og bydel
 
-**OBS: Denne makroen må kjøres inne i et datasteg** slik:
-```
-data ut;
-set inn;
-%Boomraader;
-run;
-```
 
 Makroen kjører med følgende verdier, hvis ikke annet er gitt:
 ```
@@ -53,137 +46,36 @@ Fylke
 - Standardverdier: kjører som før
 */
 
-
-/*
-***********************
-0. Nulle ut variabler
-***********************
+/*!
+-Importere kommuner bydel mapping from csv fil
 */
 
-BoShHN=.;
-VertskommHN=.;
-BoHF=.;
-BoRHF=.;
-Fylke=.;
+data komm_bydel;
+  infile "&filbane\data\kommuner_bydel_2020.csv"
+  delimiter=';'
+  missover firstobs=2 DSD;
 
+  format komnr 4.;
+  format komnr_navn $60.;
+  format bydel 6.;
+  format bydel_navn $30.;
+  format bohf 2.;
+  format bohf_navn $25.;
+  format boshhn 2.;
+  format boshhn_navn $15.;
 
-/*
-********************************************************
-1. BoShHN - Opptaksområder for lokalsykehusene i Helse Nord
-********************************************************
-*/
-
-/* Kirkenes sykehus er lokalsykehus for befolkningen i Øst-Finnmark som omfatter kommunene Lebesby,
-Nesseby, Sør-Varanger, Vadsø, Vardø, Tana, Berlevåg, Båtsfjord og Gamvik. */
-if KomNr in (2002, /* Vardø */
-             2003, /* Vadsø */
-             2022, /* Lebesby */
-             2023, /* Gamvik */
-             2024, /* Berlevåg */
-             2025, /* Tana */
-             2027, /* Nesseby */
-             2028, /* Båtsfjord */
-             2030  /* Sør-Varanger */
-             ) then BoShHN=1;
-/* Hammerfest sykehus er lokalsykehus for befolkningen i Vest-Finnmark som omfatter kommunene
-Hammerfest, Kautokeino, Alta, Loppa, Hasvik, Kvalsund, Måsøy, Nordkapp, Porsanger og Karasjok */
-else if KomNr in (2004, /* Hammerfest */
-                  2011, /* Kautokeino */
-                  2012, /* Alta */
-                  2014, /* Loppa */
-                  2015, /* Hasvik */
-                  2017, /* Kvalsund */
-                  2018, /* Måsøy */
-                  2019, /* Nordkapp */
-                  2020, /* Porsanger */
-                  2021  /* Karasjok */
-                  ) then BoShHN=2;
-/* UNN Tromsø */
-else if KomNr in (1902, /* Tromsø */
-                  1922, /* Bardu */
-                  1924, /* Målselv */
-                  1925, /* Sørreisa */
-                  1926, /* Dyrøy */
-                  1927, /* Tranøy */
-                  1928, /* Torsken */
-                  1929, /* Berg */
-                  1931, /* Lenvik */
-                  1933, /* Balsfjord */
-                  1936, /* Karlsøy */
-                  1938, /* Lyngen */
-                  1939, /* Storfjord */
-                  1940, /* Kåfjord */
-                  1941, /* Skjervøy */
-                  1942, /* Nordreisa */
-                  1943 /* Kvænangen */
-                  ) then BoShHN=3;
-/* UNN Harstad */
-else if KomNr in (1851, /* Lødingen */
-                  1852, /* Tjeldsund */
-                  1903, /* Harstad */
-                  1911, /* Kvæfjord */
-                  1913, /* Skånland */
-                  1917 /* Ibestad */
-                  ) then BoShHN=4;
-/* UNN Narvik */
-else if KomNr in (1805, /* Narvik */
-                  1853, /* Evenes */
-                  1854, /* Ballangen */
-                  1919, /* Gratangen */
-                  1920, /* Lavangen */
-                  1923 /* Salangen */
-                  ) then BoShHN=5;
-/* Vesterålen */
-else if KomNr in (1866, /* Hadsel */
-                  1867, /* Bø */
-                  1868, /* Øksnes */
-                  1870, /* Sortland */
-                  1871 /* Andøy */
-                  ) then BoShHN=6;
-/* Lofoten */
-else if KomNr in (1859, /* Flakstad */
-                  1860, /* Vestvågøy */
-                  1865, /* Vågan */
-                  1874 /* Moskenes */
-                  ) then BoShHN=7;
-/* Bodø */
-else if KomNr in (1804, /* Bodø */
-                  1837, /* Meløy */
-                  1838, /* Gildeskål */
-                  1839, /* Beiarn */
-                  1840, /* Saltdal */
-                  1841, /* Fauske */
-                  1845, /* Sørfold */
-                  1848, /* Steigen */
-                  1849, /* Hamarøy */
-                  1850, /* Tysfjord */
-                  1856, /* Røst */
-                  1857 /* Værøy */
-                  ) then BoShHN=8;
-/* Rana */
-else if KomNr in (1828, /* Nesna */
-                  1832, /* Hemnes */
-                  1833, /* Rana */
-                  1836 /* Rødøy */
-                  ) then BoShHN=9;
-/* Mosjøen */
-else if KomNr in (1824, /* Vefsn */
-                  1825, /* Grane */
-                  1826 /* Hattfjelldal */
-                  ) then BoShHN=10;
-/* Sandnessjøen */
-else if KomNr in (1811, /* Bindal */
-                  1812, /* Sømna */
-                  1813, /* Brønnøy */
-                  1815, /* Vega */
-                  1816, /* Vevelstad */
-                  1818, /* Herøy */
-                  1820, /* Alstahaug */
-                  1822, /* Leirfjord */
-                  1827, /* Dønna */
-                  1834, /* Lurøy */
-                  1835 /* Træna */
-                  ) then BoShHN=11;
+  input	
+  	komnr
+	komnr_navn $
+	bydel
+	bydel_navn $
+	bohf
+	bohf_navn $
+    boshhn
+	boshhn_navn $
+	;
+*if bydel=. then bydel=0;
+run;
 
 /*
 *********************************************************
@@ -191,106 +83,36 @@ else if KomNr in (1811, /* Bindal */
 *********************************************************
 */
 
-If BoShHN in (1,2) then BoHF=1;
-else if BoShHN in (3,4,5) then BoHF=2;
-else if BoShHN in (6,7,8) then BoHF=3;
-%if &barn ne 0 %then %do;
-else if BoShHN in (9,10,11,12) then BoHF=3; /* Helgeland legges under Nordland hvis vi ser på barn*/
-%end;
-%else %do;
-else if BoShHN in (9,10,11,12) then BoHF=4;
-%end;
+/*!
+- Merge datasett til komm_bydel mapping for å hente BoHF og BoshHN ( Opptaksområder for lokalsykehusene i Helse Nord)
+*/
+
+
+proc sql;
+  create table &dsn as
+  select *
+  from &dsn a left join komm_bydel b
+  on a.komnr=b.komnr
+  and a.bydel=b.bydel;
+quit;
 
 /*
-18. juni 2018:
-Indre Fosen (5054) lagt til St. Olavs, siden flest innbyggere sognet tidligere til St.Olavs. 
-- Rissa (1624) : 6 628 innbyggere
-- Leksvik (1718): 3 480 innbyggere
-Ble sannsynligvis også lagt til St. Olavs i 2018 (Styresak 103/17 Helse Midt-Norge, innkalling til styremøte 21.12.17 https://ekstranett.helse-midt.no/1001/Sakspapirer%20for%20utskrift/Sakspapirer%202017-12-21%20samlehefte%20for%20utskrift.pdf Styremøtet ble avlyst):
+***********************
+0. Nulle ut variabler
+***********************
 */
-if KomNr in (1632,5019,1633,5020,1702,5004,1703,5005,1711,5034,1714,5035,1717,5036,1718,1719,5037,1721,5038,1724,5039,1725,5040,1736,5041,1738,5042,1739,5043,1740,5044,1742,5045,1743,5046,1744,5047,1748,5048,1749,5049,1750,5050,1751,5051,1755,5052,1756,5053) then BoHF=6;
-else if KomNr in (1567,5061,1612,5011,1613,5012,1617,5013,1620,5014,1621,5015,1622,5016,1624,1627,5017,1630,5018,1634,5021,1635,5022,1636,5023,1638,5024,1640,5025,1644,5026,1648,5027,1653,5028,1657,5029,1662,5030,1663,5031,1664,5032,1665,5033,5054) then BoHF=7;
-else if KomNr in (1601,5001) then do;
-%if &bydel = 0 %then %do;
-   BoHF = 7;
-%end;
-%else %do;
-   if Bydel in (160101:160199) then BoHF=7; /*Trondheim - endres ved behov*/
-   if Bydel in (500101:500199) then BoHF=7; /*Trondheim - endres ved behov*/
-%end;
-end;
-else if KomNr in (1502,1504,1505,1511,1514,1515,1516,1517,1519,1520,1523,1524,1525,1526,1528,1529,1531,1532,1534,1535,1539,1543,1545,1546,1547,1548,1551,
-1554,1557,1560,1563,1566,1571,1573,1576) then BoHF=8;
-else if KomNr in (1401,1411,1412,1413,1416,1417,1418,1419,1420,1421,1422,1424,1426,1428,1429,1430,1431,1432,1433,1438,1439,1441,1443,1444,1445,1449) then BoHF=10; /*1411 Gulen skal f.o.m 1/1-16 høre til Haraldsplass*/
 
-%if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/
-else if KomNr in (1233,1234,1235,1238,1241,1242,1243,1244,1245,1246,1247,1251,1252,1253,1256,1259,1260,1263,1264,1265,1266) then BoHF=11;
-else if KomNr in (1201) then do;
-   %if &bydel = 0 %then %do;
-      BoHF = 11;
-   %end;
-   %else %do;
-      if Bydel in (120101:120199) then BoHF=11; /*Bergen - endres ved behov*/
-   %end;
-end;
-%end;
-%else %do;
-else if KomNr in (1233,1234,1235,1238,1241,1243,1244,1245,1246,1247,1251,1259) then BoHF=11; /*Haukeland*/
-else if KomNr in (1242,1252,1253,1256,1260,1263,1264,1265,1266) then BoHF=9; /*Haraldsplass*/ /*1242 Samnanger??*/
-else if KomNr in (1201) then do;
-	if Bydel in (120103,120104,120105,120106,120107,120199) then BoHF=11;
-	if Bydel in (120101,120102,120108) then BoHF=9;
-end;
-%end;
+data &dsn;
+  set &dsn;
 
-else if KomNr in (1106,1134,1135,1145,1146,1149,1151,1160,1211,1216,1219,1221,1222,1223,1224,1227,1228,1231,1232) then BoHF=12;
-else if KomNr in (1101,1102,1111,1112,1114,1119,1120,1121,1122,1124,1127,1129,1130,1133,1141,1142,1144) then BoHF=13;
-else if komnr in (1103) then do; 
-%if &bydel = 0 %then %do;
-   BoHF = 13;
+VertskommHN=.;
+BoRHF=.;
+Fylke=.;
+
+/* JS Aug2020 - if do not wish to split out Haraldsplass, then assign all Haraldsplass to Bergen */
+%if &haraldsplass = 0 %then %do;
+  if bohf=9 then bohf=11;
 %end;
-%else %do;
-	if Bydel in (110301:110399) then BoHF=13; /*Stavanger - endres ved behov*/
-%end;
-end;
-else if KomNr in (101,104,105,106,111,118,119,122,123,124,125,127,128,135,136,137,138) then BoHF=14; /* Østfold */
-else if KomNr in (121,211,213,214,215,216,217,221,226,227,228,229,230,231,233,234,235,237,238,239) then BoHF=15; /* Ahus*/
-else if KomNr in (301) then do;
-%if &bydel = 0 %then %do; /* Mangler bydel */
-   BoHF = 30;
-%end;
-%else %do;
-	if bydel in (030110,030111,030112) then BoHF=15;/*AHUS*/
-   %if &boaar < 2015 %then %do; /* f.o.m 2015: 030103 Sagene flyttet fra Lovisenberg til OUS */
-      else if bydel in (030103) then BoHF = 17; /* Lovisenberg */
-   %end;
-   %else %do;
-      else if bydel in (030103) then BoHF = 16; /* OUS */
-   %end;
-	else if bydel in (030108,030109,030113,030114,030115,030117,030199) then BoHF=16;/*OUS*/
-   %if &indreOslo ne 0 %then %do;
-      *slå sammen Lovisenberg og Diakonhjemmet til Indre Oslo (BoHF = 31);
-      else if bydel in (030101,030102,030104,030116) then BoHF=31;/*Lovisenberg -> Indre Oslo */
-      else if bydel in (030105,030106,030107) then BoHF=31;/*Diakonhjemmet -> Indre Oslo */
-   %end;
-   %else %if &barn ne 0 %then %do;
-      else if bydel in (030101,030102,030104,030116) then BoHF=16;/*Lovisenberg satt til OUS*/
-      else if bydel in (030105,030106,030107) then BoHF=16;/*Diakonhjemmet satt til OUS*/
-   %end;
-   %else %do;
-      else if bydel in (030101,030102,030104,030116) then BoHF=17;/*Lovisenberg*/
-      else if bydel in (030105,030106,030107) then BoHF=18;/*Diakonhjemmet*/
-   %end; 
-%end;
-end;
-else if KomNr in (236,402,403,412,415,417,418,419,420,423,425,426,427,428,429,430,432,434,436,437,438,439,441,501,502,511,512,513,514,515,516,517,519,520,521,
-522,528,529,533,534,536,538,540,541,542,543,544,545) then BoHF=19;
-else if KomNr in (219,220,532,602,604,605,612,615,616,617,618,619,620,621,622,623,624,625,626,627,628,631,632,633,711,713) then BoHF=20;
-else if KomNr in (701,702,704,706,709,710,712,714,715,716,719,720,722,723,728,729) then BoHF=21;
-else if KomNr in (805,806,807,811,814,815,817,819,821,822,826,827,828,829,830,831,833,834) then BoHF=22;
-else if KomNr in (901,904,906,911,912,914,919,926,928,929,935,937,938,940,941,1001,1002,1003,1004,1014,1017,1018,1021,1026,1027,1029,1032,1034,1037,1046) then BoHF=23;
-else if komNr in (9000,9900,2100,2111,2121,2131,2211,2311,2321) then BoHF=24;
-else if komNr=9999 then BoHF=99;
 
 /*
 *****************************************************
@@ -313,46 +135,38 @@ else if BoHF in (99) then BoRHF=99;
 ******************************************************
 */
 
-if 101<=komnr<=138 then Fylke=1;
-else if 211<=komnr<=239 then Fylke=2;
-else if komnr=301 then Fylke=3;
-else if 402<=komnr<=441 then Fylke=4;
-else if 501<=komnr<=545 then Fylke=5;
-else if 602<=komnr<=633 then Fylke=6;
-else if 701<=komnr<=729 then Fylke=7;
-else if 805<=komnr<=834 then Fylke=8;
-else if 901<=komnr<=941 then Fylke=9;
-else if 1001<=komnr<=1046 then Fylke=10;
-else if 1101<=komnr<=1160 then Fylke=11;
-else if 1201<=komnr<=1266 then Fylke=12;
-else if 1401<=komnr<=1449 then Fylke=14;
-else if 1502<=komnr<=1576 then Fylke=15;
-else if 1601<=komnr<=1665 then Fylke=16;
-else if 1702<=komnr<=1756 then Fylke=17;
-else if 1804<=komnr<=1874 then Fylke=18;
-else if 1901<=komnr<=1943 then Fylke=19;
-else if 2002<=komnr<=2030 then Fylke=20;
-else if 5001<=komnr<=5061 then Fylke=50;
-else if KomNr in (2100,2111,2121,2131,2211,2311,2321,9000,9900) then Fylke=24; /*24='Boomr utlandet/Svalbard' */
-else if KomNr in(., 0000,8888,9999) then Fylke=99; /*99='Ukjent/ugyldig kommunenr'*/
+if bohf=24 then Fylke=24 ;/*24='Boomr utlandet/Svalbard' */
+else if bohf=99 then Fylke=99; /*99='Ukjent/ugyldig kommunenr'*/
+else Fylke=floor(komnr/100); /*Remove the last 2 digits from kommunenummer.  The remaining leading digits are fylke*/
+
 
 /*
 *****************************************************
 5. VertskommHN (Vertskommuner Helse Nord)
 *****************************************************
 */
+if BoRHF = 1 /*Helse Nord*/ then do;
+    if KomNr in (1804 /*Bodø*/,
+                 1805 /*Narvik (-2019)*/,
+                 1806 /*Narvik (2020)*/,
+    		         1820 /*Alstahaug*/ ,
+    			       1824 /*Vefsn*/ ,
+    			       1833 /*Rana*/ ,
+    			       1860 /*Vestvågøy*/ ,
+    			       1866 /*Hadsel*/ ,
+                 1901 /*Harstad(-2012)*/,
+    			       1903 /*Harstad(-2019)*/,
+                 5402 /*Harstad(2020)*/,
+    			       1902 /*Tromsø(-2019)*/,
+                 5401 /*Tromsø(2020)*/,
+    			       2004 /*Hammerfest(-2019)*/,
+                 5406 /*Hammerfest(2020)*/ ,
+    			       2030 /*Sør-Varanger(-2019)*/,
+                 5444 /*Sør-Varanger(2020)*/)              
+    then VertskommHN=1;
+    else VertskommHN=0;
+end;
 
-if KomNr in (1804 /*Bodø*/
-             1805 /*Narvik*/
-		     1820 /*Alstahaug*/ 
-			 1824 /*Vefsn*/ 
-			 1833 /*Rana*/ 
-			 1860 /*Vestvågøy*/ 
-			 1866 /*Hadsel*/ 
-			 1903 /*Harstad*/
-			 1902 /*Tromsø*/
-			 2004 /*Hammerfest*/ 
-			 2030 /*Sør-Varanger*/) then VertskommHN=1;
-else if KomNr in (1811,1812,1813,1815,1818,1822,1825,1826,1827,1828,1832,1834,1836,1837,1838,1839,1840,1841,1845,1848,1849,1850,1851,1852,1853,1854,1856,1857,1859,1865,1867,1868,1870,1871,1874,1911,1913,1917,1919,1920,1922,1923,1924,1925,1926,1927,1928,1929,1931,1933,1936,1938,1939,1940,1941,1942,1943,2002,2003,2011,2012,2014,2015,2017,2018,2019,2020,2021,2022,2023,2024,2025,2027,2028) then VertskommHN=0;
+run;
 
 %mend Boomraader;
