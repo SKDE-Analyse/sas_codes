@@ -9,45 +9,45 @@
 		run;
 	%mend;
 
-%let datafil=forny_komnr.csv; 
+%let datafil=forny_komnr.csv;
 %let sheetnavn=ark1;
-%let utdata = komnr; /*Gir eldre komnr nytt og gyldig komnr pr 1.1.20202*/
+%let utdata = komnr;
 %read_csv
-%let datafil=forny_bydel.csv; 
+%let datafil=forny_bydel.csv;
 %let sheetnavn=ark1;
-%let utdata = bydel; /*Gir eldre bydelsnr nytt og gyldig bydelsnr pr 1.1.2020*/
+%let utdata = bydel;
 %read_csv
-%let datafil=boomr_2020.csv; 
+%let datafil=boomr_2020.csv;
 %let sheetnavn=ark1;
-%let utdata = boomr; /*Opptaksområder pr 1.1.2020*/
+%let utdata = boomr;
 %read_csv
 
 
-/*csv-fil med gyldige komnr - slår sammen filene 'komnr' og 'boomr' for å få fullstendig liste med alle komnr */
+/*csv-fil med gyldige komnr */
 data gyldig_komnr(keep=komnr2);
-set komnr(rename=(gml_komnr=g_komnr)) boomr(rename=(komnr=g_komnr)); /*Gi variabel komnr likt navn*/
-komnr2=input(g_komnr,best4.); /*fikse til numerisk*/
+set komnr(rename=(gml_komnr=g_komnr)) boomr(rename=(komnr=g_komnr));
+komnr2=input(g_komnr,best4.);
 run;
 /*fjerne duplikate linjer*/
 proc sort data=gyldig_komnr nodupkey out=liste_komnr;
 by komnr2;
 run;
 
-/*csv-fil med gyldige bydeler - slår sammen filene 'bydel' og 'boomr' for å få fullstendig liste med alle bydeler*/
-data gyldig_bydel(keep=bydel2);
-set bydel(rename=(fra_bydel=g_bydel)) boomr(rename=(bydel=g_bydel)); /*Gi variabel bydel likt navn*/
-bydel2=input(g_bydel,best6.); /*fikse til numerisk*/
+/*csv-fil med gyldige bydeler*/
+data gyldig_bydel(keep=bydel);
+set bydel(rename=(fra_bydel=g_bydel)) boomr(rename=(bydel=g_bydel));
+bydel=input(g_bydel,best6.); /*endre ti lnumerisk*/
 run;
 
 /*fjerne duplikate linjer*/
 proc sort data=gyldig_bydel nodupkey out=liste_bydel;
-by bydel2;
+by bydel;
 run;
 
-/* Fjerne linje med bydel missing */
+/*fjerne linje med missing bydel*/
 data liste_bydel;
 set liste_bydel;
-if bydel2 = . then delete;
+if bydel = . then delete;
 run;
 %mend;
 
@@ -55,47 +55,50 @@ run;
 
 
 
-%macro kontroll_komnr(inndata=, komnr=, bydel=, aar=);  /*kontrollere om mottatte data har gyldig komnr og bydel*/
+%macro kontroll_komnr(inndata=, komnr=, bydel=, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
 
-/*hente ut variabel 'komnrhjem2' og 'bydel2' fra mottatte data*/
+/*hente ut komnrhjem2 fra mottatte data*/
 proc sql;
 	create table mottatt_komnr as
-	select distinct &komnr, &bydel 
+	select distinct &komnr, &bydel
 	from &inndata;
 quit;
 
-/*lage bydel-variabel med seks siffer*/
-data mottatt_bydel;
+/*lage bydel-variabel*/
+data mottatt_bydel(keep=&komnr bydel);
 set mottatt_komnr;
-if &bydel in (1:9) then bydel = cats(&komnr,'0',&bydel);
-else if &bydel in (10:99) then bydel = cats(&komnr, &bydel);
-else if &bydel eq . then bydel = .;
+if &bydel in (1:9) then bydel_fix = cats(&komnr,'0', &bydel);
+else if &bydel in (10:99) then bydel_fix = cats(&komnr, &bydel);
+else if &bydel eq . then bydel_fix = .;
+bydel = input(bydel_fix, best6.); /*endre til numerisk*/
 run;
 
 /*sortere og laga datasett til kontroll*/
-proc sort data=mottatt_komnr(keep=&komnr); by &komnr; run;
-proc sort data=mottatt_bydel; by bydel; run;
+proc sort data=mottatt_komnr(rename=(&komnr=komnr2) keep=&komnr); by komnr2; run;
+proc sort data=mottatt_bydel(keep=bydel); by bydel; run;
 
 /*fjerne linje med bydel2 = 0*/
 data mottatt_bydel;
 set mottatt_bydel;
-if &bydel = 0 then delete;
+if bydel = . then delete;
 run;
 
-/*sammenligne komnr med csv-fil ved bruk av merge*/
-/* Output-fil 'error' vil inneholde ugyldige komnr i mottatte data */
+/*sammenligne mottatte komnr med csv-fil*/
+/*Outputfiler 'error' inneholder komnr i mottatte data som ikke er i vår liste med godkjente komnr*/
 data godkjent_komnr_&aar error_komnr_&aar;
 merge mottatt_komnr (in=a) liste_komnr (in=b);
+by komnr2;
 if a and b then felles = 1;
 if a and not b then feil = 1;
 if felles then output godkjent_komnr_&aar;
 if feil then output error_komnr_&aar;
 run;
 
-/*sammenligne bydel med csv-fil ved bruk av merge*/
-/* Output-fil 'error' vil inneholde ugyldige bydelsnr i mottatte data */
-data godkjent_bydel_&aar(drop=&bydel) error_bydel_&aar;
+/*sammenligne bydel med csv-fil*/
+/*Outputfiler 'error' inneholder bydel i mottatte data som ikke er i vår liste med godkjente bydeler*/
+data godkjent_bydel_&aar error_bydel_&aar;
 merge mottatt_bydel (in=a) liste_bydel (in=b);
+by bydel;
 if a and b then felles = 1;
 if a and not b then feil = 1;
 if felles then output godkjent_bydel_&aar;
