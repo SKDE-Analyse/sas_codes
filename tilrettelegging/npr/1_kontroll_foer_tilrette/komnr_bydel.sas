@@ -53,8 +53,6 @@ data liste_bydel;
 set liste_bydel;
 if bydel = . then delete;
 run;
-%mend;
-
 
 
 /*hente ut variabel komnr fra mottatte data*/
