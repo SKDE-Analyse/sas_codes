@@ -1,6 +1,10 @@
+/*Kontrollerer at mottatte data inneholder gyldige komrn og bydel*/
+/*Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel*/
+/* Output-filer med navn 'error' gir oversikt over ugyldige komnr eller bydeler i mottatt data */
 
-%macro csv_filer;  /*hente inn CSV-filer med komnr og bydeler*/
+%macro kontroll_komnr(inndata=, komnr=, bydel=, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
 
+/* hente inn csv-fil med komnr og bydeler */
 	%macro read_csv;
 		%let datamappe = \\tos-sas-skde-01\SKDE_SAS\felleskoder\boomr\data;  /*boomr må endres til master når branchen tas inn i  master*/
 		proc import datafile = "&datamappe.\&datafil"
@@ -51,13 +55,9 @@ if bydel = . then delete;
 run;
 %mend;
 
-%csv_filer;
 
 
-
-%macro kontroll_komnr(inndata=, komnr=, bydel=, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
-
-/*hente ut komnrhjem2 fra mottatte data*/
+/*hente ut variabel komnr fra mottatte data*/
 proc sql;
 	create table mottatt_komnr as
 	select distinct &komnr, &bydel
@@ -107,12 +107,3 @@ run;
 %mend;
 
 
-/*input til makro er mottatt datasett og navn på komnr og bydel i datasettet*/
-%kontroll_komnr(inndata=hnmot.m20_avd_2016, komnr=komnrhjem2, bydel=bydel2, aar=avd2016);
-%kontroll_komnr(inndata=hnmot.m20_avd_2017, komnr=komnrhjem2, bydel=bydel2, aar=avd2017);
-%kontroll_komnr(inndata=hnmot.m20_avd_2018, komnr=komnrhjem2, bydel=bydel2, aar=avd2018);
-%kontroll_komnr(inndata=hnmot.m20_avd_2019, komnr=komnrhjem2, bydel=bydel2, aar=avd2019);
-%kontroll_komnr(inndata=hnmot.m20_avd_2020_nov, komnr=komnrhjem2, bydel=bydel2, aar=avd2020);
-
-/*Denne kontrollerer at mottatte data inneholder gyldige komrn og bydel*/
-/*Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel*/
