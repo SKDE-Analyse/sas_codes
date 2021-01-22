@@ -1,0 +1,1 @@
+/* antall innleggelse, liggetid, poli, etc , per behandlingssykehus / HF */

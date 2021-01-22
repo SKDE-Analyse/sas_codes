@@ -1,8 +1,10 @@
-*Selecting all the variables from a dataset and run tabulate on the vars;
+/* Selecting all the variables from a dataset and run tabulate on the vars; */
 
-/* This is copied to the sas project as one of the programs, rather than used as a macro */
+/* code in a sas project to create a list of variables before running the macro */
 
-/* create a dataset with variables names */
+/*************************************
+
+* create a dataset with variables names ;
 proc contents data=&avd1 noprint out=varlist(where=(type=1) keep=name type); run;
 
 proc sql;
@@ -11,7 +13,7 @@ proc sql;
   from varlist;
 quit;
 
-/* remove variables that we don't want to tabulate on */
+* remove variables that we don't want to tabulate on ;
 data varlist;
   set varlist;
     if upcase(name) in ('I', '_TYPE_','_FREQ_',
@@ -21,7 +23,7 @@ data varlist;
 run;
 
  
-/* create a global macro variable (called vars) with the list of variable names */
+* create a global macro variable (called vars) with the list of variable names ;
 proc sql noprint;
     select name into :vars separated by ' '
     from varlist;
@@ -29,40 +31,39 @@ quit;
 
 %put &vars;
 
+* combine all years into the same table so that we can tabulate by year and see the changes over time ;
+data tabdata;
+  set &avd1 (keep=aar &vars)
+      &avd2 (keep=aar &vars)
+      &avd3 (keep=aar &vars)
+      &avd4 (keep=aar &vars)
+      &avd5 (keep=aar &vars);
+run;
+*******************************************/
 
-%macro looptab;
+%macro simpletab_loop(inndata=, utxls=);
+
 *initialize the pointer for the variable list;
 %let i=1;
 %let tabvar=%scan(&vars, &i);
-%put &tabvar;
+ods excel file="&utbane\&utxls..xlsx"  options(sheet_name="&tabvar");
 
 *loop through the variables to create tabulate;
 %do %until(&tabvar.=);
-
-%if &i > 1 %then %do;
-proc datasets library=work;
-  delete tabdata;
-run;
-%end;
-
-/* combine all years into the same table so that we can tabulate by year and see the changes over time */
-data tabdata;
-  set &avd1 (keep=aar &tabvar)
-      &avd2 (keep=aar &tabvar)
-      &avd3 (keep=aar &tabvar)
-      &avd4 (keep=aar &tabvar)
-      &avd5 (keep=aar &tabvar);
-run;
+%put &tabvar;
 
 /* run the tabulate macro */
-  %simpletab(dsn=tabdata, var=&tabvar);
+  %simpletab(dsn=&inndata, var=&tabvar);
 
 /* increase counter by one and reassign tabvar to the next variable on the list */
   %let i = %eval(&i+1);
   %let tabvar=%scan(&vars, &i);
 
 %end;
+
+ods excel close;
+
 %mend;
 
-%looptab;
+%simpletab_loop;
 

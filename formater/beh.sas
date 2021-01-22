@@ -68,11 +68,12 @@ value behSh
 155='Sykehuset Telemark Nordagutu'
 159='Sykehuset Telemark HF, ukjent lok'
 160='Akershus universitetssykehus HF'
+161='Akershus universitetssykehus, Kongsvinger'
 170='Sykehuset Innlandet HF' 
 171='Sykehuset Innlandet, Elverum'
 172='Sykehuset Innlandet, Gjøvik'
 173='Sykehuset Innlandet, Lillehammer'
-174='Sykehuset Innlandet, Kongsvinger'
+/*174='Sykehuset Innlandet, Kongsvinger'*/
 175='Sykehuset Innlandet, Tynset'
 176='Sykehuset Innlandet, Granheim'
 177='Sykehuset Innlandet, Ottestad'

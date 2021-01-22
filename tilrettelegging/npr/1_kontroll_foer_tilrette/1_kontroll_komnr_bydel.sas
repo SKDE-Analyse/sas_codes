@@ -2,52 +2,105 @@
 /*Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel*/
 /* Output-filer med navn 'error' gir oversikt over ugyldige komnr eller bydeler i mottatt data */
 
-%macro kontroll_komnr(inndata=, komnr=, bydel=, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
-
-/* hente inn csv-fil med komnr og bydeler */
-	%macro read_csv;
-		%let datamappe = \\tos-sas-skde-01\SKDE_SAS\felleskoder\boomr\data;  /*boomr må endres til master når branchen tas inn i  master*/
-		proc import datafile = "&datamappe.\&datafil"
-		DBMS = csv OUT = &utdata replace;
-		getnames=YES;
-		run;
-	%mend;
-
-%let datafil=forny_komnr.csv;
-%let sheetnavn=ark1;
-%let utdata = komnr;
-%read_csv
-%let datafil=forny_bydel.csv;
-%let sheetnavn=ark1;
-%let utdata = bydel;
-%read_csv
-%let datafil=boomr_2020.csv;
-%let sheetnavn=ark1;
-%let utdata = boomr;
-%read_csv
+%macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
 
 
+/* laste inn tre datafiler */
+data komnr;
+  infile "&databane\forny_komnr.csv"
+  delimiter=';'
+  missover firstobs=2 DSD;
+
+  format aar 4.;
+  format gml_komnr 4.;
+  format gml_navn $30.;
+  format ny_komnr 4.;
+  format ny_navn $30.;
+  format kommentar $400.;
+  format kommentar2 $400.;
+
+  input	
+  	aar
+  	gml_komnr
+	  gml_navn $ 
+	  ny_komnr
+	  ny_navn $
+	  kommentar $
+	  kommentar2 $
+	  ;
+  run;
+
+data bydel;
+  infile "&databane\forny_bydel.csv"
+  delimiter=';'
+  missover firstobs=2 DSD;
+
+  format aar 4.;
+  format fra_bydel 6.;
+  format fra_navn $30.;
+  format til_bydel 6.;
+  format til_navn $30.;
+  format kommentar $400.;
+ 
+  input	
+  	aar
+  	fra_bydel
+	  fra_navn $ 
+	  til_bydel
+	  til_navn $
+	  kommentar $
+	  ;
+run;
+
+data boomr;
+  infile "&databane\boomr_2020.csv"
+  delimiter=';'
+  missover firstobs=2 DSD;
+
+  format komnr 4.;
+  format komnr_navn $60.;
+  format bydel 6.;
+  format bydel_navn $60.;
+  format bohf 2.;
+  format bohf_navn $60.;
+  format boshhn 2.;
+  format boshhn_navn $15.;
+  format kommentar $400.;
+ 
+  input	
+  	komnr
+  	komnr_navn $
+	  bydel 
+	  bydel_navn $
+	  bohf
+	  bohf_navn $
+    boshhn
+	  boshhn_navn $
+	  kommentar $
+	  ;
+  run;
+
+/* ---------------------------------------------- */
+/* alle=1: alle kommunenummer og bydeler skal med */
+/* ---------------------------------------------- */
 /*csv-fil med gyldige komnr */
 data gyldig_komnr(keep=komnr2);
-set komnr(rename=(gml_komnr=g_komnr)) boomr(rename=(komnr=g_komnr));
-komnr2=input(g_komnr,best4.);
+set komnr(rename=(gml_komnr=komnr2)) boomr(rename=(komnr=komnr2));
 run;
 /*fjerne duplikate linjer*/
 proc sort data=gyldig_komnr nodupkey out=liste_komnr;
 by komnr2;
 run;
 
+
 /*csv-fil med gyldige bydeler*/
 data gyldig_bydel(keep=bydel);
-set bydel(rename=(fra_bydel=g_bydel)) boomr(rename=(bydel=g_bydel));
-bydel=input(g_bydel,best6.); /*endre ti lnumerisk*/
+set bydel(rename=(fra_bydel=bydel)) boomr;
 run;
-
 /*fjerne duplikate linjer*/
 proc sort data=gyldig_bydel nodupkey out=liste_bydel;
 by bydel;
 run;
-
 /*fjerne linje med missing bydel*/
 data liste_bydel;
 set liste_bydel;
@@ -55,7 +108,10 @@ if bydel = . then delete;
 run;
 
 
-/*hente ut variabel komnr fra mottatte data*/
+
+/* ---------------------------------------------------- */
+/*hente ut variabel 'komnr' og 'bydel' fra mottatte data*/
+/* ---------------------------------------------------- */
 proc sql;
 	create table mottatt_komnr as
 	select distinct &komnr, &bydel

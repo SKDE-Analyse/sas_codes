@@ -45,6 +45,15 @@ Set &Inndatasett;
 if behandlingssted2 in (973144383, 974116561) and tjenesteenhetKode=3200 then behandlingssted2=974116561;
 %end;
 
+
+/* 2021- USE THIS INSTEAD of the hard coding below ... MAYBE... CHECK!!!  */
+if &bydel in (1:9) then bydel_fix = cats(&komnr,'0', &bydel);
+else if &bydel in (10:99) then bydel_fix = cats(&komnr, &bydel);
+else if &bydel eq . then bydel_fix = .;
+bydel = input(bydel_fix, best6.); /*endre til numerisk*/
+
+
+
 /*!
 - Numerisk kommunenummer og bydel (for Oslo, Stavanger, Bergen og Trondheim)
 */
