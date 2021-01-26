@@ -1,10 +1,11 @@
 
 
-%macro Boomraader(dsn=, haraldsplass = 1, indreOslo = 0, bydel = 1);
+%macro Boomraader(dsn=, haraldsplass = 1, indreOslo = 0, bydel = 1, barn=0);
 
 /* Hvis `haraldsplass = 1`: Deler Bergen i Haraldsplass og Haukeland */
 /* Hvis `indreOslo = 1`: Slår sammen Diakonhjemmet og Lovisenberg */
 /* Hvis `bydel = 0`: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo) */
+/* Hvis `barn = 1` : Helgeland legges under Nordland */
 
 
 /*
@@ -89,9 +90,9 @@ quit;
 %end;
 
 /*
-****************************
-4. Haraldsplass og IndreOslo
-****************************
+**********************************
+4. Haraldsplass, IndreOslo og Barn
+**********************************
 */
 
 data &dsn;
@@ -103,6 +104,10 @@ data &dsn;
 
 %if &indreoslo = 1 %then %do; /* Slår sammen Lovisenberg og Diakonhjemmet */
   if bohf in (17,18) then bohf=31;
+%end;
+
+%if &barn = 1 %then %do;
+  if boshhn in (9,10,11) then bohf = 3; /* Helgeland (Rana, Mosjøen og Sandnessjøen) legges under Nordland hvis vi ser på barn*/
 %end;
 
 /*
