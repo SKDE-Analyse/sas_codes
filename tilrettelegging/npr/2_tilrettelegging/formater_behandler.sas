@@ -9,11 +9,13 @@
         run; 
         */
 
+/* Husk å definere csvbane hvor CSV-ligger lagret før makro kjøres */
 
-%macro fmt_behandler;
+
+%macro fmt_beh;
 
 data behandler;
-  infile "&databane\behandler.csv"
+  infile "&csvbane\behandler.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -46,7 +48,9 @@ data behandler;
 	;
 run;
      
-/*BEHSH*/                                                                            
+/* ------- */
+/*  BEHSH  */  
+/* ------- */                                                                           
 /* Remove duplicate values */
 proc sort data=behandler nodupkey out=behsh_fmt(keep=behsh behsh_navn);                                                                                                        
    by behsh;                                                                                                                                
@@ -61,7 +65,9 @@ run;
  /* Create the format using the control data set. */                                                                                     
 proc format cntlin=fmtfil_behsh; run;
 
-/*BEHHF*/  
+/* ------- */
+/*  BEHHF  */  
+/* ------- */
 /* Remove duplicate values */
 proc sort data=behandler nodupkey out=behhf_fmt(keep=behhf behhf_navn);                                                                                                        
    by behhf;                                                                                                                                
@@ -76,7 +82,29 @@ run;
  /* Create the format using the control data set. */                                                                                     
 proc format cntlin=fmtfil_behhf; run;
 
-/*BEHRHF*/  
+
+/* ---------------- */
+/*  BEHHF_navnkort  */  
+/* ---------------- */ 
+/* Remove duplicate values */
+proc sort data=behandler nodupkey out=behhfkort_fmt(keep=behhf behhf_navnkort);                                                                                                        
+   by behhf;                                                                                                                                
+run; 
+/* Build format data set */                                                                                                            
+data fmtfil_behhfkort(rename=(behhf=start) keep=behhf fmtname label);                                                                                    
+   retain fmtname 'behhfkort_fmt';                                                                                                 
+   length behhf_navn $60.;                                                                                                                    
+   set behhfkort_fmt; 
+   label = cat(behhf_navnkort); 
+run; 
+ /* Create the format using the control data set. */                                                                                     
+proc format cntlin=fmtfil_behhfkort; run;
+
+
+
+/* -------- */
+/*  BEHRHF  */  
+/* -------- */
 /* Remove duplicate values */
 proc sort data=behandler nodupkey out=behrhf_fmt(keep=behrhf behrhf_navn);                                                                                                        
    by behrhf;                                                                                                                                
@@ -90,6 +118,45 @@ data fmtfil_rhf(rename=(behrhf=start) keep=behrhf fmtname label);
 run; 
  /* Create the format using the control data set. */                                                                                     
 proc format cntlin=fmtfil_rhf; run;
+
+
+/* ----------------- */
+/*  BEHRHF_navnkort  */  
+/* ----------------- */
+/* Remove duplicate values */
+proc sort data=behandler nodupkey out=behrhfnavnkort_fmt(keep=behrhf behrhf_navnkort);                                                                                                        
+   by behrhf;                                                                                                                                
+run; 
+/* Build format data set */                                                                                                            
+data fmtfil_rhfkort(rename=(behrhf=start) keep=behrhf fmtname label);                                                                                    
+   retain fmtname 'behrhfkort_fmt';                                                                                                 
+   length behrhf_navn $60.;                                                                                                                    
+   set behrhfnavnkort_fmt; 
+   label = cat(behrhf_navnkort); 
+run; 
+ /* Create the format using the control data set. */                                                                                     
+proc format cntlin=fmtfil_rhfkort; run;
+
+
+/* -------------------- */
+/*  BEHRHF_navnkortest  */  
+/* -------------------- */
+/* Remove duplicate values */
+proc sort data=behandler nodupkey out=behrhfnavnkortest_fmt(keep=behrhf behrhf_navnkortest);                                                                                                        
+   by behrhf;                                                                                                                                
+run; 
+/* Build format data set */                                                                                                            
+data fmtfil_rhfkortest(rename=(behrhf=start) keep=behrhf fmtname label);                                                                                    
+   retain fmtname 'behrhfkortest_fmt';                                                                                                 
+   length behrhf_navnkortest $60.;                                                                                                                    
+   set behrhfnavnkortest_fmt; 
+   label = cat(behrhf_navnkortest); 
+run; 
+ /* Create the format using the control data set. */                                                                                     
+proc format cntlin=fmtfil_rhfkortest; run;
+
+
+
 
 /*ORGNR*/  
 /* Remove duplicate values */

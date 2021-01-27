@@ -39,9 +39,11 @@ data tabdata;
       &avd4 (keep=aar &vars)
       &avd5 (keep=aar &vars);
 run;
+
+%let tabdata=tabdata;
 *******************************************/
 
-%macro simpletab_loop(inndata=, utxls=);
+%macro simpletab_loop(utxls=);
 
 *initialize the pointer for the variable list;
 %let i=1;
@@ -52,8 +54,9 @@ ods excel file="&utbane\&utxls..xlsx"  options(sheet_name="&tabvar");
 %do %until(&tabvar.=);
 %put &tabvar;
 
+ods excel  options(sheet_name="&tabvar");
 /* run the tabulate macro */
-  %simpletab(dsn=&inndata, var=&tabvar);
+  %simpletab(dsn=&tabdata, var=&tabvar);
 
 /* increase counter by one and reassign tabvar to the next variable on the list */
   %let i = %eval(&i+1);
@@ -65,5 +68,4 @@ ods excel close;
 
 %mend;
 
-%simpletab_loop;
 

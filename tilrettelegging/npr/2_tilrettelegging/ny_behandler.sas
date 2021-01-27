@@ -5,12 +5,12 @@
 
 %macro ny_behandler(inndata=, beh=behandlingsstedkode, utdata=);
 
-%let databane= \\tos-sas-skde-01\SKDE_SAS\felleskoder\boomr\data; /*må endres til \master\data etter merge*/
+%let csvbane= \\tos-sas-skde-01\SKDE_SAS\felleskoder\boomr\data; /*må endres til \master\data etter merge*/
 
 
 /* Hente inn CSV-fil for å lage behandler */
 data beh;
-  infile "&databane\behandler.csv"
+  infile "&csvbane\behandler.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -52,7 +52,7 @@ run;
 proc sql;
 	create table &utdata as
 	select * from &inndata a left join beh b
-	on a.tmp_beh=b.orgnr;
+	on a.behandlingsstedkode2=b.orgnr;
 quit;
 
 %mend;

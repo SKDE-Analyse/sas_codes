@@ -1,6 +1,9 @@
 
 %Macro LablerFormater (innDataSett=, utDataSett=);
 
+%fmt_bo;
+%fmt_beh;
+
 /*!
 Legger på formater og labler
 */
@@ -23,7 +26,7 @@ label innDato='Innskrivelsesdato (NPR-melding)'; format innDato Eurdfdd10.;
 label utDato='Utskrivelsesdato (NPR-melding), utDato=innDato for avtSpes'; format utDato Eurdfdd10.;
 label InstitusjonID='Org.nr. til rapporteringsenhet (NPR-melding)'; format InstitusjonId INSTITUSJONID_2013_2017F.;
 label KomNR='Kommunenummer vasket mot Folkeregisteret, numerisk (NPR-melding/SKDE)'; 
-label KomNr_org='Innrapportert kommunenummer, numerisk (NPR-melding/SKDE)'; 
+label KomNrHjem2='Innrapportert kommunenummer, numerisk (NPR-melding/SKDE)'; 
 label bydel2='Bydel vasket mot Folkeregisteret (NPR)';
 label bydel='Bydel i Oslo, Bergen, Stavanger og Trondhem vasket mot Folkeregisteret (SKDE)'; format bydel bydel_alle.;
 label Hdiag='Hovedtilstand kode 1 (ICD-10/NPR-melding/SKDE)';
@@ -141,12 +144,11 @@ label frittSykehusvalg='Fritt sykehusvalg (NPK)'; format FRITTSYKEHUSVALG FRITTS
 label frittBehandlingsvalg='Fritt behandlingsvalg (NPK)'; format FRITTBehandlingsvalg frittBehandlingsvalg.;
 label secondOpinion='Second Opinion (NPK)'; format SECONDOPINION SECONDOPINION.;
 
-
 label DRGtypeHastegrad='Kombinert DRG-type og hastegrad (SKDE)'; format DRGtypeHastegrad DRGtypeHastegrad.; 
-label behandlingssted2='Behandlingssted (NPR)'; format behandlingssted2 BEHANDLINGSSTED2F.; 
-label BehHF='Behandlende HF (SKDE)'; format BehHF behHF.; 
-label behRHF='Behandlende RHF (SKDE)'; format BehRHF behRHF.; 
-label BehSh='Behandlende sykehus (SKDE)'; format BehSh BehSh.; 
+label behandlingssted2='Behandlingssted (SKDE)'; format behandlingssted2 org_fmt.; 
+label BehHF='Behandlende HF (SKDE)'; format BehHF behhfkort_fmt.; 
+label behRHF='Behandlende RHF (SKDE)'; format BehRHF behrhfkort_fmt.; 
+label BehSh='Behandlende sykehus (SKDE)'; format BehSh behsh_fmt.; 
 label innmnd='Innskrivelsesmåned (NPR)'; 
 label utmnd='Utskrivelsesmåned (NPR)';
 

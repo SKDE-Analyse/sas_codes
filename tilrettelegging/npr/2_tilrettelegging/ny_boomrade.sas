@@ -1,13 +1,32 @@
-/* haraldsplass = 0  --> Haraldsplass settes til Bergen */
-/* indreoslo = 0 -->  diakonhjemmet og lovisenberg settes til indreoslo */
 
 
-%macro boomrade(dsn= , haraldsplass=1, indreoslo=1);
+%macro Boomraader(inndata=, utdata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
+
+/* Hvis `haraldsplass = 1`: Deler Bergen i Haraldsplass og Haukeland */
+/* Hvis `indreOslo = 1`: Slår sammen Diakonhjemmet og Lovisenberg */
+/* Hvis `bydel = 0`: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo) */
 
 
-/* importere CSV-fil med mapping av boområder */
+/*
+*****************************************
+1. Drop variablene BOHF, BORHF og BOSHHN
+*****************************************
+*/
+/* Pga sql-merge må datasettet en sender inn, &inndata, ikke ha variablene bohf, borhf eller boshhn med */
+/* Hvis datasettes allerede har bohf, borhf eller boshhn så vil de ikke overskrives i proc sql-merge */
+data &inndata;
+set &inndata;
+drop bohf borhf boshhn;
+run;
+
+
+/*
+*********************************************
+2. Importere CSV-fil med mapping av boområder
+*********************************************
+*/
 data bo;
-  infile "&databane\boomr_2020.csv"
+  infile "&csvbane\boomr_2020.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -15,103 +34,87 @@ data bo;
   format komnr_navn $60.;
   format bydel 6.;
   format bydel_navn $60.;
-  format bohf 2.;
+  format bohf 4.;
   format bohf_navn $60.;
   format boshhn 2.;
   format boshhn_navn $15.;
+  format borhf 4.;
+  format borhf_navn $60.;
   format kommentar $400.;
  
   input	
-  	komnr
-  	komnr_navn $
-	bydel 
-	bydel_navn $
-	bohf
-	bohf_navn $
-    boshhn
-	boshhn_navn $
-	kommentar $
-	  ;
+  	komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ ;
   run;
 
 /*
-*********************************************
-2. BoHF - Opptaksområder for helseforetakene
-*********************************************
+*********************************
+3a. Bo - Opptaksområder med bydel
+*********************************
 */
-/* Merge datasett til boomr-mapping for å hente BoHF og BoshHN ( Opptaksområder for lokalsykehusene i Helse Nord) */
+%if &bydel = 1 %then %do;
+
 
 proc sql;
-  create table &dsn as
+  create table &inndata as
   select a.*, b.bohf, b.boshhn, b.borhf
-  from &dsn a left join bo b
+  from &inndata a left join bo b
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
 quit;
+%end;
 
 /*
-***********************
-0. Nulle ut variabler
-***********************
+**********************************
+3b. Bo - Opptaksområder uten bydel
+**********************************
+*/
+%if &bydel = 0 %then %do;
+
+data bo_utenbydel;
+set bo;
+if bydel >0 then delete; /*fjerner linjene i bo-data som har bydel*/
+run;
+
+proc sql;
+  create table &inndata as
+  select a.*, b.bohf, b.boshhn, b.borhf 
+  from &inndata a left join bo_utenbydel b
+  on a.komnr=b.komnr;
+quit;
+%end;
+
+/*
+**********************************
+4. Haraldsplass, IndreOslo og Barn
+**********************************
 */
 
-data &dsn;
-  set &dsn;
+data &inndata;
+  set &inndata;
 
-VertskommHN=.;
-BoRHF=.;
-Fylke=.;
-
-/* JS Aug2020 - if do not wish to split out Haraldsplass, then assign all Haraldsplass to Bergen */
-%if &haraldsplass = 0 %then %do;
+%if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/
   if bohf=9 then bohf=11;
 %end;
 
-/* Slå sammen Lovisenberg og Diakonhjemmet */
-%if &indreoslo = 0 %then %do;
+%if &indreoslo = 1 %then %do; /* Slår sammen Lovisenberg og Diakonhjemmet */
   if bohf in (17,18) then bohf=31;
+%end;
+
+%if &barn = 1 %then %do;
+  if boshhn in (9,10,11) then bohf = 3; /* Helgeland (Rana, Mosjøen og Sandnessjøen) legges under Nordland hvis vi ser på barn*/
 %end;
 
 
 /*
 ******************************************************
-4. Fylke
+5. Fylke
 ******************************************************
 */
 
+Fylke=.;
 if bohf=24 then Fylke=24 ;/*24='Boomr utlandet/Svalbard' */
 else if bohf=99 then Fylke=99; /*99='Ukjent/ugyldig kommunenr'*/
 else Fylke=floor(komnr/100); /*Remove the last 2 digits from kommunenummer.  The remaining leading digits are fylke*/
-
-
-/*
-*****************************************************
-5. VertskommHN (Vertskommuner Helse Nord)
-*****************************************************
-*/
-if BoRHF = 1 /*Helse Nord*/ then do;
-    if KomNr in (1804 /*Bodø*/,
-                       1805 /*Narvik (-2019)*/,
-                 1806 /*Narvik (2020)*/,
-    		     1820 /*Alstahaug*/ ,
-    			 1824 /*Vefsn*/ ,
-    			 1833 /*Rana*/ ,
-    			 1860 /*Vestvågøy*/ ,
-    			 1866 /*Hadsel*/ ,
-                       1901 /*Harstad(-2012)*/,
-    			       1903 /*Harstad(-2019)*/,
-                 5402 /*Harstad(2020)*/,
-    			       1902 /*Tromsø(-2019)*/,
-                 5401 /*Tromsø(2020)*/,
-    			       2004 /*Hammerfest(-2019)*/,
-                 5406 /*Hammerfest(2020)*/ ,
-    			       2030 /*Sør-Varanger(-2019)*/,
-                 5444 /*Sør-Varanger(2020)*/)              
-    then VertskommHN=1;
-    else VertskommHN=0;
-end;
-
 run;
-
 %mend;
 

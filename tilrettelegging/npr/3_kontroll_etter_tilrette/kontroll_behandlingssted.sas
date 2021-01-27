@@ -1,5 +1,8 @@
 /* Kontrollere at alle rader har gyldig kode for behandlingssted og har fått tildelt behsh, behhf og behrhf */
 
+/* hente inn HF fra parvus */
+
+
 
 %macro behandler_missing(dsn=);
 

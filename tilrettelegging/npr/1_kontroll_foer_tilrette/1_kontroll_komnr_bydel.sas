@@ -7,7 +7,7 @@
 
 /* laste inn tre datafiler */
 data komnr;
-  infile "&databane\forny_komnr.csv"
+  infile "&csvbane\forny_komnr.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -31,7 +31,7 @@ data komnr;
   run;
 
 data bydel;
-  infile "&databane\forny_bydel.csv"
+  infile "&csvbane\forny_bydel.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -53,7 +53,7 @@ data bydel;
 run;
 
 data boomr;
-  infile "&databane\boomr_2020.csv"
+  infile "&csvbane\boomr_2020.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -61,10 +61,12 @@ data boomr;
   format komnr_navn $60.;
   format bydel 6.;
   format bydel_navn $60.;
-  format bohf 2.;
+  format bohf 4.;
   format bohf_navn $60.;
   format boshhn 2.;
   format boshhn_navn $15.;
+  format borhf 4.;
+  format borhf_navn $60.;
   format kommentar $400.;
  
   input	
@@ -76,13 +78,15 @@ data boomr;
 	  bohf_navn $
     boshhn
 	  boshhn_navn $
+    borhf
+	  borhf_navn $
 	  kommentar $
 	  ;
   run;
 
-/* ---------------------------------------------- */
-/* alle=1: alle kommunenummer og bydeler skal med */
-/* ---------------------------------------------- */
+/* -------------------------------------------- */
+/*  1.Alle kommunenummer og bydeler skal med    */
+/* -------------------------------------------- */
 /*csv-fil med gyldige komnr */
 data gyldig_komnr(keep=komnr2);
 set komnr(rename=(gml_komnr=komnr2)) boomr(rename=(komnr=komnr2));
@@ -109,9 +113,9 @@ run;
 
 
 
-/* ---------------------------------------------------- */
-/*hente ut variabel 'komnr' og 'bydel' fra mottatte data*/
-/* ---------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* 2. Hente ut variabel 'komnr' og 'bydel' fra mottatte data*/
+/* -------------------------------------------------------- */
 proc sql;
 	create table mottatt_komnr as
 	select distinct &komnr, &bydel
@@ -136,6 +140,11 @@ data mottatt_bydel;
 set mottatt_bydel;
 if bydel = . then delete;
 run;
+
+
+/* -------------------------------------------- */
+/* 3. Sammenligne mottatte data mot CSV-filer   */
+/* -------------------------------------------- */
 
 /*sammenligne mottatte komnr med csv-fil*/
 /*Outputfiler 'error' inneholder komnr i mottatte data som ikke er i vår liste med godkjente komnr*/

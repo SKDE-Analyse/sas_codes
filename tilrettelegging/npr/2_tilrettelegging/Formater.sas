@@ -21,3 +21,5 @@
 
 /*DRG*/
 %include "&filbane\formater\drg.sas";
+
+/* sett inn formater til bo, beh og komnr og bydel */

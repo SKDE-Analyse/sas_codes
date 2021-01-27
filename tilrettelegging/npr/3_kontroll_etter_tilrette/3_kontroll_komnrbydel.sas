@@ -4,7 +4,7 @@
 
 
 data bo;
-  infile "&databane\boomr_2020.csv"
+  infile "&csvbane\boomr_2020.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -12,10 +12,12 @@ data bo;
   format komnr_navn $60.;
   format bydel 6.;
   format bydel_navn $60.;
-  format bohf 2.;
+  format bohf 4.;
   format bohf_navn $60.;
   format boshhn 2.;
   format boshhn_navn $15.;
+  format borhf 4.;
+  format borhf $60.;
   format kommentar $400.;
  
   input	
@@ -27,13 +29,15 @@ data bo;
 	bohf_navn $
   boshhn
 	boshhn_navn $
+  borhf
+	borhf_navn $
 	kommentar $
 	;
   run;
 
-/* ---------------------------------------------- */
-/* alle=1: alle kommunenummer og bydeler skal med */
-/* ---------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/*  1. Kun kommunenummer og bydeler fra boområader 2020 skal med    */
+/* ---------------------------------------------------------------- */
 /*csv-fil med gyldige komnr */
 data gyldig_kom(keep=komnr);
 set bo;
@@ -60,9 +64,9 @@ run;
 
 
 
-/* ---------------------------------------------------- */
-/*hente ut variabel 'komnr' og 'bydel' fra mottatte data*/
-/* ---------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* 2. Hente ut variabel 'komnr' og 'bydel' fra mottatte data*/
+/* -------------------------------------------------------- */
 proc sql;
 	create table mottatt_komnr as
 	select distinct komnr, bydel
@@ -79,28 +83,34 @@ set mottatt_by;
 if bydel = . then delete;
 run;
 
-/* ------------------------------------ */
-/*sammenligne mottatte komnr med csv-fil*/
-/* ------------------------------------ */
+/* ---------------------------------------- */
+/* 3. Sammenligne mottatte komnr med csv-fil*/
+/* ---------------------------------------- */
 /*Outputfiler 'error' inneholder komnr i mottatte data som ikke er i vår liste med godkjente komnr*/
-data godkjent_komnr_&aar error_komnr_&aar;
+/* output no_patient er tilfeller hvor komnr inngår i CSV-fil men ikke er i tilrettelagte data */
+data godkjent_komnr_&aar error_komnr_&aar no_patient_&aar;
 merge mottatt_kom (in=a) liste_kom (in=b);
 by komnr;
 if a and b then felles = 1;
 if a and not b then feil = 1;
+if b and not a then no_patient = 1;
 if felles then output godkjent_komnr_&aar;
 if feil then output error_komnr_&aar;
+if no_patient then output no_patient_&aar;
 run;
 
 /*sammenligne bydel med csv-fil*/
 /*Outputfiler 'error' inneholder bydel i mottatte data som ikke er i vår liste med godkjente bydeler*/
-data godkjent_bydel_&aar error_bydel_&aar;
+/* output no_patient er tilfeller hvor bydel inngår i CSV-fil men ikke er i tilrettelagte data */
+data godkjent_bydel_&aar error_bydel_&aar no_patient_bydel_&aar;
 merge mottatt_by (in=a) liste_by (in=b);
 by bydel;
 if a and b then felles = 1;
 if a and not b then feil = 1;
+if b and not a then no_patient_bydel = 1;
 if felles then output godkjent_bydel_&aar;
 if feil then output error_bydel_&aar;
+if no_patient_bydel = 1 then output no_patient_bydel_&aar;
 run;
 %mend;
 
