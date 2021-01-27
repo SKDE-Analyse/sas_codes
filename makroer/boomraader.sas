@@ -1,4 +1,6 @@
 
+/* Datasett som bruker makroen boomraader må kun inneholde gyldige kommunenr pr 1.1.20xx */
+/* Makro forny_komnr_loop må evnt kjøres først hvis data inneholder eldre kommunenummer */
 
 %macro Boomraader(inndata=, utdata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
 
