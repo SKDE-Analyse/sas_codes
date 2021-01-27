@@ -1,5 +1,8 @@
 
 
+/* Makroen 'forny_komnr_loop' må være kjørt før makroen boomraader kjøres */
+/* Det for å sikre at datasettet har kommunenummer som er gyldige pr 01.01.2020 */
+
 %macro Boomraader(dsn=, haraldsplass = 1, indreOslo = 0, bydel = 1, barn=0);
 
 /* Hvis `haraldsplass = 1`: Deler Bergen i Haraldsplass og Haukeland */
