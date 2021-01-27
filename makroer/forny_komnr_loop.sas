@@ -1,10 +1,10 @@
 /* Fornye gamle komnr til komnr i bruk pr 1.2.20xx */
 
-%macro komloop(inndata=);
+%macro forny_komnr_loop(inndata=, utdata=);
 
 /* hente inn csv-fil */
 data forny_komnr;
-  infile "&databane\forny_komnr.csv"
+  infile "&csvbane\forny_komnr.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -18,12 +18,12 @@ data forny_komnr;
 
   input	
   	aar
-	gml_komnr 
-	gml_navn $
-	ny_komnr 
-	ny_navn $
+	  gml_komnr 
+	  gml_navn $
+	  ny_komnr 
+	  ny_navn $
     kommentar $
-	kommentar2 $
+	  kommentar2 $
 	;
 run;
 
@@ -37,8 +37,8 @@ run;
 %let sumkom=1;
 
 data test;
-set &inndata;
- komnr = komnrhjem2; /* i mottatt data er komnr = komnrhjem2 */
+set &inndata(keep=lopenr komnrhjem2 episode_lnr);
+komnr = komnrhjem2; /* i mottatt data er komnr = komnrhjem2 */
 run;
 
 /* Run a loop to fornew komnr until all komnr become missing (i.e. no more to fix)*/
@@ -84,7 +84,14 @@ data test_out;
   komnr=komnr_orig&prev_j;
 run;
 
+proc sql;
+  create table &utdata as
+  select a.*, b.komnr
+  from &inndata a, test_out b
+  where a.episode_lnr=b.episode_lnr;
+quit;
+
 %mend;
 
-%komloop;
+
 

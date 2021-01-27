@@ -1,14 +1,10 @@
 
 
-/* Makroen 'forny_komnr_loop' må være kjørt før makroen boomraader kjøres */
-/* Det for å sikre at datasettet har kommunenummer som er gyldige pr 01.01.2020 */
-
-%macro Boomraader(dsn=, haraldsplass = 1, indreOslo = 0, bydel = 1, barn=0);
+%macro Boomraader(inndata=, utdata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
 
 /* Hvis `haraldsplass = 1`: Deler Bergen i Haraldsplass og Haukeland */
 /* Hvis `indreOslo = 1`: Slår sammen Diakonhjemmet og Lovisenberg */
 /* Hvis `bydel = 0`: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo) */
-/* Hvis `barn = 1` : Helgeland legges under Nordland */
 
 
 /*
@@ -16,10 +12,10 @@
 1. Drop variablene BOHF, BORHF og BOSHHN
 *****************************************
 */
-/* Pga sql-merge må datasettet en sender inn, &dsn, ikke ha variablene bohf, borhf eller boshhn med */
+/* Pga sql-merge må datasettet en sender inn, &inndata, ikke ha variablene bohf, borhf eller boshhn med */
 /* Hvis datasettes allerede har bohf, borhf eller boshhn så vil de ikke overskrives i proc sql-merge */
-data &dsn;
-set &dsn;
+data &inndata;
+set &inndata;
 drop bohf borhf boshhn;
 run;
 
@@ -30,7 +26,7 @@ run;
 *********************************************
 */
 data bo;
-  infile "&databane\boomr_2020.csv"
+  infile "&csvbane\boomr_2020.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -57,16 +53,11 @@ data bo;
 */
 %if &bydel = 1 %then %do;
 
-/* Lager bydel=99 hvis det mangler i datasettet */
-data &dsn;
-set &dsn;
-  if komnr in (301,4601,5001,1103) and bydel = . then bydel = komnr*100+99; /*hvis følgende komnr mangler bydel lage bydel udef, feks 30199*/
-run;
 
 proc sql;
-  create table &dsn as
+  create table &inndata as
   select a.*, b.bohf, b.boshhn, b.borhf
-  from &dsn a left join bo b
+  from &inndata a left join bo b
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
 quit;
@@ -85,9 +76,9 @@ if bydel >0 then delete; /*fjerner linjene i bo-data som har bydel*/
 run;
 
 proc sql;
-  create table &dsn as
+  create table &inndata as
   select a.*, b.bohf, b.boshhn, b.borhf 
-  from &dsn a left join bo_utenbydel b
+  from &inndata a left join bo_utenbydel b
   on a.komnr=b.komnr;
 quit;
 %end;
@@ -98,8 +89,8 @@ quit;
 **********************************
 */
 
-data &dsn;
-  set &dsn;
+data &inndata;
+  set &inndata;
 
 %if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/
   if bohf=9 then bohf=11;
@@ -112,6 +103,7 @@ data &dsn;
 %if &barn = 1 %then %do;
   if boshhn in (9,10,11) then bohf = 3; /* Helgeland (Rana, Mosjøen og Sandnessjøen) legges under Nordland hvis vi ser på barn*/
 %end;
+
 
 /*
 ******************************************************
