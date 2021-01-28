@@ -37,7 +37,7 @@ run;
 %let sumkom=1;
 
 data test;
-set &inndata(keep=lopenr komnrhjem2 episode_lnr);
+set &inndata(keep=pid komnrhjem2 episode_lnr);
 komnr = komnrhjem2; /* i mottatt data er komnr = komnrhjem2 */
 run;
 
@@ -71,7 +71,7 @@ run;
 data test_out;
   set test;
 
-  %let j=2;
+  %let j=1;
 
   %do %until (&j=&i);
     %let prev_j=%eval(&j-1);
