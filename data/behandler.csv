@@ -10,7 +10,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 821847052;Universitetssykehuset Nord-Norge HF avd Storslett- somatikk;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
 921837755;Universitetssykehuset Nord-Norge HF avd Bardu- somatikk;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
 921837798;Universitetssykehuset Nord-Norge HF avd Finnsnes- somatikk;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
-9747957870;Universitetssykehuset i Nord-Norge, Tromsø;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Ekstra null i orgnr, stråleenhet.
+9747957870;Universitetssykehuset i Nord-Norge, Tromsø - stråleterapi;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Ekstra null i orgnr, stråleenhet.
 993515396;UNN HF rehabilitering/habilitering Tromsø;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 13.jan 2021: 2020-data, orgnr rehab enheter I HN.
 974795744;Universitetssykehuset Nord-Norge HF almenn psykiatrisk avdeling;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 20.jan 2021: 2020-data, orgnr til psykiatrisk avdeling
 974795639;Universitetssykehuset i Nord-Norge, Harstad;22;UNN Harstad;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
@@ -39,9 +39,9 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 973254782;St Olavs hospital, Trondsletten habiliteringssenter;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974749025;St Olavs Hospital, Trondheim;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974749815;St Olavs hospital, Fysikalsk medisin Lian;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-9747490250;St Olavs Hospital, Trondheim;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Ekstra null i orgnr, stråleenhet.
+9747490250;St. Olavs Hospital HF, Trondheim - stråleterapi;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Ekstra null i orgnr, stråleenhet.
 997692888;St. Olavs hospital HF - laboratorier øya;61;St. Olavs Hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 13.jan 2021: 2020-data, orgnr til St. Olavs laboratorier Øya.
-8839748320;St. Olavs hospital HF;61;St. Olavs hospital, Trondheim;6;St. Olavs hospital HF;St. Olavs hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 20.jan 2021: 2020-data, orgnr med ekstra null (stråleenhet), orgnr tilhører hovedenhet(HF).
+8839748320;St. Olavs hospital HF - stråleterapi;61;St. Olavs hospital, Trondheim;6;St. Olavs hospital HF;St. Olavs hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 20.jan 2021: 2020-data, orgnr med ekstra null (stråleenhet), orgnr tilhører hovedenhet(HF).
 974329506;St Olavs hospital, Orkdal;62;St. Olavs hospital, Orkdal;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974749505;St Olavs hospital, Røros;63;St. Olavs hospital, Røros;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 995413388;St Olavs hospital, Hysnes helsefort;64;St. Olavs hospital, Hysnes helsefort;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
@@ -53,7 +53,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 974747138;Helse Møre og Romsdal HF Ålesund sjukehus;73;Ålesund sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 912777294;Helse Møre og Romsdal HF seksjon vaksenhabilitering Ålesund;73;Ålesund sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 916126611;Helse Møre og Romsdal HF seksjon for habilitering barn og unge Ålesund;73;Ålesund sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-9747471380;Helse Møre og Romsdal HF Ålesund sjukehus;73;Ålesund sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Ekstra null i orgnr, stråleenhet.
+9747471380;Helse Møre og Romsdal HF, Ålesund - stråleterapi;73;Ålesund sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Ekstra null i orgnr, stråleenhet.
 974747545;Helse Møre og Romsdal HF Volda sjukehus;74;Volda sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974577216;Helse Møre og Romsdal HF Klinikk for Rehabilitering (Mork);75;Mork Rehabiliteringssenter;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974576929;Helse Møre og Romsdal HF, Nevrohjemmet;76;Nevrohjemmet rehabiliteringssenter;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
@@ -68,7 +68,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 974557746;Helse Bergen, Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 996663191;Helse Bergen, Laboratorie og røntgen Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 997512189;Helse Bergen HF seksjon for behandlingshjelpemidler medisinsk-teknisk avd Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
-9745577460;Helse Bergen, Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Ekstra null i orgnr, stråleenhet.
+9745577460;Helse Bergen HF, Haukeland - stråleterapi;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Ekstra null i orgnr, stråleenhet.
 983974724;Helse Bergen HF;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 20.jan 2021: 2020-data, institusjonid viser til hovedenhet Helse Bergen HF.
 874743372;Helse Bergen, Kysthospitalet i Hagevik;102;Kysthospitalet i Hagevik;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974743272;Helse Bergen, Voss;103;Voss sjukehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
@@ -92,7 +92,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 873862122;Helse Stavanger, Rehabilitering;121;Stavanger universitetssykehus;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;
 974624680;Helse Stavanger, HABU;121;Stavanger universitetssykehus;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;
 974703300;Helse Stavanger, Stavanger universitetssjukehus;121;Stavanger universitetssykehus;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;
-9747033000;Helse Stavanger, Stavanger universitetssjukehus;121;Stavanger universitetssykehus;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;Ekstra null i orgnr, stråleenhet.
+9747033000;Helse Stavanger HF, Stavanger - stråleterapi;121;Stavanger universitetssykehus;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;Ekstra null i orgnr, stråleenhet.
 974703327;Helse Stavanger, Egersund;122;Helse Stavanger, Egersund;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;
 974737779;Betanien spesialistpoliklinikk;131;Betanien spesialistpoliklinikk Bergen;13;Resterende Helse Vest RHF;Resterende Helse Vest;3;Helse Vest RHF;Helse Vest;Vest;
 922716552;BETANIEN SYKEHUS AS;131;Betanien spesialistpoliklinikk Bergen;13;Resterende Helse Vest RHF;Resterende Helse Vest;3;Helse Vest RHF;Helse Vest;Vest;
@@ -125,7 +125,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 974632543;Sykehuset Innlandet, Granheim lungesykehus;176;Sykehuset Innlandet, Granheim;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 874631752;Sykehuset Innlandet, Ottestad;177;Sykehuset Innlandet, Ottestad;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974724960;Sykehuset Innlandet, Hamar;178;Sykehuset Innlandet, Hamar;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-9747249600;Sykehuset Innlandet, Hamar;178;Sykehuset Innlandet, Hamar;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
+9747249600;Sykehuset Innlandet, Hamar - stråleterapi;178;Sykehuset Innlandet, Hamar;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
 974116650;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark, Furnes;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 820921852;Sykehuset Innlandet HF - Hadeland spesialistsenter;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 821611512;Sykehuset Innlandet HF - Valdres spesialistsenter;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
@@ -136,10 +136,10 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 974588951;OUS, Aker;182;OUS, Aker;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974589087;OUS, Oslo legevakt;183;OUS, Oslo legevakt;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974589095;OUS, Ullevål;184;OUS, Ullevål;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-9745890950;OUS, Ullevål;184;OUS, Ullevål;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
+9745890950;OUS HF, Ullevål - stråleterapi;184;OUS, Ullevål;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
 974705761;OUS, Spesialsykehuset for epilepsi;185;OUS, Spesialsykehuset for epilepsi;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974707152;OUS, Radiumhospitalet;186;OUS, Radiumhospitalet;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-9747071520;OUS, Radiumhospitalet;186;OUS, Radiumhospitalet;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
+9747071520;OUS HF Radiumhospitalet - stråleterapi;186;OUS, Radiumhospitalet;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
 974728230;OUS, Geilomo barnesykehus;187;OUS, Geilomo barnesykehus;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974798263;OUS, Voksentoppen;188;OUS, Voksentoppen;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 975298744;OUS, Olafiaklinikken;189;OUS, Olafiaklinikken;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
@@ -158,7 +158,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 983975240;Sørlandet sykehus HF;210;Sørlandet sykehus HF;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974595230;Sørlandet sykehus, Rehabilitering Kongsgård;211;Sørlandet sykehus, Kristiansand;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974733013;Sørlandet sykehus, Kristiansand;211;Sørlandet sykehus, Kristiansand;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-9747330130;Sørlandet sykehus, Kristiansand;211;Sørlandet sykehus, Kristiansand;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
+9747330130;Sørlandet sykehus, Kristiansand - stråleterapi;211;Sørlandet sykehus, Kristiansand;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
 974631091;Sørlandet sykehus, Arendal;212;Sørlandet sykehus, Arendal;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 996891216;Sørlandet sykehus HF rehabilitering Arendal;212;Sørlandet sykehus, Arendal;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974595214;Sørlandet sykehus, Flekkefjord;213;Sørlandet sykehus, Flekkefjord;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
