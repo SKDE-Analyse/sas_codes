@@ -28,6 +28,16 @@ set &Inndatasett;
 
 /* REWRITE TO BE MORE DYNAMIC SO THAT WE DON'T HAVE TO MANUALLY CHANGE EVERY YEAR */
 
+If aar = 2020 then do;
+i + 1;
+KoblingsID = &prenum. + i + 2000000000;
+end;
+
+If aar = 2019 then do;
+i + 1;
+KoblingsID = &prenum. + i + 1900000000;
+end;
+
 If aar = 2018 then do;
 i + 1;
 KoblingsID = &prenum. + i + 1800000000;

@@ -3,6 +3,7 @@
 
 %fmt_bo;
 %fmt_beh;
+%fmt_icd10;
 
 /*!
 Legger på formater og labler
@@ -13,9 +14,9 @@ set &Inndatasett;
 
 label aar='År (NPR)';
 label Alder='Alder (SKDE)';
-label BoHF='Opptaksområde (HF) (SKDE)'; format BoHF boHF_kort.; 
-label BoRHF='Opptaksområde (RHF) (SKDE)'; format BoRHF boRHF_kort.; 
-label BoShHN='Opptaksområde (sykehus HN) (SKDE)';format BoShHN BoShHN_kort.; 
+label BoHF='Opptaksområde (HF) (SKDE)'; format BoHF boHF_fmt.; 
+label BoRHF='Opptaksområde (RHF) (SKDE)'; format BoRHF boRHF_fmt.; 
+label BoShHN='Opptaksområde (sykehus HN) (SKDE)';format BoShHN boshhn_fmt.; 
 label erMann='Er mann (kjønn, mann=1) (SKDE)'; format ErMann ErMann.; 
 label kjonn='Kjønn (NPR-melding)'; format kjonn kjonn.; 
 label Fylke='Fylke (pasientens bosted) (SKDE)'; format Fylke fylke.; 
@@ -24,17 +25,17 @@ label ICD10KatBlokk='ICD-10 kategoriblokk for første kode hovedtilstand (ICD-10/
 label innmateHast='Hastegrad ved ankomst (NPR-melding)'; format innmateHast innmateHast.; 
 label innDato='Innskrivelsesdato (NPR-melding)'; format innDato Eurdfdd10.;
 label utDato='Utskrivelsesdato (NPR-melding), utDato=innDato for avtSpes'; format utDato Eurdfdd10.;
-label InstitusjonID='Org.nr. til rapporteringsenhet (NPR-melding)'; format InstitusjonId INSTITUSJONID_2013_2017F.;
-label KomNR='Kommunenummer vasket mot Folkeregisteret, numerisk (NPR-melding/SKDE)'; 
+label InstitusjonID='Org.nr. til rapporteringsenhet (NPR-melding)'; format InstitusjonId org_fmt.;
+label KomNR='Kommunenummer fornyet til gyldig komnr-struktur pr 01.01.20xx, numerisk (SKDE)'; 
 label KomNrHjem2='Innrapportert kommunenummer, numerisk (NPR-melding/SKDE)'; 
 label bydel2='Bydel vasket mot Folkeregisteret (NPR)';
-label bydel='Bydel i Oslo, Bergen, Stavanger og Trondhem vasket mot Folkeregisteret (SKDE)'; format bydel bydel_alle.;
-label Hdiag='Hovedtilstand kode 1 (ICD-10/NPR-melding/SKDE)';
-label Hdiag2='Hovedtilstand kode 2 (ICD-10/NPR-melding/SKDE)';
+label bydel='Bydel i Oslo, Bergen, Stavanger og Trondhem vasket mot Folkeregisteret (SKDE)'; format bydel bydel_fmt.;
+label Hdiag='Hovedtilstand kode 1 (ICD-10/NPR-melding/SKDE)'; format hdiag $icd10_fmt.;
+label Hdiag2='Hovedtilstand kode 2 (ICD-10/NPR-melding/SKDE)'; format hdiag2 $icd10_fmt.;
 label Hdiag3tegn='Hovedtilstand kode 1, 3 tegn (ICD-10/NPR-melding/SKDE)'; format Hdiag3tegn $hdiag3tegn.; 
-label Bdiag1='Bitilstand kode 1 (ICD-10/NPR-melding/SKDE)';
-label Bdiag2='Bitilstand kode 2 (ICD-10/NPR-melding/SKDE)';
-label Bdiag3='Bitilstand kode 3 (ICD-10/NPR-melding/SKDE)';
+label Bdiag1='Bitilstand kode 1 (ICD-10/NPR-melding/SKDE)'; format Bdiag1 $icd10_fmt.;
+label Bdiag2='Bitilstand kode 2 (ICD-10/NPR-melding/SKDE)'; format Bdiag2 $icd10_fmt.;
+label Bdiag3='Bitilstand kode 3 (ICD-10/NPR-melding/SKDE)'; format Bdiag3 $icd10_fmt.;
 label Bdiag4='Bitilstand kode 4 (ICD-10/NPR-melding/SKDE)';
 label Bdiag5='Bitilstand kode 5 (ICD-10/NPR-melding/SKDE)';
 label Bdiag6='Bitilstand kode 6 (ICD-10/NPR-melding/SKDE)';
@@ -66,7 +67,7 @@ label tell_NCMP='Antall NCMP-koder innrapportert (NPR)';
 label tell_NCSP='Antall NCSP-koder innrapportert (NPR)';
 label KoblingsID='Unik id for påkobling av variabler (SKDE)'; 
 
-label VertskommHN='Vertskommune (HN) (SKDE)'; format VertskommHN VertskommHN.; 
+/* label VertskommHN='Vertskommune (HN) (SKDE)'; format VertskommHN VertskommHN.;  */
 label bydel2_num='Bydel vasket mot Folkeregisteret (NPR), numerisk';
 label bydel_innr='Bydel, innrapportert (SKDE), numerisk';
 label bydel_org='Bydel, backup av bydel2 (SKDE), numerisk';
@@ -83,13 +84,13 @@ label stedAktivitet='Sted for aktivitet (NPR-melding)'; format STEDAKTIVITET STE
 label utTid='Utskrivelsestidspunkt (NPR-melding)'; 
 label sh_reg='Sykehusregion - pasientens bosted (NPR)';
 
-label komNrHjem2='Kommunenummer vasket mot Folkeregisteret (NPR-melding)'; format KomNrHjem2 $KOMNRHJEM2F.; 
+label komNrHjem2='Kommunenummer vasket mot Folkeregisteret (NPR-melding)'; format KomNrHjem2 komnr_fmt.; 
 label komNrHjem='Kommunenummer, innrapportert (NPR-melding)'; 
 label emigrertDato='Emigrert dato - per 19062019 (NPR)';
 label dodDato='Dødedato - per 19062019 (NPR)';
-label fodtAar_DSF_190619='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
+/* label fodtAar_DSF_190619='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
 label fodtMnd_DSF_190619='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
-label kjonn_DSF_190619  ='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten'; format kjonn_DSF_190619 kjonn.;
+label kjonn_DSF_190619  ='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten'; format kjonn_DSF_190619 kjonn.; */
 length dodDato emigrertDato 4;
 
 %if &somatikk ne 0 %then %do;
@@ -165,7 +166,7 @@ label typeTidspunkt_3='Type tidspukt for tredje dato for utskrivingsklar pasient
 label typeTidspunkt_4='Type tidspukt for fjerde dato for utskrivingsklar pasient (NPR-melding)'; 
 label typeTidspunkt_5='Type tidspukt for femte dato for utskrivingsklar pasient (NPR-melding)'; 
 label ant_tidspunkt='Antall tidspunkt for utskrivningsklar pasient';
-label InstitusjonID_original='Org.nr. til rapporteringsenhet, identifiserer stråleterapienheter (NPR-melding)'; format InstitusjonId INSTITUSJONID_2013_2017F.;
+/* label InstitusjonID_original='Org.nr. til rapporteringsenhet, identifiserer stråleterapienheter (NPR-melding)'; format InstitusjonId_original INSTITUSJONID_2013_2017F.;  */
 
 label komNr_org='Backup av komNrHjem2 (SKDE)';
 

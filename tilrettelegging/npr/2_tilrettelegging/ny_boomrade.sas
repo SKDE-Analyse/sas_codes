@@ -89,7 +89,7 @@ quit;
 **********************************
 */
 
-data &inndata;
+data &utdata;
   set &inndata;
 
 %if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/

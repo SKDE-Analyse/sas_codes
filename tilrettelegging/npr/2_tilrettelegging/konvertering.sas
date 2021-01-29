@@ -50,8 +50,8 @@ rename HDG_num=HDG;
 /*!
 - Generere `komNr` fra `KomNrHjem2` og `bydel_innr` fra `bydel`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
 */
-KomNr=KomNrHjem2+0;
-bydel_innr=bydel2;
+/* KomNr=KomNrHjem2+0; */
+/* bydel_innr=bydel2; */
 
 
 /*!

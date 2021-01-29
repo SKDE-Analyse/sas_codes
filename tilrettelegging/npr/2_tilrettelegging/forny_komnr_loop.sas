@@ -37,7 +37,7 @@ run;
 %let sumkom=1;
 
 data test;
-set &inndata(keep=lopenr komnrhjem2 episode_lnr);
+set &inndata(keep=pid komnrhjem2 episode_lnr);
 komnr = komnrhjem2; /* i mottatt data er komnr = komnrhjem2 */
 run;
 
@@ -58,20 +58,25 @@ run;
     	select sum(komnr) into :sumkom
     	from go&i;
     quit;
-
+%put &sumkom;
     data test;
       set go&i;
     run;
+%put &i;
+
 
     %let i = %eval(&i+1);
+%put &i;
+
 %end;
 
+%put &i;
 /* save final komnr fix - komnr_orig1 as input, komnr as output (newest komnr)*/
 
 data test_out;
   set test;
 
-  %let j=2;
+  %let j=1;
 
   %do %until (&j=&i);
     %let prev_j=%eval(&j-1);

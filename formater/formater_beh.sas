@@ -166,7 +166,7 @@ run;
 /* Build format data set */                                                                                                            
 data fmtfil_orgnr(rename=(orgnr=start) keep=orgnr fmtname label);                                                                                    
    retain fmtname 'org_fmt';                                                                                                 
-   length org_navn $60.;                                                                                                                    
+   length org_navn $100.;                                                                                                                    
    set orgnr_fmt; 
    label = cat(org_navn); 
 run; 
