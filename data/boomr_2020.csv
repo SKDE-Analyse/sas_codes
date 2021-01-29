@@ -99,11 +99,11 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 5053;5053 Inderøy;;;6;Nord-Trøndelag;;;2;Helse Midt-Norge RHF;
 5060;5060 Nærøysund;;;6;Nord-Trøndelag;;;2;Helse Midt-Norge RHF;
 5001;5001 Trondheim;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;500101;Midtbyen;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;500102;Østbyen;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;500103;Lerkendal;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;500104;Heimdal;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;500199;Uoppgitt;7;St. Olavs;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;500101;01 Midtbyen;7;St. Olavs;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;500102;02 Østbyen;7;St. Olavs;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;500103;03 Lerkendal;7;St. Olavs;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;500104;04 Heimdal;7;St. Olavs;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;500199;99 Uoppgitt bydel Trondheim;7;St. Olavs;;;2;Helse Midt-Norge RHF;
 5014;5014 Frøya;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
 5021;5021 Oppdal;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
 5022;5022 Rennebu;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
@@ -148,9 +148,9 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 1577;1577 Volda;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;1.jan.2021: Nye 1577 Volda består av 1519 Volda og 1444 Hornindal. Hornindal var tidligere i opptaksområdet Helse Førde.
 1578;1578 Fjord;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
 1579;1579 Hustadvika;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
-4601;4601 Bergen;460101;Arna;9;Haraldsplass;;;3;Helse Vest RHF;
-4601;4601 Bergen;460102;Bergenhus;9;Haraldsplass;;;3;Helse Vest RHF;
-4601;4601 Bergen;460108;Åsane;9;Haraldsplass;;;3;Helse Vest RHF;
+4601;4601 Bergen;460101;01 Arna;9;Haraldsplass;;;3;Helse Vest RHF;
+4601;4601 Bergen;460102;02 Bergenhus;9;Haraldsplass;;;3;Helse Vest RHF;
+4601;4601 Bergen;460108;08 Åsane;9;Haraldsplass;;;3;Helse Vest RHF;
 4623;4623 Samnanger;;;9;Haraldsplass;;;3;Helse Vest RHF;
 4629;4629 Modalen;;;9;Haraldsplass;;;3;Helse Vest RHF;
 4630;4630 Osterøy;;;9;Haraldsplass;;;3;Helse Vest RHF;
@@ -176,12 +176,12 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 4650;4650 Gloppen;;;10;Førde;;;3;Helse Vest RHF;
 4651;4651 Stryn;;;10;Førde;;;3;Helse Vest RHF;
 4601;4601 Bergen;;;11;Bergen;;;3;Helse Vest RHF;
-4601;4601 Bergen;460103;Fana;11;Bergen;;;3;Helse Vest RHF;
-4601;4601 Bergen;460104;Fyllingsdalen;11;Bergen;;;3;Helse Vest RHF;
-4601;4601 Bergen;460105;Laksevåg;11;Bergen;;;3;Helse Vest RHF;
-4601;4601 Bergen;460106;Ytrebygda;11;Bergen;;;3;Helse Vest RHF;
-4601;4601 Bergen;460107;Årstad;11;Bergen;;;3;Helse Vest RHF;
-4601;4601 Bergen;460199;Uoppgitt;11;Bergen;;;3;Helse Vest RHF;
+4601;4601 Bergen;460103;03 Fana;11;Bergen;;;3;Helse Vest RHF;
+4601;4601 Bergen;460104;04 Fyllingsdalen;11;Bergen;;;3;Helse Vest RHF;
+4601;4601 Bergen;460105;05 Laksevåg;11;Bergen;;;3;Helse Vest RHF;
+4601;4601 Bergen;460106;06 Ytrebygda;11;Bergen;;;3;Helse Vest RHF;
+4601;4601 Bergen;460107;07 Årstad;11;Bergen;;;3;Helse Vest RHF;
+4601;4601 Bergen;460199;99 Uoppgitt bydel Bergen;11;Bergen;;;3;Helse Vest RHF;
 4620;4620 Ulvik;;;11;Bergen;;;3;Helse Vest RHF;
 4621;4621 Voss;;;11;Bergen;;;3;Helse Vest RHF;
 4622;4622 Kvam;;;11;Bergen;;;3;Helse Vest RHF;
