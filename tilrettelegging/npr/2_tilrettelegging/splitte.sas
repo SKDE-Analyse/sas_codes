@@ -37,6 +37,7 @@ ICD10Kap
 hdiag
 hdiag2
 hdiag3tegn
+hf
 ;
 
 /* Magnus-variabler som kun finnes i sykehus-fil */
@@ -48,21 +49,21 @@ ncrp1-ncrp20
 InnTid
 UtTid
 aktivitetskategori3
-behandlingssted2
+behandlingsstedkode2
 BehHF
 BehRHF
 behSh
 drg
 drg_type
 HDG
-korrvekt /* Ikke fått data for 2018 */
+/*korrvekt*/ /* Ikke fått data for 2018 */
 liggetid
-opphold_id
+/* opphold_id */
 polUtforende_1
 utTilstand /* Fikk ikke i første utlevering, juni 2018 */
 intern_kons
 niva
-versjon
+/* versjon */
 ;
 
 /* Magnus-variabler som kun finnes i avtspes-fil */

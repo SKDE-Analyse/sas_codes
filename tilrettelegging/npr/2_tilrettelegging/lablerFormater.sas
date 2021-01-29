@@ -19,7 +19,13 @@ label BoRHF='Opptaksområde (RHF) (SKDE)'; format BoRHF boRHF_fmt.;
 label BoShHN='Opptaksområde (sykehus HN) (SKDE)';format BoShHN boshhn_fmt.; 
 label erMann='Er mann (kjønn, mann=1) (SKDE)'; format ErMann ErMann.; 
 label kjonn='Kjønn (NPR-melding)'; format kjonn kjonn.; 
-label Fylke='Fylke (pasientens bosted) (SKDE)'; format Fylke fylke.; 
+label Fylke='Fylke (pasientens bosted) (SKDE)'; 
+
+label pasfylke2='Fylke (pasientens bosted) (NPR)'; 
+label shfylke='Fylke (sykehusfylke) (NPR)';
+label sh_reg='Region (sykehusregion) (NPR)';
+label pas_reg2='Region (pasientregion) (NPR)';
+
 label ICD10Kap='ICD-10 kapittel for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10Kap ICD10Kap.;
 label ICD10KatBlokk='ICD-10 kategoriblokk for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10KatBlokk ICD10KatBlokk.; 
 label innmateHast='Hastegrad ved ankomst (NPR-melding)'; format innmateHast innmateHast.; 
@@ -146,7 +152,7 @@ label frittBehandlingsvalg='Fritt behandlingsvalg (NPK)'; format FRITTBehandling
 label secondOpinion='Second Opinion (NPK)'; format SECONDOPINION SECONDOPINION.;
 
 label DRGtypeHastegrad='Kombinert DRG-type og hastegrad (SKDE)'; format DRGtypeHastegrad DRGtypeHastegrad.; 
-label behandlingssted2='Behandlingssted (SKDE)'; format behandlingssted2 org_fmt.; 
+label behandlingsstedkode2='Behandlingssted (SKDE)'; format behandlingsstedkode2 org_fmt.; 
 label BehHF='Behandlende HF (SKDE)'; format BehHF behhfkort_fmt.; 
 label behRHF='Behandlende RHF (SKDE)'; format BehRHF behrhfkort_fmt.; 
 label BehSh='Behandlende sykehus (SKDE)'; format BehSh behsh_fmt.; 
@@ -168,7 +174,7 @@ label typeTidspunkt_5='Type tidspukt for femte dato for utskrivingsklar pasient 
 label ant_tidspunkt='Antall tidspunkt for utskrivningsklar pasient';
 /* label InstitusjonID_original='Org.nr. til rapporteringsenhet, identifiserer stråleterapienheter (NPR-melding)'; format InstitusjonId_original INSTITUSJONID_2013_2017F.;  */
 
-label komNr_org='Backup av komNrHjem2 (SKDE)';
+/* label komNr_org='Backup av komNrHjem2 (SKDE)'; */
 
 label bydel_DSF='Bydel fra Folkeregisteret (NPR)';
 label g_omsorgsniva='Gammelt omsorgsnivå (NPR)'; format g_omsorgsniva g_omsorgsniva.; 
@@ -226,7 +232,7 @@ label cyto_3='Cytostatika kode 3 (Oncolex/NPR-melding)';
 label cyto_4='Cytostatika kode 4 (Oncolex/NPR-melding)'; 
 label cyto_5='Cytostatika kode 5 (Oncolex/NPR-melding)'; 
 
-label gyldig_ICD_1_1='Gyldighet av ICD-10-kode 1_1 (ICD-10/NPR)'; label gyldig_ICD_1_2='Gyldighet av ICD-10-kode 1_2 (ICD-10/NPR)';
+/* label gyldig_ICD_1_1='Gyldighet av ICD-10-kode 1_1 (ICD-10/NPR)'; label gyldig_ICD_1_2='Gyldighet av ICD-10-kode 1_2 (ICD-10/NPR)';
 label gyldig_ICD_2_1='Gyldighet av ICD-10-kode 2_1 (ICD-10/NPR)'; label gyldig_ICD_3_1='Gyldighet av ICD-10-kode 3_1 (ICD-10/NPR)'; label gyldig_ICD_4_1='Gyldighet av ICD-10-kode 4_1 (ICD-10/NPR)';
 label gyldig_ICD_5_1='Gyldighet av ICD-10-kode 5_1 (ICD-10/NPR)'; label gyldig_ICD_6_1='Gyldighet av ICD-10-kode 6_1 (ICD-10/NPR)'; label gyldig_ICD_7_1='Gyldighet av ICD-10-kode 7_1 (ICD-10/NPR)';
 label gyldig_ICD_8_1='Gyldighet av ICD-10-kode 8_1 (ICD-10/NPR)'; label gyldig_ICD_9_1='Gyldighet av ICD-10-kode 9_1 (ICD-10/NPR)'; label gyldig_ICD_10_1='Gyldighet av ICD-10-kode 10_1 (ICD-10/NPR)';
@@ -259,7 +265,7 @@ label gyldig_NCSP_13='Gyldighet av NCSP-kode 13 (NCSP/NPR)'; label gyldig_NCSP_1
 label gyldig_NCSP_16='Gyldighet av NCSP-kode 16 (NCSP/NPR)'; label gyldig_NCSP_17='Gyldighet av NCSP-kode 17 (NCSP/NPR)'; label gyldig_NCSP_18='Gyldighet av NCSP-kode 18 (NCSP/NPR)'; 
 label gyldig_NCSP_19='Gyldighet av NCSP-kode 19 (NCSP/NPR)'; label gyldig_NCSP_20='Gyldighet av NCSP-kode 20 (NCSP/NPR)'; 
 
-format gyldig_ICD: gyldig_NCMP: gyldig_NCRP: gyldig_NCSP: GYLDIG.; 
+format gyldig_ICD: gyldig_NCMP: gyldig_NCRP: gyldig_NCSP: GYLDIG.;  */
 
 label opphold_id='Generert opphold_id - koblingsnøkkel (NPR)';
 label avdOpp_id='Id for avdelingsopphold - generert av NPR (NPR)';
@@ -316,6 +322,8 @@ label aar='År fra inndato (SKDE)';
 drop avtalerhf_old;
 
 %end;
+
+drop orgnr;
 
 run;
 

@@ -12,17 +12,25 @@ MACRO FOR AVLEDEDE VARIABLE
 5. DRGTypeHastegrad
 
 
+
+
 ### Steg for steg
 
 */
 
 Data &Utdatasett;
-set &Inndatasett;
+set &Inndatasett(rename=(alderIdager=alderIdager_orig));
 
 /*!
 - Retting av ugyldig fødselsår
-/*
+*/
 
+/* fix variable anomaly that was discovered in the step 1 control */
+  alderIdager=alderIdager_orig;
+    if alderIdager<0 then alderIdager=0;
+
+    /* isolated case, one line in 2018 to be fixed */
+    if aar=2018 and aktivitetskategori3=3 and year(inndato) ne 2018 then inndato=utdato;
 
 /* if fødselsår is  invalid */
 if fodselsar > aar or fodselsar=. then fodselsar=9999;
