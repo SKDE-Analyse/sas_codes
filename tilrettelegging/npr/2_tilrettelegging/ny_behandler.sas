@@ -5,8 +5,6 @@
 
 %macro ny_behandler(inndata=, beh=behandlingsstedkode, utdata=);
 
-%let csvbane= \\tos-sas-skde-01\SKDE_SAS\felleskoder\boomr\data; /*må endres til \master\data etter merge*/
-
 
 /* Hente inn CSV-fil for å lage behandler */
 data beh;

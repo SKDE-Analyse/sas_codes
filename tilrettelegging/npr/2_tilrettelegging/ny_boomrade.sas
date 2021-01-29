@@ -14,7 +14,7 @@
 */
 /* Pga sql-merge må datasettet en sender inn, &inndata, ikke ha variablene bohf, borhf eller boshhn med */
 /* Hvis datasettes allerede har bohf, borhf eller boshhn så vil de ikke overskrives i proc sql-merge */
-data &inndata;
+data &utdata;
 set &inndata;
 drop bohf borhf boshhn;
 run;
@@ -55,9 +55,9 @@ data bo;
 
 
 proc sql;
-  create table &inndata as
+  create table &utdata as
   select a.*, b.bohf, b.boshhn, b.borhf
-  from &inndata a left join bo b
+  from &utdata a left join bo b
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
 quit;
@@ -76,9 +76,9 @@ if bydel >0 then delete; /*fjerner linjene i bo-data som har bydel*/
 run;
 
 proc sql;
-  create table &inndata as
+  create table &utdata as
   select a.*, b.bohf, b.boshhn, b.borhf 
-  from &inndata a left join bo_utenbydel b
+  from &utdata a left join bo_utenbydel b
   on a.komnr=b.komnr;
 quit;
 %end;
@@ -90,7 +90,7 @@ quit;
 */
 
 data &utdata;
-  set &inndata;
+  set &utdata;
 
 %if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/
   if bohf=9 then bohf=11;
