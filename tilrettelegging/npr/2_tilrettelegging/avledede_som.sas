@@ -30,15 +30,12 @@ set &Inndatasett(rename=(alderIdager=alderIdager_orig));
     if alderIdager<0 then alderIdager=0;
 
     /* isolated case, one line in 2018 to be fixed */
-    if aar=2018 and aktivitetskategori3=3 and year(inndato) ne 2018 then inndato=utdato;
+    if aar=2018 and aktivitetskategori3=1 and year(inndato) ne 2018 then inndato=utdato;
 
 /* if fødselsår is  invalid */
 if fodselsar > aar or fodselsar=. then fodselsar=9999;
 if aar-fodselsar > 110 then fodselsar=9999;
 
-
-if utdato lt MDY (1,1,2019) then utdato = .;
-if utdato ge MDY (5,1,2020) then utdato = .;
 
 /*!
 - Definerer Alder basert på Fodselsår

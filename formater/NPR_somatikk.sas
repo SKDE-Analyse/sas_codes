@@ -161,6 +161,7 @@ value NPRID_REG
       1 = 'Ordinær pasient. Opphold finansiert gjennom ISF, HELFO, og ordinær finansiering innen psykisk helse og TSB'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       11 = 'Konvensjonspasient behandlet ved ø-hjelp'  
       12 = 'Pasient  fra land uten konvensjonsavtale (selvbetalende)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      13 = 'Folketrygdfinansiert behandling via Helfo for pasienter bosatt i utlandet, men med medlemskap i folketrygden' /* Ny 2021*/
       20 = 'Sykepengeprosjekt, Raskere tilbake'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       22 = 'Forskningsprogram'  
 	  24 = 'Finansiert (betalt) av kommunen' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
@@ -174,6 +175,7 @@ value NPRID_REG
       45 = 'Anbudspasient på avtalen for Helse Nord RHF'  
       47 = 'Anbudspasient på avtalen for Helse Sør-Øst RHF'  
       50 = 'Opphold hos avtalespesialist finansiert via ISF'  
+      51 = 'Regional kurdøgnfinansiering' /* Ny 2021 */
       60 = 'Forsikringsfinansiert opphold'  
       70 = 'HELFO formidlet opphold ved fristbrudd'  
       80 = 'Opphold på avtale med HF/RHF. Ikke anbudsavtale' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
@@ -458,7 +460,16 @@ value NPRID_REG
 	  18 = 'Ortoptist' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
 	  19 = 'Ortopediingeniør' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
 	  20 = 'Farmasøyt' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
-	  21 = 'Fotterapeut' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
+	  21 = 'Fotterapeut' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+     22 = '	Genetiker' /* Ny kode 2021 */
+     23 = 'Logoped' /* Ny kode 2021 */
+     24 = 'Perfusjonist' /* Ny kode 2021 */
+     25 = 'Optiker' /* Ny kode 2021 */
+     26 = 'Audiofysiker' /* Ny kode 2021 */
+     27 = 'Kiropraktor' /* Ny kode 2021 */
+     28 = 'Helsesykepleier' /* Ny kode 2021 */
+     29 = 'Stråleterapeut' /* Ny kode 2021 */
+     ;
    
    value GYLDIG /* Ikke oppgitt i utlevering 2018 */
       0 = ' ' /* Gjelder kun NCRP i 2017. Fikk vite betydningen fra Marte Kjelvik i NPR. */ 

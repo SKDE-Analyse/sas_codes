@@ -29,7 +29,7 @@ length ICD10Kap: 3;
 length innmateHast kjonn kontaktType 4;
 length inndato utdato doddato epikrisedato individuellplandato mottaksdato sluttdato tildeltdato utskrklardato /*utskrklardato2*/ ventetidsluttdato ventetidsluttkode vurddato KomNr 4;
 length institusjonID  6;
-length NPRId_reg stedAktivitet 4;
+length /*NPRId_reg*/ stedAktivitet 4;
 length tell_: 4;
 length pid 6;
 
@@ -45,7 +45,7 @@ length DRGtypeHastegrad 3;
 /* length fodselsAar_ident 3; */
 length fodselsvekt 4;
 length /*fodt_mnd*/ g_omsorgsniva hastegrad hdg henvType 3;
-length inntilstand intern_kons isf_opphold liggetid 4;
+length inntilstand /*intern_kons*/ isf_opphold liggetid 4;
 length InnTid UtskrKlarDato 4;
 /* length institusjonID_original 6; */
 length omsorgsniva pakkeforlop permisjonsdogn polIndir polIndirekteAktivitet polUtforende_1 polUtforende_2 RehabType 4;

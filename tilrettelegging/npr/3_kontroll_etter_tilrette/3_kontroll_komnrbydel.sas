@@ -17,7 +17,7 @@ data bo;
   format boshhn 2.;
   format boshhn_navn $15.;
   format borhf 4.;
-  format borhf $60.;
+  format borhf_navn $60.;
   format kommentar $400.;
  
   input	
@@ -45,6 +45,7 @@ run;
 /*fjerne duplikate linjer*/
 proc sort data=gyldig_kom nodupkey out=liste_kom;
 by komnr;
+where komnr is not missing;
 run;
 
 
@@ -55,11 +56,7 @@ run;
 /*fjerne duplikate linjer*/
 proc sort data=gyldig_bydel nodupkey out=liste_by;
 by bydel;
-run;
-/*fjerne linje med missing bydel*/
-data liste_by;
-set liste_by;
-if bydel = . then delete;
+where bydel is not missing;
 run;
 
 
@@ -74,14 +71,14 @@ proc sql;
 quit;
 
 /*sortere og laga datasett til kontroll*/
-proc sort data=mottatt_komnr(keep=komnr) out= mottatt_kom; by komnr; run;
-proc sort data=mottatt_komnr(keep=bydel) out= mottatt_by; by bydel; run;
-
-/*fjerne linje med bydel2 = 0*/
-data mottatt_by;
-set mottatt_by;
-if bydel = . then delete;
+proc sort data=mottatt_komnr(keep=komnr) out= mottatt_kom; 
+by komnr; 
 run;
+proc sort data=mottatt_komnr(keep=bydel) out= mottatt_by; 
+by bydel; 
+where bydel is not missing;
+run;
+
 
 /* ---------------------------------------- */
 /* 3. Sammenligne mottatte komnr med csv-fil*/
