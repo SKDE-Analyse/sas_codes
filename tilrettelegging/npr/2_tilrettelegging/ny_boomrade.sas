@@ -61,6 +61,33 @@ proc sql;
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
 quit;
+
+* Records without bohf due invalid bydel get assigned bohf based on komnr;
+data missing_bohf(drop=bohf boshhn borhf) gooddata;
+  set &utdata;
+  if bohf=. then output missing_bohf;
+  else output gooddata;
+run;
+
+data bo_utenbydel;
+  set bo;
+  if bydel >0 then delete; /*fjerner linjene i bo-data som har bydel*/
+run;
+
+proc sql;
+  create table missing_bohf as
+  select a.*, b.bohf, b.boshhn, b.borhf 
+  from missing_bohf a left join bo_utenbydel b
+  on a.komnr=b.komnr;
+quit;
+
+data &utdata;
+  set gooddata missing_bohf;
+run;
+
+proc delete data=gooddata;
+run;
+
 %end;
 
 /*
