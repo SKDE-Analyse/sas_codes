@@ -2,7 +2,7 @@
 
 /* Makro for å lage formater til boområder */
 
-%macro fmt_bo;
+
 /* hente inn CSV-fil med definerte opptaksområder pr 01.01.2020 */
 data bo;
   infile "&csvbane\boomr_2020.csv"
@@ -154,4 +154,3 @@ proc format cntlin=fmtfil_komnr; run;
 
 
 
-%mend;

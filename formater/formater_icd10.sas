@@ -1,4 +1,3 @@
-%macro fmt_icd10;
 
 /* Read the Excel spreadsheet and create a SAS data set. */                                                                             
 proc import datafile="&csvbane\ICD-10_2020.xlsx"
@@ -29,4 +28,3 @@ data AVD_1_testfmt;
 run;
 */
 
-%mend;

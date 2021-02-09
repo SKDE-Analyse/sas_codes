@@ -12,7 +12,6 @@
 /* Husk å definere csvbane hvor CSV-ligger lagret før makro kjøres */
 
 
-%macro fmt_beh;
 
 data behandler;
   infile "&csvbane\behandler.csv"
@@ -173,4 +172,4 @@ run;
  /* Create the format using the control data set. */                                                                                     
 proc format cntlin=fmtfil_orgnr; run;
 
-%mend;
+
