@@ -1,7 +1,8 @@
 /* Makro for å lage behandlersykehus, hf og rhf. */
 /* Alle linjer må ha gyldig orgnr/behandler - fikses i tilrettelegging */
 /* Dvs 2_tilrettelegging\fix_behandlingssted må kjøres først */
-/* Opprinnelig variabel i mottatt data 'behandlingsstedkode' beholdes uendret, det lages en 'beh_tmp' som brukes til å definere behsh, behhf og behrhf. */
+/* Opprinnelig variabel i mottatt data 'behandlingsstedkode' beholdes uendret, 
+   det lages en 'behandlingsstedkode2' som brukes til å definere behsh, behhf og behrhf. */
 
 %macro ny_behandler(inndata=, beh=behandlingsstedkode, utdata=);
 

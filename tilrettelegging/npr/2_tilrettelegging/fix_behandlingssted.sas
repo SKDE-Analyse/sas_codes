@@ -8,7 +8,7 @@ data &utdata;
 set &inndata;
 
 /* Ta vare på original variabel 'behandlingsstedkode' - lage en 'behandlingsstedkode2' */
-behandlingsstedkode2 = &beh; 
+behandlingsstedkode2 = &beh+0; 
 
 /* 2016 */
 if aar = 2016 then do; 
@@ -35,6 +35,26 @@ end;
 if aar = 2020 then do; 
 if behandlingsstedkode2 = 974377779 then behandlingsstedkode2 = institusjonid ; /*Betanien spesialistpoliklinikk - behandlingsstedkode har et feilplassert siffer, mens institusjonid har riktig orgnr.*/
 end;
+
+/* Alle med missing behandlingsstedkode får behandlingsstedkode2 = institusjonid */
+if behandlingsstedkode2 = . then behandlingsstedkode2 = institusjonid;
+
+run;
+
+%mend;
+
+
+%macro fix_behandlingssted_rehab(inndata= , beh=behandlingsstedkode, utdata=);
+
+
+data &utdata;
+set &inndata;
+
+/* Ta vare på original variabel 'behandlingsstedkode' - lage en 'behandlingsstedkode2' */
+behandlingsstedkode2 = &beh+0; 
+
+/* error in code?  not found in Brønnøysundregistrene */
+if behandlingsstedkode2 = 974841984 then behandlingsstedkode2 = institusjonid;
 
 /* Alle med missing behandlingsstedkode får behandlingsstedkode2 = institusjonid */
 if behandlingsstedkode2 = . then behandlingsstedkode2 = institusjonid;
