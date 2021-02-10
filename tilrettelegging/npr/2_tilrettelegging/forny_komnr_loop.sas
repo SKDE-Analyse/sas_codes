@@ -1,6 +1,6 @@
 /* Fornye gamle komnr til komnr i bruk pr 1.2.20xx */
 
-%macro forny_komnr_loop(inndata=, utdata=);
+%macro forny_komnr_loop(inndata=, utdata=, kommune_nr=komnrhjem2 /*Kommunenummer som skal fornyes*/);
 
 /* hente inn csv-fil */
 data forny_komnr;
@@ -37,8 +37,8 @@ run;
 %let sumkom=1;
 
 data test;
-set &inndata(keep=pid komnrhjem2 episode_lnr);
-komnr = komnrhjem2; /* i mottatt data er komnr = komnrhjem2 */
+set &inndata(keep=pid &kommune_nr episode_lnr);
+komnr = &kommune_nr; /* i mottatt data er komnr = komnrhjem2 */
 run;
 
 /* Run a loop to fornew komnr until all komnr become missing (i.e. no more to fix)*/
