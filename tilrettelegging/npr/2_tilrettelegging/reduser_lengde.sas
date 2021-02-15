@@ -50,7 +50,7 @@ length InnTid UtskrKlarDato 4;
 /* length institusjonID_original 6; */
 length omsorgsniva pakkeforlop permisjonsdogn polIndir polIndirekteAktivitet polUtforende_1 polUtforende_2 RehabType 4;
 /* length relatertKontaktID 6; */
-length trimpkt utforendeHelseperson utTilstand /* VertskommHN*/ 4;
+length trimpkt /*utforendeHelseperson*/ utTilstand /* VertskommHN*/ 4;
 length UtTid 5;
 %end;
 %if &avtspes ne 0 %then %do;

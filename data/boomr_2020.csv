@@ -36,7 +36,7 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 5411;5411 Kvæfjord;;;2;UNN;4;UNN Harstad;1;Helse Nord RHF;
 5412;5412 Tjeldsund;;;2;UNN;4;UNN Harstad;1;Helse Nord RHF;
 5413;5413 Ibestad;;;2;UNN;4;UNN Harstad;1;Helse Nord RHF;
-1806;1806 Narvik;;;2;UNN;5;UNN Narvik;1;Helse Nord RHF;1.jan.2021: 1806 Narvik består av tidligere 1850 Tysfjord, 1854 Ballangen og 1805 Narvik. 1850 Tysfjord ble delt mellom 1806 Narvik og 1875 Hamarøy. SKDE velger 1806 Narvik. Tysfjord skifter opptaksområde fra Bodø til Narvik.
+1806;1806 Narvik;;;2;UNN;5;UNN Narvik;1;Helse Nord RHF;1.jan.2021: 1806 Narvik består av tidligere 1850 Tysfjord, 1854 Ballangen og 1805 Narvik. 1850 Tysfjord ble delt mellom 1806 Narvik og 1875 Hamarøy. SKDE velger 1806 Narvik. Tysfjord med ca 2000 innbyggere skifter opptaksområde fra Bodø (boshhn=8) til Narvik (boshhn=5).
 1853;1853 Evenes;;;2;UNN;5;UNN Narvik;1;Helse Nord RHF;
 5414;5414 Gratangen;;;2;UNN;5;UNN Narvik;1;Helse Nord RHF;
 5415;5415 Loabák - Lavangen;;;2;UNN;5;UNN Narvik;1;Helse Nord RHF;
@@ -60,7 +60,7 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 1848;1848 Steigen;;;3;Nordland;8;Bodø;1;Helse Nord RHF;
 1856;1856 Røst;;;3;Nordland;8;Bodø;1;Helse Nord RHF;
 1857;1857 Værøy;;;3;Nordland;8;Bodø;1;Helse Nord RHF;
-1875;1875 Hamarøy;;;3;Nordland;8;Bodø;1;Helse Nord RHF;
+1875;1875 Hamarøy;;;3;Nordland;8;Bodø;1;Helse Nord RHF;1.jan.2021: 1850 Tysfjord ble delt mellom 1806 Narvik og 1875 Hamarøy. SKDE velger 1806 Narvik. Tysfjord med ca 2000 innbyggere skifter opptaksområde fra Bodø (boshhn=8) til Narvik (boshhn=5).
 1828;1828 Nesna;;;4;Helgeland;9;Rana;1;Helse Nord RHF;
 1832;1832 Hemnes;;;4;Helgeland;9;Rana;1;Helse Nord RHF;
 1833;1833 Rana;;;4;Helgeland;9;Rana;1;Helse Nord RHF;
@@ -116,11 +116,11 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 5032;5032 Selbu;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
 5033;5033 Tydal;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
 5054;5054 Indre Fosen;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5055;5055 Heim;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: 1571 Halsa, 5011 Hemne og del av 5012 Snillfjord ble slått sammen til 5055 Heim i 2020. Halsa tilhørte tidligere opptaksområdet Møre og Romsdal.
-5056;5056 Hitra;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
+5055;5055 Heim;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: 1571 Halsa, 5011 Hemne og del av 5012 Snillfjord ble slått sammen til 5055 Heim i 2020. Halsa med ca 1600 innbyggere tilhørte tidligere opptaksområdet Møre og Romsdal (bohf=8). 5012 Snillfjord ble delt mellom 5055 Heim, 5056 Hitra og 5059 Orkland. SKDE velger 5059 Orkland. 1613/5012 Snillfjord med ca 1000 innbyggere skifter ikke opptaksområde.
+5056;5056 Hitra;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: 5012 Snillfjord ble delt mellom 5055 Heim, 5056 Hitra og 5059 Orkland. SKDE velger 5059 Orkland. 1613/5012 Snillfjord med ca 1000 innbyggere skifter ikke opptaksområde.
 5057;5057 Ørland;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5058;5058 Åfjord;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: Nye 5058 Åfjord består av og 1630/5018 Åfjord og 1632/5019 Roan. Roan var tidligere i opptaksområdet Helse Nord-Trøndelag.
-5059;5059 Orkland;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: 5012 Snillfjord ble delt mellom tre kommuner, SKDE velger å bruke 5059 Orkland for hele Snillfjord. 1613/5012 Snillfjord skifter ikke opptaksområde.
+5058;5058 Åfjord;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: Nye 5058 Åfjord består av og 1630/5018 Åfjord og 1632/5019 Roan. Roan med ca 950 innbyggere var tidligere i opptaksområdet Helse Nord-Trøndelag (bohf=6).
+5059;5059 Orkland;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: 5012 Snillfjord ble delt mellom 5055 Heim, 5056 Hitra og 5059 Orkland. SKDE velger 5059 Orkland. 1613/5012 Snillfjord med ca 1000 innbyggere skifter ikke opptaksområde.
 5061;5061 Rindal;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
 1505;1505 Kristiansund;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
 1506;1506 Molde;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
@@ -145,7 +145,7 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 1566;1566 Surnadal;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
 1573;1573 Smøla;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
 1576;1576 Aure;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
-1577;1577 Volda;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;1.jan.2021: Nye 1577 Volda består av 1519 Volda og 1444 Hornindal. Hornindal var tidligere i opptaksområdet Helse Førde.
+1577;1577 Volda;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;1.jan.2021: Nye 1577 Volda består av 1519 Volda og 1444 Hornindal. Hornindal med ca 1100 innbyggere var tidligere i opptaksområdet Helse Førde (bohf=10).
 1578;1578 Fjord;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
 1579;1579 Hustadvika;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
 4601;4601 Bergen;460101;01 Arna;9;Haraldsplass;;;3;Helse Vest RHF;
@@ -190,7 +190,7 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 4626;4626 Øygarden;;;11;Bergen;;;3;Helse Vest RHF;
 4627;4627 Askøy;;;11;Bergen;;;3;Helse Vest RHF;
 4628;4628 Vaksdal;;;11;Bergen;;;3;Helse Vest RHF;
-4635;4635 Gulen;;;11;Bergen;;;3;Helse Vest RHF;1.jan.2021: 4635 Gulen flyttet fra opptaksområdet Førde til Bergen.
+4635;4635 Gulen;;;11;Bergen;;;3;Helse Vest RHF;1.jan.2021: 4635 Gulen med ca 2300 innbyggere var tidligere i opptaksområdet til Helse Førde (bohf=10).
 1106;1106 Haugesund;;;12;Fonna;;;3;Helse Vest RHF;
 1134;1134 Suldal;;;12;Fonna;;;3;Helse Vest RHF;
 1135;1135 Sauda;;;12;Fonna;;;3;Helse Vest RHF;
@@ -245,7 +245,7 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 3016;3016 Rakkestad;;;14;Østfold;;;4;Helse Sør-Øst RHF;
 3017;3017 Råde;;;14;Østfold;;;4;Helse Sør-Øst RHF;
 3018;3018 Våler (Viken);;;14;Østfold;;;4;Helse Sør-Øst RHF;
-3019;3019 Vestby;;;14;Østfold;;;4;Helse Sør-Øst RHF;
+3019;3019 Vestby;;;14;Østfold;;;4;Helse Sør-Øst RHF;1.jan.2021: Sykehuset Østfold ble i 2018 lokalsykehus for 211/3019 Vestby. Vestby med ca 17800 innbyggere var tidligere i opptaksområdet til Akershus (bohf=15).
 301;0301 Oslo kommune;30110;10 Grorud;15;Akershus;;;4;Helse Sør-Øst RHF;
 301;0301 Oslo kommune;30111;11 Stovner;15;Akershus;;;4;Helse Sør-Øst RHF;
 301;0301 Oslo kommune;30112;12 Alna;15;Akershus;;;4;Helse Sør-Øst RHF;
@@ -261,15 +261,15 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 3031;3031 Nittedal;;;15;Akershus;;;4;Helse Sør-Øst RHF;
 3032;3032 Gjerdrum;;;15;Akershus;;;4;Helse Sør-Øst RHF;
 3033;3033 Ullensaker;;;15;Akershus;;;4;Helse Sør-Øst RHF;
-3034;3034 Nes;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Ahus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) bytter fra opptaksområdet Innlandet til Ahus.
+3034;3034 Nes;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (tidligere del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Akershus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) med ca 64500 innbyggerevar tidligere i opptaksområdet Innlandet (bohf=19).
 3035;3035 Eidsvoll;;;15;Akershus;;;4;Helse Sør-Øst RHF;
 3036;3036 Nannestad;;;15;Akershus;;;4;Helse Sør-Øst RHF;
 3037;3037 Hurdal;;;15;Akershus;;;4;Helse Sør-Øst RHF;
-3401;3401 Kongsvinger;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Ahus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) bytter fra opptaksområdet Innlandet til Ahus.
-3414;3414 Nord-Odal;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Ahus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) bytter fra opptaksområdet Innlandet til Ahus.
-3415;3415 Sør-Odal;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Ahus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) bytter fra opptaksområdet Innlandet til Ahus.
-3416;3416 Eidskog;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Ahus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) bytter fra opptaksområdet Innlandet til Ahus.
-3417;3417 Grue;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Ahus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) bytter fra opptaksområdet Innlandet til Ahus.
+3401;3401 Kongsvinger;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (tidligere del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Akershus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) med ca 64500 innbyggerevar tidligere i opptaksområdet Innlandet (bohf=19).
+3414;3414 Nord-Odal;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (tidligere del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Akershus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) med ca 64500 innbyggerevar tidligere i opptaksområdet Innlandet (bohf=19).
+3415;3415 Sør-Odal;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (tidligere del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Akershus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) med ca 64500 innbyggerevar tidligere i opptaksområdet Innlandet (bohf=19).
+3416;3416 Eidskog;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (tidligere del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Akershus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) med ca 64500 innbyggerevar tidligere i opptaksområdet Innlandet (bohf=19).
+3417;3417 Grue;;;15;Akershus;;;4;Helse Sør-Øst RHF;1.jan.2021: Kongsvinger sykehus (tidligere del av Sykehuset Innlandet HF) ble 1.feb 2019 del av Akershus HF. Følgende kommuner (3401 Kongsvinger, 3417 Grue, 3414 Nord-Odal, 3415 Sør-Odal, 3416 Eidskog, 3034 Nes) med ca 64500 innbyggerevar tidligere i opptaksområdet Innlandet (bohf=19).
 301;0301 Oslo kommune;30103;03 Sagene;16;OUS;;;4;Helse Sør-Øst RHF;
 301;0301 Oslo kommune;30108;08 Nordre Aker;16;OUS;;;4;Helse Sør-Øst RHF;
 301;0301 Oslo kommune;30109;09 Bjerke;16;OUS;;;4;Helse Sør-Øst RHF;
@@ -278,7 +278,7 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 301;0301 Oslo kommune;30115;15 Søndre Nordstrand;16;OUS;;;4;Helse Sør-Øst RHF;
 301;0301 Oslo kommune;30116;16 Sentrum;16;OUS;;;4;Helse Sør-Øst RHF;
 301;0301 Oslo kommune;30117;17 Marka;16;OUS;;;4;Helse Sør-Øst RHF;
-301;0301 Oslo kommune;30199;99 Uoppgitt bydel Oslo;16;OUS;;;4;Helse Sør-Øst RHF;1.jan.2021: Samdata har denne i sin 2020-syntaks som eget HF, dvs inngår ikke i OUS, Akershus, Lovisenberg eller Diakonhjemmet.
+301;0301 Oslo kommune;30199;99 Uoppgitt bydel Oslo;16;OUS;;;4;Helse Sør-Øst RHF;.
 301;0301 Oslo kommune;30101;01 Gamle Oslo;17;Lovisenberg;;;4;Helse Sør-Øst RHF;
 301;0301 Oslo kommune;30102;02 Grünerløkka;17;Lovisenberg;;;4;Helse Sør-Øst RHF;
 301;0301 Oslo kommune;30104;04 St. Hanshaugen;17;Lovisenberg;;;4;Helse Sør-Øst RHF;
@@ -349,7 +349,7 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 3052;3052 Nore og Uvdal;;;20;Vestre Viken;;;4;Helse Sør-Øst RHF;
 3053;3053 Jevnaker;;;20;Vestre Viken;;;4;Helse Sør-Øst RHF;
 3801;3801 Horten;;;21;Vestfold;;;4;Helse Sør-Øst RHF;
-3802;3802 Holmestrand;;;21;Vestfold;;;4;Helse Sør-Øst RHF;1.jan.2021: 3802 Holmestrand består av 713 Sande og 715 Holmestrand. Sande var tidligere i opptaksområdet Vestre Viken.
+3802;3802 Holmestrand;;;21;Vestfold;;;4;Helse Sør-Øst RHF;1.jan.2021: 3802 Holmestrand består av 713 Sande og 715 Holmestrand. Sande med ca 10000 innbyggere var tidligere i opptaksområdet Vestre Viken (bohf=20).
 3803;3803 Tønsberg;;;21;Vestfold;;;4;Helse Sør-Øst RHF;
 3804;3804 Sandefjord;;;21;Vestfold;;;4;Helse Sør-Øst RHF;
 3805;3805 Larvik;;;21;Vestfold;;;4;Helse Sør-Øst RHF;

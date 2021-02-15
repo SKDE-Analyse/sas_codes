@@ -53,8 +53,8 @@ set &inndata;
 /* Ta vare på original variabel 'behandlingsstedkode' - lage en 'behandlingsstedkode2' */
 behandlingsstedkode2 = &beh+0; 
 
-/* error in code?  not found in Brønnøysundregistrene */
-if behandlingsstedkode2 = 974841984 then behandlingsstedkode2 = institusjonid;
+/* error in code?  typo, digit swap */
+if behandlingsstedkode2 = 974841984 then behandlingsstedkode2 = 974841894;
 
 /* Alle med missing behandlingsstedkode får behandlingsstedkode2 = institusjonid */
 if behandlingsstedkode2 = . then behandlingsstedkode2 = institusjonid;

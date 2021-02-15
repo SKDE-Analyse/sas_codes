@@ -1,10 +1,6 @@
 
 %Macro LablerFormater (innDataSett=, utDataSett=);
 
-%fmt_bo;
-%fmt_beh;
-%fmt_icd10;
-
 /*!
 Legger på formater og labler
 */

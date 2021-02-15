@@ -19,18 +19,23 @@ MACRO FOR AVLEDEDE VARIABLE
 */
 
 Data &Utdatasett;
-set &Inndatasett(rename=(alderIdager=alderIdager_orig));
+set &Inndatasett;
 
 /*!
 - Retting av ugyldig fødselsår
 */
 
 /* fix variable anomaly that was discovered in the step 1 control */
-  alderIdager=alderIdager_orig;
-    if alderIdager<0 then alderIdager=0;
 
-    /* isolated case, one line in 2018 to be fixed */
-    if aar=2018 and aktivitetskategori3=1 and year(inndato) ne 2018 then inndato=utdato;
+/* if the variable exists then do */
+%if %sysevalf(%superq(alderIdager)=1,boolean) %then %do; 
+  alderIdager_orig=alderIdager;
+  if alderIdager<0 then alderIdager=0;
+%end;
+
+/* isolated case, one line in 2018, one line in 2019 to be fixed */
+if aar=2018 and liggetid>6000 then inndato=utdato;
+if aar=2019 and liggetid> 800 then inndato=utdato;
 
 /* if fødselsår is  invalid */
 if fodselsar > aar or fodselsar=. then fodselsar=9999;

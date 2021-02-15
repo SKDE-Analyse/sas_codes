@@ -25,6 +25,16 @@ Drop lopenr;
 /*!
 ### Konvertering av stringer til dato- og tidsvariable
 */
+/*!
+- Konvertere `EpikriseDato`  til datoer
+*/
+
+	EpikriseDato1=Input(EpikriseDato,Anydtdte10.);
+
+
+	Format EpikriseDato1  Eurdfdd10.;
+	Drop EpikriseDato   ;
+	rename EpikriseDato1=EpikriseDato  ; 
 
 
 /*!
@@ -102,7 +112,10 @@ array ncmp_{20} $ ncmp_1-ncmp_20;
           end;
 drop ncmp_: i;
 
-
+/*!
+- Fix invalid bydel in 2019 2020 data
+*/
+If komnrhjem2=4601 and bydel2=12 then bydel2=99;
 
 run;
 

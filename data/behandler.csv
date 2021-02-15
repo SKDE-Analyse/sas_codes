@@ -149,7 +149,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 914356199;Sunnaas sykehus, Nesodden poliklinikk;191;Sunnaas sykehus, Nesodden poliklinikk;19;Sunnaas sykehus HF;Sunnaas sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 994869736;Sunnaas sykehus, Aker poliklinikk;192;Sunnaas sykehus, Aker poliklinikk;19;Sunnaas sykehus HF;Sunnaas sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974633752;Sykehuset Østfold;200;Sykehuset Østfold HF;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-983971768;SYKEHUSET ØSTFOLD HF;200;Sykehuset Østfold HF;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
+983971768;Sykehuset Østfold HF;200;Sykehuset Østfold HF;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974633698;Sykehuset Østfold, Moss;201;Sykehuset Østfold, Moss;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974634052;Sykehuset Østfold, Fysioterapi;201;Sykehuset Østfold, Moss;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974703734;Sykehuset Østfold, Sarpsborg;202;Sykehuset Østfold, Sarpsborg;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
@@ -182,8 +182,8 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 981275721;Betanien hospital;252;Betanien Hospital Skien;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 985773238;Revmatismesykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 973254979;Revmatisme sykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-984630492;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader.
-997506499;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader.
+984630492;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;"Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader."
+997506499;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;"Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader."
 974316285;Haraldsplass diakonale sykehus AS;260;Haraldsplass diakonale sykehus;26;Haraldsplass diakonale sykehus;Haraldsplass diakonale sykehus;3;Helse Vest RHF;Helse Vest;Vest;
 813381192;Aleris Helse AS Stavanger;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 879595762;Teres Drammen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
@@ -271,8 +271,93 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 996087212;Ullevål Hageby hjertesenter Odd Johansen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 998562708;Medi 3 AS - avd Ålesund;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 999458610;Ibsensykehuset Gjøvik AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-922950172;COLOSSEUM FAUST AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Private;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
-976520165;Valnesfjord Helsesportsenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Private;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
-987407557;Ifocus øyeklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Private;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
-987658584;UNICARE BAKKE AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Private;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
-999204546;Orbita øyelegesenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Private;Oppdatert 20.jan 2021: 2020-data, institusjonid viser til ny privat aktør.
+922950172;COLOSSEUM FAUST AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
+976520165;Valnesfjord Helsesportsenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
+987407557;Ifocus øyeklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
+987658584;UNICARE BAKKE AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
+999204546;Orbita øyelegesenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 20.jan 2021: 2020-data, institusjonid viser til ny privat aktør.
+871426902;Godthaab;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+888082042;Stamina Helse, Bodø;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+912041379;Høyenhall;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+912663272;MyWorkout;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+913220684;LHL Trondheim;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+915354513;Kastvollen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+918686967;Kastvollen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+919553480;Unicare Helsefort;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+921008104;Evjeklinikken;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+932191482;Steffensrud;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+934452011;Rauland;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+936079857;Nordtun;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+937184077;Haugland;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+939906746;Selli;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+951496502;Ringen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+959678839;Hokksund;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+961721652;Muritunet;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+964249075;Vikersund;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+966867450;Landaasen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+971436875;Beitostølen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+973156829;Rehabilitering Vest as;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+974116464;Betania Malvik;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+974116774;Conrad Svendsen Senter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+974157411;Skibotnsenteret;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+974568225;Telemark;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+974917459;Diabetikersenteret;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+974987562;Røysumtunet;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+976516745;Valnesfjord;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+976547993;Fram Helserehab;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+976724895;PTØ-Senteret Hamar;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+976867017;PTØ-Gardermoen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+977155673;Ravneberghaugen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+979757751;Catosenteret;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+980395588;Grande;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+980684997;Finnmark;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+980924076;Nord-Norges Kurbad;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+980973549;Skogli;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+981027035;Røros;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+983213421;Hernes;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+983478778;Jeløy kurbad;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+984036655;Helgeland Rehabilitering;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+984756712;Friskgården;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+985311013;Coperiosenteret;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+986358668;Hakadal MSSenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+986823611;Meråker;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+986923845;Namdal;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+987552433;Evjeklinikken;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+987658584;Bakke;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+988192996;N.K.S. Helsehus Akershus;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+988351199;Tonsåsen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+988413216;Åstveit;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+990772525;Stamina Helse, Tromsø;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+991441654;Oppfølgingsenheten Frisk;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+992168781;NIMI Ringerike;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+993425273;Eiksåsen MSSenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+994675273;Idrettens Helsesenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+995111209;LHL-klinikkene Bergen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+997808347;Krokeidesenteret_Nærland;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+998725186;HLF Briskeby;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+999087345;Sørlandets Eiken;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+999238351;NIMI AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+824306532;Oppfølgingsenheten Frisk AS avd Elverum;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+871815402;Unicare Hokksund AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+872338012;Muritunet AS avd Valldal;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+918996796;Oppfølgingsenheten Frisk AS avd Randaberg;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+918997202;Oppfølgingsenheten Frisk AS avd Oslo sentrum;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+918997539;Oppfølgingsenheten Frisk AS avd Hamar;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+919693215;PTØ senteret Stavanger;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+919693282;PTØ senteret Trondheim (slettet 11.11.2020);300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+919854677;Muritunet AS avd Moa (Ålesund);300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+919968001;Oppfølgingsenheten Frisk AS avd Trondheim;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+922186154;Unicare Røros;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+922186391;Unicare Helsefort;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+922688117;Skibotn Helse og Rehabilitering AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+971725214;Unicare Landaasen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+971815388;Unicare Steffensrud AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+971821205;Stiftelsen Hernes institutt;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+973254618;Ringen Rehabiliteringssenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+974124262;Selli Rehabiliteringssenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+974841894;Sørlandets rehabiliteringssenter Eiken AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+991521607;Oppfølgingsenheten Frisk AS avd Moelv;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+993189855;Oppfølgingsenheten Frisk AS avd Elverum (slettet 25.06.2020);300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+922047847;Skibotn Helse og Rehabilitering AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+922186154;Unicare Røros;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+922186391;Unicare Helsefort;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.

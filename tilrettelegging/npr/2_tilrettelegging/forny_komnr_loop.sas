@@ -36,8 +36,13 @@ run;
 %let i=1;
 %let sumkom=1;
 
+data &inndata;
+  set &inndata;
+  nr=_n_;
+run;
+
 data test;
-set &inndata(keep=pid &kommune_nr episode_lnr);
+set &inndata(keep=pid &kommune_nr nr);
 komnr = &kommune_nr; /* i mottatt data er komnr = komnrhjem2 */
 run;
 
@@ -93,7 +98,7 @@ proc sql;
   create table &utdata as
   select a.*, b.komnr
   from &inndata a, test_out b
-  where a.episode_lnr=b.episode_lnr;
+  where a.nr=b.nr;
 quit;
 
 %mend;
