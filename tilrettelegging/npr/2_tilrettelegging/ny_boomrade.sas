@@ -104,6 +104,7 @@ data &utdata;
 
 %if &barn = 1 %then %do;
   if boshhn in (9,10,11) then bohf = 3; /* Helgeland (Rana, Mosjøen og Sandnessjøen) legges under Nordland hvis vi ser på barn*/
+  if bohf in (17,18) then bohf = 16; /* Lovisenberg og Diakonhjemmet skal til OUS når barn = 1 */
 %end;
 
 
