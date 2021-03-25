@@ -962,10 +962,25 @@ value $drg
 '801S'="DRG 801S Poliklinisk diagnostisk intervensjon ved tilstander i nervesystemet"
 
 /* Formater fra DRG 2018  lagt til 03/09/2019 */
-'224P' =	"Brudd op på humerus/albue/underarm ekskl skulderprotese, dagkirurgisk behandling"
-'224Q' =	"Op på humerus/albue/underarm ekskl skulderprotese og op bruddbehandling, dagkirurgisk behandling"
-'224A' =	"Brudd op på humerus/albue/underarm ekskl skulderprotese u/bk"
-'224B' =	"Op på humerus/albue/underarm ekskl skulderprotese og op bruddbehandling u/bk"
+'224P' =	"DRG 224P Brudd op på humerus/albue/underarm ekskl skulderprotese, dagkirurgisk behandling"
+'224Q' =	"DRG 224Q Op på humerus/albue/underarm ekskl skulderprotese og op bruddbehandling, dagkirurgisk behandling"
+'224A' =	"DRG 224A Brudd op på humerus/albue/underarm ekskl skulderprotese u/bk"
+'224B' =	"DRG 224B Op på humerus/albue/underarm ekskl skulderprotese og op bruddbehandling u/bk"
+
+/* Formater lagt til 05/03/2020 (ISF Regelverk 2017 og 2018)*/
+'307O'='DRG 307O Implantasjon av sfinkterprotese, dagkirurgisk behandling'
+'36P'='DRG 36P Transplantasjon av cornea, dagkirurgisk behandling'
+'36R'='DRG 36R Laserprosedyrer på iris og kammervinkel, dagkirurgisk behandling'
+'36S'='DRG 36S Prosedyrer for intraokulært trykk, dagkirurgisk behandling'
+'42P'='DRG 42P Andre prosedyrer på øyets fremre segment, dagkirurgisk behandling'
+'49C'='DRG 49C Utskifting eller oppgradering av taleprosessor for cochleaimplantat'
+'530O'='DRG 530O Plastikkirurgi etter stort vekttap (inkl. postbariatrisk kirurgi)'
+'801X'='DRG 801X Poliklinisk kontakt for nevrofysiologisk undersøkelse og testing'
+'823T'='DRG 823T Desensibilisering mot allergener'
+'908G'='DRG 908G Poliklinisk konsultasjon vedr myositt'
+'996P'='DRG 996P Behandlingstiltak rettet mot en gruppe pasienter i utvalgte HDG-er'
+
+'209H' = 'DRG 209H Innsetting av protese i kne'
 
 ;
 run;
