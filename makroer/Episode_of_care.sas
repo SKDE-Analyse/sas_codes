@@ -6,7 +6,8 @@ behold_datotid=0,
 debug = 0, 
 nulle_liggedogn = 0, 
 inndeling = 0,
-separer_ut_poli = 0
+separer_ut_poli = 0,
+minaar=0
 );
 
 /*!
@@ -49,7 +50,7 @@ Makroen lager 12 (eventuelt 14) nye variabler:
 6.  `EoC_utdato`: utdato på siste opphold i EoC
 7.  [eventuelt] `EoC_inndatotid`: inntid (dato og tidspunkt) på første opphold i EoC (hvis behold_datotid ulik 0))
 8.  [eventuelt] `EoC_utdatotid`: uttid (dato og tidspunkt) på siste opphold i EoC (hvis behold_datotid ulik 0))
-9.  `EoC_aar`: år ved utskriving
+9.  `EoC_aar`: år ved utskriving - alternativt minaar=1 (år ved første opphold)
 10. `EoC_liggetid`: tidsdifferanse mellom inndatotid på det første oppholdet og utdatotid på det siste oppholdet i EoC
 11. `EoC_aktivitetskategori3`: 1 hvis ett av oppholdene er døgn, eller 2 hvis ett av oppholdene er dag (og ingen døgn), eller 3 hvis oppholdene er kun poli
 12. `EoC_hastegrad`: 1 hvis ett av oppholdene er akutt, 4 ellers
@@ -74,6 +75,9 @@ Makroen lager 12 (eventuelt 14) nye variabler:
 - april 2018, Arnfinn
   - nytt argument: inndeling 
   - nytt argument: separer_ut_poli
+- mars 2020, Frank
+	- nytt: dersom man ønsker å bruke første opphold for å definere EoC_Aar
+	--> minaar=1
 
 */
 
@@ -280,12 +284,23 @@ set &dsn;
 run;
 %end;
 
+%if &minaar ne 1 %then %do;
 PROC SQL;
 	CREATE TABLE &dsn AS 
 	SELECT *,MAX(EoC_Intern_nr) AS EoC_Antall_i_EoC, min(inndato) as EoC_inndato, max(utdato) as EoC_utdato, min(inndatotid) as EoC_inndatotid, max(utdatotid) as EoC_utdatotid, max(aar) as EoC_aar
 	FROM &dsn
 	GROUP BY PID,EoC_nr_pid;
 QUIT;
+%end;
+
+%if &minaar = 1 %then %do;
+PROC SQL;
+	CREATE TABLE &dsn AS 
+	SELECT *,MAX(EoC_Intern_nr) AS EoC_Antall_i_EoC, min(inndato) as EoC_inndato, max(utdato) as EoC_utdato, min(inndatotid) as EoC_inndatotid, max(utdatotid) as EoC_utdatotid, min(aar) as EoC_aar
+	FROM &dsn
+	GROUP BY PID,EoC_nr_pid;
+QUIT;
+%end;
 
 %if &debug ne 0 %then %do;
 data &dsn.debug_9;
