@@ -3,7 +3,7 @@
 /* Output error-fil gir alle linjene fra mottatt data som har ugyldig orgnr - fikses i tilrettelegging */
 /* NB: ugyldig orgnr kan være et nytt orgnr ikke registrert i listen vår */
 
-%macro kontroll_behandlingssted(aar= ,avd=, beh=behandlingsstedkode); /*behandlingsstedkode kan erstattes med annen variabel som inneholder orgnr hvis en ønsker å kontrollere for gyldige orgnr*/
+%macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode); /*behandlingsstedkode kan erstattes med annen variabel som inneholder orgnr hvis en ønsker å kontrollere for gyldige orgnr*/
 
 data orgnr;
   infile "&csvbane\behandler.csv"
@@ -48,7 +48,7 @@ run;
 proc sql;
 create table mottatt_beh as
 select distinct &beh as orgnr
-from hnmot.m20_&avd._&aar;
+from &inndata;
 quit;
 
 
@@ -67,7 +67,7 @@ run;
 proc sql;
 	create table tmp_data as
 	select a.&beh, a.institusjonid, a.hf, gyldig, ugyldig 
-  from hnmot.m20_&avd._&aar a left join flagg_org b
+  from &inndata a left join flagg_org b
 	on a.&beh=b.orgnr;
 quit;
 

@@ -27,7 +27,7 @@ length ErMann 3;
 length fodselsar 4;
 length ICD10Kap: 3;
 length innmateHast kjonn kontaktType 4;
-length inndato utdato doddato epikrisedato individuellplandato mottaksdato sluttdato tildeltdato utskrklardato /*utskrklardato2*/ ventetidsluttdato ventetidsluttkode vurddato KomNr 4;
+length inndato: utdato: doddato epikrisedato individuellplandato mottaksdato sluttdato tildeltdato utskrklardato /*utskrklardato2*/ ventetidsluttdato ventetidsluttkode vurddato KomNr 4;
 length institusjonID  6;
 length /*NPRId_reg*/ stedAktivitet 4;
 length tell_: 4;

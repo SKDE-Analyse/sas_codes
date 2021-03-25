@@ -405,4 +405,5 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 301;301 Oslo;;;30;Oslo;;;4;Helse Sør-Øst RHF;
 ;;;;31;Indre Oslo;;;4;Helse Sør-Øst RHF;
 9999;9999 Ukjent;;;99;Ukjent;;;99;Ukjent/ugyldig kommunenr;
-;;;;8888;Norge;;;;;
+;;;;8888;Norge;;;8888;Norge;
+;;;;7777;Helse Nord;;;7777;Helse Nord RHF;

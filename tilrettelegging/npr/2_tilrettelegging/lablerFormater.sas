@@ -288,10 +288,10 @@ label hf='Behandlende helseforetak (NPR)';
 
 %if &avtspes ne 0 %then %do;
 label tell_Normaltariff='Antall normaltariff-koder innrapportert (NPR)';
-label fag='Fagfelt for avtalespesialisen 2013-2014 (NPR)';
+label fag='Fagfelt for avtalespesialisen (NPR)';
 label Fag_navn='Fagfelt for avtalespesialisen (NPR)';
 label fagLogg='Fagfelt for avtalespesialisen - mangler data (NPR)';
-label fag_SKDE='Fagfelt for avtalespesialisen - harmonisert 2014-2017 (SKDE)'; format FAG_SKDE FAG_SKDE.;
+label fag_SKDE='Fagfelt for avtalespesialisen (SKDE)'; format FAG_SKDE FAG_SKDE.;
 label SpesialistKomHN='Kommunenummer for avtalespesialistens praksis i Helse Nord (SKDE)';
 label AvtSpesKomHN='Kontakt med avtalespesialist i HN (SKDE)';
 label AvtSpes='Kontakt hos avtalespesialist (SKDE)'; format avtSpes avtSpes.;
@@ -309,12 +309,19 @@ label Tdiag3='Diagnose som ikke kan sorteres i H/Bi kode 3 (ICD-10/NPR)'; label 
 label Tdiag5='Diagnose som ikke kan sorteres i H/Bi kode 5 (ICD-10/NPR)';
 label ulikt_kjonn='Ulikt kjønn i innrapportert data og i f.nr./D-nr. (SKDE)';
 label utDato_org='Utskrivelsesdato innrapportert (NPR-melding)'; format utDato Eurdfdd10.;
+label innDato_org='Innskrivelsesdato innrapportert (NPR-melding)'; format innDato Eurdfdd10.;
 label Komplett = 'Komplettheten i innrapportert data (NPR)'; format komplett komplett.;
 label hjemmelstr ='Hjemmelstørrelse i prosent (NPR)';
 label kontakt ='Kontakttype, f.eks. enkel, spesialist eller lysbehandling (NPR)';
 label omsorgsniva='Omsorgsnivå (SKDE)'; format omsorgsniva omsorgsniva.; 
 label omsorgsniva_org='Omsorgsnivå (NPR-melding)'; format omsorgsniva_org omsorgsniva.; 
 label aar='År fra inndato (SKDE)';
+label inndato='Inndato (SKDE)';
+label utdato='Utdato satt til å lik inndato (SKDE)';
+label aar_org='År (NPR)';
+label bydel2='Bydel (SKDE)';
+label bydel2_org='Bydel (NPR)';
+
 drop avtalerhf_old;
 
 %end;

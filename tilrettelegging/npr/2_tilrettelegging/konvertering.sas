@@ -165,7 +165,7 @@ drop tell_takst;*/
 - Dup_tilstand er fem variabler som samler usorterte diagnoser for 25545 kontakter i 2014. 
 Disse er identifisert med "(dupli" som Hdiag. Navner om til Tdiag.
 */
-
+/*
 if aar in  (2014,2018) then do;
 	array Tdiag{5} $
  	   Tdiag1-Tdiag5;
@@ -177,7 +177,7 @@ if aar in  (2014,2018) then do;
  	   		end;
 	drop Dup_tilstand_1 - Dup_tilstand_5 i;
 end;
-
+*/
 /*
 - Episodefag manglet ledende null for avtalespesialister enkelte år.
 - episodefag ikke på datasette (2020T1)
