@@ -223,6 +223,7 @@ proc format;
       3 = 'Pasienten har rett til nødvendig helsehjelp'  
       4 = 'Pasienten har behov for helsehjelp'  
       5 = 'Pasienten har ikke behov for helsehjelp'  
+      6 = 'Henvisningen er ikke aktuell for rettighetsvurdering' /* ny 2020*/
       9 = 'Mangler registrering' ;
    value VENTETIDSLUTTKODE
       1 = 'Helsehjelp er påbegynt'  
@@ -1779,16 +1780,31 @@ proc format;
      '09' = 'Aust-Agder'  
      '19' = 'Troms'  
      '99' = 'Utlendinger/annet' ;
+
+   value $PASFYLKE2020 
+      '03' = 'Oslo'
+      '11' = 'Rogaland'
+      '15' = 'Møre og Romsdal'
+      '18' = 'Nordland'
+      '30' = 'Viken'
+      '34' = 'Innlandet'
+      '38' = 'Vestfold og Telemark'
+      '42' = 'Agder'
+      '46' = 'Vestland'
+      '50' = 'Trøndelag'
+      '54' = 'Troms og Finnmark'
+      '99' = 'Uoppgitt';
+
    value PAS_REG2F
-      1 = 'Helse Øst'  
-      2 = 'Helse Sør'  
-      3 = 'Helse Vest'  
-      4 = 'Helse Midt-Norge'  
-      5 = 'Helse Nord'  
-      6 = 'Annet'  
+      1 = 'Helse Øst'
+      2 = 'Helse Sør'
+      3 = 'Helse Vest'
+      4 = 'Helse Midt-Norge'
+      5 = 'Helse Nord'
+      6 = 'Annet'
       7 = 'Helse Sør-Øst' ;
    value $KOMNRHJEM2F
-     '0000' = 'Ugyldig'  
+     '0000' = 'Ugyldig'
      '9000' = 'Utenlandske statsborgere uten konvensjonsavtale'  
      '9900' = 'Utenlandske statsborgere med konvensjonsavtale'  
      '2020' = 'Porsanger'  

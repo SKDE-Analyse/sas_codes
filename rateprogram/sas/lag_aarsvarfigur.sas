@@ -47,6 +47,8 @@
 
 
 /**/
+
+%if %sysevalf(%superq(sprak)=,boolean) %then %let sprak = no;
 proc sql;
 create table aldersspenn as
 select distinct max(alder) as maxalder, min(alder) as minalder
@@ -126,11 +128,17 @@ run;
 
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
 
+
 %if &NorgeSoyle=0 %then %do;
 %if &silent=0 %then %do;
 /*ods graphics on;*/
 ods listing style=stil_figur gpath="%sysfunc(getoption(work))";
+%if &sprak = no %then %do;
 title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, &min_aar - &max_aar";
+%end;
+%else %if &sprak = en %then %do;
+title "&standard rates pr &rate_pr inhabitants, &ratevariabel, &bo, &Min_alder - &Max_alder years, &min_aar - &max_aar";
+%end;
 proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
 where &Mine_Boomraader;
 hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6); 
@@ -141,9 +149,15 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 			%if &Antall_aar>4 and &aarsobs=1 %then %do; scatter x=rate&år4 y=&Bo / markerattrs=(symbol=Diamondfilled color=black);%end;
 			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black);%end;
 			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
-			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
-     Yaxistable &forbruksmal Innbyggere /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;     
+		 %if &sprak = no %then %do;
+		 Yaxistable &forbruksmal Innbyggere /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
      yaxis display=(noticks noline) label='Bosatte i opptaksområde' labelpos=top labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+		 %end;
+		  %if &sprak = en %then %do;
+		 Yaxistable &forbruksmal Inhabitants /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+     yaxis display=(noticks noline) label='Catchment areas' labelpos=top labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+		 %end;
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset (
 		%if &Antall_aar>1 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &år1" %end;  

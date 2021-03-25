@@ -26,6 +26,7 @@ value NPRID_REG
       1 = 'Pasienten selv'  
       2 = 'Fastlege/primærlege'  /* Utgått før NPR-melding 53.1.1 - 2017 */
       4 = 'Spesialisthelsetjeneste'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      3 = 'NULL' /*ny 2020*/
       5 = 'Barnehage, skolesektor, PPT'  /* Utgått før NPR-melding 53.1.1 - 2017 */
       6 = 'Sosialtjeneste, barnevern'  /* Utgått før NPR-melding 53.1.1 - 2017 */
       7 = 'Politi, fengsel, rettsvesen'  /* Utgått før NPR-melding 53.1.1 - 2017 */
@@ -161,7 +162,11 @@ value NPRID_REG
       1 = 'Ordinær pasient. Opphold finansiert gjennom ISF, HELFO, og ordinær finansiering innen psykisk helse og TSB'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       11 = 'Konvensjonspasient behandlet ved ø-hjelp'  
       12 = 'Pasient  fra land uten konvensjonsavtale (selvbetalende)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+<<<<<<< HEAD
       13 = 'Folketrygdfinansiert behandling via Helfo for pasienter bosatt i utlandet, men med medlemskap i folketrygden' /* Ny 2021*/
+=======
+      13	= 'Folketrygdfinansiert behandling via Helfo for pasienter bosatt i utlandet, men med medlemskap i folketrygden' /* ny 2020*/
+>>>>>>> origin/master
       20 = 'Sykepengeprosjekt, Raskere tilbake'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       22 = 'Forskningsprogram'  
 	  24 = 'Finansiert (betalt) av kommunen' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
@@ -175,7 +180,11 @@ value NPRID_REG
       45 = 'Anbudspasient på avtalen for Helse Nord RHF'  
       47 = 'Anbudspasient på avtalen for Helse Sør-Øst RHF'  
       50 = 'Opphold hos avtalespesialist finansiert via ISF'  
+<<<<<<< HEAD
       51 = 'Regional kurdøgnfinansiering' /* Ny 2021 */
+=======
+      51 = 'Regional kurdøgnfinansiering' /*ny 2020*/
+>>>>>>> origin/master
       60 = 'Forsikringsfinansiert opphold'  
       70 = 'HELFO formidlet opphold ved fristbrudd'  
       80 = 'Opphold på avtale med HF/RHF. Ikke anbudsavtale' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
@@ -379,6 +388,7 @@ value NPRID_REG
       8 = 'Tele-/videokonferanse'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       11 = 'Telemedisin'  
       12 = 'Telefonsamtale med pasient' 
+      13 = 'Telefonkonsultasjon med egenadel' /*ny 2020*/
       21 = 'Teknisk Episode';
 
    value INTERN_KONS
@@ -461,6 +471,7 @@ value NPRID_REG
 	  19 = 'Ortopediingeniør' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
 	  20 = 'Farmasøyt' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
 	  21 = 'Fotterapeut' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+<<<<<<< HEAD
      22 = '	Genetiker' /* Ny kode 2021 */
      23 = 'Logoped' /* Ny kode 2021 */
      24 = 'Perfusjonist' /* Ny kode 2021 */
@@ -470,6 +481,17 @@ value NPRID_REG
      28 = 'Helsesykepleier' /* Ny kode 2021 */
      29 = 'Stråleterapeut' /* Ny kode 2021 */
      ;
+=======
+     22 = 'Genetiker'   /* ny 2020 */
+     23 = 'Logoped'  /* ny 2020 */
+     24 = 'Perfusjonist'  /* ny 2020 */
+     25 = 'Optiker'  /* ny 2020 */
+     26 = 'Audiofysiker'  /* ny 2020 */
+     27 = 'Kiropraktor'  /* ny 2020 */
+     28 = 'Helsesykepleier'  /* ny 2020 */
+     29 = 'Stråleterapeut'  /* ny 2020 */
+;
+>>>>>>> origin/master
    
    value GYLDIG /* Ikke oppgitt i utlevering 2018 */
       0 = ' ' /* Gjelder kun NCRP i 2017. Fikk vite betydningen fra Marte Kjelvik i NPR. */ 
@@ -535,4 +557,35 @@ value ICD_KAP /* Sjekket mot og oppdatert basert på ICD-10 versjon 2017 på ehels
       20 = 'Kapittel XX Ytre årsaker til sykdommer, skader og dødsfall (V0n-Y98)'  
       21 = 'Kapittel XXI Faktorer som har betydning for helsetilstand og kontakt med helsetjenesten (Z00-Z99)' ;
 
+value individuellplan /* ny 2020 */
+      1	 = 'Pasienten oppfyller ikke kriteriene'
+      2	 = 'Pasienten har avslått tilbud om IP'
+      4	 = 'IP er under arbeid i spesialisthelsethenesten'
+      5	 = 'Pasienten har allerede en IP'
+      9	 = 'Ukjent med status for individuell plan'
+      11	 = 'Pasienten oppfyller kriteriene'
+      21	 = 'Pasienten ønsker individuell plan, samtykke foreligger'
+      31	 = 'Melding om behov for IP sendt kommunen'
+      101 = 'Ja, virksom plan'
+      102 = 'Nei, individuell plan er ikke utarbeidet/planprosess ikke igangsatt'
+      103 = 'Nei, ønsker ikke individuell plan'
+      104 = 'Nei, oppfyller ikke retten til individuell plan'
+      105 = 'Melding om behov for individuell plan er sendt kommunen'
+      106 = 'Ukjent med status';
+
+value epikriseSamtykke /* ny 2020 */
+      1 = 'Ja, samtykke er innhentet'
+      2 = 'Pasientens samtykke er ikke påkrevet i dette tilfellet'
+      3 = 'Svar på forespørsel e.l. som pasienten har gitt samtykke til'
+      4 = 'Nei, pasienten har ikke gitt sitt samtykke';
+
+value spesialist /* ny 2020 */
+      1 = 'Ja'
+      2 = 'Nei'
+      9 = 'Ukjent';
+
+value rolle /* ny 2020*/
+      1 = 'Ansvarlig'
+      2 = 'Ko-terapeut';
+      
 run;
