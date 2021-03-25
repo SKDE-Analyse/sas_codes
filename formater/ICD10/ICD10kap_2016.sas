@@ -2,6 +2,7 @@ proc format;
 value $ICD10kap2016F
 1="Kapittel I: Visse infeksjonssykdommer og parasittsykdommer"
 2="Kapittel II: Svulster"
+3="Kapittel III Sykdommer i blod og bloddannende organer og visse tilstander som angår immunsystemet"
 4="Kapittel IV: Endokrine sykdommer, ernæringssykdommer og metabolske forstyrrelser"
 5="Kapittel V: Psykiske lidelser og atferdsforstyrrelser"
 6="Kapittel VI: Sykdommer i nervesystemet"

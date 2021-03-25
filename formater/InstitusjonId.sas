@@ -204,7 +204,13 @@ value INSTITUSJONID_2013_2017F
 /*995111209	= 'LHL-klinikkene Bergen'*/
 996891216	= 'Sørlandet sykehus HF rehabilitering Arendal'
 997512189	= 'Helse Bergen HF seksjon for behandlingshjelpemidler medisinsk-teknisk avd Haukeland'
-	  
+
+/*TJ: Supplert med nye institusjonID / behandlingssteder 2019 og 2020*/
+883971752   = 'Sunnaas sykehus HF' /*Sunnaas hovedenhet*/
+883974832   = 'St. Olavs Hospital HF' /*St. Olavs hovedenhet*/
+894166762   = 'Vestre Viken HF'
+817178782   = 'Medi 3 Ringvoll Klinikken AS avd kirurgi Hobøl'
+ 
 /* Avtalespesialister */
 		5555 = 'Andre'
       111955 = 'Abildsnes, Audun'  

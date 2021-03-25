@@ -7,11 +7,15 @@
    OUT: &forbruksmal._JUST._BOHF  (sex/age adjusted)
         &forbruksmal._UJUST._BOHF (unadjusted)
         &forbruksmal._IJUST._BOHF (indirect adjusted)
+
+update: 03/02/2020 JS - change the input argument niva for macro dele from hardcoding 'bohf' to using the dynamic bo nivå '&bo' that gets passed in from the main program
+
+update: 28/09/2020 JS - use left join rather than inner join to create ijust, ujust, and just files so that all område with snitt present in all the tables
 */
 
 %macro dele_tabell;
 
-%macro dele(just=, niva=bohf);
+%macro dele(just=, niva=&bo);
 /*LAGER DATASETT MED JUSTERTE RATER*/
 %if &just=just %then %do;
 %let rv_var=RV_just_rate;
@@ -85,10 +89,17 @@ proc sql;
   create table  &forbruksmal._&just._&niva as
   select d.&niva, Rate&År1, Rate&År2, Ratesnitt, Ratesnitt2, d.Innbyggere, d.&forbruksmal, SnittRate,
          min(Rate&År1,Rate&År2) as min, max(Rate&År1,Rate&År2) as max
-  from &forbruksmal._tmp&År1 a, &forbruksmal._tmp&År2 b,  &forbruksmal._tmpSN d
-  where a.&niva=b.&niva=d.&niva
+  from &forbruksmal._tmpSN d 
+  
+  left join &forbruksmal._tmp&År1 a
+  on d.&niva=a.&niva
+
+  left join &forbruksmal._tmp&År2 b
+  on d.&niva=b.&niva
+
   order by Ratesnitt2 desc;
 quit;
+
 %end;
 
 %if &antall_aar=4 %then %do;
@@ -119,14 +130,25 @@ else if aar=9999 then output &forbruksmal._tmpSN;
 
 run;
 
+
 proc sql;
   create table  &forbruksmal._&just._&niva as
   select d.&niva, Rate&År1, Rate&År2, Rate&År3, Ratesnitt, Ratesnitt2, d.Innbyggere, d.&forbruksmal, SnittRate,
          min(Rate&År1,Rate&År2,Rate&År3) as min, max(Rate&År1,Rate&År2,Rate&År3) as max
-  from &forbruksmal._tmp&År1 a, &forbruksmal._tmp&År2 b, &forbruksmal._tmp&År3 c, &forbruksmal._tmpSN d
-  where a.&niva=b.&niva=c.&niva=d.&niva
+  from &forbruksmal._tmpSN d 
+  
+  left join &forbruksmal._tmp&År1 a
+  on d.&niva=a.&niva
+
+  left join &forbruksmal._tmp&År2 b
+  on d.&niva=b.&niva
+
+  left join &forbruksmal._tmp&År3 c
+  on d.&niva=c.&niva
+
   order by Ratesnitt2 desc;
 quit;
+
 %end;
 
 %if &antall_aar=5 %then %do;
@@ -165,10 +187,23 @@ proc sql;
   create table  &forbruksmal._&just._&niva as
   select d.&niva, Rate&År1, Rate&År2, Rate&År3, Rate&År4, Ratesnitt, Ratesnitt2, d.Innbyggere, d.&forbruksmal, SnittRate,
          min(Rate&År1,Rate&År2,Rate&År3, Rate&År4) as min, max(Rate&År1,Rate&År2,Rate&År3, Rate&År4) as max
-  from &forbruksmal._tmp&År1 a, &forbruksmal._tmp&År2 b, &forbruksmal._tmp&År3 c, &forbruksmal._tmp&År4 e, &forbruksmal._tmpSN d
-  where a.&niva=b.&niva=c.&niva=d.&niva=e.&niva
+  from &forbruksmal._tmpSN d 
+  
+  left join &forbruksmal._tmp&År1 a
+  on d.&niva=a.&niva
+
+  left join &forbruksmal._tmp&År2 b
+  on d.&niva=b.&niva
+
+  left join &forbruksmal._tmp&År3 c
+  on d.&niva=c.&niva
+
+  left join &forbruksmal._tmp&År4 e
+  on d.&niva=e.&niva
+
   order by Ratesnitt2 desc;
 quit;
+
 %end;
 
 %if &antall_aar=6 %then %do;
@@ -204,16 +239,34 @@ else if aar=&År4 then output &forbruksmal._tmp&År4.;
 else if aar=&År5 then output &forbruksmal._tmp&År5.;
 else if aar=9999 then output &forbruksmal._tmpSN;
 
+format Innbyggere NLnum12.0 &forbruksmal NLnum12.0;
 run;
+
 
 proc sql;
   create table  &forbruksmal._&just._&niva as
   select d.&niva, Rate&År1, Rate&År2, Rate&År3, Rate&År4, Rate&År5, Ratesnitt, Ratesnitt2, d.Innbyggere, d.&forbruksmal, SnittRate,
          min(Rate&År1,Rate&År2,Rate&År3, Rate&År4, Rate&År5) as min, max(Rate&År1,Rate&År2,Rate&År3, Rate&År4, Rate&År5) as max
-  from &forbruksmal._tmp&År1 a, &forbruksmal._tmp&År2 b, &forbruksmal._tmp&År3 c, &forbruksmal._tmp&År4 e, &forbruksmal._tmp&År5 f, &forbruksmal._tmpSN d
-  where a.&niva=b.&niva=c.&niva=d.&niva=e.&niva=f.&niva
+  from &forbruksmal._tmpSN d 
+  
+  left join &forbruksmal._tmp&År1 a
+  on d.&niva=a.&niva
+
+  left join &forbruksmal._tmp&År2 b
+  on d.&niva=b.&niva
+
+  left join &forbruksmal._tmp&År3 c
+  on d.&niva=c.&niva
+
+  left join &forbruksmal._tmp&År4 e
+  on d.&niva=e.&niva
+
+  left join &forbruksmal._tmp&År5 f
+  on d.&niva=f.&niva
+
   order by Ratesnitt2 desc;
 quit;
+
 %end;
 /*if anything else, then take the first 3 years */
 /*
