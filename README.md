@@ -1,26 +1,23 @@
-[![Build Status](https://travis-ci.org/SKDE-Analyse/sas_codes.svg?branch=master)](https://travis-ci.org/SKDE-Analyse/sas_codes)
-[![Dokumentasjon](https://img.shields.io/badge/Dokumentasjon--grey.svg)](https://skde-analyse.github.io/sas_codes)
+[![Bygg og distribuer dokumentasjon](https://github.com/SKDE-Analyse/sas_codes/actions/workflows/create_doc.yml/badge.svg)](https://github.com/SKDE-Analyse/sas_codes/actions/workflows/create_doc.yml)
+[![Les dokumentasjon](https://img.shields.io/badge/Dokumentasjon--grey.svg)](https://skde-analyse.github.io/sas_codes)
 
-# En kombinasjon av SAS-kode-repositoriene ved SKDE
+# Felles SAS-koder for SKDE
 
-- [Makroer](makroer)
-- [Rateprogrammet](rateprogram)
-- [Tilrettelegging](tilrettelegging)
-- Se [denne siden](https://skde-analyse.github.io/sas_codes/monorepo) for en beskrivelse av hvordan alt ble samlet.
+Dette *repository* inneholder felles SAS-koder brukt ved SKDE. Det er de samme kodene som normalt ligger på `<sas-server-...>\Felleskoder\master` og andre mapper under `Felleskoder`.
 
-## Testing av koden
+## Hva finnes her (lenke for mer informasjon)?
 
-Ved å kjøre følgende kode vil alle testene i "branchen" `master` kjøres:
+- [Makroer](https://skde-analyse.github.io/sas_codes/makroer_doc)
+- [Formater](https://skde-analyse.github.io/sas_codes/formater_doc)
+- [Rateprogram](https://skde-analyse.github.io/sas_codes/rateprogram_doc)
+- [Kode for tilrettelegging av data fra NPR](https://skde-analyse.github.io/sas_codes/tilrettelegging_doc)
+- [Eksempler](https://skde-analyse.github.io/sas_codes/eksempler_doc)
+- [Tester](https://skde-analyse.github.io/sas_codes/testing)
 
-```
-%let branch = master;
-%let filbane=<...>\felleskoder\&branch;
-%include "&filbane\tests\tests.sas";
-%test(branch = &branch);
-```
+## Hvordan bruke disse kodene?
 
-Endringer av kodene kan føre til at enkelte tester feiler. Det er da mulig å oppdatere referansene ved å kjøre `test` med `lag_ny_referanse = 1` slik:
+De fleste av kodene bruker makrovariablen `&filbane`, som sier i hvilken mappe disse kodene ligger i. Denne må derfor defineres før kodene kan brukes i et prosjekt. Ved SKDE har vi kodene liggende på en SAS-server (for navn på server, kontakt noen ved SKDE):
 
-```
-%test(branch = &branch, lag_ny_referanse = 1);
+```sas
+%let filbane = \\<server>\<mappe>\Felleskoder\master;
 ```
