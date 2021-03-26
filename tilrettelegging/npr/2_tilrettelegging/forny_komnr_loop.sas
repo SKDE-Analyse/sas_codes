@@ -4,7 +4,7 @@
 
 /* hente inn csv-fil */
 data forny_komnr;
-  infile "&csvbane\forny_komnr.csv"
+  infile "&filbane\data\forny_komnr.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

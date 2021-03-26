@@ -4,7 +4,7 @@
 
 
 data bo;
-  infile "&csvbane\boomr_2020.csv"
+  infile "&filbane\data\boomr_2021.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

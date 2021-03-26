@@ -98,30 +98,30 @@ komnr;komnr_navn;bydel;bydel_navn;bohf;bohf_navn;boshhn;boshhn_navn;borhf;borhf_
 5052;5052 Leka;;;6;Nord-Trøndelag;;;2;Helse Midt-Norge RHF;
 5053;5053 Inderøy;;;6;Nord-Trøndelag;;;2;Helse Midt-Norge RHF;
 5060;5060 Nærøysund;;;6;Nord-Trøndelag;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;500101;01 Midtbyen;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;500102;02 Østbyen;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;500103;03 Lerkendal;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;500104;04 Heimdal;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5001;5001 Trondheim;500199;99 Uoppgitt bydel Trondheim;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5014;5014 Frøya;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5021;5021 Oppdal;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5022;5022 Rennebu;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5025;5025 Røros;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5026;5026 Holtålen;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5027;5027 Midtre Gauldal;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5028;5028 Melhus;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5029;5029 Skaun;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5031;5031 Malvik;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5032;5032 Selbu;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5033;5033 Tydal;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5054;5054 Indre Fosen;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5055;5055 Heim;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: 1571 Halsa, 5011 Hemne og del av 5012 Snillfjord ble slått sammen til 5055 Heim i 2020. Halsa med ca 1600 innbyggere tilhørte tidligere opptaksområdet Møre og Romsdal (bohf=8). 5012 Snillfjord ble delt mellom 5055 Heim, 5056 Hitra og 5059 Orkland. SKDE velger 5059 Orkland. 1613/5012 Snillfjord med ca 1000 innbyggere skifter ikke opptaksområde.
-5056;5056 Hitra;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: 5012 Snillfjord ble delt mellom 5055 Heim, 5056 Hitra og 5059 Orkland. SKDE velger 5059 Orkland. 1613/5012 Snillfjord med ca 1000 innbyggere skifter ikke opptaksområde.
-5057;5057 Ørland;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
-5058;5058 Åfjord;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: Nye 5058 Åfjord består av og 1630/5018 Åfjord og 1632/5019 Roan. Roan med ca 950 innbyggere var tidligere i opptaksområdet Helse Nord-Trøndelag (bohf=6).
-5059;5059 Orkland;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;1.jan.2021: 5012 Snillfjord ble delt mellom 5055 Heim, 5056 Hitra og 5059 Orkland. SKDE velger 5059 Orkland. 1613/5012 Snillfjord med ca 1000 innbyggere skifter ikke opptaksområde.
-5061;5061 Rindal;;;7;St. Olavs;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;500101;01 Midtbyen;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;500102;02 Østbyen;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;500103;03 Lerkendal;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;500104;04 Heimdal;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5001;5001 Trondheim;500199;99 Uoppgitt bydel Trondheim;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5014;5014 Frøya;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5021;5021 Oppdal;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5022;5022 Rennebu;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5025;5025 Røros;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5026;5026 Holtålen;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5027;5027 Midtre Gauldal;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5028;5028 Melhus;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5029;5029 Skaun;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5031;5031 Malvik;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5032;5032 Selbu;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5033;5033 Tydal;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5054;5054 Indre Fosen;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5055;5055 Heim;;;7;St. Olav;;;2;Helse Midt-Norge RHF;1.jan.2021: 1571 Halsa, 5011 Hemne og del av 5012 Snillfjord ble slått sammen til 5055 Heim i 2020. Halsa med ca 1600 innbyggere tilhørte tidligere opptaksområdet Møre og Romsdal (bohf=8). 5012 Snillfjord ble delt mellom 5055 Heim, 5056 Hitra og 5059 Orkland. SKDE velger 5059 Orkland. 1613/5012 Snillfjord med ca 1000 innbyggere skifter ikke opptaksområde.
+5056;5056 Hitra;;;7;St. Olav;;;2;Helse Midt-Norge RHF;1.jan.2021: 5012 Snillfjord ble delt mellom 5055 Heim, 5056 Hitra og 5059 Orkland. SKDE velger 5059 Orkland. 1613/5012 Snillfjord med ca 1000 innbyggere skifter ikke opptaksområde.
+5057;5057 Ørland;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
+5058;5058 Åfjord;;;7;St. Olav;;;2;Helse Midt-Norge RHF;1.jan.2021: Nye 5058 Åfjord består av og 1630/5018 Åfjord og 1632/5019 Roan. Roan med ca 950 innbyggere var tidligere i opptaksområdet Helse Nord-Trøndelag (bohf=6).
+5059;5059 Orkland;;;7;St. Olav;;;2;Helse Midt-Norge RHF;1.jan.2021: 5012 Snillfjord ble delt mellom 5055 Heim, 5056 Hitra og 5059 Orkland. SKDE velger 5059 Orkland. 1613/5012 Snillfjord med ca 1000 innbyggere skifter ikke opptaksområde.
+5061;5061 Rindal;;;7;St. Olav;;;2;Helse Midt-Norge RHF;
 1505;1505 Kristiansund;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
 1506;1506 Molde;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;
 1507;1507 Ålesund;;;8;Møre og Romsdal;;;2;Helse Midt-Norge RHF;

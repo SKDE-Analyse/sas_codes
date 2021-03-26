@@ -35,6 +35,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 994974270;Helse Nord-Trøndelag, Namsos rehabilitering;51;Sykehuset Namsos;5;Helse Nord-Trøndelag HF;Helse Nord-Trøndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974754118;Helse Nord-Trøndelag HF -  Levanger;52;Sykehuset Levanger;5;Helse Nord-Trøndelag HF;Helse Nord-Trøndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 994958682;Helse Nord-Trøndelag, Levanger rehabilitering;52;Sykehuset Levanger;5;Helse Nord-Trøndelag HF;Helse Nord-Trøndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+883974832;St. Olavs Hospital HF;60;St. Olavs Hospital HF;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Hovedenhet til St.Olavs hospital manglet i oversikten. Satt til behsh 60.
 913461223;St Olavs hospital, Fysikalsk medisin Øya;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 973254782;St Olavs hospital, Trondsletten habiliteringssenter;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974749025;St Olavs Hospital, Trondheim;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
@@ -63,6 +64,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 974745364;Helse Førde, Nordfjord;92;Nordfjord sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
 974745089;Helse Førde, Lærdal;93;Lærdal sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
 974743914;Helse Førde, Florø;94;Florø sykehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
+922643202;Helse Førde HF Sogndal poliklinikk;95;Sogndal poliklinikk;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Sogndal poliklinikk under Helse Førde HF. 
 973923811;Helse Bergen, Habilitering Voksne;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974557169;Helse Bergen, Rehabilitering;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974557746;Helse Bergen, Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
@@ -179,6 +181,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 965985166;Lovisenberg diakonale sykehus AS;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 20.jan 2021: 2019-data, institusjonid viser til hovedenhet Lovisenberg diakonale sykehus AS.
 985962170;Martina Hansens Hospital;251;Martina Hansens Hospital;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974116588;Martina Hansens hospital sykehuset;251;Martina Hansens Hospital;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
+924445114;Martina Hansens hospital avd radiologi;251;Martina Hansens Hospital;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Underenhet til Martina Hansens Hospital, legges til behsh 251 sammen med hovedenhet.
 981275721;Betanien hospital;252;Betanien Hospital Skien;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 985773238;Revmatismesykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 973254979;Revmatisme sykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
@@ -361,3 +364,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 922047847;Skibotn Helse og Rehabilitering AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
 922186154;Unicare Røros;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
 922186391;Unicare Helsefort;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+825222332;LHL klinikken Tønsberg;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021.
+919122609;LHL sykehuset Vestfold;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021.
+922436029;Retscreen AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021.
+924642653;Majorstuen spesialistsenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021.

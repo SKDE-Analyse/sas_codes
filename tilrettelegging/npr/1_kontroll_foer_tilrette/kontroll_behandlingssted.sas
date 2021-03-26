@@ -6,7 +6,7 @@
 %macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode); /*behandlingsstedkode kan erstattes med annen variabel som inneholder orgnr hvis en ønsker å kontrollere for gyldige orgnr*/
 
 data orgnr;
-  infile "&csvbane\behandler.csv"
+  infile "&filbane\data\behandler.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

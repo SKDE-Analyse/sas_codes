@@ -5,7 +5,7 @@
 
 /* hente inn CSV-fil med definerte opptaksområder pr 01.01.2020 */
 data bo;
-  infile "&csvbane\boomr_2020.csv"
+  infile "&filbane\data\boomr_2020.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -110,7 +110,7 @@ proc format cntlin=fmtfil_bydel; run;
 /* --------- */    
 
 data forny_kom;
-  infile "&csvbane\forny_komnr.csv"
+  infile "&filbane\data\forny_komnr.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

@@ -9,12 +9,12 @@
         run; 
         */
 
-/* Husk å definere csvbane hvor CSV-ligger lagret før makro kjøres */
+/* Husk å definere filbane før makro kjøres */
 
 
 
 data behandler;
-  infile "&csvbane\behandler.csv"
+  infile "&filbane\data\behandler.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
