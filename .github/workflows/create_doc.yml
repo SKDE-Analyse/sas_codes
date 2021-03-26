@@ -16,7 +16,7 @@ jobs:
           python docs/extract_sas_documentation.py "makroer" "rateprogram" "rateprogram/sas" "tilrettelegging/npr" "tilrettelegging/ssb" "tests" "include"
           rm docs/extract_sas_documentation.py # so it will not be part of deployment
       - name: Deploy 🚀
-#        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages # The branch the action should deploy to.
