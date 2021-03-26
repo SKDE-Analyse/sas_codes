@@ -29,7 +29,6 @@ def extractDoc(filename):
 ## Makro `{0}`
 
 '''.format(i[7:].split("(")[0])
-            insideMacro = True
         if extract and "*/" in i:
             # Stop extracting doc when */ is found in file
             extract = False
@@ -86,11 +85,6 @@ def main():
 
     # Make a separate web page for each sas file
     for i in listofMacros:
-        tail = '''
-
-[Ta meg tilbake.](./)
-
-'''
         heading = '''
 # Dokumentasjon for filen *{0}*
 
