@@ -1,5 +1,7 @@
 # SAS-koder for tilrettelegging av NPR-data
 
+**Denne dokumentasjonen er utdatert**
+
 ## Kjøre tilretteleggingen av NPR-data
 
 Først må makro-filene inkluderes i prosjektet:
