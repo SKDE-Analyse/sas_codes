@@ -13,8 +13,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Install and Build 🔧
         run: |
-          wget https://raw.githubusercontent.com/SKDE-Analyse/python-scripts/v1.1.0/skde/extract_sas_documentation.py
-          python extract_sas_documentation.py "makroer" "rateprogram" "rateprogram/sas" "tilrettelegging/npr" "tilrettelegging/ssb" "tests" "include"
+          python docs/extract_sas_documentation.py "makroer" "rateprogram" "rateprogram/sas" "tilrettelegging/npr" "tilrettelegging/ssb" "tests" "include"
+          rm extract_sas_documentation.py
       - name: Deploy 🚀
 #        if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@4.1.0
