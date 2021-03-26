@@ -5,7 +5,7 @@
 
 ## Hvordan bruke rateprogrammet
 
-- Ha oppdatert *automacro*, se [her](http://skde-analyse.github.io/dokumentasjon/sas.html#macroer)
+- Ha oppdatert *automacro*, se [her](https://skde-analyse.github.io/dokumentasjon/sas.html#laste-inn-v%C3%A5r-egen-autocomplete-fil)
 - Åpne et nytt program i SAS, begynn å skriv `rate` og velg `RATEPROGRAM`
 
 ![Alt text](bilder/automakro.png)
