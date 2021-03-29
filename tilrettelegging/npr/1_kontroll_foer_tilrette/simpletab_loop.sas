@@ -50,19 +50,24 @@ run;
 %let tabvar=%scan(&vars, &i);
 ods excel file="&utbane\&utxls..xlsx"  options(sheet_name="&tabvar");
 
-*loop through the variables to create tabulate;
+*loop through the NUMERIC variables to create tabulate;
 %do %until(&tabvar.=);
-%put &tabvar;
 
-ods excel  options(sheet_name="&tabvar");
-/* run the tabulate macro */
-  %simpletab(dsn=&tabdata, var=&tabvar);
+  ods excel  options(sheet_name="&tabvar");
+  /* run the tabulate macro */
+    %simpletab(dsn=&tabdata, var=&tabvar);
 
-/* increase counter by one and reassign tabvar to the next variable on the list */
-  %let i = %eval(&i+1);
-  %let tabvar=%scan(&vars, &i);
+  /* increase counter by one and reassign tabvar to the next variable on the list */
+    %let i = %eval(&i+1);
+    %let tabvar=%scan(&vars, &i);
 
 %end;
+
+*proc freq on the STRING variables;
+ods excel options(sheet_name="string");
+proc freq data=&tabdata;
+  tables fagomrade episodefag / missing;
+run;
 
 ods excel close;
 
