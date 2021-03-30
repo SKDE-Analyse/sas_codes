@@ -1,8 +1,16 @@
 
-/* Read the Excel spreadsheet and create a SAS data set. */                                                                             
-proc import datafile="&filbane\data\ICD-10_2020.xlsx"
-            out=icd10_fmt dbms=xlsx replace;                                                       
-run;  
+
+data icd10_fmt;
+  infile "&filbane\data\ICD10.csv"
+  delimiter=';'
+  missover firstobs=2 DSD;
+
+  format ICD10 $10.;
+  format Tekst $63.;
+
+  input	
+   ICD10 $ Tekst $  ;
+  run;
 
 /* Remove duplicate values */
 proc sort data=icd10_fmt nodupkey;                                                                                                        
@@ -14,7 +22,7 @@ data fmtfil_icd10(rename=(icd10=start) keep=icd10 fmtname label);
    retain fmtname '$icd10_fmt';                                                                                                 
    length tekst $63.;                                                                                                                    
    set icd10_fmt; 
-   label = cat(icd10, "  ", tekst); 
+   label = cat(icd10,"",tekst); 
 run; 
  
 /* Create the format using the control data set. */                                                                                     
