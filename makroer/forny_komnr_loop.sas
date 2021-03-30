@@ -6,7 +6,7 @@
 data forny_komnr;
   infile "&filbane\data\forny_komnr.csv"
   delimiter=';'
-  missover firstobs=2 DSD;
+  missover firstobs=3 DSD;
 
   format aar 4.;
   format gml_komnr 4.;
