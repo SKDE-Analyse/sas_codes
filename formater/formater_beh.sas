@@ -1,6 +1,6 @@
 
 /* Makro for å sette på formater for behsh, behhf, behrhf */
-/* Kjør makro i prosjekt  - %fmt_behandler; */
+
 /* Bruk formater i datasteg */
         /*  
         data utdata;
@@ -11,6 +11,8 @@
 
 /* Husk å definere filbane før makro kjøres */
 
+/* Det gjøres en kontroll etter innlasting av CSV for å sjekke at det ikke er duplikate verdier */
+/* Hvis det er duplikate verdier slettes datasettet behandler og det kommer en melding om ABORT i SAS-logg */
 
 
 data behandler;
@@ -47,6 +49,33 @@ data behandler;
 	;
 run;
      
+/* --------------------------------------------------------------- */
+/*  Kontroll at det ikke er duplikate organisasjonsnummer i filen  */  
+/* --------------------------------------------------------------- */
+/* Sortere etter organisasjonsnummer først */
+proc sort data=behandler;
+by orgnr;
+run;
+
+/* Hvis duplikat blir makro-variabel duplikat = 1 */
+/* SAS gjør i tillegg en ABORT */
+data behandler;
+set behandler;
+by orgnr;
+if first.orgnr = 0 or last.orgnr = 0 then do;
+ CALL SYMPUTX('duplikat', 1);
+abort;
+end;
+else CALL SYMPUTX('duplikat',0);
+run;
+
+/* Hvis det er duplikate orgnr slettes filen */
+%if &duplikat = 1 %then %do;
+proc delete data=behandler;
+run;
+%end;
+
+
 /* ------- */
 /*  BEHSH  */  
 /* ------- */                                                                           
