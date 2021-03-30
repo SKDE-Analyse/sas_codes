@@ -34,19 +34,12 @@ end;
 
 /* 2020 - T3-data */
 if aar = 2020 then do; 
-if behandlingsstedkode2 = 974377779 then behandlingsstedkode2 = 974737779 ; /*Betanien spesialistpoliklinikk - behandlingsstedkode har et feilplassert siffer. Bruker ikke 'institusjonID' som vanlig da den viser til hovedenhet i denne utleveringen.*/
-if behandlingsstedkode2 = 825222332 then behandlingsstedkode2 = 919028513 ; /*LHL-klinikk Tønsberg. Bruke til hovedenhet.*/
-if behandlingsstedkode2 = 924445114 then behandlingsstedkode2 = institusjonid ; /*Martina Hansens Hospital avd radiologi. InstitusjonId viser til hovedenhet.*/
-if behandlingsstedkode2 =           then behandlingsstedkode2 = institusjonid ; /**/
-if behandlingsstedkode2 =           then behandlingsstedkode2 = institusjonid ; /**/
+if behandlingsstedkode2 = 974377779 then behandlingsstedkode2 = 974737779 ; /*Betanien spesialistpoliklinikk - behandlingsstedkode har et feilplassert siffer. Bruker ikke 'institusjonID' (det er gjort tidligere år) da den viser til hovedenhet i denne utleveringen.*/
 end;
 
 /* 2021 */
 if aar = 2021 then do; 
-if behandlingsstedkode2 = 974377779 then behandlingsstedkode2 = 974737779 ; /*Betanien spesialistpoliklinikk - behandlingsstedkode har et feilplassert siffer. Bruker ikke 'institusjonID' som vanlig da den viser til hovedenhet i denne utleveringen.*/
-if behandlingsstedkode2 = 825222332 then behandlingsstedkode2 = 919028513 ; /*LHL-klinikk Tønsberg. Bruke til hovedenhet.*/
-if behandlingsstedkode2 = 919122609 then behandlingsstedkode2 = institusjonid ; /*LHL sykehuset Vestfold. InstitusjonID viser til hovedenhet.*/
-if behandlingsstedkode2 = 924445114 then behandlingsstedkode2 = institusjonid ; /*Martina Hansens Hospital avd radiologi. InstitusjonId viser til hovedenhet.*/
+if behandlingsstedkode2 = 974377779 then behandlingsstedkode2 = 974737779 ; /*Betanien spesialistpoliklinikk - behandlingsstedkode har et feilplassert siffer. Bruker ikke 'institusjonID' (det er gjort tidligere år) da den viser til hovedenhet i denne utleveringen.*/
 end;
 
 
