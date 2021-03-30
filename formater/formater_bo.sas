@@ -3,11 +3,11 @@
 /* Makro for å lage formater til boområder */
 
 
-/* hente inn CSV-fil med definerte opptaksområder pr 01.01.2020 */
+/* hente inn CSV-fil med definerte opptaksområder pr 01.01.2021 */
 data bo;
-  infile "&filbane\data\boomr_2020.csv"
+  infile "&filbane\data\boomr.csv"
   delimiter=';'
-  missover firstobs=2 DSD;
+  missover firstobs=3 DSD;
 
   format komnr 4.;
   format komnr_navn $60.;

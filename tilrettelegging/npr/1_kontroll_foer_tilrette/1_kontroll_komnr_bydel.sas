@@ -53,9 +53,9 @@ data bydel;
 run;
 
 data boomr;
-  infile "&filbane\data\boomr_2021.csv"
+  infile "&filbane\data\boomr.csv"
   delimiter=';'
-  missover firstobs=2 DSD;
+  missover firstobs=3 DSD;
 
   format komnr 4.;
   format komnr_navn $60.;
