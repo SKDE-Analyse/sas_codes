@@ -1,10 +1,12 @@
 
+/* Input variables  : komnr, bydel */
+/* Output variables : bohf, borh, boshhn, fylke */
 
 %macro boomraader(inndata=, utdata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
 
 /* Hvis `haraldsplass = 1`: Deler Bergen i Haraldsplass og Haukeland */
-/* Hvis `indreOslo = 1`: Slår sammen Diakonhjemmet og Lovisenberg */
-/* Hvis `bydel = 0`: Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo) */
+/* Hvis `indreOslo = 1`   : Slår sammen Diakonhjemmet og Lovisenberg */
+/* Hvis `bydel = 0`       : Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo) */
 
 
 /*

@@ -1,4 +1,6 @@
-/* Fornye gamle komnr til komnr i bruk pr 1.2.20xx */
+/* Fornye gamle komnr til komnr i bruk pr 1.1.20xx */
+/* Input variable  : KomNrHjem2 in RHF data (specified in the argument, original kommunenummer varialbe from NPR) */
+/* Output variable : KomNr */
 
 %macro forny_komnr_loop(inndata=, utdata=, kommune_nr=komnrhjem2 /*Kommunenummer som skal fornyes*/);
 
