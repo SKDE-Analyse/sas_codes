@@ -1,11 +1,11 @@
 /* Makro for å lage behandler (BEHSH, BEHHF, BEHRHF). */
-/* Den bruker variabelen 'behandlingsstedkode2' som lages i tilretteleggingen for å definere behandler */
+/* Den bruker variabelen 'behandlingsstedkode2' (RHF datagrunnlag) som lages i tilretteleggingen for å definere behandler */
 /* Alle linjer må ha gyldig orgnr/behandler - det fikses i tilrettelegging */
 
 /* Det gjøres en kontroll etter innlasting av CSV for å sjekke at det ikke er duplikate verdier */
 /* Hvis det er duplikate verdier slettes datasettet behandler og det kommer en melding om ABORT i SAS-logg */
 
-%macro behandler(inndata=, beh=behandlingsstedkode, utdata=);
+%macro behandler(inndata=, beh=behandlingsstedkode2, utdata=);
 
 
 /* Hente inn CSV-fil for å lage behandler */
@@ -79,7 +79,7 @@ run;
 proc sql;
 	create table &utdata as
 	select * from &inndata a left join beh b
-	on a.behandlingsstedkode2=b.orgnr;
+	on a.&beh=b.orgnr;
 quit;
 
 %mend;
