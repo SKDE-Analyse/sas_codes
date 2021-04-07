@@ -3,8 +3,11 @@
 /* Output error-fil gir alle linjene fra mottatt data som har ugyldig orgnr - fikses i tilrettelegging */
 /* NB: ugyldig orgnr kan være et nytt orgnr ikke registrert i listen vår */
 
-%macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode); /*behandlingsstedkode kan erstattes med annen variabel som inneholder orgnr hvis en ønsker å kontrollere for gyldige orgnr*/
+%macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode, sektor=som); 
+/* beh=behandlingsstedkode kan erstattes med annen variabel som inneholder orgnr hvis en ønsker å kontrollere for gyldige orgnr*/
+/* sektor could be set to som or aspes */
 
+%if &sektor=som %then %do;
 data orgnr;
   infile "&filbane\data\behandler.csv"
   delimiter=';'
@@ -38,6 +41,25 @@ data orgnr;
 	kommentar $
 	;
 run;
+%end;
+
+%if &sektor=aspes or &sektor=avtspes %then %do;
+data orgnr;
+  infile "&filbane\data\avtalespesialister.csv"
+  delimiter=';'
+  missover firstobs=2 DSD;
+
+  format orgnr 10.;
+  format org_navn $100.;
+  format kommentar $300.;
+
+  input	
+    orgnr
+    org_navn $
+	kommentar $
+	;
+run;
+%end;
 
 /*til kontroll av orgnr i mottatte data trenger en kun kolonnen orgnr*/
 data beh_liste(keep=orgnr);
@@ -64,12 +86,23 @@ if a and not b then ugyldig = 1;
 run;
 
 /*merge flagg til data som kontrolleres*/
+%if &sektor=som %then %do;
 proc sql;
 	create table tmp_data as
 	select a.&beh, a.institusjonid, a.hf, gyldig, ugyldig 
   from &inndata a left join flagg_org b
 	on a.&beh=b.orgnr;
 quit;
+%end;
+
+%if &sektor=aspes or &sektor=avtspes %then %do;
+proc sql;
+	create table tmp_data as
+	select a.&beh, a.sektor, gyldig, ugyldig 
+  from &inndata a left join flagg_org b
+	on a.&beh=b.orgnr;
+quit;
+%end;
 
 /*hvor mange linjer har gyldig/ugyldig orgnr*/
 proc freq data=tmp_data; 
