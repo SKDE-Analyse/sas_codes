@@ -36,3 +36,6 @@ data AVD_1_testfmt;
 run;
 */
 
+proc datasets nolist;
+delete icd10_fmt ;
+run;

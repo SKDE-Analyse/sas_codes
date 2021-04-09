@@ -153,4 +153,6 @@ run;
 proc format cntlin=fmtfil_komnr; run;
 
 
-
+proc datasets nolist;
+delete bo: bydel_fmt forny_kom komnr: fmtfil_bydel ; 
+run;

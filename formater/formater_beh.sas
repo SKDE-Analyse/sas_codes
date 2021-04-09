@@ -138,14 +138,14 @@ proc sort data=behandler nodupkey out=behrhf_fmt(keep=behrhf behrhf_navn);
    by behrhf;                                                                                                                                
 run; 
 /* Build format data set */                                                                                                            
-data fmtfil_rhf(rename=(behrhf=start) keep=behrhf fmtname label);                                                                                    
+data fmtfil_behrhf(rename=(behrhf=start) keep=behrhf fmtname label);                                                                                    
    retain fmtname 'behrhf_fmt';                                                                                                 
    length behrhf_navn $60.;                                                                                                                    
    set behrhf_fmt; 
    label = cat(behrhf_navn); 
 run; 
  /* Create the format using the control data set. */                                                                                     
-proc format cntlin=fmtfil_rhf; run;
+proc format cntlin=fmtfil_behrhf; run;
 
 
 /* ----------------- */
@@ -202,3 +202,6 @@ run;
 proc format cntlin=fmtfil_orgnr; run;
 
 
+proc datasets nolist;
+delete beh: orgnr_fmt fmtfil_behsh fmtfil_komnr fmtfil_behsh fmtfil_behhfkort fmtfil_rhfkort fmtfil_rhfkortest fmtfil_orgnr fmtfil_behrhf ;
+run;
