@@ -12,6 +12,7 @@ EKSEMPEL:
 %macro liste_datasett_aar(lib, aar);
 
 
+/*Macro som sletter et datasett dersom det inneholder rader med data fra et angitt år*/
 %MACRO LIST_IF(mappe, DS, yr);
 
 		/*Lager macro-variabel DEL og setter til 0*/
@@ -22,10 +23,10 @@ EKSEMPEL:
 		%let chk = %sysfunc(varnum(&dsid, aar));
 		%let rc = %sysfunc(close(&dsid));
 		/*Hvis aar-variabelen ikke finnes i &DS blir en rad lagt til i 
-		datasettet mangler_aar_liste bestående av datasettnavnet &DS*/
+		datasettet Mangler_aar_&lib bestående av datasettnavnet &DS*/
 		%if &chk = 0 %then %do;
-			data mangler_aar_liste;
-			set mangler_aar_liste end=eof;
+			data Mangler_aar_&lib.;
+			set Mangler_aar_&lib. end=eof;
 			output;
 				if eof then do;
 					navn=%upcase("&mappe..&DS");
@@ -34,7 +35,8 @@ EKSEMPEL:
 			run;
 		%end;
 		/*Hvis aar-variabelen finnes i &DS: Sjekk om &DS inneholder 
-		observasjoner med aktuelt år, i så fall settes makrovariabelen DEL til 1*/
+		observasjoner med aktuelt år,
+		i så fall settes makrovariabelen DEL til 1*/
 		%else %do;
 		DATA _NULL_;
         SET &mappe..&DS.;
@@ -44,10 +46,10 @@ EKSEMPEL:
 		%end;
 
 		/*Hvis makrovariabelen del er lik 1 så legges det til en rad i 
-		datasettet slette_liste bestående av datasettnavnet &DS*/
+		datasettet slette_liste_&lib bestående av datasettnavnet &DS*/
 		%if &del=1 %then %do;
-			data slette_liste;
-			set slette_liste end=eof;
+			data slette_liste_&lib.;
+			set slette_liste_&lib. end=eof;
 			output;
 				if eof then do;
 					navn=%upcase("&mappe..&DS");
@@ -74,16 +76,16 @@ quit;
 
 /*Lager to nye datasett som inneholder navnene til
 datasett som skal slettes eller som ikke inneholder variabelen aar*/
-data slette_liste;
+data slette_liste_&lib.;
 length navn $30;
 run;
 
-data mangler_aar_liste;
+data Mangler_aar_&lib.;
 length navn $30;
 run;
 
 /*Kjører macroen LIST_IF for alle datasettene i mappa*/
 %do i=1 %to &count;
-%LIST_IF(mappe=&lib, DS=&dsname&i, yr=&aar);
+%LIST_IF(mappe=&lib, DS=&&dsname&i, yr=&aar);
 %end;
 %mend; 
