@@ -7,6 +7,7 @@ debug = 0,
 nulle_liggedogn = 0, 
 inndeling = 0,
 separer_ut_poli = 0,
+separer_ut_dag = 0,
 minaar=0
 );
 
@@ -34,6 +35,7 @@ Inndatasettet må inneholde pid inndato utdato inntid og uttid
   - 2: alle kontakter til pasient internt i et behandlende HF teller som en episode
   - 3: alle kontakter til pasient internt i et behandlende sykehus teller som en episode
 - `separer_ut_poli` (=0): Hvis ulik null teller alle poliklinikkonsultasjoner og konsultasjoner hos avtalespesialist som egne EoC (alle konsultasjoner der aktivitetskategori3 ikke er 1 eller 2)
+- `separer_ut_dag` (=0): Hvis ulik null teller alle dagbehandlinger som egne EoC (alle konsultasjoner der aktivitetskategori3 er 2)
   
 Episode of care omfatter da:
 - Dersom inndatotid på nytt opphold er før utdatotid på forrige opphold
@@ -102,6 +104,9 @@ inndatotid=dhms(innDato,0,0,innTid);
 utdatotid=dhms(utDato,0,0,utTid);
 %if &separer_ut_poli ne 0 %then %do;
 if aktivitetskategori3 not in (1,2) then tmp_poli = 1;
+%end;
+%if &separer_ut_dag ne 0 %then %do;
+if aktivitetskategori3 = 2 then tmp_poli = 1;
 %end;
 format inndatotid utdatotid datetime18.;
 run;
