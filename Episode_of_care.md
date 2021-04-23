@@ -27,6 +27,7 @@ Inndatasettet må inneholde pid inndato utdato inntid og uttid
   - 2: alle kontakter til pasient internt i et behandlende HF teller som en episode
   - 3: alle kontakter til pasient internt i et behandlende sykehus teller som en episode
 - `separer_ut_poli` (=0): Hvis ulik null teller alle poliklinikkonsultasjoner og konsultasjoner hos avtalespesialist som egne EoC (alle konsultasjoner der aktivitetskategori3 ikke er 1 eller 2)
+- `separer_ut_dag` (=0): Hvis ulik null teller alle dagbehandlinger som egne EoC (alle konsultasjoner der aktivitetskategori3 er 2)
   
 Episode of care omfatter da:
 - Dersom inndatotid på nytt opphold er før utdatotid på forrige opphold
