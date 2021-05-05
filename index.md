@@ -24,6 +24,7 @@
 - [makroer/CoMorbIndex.sas](CoMorbIndex)
 - [makroer/Label_m_info.sas](Label_m_info)
 - [makroer/forholdstall.sas](forholdstall)
+- [makroer/definer_behandler.sas](definer_behandler)
 - [makroer/telle_pr_PID.sas](telle_pr_PID)
 - [makroer/Unik_pasient.sas](Unik_pasient)
 - [makroer/ratefig.sas](ratefig)
