@@ -1,7 +1,7 @@
 
 
 data icd10_fmt;
-  infile "&filbane\data\ICD10.csv"
+  infile "&filbane\formater\ICD10.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

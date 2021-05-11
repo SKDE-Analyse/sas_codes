@@ -5,7 +5,7 @@
 
 /* hente inn CSV-fil med definerte opptaksområder pr 01.01.2021 */
 data bo;
-  infile "&filbane\data\boomr.csv"
+  infile "&filbane\formater\boomr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
