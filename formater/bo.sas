@@ -110,7 +110,7 @@ proc format cntlin=fmtfil_bydel; run;
 /* --------- */    
 
 data forny_kom;
-  infile "&filbane\data\forny_komnr.csv"
+  infile "&filbane\formater\forny_komnr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
