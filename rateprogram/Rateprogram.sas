@@ -11,8 +11,8 @@ options sasautos=("&filbane\makroer" SASAUTOS);
 
 %include "&filbane\formater\SKDE_somatikk.sas";
 %include "&filbane\formater\NPR_somatikk.sas";
-%include "&filbane\formater\formater_bo.sas";
-%include "&filbane\formater\formater_beh.sas";
+%include "&filbane\formater\bo.sas";
+%include "&filbane\formater\beh.sas";
 
 %include "&filbane\rateprogram\rateberegninger.sas";
 
