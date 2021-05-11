@@ -10,7 +10,7 @@
 
 /* Hente inn CSV-fil for å lage behandler */
 data beh;
-  infile "&filbane\data\behandler.csv"
+  infile "&filbane\formater\behandler.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -81,5 +81,9 @@ proc sql;
 	select * from &inndata a left join beh b
 	on a.&beh=b.orgnr;
 quit;
+
+proc freq data=&utdata;
+  tables behsh behhf behrhf;
+run;
 
 %mend;

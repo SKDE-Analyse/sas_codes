@@ -9,7 +9,7 @@
 
 %if &sektor=som %then %do;
 data orgnr;
-  infile "&filbane\data\behandler.csv"
+  infile "&filbane\formater\behandler.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -45,7 +45,7 @@ run;
 
 %if &sektor=aspes or &sektor=avtspes %then %do;
 data orgnr;
-  infile "&filbane\data\avtalespesialister.csv"
+  infile "&filbane\formater\avtalespesialister.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

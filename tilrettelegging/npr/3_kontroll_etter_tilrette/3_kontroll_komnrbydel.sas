@@ -4,7 +4,7 @@
 
 
 data bo;
-  infile "&filbane\data\boomr.csv"
+  infile "&filbane\formater\boomr.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

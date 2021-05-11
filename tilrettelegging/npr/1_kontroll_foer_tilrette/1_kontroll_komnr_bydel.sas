@@ -7,7 +7,7 @@
 
 /* laste inn tre datafiler */
 data komnr;
-  infile "&filbane\data\forny_komnr.csv"
+  infile "&filbane\formater\forny_komnr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
@@ -31,7 +31,7 @@ data komnr;
   run;
 
 data bydel;
-  infile "&filbane\data\forny_bydel.csv"
+  infile "&filbane\formater\forny_bydel.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -53,7 +53,7 @@ data bydel;
 run;
 
 data boomr;
-  infile "&filbane\data\boomr.csv"
+  infile "&filbane\formater\boomr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
