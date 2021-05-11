@@ -4,7 +4,7 @@
 
 /* OBS: husk at bydeler blir ikke oppdatert når denne makroen kjøres. Hvis det er bydeler i datasettet må det lages etter at denne makroen er kjørt. */
 
-%macro forny_komnr_loop(inndata=, utdata=, kommune_nr=komnrhjem2 /*Kommunenummer som skal fornyes*/);
+%macro forny_komnr(inndata=, utdata=, kommune_nr=komnrhjem2 /*Kommunenummer som skal fornyes*/);
 
 /* hente inn csv-fil */
 data forny_komnr;
