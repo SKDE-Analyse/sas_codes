@@ -590,6 +590,7 @@ value fylke /* added 08.04.2021*/
       18	= '18 Nordland'
       19	= '19 Troms'
       20	= '20 Finnmark'
+      24 = '24 Utlandet/Svalbard'      /* ny 2020*/
       30 = '30 Viken'                  /* ny 2020*/
       34 = '34 Innlandet'              /* ny 2020*/
       38 = '38 Vestfold og Telemark'   /* ny 2020*/
