@@ -18,22 +18,21 @@ length cyto_: $7;
 
 length bohf borhf boshhn fylke 4;
 length bydel 6;
-%if &somatikk ne 0 %then %do;
-length behhf behrhf behsh 4;
-%end;
 length hdiag3tegn $3;
 length aar 4;
 length ErMann 3;
 length fodselsar 4;
 length ICD10Kap: 3;
 length innmateHast kjonn kontaktType 4;
-length inndato: utdato: doddato epikrisedato individuellplandato mottaksdato sluttdato tildeltdato utskrklardato /*utskrklardato2*/ ventetidsluttdato ventetidsluttkode vurddato KomNr 4;
+length inndato: utdato: doddato emigrertDato epikrisedato individuellplandato mottaksdato sluttdato tildeltdato utskrklardato /*utskrklardato2*/ ventetidsluttdato ventetidsluttkode vurddato KomNr 4;
 length institusjonID  6;
-length /*NPRId_reg*/ stedAktivitet 4;
+length NPRId_reg stedAktivitet 4;
 length tell_: 4;
 length pid 6;
 
 %if &somatikk ne 0 %then %do;
+length behhf behrhf behsh 4;
+
 length hastegrad aktivitetskategori: 4;
 
 length alderIDager 4;
@@ -45,10 +44,10 @@ length DRGtypeHastegrad 3;
 /* length fodselsAar_ident 3; */
 length fodselsvekt 4;
 length /*fodt_mnd*/ g_omsorgsniva hastegrad hdg henvType 3;
-length inntilstand /*intern_kons*/ isf_opphold liggetid 4;
+length inntilstand intern_kons isf_opphold liggetid 4;
 length InnTid UtskrKlarDato 4;
 /* length institusjonID_original 6; */
-length omsorgsniva pakkeforlop permisjonsdogn polIndir polIndirekteAktivitet polUtforende_1 polUtforende_2 RehabType 4;
+length omsorgsniva pakkeforlop permisjonsdogn polIndir polIndirekteAktivitet polUtforende_1 /*polUtforende_2*/ RehabType 4;
 /* length relatertKontaktID 6; */
 length trimpkt /*utforendeHelseperson*/ utTilstand /* VertskommHN*/ 4;
 length UtTid 5;

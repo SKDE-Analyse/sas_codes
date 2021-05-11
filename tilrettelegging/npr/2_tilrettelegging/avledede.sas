@@ -1,4 +1,4 @@
-%Macro Avledede_som (innDataSett=, utDataSett=);
+%Macro Avledede (innDataSett=, utDataSett=);
 
 
 /*!
@@ -19,21 +19,14 @@ MACRO FOR AVLEDEDE VARIABLE
 */
 
 Data &Utdatasett;
-set &Inndatasett;
+set &Inndatasett(rename=(sektor=sektor_org));
 
 /* fix variable anomaly that was discovered in the step 1 control */
-
-alderIdager_org=alderIdager;
-if alderIdager ne . then do;
-if alderIdager < 0 then alderIdager=.;
-end;
 
 /* isolated case, one line in 2018, one line in 2019 to be fixed */
 if aar=2018 and liggetid>6000 then inndato=utdato;
 if aar=2019 and liggetid> 800 then inndato=utdato;
 
-liggetid_org=liggetid;
-liggetid=utdato-inndato;
 
 /*!
 - Retting av ugyldig fødselsår
@@ -64,17 +57,35 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
 */
 
 %if &somatikk=1 %then %do;
+
+  %if &sektor=AVD or &sektor=SHO %then %do;
+    alderIdager_org=alderIdager;
+    if alderIdager ne . then do;
+    if alderIdager < 0 then alderIdager=.;
+    end;
+  %end;
+    
+    liggetid_org=liggetid;
+    liggetid=utdato-inndato;
+
     hastegrad=.;
     if innmateHast in (1,2,3)   then hastegrad=1; /*Akutt*/
     if innmateHast=4            then hastegrad=4; /*Planlagt*/
     if innmateHast=5            then hastegrad=5; /*Tilbakeføring av pasient fra annet sykehus (gjelder fra 2016)*/
 
-         if DRG_type='M' and hastegrad=4 /*Planlagt*/   then DRGtypeHastegrad=1;
-    else if DRG_type='M' and hastegrad=1 /*Akutt*/      then DRGtypeHastegrad=2;
-    else if DRG_type='K' and hastegrad=4 /*Planlagt*/   then DRGtypeHastegrad=3;
-    else if DRG_type='K' and hastegrad=1 /*Akutt*/      then DRGtypeHastegrad=4;
-    if DRG_TYPE=' ' then DRGtypeHastegrad=9;
-    if hastegrad=.  then DRGtypeHastegrad=9;
+    %if &sektor = AVD or &sektor = SHO %then %do;                   /* this &sektor is the macro variable set in the SAS-project */
+
+             if DRG_type='M' and hastegrad=4 /*Planlagt*/   then DRGtypeHastegrad=1;
+        else if DRG_type='M' and hastegrad=1 /*Akutt*/      then DRGtypeHastegrad=2;
+        else if DRG_type='K' and hastegrad=4 /*Planlagt*/   then DRGtypeHastegrad=3;
+        else if DRG_type='K' and hastegrad=1 /*Akutt*/      then DRGtypeHastegrad=4;
+        if DRG_TYPE=' ' then DRGtypeHastegrad=9;
+        if hastegrad=.  then DRGtypeHastegrad=9;
+
+       /* 12.04.2021 - All lines in somatic files have the same value for sektor variable. Not sure why it is 4 since sektor 4 means avtspes in other files.
+                       Recode this to 1 so that we can use the same format for sektor as we use in avtspes and pysk files */
+        if sektor_org=4 then sektor=1; /*Somatiske aktivitetsdata*/    /* this sektor is a variable in the dataset */
+    %end;
 %end;
 
 
@@ -94,6 +105,10 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
 
     aar_org=aar;
     aar=year(utdato);
+
+    if sektor_org='SOM' then sektor=5; /*Avtalespesialister, som*/
+    if sektor_org='PHV' then sektor=4; /*Avtalespesialister, psyk*/
+    
     /*
     ************************************************************************************************
     3.7	FAG_SKDE

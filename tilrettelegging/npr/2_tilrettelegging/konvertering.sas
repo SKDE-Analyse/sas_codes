@@ -13,7 +13,7 @@ MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 */
 
 Data &Utdatasett;
-Set &Inndatasett;
+Set &Inndatasett(rename=(episodefag=episodefag_org));
 
 /* Sletter variabler vi ikke trenger fra somatikkfilene. */
 %if &somatikk ne 0 %then %do;
@@ -48,10 +48,14 @@ rename HDG_num=HDG;
 %end;
 
 /*!
-- Generere `komNr` fra `KomNrHjem2` og `bydel_innr` fra `bydel`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
+- Generere `bydel_org` fra `bydel` og `bydel2_org` fra `bydel2`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
 */
-/* KomNr=KomNrHjem2+0; */
-/* bydel_innr=bydel2; */
+
+%if &datagrunnlag=SKDE %then %do;
+	bydel_org=bydel;
+	bydel2_org=bydel2;
+	drop bydel;
+%end;
 
 
 /*!
@@ -62,6 +66,15 @@ rename HDG_num=HDG;
 /*!
 ###	Fjerner blanke felt og punktum i stringvariable, samt ny navngiving. For 2014 navnes dup_tilstand til Tdiag.
 */
+		/*
+		- Episodefag manglet ledende null for avtalespesialister enkelte år.
+		- convert to character if numeric
+		*/
+
+    episodefag=put(episodefag_org,3.);
+		if lengthn(compress(episodefag_org)) = 2 then episodefag = compress("0"||episodefag_org);
+		if episodefag in ("0","950") then episodefag="999";
+
 
 
 /*!
@@ -69,6 +82,7 @@ rename HDG_num=HDG;
 */
 %if &somatikk ne 0 %then %do;
 	DRG=upcase(compress(DRG));
+	drop cyto:;
 %end;
 
 /*!
@@ -77,7 +91,7 @@ rename HDG_num=HDG;
 
 array tilstand(*) $ tilstand:;
 do i = 1 to dim(tilstand);
-  tilstand(i)=upcase(compress(tilstand(i),"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890","ki"));
+  tilstand(i)=upcase(compress(tilstand(i),"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890","ki")); /*The modifier "ki" means Keep the characters in the list and Ignore the case of the characters */
 end;
 
 /* Hdiag */
@@ -101,25 +115,9 @@ do i=1 to dim(bTilstand);
 end;
 drop tilstand_: i;
 
-
-
-
-/* 12Jul2019 JS - det ligger ICD-10-koder i ATC_1 -- ATC_5 i 2014.  Koden ATC_1 er identisk med koden i tilstand_1_1, og ATC_2 er identisk med koden i tilstand_1_2.
-   Flytter ACT_2 til ATC_5 til tilstand_2_1 til tilstand_4_1 som Bdiag */
-/* ingjen ATC var i 2020T1 data
- if &avtspes=1 and ATC_1 ne '' then do;
-   tilstand_2_1=ATC_3;
-   tilstand_3_1=ATC_4;
-   tilstand_4_1=ATC_5;
- end;  
-*/
-
-
-
 /*!
 - Fjerner blanke felt i prosedyrevariable, og fjerner underscore (_) i variabelnavn
 */
-
 
 array ncsp{&nkode} $ ncsp1-ncsp&nkode;
 array ncsp_{&nkode} $ ncsp_1-ncsp_&nkode;
@@ -137,55 +135,61 @@ drop ncsp_: ncmp_: i;
 
 
 %if &somatikk ne 0 %then %do;
-array ncrp{20} $ ncrp1-ncrp20;
-array ncrp_{20} $ ncrp_1-ncrp_20;
-do i=1 to 20;
-   ncrp{i}=upcase(compress(ncrp_{i}));
-end;
-drop ncrp_: i;
+	array ncrp{20} $ ncrp1-ncrp20;
+	array ncrp_{20} $ ncrp_1-ncrp_20;
+	do i=1 to 20;
+	   ncrp{i}=upcase(compress(ncrp_{i}));
+	end;
+	drop ncrp_: i;
 %end;
 
 %if &avtspes ne 0 %then %do;
 
-*drop cyto:;
-/*!
-- Fjerner blanke felt i takstvariable, og navner om til Normaltariff1-15
-*/
-array Normaltariff{15} $ Normaltariff1-Normaltariff15;
-array takst_{15} $ takst_:;
-do i=1 to 15;
-	Normaltariff{i}=propcase(lowcase(compress(takst_{i})));
-end;
-drop takst_: i;
-/*
-Tell_normaltariff = Tell_takst;
-drop tell_takst;*/
+	/*!
+	- Fjerner blanke felt i takstvariable, og navner om til Normaltariff1-15
+	*/
+	array Normaltariff{15} $ Normaltariff1-Normaltariff15;
+	array takst_{15} $ takst_:;
+	do i=1 to 15;
+		Normaltariff{i}=propcase(lowcase(compress(takst_{i})));
+	end;
+	drop takst_: i;
 
-/*
-- Dup_tilstand er fem variabler som samler usorterte diagnoser for 25545 kontakter i 2014. 
-Disse er identifisert med "(dupli" som Hdiag. Navner om til Tdiag.
-*/
-/*
-if aar in  (2014,2018) then do;
-	array Tdiag{5} $
- 	   Tdiag1-Tdiag5;
+	%if &datagrunnlag=SKDE %then %do;
 
-	array Dup_Tilstand{5} $
-		Dup_tilstand_1 - Dup_tilstand_5;
-			do i=1 to 5;
-               Tdiag{i}=upcase(compress(Dup_Tilstand{i}));
- 	   		end;
-	drop Dup_tilstand_1 - Dup_tilstand_5 i;
-end;
-*/
-/*
-- Episodefag manglet ledende null for avtalespesialister enkelte år.
-- episodefag ikke på datasette (2020T1)
-*/
-/*
-if length(compress(episodefag)) = 2 then episodefag = compress("0"||episodefag);
-if episodefag in ("0","950") then episodefag=999;
-*/
+		Tell_normaltariff = Tell_takst;
+		drop tell_takst;
+	%end;
+
+	
+
+	/* 12Jul2019 JS - det ligger ICD-10-koder i ATC_1 -- ATC_5 i 2014.  Koden ATC_1 er identisk med koden i tilstand_1_1, og ATC_2 er identisk med koden i tilstand_1_2.
+	   Flytter ACT_2 til ATC_5 til tilstand_2_1 til tilstand_4_1 som Bdiag */
+	/* ingjen ATC var i 2020T1 data
+	 if &avtspes=1 and ATC_1 ne '' then do;
+	   tilstand_2_1=ATC_3;
+	   tilstand_3_1=ATC_4;
+	   tilstand_4_1=ATC_5;
+	 end;  
+	*/
+
+	/*
+	- Dup_tilstand er fem variabler som samler usorterte diagnoser for 25545 kontakter i 2014. 
+	Disse er identifisert med "(dupli" som Hdiag. Navner om til Tdiag.
+	*/
+	/*
+	if aar in  (2014,2018) then do;
+		array Tdiag{5} $
+	 	   Tdiag1-Tdiag5;
+
+		array Dup_Tilstand{5} $
+			Dup_tilstand_1 - Dup_tilstand_5;
+				do i=1 to 5;
+	               Tdiag{i}=upcase(compress(Dup_Tilstand{i}));
+	 	   		end;
+		drop Dup_tilstand_1 - Dup_tilstand_5 i;
+	end;
+	*/
 
 %end;
 

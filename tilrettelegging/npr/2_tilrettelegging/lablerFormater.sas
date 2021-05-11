@@ -65,7 +65,7 @@ label stedAktivitet='Sted for aktivitet (NPR-melding)'; format STEDAKTIVITET STE
 label utTid='Utskrivelsestidspunkt (NPR-melding)'; 
 label komNrHjem2='Kommunenummer vasket mot Folkeregisteret (NPR-melding)'; format KomNrHjem2 komnr_fmt.; 
 label komNrHjem='Kommunenummer, innrapportert (NPR-melding)'; 
-label dodDato='Dødedato (NPR)';
+label dodDato='Døddato (NPR)';
 label ATC_1='ATC kode 1 (ATC/NPR-melding)'; 
 label ATC_2='ATC kode 2 (ATC/NPR-melding)'; 
 label ATC_3='ATC kode 3 (ATC/NPR-melding)'; 
@@ -107,7 +107,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
 
     label ICD10Kap='ICD-10 kapittel for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10Kap ICD10Kap.;
     label ICD10KatBlokk='ICD-10 kategoriblokk for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10KatBlokk ICD10KatBlokk.; 
-    label KomNR='Kommunenummer fornyet til gyldig komnr-struktur pr 01.01.20xx, numerisk (SKDE)'; format KomNR komnr_fmt.; 
+    label KomNR='Kommunenummer fornyet til gyldig komnr-struktur pr 01.01.2021, numerisk (SKDE)'; format KomNR komnr_fmt.; 
     label bydel='Bydel i Oslo, Bergen, Stavanger og Trondhem vasket mot Folkeregisteret (SKDE)'; format bydel bydel_fmt.;
 
     label Hdiag='Hovedtilstand kode 1 (ICD-10/NPR-melding/SKDE)'; format hdiag $icd10_fmt.;
