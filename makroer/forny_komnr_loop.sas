@@ -8,7 +8,7 @@
 
 /* hente inn csv-fil */
 data forny_komnr;
-  infile "&filbane\data\forny_komnr.csv"
+  infile "&filbane\formater\forny_komnr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
