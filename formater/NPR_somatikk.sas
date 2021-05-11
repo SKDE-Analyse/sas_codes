@@ -345,8 +345,10 @@ value NPRID_REG
       2 = 'Behandling'  
       3 = 'Kontroll'  
       5 = 'Indirekte pasientkontakt'  
+      6 = 'Videokonsultasjon'
+      7 = 'Telefonkonsultasjon med egenandel'
       12 = 'Pasientadministrert behandling'  
-      13 = 'Opplæring' ;
+      13 = 'Opplæring';
 	  
    value STEDAKTIVITET
       1 = 'På egen helseinstitusjon'  
@@ -470,8 +472,7 @@ value NPRID_REG
      26 = 'Audiofysiker'  /* ny 2020 */
      27 = 'Kiropraktor'  /* ny 2020 */
      28 = 'Helsesykepleier'  /* ny 2020 */
-     29 = 'Stråleterapeut'  /* ny 2020 */
-;
+     29 = 'Stråleterapeut'  /* ny 2020 */ ;
    
    value GYLDIG /* Ikke oppgitt i utlevering 2018 */
       0 = ' ' /* Gjelder kun NCRP i 2017. Fikk vite betydningen fra Marte Kjelvik i NPR. */ 
@@ -568,4 +569,51 @@ value rolle /* ny 2020*/
       1 = 'Ansvarlig'
       2 = 'Ko-terapeut';
       
+value fylke /* added 08.04.2021*/
+      0	= '0	Ugyldig/blank'
+      1	= '1	Østfold'
+      2	= '2	Akershus'
+      3	= '3	Oslo'
+      4	= '4	Hedmark'
+      5	= '5	Oppland'
+      6	= '6	Buskerud'
+      7	= '7	Vestfold'
+      8	= '8	Telemark'
+      9	= '9	Aust-Agder'
+      10	= '10 Vest-Agder'
+      11	= '11 Rogaland'
+      12	= '12 Hordaland'
+      14	= '14 Sogn og Fjordane'
+      15	= '15 Møre og Romsdal'
+      16	= '16 Sør-Trøndelag'
+      17	= '17 Nord-Trøndelag'
+      18	= '18 Nordland'
+      19	= '19 Troms'
+      20	= '20 Finnmark'
+      24 = '24 Utlandet/Svalbard'      /* ny 2020*/
+      30 = '30 Viken'                  /* ny 2020*/
+      34 = '34 Innlandet'              /* ny 2020*/
+      38 = '38 Vestfold og Telemark'   /* ny 2020*/
+      42 = '42 Agder'                  /* ny 2020*/
+      46 = '46 Vestland'               /* ny 2020*/
+      50 = '50 Trøndelag'              
+      54 = '54 Troms og Finnmark'      /* ny 2020*/
+      88	= '88 Ikke spesifisert'
+      99	= '99 Utlendinger'
+      21	= '21 Svalbard'
+;
+
+value region /* added 08.04.2021*/
+      3 = 'Helse Vest'
+      4 = 'Helse Midt-Norge'
+      5 = 'Helse Nord'
+      6 = 'Utlendinger/annet'
+      7 = 'Helse Sør-Øst';
+
+value SEKTOR
+      1 = 'Somatiske aktivitetsdata'  
+      2 = 'VOP'  
+      3 = 'TSB'  
+      4 = 'Avtalespesialister, psyk' 
+      5 = 'Avtalespesialister, som' ;
 run;
