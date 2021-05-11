@@ -2,6 +2,8 @@
 /* Input variable  : KomNrHjem2 in RHF data (specified in the argument, original kommunenummer varialbe from NPR) */
 /* Output variable : KomNr */
 
+/* OBS: husk at bydeler blir ikke oppdatert når denne makroen kjøres. Hvis det er bydeler i datasettet må det lages etter at denne makroen er kjørt. */
+
 %macro forny_komnr_loop(inndata=, utdata=, kommune_nr=komnrhjem2 /*Kommunenummer som skal fornyes*/);
 
 /* hente inn csv-fil */
@@ -43,8 +45,8 @@ data &inndata;
   nr=_n_;
 run;
 
-data test;
-set &inndata(keep=pid &kommune_nr nr);
+data tmp_forny;
+set &inndata(keep=&kommune_nr nr);
 komnr = &kommune_nr; /* i mottatt data er komnr = komnrhjem2 */
 run;
 
@@ -53,7 +55,7 @@ run;
     proc sql;
     	create table go&i as
     	select *
-        from test a left join forny b
+        from tmp_forny a left join forny b
     	on a.komnr=b.komnr;
     quit;
 
@@ -66,7 +68,7 @@ run;
     	from go&i;
     quit;
 %put &sumkom;
-    data test;
+    data tmp_forny;
       set go&i;
     run;
 %put &i;
@@ -80,8 +82,8 @@ run;
 %put &i;
 /* save final komnr fix - komnr_orig1 as input, komnr as output (newest komnr)*/
 
-data test_out;
-  set test;
+data tmp_forny_out;
+  set tmp_forny;
 
   %let j=1;
 
@@ -99,7 +101,7 @@ run;
 proc sql;
   create table &utdata as
   select a.*, b.komnr
-  from &inndata a, test_out b
+  from &inndata a, tmp_forny_out b
   where a.nr=b.nr;
 quit;
 
