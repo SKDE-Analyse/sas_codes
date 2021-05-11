@@ -66,7 +66,12 @@ value fagLogg
 
 ;
 
-	  ;
 
+value SEKTOR
+      1 = 'Somatiske aktivitetsdata'  
+      2 = 'VOP'  
+      3 = 'TSB'  
+      4 = 'Avtalespesialister, psyk' 
+      5 = 'Avtalespesialister, som' ;
 run;
 

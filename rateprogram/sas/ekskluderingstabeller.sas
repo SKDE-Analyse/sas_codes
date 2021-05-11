@@ -42,7 +42,7 @@ Alle ekskluderte
 */
 
 ods text='^{style[font_size=14pt font_weight=bold font_style=italic]
-					Ekskludert pga komnr=. or komnr not in (0:2031, 5000:5100) or alder not &aldersspenn or ermann not in &kjonn}';
+					Ekskludert pga komnr=. or komnr not in (0:5500) or alder not &aldersspenn or ermann not in &kjonn}';
 ods text=" ";
 ods text='^{style[font_size=12pt font_weight=bold]
 					Utvalgskriterier:}';
@@ -52,7 +52,7 @@ ods text="kjonn = &kjonn";
 PROC SQL;
 CREATE TABLE ikke_med_tot AS
 SELECT * FROM &datasett
-where komnr=. or komnr not in (0:2031, 5000:5100) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
+where komnr=. or komnr not in (0:5500) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
 QUIT;
 
 PROC TABULATE DATA=ikke_med_tot FORMAT=&talltabformat..0;	
@@ -74,14 +74,14 @@ run;
 Ekskludering pga komnr utenfor (0:2031, 5000:5100)
 */
 ods text='^{style[font_size=14pt font_weight=bold font_style=italic]
-					Ekskludert pga komnr not in (0:2031, 5000:5100)
+					Ekskludert pga komnr not in (0:5500)
                     }';
 ods text=" ";
 
 PROC SQL;
 CREATE TABLE ikke_kom AS
 SELECT * FROM qwerty_data
-where komnr not in (0:2031, 5000:5100);
+where komnr not in (0:5500);
 QUIT;
 
 PROC TABULATE DATA=ikke_kom FORMAT=&talltabformat..0;	

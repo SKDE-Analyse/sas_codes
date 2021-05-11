@@ -118,14 +118,12 @@ Definere komnr og bydel basert på bohf hvis datasettet mangler komnr og bydel
     %ekskluderingstabeller(datasett = tmp1utvalgx);
 %end;
 
-%forny_komnr(datasett = tmp1UTVALGX);
-	/*----------------------------*/
 
 	PROC SQL;
 	   CREATE TABLE tmp2utvalgx AS
 	   SELECT DISTINCT aar,KomNr,bydel,Alder,ErMann,(SUM(RV)) AS RV
 	      FROM tmp1UTVALGX
-		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and komnr in (0:2031, 5000:5100)
+		  where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and komnr in (0:5500)
 	      GROUP BY aar, KomNr, bydel, Alder, ErMann;	  
 	QUIT;
 
@@ -141,11 +139,10 @@ Lag en figur med aldersprofilen i utvalget
 	data tmp1innb_aar;
 	set &innbyggerfil;
 	keep aar komnr bydel Ermann Alder innbyggere;
-	where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and komnr in (0:2031, 5000:5100);
+	where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and komnr in (0:5500);
 	&aldjust; 
 	run;
 
-%forny_komnr(datasett = tmp1innb_aar);
 
 	PROC SQL;
 	   CREATE TABLE innb_aar AS 
@@ -229,14 +226,18 @@ run;
    %if %sysevalf(%superq(indreOslo)=,boolean) %then %let indreOslo = 0;
    %if %sysevalf(%superq(bydel)=,boolean) %then %let bydel = 1;
    %if %sysevalf(%superq(barn)=,boolean) %then %let barn = 0;
-   
+
+
+	%boomraader(inndata=RV, utdata= RV2, haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
+proc delete data=rv;
+run;
+
 	data RV;
-	set RV;
+	set RV2;
 	/* Definere boområder */
-	%Boomraader(haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
 	if BOHF in (24,99) then BoRHF=.; /*kaster ut Utlandet og Svalbard*/
 	if BoRHF in (1:4) then Norge=1;
-format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr komnr. bydel bydel. ermann ermann.;
+format borhf borhf_fmt. bohf bohf_fmt. boshhn boshhn_fmt. komnr komnr_fmt. bydel bydel_fmt. ermann ermann.;
 	run;
 
 	/* beregne hvilken innbyggerandel (av den nasjonale befolkningen) som befinner seg i hver kjønns-og alderskategori*/
