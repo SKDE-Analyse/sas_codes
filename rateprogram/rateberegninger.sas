@@ -1,6 +1,6 @@
 %let makrobane=&filbane\rateprogram\sas;
 
-%include "&filbane\tilrettelegging\npr\2_tilrettelegging\ny_boomrade.sas";
+%include "&filbane\makroer\boomraader.sas";
 
 %include "&makrobane\lag_kart.sas";
 %include "&makrobane\omraade.sas";

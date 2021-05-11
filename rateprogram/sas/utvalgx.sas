@@ -118,9 +118,6 @@ Definere komnr og bydel basert på bohf hvis datasettet mangler komnr og bydel
     %ekskluderingstabeller(datasett = tmp1utvalgx);
 %end;
 
-/* Tove: allerede gjort i tilrettelegging */
-*%forny_komnr(datasett = tmp1UTVALGX);
-	/*----------------------------*/
 
 	PROC SQL;
 	   CREATE TABLE tmp2utvalgx AS
@@ -145,8 +142,7 @@ Lag en figur med aldersprofilen i utvalget
 	where aar in &Periode and Ermann in &kjonn and Alder &aldersspenn and komnr in (0:5500);
 	&aldjust; 
 	run;
-/* Tove. Ikke nødvendig, gjort i tilrettelegging */
-*%forny_komnr(datasett = tmp1innb_aar);
+
 
 	PROC SQL;
 	   CREATE TABLE innb_aar AS 
@@ -231,8 +227,8 @@ run;
    %if %sysevalf(%superq(bydel)=,boolean) %then %let bydel = 1;
    %if %sysevalf(%superq(barn)=,boolean) %then %let barn = 0;
 
-/* Tove - flytte ut av datasteg */
-	%Boomraader(inndata=RV, utdata= RV2, haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
+
+	%boomraader(inndata=RV, utdata= RV2, haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
 proc delete data=rv;
 run;
 
