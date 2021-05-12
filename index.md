@@ -37,6 +37,7 @@
 - [makroer/ratefig.sas](ratefig)
 - [makroer/reinnleggelser.sas](reinnleggelser)
 - [makroer/ratefig_tredeltSoyle.sas](ratefig_tredeltSoyle)
+- [makroer/liste_datasett_aar.sas](liste_datasett_aar)
 - [makroer/VarFraParvus1.sas](VarFraParvus1)
 - [makroer/flerniva_fixed_2niva.sas](flerniva_fixed_2niva)
 - [makroer/Multippel_test.sas](Multippel_test)
