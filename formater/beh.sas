@@ -203,5 +203,5 @@ proc format cntlin=fmtfil_orgnr; run;
 
 
 proc datasets nolist;
-delete beh: orgnr_fmt fmtfil_behsh fmtfil_komnr fmtfil_behsh fmtfil_behhfkort fmtfil_rhfkort fmtfil_rhfkortest fmtfil_orgnr fmtfil_behrhf ;
+delete beh: orgnr_fmt fmtfil_behhfkort fmtfil_rhfkort fmtfil_rhfkortest fmtfil_behrhf ;
 run;
