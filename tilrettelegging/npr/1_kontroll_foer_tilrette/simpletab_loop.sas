@@ -66,7 +66,7 @@ ods excel file="&utbane\&utxls..xlsx"  options(sheet_name="&tabvar");
 *proc freq on the STRING variables;
 ods excel options(sheet_name="string");
 proc freq data=&tabdata;
-  tables episodefag / missing;
+  tables episodefag fagomrade / missing;
 run;
 
 ods excel close;
