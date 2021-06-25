@@ -84,6 +84,10 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label tell_ICD10='Antall ICD-10-koder innrapportert (NPR)';
     label tell_NCMP='Antall NCMP-koder innrapportert (NPR)';
     label tell_NCSP='Antall NCSP-koder innrapportert (NPR)';
+    label tilSted='Til sted (NPK)'; format tilsted tilsted.;
+    label fraSted='Fra sted (NPK)'; format frasted frasted.; 
+    label polkonAktivitet='Aktivitetstype (NPR-melding)'; format polkonAktivitet POLKONAKTIVITET.;
+
     /* 
     label fodtAar_DSF_190619='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
     label fodtMnd_DSF_190619='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
@@ -351,7 +355,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label fag='Fagfelt for avtalespesialisen (NPR)'; format fag fag_skde.;
 
     label ulikt_kjonn='Ulikt kjønn i innrapportert data og i f.nr./D-nr. (SKDE)';
-    label kontakt ='Kontakttype, f.eks. enkel, spesialist eller lysbehandling (NPR)';
+    label kontakt ='Kontakttype, f.eks. enkel, spesialist eller lysbehandling (NPR)'; format kontakt kontakt.;
     label bydel2_org='Bydel (NPR)';
     label bydel_org='Bydel (NPR)';
 
