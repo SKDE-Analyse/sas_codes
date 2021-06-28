@@ -6,7 +6,10 @@ DATA=&dsn;
 	CLASS &var /	ORDER=UNFORMATTED MISSING;
 	TABLE /* Row Dimension */
 &var*N 
-ALL={LABEL="Total (ALL)"}*N,
+ALL={LABEL="Total (ALL)"}*N
+
+&var*colpctn*f=8.
+ALL={LABEL="Total (ALL)"}* colpctn*f=8.,
 /* Column Dimension */
 aar;
 RUN;
