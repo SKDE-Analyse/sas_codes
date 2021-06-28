@@ -136,6 +136,27 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
     if Fag = 30 then Fag_SKDE = 30;
     if Fag = 31 then Fag_SKDE = 31;
 
+    /* SKDE data for 2015-2019 has fag in words, not in codes. */
+    if Fag = 'anestesi'     then Fag_SKDE = 1;
+    if Fag = 'barn'         then Fag_SKDE = 2;
+    if Fag = 'fys med'      then Fag_SKDE = 3;
+    if Fag = 'gyn'              then Fag_SKDE = 4;
+    if Fag = 'hud'              then Fag_SKDE = 5;
+    if substr(Fag,1,8) = 'indremed' and index(fag,'evma')<=0 then Fag_SKDE = 6;   /* indremed excluding revma */
+    if substr(Fag,1,7) = 'kirurgi'  and index(fag,'plast')<=0 then Fag_SKDE = 11; /* kirurgi excluding plast */
+    if Fag = 'nevrologi' then Fag_SKDE = 15;
+    if Fag = 'ortopedi' then Fag_SKDE = 16;
+    if Fag = 'kirurgi, plastisk' then Fag_SKDE = 17;
+    if Fag = 'radiologi' then Fag_SKDE = 18;
+    if index(fag,'evma')>0 then Fag_SKDE = 19; /* revma */
+    if Fag = 'urologi' then Fag_SKDE = 20;
+    if Fag = 'ønh' then Fag_SKDE = 21;
+    if Fag = 'øye' then Fag_SKDE = 22;
+    if Fag = 'onkologi' then Fag_SKDE = 23;
+    if Fag = 'psykiatri' then Fag_SKDE = 30;
+    if Fag = 'psykologi' then Fag_SKDE = 31;
+
+
     AvtSpes=1;
 
 %end;
