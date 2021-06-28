@@ -64,9 +64,12 @@ ods excel file="&utbane\&utxls..xlsx"  options(sheet_name="&tabvar");
 %end;
 
 *proc freq on the STRING variables;
+*stringvar is defined in the sas project so that we can input different string var without changing the macro;
+%if %sysevalf(%superq(stringvar)=,boolean) %then %let stringvar = aar;
+
 ods excel options(sheet_name="string");
 proc freq data=&tabdata;
-  tables episodefag fagomrade / missing;
+  tables (&stringvar) * aar / nopercent norow nocol missing;
 run;
 
 ods excel close;
