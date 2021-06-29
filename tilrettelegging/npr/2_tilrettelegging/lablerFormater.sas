@@ -87,6 +87,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label tilSted='Til sted (NPK)'; format tilsted tilsted.;
     label fraSted='Fra sted (NPK)'; format frasted frasted.; 
     label polkonAktivitet='Aktivitetstype (NPR-melding)'; format polkonAktivitet POLKONAKTIVITET.;
+    label oppholdstype='oppholdstype, ikke lenger i bruk etter 2017';
 
     /* 
     label fodtAar_DSF_190619='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
