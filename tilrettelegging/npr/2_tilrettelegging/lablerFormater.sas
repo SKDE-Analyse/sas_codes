@@ -88,6 +88,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label fraSted='Fra sted (NPK)'; format frasted frasted.; 
     label polkonAktivitet='Aktivitetstype (NPR-melding)'; format polkonAktivitet POLKONAKTIVITET.;
     label oppholdstype='oppholdstype, ikke lenger i bruk etter 2017';
+    label behandlingssted2='behandlingssted (NPR)'; format behandlingssted2 org_fmt.;
 
     /* 
     label fodtAar_DSF_190619='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
@@ -177,7 +178,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label utforendeHelseperson='Utførende helsepersonell (NPR-melding)'; format utforendeHelseperson UTFORENDEHELSEPERSON.;
     label aggrshoppID_LNr='Id for aggregert sykehusopphold (NPK)'; 
     label hdg='Hoveddiagnosegruppe (NPK)'; format HDG HDG.; 
-    label nyTilstand='Ny Tilstand (NPR-melding)';
+    label nyTilstand='Ny Tilstand (NPR-melding)'; format nyTilstand NYTILSTAND.;
     /*these 4 variables are removed for avtsp, keep in here in case we still have them for som*/
     label tilSted='Til sted (NPK)'; format tilsted tilsted.;
     label fraSted='Fra sted (NPK)'; format frasted frasted.; 
@@ -191,8 +192,8 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label npkOpphold_antallKontakter='Antall kontakter som inngår i det aggregerte "sykehusoppholdet" (NPK)';
     label npkOpphold_antallAvdelingsopphol='Antall avdelingsopphold som inngår i det aggregerte "sykehusoppholdet" (NPK)'; 
     label polUtforende_1='Utførende helsepersonell 1 (NPK)'; format polUtforende_1 UTFORENDEHELSEPERSON.; 
-    label polUtforende_2='Utførende helsepersonell 2 (NPK)';
-    label polUtforende_3='Utførende helsepersonell 3 (NPK)'; 
+    label polUtforende_2='Utførende helsepersonell 2 (NPK)'; format polUtforende_2 UTFORENDEHELSEPERSON.; 
+    label polUtforende_3='Utførende helsepersonell 3 (NPK)'; format polUtforende_3 UTFORENDEHELSEPERSON.; 
     label relatertKontaktID='Id for relaterte kontakter (NPK)';
     label henvType='Utfall av vurdering av henvisningen (NPR-melding)'; format henvType henvType.;
     label henvFraInstitusjonID='Henvist fra institusjon (NPK)'; format HENVFRAINSTITUSJONID HENVFRAINSTITUSJONID.;
@@ -234,10 +235,10 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label fagenhetKode='Fagenhet kode (NPR-melding)';
     label fagenhetLokal='Fagenhet navn (NPR-melding)';
     label fagenhetReshID='Fagenhet ReshID (NPR-melding)';
-    label behandlingsstedKode='Behandlingssted kode (NPR-melding)';
+    label behandlingsstedKode='Behandlingssted kode (NPR-melding)'; format behandlingsstedKode org_fmt.;
     label behandlingsstedLokal='Behandlingssted navn (NPR-melding)';
     label behandlingsstedReshID='Behandlingssted ReshID (NPR-melding)';
-    label hf='Behandlende helseforetak (NPR)';
+    label hf='Behandlende helseforetak (NPR)'; format hf org_fmt.;
 
     /* somatikk raw data only in SKDE datagrunnlag  */
     %if &datagrunnlag=SKDE %then %do;
