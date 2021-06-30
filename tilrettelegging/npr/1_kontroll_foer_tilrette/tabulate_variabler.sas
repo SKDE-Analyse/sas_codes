@@ -4,14 +4,12 @@ PROC TABULATE
 DATA=&dsn;	
 	CLASS aar /	ORDER=UNFORMATTED MISSING;
 	CLASS &var /	ORDER=UNFORMATTED MISSING;
-	TABLE /* Row Dimension */
-&var*N 
-ALL={LABEL="Total (ALL)"}*N
+	TABLE 
+	/* Row Dimension */
+	&var all, 
 
-&var*colpctn*f=8.
-ALL={LABEL="Total (ALL)"}* colpctn*f=8.,
-/* Column Dimension */
-aar;
+	/* Column Dimension */
+	(N*f=nlnum10. colpctn*f=8.) * aar ;				
 RUN;
 %mend;
 
