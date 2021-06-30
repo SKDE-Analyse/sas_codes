@@ -1,4 +1,4 @@
-%Macro Merge_persondata (innDataSett=, persondata=, utDataSett=, pid=pid);
+%Macro Merge_persondata (innDataSett=, persondata=, utDataSett=);
 /*!
  Kobler først på variablene emigrert og dodDato fra egen fil 
  */
@@ -28,6 +28,7 @@ Drop LNr;
 
 emigrertDato_DSF=Input(emigrertDato_DSF_org, Anydtdte10.);
 DodDato_DSF=Input(dodDato_DSF_org,Anydtdte10.);
+fodtAar_DSF=fodselsAar_DSF;
 format emigrertDato_DSF dodDato_DSF Eurdfdd10.;
 Drop emigrertDato_DSF_org dodDato_DSF_org;
 
@@ -40,17 +41,8 @@ proc sql;
 create table &utDataSett as
 select a.*, b.*
 from &innDataSett a left join persondata b
-on a.&pid=b.&pid;
+on a.pid=b.pid;
 quit; 
 
-data &utDataSett;
-set &utDataSett;
-label emigrertDato_DSF='Emigrert dato DSF (NPR)';
-label dodDato_DSF='Dødedato DSF (NPR)';
-label fodselsAar_DSF='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
-/* label fodtMnd_DSF_190619='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten'; */
-label kjonn_DSF='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten';
-length dodDato_DSF emigrertDato_DSF 4;
-run;
 
 %Mend Merge_persondata;

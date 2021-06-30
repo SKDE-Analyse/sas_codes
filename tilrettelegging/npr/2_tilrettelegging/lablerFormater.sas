@@ -90,11 +90,6 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label oppholdstype='oppholdstype, ikke lenger i bruk etter 2017';
     label behandlingssted2='behandlingssted (NPR)'; format behandlingssted2 org_fmt.;
 
-    /* 
-    label fodtAar_DSF_190619='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
-    label fodtMnd_DSF_190619='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
-    label kjonn_DSF_190619  ='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten'; format kjonn_DSF_190619 kjonn.; 
-    */
 %end;
 
 /****************************/
@@ -154,6 +149,13 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
 
     label Hastegrad='Hastegrad - akutt/elektivt (SKDE)'; format hastegrad Hastegrad.;
     label sektor='Sektor (SKDE), basert på sektor_org'; format sektor sektor.;
+
+    label fodtAar_DSF='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
+    label fodtMnd_DSF='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
+    label kjonn_DSF  ='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten'; format kjonn_DSF kjonn.; 
+    label emigrertDato_DSF='Emigrert dato DSF (NPR)';
+    label dodDato_DSF='Dødedato DSF (NPR)';
+
 %end;
 
 

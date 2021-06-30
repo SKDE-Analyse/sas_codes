@@ -31,7 +31,15 @@ if aar=2019 and liggetid> 800 then inndato=utdato;
 /*!
 - Retting av ugyldig fødselsår
 */
+
+/* JS 17/07/2019- If year and month from persondata is available and valid, then use it as primary source */
+tmp_alder=aar-fodtAar_DSF;
 fodselsar_org=fodselsar;
+
+if fodtAar_DSF > 1900 and 0 <= tmp_alder <= 110 
+then fodselsar=fodtAar_DSF;
+
+/* if fødselsår is still invalid */
 if fodselsar > aar or fodselsar=. then fodselsar=9999;
 if aar-fodselsar > 110 then fodselsar=9999;
 
@@ -42,6 +50,7 @@ if aar-fodselsar > 110 then fodselsar=9999;
 
 Alder=aar-fodselsar;
 if fodselsar=9999 then alder=.; /*Ugyldig*/
+drop tmp_alder;
 
 /*!
 - Omkoding av KJONN til ErMann
@@ -49,6 +58,16 @@ if fodselsar=9999 then alder=.; /*Ugyldig*/
      if KJONN=1 /*1 ='Mann' */   then ErMann=1; /* Mann */
 else if KJONN=2 /*2 ='Kvinne' */ then ErMann=0; /* Kvinne */
 else if KJONN in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ErMann=.;
+
+/* ukjent kjønn i data får fikset til kjonn_DSF hvis det er kjente */
+If ErMann=. and kjonn_DSF in (1,2) then do;
+	if kjonn_DSF = 1 then ErMann = 1;
+	else if kjonn_DSF = 2 then ErMann = 0;
+end;
+
+ulikt_kjonn=.;
+if kjonn=1 and kjonn_DSF=2 then ulikt_kjonn=1;
+if kjonn=2 and kjonn_DSF=1 then ulikt_kjonn=1;
 
 
 /*!

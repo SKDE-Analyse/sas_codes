@@ -29,6 +29,7 @@ length institusjonID  6;
 length NPRId_reg stedAktivitet 4;
 length tell_: 4;
 length pid 6;
+length dodDato_DSF emigrertDato_DSF 4;
 
 %if &somatikk ne 0 %then %do;
 length behhf behrhf behsh 4;
