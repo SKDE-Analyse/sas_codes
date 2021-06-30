@@ -397,7 +397,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
         label SpesialistKomHN='Kommunenummer for avtalespesialistens praksis i Helse Nord (SKDE)';
         label AvtSpesKomHN='Kontakt med avtalespesialist i HN (SKDE)';
         label AvtSpes='Kontakt hos avtalespesialist (SKDE)'; format avtSpes avtSpes.;
-        /* label AvtaleRHF='RHF-et spesialisten har avtale med (NPR)'; format avtaleRHF boRHF_kort.; */
+        label AvtaleRHF='RHF-et spesialisten har avtale med (NPR)'; format avtaleRHF boRHF_fmt.;
 
         label bydel='Bydel (SKDE)';
         label omsorgsniva_org='Omsorgsnivå (NPR-melding)'; format omsorgsniva_org omsorgsniva.; 
