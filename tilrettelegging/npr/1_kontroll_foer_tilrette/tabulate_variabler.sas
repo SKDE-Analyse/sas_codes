@@ -20,9 +20,11 @@ PROC TABULATE
 DATA=&dsn;	
 	CLASS aar /	ORDER=UNFORMATTED MISSING;
 	CLASS &var1 &var2 /	ORDER=UNFORMATTED MISSING;
-	TABLE /* Row Dimension */
-(&var1*&var2) *N,
-/* Column Dimension */
-aar;
+	TABLE 
+	/* Row Dimension */
+	(&var1*&var2) all,
+
+	/* Column Dimension */
+	(N*f=nlnum10. colpctn*f=8.) * aar;
 RUN;
 %mend;
