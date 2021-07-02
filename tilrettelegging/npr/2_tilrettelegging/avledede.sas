@@ -43,7 +43,8 @@ then fodselsar=fodtAar_DSF;
 if fodselsar > aar or fodselsar=. then fodselsar=9999;
 if aar-fodselsar > 110 then fodselsar=9999;
 
-
+doddato=DodDato_DSF;
+emigrertdato=emigrertDato_DSF;
 /*!
 - Definerer Alder basert på Fodselsår
 */
