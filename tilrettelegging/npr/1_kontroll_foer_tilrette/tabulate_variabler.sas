@@ -16,6 +16,7 @@ RUN;
 
 /* create frequency table for 2 variables, for example komnr/bydel */
 %macro doubletab(dsn=, var1=, var2=);
+ods excel options(sheet_name="&var1. - &var2.");
 PROC TABULATE
 DATA=&dsn;	
 	CLASS aar /	ORDER=UNFORMATTED MISSING;
