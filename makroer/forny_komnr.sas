@@ -1,12 +1,17 @@
-/* Fornye gamle komnr til komnr i bruk pr 1.1.20xx */
-/* Input variable  : KomNrHjem2 in RHF data (specified in the argument, original kommunenummer varialbe from NPR) */
-/* Output variable : KomNr */
+/* Fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 */
 
-/* OBS: husk at bydeler blir ikke oppdatert når denne makroen kjøres. Hvis det er bydeler i datasettet må det lages etter at denne makroen er kjørt. */
+/* Input variable  : KomNrHjem2 in RHF data (specified in the argument, original kommunenummer variable from NPR) */
 
-%macro forny_komnr(inndata=, utdata=, kommune_nr=komnrhjem2 /*Kommunenummer som skal fornyes*/);
+/* Output variable : KomNr 
+                     komnr_inn (input kommunenummer beholdes i utdata for evnt kontroll)
+*/
 
-/* hente inn csv-fil */
+/* OBS: bydeler blir ikke oppdatert når denne makroen kjøres. */ 
+/* Hvis det er bydeler i datasettet må de fornyes etter at denne makroen er kjørt. */
+
+%macro forny_komnr(inndata=, kommune_nr=komnrhjem2 /*Kommunenummer som skal fornyes*/);
+
+/* lese inn csv-fil */
 data forny_komnr;
   infile "&filbane\formater\forny_komnr.csv"
   delimiter=';'
@@ -31,26 +36,28 @@ data forny_komnr;
 	;
 run;
 
-/* kun beholde gml komnr og nytt komnr */
-data forny(keep=komnr nykom);
-set forny_komnr(rename=(ny_komnr = nykom gml_komnr=komnr));
+/* beholde og gi nytt navn til variablene 'gml_komnr' og 'ny_komnr' fra innlest CSV-fil */
+data forny		(keep=komnr nykom);	 
+set forny_komnr	(rename=(ny_komnr = nykom  gml_komnr=komnr));
 run;
 
-
-%let i=1;
-%let sumkom=1;
-
-data &inndata;
-  set &inndata;
-  nr=_n_;
+/* gi nytt navn til kommunenummer fra inndata slik at det beholdes i utdata som variabel 'komnr_inn' */
+/* lage radnummer for å bruke til merge i siste steg */
+data &inndata (rename=(&kommune_nr = komnr_inn)); 
+set &inndata;
+  nr=_n_; 
 run;
 
-data tmp_forny;
-set &inndata(keep=&kommune_nr nr);
-komnr = &kommune_nr; /* i mottatt data er komnr = komnrhjem2 */
+/* loop trenger kun innsendt kommunenummer og radnummer */
+/* komnr_inn gis nytt navn før loop da merge skal gjøres med a.komnr=b.komnr */
+data tmp_forny 	(rename= (komnr_inn = komnr));
+set &inndata	(keep=komnr_inn nr); 
 run;
 
 /* Run a loop to fornew komnr until all komnr become missing (i.e. no more to fix)*/
+%let i=1;
+%let sumkom=1;
+
 %do %until (&sumkom<1);
     proc sql;
     	create table go&i as
@@ -63,25 +70,20 @@ run;
       set go&i; 
     run;
 
+    title 'antall komnr som må fornyes';
     proc sql;
-    	select sum(komnr) into :sumkom
-    	from go&i;
+    select count( distinct (case when komnr>1 then komnr end)) into :sumkom
+    from go&i;
     quit;
-%put &sumkom;
+
     data tmp_forny;
       set go&i;
     run;
-%put &i;
-
 
     %let i = %eval(&i+1);
-%put &i;
-
 %end;
 
-%put &i;
 /* save final komnr fix - komnr_orig1 as input, komnr as output (newest komnr)*/
-
 data tmp_forny_out;
   set tmp_forny;
 
@@ -99,13 +101,19 @@ data tmp_forny_out;
 run;
 
 proc sql;
-  create table &utdata as
-  select a.*, b.komnr
+  create table &inndata as
+  select b.komnr, a.* 
   from &inndata a, tmp_forny_out b
   where a.nr=b.nr;
 quit;
 
+/* Melding til loggen */
+%put *------------------------------------------------*;
+%put *** OBS: bydeler fornyes ikke i denne makroen! ***;
+%put *------------------------------------------------*;
+
+proc datasets nolist;
+delete go: forny tmp_forny: forny_komnr;
+run;
 %mend;
-
-
 
