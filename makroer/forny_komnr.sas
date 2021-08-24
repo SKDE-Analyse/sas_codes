@@ -112,6 +112,12 @@ quit;
 %put *** OBS: bydeler fornyes ikke i denne makroen! ***;
 %put *------------------------------------------------*;
 
+%put *-------------------------------------------------------------------------------------------------*;
+%put * Bydeler må oppdateres manuelt. Se makro 'bydel'.                                                *
+%put * \\tos-sas-skde-01\SKDE_SAS\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas   *;
+%put *-------------------------------------------------------------------------------------------------*;
+
+
 proc datasets nolist;
 delete go: forny tmp_forny: forny_komnr;
 run;
