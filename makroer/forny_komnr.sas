@@ -1,21 +1,21 @@
-/* Fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 */
+%macro forny_komnr(inndata=, kommune_nr=komnrhjem2);
+/*! Fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 
 
-/* Endringslogg:
-      Sist endret 25.08.2021 av Tove Johansen */
+Endringslogg:
+          Sist endret 25.08.2021 av Tove Johansen. 
 
-/* Input variable  : 
-              Inndata
-              kommune_nr (KomNrHjem2 in RHF data (specified in the argument, original kommunenummer variable from NPR)) */
+ Input variable: 
+          Inndata
+          kommune_nr (Kommunenummer som skal fornyes, default er 'KomNrHjem2' - variabel utlevert fra NPR ) 
 
-/* Output variable : 
-              KomNr 
-              komnr_inn (input kommunenummer beholdes i utdata for evnt kontroll)
-*/
+ Output variable: 
+          KomNr 
+          komnr_inn (input kommunenummer beholdes i utdata for evnt kontroll)
 
-/* OBS: bydeler blir ikke oppdatert når denne makroen kjøres. */ 
-/* Hvis det er bydeler i datasettet må de fornyes etter at denne makroen er kjørt. */
-
-%macro forny_komnr(inndata=, kommune_nr=komnrhjem2 /*Kommunenummer som skal fornyes*/);
+ OBS: bydeler blir ikke oppdatert når denne makroen kjøres. 
+ Hvis det er bydeler i datasettet må de fornyes etter at denne makroen er kjørt. 
+ Se makro 'bydel': \\tos-sas-skde-01\SKDE_SAS\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas
+ */
 
 /* lese inn csv-fil */
 data forny_komnr;
@@ -122,7 +122,6 @@ quit;
 %put * Bydeler må oppdateres manuelt. Se makro 'bydel'.                                                *
 %put * \\tos-sas-skde-01\SKDE_SAS\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas   *;
 %put *-------------------------------------------------------------------------------------------------*;
-
 
 proc datasets nolist;
 delete go: forny tmp_forny: forny_komnr;
