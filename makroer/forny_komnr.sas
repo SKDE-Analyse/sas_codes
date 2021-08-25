@@ -1,9 +1,15 @@
 /* Fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 */
 
-/* Input variable  : KomNrHjem2 in RHF data (specified in the argument, original kommunenummer variable from NPR) */
+/* Endringslogg:
+      Sist endret 25.08.2021 av Tove Johansen */
 
-/* Output variable : KomNr 
-                     komnr_inn (input kommunenummer beholdes i utdata for evnt kontroll)
+/* Input variable  : 
+              Inndata
+              kommune_nr (KomNrHjem2 in RHF data (specified in the argument, original kommunenummer variable from NPR)) */
+
+/* Output variable : 
+              KomNr 
+              komnr_inn (input kommunenummer beholdes i utdata for evnt kontroll)
 */
 
 /* OBS: bydeler blir ikke oppdatert når denne makroen kjøres. */ 
