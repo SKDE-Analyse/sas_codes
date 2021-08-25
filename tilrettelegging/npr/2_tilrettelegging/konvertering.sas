@@ -1,4 +1,4 @@
-%Macro Konvertering (Inndatasett=, Utdatasett=);
+%Macro Konvertering (Inndatasett=, Utdatasett=, pid=lnr);
 
 /*!
 
@@ -26,8 +26,8 @@ Set &Inndatasett(rename=(episodefag=episodefag_org));
 /*!
 - Lager `pid` fra `LNr` (løpenummer) og sletter `LNr`
 */
-PID=lopenr+0;
-Drop lopenr;
+PID=&pid+0;
+Drop &pid;
 
 /*!
 - Gjør `RehabType` numerisk.
