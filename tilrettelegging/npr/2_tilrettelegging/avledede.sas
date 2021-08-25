@@ -19,7 +19,7 @@ MACRO FOR AVLEDEDE VARIABLE
 */
 
 Data &Utdatasett;
-set &Inndatasett(rename=(sektor=sektor_org));
+set &Inndatasett /*(rename=(sektor=sektor_org))*/ /*SKDE-data har ikke variabel 'sektor'*/   ;
 
 /* fix variable anomaly that was discovered in the step 1 control */
 

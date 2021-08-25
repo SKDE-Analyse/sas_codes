@@ -25,6 +25,7 @@ set &inndata;
         if aar = 2017 then do; 
             if behandlingsstedkode2 = 974377779 then behandlingsstedkode2 = institusjonid ; /*Betanien spesialistpoliklinikk - behandlingsstedkode har et feilplassert siffer, mens institusjonid har riktig orgnr.*/
             if behandlingsstedkode2 = 974733213 then behandlingsstedkode2 = institusjonid ; /*Somatikk Kristiansand - fysioterapi - behandlingsstedkode har et feil siffer(2 i stedet for  0), mens instititusjonid har riktig orgnr.*/
+            if behandlingsstedkode2 = 974733113 then behandlingsstedkode2 = institusjonid ; /*Somatikk Kristiansand - fysioterapi - behandlingsstedkode har et feil siffer(1 i stedet for  0), mens instititusjonid har riktig orgnr.*/
             if behandlingsstedkode2 = 383971636 then behandlingsstedkode2 = institusjonid  ; /*Akershus - fysioterapi - behandlingsstedkode har et feil siffer(starter med 3 i stedet for 9, er orgnr til hovedenhet/HF). Bruker institusjonid som har orgnr til Ahus Nordbyhagen somatikk.*/
         end;
         /* 2018 */
