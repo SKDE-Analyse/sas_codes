@@ -65,7 +65,8 @@ label stedAktivitet='Sted for aktivitet (NPR-melding)'; format STEDAKTIVITET STE
 label utTid='Utskrivelsestidspunkt (NPR-melding)'; 
 label komNrHjem2='Kommunenummer vasket mot Folkeregisteret (NPR-melding)'; format KomNrHjem2 komnr_fmt.; 
 label komNrHjem='Kommunenummer, innrapportert (NPR-melding)'; 
-label dodDato='Døddato (NPR)';
+label dodDato='Døddato (NPR)';format dodDato Eurdfdd10.;
+
 label ATC_1='ATC kode 1 (ATC/NPR-melding)'; 
 label ATC_2='ATC kode 2 (ATC/NPR-melding)'; 
 label ATC_3='ATC kode 3 (ATC/NPR-melding)'; 
@@ -84,11 +85,12 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label tell_ICD10='Antall ICD-10-koder innrapportert (NPR)';
     label tell_NCMP='Antall NCMP-koder innrapportert (NPR)';
     label tell_NCSP='Antall NCSP-koder innrapportert (NPR)';
-    /* 
-    label fodtAar_DSF_190619='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
-    label fodtMnd_DSF_190619='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
-    label kjonn_DSF_190619  ='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten'; format kjonn_DSF_190619 kjonn.; 
-    */
+    label tilSted='Til sted (NPK)'; format tilsted tilsted.;
+    label fraSted='Fra sted (NPK)'; format frasted frasted.; 
+    label polkonAktivitet='Aktivitetstype (NPR-melding)'; format polkonAktivitet POLKONAKTIVITET.;
+    label oppholdstype='oppholdstype, ikke lenger i bruk etter 2017';
+    label behandlingssted2='behandlingssted (NPR)'; format behandlingssted2 org_fmt.;
+
 %end;
 
 /****************************/
@@ -109,6 +111,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label ICD10KatBlokk='ICD-10 kategoriblokk for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10KatBlokk ICD10KatBlokk.; 
     label KomNR='Kommunenummer fornyet til gyldig komnr-struktur pr 01.01.2021, numerisk (SKDE)'; format KomNR komnr_fmt.; 
     label bydel='Bydel i Oslo, Bergen, Stavanger og Trondhem vasket mot Folkeregisteret (SKDE)'; format bydel bydel_fmt.;
+    label bydel2_org='Bydel vasket mot Folkeregisteret (NPR)'; format bydel bydel_fmt.;
 
     label Hdiag='Hovedtilstand kode 1 (ICD-10/NPR-melding/SKDE)'; format hdiag $icd10_fmt.;
     label Hdiag2='Hovedtilstand kode 2 (ICD-10/NPR-melding/SKDE)'; format hdiag2 $icd10_fmt.;
@@ -148,6 +151,13 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
 
     label Hastegrad='Hastegrad - akutt/elektivt (SKDE)'; format hastegrad Hastegrad.;
     label sektor='Sektor (SKDE), basert på sektor_org'; format sektor sektor.;
+
+    label fodtAar_DSF='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
+    label fodtMnd_DSF='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
+    label kjonn_DSF  ='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten'; format kjonn_DSF kjonn.; 
+    label emigrertDato_DSF='Emigrert dato DSF (NPR)';format emigrertDato_DSF  Eurdfdd10.;
+    label dodDato_DSF='Dødedato DSF (NPR)'; format dodDato_DSF Eurdfdd10.;
+
 %end;
 
 
@@ -172,7 +182,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label utforendeHelseperson='Utførende helsepersonell (NPR-melding)'; format utforendeHelseperson UTFORENDEHELSEPERSON.;
     label aggrshoppID_LNr='Id for aggregert sykehusopphold (NPK)'; 
     label hdg='Hoveddiagnosegruppe (NPK)'; format HDG HDG.; 
-    label nyTilstand='Ny Tilstand (NPR-melding)';
+    label nyTilstand='Ny Tilstand (NPR-melding)'; format nyTilstand NYTILSTAND.;
     /*these 4 variables are removed for avtsp, keep in here in case we still have them for som*/
     label tilSted='Til sted (NPK)'; format tilsted tilsted.;
     label fraSted='Fra sted (NPK)'; format frasted frasted.; 
@@ -186,8 +196,8 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label npkOpphold_antallKontakter='Antall kontakter som inngår i det aggregerte "sykehusoppholdet" (NPK)';
     label npkOpphold_antallAvdelingsopphol='Antall avdelingsopphold som inngår i det aggregerte "sykehusoppholdet" (NPK)'; 
     label polUtforende_1='Utførende helsepersonell 1 (NPK)'; format polUtforende_1 UTFORENDEHELSEPERSON.; 
-    label polUtforende_2='Utførende helsepersonell 2 (NPK)';
-    label polUtforende_3='Utførende helsepersonell 3 (NPK)'; 
+    label polUtforende_2='Utførende helsepersonell 2 (NPK)'; format polUtforende_2 UTFORENDEHELSEPERSON.; 
+    label polUtforende_3='Utførende helsepersonell 3 (NPK)'; format polUtforende_3 UTFORENDEHELSEPERSON.; 
     label relatertKontaktID='Id for relaterte kontakter (NPK)';
     label henvType='Utfall av vurdering av henvisningen (NPR-melding)'; format henvType henvType.;
     label henvFraInstitusjonID='Henvist fra institusjon (NPK)'; format HENVFRAINSTITUSJONID HENVFRAINSTITUSJONID.;
@@ -229,10 +239,10 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label fagenhetKode='Fagenhet kode (NPR-melding)';
     label fagenhetLokal='Fagenhet navn (NPR-melding)';
     label fagenhetReshID='Fagenhet ReshID (NPR-melding)';
-    label behandlingsstedKode='Behandlingssted kode (NPR-melding)';
+    label behandlingsstedKode='Behandlingssted kode (NPR-melding)'; format behandlingsstedKode org_fmt.;
     label behandlingsstedLokal='Behandlingssted navn (NPR-melding)';
     label behandlingsstedReshID='Behandlingssted ReshID (NPR-melding)';
-    label hf='Behandlende helseforetak (NPR)';
+    label hf='Behandlende helseforetak (NPR)'; format hf org_fmt.;
 
     /* somatikk raw data only in SKDE datagrunnlag  */
     %if &datagrunnlag=SKDE %then %do;
@@ -351,7 +361,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label fag='Fagfelt for avtalespesialisen (NPR)'; format fag fag_skde.;
 
     label ulikt_kjonn='Ulikt kjønn i innrapportert data og i f.nr./D-nr. (SKDE)';
-    label kontakt ='Kontakttype, f.eks. enkel, spesialist eller lysbehandling (NPR)';
+    label kontakt ='Kontakttype, f.eks. enkel, spesialist eller lysbehandling (NPR)'; format kontakt kontakt.;
     label bydel2_org='Bydel (NPR)';
     label bydel_org='Bydel (NPR)';
 
@@ -389,7 +399,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
         label SpesialistKomHN='Kommunenummer for avtalespesialistens praksis i Helse Nord (SKDE)';
         label AvtSpesKomHN='Kontakt med avtalespesialist i HN (SKDE)';
         label AvtSpes='Kontakt hos avtalespesialist (SKDE)'; format avtSpes avtSpes.;
-        /* label AvtaleRHF='RHF-et spesialisten har avtale med (NPR)'; format avtaleRHF boRHF_kort.; */
+        label AvtaleRHF='RHF-et spesialisten har avtale med (NPR)'; format avtaleRHF boRHF_fmt.;
 
         label bydel='Bydel (SKDE)';
         label omsorgsniva_org='Omsorgsnivå (NPR-melding)'; format omsorgsniva_org omsorgsniva.; 
