@@ -21,8 +21,12 @@ Makro for å fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
  Se makro 'bydel': 
   - \\tos-sas-skde-01\SKDE_SAS\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas
 
-Endringslogg:
-          Sist endret 25.08.2021 av Tove Johansen.
+### Endringslogg:
+    - 2020 Opprettet av Tove og Janice
+    - august 2021, Tove
+          - tatt bort 'utdata='
+          - skrive melding til SAS-logg
+          - dokumentasjon markdown
 
  */
 
