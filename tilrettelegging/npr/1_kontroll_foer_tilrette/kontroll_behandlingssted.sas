@@ -1,11 +1,34 @@
-/* Kontrollere om variabel behandlingsstedkode har gyldig verdi (orgnr) */
-/* Output fra proc freq gir andel med gyldig og ugyldig orgnr mottatt */
-/* Output error-fil gir alle linjene fra mottatt data som har ugyldig orgnr - fikses i tilrettelegging */
-/* NB: ugyldig orgnr kan være et nytt orgnr ikke registrert i listen vår */
-
 %macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode, sektor=som); 
-/* beh=behandlingsstedkode kan erstattes med annen variabel som inneholder orgnr hvis en ønsker å kontrollere for gyldige orgnr*/
-/* sektor could be set to som or aspes */
+/* !
+### Beskrivelse
+
+Makro for å kontrollere om variabel 'behandlingsstedkode' i somatikk-data og 'institusjonid' i avtspes-data har en kjent verdi.
+Kontrollen gjennomføres ved at mottatte verdier sjekkes mot CSV-filer som inneholder organisasjonsnummer for somatikk-data og reshid for avtalespesialist-data. 
+
+Ukjente verdier (fra datasettet error_liste_'aar') kontrolleres mot brønnøysundregisteret eller reshid-registeret.
+Hvis verdien i error_listen er et gyldig organisasjonsnummer eller reshid så skal CSV-fil oppdateres.
+Hvis ikke korrigeres det i tilretteleggingen steg 2.
+
+### Input 
+- inndata: 
+- aar: Brukes for å gi unike navn til output-errorfiler.
+- beh: Organisasjonsnummer eller reshid som skal kontrolleres, default er 'behandlingsstedkode' for somatikkdata. Hvis kontroll av reshid i avtalespesialist-data endres det til 'institusjonid'.
+- sektor: Default er 'som' som somatikk-data, det velges 'aspes' hvis avtalespesialist-data. 
+
+### Output 
+- seks datasett
+ - orgnr: alle verdier fra CSV-fil(avtalespesialister.csv eller behandler.csv) brukt i kontrollen.
+ - mottatt_beh: alle verdier fra variabel som kontrolleres.
+ - error_liste_'aar': verdier fra kontrollert variabel som ikke gjenfinnes i CSV-filen. 
+ - flagg_org: viser flagg med 'gyldig' eller 'ugyldig' for mottatte verdier.
+ - tmp_data: datasett som brukes til å gjøre proc freq.
+- resultat fra proc freq
+ - viser andel av radene med gyldig og ugyldig verdi av kontrollert variabel.
+
+### Endringslogg
+- 2020 Opprettet av Janice og Tove
+- August 2021, Tove, dokumentasjon markdown
+*/
 
 %if &sektor=som %then %do;
 data orgnr;
@@ -54,8 +77,8 @@ data orgnr;
   format kommentar $300.;
 
   input	
-    orgnr
-    org_navn $
+  orgnr
+  org_navn $
 	kommentar $
 	;
 run;
@@ -72,7 +95,6 @@ create table mottatt_beh as
 select distinct &beh as orgnr
 from &inndata;
 quit;
-
 
 /*sortere og flagge orgnr/behandler*/
 proc sort data=beh_liste; by orgnr; run;
@@ -109,12 +131,8 @@ proc freq data=tmp_data;
 tables gyldig/missing; 
 run;
 
-
 /*printe ut fil med ugyldig behandler/orgnr*/
 /*disse fikses i tilrettelegging*/
-
 proc sort data=tmp_data nodupkey out=error_liste_&aar(keep=&beh);
 by &beh; where ugyldig = 1; run;
-
-
 %mend;
