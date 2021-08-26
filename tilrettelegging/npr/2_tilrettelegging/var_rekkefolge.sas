@@ -93,7 +93,7 @@ AvtSpes
 */
 
 Data &Utdatasett;
-retain aar pid &magnusvar koblingsID;
+retain aar pid &magnusvar ;
 set &Inndatasett;
 run;
 

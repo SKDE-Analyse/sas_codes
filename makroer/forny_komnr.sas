@@ -2,7 +2,7 @@
 /*! 
 ### Beskrivelse
 
-Makro for å fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
+Makro for Ã¥ fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
 
 ```
 %forny_komnr(inndata=, kommune_nr=komnrhjem2)
@@ -16,8 +16,8 @@ Makro for å fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
 - KomNr: Fornyet kommunenummer
 - komnr_inn: Input kommunenummer beholdes i utdata for evnt kontroll
 
-OBS: bydeler blir ikke oppdatert når denne makroen kjøres. 
-Hvis det er bydeler i datasettet må de fornyes etter at denne makroen er kjørt. 
+OBS: bydeler blir ikke oppdatert nÃ¥r denne makroen kjÃ¸res. 
+Hvis det er bydeler i datasettet mÃ¥ de fornyes etter at denne makroen er kjÃ¸rt. 
 Se makro 'bydel': 
 - \&filbane\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas
 
@@ -27,6 +27,7 @@ Se makro 'bydel':
   - tatt bort 'utdata='
   - skrive melding til SAS-logg
   - dokumentasjon markdown
+
  */
 
 /* lese inn csv-fil */
@@ -60,14 +61,14 @@ set forny_komnr	(rename=(ny_komnr = nykom  gml_komnr=komnr));
 run;
 
 /* gi nytt navn til kommunenummer fra inndata slik at det beholdes i utdata som variabel 'komnr_inn' */
-/* lage radnummer for å bruke til merge i siste steg */
+/* lage radnummer for Ã¥ bruke til merge i siste steg */
 data &inndata (rename=(&kommune_nr = komnr_inn)); 
 set &inndata;
   nr=_n_; 
 run;
 
 /* loop trenger kun innsendt kommunenummer og radnummer */
-/* komnr_inn gis nytt navn før loop da merge skal gjøres med a.komnr=b.komnr */
+/* komnr_inn gis nytt navn fÃ¸r loop da merge skal gjÃ¸res med a.komnr=b.komnr */
 data tmp_forny 	(rename= (komnr_inn = komnr));
 set &inndata	(keep=komnr_inn nr); 
 run;
@@ -88,7 +89,7 @@ run;
       set go&i; 
     run;
 
-    title 'antall komnr som må fornyes';
+    title 'antall komnr som mÃ¥ fornyes';
     proc sql;
     select count( distinct (case when komnr>1 then komnr end)) into :sumkom
     from go&i;
@@ -131,7 +132,7 @@ quit;
 %put *------------------------------------------------*;
 
 %put *-------------------------------------------------------------------------------------------------*;
-%put * Bydeler må oppdateres manuelt. Se makro 'bydel'.                                                *
+%put * Bydeler mÃ¥ oppdateres manuelt. Se makro 'bydel'.                                                *
 %put * \\&filbane\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas   *;
 %put *-------------------------------------------------------------------------------------------------*;
 
