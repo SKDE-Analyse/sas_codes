@@ -9,25 +9,24 @@ Makro for å fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
 ```
 
 ### Input 
-      - Inndata:
-      - kommune_nr:  Kommunenummer som skal fornyes, default er 'KomNrHjem2' - variabel utlevert fra NPR 
+- Inndata:
+- kommune_nr:  Kommunenummer som skal fornyes, default er 'KomNrHjem2' - variabel utlevert fra NPR 
 
 ### Output 
-      - KomNr: Fornyet kommunenummer
-      - komnr_inn: Input kommunenummer beholdes i utdata for evnt kontroll
+- KomNr: Fornyet kommunenummer
+- komnr_inn: Input kommunenummer beholdes i utdata for evnt kontroll
 
- OBS: bydeler blir ikke oppdatert når denne makroen kjøres. 
- Hvis det er bydeler i datasettet må de fornyes etter at denne makroen er kjørt. 
- Se makro 'bydel': 
-  - \\tos-sas-skde-01\SKDE_SAS\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas
+OBS: bydeler blir ikke oppdatert når denne makroen kjøres. 
+Hvis det er bydeler i datasettet må de fornyes etter at denne makroen er kjørt. 
+Se makro 'bydel': 
+- \&filbane\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas
 
 ### Endringslogg:
-    - 2020 Opprettet av Tove og Janice
-    - august 2021, Tove
-          - tatt bort 'utdata='
-          - skrive melding til SAS-logg
-          - dokumentasjon markdown
-
+- 2020 Opprettet av Tove og Janice
+- august 2021, Tove
+  - tatt bort 'utdata='
+  - skrive melding til SAS-logg
+  - dokumentasjon markdown
  */
 
 /* lese inn csv-fil */
@@ -133,7 +132,7 @@ quit;
 
 %put *-------------------------------------------------------------------------------------------------*;
 %put * Bydeler må oppdateres manuelt. Se makro 'bydel'.                                                *
-%put * \\tos-sas-skde-01\SKDE_SAS\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas   *;
+%put * \\&filbane\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas   *;
 %put *-------------------------------------------------------------------------------------------------*;
 
 proc datasets nolist;
