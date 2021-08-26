@@ -6,7 +6,7 @@
 
 ### Beskrivelse
 
-Makro for Ã¥ fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
+Makro for å fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
 
 ```
 %forny_komnr(inndata=, kommune_nr=komnrhjem2)
@@ -20,8 +20,8 @@ Makro for Ã¥ fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
 - KomNr: Fornyet kommunenummer
 - komnr_inn: Input kommunenummer beholdes i utdata for evnt kontroll
 
-OBS: bydeler blir ikke oppdatert nÃ¥r denne makroen kjÃ¸res. 
-Hvis det er bydeler i datasettet mÃ¥ de fornyes etter at denne makroen er kjÃ¸rt. 
+OBS: bydeler blir ikke oppdatert når denne makroen kjøres. 
+Hvis det er bydeler i datasettet må de fornyes etter at denne makroen er kjørt. 
 Se makro 'bydel': 
 - \&filbane\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas
 
