@@ -2,32 +2,28 @@
 /* !
 ### Beskrivelse
 
-Makro for å kontrollere om variabel 'behandlingsstedkode' i somatikk-data og 'institusjonid' i avtspes-data har en kjent verdi.
+Makro for å kontrollere om variabel 'behandlingsstedkode' eller 'behandlingssted2' i somatikk-data og 'institusjonid' i avtspes-data har en kjent verdi.
 Kontrollen gjennomføres ved at mottatte verdier sjekkes mot CSV-filer som inneholder organisasjonsnummer for somatikk-data og reshid for avtalespesialist-data. 
 
 Ukjente verdier (fra datasettet error_liste_'aar') kontrolleres mot brønnøysundregisteret eller reshid-registeret.
 Hvis verdien i error_listen er et gyldig organisasjonsnummer eller reshid så skal CSV-fil oppdateres.
-Hvis ikke korrigeres det i tilretteleggingen steg 2.
+Hvis ikke korrigeres ugyldig verdi i tilretteleggingen steg 2.
 
 ### Input 
-- inndata: 
+- inndata: Filen med behandlingssted-variabel som skal kontrolleres, f.eks hnmot.m20t3_som_2020.
 - aar: Brukes for å gi unike navn til output-errorfiler.
-- beh: Organisasjonsnummer eller reshid som skal kontrolleres, default er 'behandlingsstedkode' for somatikkdata. Hvis kontroll av reshid i avtalespesialist-data endres det til 'institusjonid'.
-- sektor: Default er 'som' som somatikk-data, det velges 'aspes' hvis avtalespesialist-data. 
+- beh: Organisasjonsnummer eller reshid som skal kontrolleres, default er 'behandlingsstedkode' for RHF-data. Hvis kontroll av SKDE-data endres det til 'behandlingssted2', eller ved kontroll av reshid i avtalespesialist-data endres det til 'institusjonid'.
+- sektor: Default er 'som' for somatikk-data, det velges 'aspes' hvis avtalespesialist-data. 
 
 ### Output 
-- seks datasett
- - orgnr: alle verdier fra CSV-fil(avtalespesialister.csv eller behandler.csv) brukt i kontrollen.
- - mottatt_beh: alle verdier fra variabel som kontrolleres.
- - error_liste_'aar': verdier fra kontrollert variabel som ikke gjenfinnes i CSV-filen. 
- - flagg_org: viser flagg med 'gyldig' eller 'ugyldig' for mottatte verdier.
- - tmp_data: datasett som brukes til å gjøre proc freq.
+- ett datasett
+ - error_liste_'aar': mottatte verdier fra kontrollert variabel som ikke gjenfinnes i CSV-filen. 
 - resultat fra proc freq
  - viser andel av radene med gyldig og ugyldig verdi av kontrollert variabel.
 
 ### Endringslogg
 - 2020 Opprettet av Janice og Tove
-- August 2021, Tove, dokumentasjon markdown
+- September 2021, Tove, dokumentasjon markdown
 */
 
 %if &sektor=som %then %do;
@@ -135,4 +131,8 @@ run;
 /*disse fikses i tilrettelegging*/
 proc sort data=tmp_data nodupkey out=error_liste_&aar(keep=&beh);
 by &beh; where ugyldig = 1; run;
+
+proc datasets nolist;
+delete flagg_org tmp_data orgnr beh_liste mottatt_beh;
+run;
 %mend;
