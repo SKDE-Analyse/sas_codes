@@ -5,7 +5,7 @@
 Makro for å fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
 
 ```
-%forny_komnr(inndata=, kommune_nr=komnrhjem2)
+%forny_komnr(inndata=, kommune_nr=komnrhjem2);
 ```
 
 ### Input 
