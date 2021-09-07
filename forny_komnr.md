@@ -23,7 +23,7 @@ Makro for å fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
 OBS: bydeler blir ikke oppdatert når denne makroen kjøres. 
 Hvis det er bydeler i datasettet må de fornyes etter at denne makroen er kjørt. 
 Se makro 'bydel': 
-- \&filbane\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas
+- \\&filbane\tilrettelegging\npr\2_tilrettelegging\bydel.sas
 
 ### Endringslogg:
 - 2020 Opprettet av Tove og Janice
