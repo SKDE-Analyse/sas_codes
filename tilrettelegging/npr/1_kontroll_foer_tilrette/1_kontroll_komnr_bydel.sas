@@ -1,11 +1,34 @@
-/*Kontrollerer at mottatte data inneholder gyldige komrn og bydel*/
-/*Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel*/
-/* Output-filer med navn 'error' gir oversikt over ugyldige komnr eller bydeler i mottatt data */
-
 %macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
+/*!
+### Beskrivelse
 
+```
+%kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);
+```
 
-/* laste inn tre datafiler */
+Makro for å kontrollere om variabel 'komnrhjem2' og 'bydel2' i somatikk-data inneholder gyldige kommunenummer og bydeler.
+Kontrollen gjøres ved at mottatte verdier sjekkes mot CSV-filer som inneholder kommunenummer og bydel.
+Makroen kontrollerer ikke om f.eks kommunenummer Oslo 0301 mangler bydel. 
+
+Hvis ugyldige verdier i output-datasettene korrigeres det i tilretteleggingen.
+
+### Input 
+- inndata: Filen med kommunenummer-variabel som skal kontrolleres, f.eks hnmot.m20t3_som_2020.
+- komnr: Kommunenummer som skal kontrolleres, default er 'komnrhjem2'.
+- bydel: Bydel som skal kontrolleres, default er 'bydel2'.
+- aar: Brukes for å gi unike navn til output-errorfiler.
+
+### Output 
+- to datasett
+  - error_komnr_'aar'
+  - error_bydel_'aar'
+
+### Endringslogg
+- 2020 Opprettet av Janice og Tove
+- September 2021, Tove, legge til steg for å slette datasett.
+*/
+
+/* laste inn CSV-filer */
 data komnr;
   infile "&filbane\formater\forny_komnr.csv"
   delimiter=';'
@@ -85,7 +108,7 @@ data boomr;
   run;
 
 /* -------------------------------------------- */
-/*  1.Alle kommunenummer og bydeler skal med    */
+/*  1. Alle gyldige kommunenummer og bydeler    */
 /* -------------------------------------------- */
 /*csv-fil med gyldige komnr */
 data gyldig_komnr(keep=komnr2);
@@ -113,9 +136,9 @@ run;
 
 
 
-/* -------------------------------------------------------- */
-/* 2. Hente ut variabel 'komnr' og 'bydel' fra mottatte data*/
-/* -------------------------------------------------------- */
+/* --------------------------------------------------------- */
+/* 2. Hente ut variabel 'komnr' og 'bydel' fra mottatte data */
+/* --------------------------------------------------------- */
 proc sql;
 	create table mottatt_komnr as
 	select distinct &komnr, &bydel
@@ -166,6 +189,10 @@ if a and b then felles = 1;
 if a and not b then feil = 1;
 if felles then output godkjent_bydel_&aar;
 if feil then output error_bydel_&aar;
+run;
+
+proc datasets nolist;
+delete komnr bydel boomr gyldig_komnr liste_komnr gyldig_bydel liste_bydel mottatt_komnr mottatt_bydel godkjent_: ;
 run;
 %mend;
 
