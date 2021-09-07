@@ -2,6 +2,10 @@
 /*!
 ### Beskrivelse
 
+```
+%kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode, sektor=som);
+```
+
 Makro for å kontrollere om variabel 'behandlingsstedkode' eller 'behandlingssted2' i somatikk-data og 'institusjonid' i avtspes-data har en kjent verdi.
 Kontrollen gjennomføres ved at mottatte verdier sjekkes mot CSV-filer som inneholder organisasjonsnummer for somatikk-data og reshid for avtalespesialist-data. 
 
@@ -17,9 +21,9 @@ Hvis ikke korrigeres ugyldig verdi i tilretteleggingen steg 2.
 
 ### Output 
 - ett datasett
- - error_liste_'aar': mottatte verdier fra kontrollert variabel som ikke gjenfinnes i CSV-filen. 
+  - error_liste_'aar': mottatte verdier fra kontrollert variabel som ikke gjenfinnes i CSV-filen. 
 - resultat fra proc freq
- - viser andel av radene med gyldig og ugyldig verdi av kontrollert variabel.
+  - viser andel av radene med gyldig og ugyldig verdi av kontrollert variabel.
 
 ### Endringslogg
 - 2020 Opprettet av Janice og Tove
