@@ -1,5 +1,5 @@
 %macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode, sektor=som); 
-/* !
+/*!
 ### Beskrivelse
 
 Makro for å kontrollere om variabel 'behandlingsstedkode' eller 'behandlingssted2' i somatikk-data og 'institusjonid' i avtspes-data har en kjent verdi.
