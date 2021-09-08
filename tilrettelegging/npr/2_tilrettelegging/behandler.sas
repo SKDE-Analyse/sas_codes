@@ -1,12 +1,34 @@
-/* Makro for å lage behandler (BEHSH, BEHHF, BEHRHF). */
-/* Den bruker variabelen 'behandlingsstedkode2' (RHF datagrunnlag) som lages i tilretteleggingen for å definere behandler */
-/* Alle linjer må ha gyldig orgnr/behandler - det fikses i tilrettelegging */
+%macro behandler(inndata=, beh=behandlingssted2);
+/*!
+### Beskrivelse
 
-/* Det gjøres en kontroll etter innlasting av CSV for å sjekke at det ikke er duplikate verdier */
-/* Hvis det er duplikate verdier slettes datasettet behandler og det kommer en melding om ABORT i SAS-logg */
+```
+%behandler(inndata=, beh=behandlingsstedkode2, utdata=);
+```
+Makro for å lage behandler-variablene behsh, behhf og behrhf. 
+Dt gjøres ved bruk av csv-filen \&filbane\formater\behandler.csv.
 
-%macro behandler(inndata=, beh=behandlingsstedkode2, utdata=);
+Makroen bruker variabelen 'behandlingssted2' fra inndata for å lage behandler-variablene.
+Før makroen kjøres må alle radene i inndata ha gyldig behandlingssted (organisasjonsnummer), det gjøres i tilretteleggingen med makroen:
+- \\&filbane\tilrettelegging\npr\2_tilrettelegging\fix_behandlingssted.sas
 
+Det gjøres en kontroll av CSV-filen etter innlasting for å sjekke etter duplikate verdier.
+Hvis det er duplikate verdier slettes datasettet og det kommer en melding om ABORT i SAS-loggen.
+Hvis det skjer må CSV-filen sjekket og duplikate føringer må slettes.
+
+### Input 
+- inndata: Datasett hvor behandler-variabler skal lages, f.eks hnmot.m20t3_som_2020.
+- beh: Behandlingssted-variabel som brukes til å definere behandler-variablene, default er 'behandlingssted2' som brukes i både RHF- og SKDE-data.
+
+### Output 
+- tre variabler
+  - BEHSH
+  - BEHHF
+  - BEHRHF
+
+### Endringslogg
+- 2020 Opprettet av Janice og Tove
+*/
 
 /* Hente inn CSV-fil for å lage behandler */
 data beh;
@@ -69,21 +91,26 @@ proc delete data=beh;
 run;
 %end;
 
-
 /*ta med de variablene som trengs til å lage behandler*/
 data beh(keep=orgnr behsh behhf behrhf);
 set beh;
 run;
 
+/* drop evnt behrhf, behhf og behsh hvis de allerede er i inndata */
+data &inndata;
+set &inndata;
+drop behsh behhf behrhf;
+run;
+
 /*merge behandler med bruk av orgnr*/
-proc sql;
-	create table &utdata as
-	select * from &inndata a left join beh b
+proc sql undo_policy=none;
+	create table &inndata as
+	select a.*, b.behsh, b.behhf, b.behrhf 
+  from &inndata a left join beh b
 	on a.&beh=b.orgnr;
 quit;
 
-proc freq data=&utdata;
-  tables behsh behhf behrhf;
+proc datasets nolist;
+delete beh;
 run;
-
 %mend;
