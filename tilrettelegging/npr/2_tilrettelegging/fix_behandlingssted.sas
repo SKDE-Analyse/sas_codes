@@ -11,8 +11,8 @@ data &utdata;
 set &inndata;
 
 %if &datagrunnlag=RHF %then %do;
-    /* Ta vare på original variabel 'behandlingsstedkode' - lage en 'behandlingsstedkode2' */
-    behandlingsstedkode2 = &beh+0; 
+    /* Ta vare på original variabel 'behandlingsstedkode' - lage en 'behandlingssted2' */
+    behandlingssted2 = &beh+0; 
 
     %if &sektor=AVD or &sektor=SHO %then %do;
 
