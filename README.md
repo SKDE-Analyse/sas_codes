@@ -1,5 +1,6 @@
 [![Bygg og distribuer dokumentasjon](https://github.com/SKDE-Analyse/sas_codes/actions/workflows/create_doc.yml/badge.svg)](https://github.com/SKDE-Analyse/sas_codes/actions/workflows/create_doc.yml)
 [![Les dokumentasjon](https://img.shields.io/badge/Dokumentasjon--grey.svg)](https://skde-analyse.github.io/sas_codes)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 # Felles SAS-koder for SKDE
 
