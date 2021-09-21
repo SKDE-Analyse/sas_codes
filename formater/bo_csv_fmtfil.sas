@@ -36,6 +36,8 @@ data bo;
   format komnr_navn $60.;
   format bydel 6.;
   format bydel_navn $60.;
+  format bosh 4.;
+  format bosh_navn $60.;
   format bohf 4.;
   format bohf_navn $60.;
   format boshhn 2.;
@@ -44,9 +46,7 @@ data bo;
   format borhf_navn $60.;
   format kommentar $400.;
  
-  input	
-  	komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $
-	  ;
+  input	komnr komnr_navn $ bydel bydel_navn $ bosh bosh_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ ;
   run;
 
 
@@ -88,6 +88,24 @@ data hnref.fmtfil_bohf(rename=(bohf=start) keep=bohf fmtname label);
 run; 
  /* Create the format using the control data set. */                                                                                     
 proc format cntlin=hnref.fmtfil_bohf; run;
+
+/* -------- */
+/*   BOSH   */  
+/* -------- */                                                                           
+/* Remove duplicate values */
+proc sort data=bo nodupkey out=bosh_fmt(keep=bosh bosh_navn);                                                                                                        
+   by bosh;   
+   where bosh is not missing;                                                                                                                              
+run; 
+/* Build format data set */                                                                                                            
+data hnref.fmtfil_bosh(rename=(bosh=start) keep=bosh fmtname label);                                                                                    
+   retain fmtname 'bosh_fmt';                                                                                                 
+   length bosh_navn $60.;                                                                                                                    
+   set bosh_fmt; 
+   label = cat(bosh_navn); 
+run; 
+ /* Create the format using the control data set. */                                                                                     
+proc format cntlin=hnref.fmtfil_bosh; run;
 
 
 /* --------- */
