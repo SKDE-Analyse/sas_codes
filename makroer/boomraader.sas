@@ -1,6 +1,3 @@
-
-/* Output variables : bohf, borh, boshhn, fylke */
-
 %macro boomraader(inndata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
 /*! 
 ### Beskrivelse
