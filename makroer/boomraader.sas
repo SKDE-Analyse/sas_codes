@@ -2,12 +2,11 @@
 /* Input variables  : komnr, bydel */
 /* Output variables : bohf, borh, boshhn, fylke */
 
-%macro boomraader(inndata=, utdata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
+%macro boomraader(inndata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
 
-/* Hvis `haraldsplass = 1`: Deler Bergen i Haraldsplass og Haukeland */
-/* Hvis `indreOslo = 1`   : Slår sammen Diakonhjemmet og Lovisenberg */
+/* Hvis `haraldsplass = 1`: Deler Bergen i Haraldsplass og Haukeland, NB: må ha bydel i datasett. */
+/* Hvis `indreOslo = 1`   : Slår sammen Diakonhjemmet og Lovisenberg, NB: må ha bydel i datasett. */
 /* Hvis `bydel = 0`       : Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo) */
-
 
 /*
 *****************************************
@@ -16,9 +15,9 @@
 */
 /* Pga sql-merge må datasettet en sender inn, &inndata, ikke ha variablene bohf, borhf eller boshhn med */
 /* Hvis datasettes allerede har bohf, borhf eller boshhn så vil de ikke overskrives i proc sql-merge */
-data &utdata;
+data &inndata;
 set &inndata;
-drop bohf borhf boshhn;
+drop bosh bohf borhf boshhn;
 run;
 
 
@@ -36,6 +35,8 @@ data bo;
   format komnr_navn $60.;
   format bydel 6.;
   format bydel_navn $60.;
+  format bosh 4.;
+  format bosh_navn $60.;
   format bohf 4.;
   format bohf_navn $60.;
   format boshhn 2.;
@@ -44,8 +45,7 @@ data bo;
   format borhf_navn $60.;
   format kommentar $400.;
  
-  input	
-  	komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ ;
+  input	komnr komnr_navn $ bydel bydel_navn $ bosh bosh_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ ;
   run;
 
 /*
@@ -57,9 +57,9 @@ data bo;
 
 
 proc sql;
-  create table &utdata as
-  select a.*, b.bohf, b.boshhn, b.borhf
-  from &utdata a left join bo b
+  create table &inndata as
+  select a.*, b.bohf, b.boshhn, b.bosh, b.borhf
+  from &inndata a left join bo b
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
 quit;
@@ -80,9 +80,9 @@ if bydel >0 then delete; /*fjerner linjene i bo-data som har bydel*/
 run;
 
 proc sql;
-  create table &utdata as
-  select a.*, b.bohf, b.boshhn, b.borhf 
-  from &utdata a left join bo_utenbydel b
+  create table &inndata as
+  select a.*, b.bohf, b.boshhn, b.bosh, b.borhf 
+  from &inndata a left join bo_utenbydel b
   on a.komnr=b.komnr;
 quit;
 %end;
@@ -93,8 +93,8 @@ quit;
 **********************************
 */
 
-data &utdata;
-  set &utdata;
+data &inndata;
+  set &inndata;
 
 %if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/
   if bohf=9 then bohf=11;
@@ -120,6 +120,10 @@ Fylke=.;
 if bohf=24 then Fylke=24 ;/*24='Boomr utlandet/Svalbard' */
 else if bohf=99 then Fylke=99; /*99='Ukjent/ugyldig kommunenr'*/
 else Fylke=floor(komnr/100); /*Remove the last 2 digits from kommunenummer.  The remaining leading digits are fylke*/
+run;
+
+proc datasets nolist;
+delete bo: ;
 run;
 %mend;
 
