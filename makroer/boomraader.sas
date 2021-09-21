@@ -1,25 +1,44 @@
 
-/* Input variables  : komnr, bydel */
 /* Output variables : bohf, borh, boshhn, fylke */
 
 %macro boomraader(inndata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
+/*! 
+### Beskrivelse
 
-/* Hvis `haraldsplass = 1`: Deler Bergen i Haraldsplass og Haukeland, NB: må ha bydel i datasett. */
-/* Hvis `indreOslo = 1`   : Slår sammen Diakonhjemmet og Lovisenberg, NB: må ha bydel i datasett. */
-/* Hvis `bydel = 0`       : Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo) */
+Makro for å lage bo-variablene: bosh, boshhn, bohf, borhf og fylke.
+Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
+
+```
+%boomraader(inndata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
+```
+
+### Input 
+- inndata: Datasett som skal få lagd bo-variablene.
+- haraldsplass = 1: Splitter ut Haraldsplass fra bohf 11 Bergen, NB: må også ha argument 'bydel = 1', default er 'haraldsplass=0'.
+- indreOslo = 1: Slår sammen Diakonhjemmet og Lovisenberg, NB: må også ha argument 'bydel = 1', default er 'indreOslo=0'.
+- bydel = 0: Uten bydel får hele kommunen 301 Oslo bohf=30 (Oslo), ved bruk av 'bydel=1' deles kommune 301 Oslo til bohf 15 (akershus), 18 (diakonhjemmet), 17 (lovisenberg) og 15 (ahus), default er 'bydel=1'. 
+
+
+### Output 
+- bo-variablene: bosh, boshhn, bohf, borhf og fylke.
+
+
+### Endringslogg:
+- 2020 Opprettet av Tove og Janice
+- september 2021, Tove
+  - tatt bort argument 'utdata='
+ */
 
 /*
 *****************************************
 1. Drop variablene BOHF, BORHF og BOSHHN
 *****************************************
 */
-/* Pga sql-merge må datasettet en sender inn, &inndata, ikke ha variablene bohf, borhf eller boshhn med */
-/* Hvis datasettes allerede har bohf, borhf eller boshhn så vil de ikke overskrives i proc sql-merge */
+/* Pga sql-merge må datasettet en sender inn, &inndata, ikke ha variablene bosh, bohf, borhf eller boshhn med */
 data &inndata;
 set &inndata;
 drop bosh bohf borhf boshhn;
 run;
-
 
 /*
 *********************************************
@@ -30,7 +49,6 @@ data bo;
   infile "&filbane\formater\boomr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
-
   format komnr 4.;
   format komnr_navn $60.;
   format bydel 6.;
@@ -54,8 +72,6 @@ data bo;
 *********************************
 */
 %if &bydel = 1 %then %do;
-
-
 proc sql;
   create table &inndata as
   select a.*, b.bohf, b.boshhn, b.bosh, b.borhf
@@ -63,8 +79,6 @@ proc sql;
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
 quit;
-
-
 %end;
 
 /*
@@ -73,7 +87,6 @@ quit;
 **********************************
 */
 %if &bydel = 0 %then %do;
-
 data bo_utenbydel;
 set bo;
 if bydel >0 then delete; /*fjerner linjene i bo-data som har bydel*/
@@ -94,7 +107,7 @@ quit;
 */
 
 data &inndata;
-  set &inndata;
+set &inndata;
 
 %if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/
   if bohf=9 then bohf=11;
@@ -108,7 +121,6 @@ data &inndata;
   if boshhn in (9,10,11) then bohf = 3; /* Helgeland (Rana, Mosjøen og Sandnessjøen) legges under Nordland hvis vi ser på barn*/
   if bohf in (17,18) then bohf = 16; /* Lovisenberg og Diakonhjemmet skal til OUS når barn = 1 */
 %end;
-
 
 /*
 ******************************************************
