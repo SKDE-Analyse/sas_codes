@@ -3,6 +3,7 @@
 /* Sist endret: Janice 17.06.2021 */
 proc format cntlin=hnref.fmtfil_boshhn; run;
 proc format cntlin=hnref.fmtfil_bohf;   run;
+proc format cntlin=hnref.fmtfil_bosh;   run;
 proc format cntlin=hnref.fmtfil_borhf;  run;
 proc format cntlin=hnref.fmtfil_bydel;  run;
 proc format cntlin=hnref.fmtfil_komnr;  run;
