@@ -1,27 +1,39 @@
+%macro boomraader(inndata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
+/*! 
+### Beskrivelse
 
-/* Input variables  : komnr, bydel */
-/* Output variables : bohf, borh, boshhn, fylke */
+Makro for å lage bo-variablene: boshhn, bohf, borhf og fylke.
+Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 
-%macro boomraader(inndata=, utdata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
+```
+%boomraader(inndata=, haraldsplass = 0, indreOslo = 0, bydel = 1, barn=0);
+```
 
-/* Hvis `haraldsplass = 1`: Deler Bergen i Haraldsplass og Haukeland */
-/* Hvis `indreOslo = 1`   : Slår sammen Diakonhjemmet og Lovisenberg */
-/* Hvis `bydel = 0`       : Vi mangler bydel og må bruke gammel boomr.-struktur (bydel 030110, 030111, 030112 går ikke til Ahus men til Oslo) */
+### Input 
+- inndata: Datasett som skal få koblet på bo-variablene.
+- haraldsplass = 1: Splitter ut Haraldsplass fra Bergen, NB: må også ha argument 'bydel = 1', default er 'haraldsplass=0'.
+- indreOslo = 1: Slår sammen Diakonhjemmet og Lovisenberg, NB: må også ha argument 'bydel = 1', default er 'indreOslo=0'.
+- bydel = 0: Uten bydel får hele kommune 301 Oslo bohf=30 (Oslo), ved bruk av 'bydel=1' deles kommune 301 Oslo til bohf: 15 (akershus), 17 (lovisenberg), 18 (diakonhjemmet) og 15 (ahus), default er 'bydel=1'. 
+- barn = 1: Helgeland (Rana, Mosjøen og Sandnessjøen) legges under bohf=3 (Nordland) hvis vi ser på barn, og Lovisenberg og Diakonhjemmet skal til OUS, NB: må også ha argument 'bydel = 1', default er 'barn=0'.
 
+### Output 
+- bo-variablene: boshhn, bohf, borhf og fylke.
+
+### Endringslogg:
+- 2020 Opprettet av Tove og Janice
+- september 2021, Tove, fjernet argument 'utdata='
+ */
 
 /*
 *****************************************
 1. Drop variablene BOHF, BORHF og BOSHHN
 *****************************************
 */
-/* Pga sql-merge må datasettet en sender inn, &inndata, ikke ha variablene bohf, borhf eller boshhn med */
-/* Hvis datasettes allerede har bohf, borhf eller boshhn så vil de ikke overskrives i proc sql-merge */
-data &utdata;
+/* Pga sql-merge i makroen må datasettet en sender inn ikke ha variablene bohf, borhf eller boshhn med */
+data &inndata;
 set &inndata;
 drop bohf borhf boshhn;
 run;
-
-
 /*
 *********************************************
 2. Importere CSV-fil med mapping av boområder
@@ -45,56 +57,47 @@ data bo;
   format kommentar $400.;
  
   input	
-  	komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ ;
+  komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ ;
   run;
-
 /*
 *********************************
 3a. Bo - Opptaksområder med bydel
 *********************************
 */
 %if &bydel = 1 %then %do;
-
-
 proc sql;
-  create table &utdata as
+  create table &inndata as
   select a.*, b.bohf, b.boshhn, b.borhf
-  from &utdata a left join bo b
+  from &inndata a left join bo b
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
 quit;
-
-
 %end;
-
 /*
 **********************************
 3b. Bo - Opptaksområder uten bydel
 **********************************
 */
 %if &bydel = 0 %then %do;
-
 data bo_utenbydel;
 set bo;
 if bydel >0 then delete; /*fjerner linjene i bo-data som har bydel*/
 run;
 
 proc sql;
-  create table &utdata as
+  create table &inndata as
   select a.*, b.bohf, b.boshhn, b.borhf 
-  from &utdata a left join bo_utenbydel b
+  from &inndata a left join bo_utenbydel b
   on a.komnr=b.komnr;
 quit;
 %end;
-
 /*
 **********************************
 4. Haraldsplass, IndreOslo og Barn
 **********************************
 */
-
-data &utdata;
-  set &utdata;
+data &inndata;
+set &inndata;
 
 %if &haraldsplass = 0 %then %do; /* Bergen splittes ikke i Haukeland og Haraldsplass*/
   if bohf=9 then bohf=11;
@@ -108,18 +111,19 @@ data &utdata;
   if boshhn in (9,10,11) then bohf = 3; /* Helgeland (Rana, Mosjøen og Sandnessjøen) legges under Nordland hvis vi ser på barn*/
   if bohf in (17,18) then bohf = 16; /* Lovisenberg og Diakonhjemmet skal til OUS når barn = 1 */
 %end;
-
-
 /*
 ******************************************************
 5. Fylke
 ******************************************************
 */
-
 Fylke=.;
 if bohf=24 then Fylke=24 ;/*24='Boomr utlandet/Svalbard' */
 else if bohf=99 then Fylke=99; /*99='Ukjent/ugyldig kommunenr'*/
 else Fylke=floor(komnr/100); /*Remove the last 2 digits from kommunenummer.  The remaining leading digits are fylke*/
+run;
+/* Slette datasett */
+proc datasets nolist;
+delete bo: ;
 run;
 %mend;
 
