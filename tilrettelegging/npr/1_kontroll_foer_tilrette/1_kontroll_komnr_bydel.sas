@@ -1,9 +1,31 @@
-/*Kontrollerer at mottatte data inneholder gyldige komrn og bydel*/
-/*Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel*/
-/* Output-filer med navn 'error' gir oversikt over ugyldige komnr eller bydeler i mottatt data */
-
 %macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
 
+/*! 
+### Beskrivelse
+
+Makro for å kontrollere at mottatte data inneholder gyldige komrn og bydel
+Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
+
+```
+%kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=)
+```
+
+### Input 
+      - Inndata:
+      - kommune_nr:  Kommunenummer som skal skjekkes, default er 'KomNrHjem2' - variabel utlevert fra NPR 
+      - bydel     :  Bydelnummer som skal skjekkes, default er 'bydel2' - variabel utlevert fra NPR 
+
+### Output 
+      - Godkjent lister som SAS datasett
+      - Error lister gir oversikt over ugyldige komnr eller bydeler i mottatt data.  De lages som SAS, og printes ut til results vinduet hvis det er noe.
+
+### Endringslogg:
+    - Opprettet før 2020
+    - september 2021, Janice
+          - dokumentasjon markdown
+          - bydel til numerisk før kombineres med komnr
+          - error lister printes ut
+ */
 
 /* laste inn tre datafiler */
 data komnr;
@@ -122,17 +144,29 @@ proc sql;
 	from &inndata;
 quit;
 
+data mottatt_komnr;
+  set mottatt_komnr;
+  komnr = &komnr + 0;
+run;
+
 /*lage bydel-variabel*/
-data mottatt_bydel(keep=&komnr bydel);
-set mottatt_komnr;
-if &bydel in (1:9) then bydel_fix = cats(&komnr,'0', &bydel);
-else if &bydel in (10:99) then bydel_fix = cats(&komnr, &bydel);
-else if &bydel eq . then bydel_fix = .;
-bydel = input(bydel_fix, best6.); /*endre til numerisk*/
+data mottatt_bydel(keep=komnr bydel);
+  set mottatt_komnr;
+
+  /* make bydel numeric and create new variable that combines komnr and bydel */
+  bydel_num=&bydel+0;
+  bydel=komnr*100+bydel_num;
+  
+  /* code if &bydel is character */
+  /* 
+  if &bydel in (1:9) then bydel_fix = cats(&komnr,'0', &bydel);
+  else if &bydel in (10:99) then bydel_fix = cats(&komnr, &bydel);
+  else if &bydel eq . then bydel_fix = .;
+  bydel = input(bydel_fix, best6.); */ /*endre til numerisk */
 run;
 
 /*sortere og laga datasett til kontroll*/
-proc sort data=mottatt_komnr(rename=(&komnr=komnr2) keep=&komnr); by komnr2; run;
+proc sort data=mottatt_komnr(rename=(komnr=komnr2) keep=komnr); by komnr2; run;
 proc sort data=mottatt_bydel(keep=bydel); by bydel; run;
 
 /*fjerne linje med bydel2 = 0*/
@@ -157,6 +191,9 @@ if felles then output godkjent_komnr_&aar;
 if feil then output error_komnr_&aar;
 run;
 
+title "error komnr i &aar. filen";
+proc print data=error_komnr_&aar; run;
+
 /*sammenligne bydel med csv-fil*/
 /*Outputfiler 'error' inneholder bydel i mottatte data som ikke er i vår liste med godkjente bydeler*/
 data godkjent_bydel_&aar error_bydel_&aar;
@@ -167,6 +204,11 @@ if a and not b then feil = 1;
 if felles then output godkjent_bydel_&aar;
 if feil then output error_bydel_&aar;
 run;
+
+title "error bydel i &aar. filen";
+proc print data=error_bydel_&aar; run;
+
+
 %mend;
 
 

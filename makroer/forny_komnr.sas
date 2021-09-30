@@ -27,7 +27,8 @@ Makro for å fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
           - tatt bort 'utdata='
           - skrive melding til SAS-logg
           - dokumentasjon markdown
-
+    - september 2021, Janice
+          - instead of renaming &kommune_nr to komnr_inn, add 0 to make it numeric in case it is not already
  */
 
 /* lese inn csv-fil */
@@ -62,9 +63,10 @@ run;
 
 /* gi nytt navn til kommunenummer fra inndata slik at det beholdes i utdata som variabel 'komnr_inn' */
 /* lage radnummer for å bruke til merge i siste steg */
-data &inndata (rename=(&kommune_nr = komnr_inn)); 
+data &inndata; 
 set &inndata;
-  nr=_n_; 
+  nr=_n_;
+  komnr_inn = &kommune_nr + 0;
 run;
 
 /* loop trenger kun innsendt kommunenummer og radnummer */
@@ -132,7 +134,7 @@ quit;
 %put *------------------------------------------------*;
 
 %put *-------------------------------------------------------------------------------------------------*;
-%put * Bydeler må oppdateres manuelt. Se makro 'bydel'.                                                *
+%put * Bydeler må oppdateres manuelt. Se makro 'bydel'.                                                *;
 %put * \\tos-sas-skde-01\SKDE_SAS\felleskoder\master\tilrettelegging\npr\2_tilrettelegging\bydel.sas   *;
 %put *-------------------------------------------------------------------------------------------------*;
 
