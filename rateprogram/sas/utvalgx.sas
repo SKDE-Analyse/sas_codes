@@ -228,12 +228,11 @@ run;
    %if %sysevalf(%superq(barn)=,boolean) %then %let barn = 0;
 
 
-	%boomraader(inndata=RV, utdata= RV2, haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
-proc delete data=rv;
+	%boomraader(inndata=RV, haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
 run;
 
 	data RV;
-	set RV2;
+	set RV;
 	/* Definere boområder */
 	if BOHF in (24,99) then BoRHF=.; /*kaster ut Utlandet og Svalbard*/
 	if BoRHF in (1:4) then Norge=1;
