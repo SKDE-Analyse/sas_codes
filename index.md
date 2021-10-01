@@ -46,7 +46,6 @@
 - [rateprogram/Rateprogram.sas](Rateprogram)
 - [rateprogram/sas/aarsvar.sas](aarsvar)
 - [rateprogram/sas/aldersfigur.sas](aldersfigur)
-- [rateprogram/sas/indirekterate.sas](indirekterate)
 - [rateprogram/sas/valg_kategorier.sas](valg_kategorier)
 - [rateprogram/sas/definere_format.sas](definere_format)
 - [rateprogram/sas/ekskluderingstabeller.sas](ekskluderingstabeller)
