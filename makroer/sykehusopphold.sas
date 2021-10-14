@@ -13,7 +13,7 @@
 
  ### Beskrivelse
 Makro for å markere opphold som regnes som en sykehusepisode. 
-Inndatasettet må inneholde pid inndato utdato inntid og uttid
+Inndatasettet må inneholde pid, inndato, utdato, inntid, uttid, aar, alder, aggrshoppid_lnr, aktivitetskategori3, hastegrad, uttilstand, behsh
 
 ```
 %sykehusopphold(dsn=, overforing_tid=28800, forste_hastegrad=1, behold_datotid=0, nulle_liggedogn=0, minaar=0);
@@ -55,6 +55,37 @@ Makroen lager 12 (eventuelt 14) nye variabler:
 ### Endringslogg
 - 07.09.2021 Opprettet av Janice Shu
  */
+
+/* 
+Slette SHO-variabler som lages i denne makroen
+*/
+data &dsn;
+set &dsn;
+drop SHO:;
+run;
+
+ /* First check if required variables are on the dataset, if not exit the macro and print error message */
+data _null_;
+dset=open("&dsn");
+
+call symput ('chk1',varnum(dset,'inndato'));
+call symput ('chk2',varnum(dset,'utdato'));
+call symput ('chk3',varnum(dset,'inntid'));
+call symput ('chk4',varnum(dset,'uttid'));
+call symput ('chk5',varnum(dset,'aar'));
+call symput ('chk6',varnum(dset,'alder'));
+call symput ('chk7',varnum(dset,'aggrshoppid_lnr'));
+call symput ('chk8',varnum(dset,'aktivitetskategori3'));
+call symput ('chk9',varnum(dset,'hastegrad'));
+call symput ('chk10',varnum(dset,'uttilstand'));
+call symput ('chk11',varnum(dset,'behsh'));
+run;
+
+%if &chk1=0 or &chk2=0  or &chk3=0  or &chk4=0  or &chk5=0  or &chk6=0  or &chk7=0  or 
+    &chk8=0 or &chk9=0  or &chk10=0 or &chk11=0  %then %do;
+    %put !!!WARNING!!! At least one of the required input variables is missing on the dataset.;
+    %abort ;
+%end;
 
 data &dsn;
   set &dsn;
@@ -119,7 +150,7 @@ retain flag;
 	  flag+1;
 	end;
 
-	if BehSH ne LAG_BehSH and sek_mellom>=0 and sek_mellom<=&overforing_tid then Overforing=flag;
+	if BehSH ne LAG_BehSH and sek_mellom ne . and sek_mellom<=&overforing_tid then Overforing=flag;
 
   end;
 run;
@@ -157,7 +188,7 @@ run;
 %if %sysevalf(%superq(test)=,boolean) %then %let test = 0;
 %if &test=1 %then %do;
 data overforing_updown;
-  set overforing;
+  set overforinger;
 run;
 %end;
 

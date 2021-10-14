@@ -11,7 +11,7 @@ Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
 ```
 
 ### Input 
-      - Inndata:
+      - Inndata: 
       - kommune_nr:  Kommunenummer som skal skjekkes, default er 'KomNrHjem2' - variabel utlevert fra NPR 
       - bydel     :  Bydelnummer som skal skjekkes, default er 'bydel2' - variabel utlevert fra NPR 
 
@@ -153,16 +153,11 @@ run;
 data mottatt_bydel(keep=komnr bydel);
   set mottatt_komnr;
 
-  /* make bydel numeric and create new variable that combines komnr and bydel */
-  bydel_num=&bydel+0;
-  bydel=komnr*100+bydel_num;
-  
-  /* code if &bydel is character */
-  /* 
-  if &bydel in (1:9) then bydel_fix = cats(&komnr,'0', &bydel);
-  else if &bydel in (10:99) then bydel_fix = cats(&komnr, &bydel);
-  else if &bydel eq . then bydel_fix = .;
-  bydel = input(bydel_fix, best6.); */ /*endre til numerisk */
+  if komnr in (301,4601,5001,1103) then do;
+    /* make bydel numeric and create new variable that combines komnr and bydel */
+    bydel_num=&bydel+0;
+    bydel=komnr*100+bydel_num;
+  run;
 run;
 
 /*sortere og laga datasett til kontroll*/
