@@ -36,7 +36,7 @@ Value BoHF_kort
 	3='Nordland'
 	4='Helgeland '
 	6='Nord-Trøndelag'
-	7="St. Olavs"
+	7="St. Olav"
 	8='Møre og Romsdal'
 	9='Haraldsplass'
 	10='Førde'
@@ -211,10 +211,10 @@ value BoRHF
 99='Unknown/invalid municipal nr';
 
 value BoRHF_kort
-1='Northern Norway Regional Health Authority' 
-2='Central Norway Regional Health Authority' 
-3='The Western Norway Regional Health Authority' 
-4='South-Eastern Norway Regional Health Authority' 
+1='Northern Norway RHA' 
+2='Central Norway RHA' 
+3='Western Norway RHA' 
+4='South-Eastern Norway RHA' 
 24='Abroad/Svalbard' 
 8888='Norway'
 99='Unknown/invalid municipal nr';
