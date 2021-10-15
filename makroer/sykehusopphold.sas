@@ -62,6 +62,7 @@ Slette SHO-variabler som lages i denne makroen
 data &dsn;
 set &dsn;
 drop SHO:;
+if aggrshoppID_Lnr=. then aggrshoppID_Lnr=1;
 run;
 
  /* First check if required variables are on the dataset, if not exit the macro and print error message */
