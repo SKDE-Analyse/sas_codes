@@ -119,7 +119,6 @@ set &inndata._&agg_var;
     if off = 1 then poli_off = 1;
     if priv = 1 then poli_priv = 1;
   end;
- * rename sho_aar = aar sho_alder = alder;
 run;
 
 %unik_pasient(datasett = &inndata._&agg_var., variabel = tot);
@@ -135,29 +134,6 @@ run;
 %unik_pasient(datasett = &inndata._&agg_var., variabel = poli_off);
 %unik_pasient(datasett = &inndata._&agg_var., variabel = poli_priv);
 
-/*
-Aggreger datasettet
-*/
-/*
-proc sql;
-   create table &mappe..&utdata as 
-   select distinct aar, ermann, alder, komnr, bydel,
-   SUM(tot) as tot, SUM(tot_unik) as tot_unik, sum(tot_unik_alleaar) as tot_unik_alleaar,
-   SUM(off) as off, SUM(off_unik) as off_unik,
-   SUM(priv) as priv, SUM(priv_unik) as priv_unik,
-   SUM(elektiv) as elek, SUM(elektiv_unik) as elek_unik,
-   SUM(ohjelp) as ohj, SUM(ohjelp_unik) as ohj_unik,
-   SUM(innlegg) as inn, SUM(innlegg_unik) as inn_unik,
-   SUM(inn_elektiv) as inn_elek, SUM(inn_elektiv_unik) as inn_elek_unik,
-   SUM(inn_ohjelp) as inn_ohj, SUM(inn_ohjelp_unik) as inn_ohj_unik,
-   SUM(poli) as poli, SUM(poli_unik) as poli_unik,
-   SUM(poli_off) as poli_off, SUM(poli_off_unik) as poli_off_unik,
-   SUM(poli_priv) as poli_priv, SUM(poli_priv_unik) as poli_priv_unik,
-   SUM(sho_liggetid) as sho_liggetid
-   from &inndata._&agg_var
-   group by aar, ermann, alder, komnr, bydel;
-quit; run;
-*/
 proc sql;
    create table &mappe..&utdata as 
    select distinct (sho_aar) as aar, ermann, (sho_alder) as alder, komnr, bydel,
