@@ -1,32 +1,30 @@
 %macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
-/*!
+/*! 
 ### Beskrivelse
 
-```
-%kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);
-```
+Makro for √• kontrollere at mottatte data inneholder gyldige komnr og bydel
+Den sier ikke noe om det er l√∏penr ifeks Oslo 0301 som mangler bydel
 
-Makro for Â kontrollere om variabel 'komnrhjem2' og 'bydel2' i somatikk-data inneholder gyldige kommunenummer og bydeler.
-Kontrollen gj¯res ved at mottatte verdier sjekkes mot CSV-filer som inneholder kommunenummer og bydel.
-Makroen kontrollerer ikke om f.eks kommunenummer Oslo 0301 mangler bydel. 
-
-Hvis ugyldige verdier i output-datasettene korrigeres det i tilretteleggingen.
+```
+%kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=)
+```
 
 ### Input 
-- inndata: Filen med kommunenummer-variabel som skal kontrolleres, f.eks hnmot.m20t3_som_2020.
-- komnr: Kommunenummer som skal kontrolleres, default er 'komnrhjem2'.
-- bydel: Bydel som skal kontrolleres, default er 'bydel2'.
-- aar: Brukes for Â gi unike navn til output-errorfiler.
+      - Inndata: 
+      - kommune_nr:  Kommunenummer som skal sjekkes, default er 'KomNrHjem2' - variabel utlevert fra NPR 
+      - bydel     :  Bydelnummer som skal sjekkes, default er 'bydel2' - variabel utlevert fra NPR 
 
 ### Output 
-- to datasett
-  - error_komnr_'aar'
-  - error_bydel_'aar'
+      - Godkjent lister som SAS datasett
+      - Error lister gir oversikt over ugyldige komnr eller bydeler i mottatt data.  De lages som SAS, og printes ut til results vinduet hvis det er noe.
 
-### Endringslogg
-- 2020 Opprettet av Janice og Tove
-- September 2021, Tove, legge til steg for Â slette datasett.
-*/
+### Endringslogg:
+    - Opprettet f√∏r 2020
+    - september 2021, Janice
+          - dokumentasjon markdown
+          - bydel til numerisk f√∏r kombineres med komnr
+          - error lister printes ut
+*/          
 
 /* laste inn CSV-filer */
 data komnr;
@@ -119,7 +117,6 @@ proc sort data=gyldig_komnr nodupkey out=liste_komnr;
 by komnr2;
 run;
 
-
 /*csv-fil med gyldige bydeler*/
 data gyldig_bydel(keep=bydel);
 set bydel(rename=(fra_bydel=bydel)) boomr;
@@ -134,8 +131,6 @@ set liste_bydel;
 if bydel = . then delete;
 run;
 
-
-
 /* --------------------------------------------------------- */
 /* 2. Hente ut variabel 'komnr' og 'bydel' fra mottatte data */
 /* --------------------------------------------------------- */
@@ -145,17 +140,24 @@ proc sql;
 	from &inndata;
 quit;
 
+data mottatt_komnr;
+  set mottatt_komnr;
+  komnr = &komnr + 0;
+run;
+
 /*lage bydel-variabel*/
-data mottatt_bydel(keep=&komnr bydel);
-set mottatt_komnr;
-if &bydel in (1:9) then bydel_fix = cats(&komnr,'0', &bydel);
-else if &bydel in (10:99) then bydel_fix = cats(&komnr, &bydel);
-else if &bydel eq . then bydel_fix = .;
-bydel = input(bydel_fix, best6.); /*endre til numerisk*/
+data mottatt_bydel(keep=komnr bydel);
+  set mottatt_komnr;
+
+  if komnr in (301,4601,5001,1103) then do;
+    /* make bydel numeric and create new variable that combines komnr and bydel */
+    bydel_num=&bydel+0;
+    bydel=komnr*100+bydel_num;
+  run;
 run;
 
 /*sortere og laga datasett til kontroll*/
-proc sort data=mottatt_komnr(rename=(&komnr=komnr2) keep=&komnr); by komnr2; run;
+proc sort data=mottatt_komnr(rename=(komnr=komnr2) keep=komnr); by komnr2; run;
 proc sort data=mottatt_bydel(keep=bydel); by bydel; run;
 
 /*fjerne linje med bydel2 = 0*/
@@ -164,13 +166,12 @@ set mottatt_bydel;
 if bydel = . then delete;
 run;
 
-
 /* -------------------------------------------- */
 /* 3. Sammenligne mottatte data mot CSV-filer   */
 /* -------------------------------------------- */
 
 /*sammenligne mottatte komnr med csv-fil*/
-/*Outputfiler 'error' inneholder komnr i mottatte data som ikke er i vÂr liste med godkjente komnr*/
+/*Outputfiler 'error' inneholder komnr i mottatte data som ikke er i v√•r liste med godkjente komnr*/
 data godkjent_komnr_&aar error_komnr_&aar;
 merge mottatt_komnr (in=a) liste_komnr (in=b);
 by komnr2;
@@ -180,8 +181,11 @@ if felles then output godkjent_komnr_&aar;
 if feil then output error_komnr_&aar;
 run;
 
+title "error komnr i &aar. filen";
+proc print data=error_komnr_&aar; run;
+
 /*sammenligne bydel med csv-fil*/
-/*Outputfiler 'error' inneholder bydel i mottatte data som ikke er i vÂr liste med godkjente bydeler*/
+/*Outputfiler 'error' inneholder bydel i mottatte data som ikke er i v√•r liste med godkjente bydeler*/
 data godkjent_bydel_&aar error_bydel_&aar;
 merge mottatt_bydel (in=a) liste_bydel (in=b);
 by bydel;
@@ -191,9 +195,8 @@ if felles then output godkjent_bydel_&aar;
 if feil then output error_bydel_&aar;
 run;
 
-proc datasets nolist;
-delete komnr bydel boomr gyldig_komnr liste_komnr gyldig_bydel liste_bydel mottatt_komnr mottatt_bydel godkjent_: ;
-run;
+title "error bydel i &aar. filen";
+proc print data=error_bydel_&aar; run;
 %mend;
 
 
