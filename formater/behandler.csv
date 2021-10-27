@@ -71,7 +71,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 996663191;Helse Bergen, Laboratorie og røntgen Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 997512189;Helse Bergen HF seksjon for behandlingshjelpemidler medisinsk-teknisk avd Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 9745577460;Helse Bergen HF, Haukeland - stråleterapi;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Ekstra null i orgnr, stråleenhet.
-983974724;Helse Bergen HF;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 20.jan 2021: 2020-data, institusjonid viser til hovedenhet Helse Bergen HF.
+983974724;Helse Bergen HF;100;Helse Bergen HF;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 20.jan 2021: 2020-data, institusjonid viser til hovedenhet Helse Bergen HF.
 874743372;Helse Bergen, Kysthospitalet i Hagevik;102;Kysthospitalet i Hagevik;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974743272;Helse Bergen, Voss;103;Voss sjukehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 973925032;Bergen legevakt;104;Bergen legevakt;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
