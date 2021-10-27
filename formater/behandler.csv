@@ -65,18 +65,18 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 974745089;Helse Førde, Lærdal;93;Lærdal sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
 974743914;Helse Førde, Florø;94;Florø sykehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
 922643202;Helse Førde HF Sogndal poliklinikk;95;Sogndal poliklinikk;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Sogndal poliklinikk under Helse Førde HF. 
+983974724;Helse Bergen HF;100;Helse Bergen HF;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 27.okt 2021: korrigere behsh. Helse Bergen HF = 100, og skadepoliklinikk = 104.
 973923811;Helse Bergen, Habilitering Voksne;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974557169;Helse Bergen, Rehabilitering;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974557746;Helse Bergen, Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 996663191;Helse Bergen, Laboratorie og røntgen Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 997512189;Helse Bergen HF seksjon for behandlingshjelpemidler medisinsk-teknisk avd Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 9745577460;Helse Bergen HF, Haukeland - stråleterapi;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Ekstra null i orgnr, stråleenhet.
-983974724;Helse Bergen HF;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 20.jan 2021: 2020-data, institusjonid viser til hovedenhet Helse Bergen HF.
 874743372;Helse Bergen, Kysthospitalet i Hagevik;102;Kysthospitalet i Hagevik;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974743272;Helse Bergen, Voss;103;Voss sjukehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 973925032;Bergen legevakt;104;Bergen legevakt;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
+922573026;Helse Bergen HF - skadepoliklinikken Bergen helsehus;104;Bergen legevakt;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 27.okt 2021: korrigere behsh. Helse Bergen HF = 100, og skadepoliklinikk = 104.
 922105294;Helse Bergen HF - radiologisk avdeling brystdiagnostisk senter;105;Helse Bergen diverse;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
-922573026;Helse Bergen HF - skadepoliklinikken Bergen helsehus;105;Helse Bergen diverse;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 923809538;Helse Bergen HF - Straume dialysebehandling;105;Helse Bergen diverse;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 923809708;Helse Bergen HF - habiliteringstj for barn og ungdom;105;Helse Bergen diverse;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 923810072;Helse Bergen HF - Knarvik hudpoliklinikk;105;Helse Bergen diverse;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
@@ -190,7 +190,7 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 985773238;Revmatismesykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 973254979;Revmatisme sykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 984630492;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;"Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader.
-997506499;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;"Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader.
+997506499;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader."
 974316285;Haraldsplass diakonale sykehus AS;260;Haraldsplass diakonale sykehus;26;Haraldsplass diakonale sykehus;Haraldsplass diakonale sykehus;3;Helse Vest RHF;Helse Vest;Vest;
 813381192;Aleris Helse AS Stavanger;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 879595762;Teres Drammen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
