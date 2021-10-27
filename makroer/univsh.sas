@@ -3,13 +3,13 @@
 /*!
 Markerer universitetssykehus (BehUSh)
 
-FÃ¸lgende sykehus er definert som universitetssykehus 1 (BehUSh = 1):
-- UNN TromsÃ¸
+Følgende sykehus er definert som universitetssykehus 1 (BehUSh = 1):
+- UNN Tromsø
 - St. Olavs hospital Trondheim
 - Haukeland
-- Oslo universitetssykehus (Rikshospitalet, UllevÃ¥l, Radiumhospitalet)
+- Oslo universitetssykehus (Rikshospitalet, Ullevål, Radiumhospitalet)
 
-FÃ¸lgende sykehus er definert som universitetssykehus 2 (BehUSh = 2):
+Følgende sykehus er definert som universitetssykehus 2 (BehUSh = 2):
 - Stavanger universitetssykehus
 - Akershus universitetssykehus
 
@@ -26,14 +26,16 @@ value BehUSh
 data &dsn;
 set &dsn;
 
-if BehSh in (21, /* UNN TromsÃ¸ */
-             61, /* St. Olavs hospital Trondheim */
+if BehSh in (21,  /* UNN Tromsø */
+             61,  /* St. Olavs hospital Trondheim */
              101, /* Haukeland */
+             104, /* Bergen legevakt/helsehus */
              180, /* Oslo universitetssykehus HF */
              181, /* OUS, Rikshospitalet */
              182, /* OUS, Aker */
-             184, /* OUS, UllevÃ¥l */
-             186 /* OUS, Radiumhospitalet */
+             183, /* Oslo legevakt */
+             184, /* OUS, Ullevål */
+             186  /* OUS, Radiumhospitalet */
              ) then BehUSh = 1;
 else if BehSh in (121, /* Stavanger universitetssykehus */
                   160  /* Akershus universitetssykehus */
@@ -45,7 +47,5 @@ if behandlingssted2 = 974705192 then BehUSh = 3;
 
 format BehUSh BehUSh.;
 run;
-
-
 
 %mend;
