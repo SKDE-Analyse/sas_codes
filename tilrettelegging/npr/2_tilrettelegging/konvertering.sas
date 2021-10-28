@@ -38,14 +38,6 @@ Drop RehabType;
 rename Rehab=RehabType;
 %end;
 
-/*!
-- Gjør `HDG` numerisk.
-*/
-%if &somatikk ne 0 %then %do;
-HDG_num=HDG+0;
-Drop HDG;
-rename HDG_num=HDG;
-%end;
 
 /*!
 - Generere `bydel_org` fra `bydel` og `bydel2_org` fra `bydel2`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
@@ -63,6 +55,7 @@ rename HDG_num=HDG;
 */
 /* files received in 2020 for the pandemic project has dates and time already in the correct format.*/
 
+
 /*!
 ###	Fjerner blanke felt og punktum i stringvariable, samt ny navngiving. For 2014 navnes dup_tilstand til Tdiag.
 */
@@ -70,19 +63,23 @@ rename HDG_num=HDG;
 		- Episodefag manglet ledende null for avtalespesialister enkelte år.
 		- convert to character if numeric
 		*/
-
+%if &somatikk ne 0 %then %do;
     episodefag=put(episodefag_org,3.);
 		if lengthn(compress(episodefag_org)) = 2 then episodefag = compress("0"||episodefag_org);
 		if episodefag in ("0","950") then episodefag="999";
 
-
-
 /*!
 - Fjerner blanke felt i DRG-koden og justerer til stor bokstav (upcase)
 */
-%if &somatikk ne 0 %then %do;
 	DRG=upcase(compress(DRG));
 	drop cyto:;
+
+/*!
+- Gjør `HDG` numerisk.
+*/
+	HDG_num=HDG+0;
+	Drop HDG;
+	rename HDG_num=HDG;
 %end;
 
 /*!
