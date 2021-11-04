@@ -2,6 +2,7 @@
 %macro kpr_avledede(inndata= , utdata=);
 data &utdata;
 set &inndata;
+
 /* 
 - Lager 'kodeverk' fra 'hoveddiagnosetabell'. Slette variabel 'hoveddiagnosetabell'
 */
@@ -13,6 +14,8 @@ if hoveddiagnosetabell eq "Akser i BUP-klassifikasjon"      then kodeverk = 5;
 if hoveddiagnosetabell eq " "                               then kodeverk = .;
 drop hoveddiagnosetabell;
 format kodeverk kodeverk.;
+
+%if &diagnose ne 1 %then %do; /*Koden under kjøres ikke hvis diagnose=1*/
 /* 
 - Lager 'dato' og 'tid' fra 'datotid'. Sletter variabel 'datotid'. 
 */
@@ -53,5 +56,6 @@ if tjenestetypenavn eq "Ukjent"
     or tjenestetypenavn eq " "                          then tjenestetype = 14; 
 drop tjenestetypenavn;
 format tjenestetype tjenestetype.;
+%end;
 run;
 %mend;

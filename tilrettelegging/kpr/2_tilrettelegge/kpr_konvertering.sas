@@ -5,6 +5,22 @@ data &utdata;
 set &inndata;
 
 /*
+- Rename 'hoveddiagnoseKode' til 'diagnose'. 
+*/
+rename hoveddiagnoseKode = diagnose;
+
+%if &diagnose eq 1 %then %do; /*kjøres kun på diagnose-fil*/
+/* 
+- Lager 'erHdiag'. Sletter 'erHoveddiagnose'.
+ */
+erHdiag = erhoveddiagnose +0;
+drop erhoveddiagnose;
+format erHdiag erHdiag.;
+%end;
+
+
+%if &diagnose ne 1 %then %do; /*Koden under kjøres ikke hvis diagnose=1*/
+/*
 - Lager 'kpr_pid' fra 'KPR_lnr' (løpenummer) og sletter 'KPR_lnr'
 */
 KPR_PID=KPR_lnr+0;
@@ -25,16 +41,11 @@ drop kontakttypenavn kuhrKontakttypeId;
 format kontakttype kontakttype.;
 
 /*
-- Rename 'hoveddiagnoseKode' til 'diagnose'. 
-*/
-rename hoveddiagnoseKode = diagnose;
-
-/*
 - Lager 'refusjonutbetalt' fra 'refusjonutbetaltbeløp'. 
 */
 refusjonutbetalt = 'refusjonutbetaltbeløp'n + 0;
 drop 'refusjonutbetaltbeløp'n;
-
+%end;
 run;
 
 %mend;
