@@ -3,7 +3,7 @@
 /*! 
 ### Beskrivelse
 
-Makro for å kontrollere at mottatte data inneholder gyldige komrn og bydel
+Makro for å kontrollere at mottatte data inneholder gyldige komnr og bydel
 Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
 
 ```
@@ -12,8 +12,8 @@ Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
 
 ### Input 
       - Inndata: 
-      - kommune_nr:  Kommunenummer som skal skjekkes, default er 'KomNrHjem2' - variabel utlevert fra NPR 
-      - bydel     :  Bydelnummer som skal skjekkes, default er 'bydel2' - variabel utlevert fra NPR 
+      - kommune_nr:  Kommunenummer som skal sjekkes, default er 'KomNrHjem2' - variabel utlevert fra NPR 
+      - bydel     :  Bydelnummer som skal sjekkes, default er 'bydel2' - variabel utlevert fra NPR 
 
 ### Output 
       - Godkjent lister som SAS datasett
@@ -25,6 +25,8 @@ Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
           - dokumentasjon markdown
           - bydel til numerisk før kombineres med komnr
           - error lister printes ut
+    - november 2021, Tove
+          - inkluderer tidligere bydelskommuner 1201 og 4601 i steg 2 hvor bydel kontrolleres 
  */
 
 /* laste inn tre datafiler */
@@ -153,10 +155,11 @@ run;
 data mottatt_bydel(keep=komnr bydel);
   set mottatt_komnr;
 
-  if komnr in (301,4601,5001,1103) then do;
+  if komnr in (301,4601,1201,5001,1601,1103) then do; 
     /* make bydel numeric and create new variable that combines komnr and bydel */
     bydel_num=&bydel+0;
     bydel=komnr*100+bydel_num;
+  end;
   run;
 run;
 
@@ -202,7 +205,7 @@ run;
 
 title "error bydel i &aar. filen";
 proc print data=error_bydel_&aar; run;
-
+title;
 
 %mend;
 
