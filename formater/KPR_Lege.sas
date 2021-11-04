@@ -34,7 +34,10 @@ Proc format;
       6 = 'Administrativt arbeid'
       0 = 'Ukjent'
       ;
-
+ value erHdiag
+     1 = "Ja"
+     0 = "Nei"
+     ;
  /* value $fritakskode
       'A' = ''
       'B' = ''
