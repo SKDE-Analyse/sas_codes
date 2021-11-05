@@ -114,6 +114,7 @@ data boomr;
 /*csv-fil med gyldige komnr */
 data gyldig_komnr(keep=komnr2);
 set komnr(rename=(gml_komnr=komnr2)) boomr(rename=(komnr=komnr2));
+where komnr2 is not missing;
 run;
 /*fjerne duplikate linjer*/
 proc sort data=gyldig_komnr nodupkey out=liste_komnr;
