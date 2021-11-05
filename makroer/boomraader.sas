@@ -58,6 +58,8 @@ data bo;
  
   input	
   komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ ;
+
+  if komnr eq . then delete; /*ta vekk rader som kun brukes til å lage formater*/
   run;
 /*
 *********************************
