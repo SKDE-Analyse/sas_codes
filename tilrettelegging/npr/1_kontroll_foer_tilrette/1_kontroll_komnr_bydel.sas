@@ -27,6 +27,7 @@ Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
           - error lister printes ut
     - november 2021, Tove
           - inkluderer tidligere bydelskommuner 1201 og 4601 i steg 2 hvor bydel kontrolleres 
+          - fjerne rad med missing komnr i steg 1 slik at rader med manglende komnr i kontrollert data kommer i output error-liste
  */
 
 /* laste inn tre datafiler */
