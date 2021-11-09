@@ -5,9 +5,14 @@ data &utdata;
 set &inndata;
 
 /*
-- Rename 'hoveddiagnoseKode' til 'diagnose'. 
+- Rename 'hoveddiagnoseKode' til 'Hdiag'. 
 */
-rename hoveddiagnoseKode = diagnose;
+rename hoveddiagnoseKode = Hdiag;
+
+/*
+- Rename 'diagnoseKode' til 'diag'. 
+*/
+rename diagnoseKode = diag;
 
 %if &diagnose eq 1 %then %do; /*kjøres kun på diagnose-fil*/
 /* 
@@ -16,6 +21,9 @@ rename hoveddiagnoseKode = diagnose;
 erHdiag = erhoveddiagnose +0;
 drop erhoveddiagnose;
 format erHdiag erHdiag.;
+
+
+
 %end;
 
 
