@@ -21,9 +21,6 @@ rename diagnoseKode = diag;
 erHdiag = erhoveddiagnose +0;
 drop erhoveddiagnose;
 format erHdiag erHdiag.;
-
-
-
 %end;
 
 

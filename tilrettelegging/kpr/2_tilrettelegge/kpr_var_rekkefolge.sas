@@ -16,9 +16,12 @@ retain    aar
           boshhn
           fylke
           kodeverk
-          diagnose
-          kontakttype
+          hdiag
+          icpc2_hdiag
+          icpc2_kap
+          icpc2_type
           tjenestetype
+          kontakttype
           behandlingsnr
           minimumtidsbruk
           fritakskode
@@ -26,7 +29,7 @@ retain    aar
           refusjonutbetalt
           ;
 set &Inndata;
-drop nr bostedavledet;
+drop nr komnr_inn;
 run;
 
 %mend;
