@@ -34,9 +34,37 @@ Proc format;
       6 = 'Administrativt arbeid'
       0 = 'Ukjent'
       ;
+
  value erHdiag
      1 = "Ja"
      0 = "Nei"
+     ;
+
+value $icpc2_Kap
+     '-' = "Prosesskoder"
+     'A' = "Allment og uspesifisert"
+     'B' = "Blod, bloddannende organer og immunsystemet "
+     'D' = "Fordøyelsessystemet"
+     'F' = "Øye"
+     'H' = "Øre"
+     'K' = "Hjerte-karsystemet"
+     'L' = "Muskel og skjelettsystemet"
+     'N' = "Nervesystemet"
+     'P' = "Psykisk"
+     'R' = "Luftveier"
+     'S' = "Hud"
+     'T' = "Endokrine, metabolske og ernæringsmessige problemer"
+     'U' = "Urinveier"
+     'W' = "Svangerskap, fødsel og familieplanlegging"
+     'X' = "Kvinnelige kjønnsorganer"
+     'Y' = "Mannlige kjønnsorganer"
+     'Z' = "Sosiale problemer"
+     ;
+
+ value icpc2_type
+     1 = "Sympt./plager"
+     2 = "Diag./sykdom"
+     3 = "Prosesskode"
      ;
  /* value $fritakskode
       'A' = ''
