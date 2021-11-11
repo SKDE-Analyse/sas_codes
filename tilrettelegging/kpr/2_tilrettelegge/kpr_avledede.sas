@@ -3,6 +3,22 @@
 data &utdata;
 set &inndata;
 
+%if &diagnose eq 1 %then %do; /*kjøres kun på diagnosedata*/
+/* 
+- Lager 'kodeverk' fra 'diagnosetabell'. Slette variabel 'diagnosetabell'
+*/
+if diagnosetabell eq "ICPC-2"                          then kodeverk = 1;
+if diagnosetabell eq "ICPC-2B"                         then kodeverk = 2;
+if diagnosetabell eq "ICD-10"                          then kodeverk = 3;
+if diagnosetabell eq "ICD-DA-3"                        then kodeverk = 4;
+if diagnosetabell eq "Akser i BUP-klassifikasjon"      then kodeverk = 5;
+if diagnosetabell eq " "                               then kodeverk = .;
+drop diagnosetabell;
+format kodeverk kodeverk.;
+%end;
+
+
+%if &diagnose ne 1 %then %do; /*Kjøres kun på regningsdata*/
 /* 
 - Lager 'kodeverk' fra 'hoveddiagnosetabell'. Slette variabel 'hoveddiagnosetabell'
 */
@@ -15,7 +31,6 @@ if hoveddiagnosetabell eq " "                               then kodeverk = .;
 drop hoveddiagnosetabell;
 format kodeverk kodeverk.;
 
-%if &diagnose ne 1 %then %do; /*Koden under kjøres ikke hvis diagnose=1*/
 /* 
 - Lager 'dato' og 'tid' fra 'datotid'. Sletter variabel 'datotid'. 
 */
