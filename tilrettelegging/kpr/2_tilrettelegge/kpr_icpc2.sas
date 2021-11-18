@@ -11,8 +11,8 @@ data icpc2_data icpc2b_data rest;
   set &inndata;
   drop icpc2: ; /*slette gamle icpc2_*variabler som er i datasett*/
   if kodeverk eq 1 then output icpc2_data;
-  if kodeverk eq 2 then output icpc2b_data;
-  if kodeverk in (3:5) then output rest;
+  else if kodeverk eq 2 then output icpc2b_data;
+  else output rest;
   run;
 
 /* ICPC-2 */
