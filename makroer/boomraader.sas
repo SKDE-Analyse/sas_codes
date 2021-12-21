@@ -72,6 +72,11 @@ proc sql;
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
 quit;
+
+/* Slette datasett */
+proc datasets nolist;
+delete bo ;
+run;
 %end;
 /*
 **********************************
@@ -90,6 +95,11 @@ proc sql;
   from &inndata a left join bo_utenbydel b
   on a.komnr=b.komnr;
 quit;
+
+/* Slette datasett */
+proc datasets nolist;
+delete bo_utenbydel bo ;
+run;
 %end;
 /*
 **********************************
@@ -121,9 +131,6 @@ if bohf=24 then Fylke=24 ;/*24='Boomr utlandet/Svalbard' */
 else if bohf=99 then Fylke=99; /*99='Ukjent/ugyldig kommunenr'*/
 else Fylke=floor(komnr/100); /*Remove the last 2 digits from kommunenummer.  The remaining leading digits are fylke*/
 run;
-/* Slette datasett */
-proc datasets nolist;
-delete bo: ;
-run;
+
 %mend;
 
