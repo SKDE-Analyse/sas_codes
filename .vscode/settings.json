@@ -1,0 +1,7 @@
+{
+    "[SAS]": {
+        "files.encoding": "windows1252",
+        "files.eol": "\r\n"
+    },
+    "files.autoGuessEncoding": true,
+}
