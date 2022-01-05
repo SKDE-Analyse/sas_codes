@@ -40,11 +40,11 @@ format dato eurdfdd10. tid time8.;
 drop datotid;
 
 /*
-- Lager 'ermann' fra variabel 'kjonn'. Sletter 'kjonn'
+- Lager 'ermann' fra variabel 'kjonn'. Rename 'kjonn' til 'kjonn_org'
 */
 if kjonn eq 1 then ermann = 1; /*menn*/
 if kjonn eq 2 then ermann = 0; /*kvinner*/
-drop kjonn kjonn_navn;
+kjonn_org = kjonn;
 format ermann ermann.;
 
 /* 
