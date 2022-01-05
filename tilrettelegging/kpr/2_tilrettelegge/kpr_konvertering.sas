@@ -21,26 +21,26 @@ format erHdiag erHdiag.;
 
 %if &diagnose ne 1 %then %do; /*Koden under kjøres ikke hvis diagnose=1*/
 /*
-- Lager 'kpr_pid' fra 'KPR_lnr' (løpenummer) og sletter 'KPR_lnr'
+- Lager 'pid_kpr' fra 'KPR_lnr' (løpenummer) og sletter 'KPR_lnr'
 */
-KPR_PID=KPR_lnr+0;
+PID_KPR=KPR_lnr+0;
 Drop KPR_lnr;
 /*
 - Rename 'hoveddiagnoseKode' til 'Hdiag'. 
 */
-rename hoveddiagnoseKode = Hdiag;
+rename hoveddiagnoseKode = HdiagKPR;
 /*
 - Lager 'bydel_org' og sletter 'bydel2'. 
 */
 bydel_org = bydel2 + 0;
 drop bydel2;
 /* 
-- Lager 'kontakttype'. Endre kontakttype '-1' til '0'. Slette 'kontakttypenavn' og 'kuhrKontakttypeId'.
+- Lager 'kontakttype_kpr'. Endre kontakttype_kpr '-1' til '0'. Slette 'kontakttypenavn' og 'kuhrKontakttypeId'.
  */
-kontakttype = kuhrKontakttypeId +0;
-if kontakttype eq -1 then kontakttype = 0;
+kontakttype_KPR = kuhrKontakttypeId +0;
+if kontakttype_KPR eq -1 then kontakttype = 0;
 drop kontakttypenavn kuhrKontakttypeId;
-format kontakttype kontakttype.;
+format kontakttype_kpr kontakttype_kpr.;
 /*
 - Lager 'refusjonutbetalt' fra 'refusjonutbetaltbeløp'. 
 */
