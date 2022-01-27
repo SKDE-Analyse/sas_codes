@@ -162,7 +162,7 @@ hbarparm category=bohf response=nrate_1 / fillattrs=(color=CX4C4C4C) outlineattr
 			scatter x=tot_rate_&aar2 y=Bohf&aar2 / markerattrs=(symbol=circlefilled color=grey  size=7) name="y2"; 
 			scatter x=tot_rate_&aar1 y=bohf&aar1 / markerattrs=(symbol=circlefilled color=black size=5) name="y1";
 			Highlow Y=Bohf low=tot_Min high=tot_Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); 
-			*keylegend "y1" "y2" "y3" / across=1 position=bottomright location=inside noborder valueattrs=(size=7);
+			keylegend "y1" "y2" "y3" / across=1 position=bottomright location=inside noborder valueattrs=(size=7);
 			%end;
 			%if &ratestart=&aar2 %then %do;
 			scatter x=tot_rate_&aar3 y=Bohf&aar3 / markerattrs=(symbol=circle       color=black size=9) name="y3"; 

@@ -2,17 +2,17 @@
 /*! 
 ### Beskrivelse
 
-Makro for å lage bo-variablene: boshhn, bohf, borhf og fylke.
-Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
+Makro for Ã¥ lage bo-variablene: boshhn, bohf, borhf og fylke.
+Bo-variablene defineres ved Ã¥ bruke 'komnr' og 'bydel' fra inndata.
 
 ```
 %boomraader(inndata=, indreOslo = 0, bydel = 1);
 ```
 
 ### Input 
-- inndata: Datasett som skal få koblet på bo-variablene.
-- indreOslo = 1: Slår sammen Diakonhjemmet og Lovisenberg, NB: må også ha argument 'bydel = 1', default er 'indreOslo=0'.
-- bydel = 0: Uten bydel får hele kommune 301 Oslo bohf=30 (Oslo), ved bruk av 'bydel=1' deles kommune 301 Oslo til bohf: 15 (akershus), 17 (lovisenberg), 18 (diakonhjemmet) og 15 (ahus), default er 'bydel=1'. 
+- inndata: Datasett som skal fÃ¥ koblet pÃ¥ bo-variablene.
+- indreOslo = 1: SlÃ¥r sammen Diakonhjemmet og Lovisenberg, NB: mÃ¥ ogsÃ¥ ha argument 'bydel = 1', default er 'indreOslo=0'.
+- bydel = 0: Uten bydel fÃ¥r hele kommune 301 Oslo bohf=30 (Oslo), ved bruk av 'bydel=1' deles kommune 301 Oslo til bohf: 15 (akershus), 17 (lovisenberg), 18 (diakonhjemmet) og 15 (ahus), default er 'bydel=1'. 
 
 ### Output 
 - bo-variablene: boshhn, bohf, borhf og fylke.
@@ -28,14 +28,14 @@ Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 1. Drop variablene BOHF, BORHF og BOSHHN
 *****************************************
 */
-/* Pga sql-merge i makroen må datasettet en sender inn ikke ha variablene bohf, borhf eller boshhn med */
+/* Pga sql-merge i makroen mÃ¥ datasettet en sender inn ikke ha variablene bohf, borhf eller boshhn med */
 data &inndata;
 set &inndata;
 drop bohf borhf boshhn;
 run;
 /*
 *********************************************
-2. Importere CSV-fil med mapping av boområder
+2. Importere CSV-fil med mapping av boomrÃ¥der
 *********************************************
 */
 data bo;
@@ -60,7 +60,7 @@ data bo;
   run;
 /*
 *********************************
-3a. Bo - Opptaksområder med bydel
+3a. Bo - OpptaksomrÃ¥der med bydel
 *********************************
 */
 %if &bydel = 1 %then %do;
@@ -71,10 +71,15 @@ proc sql;
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
 quit;
+
+/* Slette datasett */
+proc datasets nolist;
+delete bo ;
+run;
 %end;
 /*
 **********************************
-3b. Bo - Opptaksområder uten bydel
+3b. Bo - OpptaksomrÃ¥der uten bydel
 **********************************
 */
 %if &bydel = 0 %then %do;
@@ -89,6 +94,11 @@ proc sql;
   from &inndata a left join bo_utenbydel b
   on a.komnr=b.komnr;
 quit;
+
+/* Slette datasett */
+proc datasets nolist;
+delete bo_utenbydel bo ;
+run;
 %end;
 /*
 **********************************
@@ -97,7 +107,7 @@ quit;
 */
 data &inndata;
 set &inndata;
-%if &indreoslo = 1 %then %do; /* Slår sammen Lovisenberg og Diakonhjemmet */
+%if &indreoslo = 1 %then %do; /* SlÃ¥r sammen Lovisenberg og Diakonhjemmet */
   if bohf in (17,18) then bohf=31;
 %end;
 /*
@@ -109,9 +119,5 @@ Fylke=.;
 if bohf=24 then Fylke=24 ;/*24='Boomr utlandet/Svalbard' */
 else if bohf=99 then Fylke=99; /*99='Ukjent/ugyldig kommunenr'*/
 else Fylke=floor(komnr/100); /*Remove the last 2 digits from kommunenummer.  The remaining leading digits are fylke*/
-run;
-/* Slette datasett */
-proc datasets nolist;
-delete bo: ;
 run;
 %mend;
