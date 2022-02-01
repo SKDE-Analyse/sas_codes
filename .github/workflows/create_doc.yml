@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Install and Build 🔧
         run: |
-          python docs/extract_sas_documentation.py "makroer" "rateprogram" "rateprogram/sas" "tilrettelegging/npr/1_kontroll_foer_tilrette" "tilrettelegging/npr/2_tilrettelegging" "tilrettelegging/npr/3_kontroll_etter_tilrette" "tilrettelegging/ssb" "tests" "include"
+          python docs/extract_sas_documentation.py "makroer" "rateprogram" "tilrettelegging/npr/1_kontroll_foer_tilrette" "tilrettelegging/npr/2_tilrettelegging" "tilrettelegging/npr/3_kontroll_etter_tilrette" "tilrettelegging/ssb" "tests" "include"
           rm docs/extract_sas_documentation.py # so it will not be part of deployment
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
