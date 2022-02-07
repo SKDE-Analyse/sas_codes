@@ -222,13 +222,10 @@ run;
    Definere macro-variabler for boomraade-makroen,
    hvis de ikke er definert tidligere
    */
-   %if %sysevalf(%superq(haraldsplass)=,boolean) %then %let haraldsplass = 0;
    %if %sysevalf(%superq(indreOslo)=,boolean) %then %let indreOslo = 0;
    %if %sysevalf(%superq(bydel)=,boolean) %then %let bydel = 1;
-   %if %sysevalf(%superq(barn)=,boolean) %then %let barn = 0;
 
-
-	%boomraader(inndata=RV, haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
+	%boomraader(inndata=RV, indreOslo = &indreOslo, bydel = &bydel);
 run;
 
 	data RV;
