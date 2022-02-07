@@ -56,12 +56,12 @@ quit;
 %let skala=/*values=(0 to 1.5 by 0.5)*/;
 
 %if &sprak=no %then %do;
-	%let opptak_txt = 'Bosatte i opptaksområdene';
+	%let opptak_txt = "Bosatte i opptaksområdene";
 	%let format_percent = nlpct8.0;
 	%let format_num = nlnum8.0;
 %end;
 %else %if &sprak=en %then %do;
-	%let opptak_txt = 'Hospital referral area';
+	%let opptak_txt = "Hospital referral area";
 	%let format_percent = percent8.0;
 	%let format_num = comma8.0;
 %end;
@@ -78,7 +78,7 @@ hbarparm category=&bo. response=ratesnittN_1 / fillattrs=(color=CX4C4C4C) outlin
 	keylegend "hp2" "hp1"/ location=outside position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
     Yaxistable &tabellvariable/Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
    
-    yaxis display=(noticks noline) label='Bosatte i opptaksområdene' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+    yaxis display=(noticks noline) label=&opptak_txt labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
 	xaxis offsetmin=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 	Label &tabellvariable="&labeltab";
 	Format  &tabellvariable &format_percent ;
