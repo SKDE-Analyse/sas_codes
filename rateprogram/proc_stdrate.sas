@@ -1,18 +1,18 @@
 %macro proc_stdrate(
     dsn=, /*Grunnlagsdatsettet det skal beregnes rater fra*/
-    rate_var=, /*Ratevariabel, kan vÃ¦re aggregert (verdier stÃ¸rre enn en) eller dikotom (0,1)*/
+    rate_var=, /*Ratevariabel, kan være aggregert (verdier større enn en) eller dikotom (0,1)*/
     bo=bohf, /*BoHf, BoRHF eller BoShHN, BoHf er default*/
 	alder_min=0, /*Laveste alder i utvalget, 0 er default*/
-	alder_max=105, /*HÃ¸yeste alder i utvalget, 105 er default*/
+	alder_max=105, /*Høyeste alder i utvalget, 105 er default*/
     rmult=1000, /*Ratemultiplikator, dvs rate pr, 1000 er default*/
 	indirekte=, /*Settes lik 1 dersom indirekte, ellers direkte metode, direkte er default*/
-    standardaar=, /*StandardiseringsÃ¥r*/
-    start=, /*StartÃ¥r*/
-    slutt=, /*SluttÃ¥r*/
-    utdata=, /*Navn pÃ¥ utdatasett, utdatasettet er pÃ¥ "wide" form*/
+    standardaar=, /*Standardiseringsår*/
+    start=, /*Startår*/
+    slutt=, /*Sluttår*/
+    utdata=, /*Navn på utdatasett, utdatasettet er på "wide" form*/
     long=, /*if long=1 --> skriv ut "langt" datasett, ikke aktivert er default*/
     innbygg_dsn=innbygg.INNB_SKDE_BYDEL, /*Innbyggerdatasett: innbygg.INNB_SKDE_BYDEL, innbygg.INNB_SKDE_BYDEL er default*/
-    /*Til boomrÃ¥de-makroen: Standard er:(inndata=pop, indreOslo = 0, bydel = 1);*/
+    /*Til boområde-makroen: Standard er:(inndata=pop, indreOslo = 0, bydel = 1);*/
     bodef_indreoslo=0, /*0 er standard, 0 er default*/
     bodef_bydel=1 /*1 er standard, 1 er default*/
 );
@@ -20,16 +20,16 @@
 /*! 
 ### Beskrivelse
 
-Makro for Ã¥ beregne rater
+Makro for å beregne rater
 
 ```
-kortversjon (kjÃ¸res med default verdier for resten)
+kortversjon (kjøres med default verdier for resten)
 %proc_stdrate(dsn=, rate_var=, standardaar=, start=, slutt=, utdata=);
 ```
 ### Input
-- datasett med variabel det skal beregnes rater pÃ¥, 
-	- kan vÃ¦re 0,1 variabel eller aggregert
-	- mÃ¥ innheolde bo-nivÃ¥et det skal kjÃ¸res rater pÃ¥
+- datasett med variabel det skal beregnes rater på, 
+	- kan være 0,1 variabel eller aggregert
+	- må innheolde bo-nivået det skal kjøres rater på
 
 ### Output
 - &utdata + evt. long_&utdata
@@ -84,26 +84,26 @@ value aar_fmt
 9999="Snitt";
 
 value nyalder_fmt
-1="0-4 Ã¥r"
-2="5-9 Ã¥r"
-3="10-14 Ã¥r"
-4="15-19 Ã¥r"
-5="20-24 Ã¥r"
-6="25-29 Ã¥r"
-7="30-34 Ã¥r"
-8="35-39 Ã¥r"
-9="40-44 Ã¥r"
-10="45-49 Ã¥r"
-11="50-54 Ã¥r"
-12="55-59 Ã¥r"
-13="60-64 Ã¥r"
-14="65-69 Ã¥r"
-15="70-74 Ã¥r"
-16="75-79 Ã¥r"
-17="80-84 Ã¥r"
-18="85-89 Ã¥r"
-19="90-94 Ã¥r"
-20="95-105 Ã¥r";
+1="0-4 år"
+2="5-9 år"
+3="10-14 år"
+4="15-19 år"
+5="20-24 år"
+6="25-29 år"
+7="30-34 år"
+8="35-39 år"
+9="40-44 år"
+10="45-49 år"
+11="50-54 år"
+12="55-59 år"
+13="60-64 år"
+14="65-69 år"
+15="70-74 år"
+16="75-79 år"
+17="80-84 år"
+18="85-89 år"
+19="90-94 år"
+20="95-105 år";
 run;
 
 /*****Hent inn ratedata*****/
@@ -148,14 +148,14 @@ else if alder in (95:105) then nyalder=20;
 format nyalder nyalder_fmt.;   
 run;
 
-/*Tabell - fordeling pÃ¥ alder*/
+/*Tabell - fordeling på alder*/
 proc means data=rateutvalg n mean std min max median q1 q3 QRANGE;
 var alder;
 weight &rate_var;
 run;
 
 /**Aggregere ratevariabel**/
-/*Over Ã¥r, bo, alder og kjÃ¸nn*/
+/*Over år, bo, alder og kjønn*/
 proc sql;
 	create table ratedsn0 as
 	select aar, &bo, nyalder, ermann,
@@ -163,7 +163,7 @@ proc sql;
 	from rateutvalg
 	group by aar, &bo, nyalder, ermann;
 quit;
-/*Norge: Over Ã¥r, alder og kjÃ¸nn. Norge=8888*/
+/*Norge: Over år, alder og kjønn. Norge=8888*/
 proc sql;
 	create table ratedsnN as
 	select aar, nyalder, ermann,
@@ -175,11 +175,11 @@ data ratedsnN;
 set ratedsnN;
 &bo=8888;
 run;
-/*SlÃ¥r sammen boomrÃ¥de og Norge*/
+/*Slår sammen boområde og Norge*/
 data ratedsn;
 set ratedsn0 ratedsnN;
 run;
-/*For gjennomsnitt i perioden - over bo, alder og kjÃ¸nn. Aar=9999*/
+/*For gjennomsnitt i perioden - over bo, alder og kjønn. Aar=9999*/
 proc sql;
 	create table ratedsnsnitt as
 	select &bo, nyalder, ermann,
@@ -192,7 +192,7 @@ set ratedsnsnitt;
 aar=9999;
 antall=antall/(&slutt-&start+1);
 run;
-/*SlÃ¥r sammen enkeltÃ¥r og gjennomsnitt*/
+/*Slår sammen enkeltår og gjennomsnitt*/
 data ratedsn;
 set ratedsn ratedsnsnitt;
 run;
@@ -243,7 +243,7 @@ format nyalder nyalder_fmt.;
 run;
 
 /**Aggregere populasjon**/
-/*Over Ã¥r, bo, alder og kjÃ¸nn*/
+/*Over år, bo, alder og kjønn*/
 proc sql;
 	create table pop_area0 as
 	select aar, &bo, nyalder, ermann,
@@ -251,7 +251,7 @@ proc sql;
 	from pop
 	group by aar, &bo, nyalder, ermann;
 quit;
-/*Norge: Over Ã¥r, alder og kjÃ¸nn. Norge=8888*/
+/*Norge: Over år, alder og kjønn. Norge=8888*/
 proc sql;
 	create table pop_areaN as
 	select aar, nyalder, ermann,
@@ -263,11 +263,11 @@ data pop_areaN;
 set pop_areaN;
 &bo=8888;
 run;
-/*SlÃ¥r sammen boomrÃ¥de og Norge*/
+/*Slår sammen boområde og Norge*/
 data pop_area;
 set pop_area0 pop_areaN;
 run;
-/*For gjennomsnitt i perioden - over bo, alder og kjÃ¸nn. Aar=9999*/
+/*For gjennomsnitt i perioden - over bo, alder og kjønn. Aar=9999*/
 proc sql;
 	create table popsnitt as
 	select &bo, nyalder, ermann,
@@ -280,11 +280,11 @@ set popsnitt;
 aar=9999;
 pop=pop/(&slutt-&start+1);
 run;
-/*SlÃ¥r sammen enkeltÃ¥r og gjennomsnitt*/
+/*Slår sammen enkeltår og gjennomsnitt*/
 data pop_area;
 set pop_area popsnitt;
 run;
-/*Referansepopulasjon for Norge, i standardiseringsÃ¥r*/
+/*Referansepopulasjon for Norge, i standardiseringsår*/
 proc sql;
 	create table popN as
 	select nyalder, ermann,
@@ -294,7 +294,7 @@ proc sql;
 	group by nyalder, ermann;
 quit;
 
-/*******slÃ¥ sammen ratedata og populasjonsdata, og beregn rate****************/
+/*******slå sammen ratedata og populasjonsdata, og beregn rate****************/
 proc sql;
 create table ratedata as
 select a.*,antall
@@ -308,7 +308,7 @@ if antall=. then antall=0;
 run;
 
 /*for indirekte justering - 
-i) beregne events nasjonalt i standardiseringsÃ¥r
+i) beregne events nasjonalt i standardiseringsår
 ii) merge inn i popN datasettet (referansepopulasjonen)*/
 proc sql;
 	create table eventN as
@@ -364,7 +364,7 @@ styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 	vbar alder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar";
 	keylegend "Vbar" / location=outside position=topright noborder;
     yaxis label="Antall";
-	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, ett-Ã¥rig';
+	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, ett-årig';
 run;
 
 PROC SQL;
@@ -379,7 +379,7 @@ styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 	vbar nyalder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar";
 	keylegend "Vbar" / location=outside position=topright noborder;
     yaxis label="Antall";
-	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, 5-Ã¥rige alderskategorier';
+	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, 5-årige alderskategorier';
 run;
 
 /**************Lag tabeller***********/
@@ -410,7 +410,7 @@ aar={LABEL="Lower CL"}*lcl={LABEL=""}*F=8.2*Sum={LABEL=""}
 aar={LABEL="Upper CL"}*ucl={LABEL=""}*F=8.2*Sum={LABEL=""};
 RUN;
 
-/***************Lag Ã¥rsvariasjonsfigur*********/
+/***************Lag årsvariasjonsfigur*********/
 data _null_;
 set tmp_rate;
 If Aar=9999 and &bo=8888 then do;
@@ -455,7 +455,7 @@ var ucl;
 id aar;
 by &bo;
 run;
-/*slÃ¥ sammen transponerte datasett*/
+/*slå sammen transponerte datasett*/
 data tmp_rater;
 merge tmp_rater tmp_antall tmp_pop tmp_crude tmp_lcl tmp_ucl;
 run;
@@ -522,11 +522,11 @@ Highlow Y=&bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thi
 
 Yaxistable antsnitt popsnitt /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
 %if &indirekte ne 1 %then %do;
-yaxis display=(noticks noline) label="Rater pr &rmult, &rate_var, &dsn, direkte metode, &alder_min - &alder_max Ã¥r" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
+yaxis display=(noticks noline) label="Rater pr &rmult, &rate_var, &dsn, direkte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
 discreteorder=data valueattrs=(size=7);
 %end;
 %if &indirekte = 1 %then %do;
-yaxis display=(noticks noline) label="Rater pr &rmult, &rate_var, &dsn, indirekte metode, , &alder_min - &alder_max Ã¥r" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
+yaxis display=(noticks noline) label="Rater pr &rmult, &rate_var, &dsn, indirekte metode, , &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
 discreteorder=data valueattrs=(size=7);
 %end;
 xaxis display=(nolabel) offsetmin=0.02 valueattrs=(size=7);
@@ -584,7 +584,7 @@ set tmp_rate;
 run;
 %end;
 
-/*Skru av denne for Ã¥ se midlertidige datasett*/
+/*Skru av denne for å se midlertidige datasett*/
 proc datasets nolist;
 delete rate: pop: tmp_: stdrate_: eventn;
 run;
