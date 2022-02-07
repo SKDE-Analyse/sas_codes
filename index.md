@@ -46,6 +46,7 @@
 - [makroer/lag_figur.sas](lag_figur)
 - [makroer/UnikeVariableAvdOpphold.sas](UnikeVariableAvdOpphold)
 - [rateprogram/proc_stdrate.sas](proc_stdrate)
+- [rateprogram/ratefig_todelt.sas](ratefig_todelt)
 - [rateprogram/ratefig_aarsvar.sas](ratefig_aarsvar)
 - [rateprogram/ratefig_aarsvar_eng.sas](ratefig_aarsvar_eng)
 - [rateprogram/ratefig_tredelt_andelkolonne.sas](ratefig_tredelt_andelkolonne)
