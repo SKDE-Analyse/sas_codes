@@ -6,13 +6,13 @@
     label_2=, /*Legendnavn andre del*/
     label_3=, /*Legendnavn tredje del*/
     tabellvariable=andel_12, /*Variabel som brukes til kolonnen til høyre, default satt til sum av andel 1 + andel 2*/
-    labeltabell=andel_12 = "Andel 1+2";, /*Tekst til kolonnen til høyre*/
+    labeltab=andel_1+2, /*Tekst til kolonnen til høyre*/
     sprak=no /*=en*/, /*Norsk eller engelsk tekst i figur, default satt til norsk*/
     bo=bohf /*=borhf eller =boshhn*/,  /*Opptaksområder, default satt til bohf*/
     bildeformat=png, /*Bildeformat, default satt til png*/
     skala=, /*Bestemmes av data når ikke angitt*/
     figurnavn = , /*Første del av figurnavn*/
-    xlabel = , /*Tekst under x-aksen*/
+    xlabel =  /*Tekst under x-aksen*/
 );
 /*! 
 ### Beskrivelse
@@ -90,7 +90,7 @@ hbarparm category=&bo. response=ratesnittN_1 / fillattrs=(color=CX4C4C4C) outlin
    
     yaxis display=(noticks noline) label=&opptak_txt labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
 	xaxis offsetmin=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
-	Label &labeltabell;
+	Label &tabellvariable="&labeltab";
 	Format  &tabellvariable &format_percent ;
 run;
 %mend ratefig_tredelt_andelkolonne;

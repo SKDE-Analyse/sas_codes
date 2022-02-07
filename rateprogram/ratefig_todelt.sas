@@ -10,7 +10,7 @@
     bildeformat=png, /*Bildeformat, default satt til png*/
     skala=, /*Bestemmes av data når ikke angitt*/
     figurnavn = , /*Første del av figurnavn*/
-    xlabel = , /*Tekst under x-aksen*/
+    xlabel =  /*Tekst under x-aksen*/
 );
 /*! 
 ### Beskrivelse
