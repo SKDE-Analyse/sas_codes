@@ -574,6 +574,10 @@ set tmp_rater;
 drop _:;
 run;
 
+proc sort data = &utdata;
+by &bo;
+run;
+
 %if &long=1 %then %do;
 data long_&utdata;
 set tmp_rate;
