@@ -107,7 +107,7 @@ value nyalder_fmt
 run;
 
 /*****Hent inn ratedata*****/
-data rateutvalg;
+data xyz_rateutvalg;
 set &dsn;
 keep aar ermann alder &bo &rate_var nyalder;
 if alder in (&alder_min:&alder_max);
@@ -149,7 +149,7 @@ format nyalder nyalder_fmt.;
 run;
 
 /*Tabell - fordeling på alder*/
-proc means data=rateutvalg n mean std min max median q1 q3 QRANGE;
+proc means data=xyz_rateutvalg n mean std min max median q1 q3 QRANGE;
 var alder;
 weight &rate_var;
 run;
@@ -157,55 +157,55 @@ run;
 /**Aggregere ratevariabel**/
 /*Over år, bo, alder og kjønn*/
 proc sql;
-	create table ratedsn0 as
+	create table xyz_ratedsn0 as
 	select aar, &bo, nyalder, ermann,
 		sum(&rate_var) as antall
-	from rateutvalg
+	from xyz_rateutvalg
 	group by aar, &bo, nyalder, ermann;
 quit;
 /*Norge: Over år, alder og kjønn. Norge=8888*/
 proc sql;
-	create table ratedsnN as
+	create table xyz_ratedsnN as
 	select aar, nyalder, ermann,
 		sum(&rate_var) as antall
-	from rateutvalg
+	from xyz_rateutvalg
 	group by aar, nyalder, ermann;
 quit;
-data ratedsnN;
-set ratedsnN;
+data xyz_ratedsnN;
+set xyz_ratedsnN;
 &bo=8888;
 run;
 /*Slår sammen boområde og Norge*/
-data ratedsn;
-set ratedsn0 ratedsnN;
+data xyz_ratedsn;
+set xyz_ratedsn0 xyz_ratedsnN;
 run;
 /*For gjennomsnitt i perioden - over bo, alder og kjønn. Aar=9999*/
 proc sql;
-	create table ratedsnsnitt as
+	create table xyz_ratedsnsnitt as
 	select &bo, nyalder, ermann,
 		sum(antall) as antall
-	from ratedsn
+	from xyz_ratedsn
 	group by &bo, nyalder, ermann;
 quit;
-data ratedsnsnitt;
-set ratedsnsnitt;
+data xyz_ratedsnsnitt;
+set xyz_ratedsnsnitt;
 aar=9999;
 antall=antall/(&slutt-&start+1);
 run;
 /*Slår sammen enkeltår og gjennomsnitt*/
-data ratedsn;
-set ratedsn ratedsnsnitt;
+data xyz_ratedsn;
+set xyz_ratedsn xyz_ratedsnsnitt;
 run;
 
 /*****Hent inn innbyggerdata*****/
-data pop;
+data xyz_pop;
 set &innbygg_dsn;
 where aar in (&start:&slutt) and alder in (&alder_min:&alder_max);
 run;
-%boomraader(inndata=pop, indreOslo=&bodef_indreoslo, bydel=&bodef_bydel);
+%boomraader(inndata=xyz_pop, indreOslo=&bodef_indreoslo, bydel=&bodef_bydel);
 
-data pop;
-set pop;
+data xyz_pop;
+set xyz_pop;
 %if &bo=bohf %then %do;
     drop komnr bydel boshhn borhf fylke;
     format bohf bohf_fmt.;
@@ -245,65 +245,65 @@ run;
 /**Aggregere populasjon**/
 /*Over år, bo, alder og kjønn*/
 proc sql;
-	create table pop_area0 as
+	create table xyz_pop_area0 as
 	select aar, &bo, nyalder, ermann,
 		sum(innbyggere) as pop
-	from pop
+	from xyz_pop
 	group by aar, &bo, nyalder, ermann;
 quit;
 /*Norge: Over år, alder og kjønn. Norge=8888*/
 proc sql;
-	create table pop_areaN as
+	create table xyz_pop_areaN as
 	select aar, nyalder, ermann,
 		sum(innbyggere) as pop
-	from pop
+	from xyz_pop
 	group by aar, nyalder, ermann;
 quit;
-data pop_areaN;
-set pop_areaN;
+data xyz_pop_areaN;
+set xyz_pop_areaN;
 &bo=8888;
 run;
 /*Slår sammen boområde og Norge*/
-data pop_area;
-set pop_area0 pop_areaN;
+data xyz_pop_area;
+set xyz_pop_area0 xyz_pop_areaN;
 run;
 /*For gjennomsnitt i perioden - over bo, alder og kjønn. Aar=9999*/
 proc sql;
-	create table popsnitt as
+	create table xyz_popsnitt as
 	select &bo, nyalder, ermann,
 		sum(pop) as pop
-	from pop_area
+	from xyz_pop_area
 	group by &bo, nyalder, ermann;
 quit;
-data popsnitt;
-set popsnitt;
+data xyz_popsnitt;
+set xyz_popsnitt;
 aar=9999;
 pop=pop/(&slutt-&start+1);
 run;
 /*Slår sammen enkeltår og gjennomsnitt*/
-data pop_area;
-set pop_area popsnitt;
+data xyz_pop_area;
+set xyz_pop_area xyz_popsnitt;
 run;
 /*Referansepopulasjon for Norge, i standardiseringsår*/
 proc sql;
-	create table popN as
+	create table xyz_popN as
 	select nyalder, ermann,
 		sum(innbyggere) as Npop
-	from pop
+	from xyz_pop
 	where aar=&standardaar
 	group by nyalder, ermann;
 quit;
 
 /*******slå sammen ratedata og populasjonsdata, og beregn rate****************/
 proc sql;
-create table ratedata as
+create table xyz_ratedata as
 select a.*,antall
-from pop_area as a left join ratedsn as b
+from xyz_pop_area as a left join xyz_ratedsn as b
 on a.&bo=b.&bo and a.aar=b.aar and a.nyalder=b.nyalder and a.ermann=b.ermann;
 run;
 
-data ratedata;
-set ratedata;
+data xyz_ratedata;
+set xyz_ratedata;
 if antall=. then antall=0;
 run;
 
@@ -311,27 +311,27 @@ run;
 i) beregne events nasjonalt i standardiseringsår
 ii) merge inn i popN datasettet (referansepopulasjonen)*/
 proc sql;
-	create table eventN as
+	create table xyz_eventN as
 	select nyalder, ermann,
 		sum(antall) as Nevent
-	from ratedata
+	from xyz_ratedata
 	where aar=&standardaar
 	group by nyalder, ermann;
 quit;
 proc sql;
-create table popN as
+create table xyz_popN as
 select a.*,b.Nevent
-from popN as a left join eventN as b
+from xyz_popN as a left join xyz_eventN as b
 on a.nyalder=b.nyalder and a.ermann=b.ermann;
 run;
 
 /**Selve standardiseringa skjer her**/
 ods exclude all;
 %if &indirekte ne 1 %then %do;
-proc stdrate data=ratedata refdata=popN method=direct stat=rate(mult=&rmult);
+proc stdrate data=xyz_ratedata refdata=xyz_popN method=direct stat=rate(mult=&rmult);
 %end;
 %if &indirekte=1 %then %do;
-proc stdrate data=ratedata refdata=popN method=indirect stat=rate(mult=&rmult);
+proc stdrate data=xyz_ratedata refdata=xyz_popN method=indirect stat=rate(mult=&rmult);
 %end;
 by &bo aar;
 population event=antall total=pop;
@@ -342,24 +342,24 @@ population event=antall total=pop;
 	reference event=Nevent total=Npop;
 %end;
 strata ermann nyalder /*/ stats*/;
-ods output stdrate=StdRate_&utdata;
+ods output stdrate=xyz_StdRate_&utdata;
 run;
 ods exclude none; 
 
-data StdRate_&utdata;
-set StdRate_&utdata;
+data xyz_StdRate_&utdata;
+set xyz_StdRate_&utdata;
 format aar aar_fmt. &bo &bo._fmt.;
 run; 
 
 /***********Lag aldersfigurer***********/
 PROC SQL;
-   CREATE TABLE tmp_aldersfig AS
+   CREATE TABLE xyz_aldersfig AS
    SELECT DISTINCT aar,Alder,ErMann,(SUM(&rate_var)) AS RV
-      FROM rateutvalg
+      FROM xyz_rateutvalg
       GROUP BY aar, Alder, ErMann;	  
 QUIT;
 
-proc sgplot data=tmp_aldersfig noautolegend noborder sganno=anno pad=(Bottom=4% );
+proc sgplot data=xyz_aldersfig noautolegend noborder sganno=anno pad=(Bottom=4% );
 styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 	vbar alder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar";
 	keylegend "Vbar" / location=outside position=topright noborder;
@@ -368,13 +368,13 @@ styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 run;
 
 PROC SQL;
-   CREATE TABLE tmp_aldersfigkat AS
+   CREATE TABLE xyz_aldersfigkat AS
    SELECT DISTINCT aar,nyAlder,ErMann,(SUM(&rate_var)) AS RV
-	FROM rateutvalg where alder in (&alder_min:&alder_max)
+	FROM xyz_rateutvalg where alder in (&alder_min:&alder_max)
       GROUP BY aar, nyAlder, ErMann;	  
 QUIT;
 
-proc sgplot data=tmp_aldersfigkat noautolegend noborder sganno=anno pad=(Bottom=4% );
+proc sgplot data=xyz_aldersfigkat noautolegend noborder sganno=anno pad=(Bottom=4% );
 styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 	vbar nyalder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar";
 	keylegend "Vbar" / location=outside position=topright noborder;
@@ -383,13 +383,13 @@ styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
 run;
 
 /**************Lag tabeller***********/
-data tmp_rate;
-set StdRate_&utdata;
+data xyz_tmp_rate;
+set xyz_StdRate_&utdata;
 drop Method RateMult ExpectedEvents RefPopTime StdErr Type;
 rename ObservedEvents=Antall PopTime=Populasjon Stdrate=Rate LowerCL=LCL UpperCL=UCL;
 run;
 
-proc tabulate data=tmp_rate;
+proc tabulate data=xyz_tmp_rate;
 	VAR Rate Antall populasjon;
 	CLASS aar &bo/	ORDER=UNFORMATTED MISSING;
 	TABLE 
@@ -399,7 +399,7 @@ aar={LABEL="Antall"}*Antall={LABEL=""}*F=8.0*Sum={LABEL=""}
 aar={LABEL="Innbyggere"}*populasjon={LABEL=""}*F=8.0*Sum={LABEL=""};
 RUN;
 
-proc tabulate data=tmp_rate;
+proc tabulate data=xyz_tmp_rate;
 	VAR crudeRate rate lcl ucl;
 	CLASS aar &bo/	ORDER=UNFORMATTED MISSING;
 	TABLE 
@@ -412,7 +412,7 @@ RUN;
 
 /***************Lag årsvariasjonsfigur*********/
 data _null_;
-set tmp_rate;
+set xyz_tmp_rate;
 If Aar=9999 and &bo=8888 then do;
 call symput('NorgeSnitt',(rate));
 Call symput('Norge_lcl',(lcl));
@@ -420,48 +420,48 @@ Call symput('Norge_ucl',(ucl));
 end;
 run;
 /*Transponering*/
-proc transpose data=tmp_rate out=tmp_rater prefix=rate;
+proc transpose data=xyz_tmp_rate out=xyz_tmp_rater prefix=rate;
 var Rate;
 id aar;
 by &bo;
 run;
 
-proc transpose data=tmp_rate out=tmp_antall prefix=ant;
+proc transpose data=xyz_tmp_rate out=xyz_tmp_antall prefix=ant;
 var antall;
 id aar;
 by &bo;
 run;
 
-proc transpose data=tmp_rate out=tmp_pop prefix=pop;
+proc transpose data=xyz_tmp_rate out=xyz_tmp_pop prefix=pop;
 var populasjon;
 id aar;
 by &bo;
 run;
 
-proc transpose data=tmp_rate out=tmp_crude prefix=crude;
+proc transpose data=xyz_tmp_rate out=xyz_tmp_crude prefix=crude;
 var CrudeRate;
 id aar;
 by &bo;
 run;
 
-proc transpose data=tmp_rate out=tmp_lcl prefix=lcl;
+proc transpose data=xyz_tmp_rate out=xyz_tmp_lcl prefix=lcl;
 var lcl;
 id aar;
 by &bo;
 run;
 
-proc transpose data=tmp_rate out=tmp_ucl prefix=ucl;
+proc transpose data=xyz_tmp_rate out=xyz_tmp_ucl prefix=ucl;
 var ucl;
 id aar;
 by &bo;
 run;
 /*slå sammen transponerte datasett*/
-data tmp_rater;
-merge tmp_rater tmp_antall tmp_pop tmp_crude tmp_lcl tmp_ucl;
+data xyz_tmp_rater;
+merge xyz_tmp_rater xyz_tmp_antall xyz_tmp_pop xyz_tmp_crude xyz_tmp_lcl xyz_tmp_ucl;
 run;
 
-data tmp_rater;
-set tmp_rater;
+data xyz_tmp_rater;
+set xyz_tmp_rater;
 max=max(of rate&start-rate&slutt);
 min=min(of rate&start-rate&slutt);
 run;
@@ -495,19 +495,19 @@ run;
 	%let ar7=%sysevalf(&start+6);
 %end;
 
-data tmp_rater;
-set tmp_rater;
+data xyz_tmp_rater;
+set xyz_tmp_rater;
 if &bo=8888 then nrate=ratesnitt;
 label antsnitt="Events";
 label popsnitt="Populasjon";
 format antsnitt popsnitt nlnum8.0;
 run;
 
-proc sort data=tmp_rater;
+proc sort data=xyz_tmp_rater;
 by descending ratesnitt;
 run;
 
-proc sgplot data=tmp_rater noborder noautolegend sganno=anno pad=(Bottom=5%);
+proc sgplot data=xyz_tmp_rater noborder noautolegend sganno=anno pad=(Bottom=5%);
 hbarparm category=&bo response=ratesnitt / fillattrs=(color=CX95BDE6); 
 hbarparm category=&bo response=nrate / fillattrs=(color=CXC3C3C3);
      /* Refline &NorgeSnitt / axis=x lineattrs=(Thickness=.5 color=Black pattern=2) name="Ref1"; */
@@ -570,7 +570,7 @@ xaxis display=(nolabel) offsetmin=0.02 valueattrs=(size=7);
 run;
 
 data &utdata;
-set tmp_rater;
+set xyz_tmp_rater;
 drop _:;
 run;
 
@@ -580,13 +580,13 @@ run;
 
 %if &long=1 %then %do;
 data long_&utdata;
-set tmp_rate;
+set xyz_tmp_rate;
 run;
 %end;
 
 /*Skru av denne for å se midlertidige datasett*/
 proc datasets nolist;
-delete rate: pop: tmp_: stdrate_: eventn;
+delete xyz_:;
 run;
 
 %mend proc_stdrate;
