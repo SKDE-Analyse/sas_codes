@@ -16,7 +16,8 @@
     skala=, /* Skala på x-aksen på figurene - eks: values=(0 to 0.8 by 0.2), ikke angitt som default */
     lagre=1, /*lik 1 dersom lagring av bildefil, 1 som default*/
     figurnavn=, /*navn på bildefil*/
-    bildeformat=png /*Format, png som default*/
+    bildeformat=png, /*Format, png som default*/
+    xlabel =  /*Tekst under x-aksen*/
 );
 
 /*! 
@@ -73,13 +74,13 @@ kortversjon (kjøres med default-verdier for resten)
 	%let ar7=%sysevalf(&start+6);
 %end;
 
-data tmp_&dsn;
+data xyz_&dsn;
 set &dsn;
 if &bo=8888 then nrate=ratesnitt;
 run;
 
 data _null_;
-set tmp_&dsn;
+set xyz_&dsn;
 If &bo=8888 then do;
 call symput('NorgeSnitt',(nrate));
 end;
@@ -87,51 +88,51 @@ run;
 
 /*Yaxis-table - hente verdier fra annet datasett*/
 %if &ytabdata ne . %then %do;
-data tmp_tabdata;
+data xyz_tabdata;
 set &ytabdata;
 keep &bo &yvariabel1 &yvariabel2;
 run;
 
-data tmp_tabdata;
-set tmp_tabdata;
+data xyz_tabdata;
+set xyz_tabdata;
 yvar1=&yvariabel1;
 yvar2=&yvariabel2;
 label yvar1="&ylabel1" yvar2="&ylabel2";  
 run;
 
 proc sql;
-create table tmp_&dsn as
+create table xyz_&dsn as
 select a.*, b.yvar1, b.yvar2
-from tmp_&dsn as a left join tmp_tabdata as b
+from xyz_&dsn as a left join xyz_tabdata as b
 on a.&bo=b.&bo;
 run;
 %end;
 
 /*Yaxis-table - fra samme datasett*/
 %if &ytabdata = . %then %do;
-data tmp_&dsn;
-set tmp_&dsn;
+data xyz_&dsn;
+set xyz_&dsn;
 yvar1=&yvariabel1;
 yvar2=&yvariabel2;
 label yvar1="&ylabel1" yvar2="&ylabel2"; 
 %end;
 
 /*Legg på format på y-axis table variable*/
-data tmp_&dsn;
-set tmp_&dsn;
+data xyz_&dsn;
+set xyz_&dsn;
 format yvar1 &yvarformat1 yvar2 &yvarformat2;
 drop min max;
 run;
 
 /*legg på max og min for den aktuelle perioden*/
-data tmp_&dsn;
-set tmp_&dsn;
+data xyz_&dsn;
+set xyz_&dsn;
 max=max(of rate&start-rate&slutt);
 min=min(of rate&start-rate&slutt);
 run;
 
 /*sorter datasett*/
-proc sort data=tmp_&dsn;
+proc sort data=xyz_&dsn;
 by descending rateSnitt;
 run;
 
@@ -141,7 +142,7 @@ ODS Graphics ON /reset=All imagename="&figurnavn" imagefmt=&bildeformat border=o
 ODS Listing style=stil_figur Image_dpi=300 GPATH="&bildesti";
 %end;
 title;
-proc sgplot data=tmp_&dsn noborder noautolegend sganno=anno pad=(Bottom=5%);
+proc sgplot data=xyz_&dsn noborder noautolegend sganno=anno pad=(Bottom=5%);
 %if &soyle ne 1 %then %do;  where &bo ne 8888; %end;
 hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 %if &soyle = 1 %then %do; hbarparm category=&bo response=nrate / fillattrs=(color=CXC3C3C3); %end;
@@ -161,7 +162,7 @@ Yaxistable yvar1 yvar2 /Label location=inside position=right labelpos=bottom val
 %end;
 yaxis display=(noticks noline) label='Referral areas' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=8);
 
-xaxis display=(nolabel) offsetmin=0.02 &skala valueattrs=(size=8) offsetmax=0.05;
+xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala label="&xlabel" valueattrs=(size=8) offsetmax=0.05;
 
 %if &Antall_aar=2 %then %do;
     legenditem type=marker name='item1' / label="&ar1" markerattrs=(symbol=circlefilled color=black size=5pt);
@@ -234,7 +235,7 @@ ods listing close; ods graphics off;
 %end;
 
 proc datasets nolist;
-delete tmp:;
+delete xyz:;
 run;
 
 %mend ratefig_aarsvar_eng;
