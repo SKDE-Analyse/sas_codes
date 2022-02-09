@@ -382,7 +382,7 @@ value NPRID_REG
       8 = 'Tele-/videokonferanse'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       11 = 'Telemedisin'  
       12 = 'Telefonsamtale med pasient' 
-      13 = 'Telefonkonsultasjon med egenadel' /*ny 2020*/
+      13 = 'Telefonkonsultasjon med egenandel' /*ny 2020*/
       21 = 'Teknisk Episode';
 
    value INTERN_KONS
