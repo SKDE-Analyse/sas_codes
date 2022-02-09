@@ -21,7 +21,7 @@ Makro for å lage tredelt søylefigur.
 
 ```
 Kortversjon (kjøres med default verdier for resten):
-%ratefig_tredelt_andelkolonne(del1=, del2=, del3=, label_1=, label_2=, label_3=, fignavn=, xlabel= )
+%ratefig_tredelt_andelkolonne(del1=, del2=, del3=, label_1=, label_2=, label_3=, figurnavn=, xlabel= )
 ```
 ### Input
 - Tre datasett/output fra rateprogram (del1, del2 og del3)
@@ -76,7 +76,7 @@ quit;
 /*figur tegner først total rate, deretter sum av del1 og del2, deretter del1 til sist. */
 ODS Graphics ON /reset=All imagename="&figurnavn._&bo._tredelt" imagefmt=&bildeformat. border=off height=500px ;
 ODS Listing Image_dpi=300 GPATH="&bildesti";
-proc sgplot data=&figurnavn._&bo. noborder noautolegend sganno=&anno pad=(Bottom=5%);
+proc sgplot data=&figurnavn._&bo. noborder noautolegend sganno=anno pad=(Bottom=5%);
 hbarparm category=&bo. response=RateSnitt_tot / fillattrs=(color=CX95BDE6) outlineattrs=(color=CX00509E) missing name="hp1" legendlabel="&label_3";
 hbarparm category=&bo. response=RateSnitt_12 / fillattrs=(color=CX568BBF) outlineattrs=(color=CX00509E) missing name="hp2" legendlabel="&label_2";
 hbarparm category=&bo. response=ratesnitt_1 / fillattrs=(color=CX00509E) outlineattrs=(color=CX00509E) missing name="hp3" legendlabel="&label_1" ; 

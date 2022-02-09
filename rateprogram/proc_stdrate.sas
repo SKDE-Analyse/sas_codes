@@ -466,6 +466,35 @@ max=max(of rate&start-rate&slutt);
 min=min(of rate&start-rate&slutt);
 run;
 
+/**Forholdstall**/
+proc transpose data=xyz_tmp_rate out=xyz_ft;
+where Aar=9999 and &bo ne 8888;
+var rate;
+run;
+
+data xyz_ft;
+set xyz_ft;
+&bo=8888;
+max1=largest(1,of col:);
+max2=largest(2,of col:);
+max3=largest(3,of col:);
+min1=smallest(1,of col:);
+min2=smallest(2,of col:);
+min3=smallest(3,of col:);
+FT1=max1/min1;
+FT2=max2/min2;
+FT3=max3/min3;
+keep &bo ft:;
+format FT: 8.3;
+run;
+
+data _null_;
+set xyz_ft;
+call symput('FT1',put(FT1,4.2));
+Call symput('FT2',put(FT2,4.2));
+Call symput('FT3',put(FT3,4.2));
+run;
+
 %global Antall_aar;
 %let Antall_aar=%sysevalf(&slutt-&start+2);
 %global ar1;
@@ -522,14 +551,14 @@ Highlow Y=&bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thi
 
 Yaxistable antsnitt popsnitt /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
 %if &indirekte ne 1 %then %do;
-yaxis display=(noticks noline) label="Rater pr &rmult, &rate_var, &dsn, direkte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
+yaxis display=(noticks noline) label="&rate_var, &dsn, direkte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
 discreteorder=data valueattrs=(size=7);
 %end;
 %if &indirekte = 1 %then %do;
-yaxis display=(noticks noline) label="Rater pr &rmult, &rate_var, &dsn, indirekte metode, , &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
+yaxis display=(noticks noline) label="&rate_var, &dsn, indirekte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
 discreteorder=data valueattrs=(size=7);
 %end;
-xaxis display=(nolabel) offsetmin=0.02 valueattrs=(size=7);
+xaxis /*display=(nolabel)*/ offsetmin=0.02 valueattrs=(size=7) label="Rater pr &rmult, FT1=&FT1, FT2=&FT2, FT3=&FT3";
 
 %if &Antall_aar=2 %then %do;
     legenditem type=marker name='item1' / label="&ar1" markerattrs=(symbol=circlefilled color=black size=5pt);
@@ -572,6 +601,13 @@ run;
 data &utdata;
 set xyz_tmp_rater;
 drop _:;
+run;
+
+proc sql;
+create table &utdata as 
+select *
+from &utdata as a left join xyz_ft as b
+on a.&bo=b.&bo;
 run;
 
 proc sort data = &utdata;
