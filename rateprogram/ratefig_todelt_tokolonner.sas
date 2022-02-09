@@ -1,14 +1,14 @@
 %macro ratefig_todelt_tokolonner(
     del1=, /*Datasett første del av søylen, f.eks offentlig*/
     del2=, /*Datasett andre del av søylen, f.eks privat*/
-    dsn3= , /*Datasett som skal brukes til kolonne, f.eks kontaktrate*/
-    dsn4= , /*Datasett som skal brukes til kolonne, f.eks pasientrate*/
-    label_1=, /*Legendnavn første del */
-    label_2=, /*Legendnavn andre del*/
+    teller= , /*Datasett som skal brukes til kolonne, f.eks kontaktrate*/
+    nevner= , /*Datasett som skal brukes til kolonne, f.eks pasientrate*/
+    label_1=del1, /*Legendnavn første del */
+    label_2=del2, /*Legendnavn andre del*/
     tabellvariable1=andel_1, /*Variabel som brukes til kolonne1 til høyre, default satt til andel_1*/
     tabellvariable2=ant_kont_pas, /*variabel som brukes til kolonne 2 til høyre, default satt til ant_kont_pas*/
     labeltab1= andel1, /*Tekst over kolonne 1 til høyre*/
-    labeltab2=ant_per_pas, /*Tekst over kolonne 2 til høyre*/
+    labeltab2=ant_per, /*Tekst over kolonne 2 til høyre*/
     sprak=no /*=en*/, /*Norsk eller engelsk tekst i figur, default satt til norsk*/
     bo=bohf /*=borhf eller =boshhn*/,  /*Opptaksområder, default satt til bohf*/
     bildeformat=png, /*Bildeformat, default satt til png*/
@@ -58,9 +58,9 @@ proc sql;
 	from &del1. a
 	left join &del2. b
 	on a.&bo.=b.&bo.
-	left join &dsn3. c
+	left join &teller. c
 	on a.&bo.=c.&bo.
-	left join &dsn4. d
+	left join &nevner. d
 	on a.&bo.=d.&bo.
 order by calculated ratesnitt_tot desc;
 quit;
