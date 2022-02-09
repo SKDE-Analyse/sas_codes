@@ -23,10 +23,10 @@ Makro for å lage trodelt søylefigur, og ha to kolonner på y-aksen.
 
 ```
 Kortversjon (kjøres med default verdier for resten):
-%ratefig_todelt_tokolonner(del1=, del2=,dsn3=, dsn4=, label_1=, label_2=, figurnavn=, xlabel= )
+%ratefig_todelt_tokolonner(del1=, del2=, teller=, nevner=, label_1=, label_2=, figurnavn=, xlabel= )
 ```
 ### Input
-- Fire datasett/output fra rateprogram (del1 og del2, dsn3 og dsn4 som brukes til kolonnen ant kontakter per pasient )
+- Fire datasett/output fra rateprogram (del1 og del2, teller og nevner som brukes til kolonnen ant kontakter per pasient )
 - Ett let-statement for å angi &bildesti (%let bildesti = \\&filbane\Analyse\prosjekter\eksempelmappe\figurer;)
 - Ett include-statement for å angi anno 
 
