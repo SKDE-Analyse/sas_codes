@@ -35,7 +35,7 @@ Kortversjon (kjøres med default verdier for resten):
     tablabel1= ,tablabel2= ,
     fmt_tabvar1= ,fmt_tabvar2= ,
     figurnavn= ,xlabel= )
-    
+
 ```
 ### Input
 - Ett tilpasset datasett fra rateprogram
@@ -77,14 +77,11 @@ run;
 
 %if &sprak=no %then %do;
 	%let opptak_txt = "Bosatte i opptaksområdene";
-	%let format_percent = nlpct8.0;
-	%let format_num = nlnum8.0;
 %end;
 %else %if &sprak=en %then %do;
 	%let opptak_txt = "Hospital referral area";
-	%let format_percent = percent8.0;
-	%let format_num = comma8.0;
 %end;
+
 /*figur tegner først total rate, deretter sum av del1 og del2, deretter del1 til sist. */
 ODS Graphics ON /reset=All imagename="&figurnavn._&bo._todelt" imagefmt=&bildeformat border=off height=500px ;
 ODS Listing Image_dpi=300 GPATH="&bildesti";
@@ -123,4 +120,4 @@ proc datasets nolist;
 delete xyz_:;
 run;
 
-%mend ratefig_todelt;
+%mend ratefigur_todelt;
