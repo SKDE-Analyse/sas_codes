@@ -30,7 +30,7 @@ kortversjon (kjøres med default-verdier for resten)
 ### Input
 - datasett/output fra rateprogram
 - datasett må inneholde alle rate-variabelene og nrate
-- eventuelt, hente inn data fra annet datasett (ytabdata) til y-axis table
+
 - følgende let-statement:
     - bildesti
 -følgende include-statement
