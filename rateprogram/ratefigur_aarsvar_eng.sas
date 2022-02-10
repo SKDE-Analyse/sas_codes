@@ -84,18 +84,12 @@ call symput('NorgeSnitt',(nrate));
 end;
 run;
 
-/*Yaxis-table - fra samme datasett*/
-%if &ytabdata = . %then %do;
+/*Legg på format på y-axis table variable*/
 data xyz_&dsn;
 set xyz_&dsn;
 yvar1=&yvariabel1;
 yvar2=&yvariabel2;
 label yvar1="&ylabel1" yvar2="&ylabel2"; 
-%end;
-
-/*Legg på format på y-axis table variable*/
-data xyz_&dsn;
-set xyz_&dsn;
 format yvar1 &yvarformat1 yvar2 &yvarformat2;
 drop min max;
 run;
