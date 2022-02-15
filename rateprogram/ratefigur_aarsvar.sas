@@ -1,8 +1,6 @@
-%macro ratefig_aarsvar(
+%macro ratefigur_aarsvar(
     dsn=, /*Grunnlagsdatsettet for figur, som regel utdata fra rateprogram*/
     /*dsn må inneholde variablene rate: og nrate*/
-    ytabdata=, /*Dersom nødvendig, hente inn data til Y-axis table fra annet datsett*/
-    /* datasett må være på samme form som dsn, avslått som default */
     yvariabel1=antsnitt, /*Variabel 1 til Y-axis table, antsnitt som default*/
 	yvariabel2=popsnitt, /*Variabel 2 til Y-axis table, popsnitt som default*/
 	ylabel1=Antall, /*Label til Y-axis table, variabel 1, , Antall som default*/
@@ -31,7 +29,7 @@ kortversjon (kjøres med default verdier for resten)
 ### Input
 - datasett/output fra rateprogram
 - datasett må inneholde alle rate-variabelene og nrate
-- eventuelt, hente inn data fra annet datasett til y-axis table
+
 - følgende let-statement:
     - 
 
@@ -83,40 +81,12 @@ call symput('NorgeSnitt',(nrate));
 end;
 run;
 
-/*Yaxis-table - hente verdier fra annet datasett*/
-%if &ytabdata ne . %then %do;
-data xyz_tabdata;
-set &ytabdata;
-keep &bo &yvariabel1 &yvariabel2;
-run;
-
-data xyz_tabdata;
-set xyz_tabdata;
-yvar1=&yvariabel1;
-yvar2=&yvariabel2;
-label yvar1="&ylabel1" yvar2="&ylabel2";  
-run;
-
-proc sql;
-create table xyz_&dsn as
-select a.*, b.yvar1, b.yvar2
-from xyz_&dsn as a left join xyz_tabdata as b
-on a.&bo=b.&bo;
-run;
-%end;
-
-/*Yaxis-table - fra samme datasett*/
-%if &ytabdata = . %then %do;
+/*Legg på format på y-axis table variable*/
 data xyz_&dsn;
 set xyz_&dsn;
 yvar1=&yvariabel1;
 yvar2=&yvariabel2;
 label yvar1="&ylabel1" yvar2="&ylabel2"; 
-%end;
-
-/*Legg på format på y-axis table variable*/
-data xyz_&dsn;
-set xyz_&dsn;
 format yvar1 &yvarformat1 yvar2 &yvarformat2;
 drop min max;
 run;
@@ -235,4 +205,4 @@ proc datasets nolist;
 delete xyz:;
 run;
 
-%mend ratefig_aarsvar;
+%mend ratefigur_aarsvar;
