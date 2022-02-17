@@ -359,9 +359,30 @@ PROC SQL;
       GROUP BY aar, Alder, ErMann;	  
 QUIT;
 
-proc sgplot data=xyz_aldersfig noautolegend noborder sganno=anno pad=(Bottom=4% );
-styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
-	vbar alder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar";
+/*For å få rikitg farge på menn og kvinner*/
+proc sql;
+create table xyz_color as 
+select distinct ermann
+from xyz_aldersfig;
+quit;
+
+
+data xyz_ermanncolor;
+set xyz_color;
+id='ermann';
+if ermann=0 then do; 
+fillcolor='CX00509E';
+value='Kvinner';
+end;
+if ermann=1 then do;
+fillcolor='CX95BDE6';
+value='Menn';
+end;
+run;
+
+proc sgplot data=xyz_aldersfig dattrmap=xyz_ermanncolor noautolegend noborder sganno=anno pad=(Bottom=4% );
+styleattrs /*datacolors=(CX00509E CX95BDE6)*/ DATACONTRASTCOLORS=(CX00509E);
+	vbar alder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar" grouporder=asending attrid=ermann;
 	keylegend "Vbar" / location=outside position=topright noborder;
     yaxis label="Antall";
 	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, ett-årig';
@@ -374,9 +395,10 @@ PROC SQL;
       GROUP BY aar, nyAlder, ErMann;	  
 QUIT;
 
-proc sgplot data=xyz_aldersfigkat noautolegend noborder sganno=anno pad=(Bottom=4% );
-styleattrs datacolors=(CX00509E CX95BDE6) DATACONTRASTCOLORS=(CX00509E);
-	vbar nyalder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar";
+
+proc sgplot data=xyz_aldersfigkat dattrmap=xyz_ermanncolor  noautolegend noborder sganno=anno pad=(Bottom=4% );
+styleattrs /*datacolors=(CX00509E CX95BDE6)*/ DATACONTRASTCOLORS=(CX00509E);
+	vbar nyalder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar" grouporder=asending attrid=ermann;
 	keylegend "Vbar" / location=outside position=topright noborder;
     yaxis label="Antall";
 	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, 5-årige alderskategorier';
