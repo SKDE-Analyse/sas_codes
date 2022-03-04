@@ -20,7 +20,6 @@ Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 ### Endringslogg:
 - 2020 Opprettet av Tove og Janice
 - september 2021, Tove, fjernet argument 'utdata='
-- november 2021, Tove, fjerne rader som kun brukes til format(de har missing komnr) for å unngå feil i merge når komnr mangler i data som tilrettelegges
 - januar 2022, Tove, fjerne argument 'barn=' og 'haraldsplass='
 - februar 2022, Tove, ta ut radene som kun brukes til formater
  */
