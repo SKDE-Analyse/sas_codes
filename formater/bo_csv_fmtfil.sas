@@ -38,7 +38,7 @@ data bo;
   format bydel_navn $60.;
   format bohf 4.;
   format bohf_navn $60.;
-  format boshhn 2.;
+  format boshhn 4.;
   format boshhn_navn $15.;
   format borhf 4.;
   format borhf_navn $60.;
