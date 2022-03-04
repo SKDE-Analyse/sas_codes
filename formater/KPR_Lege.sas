@@ -1,7 +1,7 @@
 Proc format;
 
- value tjenestetype
-	1 = 'Fastlege'
+ value tjenestetype_kpr
+	 1 = 'Fastlege'
       2 = 'Legevakt'
       3 = 'Fysioterapeut privat'
       4 = 'Fysioterapeut kommunal'
@@ -41,7 +41,6 @@ Proc format;
      ;
 
 value $icpc2_Kap
-     '-' = "Prosesskoder"
      'A' = "Allment og uspesifisert"
      'B' = "Blod, bloddannende organer og immunsystemet "
      'D' = "Fordøyelsessystemet"

@@ -1,44 +1,44 @@
 icpc2_kode;icpc2_tekst;icpc2_Kap;icpc2_type
--30;Medisinsk undersøkelse fullstendig;-;3
--31;Medisinsk undersøkelse målrettet;-;3
--32;Sensitivitetsprøve;-;3
--33;Mikrobiologisk/immunologisk prøve;-;3
--34;Blodprøve IKA;-;3
--35;Urinprøve IKA;-;3
--36;Avføringsprøve IKA;-;3
--37;Histologisk/cytologisk prøve;-;3
--38;Laboratorieprøve IKA;-;3
--39;Fysisk funksjonsprøve;-;3
--40;Endoskopi;-;3
--41;Billeddiagnostikk;-;3
--42;Biosignalundersøkelse IKA;-;3
--43;Diagnostisk prosedyre IKA;-;3
--44;Forebyggende vaksinering/medikasjon;-;3
--45;Helseopplysning/rådgivning;-;3
--46;Kontakt med primærhelsetjenesten;-;3
--47;Kontakt med spesialist;-;3
--48;Vurdering av kontaktårsak/behov;-;3
--49;Forebyggende prosedyre IKA;-;3
--50;Legemiddelforskrivning/-administrasj;-;3
--51;Incisjon/tapping/aspirasjon;-;3
--52;Fjerne vev/biopsi/kauterisasjon;-;3
--53;Kateterisering/intub/dilatasjon;-;3
--54;Fiksering/suturering/gips/protese;-;3
--55;Lokal injeksjon/infiltrasjon;-;3
--56;Bandasje/kompresjon/tamponade;-;3
--57;Fysikalsk behandling/rehabilitering;-;3
--58;Terapeutisk rådgivning/samtale;-;3
--59;Terapeutisk tiltak/småkirurgi IKA;-;3
--60;Resultat av prøve/prosedyre;-;3
--61;Resultat undersøkelse/epikrise;-;3
--62;Administrativ prosedyre;-;3
--63;Observasjon/oppfølging IKA;-;3
--64;Kontakt forårsaket av helsepersonell;-;3
--65;Kontakt forårsaket annen enn pasient;-;3
--66;Henvisning annet helsepersonell IKA;-;3
--67;Henvisning spesialist/sykehus;-;3
--68;Henvisning IKA;-;3
--69;Kontaktårsak IKA;-;3
+30;Medisinsk undersøkelse fullstendig;;3
+31;Medisinsk undersøkelse målrettet;;3
+32;Sensitivitetsprøve;;3
+33;Mikrobiologisk/immunologisk prøve;-;3
+34;Blodprøve IKA;;3
+35;Urinprøve IKA;;3
+36;Avføringsprøve IKA;;3
+37;Histologisk/cytologisk prøve;;3
+38;Laboratorieprøve IKA;;3
+39;Fysisk funksjonsprøve;;3
+40;Endoskopi;;3
+41;Billeddiagnostikk;;3
+42;Biosignalundersøkelse IKA;;3
+43;Diagnostisk prosedyre IKA;;3
+44;Forebyggende vaksinering/medikasjon;;3
+45;Helseopplysning/rådgivning;;3
+46;Kontakt med primærhelsetjenesten;;3
+47;Kontakt med spesialist;;3
+48;Vurdering av kontaktårsak/behov;;3
+49;Forebyggende prosedyre IKA;;3
+50;Legemiddelforskrivning/-administrasj;;3
+51;Incisjon/tapping/aspirasjon;;3
+52;Fjerne vev/biopsi/kauterisasjon;;3
+53;Kateterisering/intub/dilatasjon;;3
+54;Fiksering/suturering/gips/protese;;3
+55;Lokal injeksjon/infiltrasjon;;3
+56;Bandasje/kompresjon/tamponade;;3
+57;Fysikalsk behandling/rehabilitering;;3
+58;Terapeutisk rådgivning/samtale;;3
+59;Terapeutisk tiltak/småkirurgi IKA;;3
+60;Resultat av prøve/prosedyre;;3
+61;Resultat undersøkelse/epikrise;;3
+62;Administrativ prosedyre;;3
+63;Observasjon/oppfølging IKA;;3
+64;Kontakt forårsaket av helsepersonell;;3
+65;Kontakt forårsaket annen enn pasient;;3
+66;Henvisning annet helsepersonell IKA;;3
+67;Henvisning spesialist/sykehus;;3
+68;Henvisning IKA;;3
+69;Kontaktårsak IKA;;3
 A01;Smerte generell/flere steder;A;1
 A02;Frysninger;A;1
 A03;Feber;A;1

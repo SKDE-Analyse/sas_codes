@@ -15,7 +15,7 @@ RUN;
 %macro missing_string;
 proc tabulate
 data=&data(where=(&var eq " "));
-CLASS aar /	ORDER=UNFORMATTED MISSING;
+	CLASS aar /	ORDER=UNFORMATTED MISSING;
 	CLASS &var1 /	ORDER=UNFORMATTED MISSING;
 	TABLE 
 	/* Row Dimension */
