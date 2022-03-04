@@ -6,7 +6,7 @@
 
 ### Beskrivelse
 
-Makro for å kontrollere at mottatte data inneholder gyldige komrn og bydel
+Makro for å kontrollere at mottatte data inneholder gyldige komnr og bydel
 Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
 
 ```
@@ -15,8 +15,8 @@ Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
 
 ### Input 
       - Inndata: 
-      - kommune_nr:  Kommunenummer som skal skjekkes, default er 'KomNrHjem2' - variabel utlevert fra NPR 
-      - bydel     :  Bydelnummer som skal skjekkes, default er 'bydel2' - variabel utlevert fra NPR 
+      - kommune_nr:  Kommunenummer som skal sjekkes, default er 'KomNrHjem2' - variabel utlevert fra NPR 
+      - bydel     :  Bydelnummer som skal sjekkes, default er 'bydel2' - variabel utlevert fra NPR 
 
 ### Output 
       - Godkjent lister som SAS datasett
@@ -28,3 +28,6 @@ Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
           - dokumentasjon markdown
           - bydel til numerisk før kombineres med komnr
           - error lister printes ut
+    - november 2021, Tove
+          - inkluderer tidligere bydelskommuner 1201 og 4601 i steg 2 hvor bydel kontrolleres 
+          - fjerne rad med missing komnr i steg 1 slik at rader med manglende komnr i kontrollert data kommer i output error-liste
