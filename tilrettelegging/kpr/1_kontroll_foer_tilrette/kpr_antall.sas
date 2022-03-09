@@ -2,6 +2,7 @@
 /* ------------------------ */
 /* REGNINGSFILEN/HOVEDFILEN */
 /* ------------------------ */
+
 PROC SQL;
 CREATE TABLE regning_&aar. AS
 SELECT 	&aar as aar, 
@@ -9,14 +10,14 @@ SELECT 	&aar as aar,
 		sum(missing (kpr_lnr))				as uten_kpr_lnr, /*regninger uten løpenummer*/
 		count(*) 							as rader, /*antall regninger*/
 		count(distinct enkeltregning_lnr) 	as unik_enkeltregning, /*kontroll antall unike regninger*/
-		min(datotid) 						as mininn format datetime18., /*min dato*/
-		max(datotid) 						as maxinn format datetime18. /*max dato*/
+		min(dato) 							as mininn format YYMMDD10., /*min dato*/
+		max(dato) 							as maxinn format YYMMDD10. /*max dato*/
   FROM &inn ;
 QUIT;
+
 /* -------- */
 /* TAKSTFIL */
 /* -------- */
-
 /*antall unike regninger i takstfil, burde være lik antall regninger i hovedfil*/
 PROC SQL;
 CREATE TABLE takst_&aar. AS
@@ -24,10 +25,10 @@ CREATE TABLE takst_&aar. AS
           count(distinct enkeltregning_lnr) 	as unik_regning_takst 
   FROM &inn_takst;
 QUIT;
+
 /* ----------- */
 /* DIAGNOSEFIL */
 /* ----------- */
-
 /*antall unike regninger i diagnosefil, burde være lik antall regninger i hovedfil*/
 PROC SQL;
 CREATE TABLE diag_&aar. AS

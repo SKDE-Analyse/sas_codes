@@ -16,41 +16,24 @@ run;
 /*hvis datasett ikke er tomt: hvilke tjenestetyper gjelder det?*/
 proc sql;
 	create table sjekk_tjentype_&aar. as
-	select a.*, b.tjenestetypenavn
+	select a.*, b.tjenestetype
 	from regning_fail_&aar. a
 	left join &hoved b
 	on a.enkeltregning_lnr=b.enkeltregning_lnr;
 quit;
-
+title'tjenestetype diagnose ikke ok';
 proc sql;
-	select tjenestetypenavn, count(*) as rad_diag
+	select tjenestetype, count(*) as rad_diag
 	from sjekk_tjentype_&aar.
 	where ok_diag ne 1
-	group by tjenestetypenavn;
+	group by tjenestetype;
 quit;
-
+title'tjenestetype takst ikke ok';
 proc sql;
-	select tjenestetypenavn, count(*) as rad_takst
+	select tjenestetype, count(*) as rad_takst
 	from sjekk_tjentype_&aar.
 	where ok_takst ne 1
-	group by tjenestetypenavn;
+	group by tjenestetype;
 quit;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+title;
 %mend kpr_enkeltregning;

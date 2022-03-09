@@ -23,20 +23,16 @@ drop erhoveddiagnose;
 pid_kpr=KPR_lnr+0;
 Drop KPR_lnr;
 /*
-- Rename 'hoveddiagnoseKode' til 'Hdiag'. 
-*/
-rename hoveddiagnoseKode = hdiag_kpr;
-/*
 - Lager 'bydel_kpr' og sletter 'bydel2'. 
 */
-bydel_kpr = bydel2 + 0;
-drop bydel2;
+bydel_kpr = bydel + 0;
+drop bydel;
 /* 
 - Lager 'kontakttype_kpr'. Endre kontakttype_kpr '-1' til '0'. Slette 'kontakttypenavn' og 'kuhrKontakttypeId'.
  */
-kontakttype_kpr = kuhrKontakttypeId +0;
+kontakttype_kpr = kontakttypeId +0;
 if kontakttype_kpr eq -1 then kontakttype_kpr = 0;
-drop kontakttypenavn kuhrKontakttypeId;
+drop kontakttypenavn kontakttypeId;
 /*
 - Lager 'refusjonutbetalt' fra 'refusjonutbetaltbeløp'. 
 */

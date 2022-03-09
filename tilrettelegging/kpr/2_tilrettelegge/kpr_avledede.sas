@@ -18,11 +18,9 @@ drop diagnosetabell;
 
 %if &regning eq 1 %then %do; /*Kjøres kun på regningsdata*/
 /* 
-- Lager 'inndato' og 'inntid' fra 'datotid'. Drop 'datotid'. 
+- Rename 'dato' til 'inndato' og 'klokkeslett' til 'inntid'. 
 */
-inndato = datepart(datotid);
-inntid = timepart(datotid);
-drop datotid;
+rename dato = inndato klokkeslett=inntid;
 
 /*
 - Lager 'ermann' fra variabel 'kjonn'. Drop 'kjonn'
@@ -33,28 +31,28 @@ if kjonn eq . then ermann = .; /*missing*/
 drop kjonn kjonn_navn;
 
 /* 
-- Lager 'tjenestetype_kpr' fra 'tjenestetypenavn'. Sletter 'tjenestetypenavn'
+- Lager 'tjenestetype_kpr' fra 'tjenestetype'. Sletter 'tjenestetype'
 */
-if tjenestetypenavn eq "Fastlege"                       then tjenestetype_kpr = 1; 
-if tjenestetypenavn eq "Legevakt"                       then tjenestetype_kpr = 2; 
+if tjenestetype eq "Fastlege"                       then tjenestetype_kpr = 1; 
+if tjenestetype eq "Legevakt"                       then tjenestetype_kpr = 2; 
 
-if tjenestetypenavn eq "Fysioterapeut privat"           then tjenestetype_kpr = 3; 
-if tjenestetypenavn eq "Fysioterapeut kommunal"         then tjenestetype_kpr = 4; 
-if tjenestetypenavn eq "Kiropraktor"                    then tjenestetype_kpr = 5; 
+if tjenestetype eq "Fysioterapeut privat"           then tjenestetype_kpr = 3; 
+if tjenestetype eq "Fysioterapeut kommunal"         then tjenestetype_kpr = 4; 
+if tjenestetype eq "Kiropraktor"                    then tjenestetype_kpr = 5; 
 
-if tjenestetypenavn eq "Tannlege"                       then tjenestetype_kpr = 6; 
-if tjenestetypenavn eq "Kjeveortoped"                   then tjenestetype_kpr = 7; 
-if tjenestetypenavn eq "Tannpleier"                     then tjenestetype_kpr = 8; 
+if tjenestetype eq "Tannlege"                       then tjenestetype_kpr = 6; 
+if tjenestetype eq "Kjeveortoped"                   then tjenestetype_kpr = 7; 
+if tjenestetype eq "Tannpleier"                     then tjenestetype_kpr = 8; 
 
-if tjenestetypenavn eq "Helsestasjon"                   then tjenestetype_kpr = 9; 
-if tjenestetypenavn eq "Logoped"                        then tjenestetype_kpr = 10; 
-if tjenestetypenavn eq "Ridefysioterapi"                then tjenestetype_kpr = 11; 
-if tjenestetypenavn eq "Audiopedagog"                   then tjenestetype_kpr = 12; 
-if tjenestetypenavn eq "Ortoptist"                      then tjenestetype_kpr = 13; 
+if tjenestetype eq "Helsestasjon"                   then tjenestetype_kpr = 9; 
+if tjenestetype eq "Logoped"                        then tjenestetype_kpr = 10; 
+if tjenestetype eq "Ridefysioterapi"                then tjenestetype_kpr = 11; 
+if tjenestetype eq "Audiopedagog"                   then tjenestetype_kpr = 12; 
+if tjenestetype eq "Ortoptist"                      then tjenestetype_kpr = 13; 
 
-if tjenestetypenavn eq "Ukjent" 
-    or tjenestetypenavn eq " "                          then tjenestetype_kpr = 14; 
-drop tjenestetypenavn;
+if tjenestetype eq "Ukjent" 
+    or tjenestetype eq " "                          then tjenestetype_kpr = 14; 
+drop tjenestetype;
 %end;
 run;
 %mend kpr_avledede;
