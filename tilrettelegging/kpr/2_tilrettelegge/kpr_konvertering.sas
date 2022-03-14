@@ -3,9 +3,9 @@
 data &utdata;
 set &inndata;
 
-%if &diagnose eq 1 %then %do; /*kjøres kun på diagnose-fil*/
+%if &sektor=diagnose %then %do; /*kjøres kun på diagnose-fil*/
 /*
-- Rename 'diagnoseKode' til 'diag'. 
+- Rename 'diagnoseKode' til 'diag_kpr'. 
 */
 rename diagnoseKode = diag_kpr;
 /* 
@@ -16,7 +16,7 @@ drop erhoveddiagnose;
 %end;
 
 
-%if &regning eq 1 %then %do; /*Koden kjøres kun på regningsfil*/
+%if &sektor=enkeltregning %then %do; /*Koden kjøres kun på regningsfil*/
 /*
 - Lager 'pid_kpr' fra 'KPR_lnr' (løpenummer) og sletter 'KPR_lnr'
 */

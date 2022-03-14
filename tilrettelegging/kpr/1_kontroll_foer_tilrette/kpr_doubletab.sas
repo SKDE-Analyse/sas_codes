@@ -1,8 +1,7 @@
 %macro doubletab;
 PROC TABULATE
 DATA=&data;	
-	CLASS aar /	ORDER=UNFORMATTED MISSING;
-	CLASS &var3 &var4 /	ORDER=UNFORMATTED MISSING;
+	CLASS aar &var3 &var4 /	ORDER=UNFORMATTED MISSING;
 	TABLE 
 	/* Row Dimension */
 	(&var3*&var4) all,

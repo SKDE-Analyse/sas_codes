@@ -3,20 +3,20 @@
 data &utdata;
 set &inndata;
 
-%if &diagnose eq 1 %then %do; /*kjøres kun på diagnosedata*/
+%if &sektor=diagnose %then %do; /*kjøres kun på diagnosedata*/
 /* 
-- Lager numerisk 'kodeverk' fra string 'diagnosetabell'. Drop variabel 'diagnosetabell'
+- Lager numerisk 'kodeverk_kpr' fra string 'diagnosetabell'. Drop variabel 'diagnosetabell'
 */
-if diagnosetabell eq "ICPC-2"                          then kodeverk = 1;
-if diagnosetabell eq "ICPC-2B"                         then kodeverk = 2;
-if diagnosetabell eq "ICD-10"                          then kodeverk = 3;
-if diagnosetabell eq "ICD-DA-3"                        then kodeverk = 4;
-if diagnosetabell eq "Akser i BUP-klassifikasjon"      then kodeverk = 5;
-if diagnosetabell eq " "                               then kodeverk = .;
+if diagnosetabell eq "ICPC-2"                          then kodeverk_kpr = 1;
+if diagnosetabell eq "ICPC-2B"                         then kodeverk_kpr = 2;
+if diagnosetabell eq "ICD-10"                          then kodeverk_kpr = 3;
+if diagnosetabell eq "ICD-DA-3"                        then kodeverk_kpr = 4;
+if diagnosetabell eq "Akser i BUP-klassifikasjon"      then kodeverk_kpr = 5;
+if diagnosetabell eq " "                               then kodeverk_kpr = .;
 drop diagnosetabell;
 %end;
 
-%if &regning eq 1 %then %do; /*Kjøres kun på regningsdata*/
+%if &sektor=enkeltregning %then %do; /*Kjøres kun på regningsdata*/
 /* 
 - Rename 'dato' til 'inndato' og 'klokkeslett' til 'inntid'. 
 */
@@ -31,7 +31,7 @@ if kjonn eq . then ermann = .; /*missing*/
 drop kjonn kjonn_navn;
 
 /* 
-- Lager 'tjenestetype_kpr' fra 'tjenestetype'. Sletter 'tjenestetype'
+- Lager numerisk 'tjenestetype_kpr' fra 'tjenestetype'. Sletter 'tjenestetype'
 */
 if tjenestetype eq "Fastlege"                       then tjenestetype_kpr = 1; 
 if tjenestetype eq "Legevakt"                       then tjenestetype_kpr = 2; 

@@ -1,9 +1,7 @@
 %macro simpletab;
 PROC TABULATE
 DATA=&data;	
-	CLASS aar /	ORDER=UNFORMATTED MISSING;
-	CLASS &var /	ORDER=UNFORMATTED MISSING;
-
+	CLASS aar &var /	ORDER=UNFORMATTED MISSING;
 	TABLE 
 	/* Row Dimension */
 	&var all, 

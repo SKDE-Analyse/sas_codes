@@ -1,42 +1,55 @@
-%macro kpr_lengde_variabler(inndata=);
+%macro kpr_lengde_variabler(inndata=, utdata=);
 
-data &inndata._ut;
-/* variabler i tilrettelagte data unik for KPR-datakilde */
-length KPRAntall                8;
-length inndato                  8;
-length diagnoseKode             $20;
-length diagnoseTabell           $26;
-length egenandelPasient         8;
-length enkeltregning_Lnr        8;
-length fritakskode              $1;
-length kodeNr                   4;
-length minimumTidsbruk          8;
-length takstKode                $7;
-length pid_kpr                  8;
-length hdiag_kpr                $20;
-length diag                 ;
-length erhdiag                  ;
-length icpc2_hdiag                  ;
-length icpc2_kap                    ;
-length icpc2_type                   ;
-length kodeverk_kpr                 ;
-length kontakttype_kpr                  ;
-length refusjonutbetalt                 ;
-length tjenestetype_kpr                 ;
+data &utdata;
+/* alle datasettene */
+    length enkeltregning_Lnr        8;
+    length aar                      4;
 
-/* Variabler i tilrettelagte data som er felles med andre datakilder */
-length aar                      4;
-length alder                    8;
-length fodselsar                4;
-length ErMann                   3;
-length bohf                     8;
-length borhf                    8;
-length boshhn                   8;
-length komnr                    4;
-length bydel                    6;
-length inndato                  8;
-length inntid                   4;
-length fylke                    4;
+/* regning og diagnose */
+%if &sektor=enkeltregning or &sektor=diagnose %then %do;
+    length kodeverk_kpr             3;
+%end;
+
+/* regning */
+%if &sektor=enkeltregning %then %do;
+    length fritakskode              $1;
+    length egenandelPasient         8;
+    length pid_kpr                  8;
+    length hdiag_kpr                $20;
+    length icpc2_hdiag              $5;
+    length icpc2_kap                $1;
+    length icpc2_type               3;
+    length ant_bdiag_kpr            3;
+    length tjenestetype_kpr         3;
+    length kontakttype_kpr          3;
+    length refusjonutbetalt         8;
+    /* Variabler i tilrettelagte data som er felles med NPR */
+    length aar                      4;
+    length alder                    8;
+    length fodselsar                4;
+    length ErMann                   3;
+    length bohf                     8;
+    length borhf                    8;
+    length boshhn                   8;
+    length komnr                    4;
+    length bydel                    6;
+    length inndato                  8;
+    length inntid                   4;
+    length fylke                    4;
+%end;
+
+/* diagnose */
+%if &sektor=diagnose %then %do;
+    length diag_kpr                 $20;
+    length erhdiag_kpr              3;
+    length kodeNr                   4;
+%end;
+
+/* takst */
+%if &sektor=takst %then %do;
+    length takstKode                $7;
+    length kprantall                3;
+%end;
 set &inndata;
 run;
 %mend kpr_lengde_variabler;
