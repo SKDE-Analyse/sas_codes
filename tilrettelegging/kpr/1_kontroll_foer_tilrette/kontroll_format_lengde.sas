@@ -5,11 +5,11 @@
 %macro kontroll_format_lengde;
 
 /* hente ut lengde, format og type med proc content */
-proc contents data=&mappe..KPR_L_&sektor._2017_M21T2 noprint out=&sektor.17(keep=name length format type);run;
-proc contents data=&mappe..KPR_L_&sektor._2018_M21T2 noprint out=&sektor.18(keep=name length format type);run;
-proc contents data=&mappe..KPR_L_&sektor._2019_M21T2 noprint out=&sektor.19(keep=name length format type);run;
-proc contents data=&mappe..KPR_L_&sektor._2020_M21T2 noprint out=&sektor.20(keep=name length format type);run;
-proc contents data=&mappe..KPR_L_&sektor._2021_08OKT_M21T2 noprint out=&sektor.21(keep=name length format type);run;
+proc contents data=&mappe..&prefix._&sektor._2017_&suffix. noprint out=&sektor.17(keep=name length format type);run;
+proc contents data=&mappe..&prefix._&sektor._2018_&suffix. noprint out=&sektor.18(keep=name length format type);run;
+proc contents data=&mappe..&prefix._&sektor._2019_&suffix. noprint out=&sektor.19(keep=name length format type);run;
+proc contents data=&mappe..&prefix._&sektor._2020_&suffix. noprint out=&sektor.20(keep=name length format type);run;
+proc contents data=&mappe..&prefix._&sektor._2021_&suffix. noprint out=&sektor.21(keep=name length format type);run;
 
 /*stable datasettene*/
 data stable_&sektor. (keep=name);

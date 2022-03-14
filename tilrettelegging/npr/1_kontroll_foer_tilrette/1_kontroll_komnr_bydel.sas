@@ -155,19 +155,21 @@ run;
 
 /*lage bydel-variabel*/
 data mottatt_bydel(keep=komnr bydel);
+length bydel_num 6 bydel 6; /*sette lengde lik 6*/
   set mottatt_komnr;
 
   if komnr in (301,4601,1201,5001,1601,1103) then do; 
     /* make bydel numeric and create new variable that combines komnr and bydel */
     bydel_num=&bydel+0;
     bydel=komnr*100+bydel_num;
+  format bydel best6.;
   end;
   run;
 run;
 
 /*sortere og laga datasett til kontroll*/
 proc sort data=mottatt_komnr(rename=(komnr=komnr2) keep=komnr); by komnr2; run;
-proc sort data=mottatt_bydel(keep=bydel); by bydel; run;
+proc sort data=mottatt_bydel (keep=bydel); by bydel; run;
 
 /*fjerne linje med bydel2 = 0*/
 data mottatt_bydel;

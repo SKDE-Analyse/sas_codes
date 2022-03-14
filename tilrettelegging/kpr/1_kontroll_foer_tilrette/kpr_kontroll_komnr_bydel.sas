@@ -1,3 +1,4 @@
+/* Bruke makro fra NPR-tilrettelegging */
 %include "&filbane\tilrettelegging\npr\1_kontroll_foer_tilrette\1_kontroll_komnr_bydel.sas";
 
 %macro komnr_ukjent(inndata=, aar=);
@@ -24,10 +25,9 @@ Makroen bruker error_komnr_&aar-filene som er output fra makroen 'kontroll_komnr
  */
 proc sql;
 	create table ukjent_bosted_&aar. as
-	select a.kpr_lnr, a.bostedavledet, a.enkeltregning_lnr, b.komnr2
-	from &inndata a
-	inner join error_komnr_&aar. b
-	ON a.bostedavledet=b.komnr2;
+	select kpr_lnr, kommuneNr, enkeltregning_lnr
+	from &inndata 
+	where kommuneNr in (select komnr2 from error_komnr_&aar.);
 quit;
 
 proc sql;

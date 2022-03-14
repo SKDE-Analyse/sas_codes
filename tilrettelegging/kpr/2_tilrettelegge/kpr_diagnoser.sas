@@ -8,7 +8,7 @@ Input: 	1) inndata (navn på hovedfil/regningsfil som skal tilrettelegges)
 		3) let-statement (%let aar=, %let suffix=)
 Output: tre variabler 
 		1) hdiag_kpr (hoveddiagnose tilknyttet enkeltregningen)
-		2) kodeverk (angir hvilket kodeverk diagnosen tilhører, f.eks icd10, icpc2 osv.)
+		2) kodeverk (angir hvilket kodeverk diagnosen tilhører, f.eks icd10, icpc2 osv. Gjør den om til numerisk.)
 		3) ant_bdiag_kpr (antall bidiagnoser tilknyttet enkeltregningen) 
 */
 
@@ -17,7 +17,14 @@ Output: tre variabler
 /* hente inn hoveddiagnose fra diagnosefilen */
 proc sql;
 	create table tmp_utdata as
-	select *, b.diagnose as hdiag_kpr, b.diagnosetabell as kodeverk
+	select a.*, b.diagnosekode as hdiag_kpr, 
+					case 	when b.diagnosetabell eq "ICPC-2" 						then 1 
+							when b.diagnosetabell eq "ICPC-2B" 						then 2 
+					 		when b.diagnosetabell eq "ICD-10" 						then 3
+							when b.diagnosetabell eq "ICD-DA-3"  					then 4
+					 		when b.diagnosetabell eq "Akser i BUP-klassifikasjon"  	then 5
+							when b.diagnosetabell eq " "                            then .					
+					end as kodeverk_kpr
 	from &inndata a
 	left join hnmot.kpr_l_diagnose_&aar._&suffix. b
 	on a.enkeltregning_lnr=b.enkeltregning_lnr 
@@ -42,7 +49,7 @@ proc sql;
 quit;
 /* slette tmp-data */
 proc datasets nolist;
-delete tmp_utdata;
+delete tmp_utdata ant_bdiag;
 run;
 
 %mend kpr_diagnoser;

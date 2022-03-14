@@ -20,7 +20,7 @@ Når makroen brukes på takst- eller diagnosefilene er det kun steg 2 som kjøres.
 	  - aar: årssett det gjelder, f.eks 2017
       
 ### Output 
-      - utdata: inndata hvor rader med manglende "kpr_lnr" er tatt ut
+      - utdata: inndata hvor rader med manglende "kpr_lnr" er slettet
     
 ### Endringslogg:
     - Opprettet desember 2021, Tove
@@ -29,7 +29,7 @@ Når makroen brukes på takst- eller diagnosefilene er det kun steg 2 som kjøres.
 /*----------------*/
 /*-----STEG 1 ----*/
 /*----------------*/
-%if &sektor=regning %then %do; 
+%if &sektor=enkeltregning %then %do; 
 proc sql;
 	create table slette_&aar. as
 	select enkeltregning_lnr
@@ -47,5 +47,4 @@ proc sql;
 	from &inndata
 	where enkeltregning_lnr not in (select enkeltregning_lnr from slette_&aar.);
 quit;
-
 %mend;

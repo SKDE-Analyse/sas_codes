@@ -3,9 +3,9 @@
 data &utdata;
 set &inndata;
 
-%if &diagnose eq 1 %then %do; /*kjøres kun på diagnose-fil*/
+%if &sektor=diagnose %then %do; /*kjøres kun på diagnose-fil*/
 /*
-- Rename 'diagnoseKode' til 'diag'. 
+- Rename 'diagnoseKode' til 'diag_kpr'. 
 */
 rename diagnoseKode = diag_kpr;
 /* 
@@ -16,27 +16,23 @@ drop erhoveddiagnose;
 %end;
 
 
-%if &regning eq 1 %then %do; /*Koden kjøres kun på regningsfil*/
+%if &sektor=enkeltregning %then %do; /*Koden kjøres kun på regningsfil*/
 /*
 - Lager 'pid_kpr' fra 'KPR_lnr' (løpenummer) og sletter 'KPR_lnr'
 */
 pid_kpr=KPR_lnr+0;
 Drop KPR_lnr;
 /*
-- Rename 'hoveddiagnoseKode' til 'Hdiag'. 
-*/
-rename hoveddiagnoseKode = hdiag_kpr;
-/*
 - Lager 'bydel_kpr' og sletter 'bydel2'. 
 */
-bydel_kpr = bydel2 + 0;
-drop bydel2;
+bydel_kpr = bydel + 0;
+drop bydel;
 /* 
 - Lager 'kontakttype_kpr'. Endre kontakttype_kpr '-1' til '0'. Slette 'kontakttypenavn' og 'kuhrKontakttypeId'.
  */
-kontakttype_kpr = kuhrKontakttypeId +0;
+kontakttype_kpr = kontakttypeId +0;
 if kontakttype_kpr eq -1 then kontakttype_kpr = 0;
-drop kontakttypenavn kuhrKontakttypeId;
+drop kontakttypenavn kontakttypeId;
 /*
 - Lager 'refusjonutbetalt' fra 'refusjonutbetaltbeløp'. 
 */

@@ -17,7 +17,7 @@ Proc format;
       14 = 'Ukjent'
       ;
 
- value kodeverk
+ value kodeverk_kpr
       1 = 'ICPC-2'
       2 = 'ICPC-2B'
       3 = 'ICD-10'
@@ -35,7 +35,7 @@ Proc format;
       0 = 'Ukjent'
       ;
 
- value erHdiag
+ value erHdiag_kpr
      1 = "Ja"
      0 = "Nei"
      ;
