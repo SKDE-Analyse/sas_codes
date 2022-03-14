@@ -348,7 +348,8 @@ value NPRID_REG
       6 = 'Videokonsultasjon'
       7 = 'Telefonkonsultasjon med egenandel'
       12 = 'Pasientadministrert behandling'  
-      13 = 'Opplæring';
+      13 = 'Opplæring'
+	  99 = 'Annet';
 	  
    value STEDAKTIVITET
       1 = 'På egen helseinstitusjon'  
