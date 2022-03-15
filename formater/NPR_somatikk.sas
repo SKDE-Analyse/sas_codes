@@ -344,12 +344,14 @@ value NPRID_REG
       1 = 'Utredning'  
       2 = 'Behandling'  
       3 = 'Kontroll'  
-      5 = 'Indirekte pasientkontakt'  
-      6 = 'Videokonsultasjon'
-      7 = 'Telefonkonsultasjon med egenandel'
+      5 = 'Indirekte pasientkontakt'  /*Arbeid eller aktivitet knyttet til helsehjelpen som gis til en pasient uten at pasienten deltar.*/
+      6 = 'Videokonsultasjon' /*Polikliniske konsultasjoner med pasient gjennomført over video som oppfyller krav i ISF-regelverket for videokonsultasjoner. Midlertidig kode*/
+      7 = 'Telefonkonsultasjon' /*Tidl. 'Telefonkonsultasjon med egenandel'. Polikliniske konsultasjoner med pasient gjennomført over telefon som oppfyller krav i ISF-regelverket for telefonkonsultasjoner. Midlertidig kode med egenandel*/
       12 = 'Pasientadministrert behandling'  
       13 = 'Opplæring'
+	  14 = 'Screening'
 	  99 = 'Annet';
+	  
 	  
    value STEDAKTIVITET
       1 = 'På egen helseinstitusjon'  
@@ -372,19 +374,32 @@ value NPRID_REG
 	  
    value POLINDIR
       1 = 'Erklæring/uttalelse/melding'  
-      2 = 'Møte. Samarbeid (om pasient) med annet helsepersonell'  
+      2 = 'Møte. Samarbeid (om pasient) med annet helsepersonell i spesialisthelsetjenesten'  
 	 22 = 'Samarbeidsmøte (om pasient) med førstelinjetjenesten' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
 	 23 = 'Samarbeidsmøte (om pasient) med annen tjeneste' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
 	  3 = 'Aktivitetsgruppe'  
       5 = 'Brev'  
       6 = 'e-post'  
-      7 = 'Telefon'  
+      7 = 'Telefon (uten pasientens deltakelse)'  
 	 71 = 'Telefonmøte (om pasient) med førstelinjetjenesten' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
-      8 = 'Tele-/videokonferanse'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
-      11 = 'Telemedisin'  
-      12 = 'Telefonsamtale med pasient' 
-      13 = 'Telefonkonsultasjon med egenandel' /*ny 2020*/
-      21 = 'Teknisk Episode';
+      8 = 'Tele-/videokonferanse (uten pasientens deltakelse)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      11 = 'Telemedisin (med pasientens deltakelse)'  
+      12 = 'Telefonsamtale med pasient' /*Samtale med pasient. Omfatter kun enkle samtaler som ikke oppfyller kravene til telefonkonsultasjon.*/
+      13 = 'Telefonkonsultasjon med egenandel' /*ny 2020, utgår fra 01.01.2021 */
+	  17 = 'Videokonsultasjoner' /*Utgår fra 01.01.2021 */
+	  18 = 'Videosamtaler ol.'
+      21 = 'Teknisk episode (pakkeforløp, innregistrering kvalitetsregistre)' /*Skal brukes dersom det må opprettes en teknisk episode for registrering av prosedyrer Pakkeforløp og innrapportering til kvalitetsregistre*/
+	  ;
+	  
+
+	
+
+
+
+
+
+
+
 
    value INTERN_KONS
       1 = 'Ja'  
