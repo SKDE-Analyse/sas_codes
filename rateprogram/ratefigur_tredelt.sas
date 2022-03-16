@@ -97,8 +97,8 @@ hbarparm category=&bo. response=rate1_2 / fillattrs=(color=CX568BBF) outlineattr
 hbarparm category=&bo. response=&var1 / fillattrs=(color=CX00509E) outlineattrs=(color=CX00509E) missing name="hp3" legendlabel="&label1" ; 
 
 hbarparm category=&bo. response=RateNtot / fillattrs=(color=CXC3C3C3) outlineattrs=(color=CX4C4C4C); 
-hbarparm category=&bo. response=rateN1_2 / fillattrs=(color=CX4C4C4C) outlineattrs=(color=CX4C4C4C);
-hbarparm category=&bo. response=rateN1 / fillattrs=(color=CX969696) outlineattrs=(color=CX4C4C4C);
+hbarparm category=&bo. response=rateN1_2 / fillattrs=(color=CX969696) outlineattrs=(color=CX4C4C4C);
+hbarparm category=&bo. response=rateN1 / fillattrs=(color=CX4C4C4C) outlineattrs=(color=CX4C4C4C);
 
 keylegend "hp3" "hp2" "hp1"/ location=outside position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
 

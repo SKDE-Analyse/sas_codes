@@ -868,6 +868,8 @@ value $drg
 '997O'="DRG 997O Tverrfaglig utredning"
 '998O'="DRG 998O Grupperettet pasientopplæring"
 
+
+
 /* Formater fra fil DRG/DRG_2015.sas lagt til 10/11/2017 */
 '808S'="DRG 808S Påsetting av prefabrikert ortose"
 
@@ -981,6 +983,14 @@ value $drg
 '996P'='DRG 996P Behandlingstiltak rettet mot en gruppe pasienter i utvalgte HDG-er'
 
 '209H' = 'DRG 209H Innsetting av protese i kne'
+
+
+/* Manglende formater lagt til 16/03/2022 (IH) */
+'993O'="DRG 993O Samarbeid- og oppfølgingsmøte med samarbeidspart utenfor spesialisthelsetjenesten for somatiske problemstillinger"
+'994T'="DRG 994T Telefonkonsultasjoner for somatiske problemstillinger"
+'995O'="DRG 995O Oppfølgingssamtale med samarbeidspart utenfor spesialisthelsetjenesten for somatiske problemstillinger"
+'TD998A'="DRG TD998A Grupperettet pasientopplæring innen PHV/TSB – voksne"
+'TD998B'="DRG TD998B Grupperettet pasientopplæring innen PHV/TSB - barn"
 
 ;
 run;
