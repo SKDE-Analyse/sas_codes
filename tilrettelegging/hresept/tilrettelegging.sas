@@ -60,7 +60,7 @@ pid
 reseptType
 sh_reg
 utleveringsdato
-; 
+HReseptId_lnr; 
 run;
 
 %if &ettersjekk = 1 %then %do;
