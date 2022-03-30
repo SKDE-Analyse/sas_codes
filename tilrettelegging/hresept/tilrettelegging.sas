@@ -15,6 +15,11 @@ if kjonn eq "Kvinne" then ermann = 0; /*kvinner*/
 
 alder = aar - fodselsar;
 
+if komnrhjem2 = 1103 and bydel2 in (1103, 1141, 1142, 111403) then bydel2 = 99;
+if komnrhjem2 = 4601 and bydel2 in (1201, 4601) then bydel2 = 99;
+if komnrhjem2 = 5001 and bydel2 in (5001, 5030) then bydel2 = 99;
+if komnrhjem2 = 301 and bydel2 in (301, 30401) then bydel2 = 99;
+
 run;
 
 %include "&filbane\makroer\forny_komnr.sas";
