@@ -984,18 +984,12 @@ value $drg
 
 '209H' = 'DRG 209H Innsetting av protese i kne'
 
-
 /* Manglende formater lagt til 16/03/2022 (IH) */
-'224Q'="DRG 224Q Operasjon på humerus/albue/underarm ekskl skulderprotese og bruddbehandling, dagkirurgisk behandling"
-'801X'="DRG 801X Poliklinisk kontakt for nevrofysiologisk undersøkelse og testing"
-'908G'="DRG 908G Poliklinisk konsultasjon vedr myositt"
 '908H'="DRG 908H Poliklinisk konsultasjon vedr osteoporose"
 '993O'="DRG 993O Samarbeid- og oppfølgingsmøte med samarbeidspart utenfor spesialisthelsetjenesten for somatiske problemstillinger"
 '994T'="DRG 994T Telefonkonsultasjoner for somatiske problemstillinger"
 '995O'="DRG 995O Oppfølgingssamtale med samarbeidspart utenfor spesialisthelsetjenesten for somatiske problemstillinger"
 'TD998A'="DRG TD998A Grupperettet pasientopplæring innen PHV/TSB – voksne"
 'TD998B'="DRG TD998B Grupperettet pasientopplæring innen PHV/TSB - barn"
-
-
 ;
 run;
