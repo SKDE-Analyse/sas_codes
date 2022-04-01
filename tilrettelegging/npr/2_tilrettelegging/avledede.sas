@@ -1,6 +1,5 @@
 %Macro Avledede (innDataSett=, utDataSett=);
 
-
 /*!
 
 MACRO FOR AVLEDEDE VARIABLE
@@ -12,14 +11,12 @@ MACRO FOR AVLEDEDE VARIABLE
 5. DRGTypeHastegrad
 
 
-
-
 ### Steg for steg
 
 */
 
 Data &Utdatasett;
-set &Inndatasett /*(rename=(sektor=sektor_org))*/ /*SKDE-data har ikke variabel 'sektor'*/   ;
+set &Inndatasett;
 
 /* fix variable anomaly that was discovered in the step 1 control */
 
@@ -43,8 +40,10 @@ then fodselsar=fodtAar_DSF;
 if fodselsar > aar or fodselsar=. then fodselsar=9999;
 if aar-fodselsar > 110 then fodselsar=9999;
 
-doddato=DodDato_DSF;
-emigrertdato=emigrertDato_DSF;
+/* Tove 31.03.2022 - ikke aktuelt for RHF-data somatikk og avtspes */
+*doddato=DodDato_DSF;
+*emigrertdato=emigrertDato_DSF;
+
 /*!
 - Definerer Alder basert på Fodselsår
 */
@@ -56,14 +55,14 @@ drop tmp_alder;
 /*!
 - Omkoding av KJONN til ErMann
 */
-     if KJONN=1 /*1 ='Mann' */   then ErMann=1; /* Mann */
-else if KJONN=2 /*2 ='Kvinne' */ then ErMann=0; /* Kvinne */
-else if KJONN in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ErMann=.;
+     if KJONN eq 1     then ErMann=1; /* Mann */
+     if KJONN eq 2     then ErMann=0; /* Kvinne */
+     if KJONN in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ErMann=.;
 
 /* ukjent kjønn i data får fikset til kjonn_DSF hvis det er kjente */
 If ErMann=. and kjonn_DSF in (1,2) then do;
 	if kjonn_DSF = 1 then ErMann = 1;
-	else if kjonn_DSF = 2 then ErMann = 0;
+	if kjonn_DSF = 2 then ErMann = 0;
 end;
 
 ulikt_kjonn=.;
@@ -78,23 +77,19 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
 
 %if &somatikk=1 %then %do;
 
-  %if &sektor=AVD or &sektor=SHO %then %do;
-    alderIdager_org=alderIdager;
+  %if &sektor = SOM %then %do;/* this &sektor is the macro variable set in the SAS-project */
     if alderIdager ne . then do;
-    if alderIdager < 0 then alderIdager=.;
+      if alderIdager < 0 then alderIdager=.;
     end;
-  %end;
-    
+ /* beregne liggetid som differanse utdato - inndato  */
     liggetid_org=liggetid;
     liggetid=utdato-inndato;
-
+/* hastegrad */
     hastegrad=.;
     if innmateHast in (1,2,3)   then hastegrad=1; /*Akutt*/
     if innmateHast=4            then hastegrad=4; /*Planlagt*/
     if innmateHast=5            then hastegrad=5; /*Tilbakeføring av pasient fra annet sykehus (gjelder fra 2016)*/
-
-    %if &sektor = AVD or &sektor = SHO %then %do;                   /* this &sektor is the macro variable set in the SAS-project */
-
+/* DRG */
              if DRG_type='M' and hastegrad=4 /*Planlagt*/   then DRGtypeHastegrad=1;
         else if DRG_type='M' and hastegrad=1 /*Akutt*/      then DRGtypeHastegrad=2;
         else if DRG_type='K' and hastegrad=4 /*Planlagt*/   then DRGtypeHastegrad=3;
@@ -102,9 +97,9 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
         if DRG_TYPE=' ' then DRGtypeHastegrad=9;
         if hastegrad=.  then DRGtypeHastegrad=9;
 
-       /* 12.04.2021 - All lines in somatic files have the same value for sektor variable. Not sure why it is 4 since sektor 4 means avtspes in other files.
+/* 12.04.2021 - All lines in somatic files have the same value for sektor variable. Not sure why it is 4 since sektor 4 means avtspes in other files.
                        Recode this to 1 so that we can use the same format for sektor as we use in avtspes and pysk files */
-        if sektor_org=4 then sektor=1; /*Somatiske aktivitetsdata*/    /* this sektor is a variable in the dataset */
+        if sektor=4 then sektor=1; /*Somatiske aktivitetsdata*/    /* this sektor is a variable in the dataset */
     %end;
 %end;
 
@@ -113,21 +108,15 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
 %if &avtspes=1 %then %do;
     /*!
     - Sett alle hos avtalespesialister til planlagt (hastegrad 4), poliklinikk (omsorgsniva 3, utdato=inndato)
-    - Omdefinere aar fra utdato
     */
     hastegrad=4;
-
-    omsorgsniva_org=omsorgsniva;
     omsorgsniva=3; 
-
-    utdato_org=utdato;
     utdato=inndato;
 
-    aar_org=aar;
-    aar=year(utdato);
-
-    if sektor_org='SOM' then sektor=5; /*Avtalespesialister, som*/
-    if sektor_org='PHV' then sektor=4; /*Avtalespesialister, psyk*/
+    if sektor='SOM' then tmp_sektor=5; /*Avtalespesialister, som*/
+    if sektor='PHV' then tmp_sektor=4; /*Avtalespesialister, psyk*/
+    drop sektor;
+    rename tmp_sektor=sektor;
     
     /*
     ************************************************************************************************
@@ -185,17 +174,11 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
     */
     /* JS/LL 11Jul2019
      use sh_reg instead of hard coding using institusjonID
-       3=Helse vest
-       4=Helse Midt-Norge
-       5=Helse Nord
-       7=Helse Sør-Øst
     */
-
          if sh_reg=5 then AvtaleRHF=1; /* Helse Nord RHF*/     
     else if sh_reg=4 then AvtaleRHF=2; /*Helse Midt-Norge RHF*/
     else if sh_reg=3 then AvtaleRHF=3; /*Helse Vest RHF*/
     else if sh_reg=7 then AvtaleRHF=4; /*Helse Sør-Øst-RHF*/
-
 
 %end;
 

@@ -257,7 +257,7 @@ run;
 
 
 data &utdata;
-  set &utdata (rename=(kontakt=kontakt_org) /*keep original variable from NPR*/);
+  set &utdata /*(rename=(kontakt=kontakt_org)*/ /*keep original variable from NPR)*/; /*Tove 01.04.2022: variabel 'kontakt' i aspes-fil er en tom variabel.*/
 
   * rewrite kontakt with our value;
   kontakt=kontakt_def;

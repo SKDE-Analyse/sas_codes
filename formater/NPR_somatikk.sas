@@ -488,7 +488,9 @@ value NPRID_REG
      26 = 'Audiofysiker'  /* ny 2020 */
      27 = 'Kiropraktor'  /* ny 2020 */
      28 = 'Helsesykepleier'  /* ny 2020 */
-     29 = 'Stråleterapeut'  /* ny 2020 */ ;
+     29 = 'Stråleterapeut'  /* ny 2020 */ 
+     30 = 'Tannpleier' /* fra 2020 */
+     ;
    
    value GYLDIG /* Ikke oppgitt i utlevering 2018 */
       0 = ' ' /* Gjelder kun NCRP i 2017. Fikk vite betydningen fra Marte Kjelvik i NPR. */ 
@@ -617,6 +619,8 @@ value fylke /* added 08.04.2021*/
       88	= '88 Ikke spesifisert'
       99	= '99 Utlendinger'
       21	= '21 Svalbard'
+      33 = '33 Ikke spesifisert' /* lagt til mars 2022 */
+      83 = '83 Ikke spesifisert' /* lagt til mars 2022 */
 ;
 
 value region /* added 08.04.2021*/
@@ -624,7 +628,8 @@ value region /* added 08.04.2021*/
       4 = 'Helse Midt-Norge'
       5 = 'Helse Nord'
       6 = 'Utlendinger/annet'
-      7 = 'Helse Sør-Øst';
+      7 = 'Helse Sør-Øst'
+      9 = 'Utlendinger/annet' /* ny 2021 - erstatter #6 */;
 
 value SEKTOR
       1 = 'Somatiske aktivitetsdata'  

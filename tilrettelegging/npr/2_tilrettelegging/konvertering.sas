@@ -1,4 +1,4 @@
-%Macro Konvertering (Inndatasett=, Utdatasett=, pid=lnr);
+%Macro Konvertering (Inndatasett=, Utdatasett=, pid=);
 
 /*!
 
@@ -13,11 +13,12 @@ MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 */
 
 Data &Utdatasett;
-Set &Inndatasett(rename=(episodefag=episodefag_org));
+Set &Inndatasett /*Tove 01.04.2022: kan ikke kjøres på avtspes-tilrettelegging, men skal kjøres i somatikk-tilrettelegging.(rename=(episodeFag=episodefag_org)) */;
 
 /* Sletter variabler vi ikke trenger fra somatikkfilene. */
 %if &somatikk ne 0 %then %do;
-*drop oppholdstype;
+drop oppholdstype /*Tove 30.03.2022: 'oppholdstype' i mottatte data er tom - fjernes fra tilrettelagt fil*/
+	 cyto:; 
 %end;
 /*!
 ### Omkoding av stringer med tall til numeriske variable
@@ -26,18 +27,7 @@ Set &Inndatasett(rename=(episodefag=episodefag_org));
 /*!
 - Lager `pid` fra `LNr` (løpenummer) og sletter `LNr`
 */
-PID=&pid+0;
-Drop &pid;
-
-/*!
-- Gjør `RehabType` numerisk.
-*/
-%if &somatikk ne 0 %then %do;
-Rehab=RehabType+0;
-Drop RehabType;
-rename Rehab=RehabType;
-%end;
-
+rename &pid = PID;
 
 /*!
 - Generere `bydel_org` fra `bydel` og `bydel2_org` fra `bydel2`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
@@ -67,19 +57,12 @@ rename Rehab=RehabType;
     episodefag=put(episodefag_org,3.);
 		if lengthn(compress(episodefag_org)) = 2 then episodefag = compress("0"||episodefag_org);
 		if episodefag in ("0","950") then episodefag="999";
+	drop episodefag_org;
 
 /*!
 - Fjerner blanke felt i DRG-koden og justerer til stor bokstav (upcase)
 */
 	DRG=upcase(compress(DRG));
-	drop cyto:;
-
-/*!
-- Gjør `HDG` numerisk.
-*/
-	HDG_num=HDG+0;
-	Drop HDG;
-	rename HDG_num=HDG;
 %end;
 
 /*!
@@ -141,7 +124,6 @@ drop ncsp_: ncmp_: i;
 %end;
 
 %if &avtspes ne 0 %then %do;
-
 	/*!
 	- Fjerner blanke felt i takstvariable, og navner om til Normaltariff1-15
 	*/
@@ -153,12 +135,9 @@ drop ncsp_: ncmp_: i;
 	drop takst_: i;
 
 	%if &datagrunnlag=SKDE %then %do;
-
 		Tell_normaltariff = Tell_takst;
 		drop tell_takst;
 	%end;
-
-	
 
 	/* 12Jul2019 JS - det ligger ICD-10-koder i ATC_1 -- ATC_5 i 2014.  Koden ATC_1 er identisk med koden i tilstand_1_1, og ATC_2 er identisk med koden i tilstand_1_2.
 	   Flytter ACT_2 til ATC_5 til tilstand_2_1 til tilstand_4_1 som Bdiag */
@@ -187,14 +166,12 @@ drop ncsp_: ncmp_: i;
 		drop Dup_tilstand_1 - Dup_tilstand_5 i;
 	end;
 	*/
-
 %end;
 
+/* Tove 01.04.2022: fjerner tomme variabler i tilrettelagte data */
+%if &sektor=ASPES %then %do;
+	drop drg drgreturkode hdg kontakt npkopphold_ertellendeISFopphold spes_drg dag_kir niva vekt komp_drg drg_type korrvekt rehabtype;
+%end;
 
 run;
-
-
-
-
-
 %mend;

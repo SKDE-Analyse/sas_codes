@@ -72,7 +72,7 @@ label ATC_2='ATC kode 2 (ATC/NPR-melding)';
 label ATC_3='ATC kode 3 (ATC/NPR-melding)'; 
 label ATC_4='ATC kode 4 (ATC/NPR-melding)'; 
 label ATC_5='ATC kode 5 (ATC/NPR-melding)';
-label episodeFag='Fagområde for Episoden (NPR-melding)'; format episodeFag $fagomrade.;
+/*label episodeFag='Fagområde for Episoden (NPR-melding)'; format episodeFag $fagomrade.;*/
 label debitor='Debitor (NPR-melding)'; format debitor debitor.;
 label henvFraTjeneste='Henvist fra tjeneste (NPR-melding)'; format HENVFRATJENESTE HENVFRATJENESTE.;
 label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENESTE HENVTILTJENESTE.;
@@ -90,7 +90,6 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label polkonAktivitet='Aktivitetstype (NPR-melding)'; format polkonAktivitet POLKONAKTIVITET.;
     label oppholdstype='oppholdstype, ikke lenger i bruk etter 2017';
     label behandlingssted2='behandlingssted (NPR)'; format behandlingssted2 org_fmt.;
-
 %end;
 
 /****************************/
@@ -111,7 +110,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label ICD10KatBlokk='ICD-10 kategoriblokk for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10KatBlokk ICD10KatBlokk.; 
     label KomNR='Kommunenummer fornyet til gyldig komnr-struktur pr 01.01.2021, numerisk (SKDE)'; format KomNR komnr_fmt.; 
     label bydel='Bydel i Oslo, Bergen, Stavanger og Trondhem vasket mot Folkeregisteret (SKDE)'; format bydel bydel_fmt.;
-    label bydel2_org='Bydel vasket mot Folkeregisteret (NPR)'; format bydel bydel_fmt.;
+    *label bydel2_org='Bydel vasket mot Folkeregisteret (NPR)'; format bydel bydel_fmt.;
 
     label Hdiag='Hovedtilstand kode 1 (ICD-10/NPR-melding/SKDE)'; format hdiag $icd10_fmt.;
     label Hdiag2='Hovedtilstand kode 2 (ICD-10/NPR-melding/SKDE)'; format hdiag2 $icd10_fmt.;
@@ -140,14 +139,14 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label ncsp9='NCSP kode 9 (NCSP/NPR-melding/SKDE)'; label ncsp10='NCSP kode 10 (NCSP/NPR-melding/SKDE)'; 
 
     Label PID='Personentydig løpenummer, numerisk (NPR/SKDE)'; 
-    label fodselsar_org='Fødselsår fra personnr og innrapportert (NPR)';
+    *label fodselsar_org='Fødselsår fra personnr og innrapportert (NPR)';
     label fodselsar    ='Fødselsår fra personnr og innrapportert (SKDE)';
     label KoblingsID='Unik id for påkobling av variabler (SKDE)'; 
 
     /* label VertskommHN='Vertskommune (HN) (SKDE)'; format VertskommHN VertskommHN.;  */
-    label bydel2_num='Bydel vasket mot Folkeregisteret (NPR), numerisk';
-    label bydel_innr='Bydel, innrapportert (SKDE), numerisk';
-    label bydel_org='Bydel, backup av bydel2 (SKDE), numerisk';
+    label bydel2='Bydel vasket mot Folkeregisteret (NPR), numerisk';
+    *label bydel_innr='Bydel, innrapportert (SKDE), numerisk';
+    *label bydel_org='Bydel, backup av bydel2 (SKDE), numerisk';
 
     label Hastegrad='Hastegrad - akutt/elektivt (SKDE)'; format hastegrad Hastegrad.;
     label sektor='Sektor (SKDE), basert på sektor_org'; format sektor sektor.;
@@ -155,8 +154,8 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label fodtAar_DSF='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
     label fodtMnd_DSF='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
     label kjonn_DSF  ='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten'; format kjonn_DSF kjonn.; 
-    label emigrertDato_DSF='Emigrert dato DSF (NPR)';format emigrertDato_DSF  Eurdfdd10.;
-    label dodDato_DSF='Dødedato DSF (NPR)'; format dodDato_DSF Eurdfdd10.;
+    /*label emigrertDato_DSF='Emigrert dato DSF (NPR)';format emigrertDato_DSF  Eurdfdd10.;*/
+    /*label dodDato_DSF='Dødedato DSF (NPR)'; format dodDato_DSF Eurdfdd10.;*/
 
 %end;
 
@@ -186,7 +185,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     /*these 4 variables are removed for avtsp, keep in here in case we still have them for som*/
     label tilSted='Til sted (NPK)'; format tilsted tilsted.;
     label fraSted='Fra sted (NPK)'; format frasted frasted.; 
-    label polIndirekteAktivitet='polIndirekteAktivitet (NPK)'; format polIndirekteAktivitet POLINDIR.;
+    /*label polIndirekteAktivitet='polIndirekteAktivitet (NPK)'; format polIndirekteAktivitet POLINDIR.;*/
     /* NPK */ /* Variable label basert på informasjon i ISF-regelverk 2017, poengberegningsreglene og informasjon fra Eva K. Håndlykken i NPR. Ikke bekreftet av Helsedirektoratete. Noe usikkerhet rundt innhold i variablene. */
     label npkopphold_poengsum='DRGBasispoeng pluss tilleggspoeng og fradragspoeng (NPK)'; 
     label NPKResultat_oppholdID='Unik ID innen kjørejobb (NPK)'; 
@@ -197,7 +196,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label npkOpphold_antallAvdelingsopphol='Antall avdelingsopphold som inngår i det aggregerte "sykehusoppholdet" (NPK)'; 
     label polUtforende_1='Utførende helsepersonell 1 (NPK)'; format polUtforende_1 UTFORENDEHELSEPERSON.; 
     label polUtforende_2='Utførende helsepersonell 2 (NPK)'; format polUtforende_2 UTFORENDEHELSEPERSON.; 
-    label polUtforende_3='Utførende helsepersonell 3 (NPK)'; format polUtforende_3 UTFORENDEHELSEPERSON.; 
+    *label polUtforende_3='Utførende helsepersonell 3 (NPK)'; /*format polUtforende_3 UTFORENDEHELSEPERSON.;*/ 
     label relatertKontaktID='Id for relaterte kontakter (NPK)';
     label henvType='Utfall av vurdering av henvisningen (NPR-melding)'; format henvType henvType.;
     label henvFraInstitusjonID='Henvist fra institusjon (NPK)'; format HENVFRAINSTITUSJONID HENVFRAINSTITUSJONID.;
@@ -224,11 +223,11 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label innTid='Innskrivelsestidspunkt (NPR-melding)';
     label utmnd='Utskrivelsesmåned (NPR)';
     label utTilstand='Tilstand ved utskriving (NPR-melding)'; format utTilstand utTilstand.; 
-    label cyto_1='Cytostatika kode 1 (Oncolex/NPR-melding)'; 
-    label cyto_2='Cytostatika kode 2 (Oncolex/NPR-melding)'; 
-    label cyto_3='Cytostatika kode 3 (Oncolex/NPR-melding)'; 
-    label cyto_4='Cytostatika kode 4 (Oncolex/NPR-melding)'; 
-    label cyto_5='Cytostatika kode 5 (Oncolex/NPR-melding)'; 
+    *label cyto_1='Cytostatika kode 1 (Oncolex/NPR-melding)'; 
+    *label cyto_2='Cytostatika kode 2 (Oncolex/NPR-melding)'; 
+    *label cyto_3='Cytostatika kode 3 (Oncolex/NPR-melding)'; 
+    *label cyto_4='Cytostatika kode 4 (Oncolex/NPR-melding)'; 
+    *label cyto_5='Cytostatika kode 5 (Oncolex/NPR-melding)'; 
     label fodselsvekt='Fødselsvekt (NPR-melding)';
     label fagomrade='Fagområde for henvisningen (NPR-melding)'; format fagomrade $fagomrade.; 
     label permisjonsdogn='Permisjonsdøgn (NPR-melding)';
@@ -361,9 +360,9 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label fag='Fagfelt for avtalespesialisen (NPR)'; format fag fag_skde.;
 
     label ulikt_kjonn='Ulikt kjønn i innrapportert data og i f.nr./D-nr. (SKDE)';
-    label kontakt ='Kontakttype, f.eks. enkel, spesialist eller lysbehandling (NPR)'; format kontakt kontakt.;
-    label bydel2_org='Bydel (NPR)';
-    label bydel_org='Bydel (NPR)';
+    /*label kontakt ='Kontakttype, f.eks. enkel, spesialist eller lysbehandling (NPR)'; format kontakt kontakt.;*/
+    /* label bydel2_org='Bydel (NPR)';*/
+    /*label bydel_org='Bydel (NPR)';*/
 
     drop avtalerhf_old;
 
@@ -402,7 +401,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
         label AvtaleRHF='RHF-et spesialisten har avtale med (NPR)'; format avtaleRHF boRHF_fmt.;
 
         label bydel='Bydel (SKDE)';
-        label omsorgsniva_org='Omsorgsnivå (NPR-melding)'; format omsorgsniva_org omsorgsniva.; 
+        /*label omsorgsniva_org='Omsorgsnivå (NPR-melding)'; format omsorgsniva_org omsorgsniva.; */
         label omsorgsniva='Omsorgsnivå (SKDE)'; format omsorgsniva omsorgsniva.; 
         label aar_org='År (NPR)';
         label aar='År fra utdato (SKDE)';
@@ -415,8 +414,6 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
 
 
 %end;
-
-drop orgnr;
 
 run;
 
