@@ -77,17 +77,19 @@ Data &utdata;
 	B - Spesialistkonsultasjoner. For spesialister er det bare to aktuelle takter 3ad Konsultasjon dagtid og 12ad Sykebesøk dagtid. 
 		Tillegg for ekstratidsbruk tas ikke med ettersom det forutsetter allerede bruk av en av de to nevnte.
 	*/
+	/* Tove 04.04.2022: lagt til nye kode for e-konsultasjon fra Normaltariffen 2021-2022 */
 		do i=1 to 15;
-		IF Normaltariff{i} in ('3ad','12ad'/*,'3bd','3c'*/) /*or SUBSTR(Normaltariff{i},1,1) in ('4') and 
+		IF Normaltariff{i} in ('3ad','12ad','3ae'/*,'3bd','3c'*/) /*or SUBSTR(Normaltariff{i},1,1) in ('4') and 
 		SUBSTR(Normaltariff{i},2,2) in ('a1','a2','b1','b2','c1','c2','da','db')*/ then kontakt_def= 4;
 
 		else do;
-
 /* new code added 10.04.2021 , based on normaltariffen 2020-2021 */
 IF Normaltariff{i} in ('3bd','3c','12bd','12cd','107c','157','207c','217d','254','255a','255b','258','510a','720','722','731a','734a','741','743b','744') or
    SUBSTR(Normaltariff{i},1,3) in ('4a1','4b1','4c1','4c2','4da','4db') or 
    SUBSTR(Normaltariff{i},1,2) in ('4e') 
 then kontakt_def= 4;
+
+
 
 	/*
 	B - Sykebesøk av spesialist.
@@ -174,8 +176,9 @@ then kontakt_def= 4;
 	/*  
 	E - Gynekologi.
 	*/
+	/* Tove 04.04.2022: takst 206 er ny av 2021 */
 		IF SUBSTR(Normaltariff{i},1,2) in ('20') and SUBSTR(Normaltariff{i},3,2) in 
-		('5a','5b',/*'6',*/'7a','7b','8','9') then kontakt_def= 4;
+		('5a','5b','6','7a','7b','8','9') then kontakt_def= 4;
 		ELSE IF SUBSTR(Normaltariff{i},1,2) in ('21') and SUBSTR(Normaltariff{i},3,2) in 
 		('0','1a','1b','1c','1d','1e','2a','2b','3'/*'4a','4b','4c','5',*/'6',/*'7a','7b','7c',*/'8'/*,'9'*/) 
 		then kontakt_def= 4; /*Tillegg av takst: 213 Behandling av spontan abort. */
@@ -187,11 +190,12 @@ then kontakt_def= 4;
 	-> HER ER LYSBEHANDLING, 254, 255a,b, DEFINERT TIL kontakt_def = 5 **.
 	*/
 		IF SUBSTR(Normaltariff{i},1,2) in ('25') and SUBSTR(Normaltariff{i},3,2) in 
-		('0','1','2','3','6a','6b','6c','6d','7') then kontakt_def= 4;
+		('0','1','2','3','6a','6b','6c','6d','7','9') then kontakt_def= 4;
 
 	/*
 	E - Øre-nese-halssykdommer.
 	*/
+	/* Tove 04.04.2022: ny takst 259 */
 		IF SUBSTR(Normaltariff{i},1,2) in ('30') and SUBSTR(Normaltariff{i},3,2) in ('1a','1b','1c','1d','2','3','6','7'/*,'8','9'*/) then kontakt_def= 4; 
 		ELSE IF SUBSTR(Normaltariff{i},1,2) in ('31') and SUBSTR(Normaltariff{i},3,2) in (/*'0',*/'1a','1c','3','4',/*'5',*/'7b','8a','8b','9') then kontakt_def= 4;
 	/*Tillegg av takst: Takst 302 og 307, og 319 Apne */
@@ -228,16 +232,19 @@ then kontakt_def= 4;
 	/*
 	E - Nervesykdommer og sinnslidelser.
 	*/
-		IF Normaltariff{i} in ('600','601','605') then kontakt_def= 4; /*Taksten 601 Utredning av omfattende og alvorlig sykdom i sentralnervesystemet, som kun kan benyttes av nevrolog,- er lagt til*/
+	/* Tove 04.04.2022: ny takst 602 */
+		IF Normaltariff{i} in ('600','601','602','605') then kontakt_def= 4; /*Taksten 601 Utredning av omfattende og alvorlig sykdom i sentralnervesystemet, som kun kan benyttes av nevrolog,- er lagt til*/
 	/*	ELSE IF SUBSTR(Normaltariff{i},1,2) in ('61') and SUBSTR(Normaltariff{i},3,2) in 
 		(/*'2a','2b','5','6','7','8'*//*) then kontakt_def= 4;*/
+	/* Tove 04.04.2022: lagt til takst 620 */
 		ELSE IF SUBSTR(Normaltariff{i},1,2) in ('62') and SUBSTR(Normaltariff{i},3,2)  in 
-		('1a','1b','1c','1d','2a','2b','3a','3b','3c','3d','4a','4b','5a','5b','6') then kontakt_def=4;
+		('0','1a','1b','1c','1d','2a','2b','3a','3b','3c','3d','4a','4b','5a','5b','6') then kontakt_def=4;
 
 	/* 
 	E - Pediatri.
 	*/
-		IF Normaltariff{i} in ('651a','651b') then kontakt_def= 4;
+	/* Tove 04.04.2022: takst fra 2017 */
+		IF Normaltariff{i} in ('651a','651b','652') then kontakt_def= 4;
 
 	  end; 
 	end; 
@@ -246,7 +253,7 @@ then kontakt_def= 4;
 	Lysbehandling.
 	*/
 		do i=1 to 15;
-		IF SUBSTR(Normaltariff{i},1,2) in ('25') and SUBSTR(Normaltariff{i},3,2) in ('4','5a','5b') then 
+		IF SUBSTR(Normaltariff{i},1,2) in ('25') and SUBSTR(Normaltariff{i},3,2) in ('4','5a','5b','8') then 
 		kontakt_def= 5;
 		end;
 	
