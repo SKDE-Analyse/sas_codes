@@ -4,7 +4,7 @@
 %macro bydel(inndata=, utdata=, bydel=bydel2);
 
 
-data &utdata(drop=bydel_tmp);
+data &utdata (drop=bydel_tmp);
   set &inndata;
 
   bydel_tmp=&bydel;
@@ -14,14 +14,12 @@ data &utdata(drop=bydel_tmp);
 
   if aar=2020 and komnr=5001 and bydel_tmp=6 then bydel_tmp=0; /* T2020T3 SOM */
 
-  %if (aar eq 2020 or aar eq 2021) and &avtspes=1 and &datagrunnlag=RHF %then %do; /* T2020T3 og T2021T3 ASPES*/
+  %if &avtspes=1 and &datagrunnlag=RHF %then %do; /* ASPES*/
     if komnr=4601 and bydel_tmp in (9:16) then bydel_tmp=0;
     if komnr=5001 and bydel_tmp in (5:7) then bydel_tmp=0;
   %end;
 
   if aar=2020 and komnr=4601 and bydel_tmp=12 then bydel_tmp=0; /* T2020T3 REHAB */
-
-
 
   /* Create variable 'bydel' for the kommune with bydel */
   if komnr in (301,4601,5001,1103) then do;
