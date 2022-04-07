@@ -113,7 +113,7 @@ proc sql;
 quit;
 %end;
 
-%if &sektor=aspes or &sektor=avtspes %then %do;
+%if &sektor=aspes or &sektor=avtspes or &sektor=rehab %then %do;
 proc sql;
 	create table tmp_data as
 	select a.&beh, a.sektor, gyldig, ugyldig 

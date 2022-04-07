@@ -99,11 +99,14 @@ drop tilstand_: i;
 - Fjerner blanke felt i prosedyrevariable, og fjerner underscore (_) i variabelnavn
 */
 
+%if &sektor ne REHAB %then %do;
 array ncsp{&nkode} $ ncsp1-ncsp&nkode;
 array ncsp_{&nkode} $ ncsp_1-ncsp_&nkode;
 do i=1 to &nkode; 
    ncsp{i}=upcase(compress(ncsp_{i}));
 end;
+drop ncsp_:
+%end;
 
 array ncmp{&nkode} $ ncmp1-ncmp&nkode;
 array ncmp_{&nkode} $ ncmp_1-ncmp_&nkode;
@@ -111,7 +114,7 @@ do i=1 to &nkode;
    ncmp{i}=upcase(compress(ncmp_{i}));
 end;
 
-drop ncsp_: ncmp_: i;
+drop ncmp_: i;
 
 
 %if &somatikk ne 0 %then %do;
@@ -168,10 +171,16 @@ drop ncsp_: ncmp_: i;
 	*/
 %end;
 
-/* Tove 01.04.2022: fjerner tomme variabler i tilrettelagte data */
+/* Tove 01.04.2022: fjerner tomme variabler fra tilrettelagte data */
 %if &sektor=ASPES %then %do;
 	drop drg drgreturkode hdg kontakt npkopphold_ertellendeISFopphold spes_drg dag_kir niva vekt komp_drg drg_type korrvekt rehabtype;
 %end;
+
+/* Tove 07.04.2022: fjerner tomme variabler fra tilrettelagte data (+ noen variabler med annen type enn i somatikkfil..) */
+%if &sektor=REHAB %then %do;
+	drop oppholdstype fagenhetisfrefusjon utforendeHelseperson fagenhetKode fagomrade episodefag;
+%end;
+
 
 run;
 %mend;

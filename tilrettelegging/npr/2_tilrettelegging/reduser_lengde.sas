@@ -30,7 +30,7 @@ length NPRId_reg stedAktivitet 4;
 *length tell_: 4;
 length pid 6;
 *length dodDato_DSF emigrertDato_DSF 4;
-length hastegrad polIndir omsorgsniva  liggetid: 4;
+length /*hastegrad polIndir*/ omsorgsniva  liggetid: 4;
 length InnTid  4;
 length UtTid 5;
 
@@ -40,7 +40,6 @@ length behhf behrhf behsh 4;
 
 length alderIDager UtskrKlarDato 4;
 length behandlingsstedKode: 6;
-
 length tjenesteenhetlokal $102;
 length drg $4;
 length DRGtypeHastegrad 3;
@@ -54,8 +53,15 @@ length  /*pakkeforlop*/ permisjonsdogn aktivitetskategori /*polIndirekteAktivite
 length trimpkt /*utforendeHelseperson*/ utTilstand /* VertskommHN*/ 4;
 
 %end;
+
 %if &avtspes ne 0 %then %do;
 length ald_gr: 3;
+%end;
+
+%if &sektor = REHAB %then %do;
+length behhf behrhf behsh 4;
+length liggetid permisjonsdogn 4;
+
 %end;
 
 set &innDataSett;

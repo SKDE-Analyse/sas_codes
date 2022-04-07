@@ -103,6 +103,9 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
     %end;
 %end;
 
+%if &sektor = REHAB %then %do;
+  if sektor = 5 then sektor = 1;
+%end;
 
 
 %if &avtspes=1 %then %do;
