@@ -5,31 +5,39 @@ MACROER FOR Å KOBLINGS_ID
 %macro KoblingsID(innDataSett=, utDataSett=, fil =);
 
 /*!
-Lager en unik id på hvert opphold, som siden brukes når vi splitter datasettet i to.
+Lager en unik id på hver rad, som siden kan brukes til å hente inn mottatte variabler til tilrettelagt data hvis behov.
 
 ### Input
 - `innDataSett` 
 - `utDataSett` 
-- `fil`: kan være `avd`, `sho` eller `avtspes`  eller `rehab`
+- `fil`: kan være som`, `avtspes`  eller `rehab`
 */
 
-%if %lowcase(&fil) = avd %then %do;
-%let prenum = 1810000000000;
-%end;
-%if %lowcase(&fil) = sho %then %do;
-%let prenum = 1820000000000;
-%end;
+/* 
+Tove 31.03.2022: 
+    Lager koblingsid på SOM-fil. Splitt til avd og sho skjer først når tilrettelegging er ferdig.
+    Det gjøres ikke splitt til PARVUS lengre, slik at denne koblingen skal brukes til å hente inn originale variabler fra mottatte data hvis behov.
+ */
+
 %if %lowcase(&fil) = avtspes %then %do;
 %let prenum = 1830000000000;
 %end;
 %if %lowcase(&fil) = rehab %then %do;
 %let prenum = 1840000000000;
 %end;
+%if %lowcase(&fil) = som %then %do;
+%let prenum = 1850000000000;
+%end;
 
 Data &Utdatasett(drop=i);
 set &Inndatasett;
 
 /* REWRITE TO BE MORE DYNAMIC SO THAT WE DON'T HAVE TO MANUALLY CHANGE EVERY YEAR */
+
+If aar = 2022 then do;
+i + 1;
+KoblingsID = &prenum. + i + 2200000000;
+end;
 
 If aar = 2021 then do;
 i + 1;
@@ -54,31 +62,6 @@ end;
 If aar = 2017 then do;
 i + 1;
 KoblingsID = &prenum. + i + 1700000000;
-end;
-
-If aar = 2016 then do;
-i + 1;
-KoblingsID = &prenum. + i + 1600000000;
-end;
-
-If aar = 2015 then do;
-i + 1;
-KoblingsID = &prenum. + i + 1500000000;
-end;
-
-If aar = 2014 then do;
-i + 1;
-KoblingsID = &prenum. + i + 1400000000;
-end;
-
-If aar = 2013 then do;
-i + 1;
-KoblingsID = &prenum. + i + 1300000000;
-end;
-
-If aar = 2012 then do;
-i + 1;
-KoblingsID = &prenum. + i + 1200000000;
 end;
 
 format koblingsID 32.;

@@ -7,10 +7,8 @@
 %include "&filbane\formater\NPR_AvtSpes.sas";
 %include "&filbane\formater\NPR_somatikk.sas";
 %include "&filbane\formater\SKDE_somatikk.sas";
-*%include "&filbane\formater\InstitusjonId.sas";
 
 /* ICD-10*/
-*%include "&filbane\formater\icd10.sas";
 %include "&filbane\formater\hdiag3tegn.sas";
 %include "&filbane\formater\icd10.sas";
 
@@ -25,5 +23,8 @@
 
 /*DRG*/
 %include "&filbane\formater\drg.sas";
+
+/* HENVFRAINSTITUSJONID */
+%include "&filbane\formater\NPR_henvFra_henvTil.sas";
 
 

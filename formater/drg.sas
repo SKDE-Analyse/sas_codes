@@ -868,8 +868,6 @@ value $drg
 '997O'="DRG 997O Tverrfaglig utredning"
 '998O'="DRG 998O Grupperettet pasientopplæring"
 
-
-
 /* Formater fra fil DRG/DRG_2015.sas lagt til 10/11/2017 */
 '808S'="DRG 808S Påsetting av prefabrikert ortose"
 
@@ -981,7 +979,6 @@ value $drg
 '823T'='DRG 823T Desensibilisering mot allergener'
 '908G'='DRG 908G Poliklinisk konsultasjon vedr myositt'
 '996P'='DRG 996P Behandlingstiltak rettet mot en gruppe pasienter i utvalgte HDG-er'
-
 '209H' = 'DRG 209H Innsetting av protese i kne'
 
 /* Manglende formater lagt til 16/03/2022 (IH) */
@@ -989,7 +986,12 @@ value $drg
 '993O'="DRG 993O Samarbeid- og oppfølgingsmøte med samarbeidspart utenfor spesialisthelsetjenesten for somatiske problemstillinger"
 '994T'="DRG 994T Telefonkonsultasjoner for somatiske problemstillinger"
 '995O'="DRG 995O Oppfølgingssamtale med samarbeidspart utenfor spesialisthelsetjenesten for somatiske problemstillinger"
-'TD998A'="DRG TD998A Grupperettet pasientopplæring innen PHV/TSB – voksne"
+'TD998A'="DRG TD998A Grupperettet pasientopplæring innen PHV/TSB - voksne"
 'TD998B'="DRG TD998B Grupperettet pasientopplæring innen PHV/TSB - barn"
+
+/* Nye formater ifbm tilrettelegging 2021T3 (TJ) */
+'992O'="Fysisk treningsterapi som ledd i spesialisthelsetjenester til pasienter med somatiske lidelser"
+'294C'="Diabetes >35 år m/bk"
+'294N'="Diabetes > 35 år u/bk"
 ;
 run;

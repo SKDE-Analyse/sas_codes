@@ -6,7 +6,6 @@
 
 %macro fix_behandlingssted(inndata= , beh=behandlingsstedkode, utdata=);
 
-
 data &utdata;
 set &inndata;
 
@@ -14,7 +13,7 @@ set &inndata;
     /* Ta vare på original variabel 'behandlingsstedkode' - lage en 'behandlingsstedkode2' */
     behandlingsstedkode2 = &beh+0; 
 
-    %if &sektor=AVD or &sektor=SHO %then %do;
+    %if /* &sektor=AVD or &sektor=SHO or*/ &sektor=SOM %then %do;
 
         /* 2016 */
         if aar = 2016 then do; 
@@ -44,12 +43,12 @@ set &inndata;
         if aar = 2020 then do; 
             if behandlingsstedkode2 = 974377779 then behandlingsstedkode2 = 974737779 ; /*Betanien spesialistpoliklinikk - behandlingsstedkode har et feilplassert siffer. Bruker ikke 'institusjonID' (det er gjort tidligere år) da den viser til hovedenhet i denne utleveringen.*/
         end;
-        /* 820491432  LIVEL AS AVD RINGERIKE ,  Allmenn legetjeneste*/
 
-        /* 2021 */
-        if aar = 2021 then do; 
-            if behandlingsstedkode2 = 974377779 then behandlingsstedkode2 = 974737779 ; /*Betanien spesialistpoliklinikk - behandlingsstedkode har et feilplassert siffer. Bruker ikke 'institusjonID' (det er gjort tidligere år) da den viser til hovedenhet i denne utleveringen.*/
-        end;
+        /* Tove 31.03.2022: 2021-data */
+        /* For lukkede data har Betanien rapportert med riktig orgnr*/
+        *if aar = 2021 then do; 
+            *if behandlingsstedkode2 = 974377779 then behandlingsstedkode2 = 974737779 ; /*Betanien spesialistpoliklinikk - behandlingsstedkode har et feilplassert siffer. Bruker ikke 'institusjonID' (det er gjort tidligere år) da den viser til hovedenhet i denne utleveringen.*/
+        *end;
     %end;
 
 

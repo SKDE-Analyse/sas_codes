@@ -61,7 +61,7 @@ liggetid
 /* opphold_id */
 polUtforende_1
 utTilstand /* Fikk ikke i første utlevering, juni 2018 */
-intern_kons
+/*intern_kons*/
 niva
 /* versjon */
 ;
