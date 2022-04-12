@@ -5,9 +5,9 @@ MACROER FOR Å KOBLINGS_ID
 
 ## Makro `KoblingsID`
 
-Lager en unik id på hvert opphold, som siden brukes når vi splitter datasettet i to.
+Lager en unik id på hver rad, som siden kan brukes til å hente inn mottatte variabler til tilrettelagt data hvis behov.
 
 ### Input
 - `innDataSett` 
 - `utDataSett` 
-- `fil`: kan være `avd`, `sho` eller `avtspes`  eller `rehab`
+- `fil`: kan være som`, `avtspes`  eller `rehab`

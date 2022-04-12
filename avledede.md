@@ -11,8 +11,6 @@ MACRO FOR AVLEDEDE VARIABLE
 5. DRGTypeHastegrad
 
 
-
-
 ### Steg for steg
 
 - Retting av ugyldig fødselsår
@@ -21,5 +19,4 @@ MACRO FOR AVLEDEDE VARIABLE
 - Definere `hastegrad` og `DRGtypeHastegrad` (kun for somatikk). 
 Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
     - Sett alle hos avtalespesialister til planlagt (hastegrad 4), poliklinikk (omsorgsniva 3, utdato=inndato)
-    - Omdefinere aar fra utdato
     - Lager ny harmonisert variabel fra FAG og Fag_navn (gjelder kun avtalespesialister). 
