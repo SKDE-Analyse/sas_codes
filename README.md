@@ -20,5 +20,5 @@ Dette *repository* inneholder felles SAS-koder brukt ved SKDE. Det er de samme k
 De fleste av kodene bruker makrovariablen `&filbane`, som sier i hvilken mappe disse kodene ligger i. Denne må derfor defineres før kodene kan brukes i et prosjekt. Ved SKDE har vi kodene liggende på en SAS-server (for navn på server, kontakt noen ved SKDE):
 
 ```sas
-%let filbane = \\<server>\<mappe>\Felleskoder\master;
+%let filbane = //<server>/<mappe>/Felleskoder/main;
 ```
