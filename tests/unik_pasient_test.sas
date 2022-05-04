@@ -15,7 +15,7 @@ Sammenligner dette datasettet med en referanse (`test.ref_unik_pasient_&navn`).
 
 */
 
-%include "&filbane\makroer\unik_pasient.sas";
+%include "&filbane/makroer/unik_pasient.sas";
 
 /*
 Lage nytt startsett, basert på test.pseudosens_avd_magnus og test.pseudosens_avtspes_magnus

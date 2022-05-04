@@ -10,7 +10,7 @@
 
 /* Hente inn CSV-fil for å lage behandler */
 data beh;
-  infile "&filbane\formater\behandler.csv"
+  infile "&filbane/formater/behandler.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

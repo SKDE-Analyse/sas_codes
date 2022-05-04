@@ -26,7 +26,7 @@
 
 
 data behandler;
-  infile "&filbane\formater\behandler.csv"
+  infile "&filbane/formater/behandler.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

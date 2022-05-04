@@ -15,7 +15,7 @@ Sammenligner dette datasettet med en referanse (`tests/data/agg_&navn.csv`).
 
 */
 
-%include "&filbane\makroer\aggreger.sas";
+%include "&filbane/makroer/aggreger.sas";
 
 /*
 Lage nytt startsett, basert på test.pseudosens_avd_magnus og test.pseudosens_avtspes_magnus
@@ -27,7 +27,7 @@ data tmp;
 set test.pseudosens_avd_magnus test.pseudosens_avtspes_magnus;
 run;
 
-%include "&filbane\makroer\episode_of_care.sas";
+%include "&filbane/makroer/episode_of_care.sas";
 
 %episode_of_care(dsn = tmp);
 

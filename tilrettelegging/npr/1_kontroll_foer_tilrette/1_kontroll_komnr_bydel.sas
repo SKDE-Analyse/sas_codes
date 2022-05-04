@@ -32,7 +32,7 @@ Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
 
 /* laste inn tre datafiler */
 data komnr;
-  infile "&filbane\formater\forny_komnr.csv"
+  infile "&filbane/formater/forny_komnr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
@@ -56,7 +56,7 @@ data komnr;
   run;
 
 data bydel;
-  infile "&filbane\formater\forny_bydel.csv"
+  infile "&filbane/formater/forny_bydel.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -78,7 +78,7 @@ data bydel;
 run;
 
 data boomr;
-  infile "&filbane\formater\boomr.csv"
+  infile "&filbane/formater/boomr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 

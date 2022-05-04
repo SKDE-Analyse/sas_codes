@@ -210,10 +210,10 @@ run;
 Rateberegninger
 */
 
-%include "&filbane\rateprogram\rateberegninger.sas";
-%include "&filbane\rateprogram\sas\definerVariabler.sas";
-%include "&filbane\Stiler\stil_figur.sas";
-%include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "&filbane/rateprogram/rateberegninger.sas";
+%include "&filbane/rateprogram/sas/definerVariabler.sas";
+%include "&filbane/stiler/stil_figur.sas";
+%include "&filbane/stiler/Anno_logo_kilde_NPR_SSB.sas";
 
 %let ratefil = tmp_figur;
 

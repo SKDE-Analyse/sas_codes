@@ -15,7 +15,7 @@ Sammenligner dette datasettet med en referanse (`test.ref_boomr_&navn`).
 
 */
 
-%include "&filbane\makroer\boomraader.sas";
+%include "&filbane/makroer/boomraader.sas";
 
 /*
 Lage nytt startsett, basert på test.pseudosens_avd_magnus

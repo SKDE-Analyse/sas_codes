@@ -7,7 +7,7 @@ Ved å kjøre følgende kode vil alle testene i "branchen" `master` kjøres:
 ```sas
 %let branch = master;
 %let filbane=<...>\felleskoder\&branch;
-%include "&filbane\tests\tests.sas";
+%include "&filbane/tests/tests.sas";
 %test(branch = &branch);
 ```
 
@@ -21,7 +21,7 @@ Endringer av kodene kan føre til at enkelte tester feiler. Det er da mulig å o
 
 Se hvordan det er gjort tidligere (i mappen `tests/`) og spør eventuelt Arnfinn.
 
-Vanligvis bruker man et input-datasett, som man kjører koden på, og sammenligner data man får ut med et referansesett. I filen `tests/tests.sas` ligger makroen `sammenlignData`. Denne kan brukes til å sammenligne to datasett, der referansedatasettet ligger i mappen `&filbane\tests\data\`. Referansedatasettet lages ved å kjøre samme makro med argumentet `lagReferanse = 1` slik:
+Vanligvis bruker man et input-datasett, som man kjører koden på, og sammenligner data man får ut med et referansesett. I filen `tests/tests.sas` ligger makroen `sammenlignData`. Denne kan brukes til å sammenligne to datasett, der referansedatasettet ligger i mappen `&filbane/tests/data/`. Referansedatasettet lages ved å kjøre samme makro med argumentet `lagReferanse = 1` slik:
 
 ```sas
 %sammenlignData(fil = <filnavn>, lagReferanse = 1);
@@ -50,7 +50,7 @@ For å forhindre at man introduserer feil i rateprogrammet skal man teste koden 
 Test av rateprogrammet kan kjøres slik:
 
     %let versjon = <mappe>;
-    %include "&filbane\rateprogram\tests\tests.sas";
+    %include "&filbane/rateprogram/tests\tests.sas";
     %test1(branch = &versjon);
 Her kjøres testen i rateprogrammet i mappen &lt;mappe&gt;, siden utviklingen ikke skal gjøres direkte i `master`-mappen. Bytt ut &lt;mappe&gt; med `master` for å teste master-versjonen.
 

@@ -40,7 +40,7 @@ Når man lager en makro burde man også lage en test. Denne kan så kjøres sene
 ```SAS
 %macro minNyeMakro_test(branch = master, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
-%include "&filbane\makroer\minNyeMakro.sas";
+%include "&filbane/makroer/minNyeMakro.sas";
 
 data makronavn1;
 set test.minNyeMakro_start;
@@ -59,7 +59,7 @@ Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn 
 
 ```SAS
 /* Øverst i filen */
-%include "&filbane\makroer\tests\minNyeMakro_test.sas";
+%include "&filbane/makroer/tests/minNyeMakro_test.sas";
 
 /* Inne i makroen test*/
 %minNyeMakro_test(branch = &branch, lagNyRef = &lag_ny_referanse);

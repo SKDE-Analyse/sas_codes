@@ -19,7 +19,7 @@ Makro for å fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
 OBS: bydeler blir ikke oppdatert når denne makroen kjøres. 
 Hvis det er bydeler i datasettet må de fornyes etter at denne makroen er kjørt. 
 Se makro 'bydel': 
-- \\&filbane\tilrettelegging\npr\2_tilrettelegging\bydel.sas
+- &filbane/tilrettelegging/npr/2_tilrettelegging/bydel.sas
 
 ### Endringslogg:
 
@@ -35,7 +35,7 @@ Se makro 'bydel':
 
 /* lese inn csv-fil */
 data forny_komnr;
-  infile "&filbane\formater\forny_komnr.csv"
+  infile "&filbane/formater/forny_komnr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
@@ -138,7 +138,7 @@ quit;
 
 %put *--------------------------------------------------------------*;
 %put * Bydeler må oppdateres manuelt. Se makro 'bydel'.             *;
-%put * \\&filbane\tilrettelegging\npr\2_tilrettelegging\bydel.sas   *;
+%put * &filbane/tilrettelegging/npr/2_tilrettelegging/bydel.sas   *;
 %put *--------------------------------------------------------------*;
 
 proc datasets nolist;

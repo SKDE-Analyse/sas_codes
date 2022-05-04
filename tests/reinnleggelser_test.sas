@@ -15,7 +15,7 @@ Sammenligner dette datasettet med en referanse (`test.ref_reinn1` og `test.ref_r
 
 */
 
-%include "&filbane\makroer\reinnleggelser.sas";
+%include "&filbane/makroer/reinnleggelser.sas";
 
 /*
 Lage nytt startsett, basert på test.pseudosens_avd_magnus

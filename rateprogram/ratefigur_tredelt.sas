@@ -41,9 +41,9 @@ Kortversjon (kjøres med default verdier for resten):
 ```
 ### Input
 - Ett tilpasset datasett fra rateprogram
-- Ett let-statement for å angi &bildesti (%let bildesti = \\&filbane\Analyse\prosjekter\eksempelmappe\figurer;)
+- Ett let-statement for å angi &bildesti (%let bildesti = &filbane/Analyse/prosjekter/eksempelmappe/figurer;)
 - Ett include-statement for angi &anno
-- Ett include-statement for å angi sti til makro (%include "&filbane\rateprogram\ratefigur_tredelt.sas";)
+- Ett include-statement for å angi sti til makro (%include "&filbane/rateprogram/ratefigur_tredelt.sas";)
 
 ### Output
 - bildefil med valgt format lagres på angitt bildesti

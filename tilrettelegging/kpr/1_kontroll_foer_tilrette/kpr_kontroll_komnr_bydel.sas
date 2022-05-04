@@ -1,5 +1,5 @@
 /* Bruke makro fra NPR-tilrettelegging */
-%include "&filbane\tilrettelegging\npr\1_kontroll_foer_tilrette\1_kontroll_komnr_bydel.sas";
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas";
 
 %macro komnr_ukjent(inndata=, aar=);
 /*! 

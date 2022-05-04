@@ -4,22 +4,22 @@ Inneholder også felles makroer som testene bruker.
 */
 
 /* Inkluder alle testene */
-%include "&filbane\tests\aggreger_test.sas";
-%include "&filbane\tests\boomraader_test.sas";
-%include "&filbane\tests\Episode_of_care_test.sas";
-%include "&filbane\tests\hyppigste_test.sas";
-%include "&filbane\tests\rateprogram_test.sas";
-%include "&filbane\tests\reinnleggelser_test.sas";
-%include "&filbane\tests\unik_pasient_test.sas";
+%include "&filbane/tests/aggreger_test.sas";
+%include "&filbane/tests/boomraader_test.sas";
+%include "&filbane/tests/Episode_of_care_test.sas";
+%include "&filbane/tests/hyppigste_test.sas";
+%include "&filbane/tests/rateprogram_test.sas";
+%include "&filbane/tests/reinnleggelser_test.sas";
+%include "&filbane/tests/unik_pasient_test.sas";
 
 /* Inkluder formater */
 
-%include "&filbane\formater\SKDE_somatikk.sas";
-%include "&filbane\formater\NPR_somatikk.sas";
-%include "&filbane\formater\bo.sas";
-%include "&filbane\formater\beh.sas";
+%include "&filbane/formater/SKDE_somatikk.sas";
+%include "&filbane/formater/NPR_somatikk.sas";
+%include "&filbane/formater/bo.sas";
+%include "&filbane/formater/beh.sas";
 
-%include "&filbane\makroer\deleteAll.sas";
+%include "&filbane/makroer/deleteAll.sas";
 
 %macro test(branch = master, lag_ny_referanse = 0);
 /*!
@@ -51,7 +51,7 @@ Makro som kjører alle testene
 %macro sammenlignData(fil =, lagReferanse = 0, crit =);
 
 /*!
-Makro for å sammenligne to datasett, der referansedatasettet ligger i mappa `&filbane\tests\data\`.
+Makro for å sammenligne to datasett, der referansedatasettet ligger i mappa filbane/tests/data/a\`.
 
 */
 
@@ -67,13 +67,13 @@ FORMAT _ALL_ ;
 run;
 
 /* Lagre data som csv på disk */
-proc export data=tmp outfile="&filbane\tests\data\&fil..csv" dbms=csv replace;
+proc export data=tmp outfile="&filbane/tests/data/&fil..csv" dbms=csv replace;
 run;
 
 %end; /* &lagReferanse ne 0 */
 
 /* Hent referansedata fra disk */
-proc import datafile = "&filbane\tests\data\&fil..csv" out=ref_&fil dbms=csv replace;
+proc import datafile = "&filbane/tests/data/&fil..csv" out=ref_&fil dbms=csv replace;
 run;
 
 /*
@@ -107,11 +107,11 @@ run;
 
 %macro inkluderFormater;
 
-%include "&filbane\formater\SKDE_somatikk.sas";
-%include "&filbane\formater\NPR_somatikk.sas";
-%include "&filbane\formater\bo.sas";
-%include "&filbane\formater\beh.sas";
-%include "&filbane\formater\komnr.sas";
+%include "&filbane/formater/SKDE_somatikk.sas";
+%include "&filbane/formater/NPR_somatikk.sas";
+%include "&filbane/formater/bo.sas";
+%include "&filbane/formater/beh.sas";
+%include "&filbane/formater/komnr.sas";
 
 %mend;
 

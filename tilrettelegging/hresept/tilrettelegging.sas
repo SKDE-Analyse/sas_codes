@@ -22,15 +22,15 @@ if komnrhjem2 = 301 and bydel2 in (301, 30401) then bydel2 = 99;
 
 run;
 
-%include "&filbane\makroer\forny_komnr.sas";
+%include "&filbane/makroer/forny_komnr.sas";
 %forny_komnr(inndata=qwerty_temp);
 
-%include "&filbane\tilrettelegging\npr\2_tilrettelegging\bydel.sas";
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/bydel.sas";
 %let avtspes = 0;
 %let datagrunnlag = RHF;
 %bydel(inndata=qwerty_temp, utdata=qwerty_temp);
 
-%include "&filbane\makroer\boomraader.sas";
+%include "&filbane/makroer/boomraader.sas";
 %boomraader(inndata=qwerty_temp);
 
 

@@ -15,7 +15,7 @@ Sammenligner dette datasettet med en referanse (`test.ref_hyppigste_&navn`).
 
 */
 
-%include "&filbane\makroer\hyppigste.sas";
+%include "&filbane/makroer/hyppigste.sas";
 
 /*
 Lage nytt startsett, basert på test.pseudosens_avd_magnus og test.pseudosens_avtspes_magnus

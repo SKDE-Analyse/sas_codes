@@ -3,12 +3,12 @@
 
 * include format and anno for logo and kilde;
 
-%include "&filbane\formater\SKDE_somatikk.sas";
-%include "&filbane\formater\NPR_somatikk.sas";
-%include "&filbane\formater\bo.sas";
-%include "&filbane\formater\beh.sas";
+%include "&filbane/formater/SKDE_somatikk.sas";
+%include "&filbane/formater/NPR_somatikk.sas";
+%include "&filbane/formater/bo.sas";
+%include "&filbane/formater/beh.sas";
 
-%include "&filbane\stiler\anno_logo_kilde_npr_ssb.sas";
+%include "&filbane/stiler/anno_logo_kilde_npr_ssb.sas";
 %let anno=anno;
 
 

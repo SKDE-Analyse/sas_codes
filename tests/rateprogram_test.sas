@@ -4,7 +4,7 @@
 Kjør tester av rateprogrammet
 */
 
-%include "&filbane\tests\makroer_rateprogram.sas";
+%include "&filbane/tests/makroer_rateprogram.sas";
 
 /*
 Test av rateprogrammet hver for seg, uavhengig av rekkefølge

@@ -14,7 +14,7 @@ Sammenligner datasettene som spyttes ut med referanse-sett (test.ref_eoc[n]).
 
 */
 
-%include "&filbane\makroer\episode_of_care.sas";
+%include "&filbane/makroer/episode_of_care.sas";
 
 %if &lagNyStart ne 0 %then %do;
 /*

@@ -28,7 +28,7 @@ Hvis ikke korrigeres ugyldig verdi i tilretteleggingen steg 2.
 
 %if &sektor=som %then %do;
 data orgnr;
-  infile "&filbane\formater\behandler.csv"
+  infile "&filbane/formater/behandler.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -64,7 +64,7 @@ run;
 
 %if &sektor=aspes or &sektor=avtspes %then %do;
 data orgnr;
-  infile "&filbane\formater\avtalespesialister.csv"
+  infile "&filbane/formater/avtalespesialister.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

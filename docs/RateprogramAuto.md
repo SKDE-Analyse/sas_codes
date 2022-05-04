@@ -1,18 +1,18 @@
 # Rateprogram.sas
 
 ```sas
-options sasautos=("&filbane\makroer" SASAUTOS);
+options sasautos=("&filbane/makroer" SASAUTOS);
 
-%include "&filbane\formater\SKDE_somatikk.sas";
-%include "&filbane\formater\NPR_somatikk.sas";
-%include "&filbane\formater\bo.sas";
-%include "&filbane\formater\beh.sas";
-%include "&filbane\formater\komnr.sas";
+%include "&filbane/formater/SKDE_somatikk.sas";
+%include "&filbane/formater/NPR_somatikk.sas";
+%include "&filbane/formater/bo.sas";
+%include "&filbane/formater/beh.sas";
+%include "&filbane/formater/komnr.sas";
 
-%include "&filbane\rateprogram\rateberegninger.sas";
+%include "&filbane/rateprogram/rateberegninger.sas";
 
-%include "&filbane\stiler\stil_figur.sas";
-%include "&filbane\stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "&filbane/stiler/stil_figur.sas";
+%include "&filbane/stiler/Anno_logo_kilde_NPR_SSB.sas";
 
 /******  DATAGRUNNLAG  ****************************************************************/
 %let Ratefil=skde_kur.ratetest_11_15;

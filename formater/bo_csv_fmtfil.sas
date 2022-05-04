@@ -28,7 +28,7 @@
 
 /* hente inn CSV-fil med definerte opptaksområder pr 01.01.2021 */
 data bo;
-  infile "&filbane\formater\boomr.csv"
+  infile "&filbane/formater/boomr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
@@ -133,7 +133,7 @@ proc format cntlin=hnref.fmtfil_bydel; run;
 /* --------- */    
 
 data forny_kom;
-  infile "&filbane\formater\forny_komnr.csv"
+  infile "&filbane/formater/forny_komnr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 

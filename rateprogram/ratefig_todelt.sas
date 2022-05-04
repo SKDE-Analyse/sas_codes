@@ -23,7 +23,7 @@ Kortversjon (kjøres med default verdier for resten):
 ```
 ### Input
 - T0 datasett/output fra rateprogram (del1 og del2)
-- Ett let-statement for å angi &bildesti (%let bildesti = \\&filbane\Analyse\prosjekter\eksempelmappe\figurer;)
+- Ett let-statement for å angi &bildesti (%let bildesti = &filbane/Analyse/prosjekter/eksempelmappe/figurer;)
 - Ett include-statement for å angi &anno 
 
 ### Output

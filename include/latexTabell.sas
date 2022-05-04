@@ -2,7 +2,7 @@
 SAS template for å lage LaTeX-tabeller av SAS-tabeller. Brukes som følger:
 
 ```sas
-%include "&filbane\include\latexTabell.sas";
+%include "&filbane/include/latexTabell.sas";
 
 ods tagsets.tablesonlylatex tagset=event1
 file="<FOLDER>\filename.tex"   (notop nobot) style=journal;

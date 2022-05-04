@@ -10,8 +10,8 @@ Makro for å teste kode i ../Stiler/ (logo)
 
 ods text="Test Anno";
 
-%include "&filbane\Stiler\stil_figur.sas";
-%include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "&filbane/stiler/stil_figur.sas";
+%include "&filbane/stiler/Anno_logo_kilde_NPR_SSB.sas";
 
 %sammenlignData(fil = anno, lagReferanse = &lagReferanse);
 
@@ -33,19 +33,19 @@ ods text="Test UtvalgX";
 
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 1;
 
-%include "&filbane\makroer\boomraader.sas";
-%include "&filbane\rateprogram\rateberegninger.sas";
+%include "&filbane/makroer/boomraader.sas";
+%include "&filbane/rateprogram/rateberegninger.sas";
 
 %inkluderFormater;
 
 %if &definerVariabler ne 0 %then %do;
-%include "&filbane\rateprogram\sas\definerVariabler.sas";
+%include "&filbane/rateprogram/sas/definerVariabler.sas";
 %definerVariabler;
 %end;
 
 %if (&alene ne 0) %then %do;
 /* Importere datasettet "anno" fra disk, hvis anno-makroen ikke er kjørt først */
-proc import datafile = "&filbane\tests\data\anno.csv" out=anno dbms=csv replace;
+proc import datafile = "&filbane/tests/data/anno.csv" out=anno dbms=csv replace;
 run;
 %end;
 
@@ -94,13 +94,13 @@ ods text="Test Rateberegninger";
 
 %if (&alene ne 0) %then %do;
 
-%include "&filbane\makroer\boomraader.sas";
-%include "&filbane\rateprogram\rateberegninger.sas";
+%include "&filbane/makroer/boomraader.sas";
+%include "&filbane/rateprogram/rateberegninger.sas";
 
 %inkluderFormater;
 
 %if &definerVariabler ne 0 %then %do;
-%include "&filbane\rateprogram\sas\definerVariabler.sas";
+%include "&filbane/rateprogram/sas/definerVariabler.sas";
 %definerVariabler;
 %end;
 
@@ -110,14 +110,14 @@ Lese datasett fra disk som brukes videre i rateberegninger-makroen
 Det vil da være mulig å kjøre denne makroen uavhengig av om man har kjørt de makroene som kommer tidligere i rateprogrammet
 */
 
-proc import datafile = "&filbane\tests\data\anno.csv" out=anno dbms=csv replace;
+proc import datafile = "&filbane/tests/data/anno.csv" out=anno dbms=csv replace;
 run;
 
 data rv;
 set test.ref_rate_rv;
 run;
 
-proc import datafile = "&filbane\tests\data\andel.csv" out=andel dbms=csv replace;
+proc import datafile = "&filbane/tests/data/andel.csv" out=andel dbms=csv replace;
 run;
 
 %end; /* %if (&alene ne 0) */

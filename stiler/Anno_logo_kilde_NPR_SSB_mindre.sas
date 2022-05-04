@@ -10,7 +10,7 @@ retain function "Image";
 	x1 = 98;
 	y1 = 2;
 	width=8;
-	image = "&filbane\Stiler\logo\skde.png";
+	image = "&filbane/stiler/logo/skde.png";
 output; /*Logo*/
 	function = "text";
 	anchor = "bottomleft";

@@ -1,6 +1,6 @@
 
 data icpc2;
-  infile "&filbane\formater\icpc2.csv"
+  infile "&filbane/formater/icpc2.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

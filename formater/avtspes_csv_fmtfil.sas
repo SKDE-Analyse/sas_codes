@@ -22,7 +22,7 @@
 
 
 data avt;
-  infile "&filbane\formater\avtalespesialister.csv"
+  infile "&filbane/formater/avtalespesialister.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
