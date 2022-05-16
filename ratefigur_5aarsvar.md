@@ -1,16 +1,17 @@
 
-# Dokumentasjon for filen *rateprogram/ratefigur_aarsvar.sas*
+# Dokumentasjon for filen *rateprogram/ratefigur_5aarsvar.sas*
 
 
-## Makro `ratefigur_aarsvar`
+## Makro `ratefigur_5aarsvar`
 
 ### Beskrivelse
 
-Makro for å lage ratefigur med årsvariasjon.
+Makro for å lage ratefigur med årsvariasjon, tilpasset fem år. 
+Symbolene er endret ifht opprinnelig makro %ratefigur_aarsvar.
 
 ```
 kortversjon (kjøres med default verdier for resten)
-%ratefig_aarsvar(dsn=, start=, slutt=, figurnavn=);
+%ratefig_5aarsvar(dsn=, start=, slutt=, figurnavn=);
 ```
 ### Input
 - datasett/output fra rateprogram
@@ -23,5 +24,4 @@ kortversjon (kjøres med default verdier for resten)
 - bildefil med valgt format lagres på angitt bildesti
 
 ### Endringslogg:
-- februar 2022 opprettet, Frank
-- mai 2022 endret farge og størrelse på symboler årsvariasjon, Tove
+- mai 2022 opprettet, Tove
