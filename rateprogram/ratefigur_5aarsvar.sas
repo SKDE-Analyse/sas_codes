@@ -101,7 +101,7 @@ by descending rateSnitt;
 run;
 
 %if &lagre=1 %then %do;
-ODS Graphics ON /reset=All imagename="&figurnavn._&bo._aarsvar" imagefmt=&bildeformat border=off height=500px /*HEIGHT=&hoyde width=&bredde*/;
+ODS Graphics ON /reset=All imagename="&figurnavn._&bo._aarsvar" imagefmt=&bildeformat border=off height=700px /*HEIGHT=&hoyde width=&bredde*/;
 ODS Listing style=stil_figur Image_dpi=300 GPATH="&bildesti";
 %end;
 title;
