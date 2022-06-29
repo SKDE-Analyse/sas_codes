@@ -120,6 +120,7 @@ run;
 data Overforinger;
 set &dsn;
 retain flag;
+retain pasient_flag;
 
 	Lag_PID=Lag(PID);
 	Lag_UtDato=Lag(UtDato);
@@ -143,12 +144,14 @@ retain flag;
 		/* increase flag value if there is a longer break between opphold */
     	if Dager_mellom>1 then do; 
 	 	 flag+1;
+     pasient_flag + 1;
     	end;
  
     end;
 
 	else do; /* increase flag value for different pid */
 	  flag+1;
+    pasient_flag = 1;
 	end;
 
 	if BehSH ne LAG_BehSH and sek_mellom ne . and sek_mellom<=&overforing_tid then Overforing=flag;
@@ -207,7 +210,7 @@ data Overforinger;
 
 /*  assign SHO_id based on aggrshoppid_lnr and overføring*/
   if max_aggrshopp>1 then SHO_id=max_aggrshopp;
-  else SHO_id=pid*1000 + mod(overforing, 1000);
+  else SHO_id=pid*1000 + pasient_flag;
 
 /*  opphold that is not a part of overføring episode*/
   if overforing=. then SHO_id=aggrshoppID_Lnr;
