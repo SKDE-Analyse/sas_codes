@@ -13,7 +13,12 @@ MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 */
 
 Data &Utdatasett;
-Set &Inndatasett /*Tove 01.04.2022: kan ikke kjøres på avtspes-tilrettelegging, men skal kjøres i somatikk-tilrettelegging.(rename=(episodeFag=episodefag_org)) */;
+Set &Inndatasett 
+/*Tove 01.04.2022: kan ikke kjøres på avtspes-tilrettelegging, men skal kjøres i somatikk-tilrettelegging.*/
+%if &somatikk ne 0 %then %do;
+(rename=(episodeFag=episodefag_org)) 
+%end;
+;
 
 /* Sletter variabler vi ikke trenger fra somatikkfilene. */
 %if &somatikk ne 0 %then %do;
@@ -105,7 +110,7 @@ array ncsp_{&nkode} $ ncsp_1-ncsp_&nkode;
 do i=1 to &nkode; 
    ncsp{i}=upcase(compress(ncsp_{i}));
 end;
-drop ncsp_:
+drop ncsp_: i ;
 %end;
 
 array ncmp{&nkode} $ ncmp1-ncmp&nkode;
@@ -180,7 +185,6 @@ drop ncmp_: i;
 %if &sektor=REHAB %then %do;
 	drop oppholdstype fagenhetisfrefusjon utforendeHelseperson fagenhetKode fagomrade episodefag;
 %end;
-
 
 run;
 %mend;

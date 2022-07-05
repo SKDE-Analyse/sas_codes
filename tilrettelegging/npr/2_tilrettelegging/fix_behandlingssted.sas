@@ -13,7 +13,7 @@ set &inndata;
     /* Ta vare på original variabel 'behandlingsstedkode' - lage en 'behandlingsstedkode2' */
     behandlingsstedkode2 = &beh+0; 
 
-    %if /* &sektor=AVD or &sektor=SHO or*/ &sektor=SOM %then %do;
+    %if &sektor=SOM %then %do;
 
         /* 2016 */
         if aar = 2016 then do; 

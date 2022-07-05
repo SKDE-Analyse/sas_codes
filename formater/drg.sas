@@ -993,5 +993,23 @@ value $drg
 '992O'="Fysisk treningsterapi som ledd i spesialisthelsetjenester til pasienter med somatiske lidelser"
 '294C'="Diabetes >35 år m/bk"
 '294N'="Diabetes > 35 år u/bk"
+
+/* Nye formater ifbm tilrettelegging 2022 T1 (TJ) */
+'112P'="DRG  Perkutan ablasjonsbehandling for hjertearytmi, dagkirurgisk behandling."
+'112Q'="DRG 112Q Annen perkutan kardiovaskulær prosedyre, dagkirurgisk behandling."
+'209I'="DRG 209I Innsetting av protese i ankel."
+'209J'="DRG 209J Komplisert utskifting av protese i kne eller ankel."
+'209S'="DRG 209S Innsetting av primær hofteleddsprotese pga. fraktur m/ bk."
+'209T'="DRG 209T Innsetting av primær hofteleddsprotese pga. fraktur u/ bk."
+'209U'="DRG 209U Innsetting av primær hofteleddsprotese av andre årsaker enn fraktur m/ bk."
+'209V'="DRG 209V Innsetting av primærhofteleddsprotese av andre årsaker enn fraktur u/ bk."
+'530'="DRG 530 Større plastikkirurgi etter stort vekttap (inkl. postbariatrisk kirurgi)."
+'531'="DRG 531 Annen plastikkirurgi etter stort vekttap (inkl. postbariatrisk kirurgi)."
+'571'="DRG 571 Innsetting av intrakraniell- eller vagusstimulator."
+'57A'="DRG 57A Større kjeveoperasjoner."
+'808O'="DRG 808O Polikliniske kontakter for gjennomføring av middels omfattende prosedyrer i bevegelsesapparatet."
+'823R'="DRG 823R Mindre prosedyrer vedr faktorer som har betydning for helsetilstanden/ kontakten med helsetjenesten."
+'372B'="DRG 372B Vaginal fødsel m/kompliserende faktor preeklampsi."
+'370B'="DRG 370B Keisersnitt m/kompliserende faktor preeklampsi."
 ;
 run;
