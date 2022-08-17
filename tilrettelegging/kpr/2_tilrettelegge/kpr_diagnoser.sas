@@ -14,6 +14,22 @@ Output: tre variabler
 
 %macro kpr_diagnoser(inndata= , utdata=);
 
+%if &sektor=diagnose %then %do; /*kjøres kun på diagnosedata*/
+data &utdata;
+set &inndata;
+/* - Lager numerisk 'kodeverk_kpr' fra string 'diagnosetabell'. Drop variabel 'diagnosetabell'*/
+if diagnosetabell eq "ICPC-2"                          then kodeverk_kpr = 1;
+if diagnosetabell eq "ICPC-2B"                         then kodeverk_kpr = 2;
+if diagnosetabell eq "ICD-10"                          then kodeverk_kpr = 3;
+if diagnosetabell eq "ICD-DA-3"                        then kodeverk_kpr = 4;
+if diagnosetabell eq "Akser i BUP-klassifikasjon"      then kodeverk_kpr = 5;
+if diagnosetabell eq " "                               then kodeverk_kpr = .;
+drop diagnosetabell;
+run;
+%end;
+
+
+%if &sektor=enkeltregning %then %do; /*Kjøres kun på regningsdata*/
 /* hente inn hoveddiagnose fra diagnosefilen */
 proc sql;
 	create table tmp_utdata as
@@ -51,5 +67,6 @@ quit;
 proc datasets nolist;
 delete tmp_utdata ant_bdiag;
 run;
+%end;
 
 %mend kpr_diagnoser;

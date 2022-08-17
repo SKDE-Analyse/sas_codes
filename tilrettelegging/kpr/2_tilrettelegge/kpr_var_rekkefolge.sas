@@ -33,6 +33,7 @@ retain    aar
 retain    aar
           enkeltregning_lnr
           kodeverk_kpr
+          icpc2_diag
           diag_kpr
           erhdiag_kpr
           kodenr;

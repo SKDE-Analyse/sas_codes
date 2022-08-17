@@ -43,6 +43,8 @@ set &Inndata;
     label diag_kpr='DiagnoseKode (KPR)';
     label kodenr='Angir nummer i rekken av diagnoser (KPR)';
     label erhdiag_kpr='Hoveddiagnose = 1 (SKDE/KPR)'; format erHdiag_kpr erHdiag_kpr.;
+    label icpc2_diag='ICPC2 diagnose på regningskort (SKDE)'; format icpc2_diag $icpc2_fmt.;
+
 %end;
 
 /* Gjelder kun takstfil */
