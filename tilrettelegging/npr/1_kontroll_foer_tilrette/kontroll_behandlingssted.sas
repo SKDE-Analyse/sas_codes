@@ -9,6 +9,11 @@ Ukjente verdier (fra datasettet error_liste_'aar') kontrolleres mot brønnøysundr
 Hvis verdien i error_listen er et gyldig organisasjonsnummer eller reshid så skal CSV-fil oppdateres.
 Hvis ikke korrigeres ugyldig verdi i tilretteleggingen steg 2.
 
+Eksempel på bruk:
+Somatikk:           %kontroll_behandlingssted(inndata=hnmot.SOM_2022_M22T1, aar=2022);
+Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, aar=2022,beh=institusjonid , sektor=avtspes);
+
+
 ### Input 
 - inndata: Filen med behandlingssted-variabel som skal kontrolleres, f.eks hnmot.m20t3_som_2020.
 - aar: Brukes for å gi unike navn til output-errorfiler.
@@ -26,7 +31,7 @@ Hvis ikke korrigeres ugyldig verdi i tilretteleggingen steg 2.
 - September 2021, Tove, dokumentasjon markdown
 */
 
-%if &sektor=som %then %do;
+%if &sektor=som or &sektor=rehab %then %do;
 data orgnr;
   infile "&filbane\formater\behandler.csv"
   delimiter=';'
@@ -103,24 +108,12 @@ if a and b then gyldig = 1;
 if a and not b then ugyldig = 1;
 run;
 
-/*merge flagg til data som kontrolleres*/
-%if &sektor=som %then %do;
-proc sql;
-	create table tmp_data as
-	select a.&beh, a.institusjonid, a.hf, gyldig, ugyldig 
-  from &inndata a left join flagg_org b
-	on a.&beh=b.orgnr;
-quit;
-%end;
-
-%if &sektor=aspes or &sektor=avtspes or &sektor=rehab %then %do;
 proc sql;
 	create table tmp_data as
 	select a.&beh, a.sektor, gyldig, ugyldig 
   from &inndata a left join flagg_org b
 	on a.&beh=b.orgnr;
 quit;
-%end;
 
 /*hvor mange linjer har gyldig/ugyldig orgnr*/
 proc freq data=tmp_data; 
