@@ -52,23 +52,15 @@ length inntilstand /*intern_kons isf_opphold*/  4;
 length  /*pakkeforlop*/ permisjonsdogn aktivitetskategori /*polIndirekteAktivitet*/ polUtforende_1 /*polUtforende_2*/ RehabType 4;
 /* length relatertKontaktID 6; */
 length trimpkt /*utforendeHelseperson*/ utTilstand /* VertskommHN*/ 4;
-
 %end;
-
-/* Tove 05.07.2022 - ikke variabel som eksisterer lengre */
-/* %if &avtspes ne 0 %then %do;
-length ald_gr: 3;
-%end; */
 
 %if &sektor = REHAB %then %do;
 length behhf behrhf behsh 4;
 length liggetid permisjonsdogn 4;
-
 %end;
 
 set &innDataSett;
 format koblingsID 32.;
-
 run;
 
 %mend reduser_lengde;
