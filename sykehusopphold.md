@@ -48,3 +48,4 @@ Makroen lager 12 (eventuelt 14) nye variabler:
 
 ### Endringslogg
 - 07.09.2021 Opprettet av Janice Shu
+- juni 2022, fikset bug som ga duplikate sho_id (den slo sammen rader som ikke hørte sammen, og ga dermed feil i sho-variablene)
