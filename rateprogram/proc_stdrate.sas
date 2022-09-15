@@ -14,7 +14,8 @@
     innbygg_dsn=innbygg.INNB_SKDE_BYDEL, /*Innbyggerdatasett: innbygg.INNB_SKDE_BYDEL, innbygg.INNB_SKDE_BYDEL er default*/
     /*Til boområde-makroen: Standard er:(inndata=pop, indreOslo = 0, bydel = 1);*/
     bodef_indreoslo=0, /*0 er standard, 0 er default*/
-    bodef_bydel=1 /*1 er standard, 1 er default*/
+    bodef_bydel=1, /*1 er standard, 1 er default*/
+	test=0 /*0 (default) er for å slette midlertidige datasett, 1 er for å beholde dem */
 );
 
 /*! 
@@ -315,7 +316,7 @@ proc sql;
 	select nyalder, ermann,
 		sum(antall) as Nevent
 	from xyz_ratedata
-	where aar=&standardaar
+	where aar=&standardaar and &bo=8888
 	group by nyalder, ermann;
 quit;
 proc sql;
@@ -565,9 +566,9 @@ hbarparm category=&bo response=nrate / fillattrs=(color=CXC3C3C3);
 %if &Antall_aar>1 %then %do; scatter x=rate&ar1 y=&bo / markerattrs=(symbol=circlefilled color=black size=5pt);%end;
 %if &Antall_aar>2 %then %do; scatter x=rate&ar2 y=&bo / markerattrs=(symbol=circlefilled color=grey  size=7pt); %end;
 %if &Antall_aar>3 %then %do; scatter x=rate&ar3 y=&bo / markerattrs=(symbol=circle       color=black size=9pt);%end;
-%if &Antall_aar>4 %then %do; scatter x=rate&ar4 y=&bo / markerattrs=(symbol=circle       color=red size=9pt);%end;
-%if &Antall_aar>5 %then %do; scatter x=rate&ar5 y=&bo / markerattrs=(symbol=circle       color=black size=11pt);%end;
-%if &Antall_aar>6 %then %do; scatter x=rate&ar6 y=&bo / markerattrs=(symbol=circle       color=red size=11pt);%end;
+%if &Antall_aar>4 %then %do; scatter x=rate&ar4 y=&bo / markerattrs=(symbol=circle       color=red   size=9pt);%end;
+%if &Antall_aar>5 %then %do; scatter x=rate&ar5 y=&bo / markerattrs=(symbol=circle       color=red   size=11pt);%end;
+%if &Antall_aar>6 %then %do; scatter x=rate&ar6 y=&bo / markerattrs=(symbol=circle       color=black size=11pt);%end;
 
 Highlow Y=&bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
 
@@ -613,8 +614,8 @@ xaxis /*display=(nolabel)*/ offsetmin=0.02 valueattrs=(size=7) label="Rater pr &
     legenditem type=marker name='item1' / label="&ar1" markerattrs=(symbol=circlefilled color=black size=5pt);
     legenditem type=marker name='item2' / label="&ar2" markerattrs=(symbol=circlefilled color=grey  size=7pt);
     legenditem type=marker name='item3' / label="&ar3" markerattrs=(symbol=circle       color=black size=9pt);
-    legenditem type=marker name='item4' / label="&ar4" markerattrs=(symbol=circle       color=red size=9pt);
-    legenditem type=marker name='item5' / label="&ar5" markerattrs=(symbol=circle       color=red size=11pt);
+    legenditem type=marker name='item4' / label="&ar4" markerattrs=(symbol=circle       color=red   size=9pt);
+    legenditem type=marker name='item5' / label="&ar5" markerattrs=(symbol=circle       color=red   size=11pt);
     keylegend "item1" "item2" "item3" "item4" "item5" / across=1 position=bottomright location=inside noborder valueattrs=(size=8pt);
 
 %end;
@@ -642,9 +643,13 @@ set xyz_tmp_rate;
 run;
 %end;
 
+/* Hvis ikke test=1 */
 /*Skru av denne for å se midlertidige datasett*/
+%if %sysevalf(%superq(test)=,boolean) %then %let test = 0;
+%if &test=0 %then %do;
 proc datasets nolist;
 delete xyz_:;
 run;
+%end;
 
 %mend proc_stdrate;
