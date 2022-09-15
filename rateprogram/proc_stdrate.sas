@@ -316,7 +316,7 @@ proc sql;
 	select nyalder, ermann,
 		sum(antall) as Nevent
 	from xyz_ratedata
-	where aar=&standardaar
+	where aar=&standardaar and &bo=8888
 	group by nyalder, ermann;
 quit;
 proc sql;
