@@ -1,4 +1,4 @@
-%macro ratefigur_aarsvar(
+%macro ratefigur_5aarsvar(
     dsn=, /*Grunnlagsdatsettet for figur, som regel utdata fra rateprogram*/
     /*dsn må inneholde variablene rate: og nrate*/
     yvariabel1=antsnitt, /*Variabel 1 til Y-axis table, antsnitt som default*/
@@ -20,11 +20,12 @@
 /*! 
 ### Beskrivelse
 
-Makro for å lage ratefigur med årsvariasjon.
+Makro for å lage ratefigur med årsvariasjon, tilpasset fem år. 
+Symbolene er endret ifht opprinnelig makro %ratefigur_aarsvar.
 
 ```
 kortversjon (kjøres med default verdier for resten)
-%ratefig_aarsvar(dsn=, start=, slutt=, figurnavn=);
+%ratefig_5aarsvar(dsn=, start=, slutt=, figurnavn=);
 ```
 ### Input
 - datasett/output fra rateprogram
@@ -37,8 +38,7 @@ kortversjon (kjøres med default verdier for resten)
 - bildefil med valgt format lagres på angitt bildesti
 
 ### Endringslogg:
-- februar 2022 opprettet, Frank
-- mai 2022 endret farge og størrelse på symboler årsvariasjon, Tove
+- mai 2022 opprettet, Tove
 */
 
 %global Antall_aar;
@@ -111,8 +111,8 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 %if &soyle = 1 %then %do; hbarparm category=&bo response=nrate / fillattrs=(color=CXC3C3C3); %end;
 %if &soyle ne 1 %then %do; Refline &Norgesnitt / axis=x lineattrs=(Thickness=.5 color=Black pattern=2); %end;
 %if &Antall_aar>1 %then %do; scatter x=rate&ar1 y=&bo / markerattrs=(symbol=circlefilled color=black size=4pt);%end;
-%if &Antall_aar>2 %then %do; scatter x=rate&ar2 y=&bo / markerattrs=(symbol=circlefilled color=grey  size=6pt); %end;
-%if &Antall_aar>3 %then %do; scatter x=rate&ar3 y=&bo / markerattrs=(symbol=circle       color=black size=8pt);%end;
+%if &Antall_aar>2 %then %do; scatter x=rate&ar2 y=&bo / markerattrs=(symbol=circlefilled color=charcoal  size=6pt); %end;
+%if &Antall_aar>3 %then %do; scatter x=rate&ar3 y=&bo / markerattrs=(symbol=circlefilled color=grey size=8pt);%end;
 %if &Antall_aar>4 %then %do; scatter x=rate&ar4 y=&bo / markerattrs=(symbol=circle       color=charcoal size=9pt);%end;
 %if &Antall_aar>5 %then %do; scatter x=rate&ar5 y=&bo / markerattrs=(symbol=circle       color=black size=10pt);%end;
 Highlow Y=&bo low=Min high=Max / type=line lineattrs=(color=black thickness=1 pattern=1);
@@ -127,7 +127,7 @@ yaxis display=(noticks noline) label='Bosatte i opptaksområde' labelpos=top labe
 xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala label="&xlabel" valueattrs=(size=8) offsetmax=0.05 ;
 
 %if &Antall_aar=2 %then %do;
-    legenditem type=marker name='item1' / label="&ar1" markerattrs=(symbol=circlefilled color=black size=4pt);
+    legenditem type=marker name='item1' / label="&ar1" markerattrs=(symbol=circlefilled color=black size=5pt);
     %if &soyle ne 1 %then %do;
     legenditem type=markerline name='Ref1' / label="Snitt, Norge" lineattrs=(Thickness=.5 color=Black pattern=2);
     keylegend "item1" "Ref1"/ across=1 position=bottomright location=inside noborder valueattrs=(size=8pt);
@@ -151,8 +151,8 @@ xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala label="&xlabel" valueattrs=(si
 
 %if &Antall_aar=4 %then %do;
     legenditem type=marker name='item1' / label="&ar1" markerattrs=(symbol=circlefilled color=black size=4pt);
-    legenditem type=marker name='item2' / label="&ar2" markerattrs=(symbol=circlefilled color=grey  size=6pt);
-    legenditem type=marker name='item3' / label="&ar3" markerattrs=(symbol=circle       color=black size=8pt);
+    legenditem type=marker name='item2' / label="&ar2" markerattrs=(symbol=circlefilled color=charcoal  size=6pt);
+    legenditem type=marker name='item3' / label="&ar3" markerattrs=(symbol=circlefilled color=grey size=8pt);
     %if &soyle ne 1 %then %do;
     legenditem type=line name='Ref1' / label="Norge" lineattrs=(Thickness=.5 color=Black pattern=2);
     keylegend "item1" "item2" "item3" "Ref1"/ across=1 position=bottomright location=inside noborder valueattrs=(size=8pt);
@@ -164,9 +164,9 @@ xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala label="&xlabel" valueattrs=(si
 
 %if &Antall_aar=5 %then %do;
     legenditem type=marker name='item1' / label="&ar1" markerattrs=(symbol=circlefilled color=black size=4pt);
-    legenditem type=marker name='item2' / label="&ar2" markerattrs=(symbol=circlefilled color=grey  size=6pt);
-    legenditem type=marker name='item3' / label="&ar3" markerattrs=(symbol=circle       color=black size=8pt);
-    legenditem type=marker name='item4' / label="&ar4" markerattrs=(symbol=circle       color=charcoal size=9pt);
+    legenditem type=marker name='item2' / label="&ar2" markerattrs=(symbol=circlefilled color=charcoal size=6pt);
+    legenditem type=marker name='item3' / label="&ar3" markerattrs=(symbol=circlefilled color=grey size=8pt);
+    legenditem type=marker name='item4' / label="&ar4" markerattrs=(symbol=circle       color=black size=9pt);
     %if &soyle ne 1 %then %do;
     legenditem type=markerline name='Ref1' / label="Snitt, Norge" lineattrs=(Thickness=.5 color=Black pattern=2);
     keylegend "item1" "item2" "item3" "item4" "Ref1"/ across=1 position=bottomright location=inside noborder valueattrs=(size=8pt);
@@ -178,8 +178,8 @@ xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala label="&xlabel" valueattrs=(si
 
 %if &Antall_aar=6 %then %do;
     legenditem type=marker name='item1' / label="&ar1" markerattrs=(symbol=circlefilled color=black size=4pt);
-    legenditem type=marker name='item2' / label="&ar2" markerattrs=(symbol=circlefilled color=grey  size=6pt);
-    legenditem type=marker name='item3' / label="&ar3" markerattrs=(symbol=circle       color=black size=8pt);
+    legenditem type=marker name='item2' / label="&ar2" markerattrs=(symbol=circlefilled color=charcoal size=6pt);
+    legenditem type=marker name='item3' / label="&ar3" markerattrs=(symbol=circlefilled color=grey size=8pt);
     legenditem type=marker name='item4' / label="&ar4" markerattrs=(symbol=circle       color=charcoal size=9pt);
     legenditem type=marker name='item5' / label="&ar5" markerattrs=(symbol=circle       color=black size=10pt);
     %if &soyle ne 1 %then %do;
@@ -190,7 +190,6 @@ xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala label="&xlabel" valueattrs=(si
     keylegend "item1" "item2" "item3" "item4" "item5" / across=1 position=bottomright location=inside noborder valueattrs=(size=8pt);
     %end;
 %end;
-
 run;Title; 
 %if &lagre=1 %then %do;
 ods listing close; ods graphics off;
@@ -199,5 +198,4 @@ ods listing close; ods graphics off;
 proc datasets nolist;
 delete xyz:;
 run;
-
-%mend ratefigur_aarsvar;
+%mend ratefigur_5aarsvar;

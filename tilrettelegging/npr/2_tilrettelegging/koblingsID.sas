@@ -16,7 +16,7 @@ Lager en unik id på hver rad, som siden kan brukes til å hente inn mottatte vari
 /* 
 Tove 31.03.2022: 
     Lager koblingsid på SOM-fil. Splitt til avd og sho skjer først når tilrettelegging er ferdig.
-    Det gjøres ikke splitt til PARVUS lengre, slik at denne koblingen skal brukes til å hente inn originale variabler fra mottatte data hvis behov.
+    Det gjøres ikke splitt til PARVUS lengre.
  */
 
 %if %lowcase(&fil) = avtspes %then %do;

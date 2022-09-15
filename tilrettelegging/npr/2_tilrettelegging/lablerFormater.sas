@@ -72,7 +72,6 @@ label ATC_2='ATC kode 2 (ATC/NPR-melding)';
 label ATC_3='ATC kode 3 (ATC/NPR-melding)'; 
 label ATC_4='ATC kode 4 (ATC/NPR-melding)'; 
 label ATC_5='ATC kode 5 (ATC/NPR-melding)';
-/*label episodeFag='Fagområde for Episoden (NPR-melding)'; format episodeFag $fagomrade.;*/
 label debitor='Debitor (NPR-melding)'; format debitor debitor.;
 label henvFraTjeneste='Henvist fra tjeneste (NPR-melding)'; format HENVFRATJENESTE HENVFRATJENESTE.;
 label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENESTE HENVTILTJENESTE.;
@@ -139,7 +138,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label ncsp9='NCSP kode 9 (NCSP/NPR-melding/SKDE)'; label ncsp10='NCSP kode 10 (NCSP/NPR-melding/SKDE)'; 
 
     Label PID='Personentydig løpenummer, numerisk (NPR/SKDE)'; 
-    *label fodselsar_org='Fødselsår fra personnr og innrapportert (NPR)';
+    label fodselsar_org='Fødselsår fra personnr og innrapportert (NPR)';
     label fodselsar    ='Fødselsår fra personnr og innrapportert (SKDE)';
     label KoblingsID='Unik id for påkobling av variabler (SKDE)'; 
 
@@ -166,7 +165,8 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     /* SOMATIKK raw variables */
     /**************************/
     label Aktivitetskategori='Aktivitetskatgori 10-delt (SAMDATA)'; format Aktivitetskategori AKTIVITETSKATEGORI.; 
-    label Aktivitetskategori3='Aktivitetskatgori 3-delt (SAMDATA)'; format Aktivitetskategori3 AKTIVITETSKATEGORI3F.; 
+    label Aktivitetskategori3='Aktivitetskatgori 3-delt (SAMDATA)'; format Aktivitetskategori3 AKTIVITETSKATEGORI3F.;
+    label episodeFag='Fagområde for Episoden (NPR-melding)'; format episodeFag $fagomrade.; 
     label drg='Diagnoserelatert gruppe (NPK)'; format drg $drg.;
     label dag_kir='Dagkirurgiske DRG (NPR)';
     label niva='Nivå på episode (NPK)'; format niva $NIVA.;
@@ -196,7 +196,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
     label npkOpphold_antallAvdelingsopphol='Antall avdelingsopphold som inngår i det aggregerte "sykehusoppholdet" (NPK)'; 
     label polUtforende_1='Utførende helsepersonell 1 (NPK)'; format polUtforende_1 UTFORENDEHELSEPERSON.; 
     label polUtforende_2='Utførende helsepersonell 2 (NPK)'; format polUtforende_2 UTFORENDEHELSEPERSON.; 
-    *label polUtforende_3='Utførende helsepersonell 3 (NPK)'; /*format polUtforende_3 UTFORENDEHELSEPERSON.;*/ 
+    label polUtforende_3='Utførende helsepersonell 3 (NPK)'; /*format polUtforende_3 UTFORENDEHELSEPERSON.;*/ 
     label relatertKontaktID='Id for relaterte kontakter (NPK)';
     label henvType='Utfall av vurdering av henvisningen (NPR-melding)'; format henvType henvType.;
     label henvFraInstitusjonID='Henvist fra institusjon (NPK)'; format HENVFRAINSTITUSJONID HENVFRAINSTITUSJONID.;

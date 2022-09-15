@@ -28,9 +28,9 @@ data &utdata;
     length alder                    8;
     length fodselsar                4;
     length ErMann                   3;
-    length bohf                     8;
-    length borhf                    8;
-    length boshhn                   8;
+    length bohf                     4;
+    length borhf                    4;
+    length boshhn                   4;
     length komnr                    4;
     length bydel                    6;
     length inndato                  8;
@@ -43,6 +43,7 @@ data &utdata;
     length diag_kpr                 $20;
     length erhdiag_kpr              3;
     length kodeNr                   4;
+    length icpc2_diag               $5;
 %end;
 
 /* takst */

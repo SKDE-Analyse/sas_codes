@@ -54,15 +54,13 @@ Makroen lager 12 (eventuelt 14) nye variabler:
 
 ### Endringslogg
 - 07.09.2021 Opprettet av Janice Shu
+- juni 2022, fikset bug som ga duplikate sho_id (den slo sammen rader som ikke hørte sammen, og ga dermed feil i sho-variablene)
  */
 
-/* 
-Slette SHO-variabler som lages i denne makroen
-*/
+/* Slette SHO-variabler og andre variabler som lages i denne makroen */
 data &dsn;
 set &dsn;
-drop SHO:;
-if aggrshoppID_Lnr=. then aggrshoppID_Lnr=1;
+drop SHO: oppholdsnr utdatotid inndatotid;
 run;
 
  /* First check if required variables are on the dataset, if not exit the macro and print error message */
@@ -95,6 +93,8 @@ data &dsn;
   inndatotid=dhms(innDato,0,0,innTid);
   utdatotid=dhms(utDato,0,0,utTid);
   format inndatotid utdatotid datetime18.;
+  /*hvis ikke aggrshoppid_lnr -> settes til lik 1*/
+  if aggrshoppID_Lnr=. then aggrshoppID_Lnr=1;
 run;
 
 proc sort data=&dsn out=&dsn;
@@ -102,7 +102,6 @@ proc sort data=&dsn out=&dsn;
 run;
 
 /* Lage oppholdsnummer*/
-
 Data &dsn;
   set &dsn;
   by pid inndatotid utdatotid;
@@ -110,55 +109,48 @@ Data &dsn;
 	Oppholdsnr+1;	
 run;
 
+/*sortere på aktivitetskategori, døgn kommer først*/
 proc sort data=&dsn;
   by aktivitetskategori3 pid inndatotid utdatotid;
 run;
 
 /*IDENTIFISERE OVERFØRINGER */
-/* #### improvement for the future.  keep ony necessary variables when making the first tmp dataset */
-
 data Overforinger;
-set &dsn;
-retain flag;
+set &dsn(keep=pid aar uttilstand alder aggrshoppid_lnr utdato inndato 
+    inndatotid utdatotid behsh aktivitetskategori3 hastegrad oppholdsnr);
+retain pasient_flag;
 
 	Lag_PID=Lag(PID);
 	Lag_UtDato=Lag(UtDato);
 	Lag_UtDatotid=Lag(UtDatotid);
 	Lag_BehSh=Lag(BehSh);
-
-  lag_aktkat3=lag(aktivitetskategori3);
-  lag_hastegrad=lag(hastegrad);
+  	lag_aktkat3=lag(aktivitetskategori3);
+  	lag_hastegrad=lag(hastegrad);
 
   /*overføring på døgnopphold*/
   if aktivitetskategori3=1 then do;
 
 	if (PID=LAG_PID) then do;
-
 		/* dager differansen */
 		Dager_mellom=InnDato-LAG_UtDato;
-
 		/* Beregne tidsdifferansen mellom opphold */
 		Sek_mellom=inndatotid-lag_utdatotid; /* Tidsdifferanse (sekunder) mellom inndatotid på dette oppholdet og utdatotid på forrige opphold */
-
 		/* increase flag value if there is a longer break between opphold */
     	if Dager_mellom>1 then do; 
-	 	 flag+1;
+      pasient_flag + 1;
     	end;
- 
     end;
 
-	else do; /* increase flag value for different pid */
-	  flag+1;
+	else do; /* sett til variabel pasient_flag til null når pid skifter */
+    pasient_flag = 1;
 	end;
 
-	if BehSH ne LAG_BehSH and sek_mellom ne . and sek_mellom<=&overforing_tid then Overforing=flag;
-
+	if BehSH ne LAG_BehSH and sek_mellom ne . and sek_mellom<=&overforing_tid then Overforing=pasient_flag;
   end;
 run;
 
 /* turn the file upside down so that we can flag the opphold that preceeds the overføring*/
 /* look at only døgn  */
-
 proc sort data=Overforinger;
   by aktivitetskategori3 pid descending Oppholdsnr;
 run;
@@ -166,24 +158,8 @@ run;
 data Overforinger;
   set Overforinger;
   lag_overforing=lag(overforing);
-  if lag_overforing > 0       then  overforing = lag_overforing; 
+  if lag_overforing > 0 then  overforing = lag_overforing; 
 run; 
-
-/*sort the file differently to flag akuttpol prior to døgn*/
-proc sort DAta=Overforinger;
-by pid descending Oppholdsnr;
-run;
-
-data Overforinger;
-  set Overforinger;
-  lag_dogn_etter_akuttpol=lag(dogn_etter_akuttpol);
-  if lag_dogn_etter_akuttpol > 0 then  dogn_etter_akuttpol = lag_dogn_etter_akuttpol;
-run;
-
-/*sort chronologically*/
-proc sort DAta=Overforinger;
-by pid  Oppholdsnr;
-run;
 
 /*if test, then save intermediate datasets*/
 %if %sysevalf(%superq(test)=,boolean) %then %let test = 0;
@@ -193,140 +169,147 @@ data overforing_updown;
 run;
 %end;
 
-
-/*all lines with same overforing flag get the same SHO_id*/
+/* 1) først la radene med overforing få samme aggrshopp*/
 PROC SQL;
 	CREATE TABLE Overforinger AS 
-	SELECT *,(MAX(aggrshoppID_Lnr)) AS max_aggrshopp
+	SELECT *, MAX(aggrshoppID_Lnr) AS max_aggrshopp 
 	FROM Overforinger
 	GROUP BY pid, Overforing;
 QUIT;
 
-data Overforinger;
-  set Overforinger;
 
-/*  assign SHO_id based on aggrshoppid_lnr and overføring*/
-  if max_aggrshopp>1 then SHO_id=max_aggrshopp;
-  else SHO_id=pid*1000 + mod(overforing, 1000);
+/* 2) alle aggrshoppid_lnr som inngår i overforing gis lik aggrshopp */
+proc sort data=overforinger nodupkey out=overforinger_out(rename=(max_aggrshopp=ny_aggrshopp) keep=aggrshoppid_lnr max_aggrshopp);
+by aggrshoppID_Lnr ; where overforing ne . and aggrshoppid_lnr ne 1; run;
+proc sort data=overforinger;by aggrshoppid_lnr;run;
 
-/*  opphold that is not a part of overføring episode*/
-  if overforing=. then SHO_id=aggrshoppID_Lnr;
-
-  length SHO_id 8;
-  format SHO_id 13.;
+data overforinger2;
+merge overforinger (in=a) overforinger_out(in=b);
+by aggrshoppid_lnr;
 run;
 
-/*all lines with same aggrshoppID_lnr get the same SHO_id*/
+/*3) til sist fikse slik at alle rader med overforing har samme aggrshopp*/
+proc sort data=overforinger2 nodupkey out=overforinger2_out(rename=(ny_aggrshopp=ny_aggrshopp2)keep=pid ny_aggrshopp overforing);
+by pid overforing  ; where overforing ne . and ny_aggrshopp ne .; run;
+proc sort data=overforinger2;by pid overforing ;run;
 
-proc sort data=Overforinger(keep=pid aggrshoppID_lnr overforing SHO_id) nodupkey out=aggrshopp_newaggr;
-  by pid aggrshoppID_lnr;
-  where overforing > 0 and aggrshoppID_lnr ne 1;
+data overforinger3;
+merge overforinger2 (in=a) overforinger2_out(in=b);
+by pid overforing;
 run;
 
-proc sort data=Overforinger;
-  by pid aggrshoppID_lnr;
+/*fikse final_aggrshopp for overføringer med flere isf-opphold(aggrshopper)*/
+data overforinger3;
+set overforinger3;
+if ny_aggrshopp ne . then final_aggrshopp = ny_aggrshopp;
+else if ny_aggrshopp2 ne . then final_aggrshopp = ny_aggrshopp2;
 run;
 
-data Overforinger;
-  merge Overforinger (in=a rename=(SHO_id=old_aggr)) 
-		aggrshopp_newaggr (in=b keep=pid aggrshoppID_lnr SHO_id rename=(SHO_id=new_aggr));
-  by pid aggrshoppID_lnr;
-
-  if b then SHO_id=new_aggr;
-  else      SHO_id=old_aggr;
-
-  if a;
-
-  SHO_id_tmp=SHO_id;
-  if SHO_id = 1 then SHO_id	= pid*1000+oppholdsnr;
-
-  length SHO_id 8;
-  format SHO_id 13.;
+/*lager en temp_id, gi lik id- til alle rader, både isf-opphold og overføringer vi har identifisert*/
+data overforinger4;
+set overforinger3;
+if aggrshoppid_lnr eq 1 and overforing eq . then temp_id = 1; 
+else if aggrshoppid_lnr eq 1 and overforing ne . then do;
+	if final_aggrshopp ne . then temp_id = final_aggrshopp;
+	else if final_aggrshopp eq . then temp_id = 1;
+	end;
+else if aggrshoppid_lnr gt 1 then do;
+	if final_aggrshopp ne . then temp_id = final_aggrshopp;
+	else if final_aggrshopp eq . then temp_id = aggrshoppid_lnr;
+	end;
 run;
 
-/*make all lines with SHO_id in the format of pid*1000 + a number*/
-/*give SHO_id that are same as aggrshoppID_lnr a new id in the same format as others*/
-
+/*aggregere oppholdsnr på overforing og temp_id*/
 PROC SQL;
-	CREATE TABLE overforinger AS 
-	SELECT *,(MIN(oppholdsnr)) AS min_oppholdsnr
-	FROM overforinger
-	GROUP BY pid, SHO_id;
+	CREATE TABLE overforinger4 AS 
+	SELECT *, MIN(oppholdsnr) as min_opphold
+	FROM overforinger4
+	GROUP BY pid, overforing;
+QUIT;
+PROC SQL;
+	CREATE TABLE overforinger4 AS 
+	SELECT *, MIN(oppholdsnr) as min_opphold2
+	FROM overforinger4
+	GROUP BY pid, temp_id;
 QUIT;
 
-data overforinger;
-  set overforinger;
-  SHO_id_tmp2=SHO_id;
-  if SHO_id_tmp ne 1 then SHO_id = pid*1000+min_oppholdsnr;
-  length SHO_id_tmp2 8;
-  format SHO_id_tmp2 13.;
+/* lage SHO_id */
+data Overforinger4;
+  set Overforinger4;
 
+  length SHO_id 8;
+  format SHO_id 13.;
+/*overføringer som inngår i isf-opphold*/
+if overforing ne . and temp_id > 1 			then sho_id = pid*1000 + min_opphold2;
+/*overføringer som ikke inngår i isf-opphold*/
+else if overforing ne . and temp_id eq 1 	then sho_id = pid*1000 + min_opphold;
+/*ikke overføring, men sho etter isf-definisjon (aggrshoppid_lnr har verdi) */
+else if overforing eq . and temp_id ne 1 	then sho_id = pid*1000 + min_opphold2;
+/*ikke overføring, ikke sho etter isf-definisjon (aggrshoppid_lnr lik 1) */
+else if overforing eq . and temp_id eq 1 	then sho_id = pid*1000 + oppholdsnr;
 run;
 
-/*sort file by chronological order*/
-proc sort data=Overforinger;
-  by pid inndatotid utdatotid;
+/*lage antall sho pr pid (sho_nr_pid)  */
+proc sort data=overforinger4;
+by pid sho_id;
 run;
 
-/*place variables in interest together for ease of reading and checking data*/
-data Overforinger;
-  retain pid inndato utdato aktivitetskategori3 behSh aggrshoppID_lnr overforing SHO_id;
-  set Overforinger;
+data overforinger4;
+set overforinger4;
+by pid sho_id;
+if first.pid then sho_nr_pid = 0;
+	if first.sho_id then sho_nr_pid +1;
 run;
 
-/*merge new sho variables back to original dataset*/
-
-proc sql;
-  create table &dsn as
-  select a.*, b.SHO_id, b.min_oppholdsnr as SHO_nr_pid
-  from &dsn a, overforinger b
-  where a.pid=b.pid
-    and a.oppholdsnr=b.oppholdsnr
-  order by a.pid, b.min_oppholdsnr, a.inndatotid, a.utdatotid;
-quit;
-
-
+proc sort data=overforinger4;
+by pid sho_nr_pid inndatotid utdatotid;
+run;
 /*create SHO_id level variables*/
-
-data &dsn;
-set &dsn;
+data overforinger4;
+set overforinger4;
 by pid SHO_nr_pid inndatotid utdatotid;
-if first.SHO_nr_pid=1 then SHO_Intern_nr=0; /*Nummerer oppholdene innenfor hver SHO for hver pid*/
+if first.SHO_nr_pid=1 then SHO_Intern_nr=0; 
 	SHO_Intern_nr+1;
 run;
 
 %if &minaar ne 1 %then %do;
 PROC SQL;
-	CREATE TABLE &dsn AS 
-	SELECT *,MAX(SHO_Intern_nr) AS SHO_Antall_i_SHO, min(inndato) as SHO_inndato, max(utdato) as SHO_utdato, min(inndatotid) as SHO_inndatotid, max(utdatotid) as SHO_utdatotid, max(aar) as SHO_aar
-	FROM &dsn
+	CREATE TABLE overforinger4 AS 
+	SELECT *, MAX(SHO_Intern_nr) AS SHO_Antall_i_SHO, 
+				min(inndato) as SHO_inndato, 
+				max(utdato) as SHO_utdato, 
+				min(inndatotid) as SHO_inndatotid, 
+				max(utdatotid) as SHO_utdatotid, 
+				max(aar) as SHO_aar
+	FROM overforinger4
 	GROUP BY PID,SHO_nr_pid;
 QUIT;
 %end;
 
 %if &minaar = 1 %then %do;
 PROC SQL;
-	CREATE TABLE &dsn AS 
-	SELECT *,MAX(SHO_Intern_nr) AS SHO_Antall_i_SHO, min(inndato) as SHO_inndato, max(utdato) as SHO_utdato, min(inndatotid) as SHO_inndatotid, max(utdatotid) as SHO_utdatotid, min(aar) as SHO_aar
-	FROM &dsn
+	CREATE TABLE overforinger4 AS 
+	SELECT *,	MAX(SHO_Intern_nr) AS SHO_Antall_i_SHO, 
+				min(inndato) as SHO_inndato, 
+				max(utdato) as SHO_utdato, 
+				min(inndatotid) as SHO_inndatotid, 
+				max(utdatotid) as SHO_utdatotid, 
+				min(aar) as SHO_aar
+	FROM overforinger4
 	GROUP BY PID,SHO_nr_pid;
 QUIT;
 %end;
 
-
-data &dsn;
-set &dsn;
+data overforinger4;
+set overforinger4;
 	SHO_liggetid=SHO_utdato-SHO_inndato;
 %if &nulle_liggedogn ne 0 %then %do; /* Nulle ut liggetid hvis oppholdet er mindre enn åtte timer */
 	if SHO_utdatotid - SHO_inndatotid < 28800 then SHO_liggetid = 0;
 %end;
 run;
 
-
-/*
-Hastegrad for første opphold, hvis forste_hastegrad = 1, eller første døgnopphold
-*/
-proc sort data=&dsn;
+/*Hastegrad for første opphold, hvis forste_hastegrad = 1, eller første døgnopphold*/
+proc sort data=overforinger4;
 %if &forste_hastegrad ne 0 %then %do;
 by SHO_id SHO_Intern_nr inndatotid utdatotid;
 %end;
@@ -335,8 +318,8 @@ by SHO_id aktivitetskategori3 SHO_Intern_nr inndatotid utdatotid;
 %end;
 run;
 
-data &dsn;
-set &dsn;
+data overforinger4;
+set overforinger4;
 by SHO_id;
 /* To avoid setting SHO_hastegrad to missing, since "." is less than 0 */
 tmp_hastegrad = hastegrad;
@@ -347,24 +330,30 @@ if uttilstand > 1 then aktkat = 1;
 run;
 
 PROC SQL;
-	CREATE TABLE &dsn AS 
+	CREATE TABLE overforinger4 AS 
 	SELECT *, min(aktkat) as SHO_aktivitetskategori3, 
-   min(tmp_hastegrad) as SHO_hastegrad, 
-   max(forste_hastegrad) as SHO_forste_hastegrad, max(uttilstand) as SHO_uttilstand, max(alder) as SHO_alder
-	FROM &dsn
+   			min(tmp_hastegrad) as SHO_hastegrad, 
+   			max(forste_hastegrad) as SHO_forste_hastegrad, 
+			max(uttilstand) as SHO_uttilstand, 
+			max(alder) as SHO_alder
+	FROM overforinger4
 	GROUP BY SHO_id;
 QUIT;
 
-proc sort data=&dsn;
+proc sort data=overforinger4;
 by pid SHO_nr_pid SHO_Intern_nr inndatotid utdatotid;
 run;
 
-data &dsn;
-set &dsn;
+data overforinger4;
+set overforinger4;
 if SHO_hastegrad = 99 then SHO_hastegrad = .;
 /* Nulle liggedøgn hvis poliklinisk kontakt */
 if SHO_aktivitetskategori3 = 3 then SHO_liggetid = 0;
-drop lag_pid SHO_diff inndatotid utdatotid forste_hastegrad aktkat tmp_poli;
+drop lag_pid pasient_flag temp_id lag_utdato lag_behsh 
+		min_opphold min_opphold2 inndatotid utdatotid forste_hastegrad aktkat lag_aktkat3
+		dager_mellom sek_mellom overforing lag_overforing max_aggrshopp lag_hastegrad
+		lag_utdatotid ny_aggrshopp ny_aggrshopp2 final_aggrshopp inndato utdato alder hastegrad
+		aktivitetskategori3 behsh uttilstand aggrshoppID_Lnr;
 format SHO_utdato SHO_inndato date10.;
 format SHO_inndatotid SHO_utdatotid datetime18.;
 format SHO_aktivitetskategori3 aktivitetskategori3f.;
@@ -375,12 +364,21 @@ drop tmp_hastegrad;
 %end;
 run;
 
+/*merge new sho variables back to original dataset*/
+proc sql;
+  create table &dsn as
+  select a.*, b.*
+  from &dsn a, overforinger4 b
+  where a.pid=b.pid
+    and a.oppholdsnr=b.oppholdsnr
+  order by a.pid, b.sho_nr_pid, b.sho_intern_nr;
+quit;
+
 /*if not test, then delete intermediate datasets*/
 %if %sysevalf(%superq(test)=,boolean) %then %let test = 0;
 %if &test=0 %then %do;
   proc datasets nolist;
-  	delete AGGRSHOPP_NEWAGGR OVERFORINGER;
+  	delete OVERFORINGER:;
   run;
 %end;
-
 %mend;

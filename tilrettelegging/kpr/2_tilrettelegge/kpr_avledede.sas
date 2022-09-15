@@ -3,19 +3,6 @@
 data &utdata;
 set &inndata;
 
-%if &sektor=diagnose %then %do; /*kjøres kun på diagnosedata*/
-/* 
-- Lager numerisk 'kodeverk_kpr' fra string 'diagnosetabell'. Drop variabel 'diagnosetabell'
-*/
-if diagnosetabell eq "ICPC-2"                          then kodeverk_kpr = 1;
-if diagnosetabell eq "ICPC-2B"                         then kodeverk_kpr = 2;
-if diagnosetabell eq "ICD-10"                          then kodeverk_kpr = 3;
-if diagnosetabell eq "ICD-DA-3"                        then kodeverk_kpr = 4;
-if diagnosetabell eq "Akser i BUP-klassifikasjon"      then kodeverk_kpr = 5;
-if diagnosetabell eq " "                               then kodeverk_kpr = .;
-drop diagnosetabell;
-%end;
-
 %if &sektor=enkeltregning %then %do; /*Kjøres kun på regningsdata*/
 /* 
 - Rename 'dato' til 'inndato' og 'klokkeslett' til 'inntid'. 
