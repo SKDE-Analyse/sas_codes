@@ -1,0 +1,7 @@
+Dette er en definisjonskatalog for utvalg
+
+Utvalgsdefinisjoner/makroer skal helst beskrives med når de er oppdatert/brukt sist, endringer og begrunnelser for endringer.
+
+Makroens navn skal være slik at det beskriver utvalget (tilstand eller liknende).
+
+Om mulig - lag makroer som kun er kode uten datasteg (ikke sende inn datasett). Da kan vi kjøre flere makroer inni det samme datasteget.
