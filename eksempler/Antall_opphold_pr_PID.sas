@@ -1,13 +1,13 @@
 /*-----------------------------------------
-Legge til Antall_opphold på PID
+Legge til Antall_opphold pÃ¥ PID
 Opprettet av FO august 2012
 Redigert FO 17/10-2012
 
-1. Sorter data på PID og descending på Oppholdsvariabel og på Inndato og Utdato
+1. Sorter data pÃ¥ PID og descending pÃ¥ Oppholdsvariabel og pÃ¥ Inndato og Utdato
 2. Legg til oppholdsnummer (og slett oppholdsnummer for opphold med missing oppholdsvariabel)
-3. Sorter på PID og Oppholdsnr (desending)
+3. Sorter pÃ¥ PID og Oppholdsnr (desending)
 4. Lag Antall_opphold variabel
-5. Sorter tilbake på PID, ascending oppholdsnr
+5. Sorter tilbake pÃ¥ PID, ascending oppholdsnr
 ------------------------------------------*/
 
 proc sort data=utvalg1;
@@ -24,7 +24,7 @@ run;
 
 
 proc sort data=utvalg1;
-	by PID descending Oppholdsnr; /* 3.Sorter på PID og Oppholdsnr (desending) */
+	by PID descending Oppholdsnr; /* 3.Sorter pÃ¥ PID og Oppholdsnr (desending) */
 run;
 
 data utvalg1;
@@ -35,5 +35,5 @@ data utvalg1;
 run;
 
 proc sort data=utvalg1;
-	by PID ascending oppholdsnr; /* 5. Sorter tilbake på PID, ascending oppholdsnr */
+	by PID ascending oppholdsnr; /* 5. Sorter tilbake pÃ¥ PID, ascending oppholdsnr */
 run;

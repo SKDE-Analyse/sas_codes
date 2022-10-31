@@ -1,24 +1,24 @@
 %macro aggreger_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
-Makro for å teste aggreger-makro.
+Makro for Ã¥ teste aggreger-makro.
 
-Kjører aggreger-makroen på et test-datasett (`test.agg_start`).
+KjÃ¸rer aggreger-makroen pÃ¥ et test-datasett (`test.agg_start`).
 Sammenligner dette datasettet med en referanse (`tests/data/agg_&navn.csv`).
 
 ### Parametre
 
-- `branch = master`: Bestemmer hvilken aggreger-makro som kjøres (hvilken mappe den ligger i)
+- `branch = master`: Bestemmer hvilken aggreger-makro som kjÃ¸res (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset_:`.
-- `lagNyRef = 0` Hvis ulik null, lage referansedatasettene `tests/data/agg_&navn.csv` på nytt.
-- `lagNyStart = 0`: Hvis ulik null, lage startdatasettet `test.agg_start` på nytt.
+- `lagNyRef = 0` Hvis ulik null, lage referansedatasettene `tests/data/agg_&navn.csv` pÃ¥ nytt.
+- `lagNyStart = 0`: Hvis ulik null, lage startdatasettet `test.agg_start` pÃ¥ nytt.
 
 */
 
 %include "&filbane/makroer/aggreger.sas";
 
 /*
-Lage nytt startsett, basert på test.pseudosens_avd_magnus og test.pseudosens_avtspes_magnus
+Lage nytt startsett, basert pÃ¥ test.pseudosens_avd_magnus og test.pseudosens_avtspes_magnus
 etter eoc.
 */ 
 %if &lagNyStart ne 0 %then %do;
@@ -38,7 +38,7 @@ innlegg = .;
 poli = .;
 
 If eoc_aktivitetskategori3 = 1 and eoc_Liggetid ge 1 then innlegg = 1;
-else if eoc_uttilstand in (2, 3) then innlegg = 1; /* ut som død eller selvmord */
+else if eoc_uttilstand in (2, 3) then innlegg = 1; /* ut som dÃ¸d eller selvmord */
 else if (eoc_aktivitetskategori3 = 1 and eoc_Liggetid=0) then poli = 1;
 else if eoc_aktivitetskategori3 in (2,3) then poli = 1;
 

@@ -1,23 +1,23 @@
 icpc2_kode;icpc2_tekst;icpc2_Kap;icpc2_type
-30;Medisinsk undersøkelse fullstendig;;3
-31;Medisinsk undersøkelse målrettet;;3
-32;Sensitivitetsprøve;;3
-33;Mikrobiologisk/immunologisk prøve;;3
-34;Blodprøve IKA;;3
-35;Urinprøve IKA;;3
-36;Avføringsprøve IKA;;3
-37;Histologisk/cytologisk prøve;;3
-38;Laboratorieprøve IKA;;3
-39;Fysisk funksjonsprøve;;3
+30;Medisinsk undersÃ¸kelse fullstendig;;3
+31;Medisinsk undersÃ¸kelse mÃ¥lrettet;;3
+32;SensitivitetsprÃ¸ve;;3
+33;Mikrobiologisk/immunologisk prÃ¸ve;;3
+34;BlodprÃ¸ve IKA;;3
+35;UrinprÃ¸ve IKA;;3
+36;AvfÃ¸ringsprÃ¸ve IKA;;3
+37;Histologisk/cytologisk prÃ¸ve;;3
+38;LaboratorieprÃ¸ve IKA;;3
+39;Fysisk funksjonsprÃ¸ve;;3
 40;Endoskopi;;3
 41;Billeddiagnostikk;;3
-42;Biosignalundersøkelse IKA;;3
+42;BiosignalundersÃ¸kelse IKA;;3
 43;Diagnostisk prosedyre IKA;;3
 44;Forebyggende vaksinering/medikasjon;;3
-45;Helseopplysning/rådgivning;;3
-46;Kontakt med primærhelsetjenesten;;3
+45;Helseopplysning/rÃ¥dgivning;;3
+46;Kontakt med primÃ¦rhelsetjenesten;;3
 47;Kontakt med spesialist;;3
-48;Vurdering av kontaktårsak/behov;;3
+48;Vurdering av kontaktÃ¥rsak/behov;;3
 49;Forebyggende prosedyre IKA;;3
 50;Legemiddelforskrivning/-administrasj;;3
 51;Incisjon/tapping/aspirasjon;;3
@@ -27,36 +27,36 @@ icpc2_kode;icpc2_tekst;icpc2_Kap;icpc2_type
 55;Lokal injeksjon/infiltrasjon;;3
 56;Bandasje/kompresjon/tamponade;;3
 57;Fysikalsk behandling/rehabilitering;;3
-58;Terapeutisk rådgivning/samtale;;3
-59;Terapeutisk tiltak/småkirurgi IKA;;3
-60;Resultat av prøve/prosedyre;;3
-61;Resultat undersøkelse/epikrise;;3
+58;Terapeutisk rÃ¥dgivning/samtale;;3
+59;Terapeutisk tiltak/smÃ¥kirurgi IKA;;3
+60;Resultat av prÃ¸ve/prosedyre;;3
+61;Resultat undersÃ¸kelse/epikrise;;3
 62;Administrativ prosedyre;;3
-63;Observasjon/oppfølging IKA;;3
-64;Kontakt forårsaket av helsepersonell;;3
-65;Kontakt forårsaket annen enn pasient;;3
+63;Observasjon/oppfÃ¸lging IKA;;3
+64;Kontakt forÃ¥rsaket av helsepersonell;;3
+65;Kontakt forÃ¥rsaket annen enn pasient;;3
 66;Henvisning annet helsepersonell IKA;;3
 67;Henvisning spesialist/sykehus;;3
 68;Henvisning IKA;;3
-69;Kontaktårsak IKA;;3
+69;KontaktÃ¥rsak IKA;;3
 A01;Smerte generell/flere steder;A;1
 A02;Frysninger;A;1
 A03;Feber;A;1
 A04;Slapphet/tretthet;A;1
-A05;Sykdomsfølelse;A;1
+A05;SykdomsfÃ¸lelse;A;1
 A06;Besvimelse/synkope;A;1
-A07;Bevisstløshet/koma;A;1
+A07;BevisstlÃ¸shet/koma;A;1
 A08;Hevelse/oppfylning IKA;A;1
 A09;Svetteproblemer;A;1
-A10;Blødning IKA;A;1
+A10;BlÃ¸dning IKA;A;1
 A11;Brystsmerte IKA;A;1
 A13;Engstelig for behandling;A;1
 A16;Irritabelt/urolig spedbarn;A;1
 A18;Bekymret/opptatt av utseende IKA;A;1
-A20;Dødshjelp diskusjon/spørsmål om;A;1
-A21;Økt risiko for ondartet svulst;A;1
+A20;DÃ¸dshjelp diskusjon/spÃ¸rsmÃ¥l om;A;1
+A21;Ã˜kt risiko for ondartet svulst;A;1
 A23;Risiko for sykdom IKA;A;1
-A25;Engstelig for døden;A;1
+A25;Engstelig for dÃ¸den;A;1
 A26;Engstelig for kreft IKA;A;1
 A27;Engstelig for sykdom IKA;A;1
 A28;Redusert funksjonsevne IKA;A;1
@@ -65,7 +65,7 @@ A70;Tuberkulose;A;2
 A71;Meslinger;A;2
 A72;Vannkopper;A;2
 A73;Malaria;A;2
-A74;Røde hunder;A;2
+A74;RÃ¸de hunder;A;2
 A75;Mononukleose;A;2
 A76;Virussykdom med utslett IKA;A;2
 A77;Virussykdom IKA;A;2
@@ -73,25 +73,25 @@ A78;Infeksjonssykdom IKA;A;2
 A79;Ondartet svulst IKA;A;2
 A80;Skade/traume IKA;A;2
 A81;Multiple skader/traumer;A;2
-A82;Følgetilstand skade/traume;A;2
+A82;FÃ¸lgetilstand skade/traume;A;2
 A84;Legemiddelforgiftning;A;2
 A85;Bivirkning legemiddel;A;2
 A86;Toksisk virkning stoff IKA;A;2
 A87;Komplikasjon etter behandling;A;2
 A88;Skadevirkning av fysisk faktor;A;2
 A89;Komplikasjoner/problemer med protese;A;2
-A90;Medfødt feil IKA/multiple feil;A;2
-A91;Unormalt funn ved undersøkelse IKA;A;2
+A90;MedfÃ¸dt feil IKA/multiple feil;A;2
+A91;Unormalt funn ved undersÃ¸kelse IKA;A;2
 A92;Allergi/allergisk reaksjon IKA;A;2
-A93;Prematurt/immaturt levendefødt barn;A;2
+A93;Prematurt/immaturt levendefÃ¸dt barn;A;2
 A94;Perinatal sykelighet IKA;A;2
-A95;Perinatal død;A;2
-A96;Død/dødsfall IKA;A;2
-A97;Administrativ kontakt/undersøkelse;A;2
+A95;Perinatal dÃ¸d;A;2
+A96;DÃ¸d/dÃ¸dsfall IKA;A;2
+A97;Administrativ kontakt/undersÃ¸kelse;A;2
 A98;Individforebyggende tiltak;A;2
 A981;Cytologi livmorhals screening;A;2
 A99;Helseproblem/sykdom IKA;A;2
-B02;Lymfeknuter forstørrede/smertefulle;B;1
+B02;Lymfeknuter forstÃ¸rrede/smertefulle;B;1
 B04;Blod/blodsystemet symptomer/plager;B;1
 B25;Engstelig for HIV/AIDS;B;1
 B26;Engstelig for kreft blod/lymfesystem;B;1
@@ -107,60 +107,60 @@ B75;Godartet/uspes svulst blod/lymfe;B;2
 B76;Miltruptur traumatisk;B;2
 B77;Skade blod/lymfesystem IKA;B;2
 B78;Arvelig hemolytisk anemi;B;2
-B79;Medfødt feil blod/lymfesystem IKA;B;2
+B79;MedfÃ¸dt feil blod/lymfesystem IKA;B;2
 B80;Jernmangelanemi;B;2
 B81;Anemi B12/folsyremangel;B;2
 B82;Anemi IKA;B;2
 B83;Purpura/koagulasjonsdefekt;B;2
 B84;Unormale hvite blodceller;B;2
-B87;Forstørret milt;B;2
+B87;ForstÃ¸rret milt;B;2
 B90;HIV-sykdom/AIDS;B;2
 B99;Blod/lymfe/milt sykdom IKA;B;2
 D01;Abdominalsmerte/krampe generell;D;1
 D02;Abdominalsmerte epigastriet;D;1
 D03;Halsbrann;D;1
 D04;Endetarmssmerte;D;1
-D05;Perianal kløe;D;1
+D05;Perianal klÃ¸e;D;1
 D06;Abdominalsmerte lokalisert IKA;D;1
-D07;Dyspepsi/fordøyelsesbesvær;D;1
-D08;Flatulens/oppblåsthet/raping;D;1
+D07;Dyspepsi/fordÃ¸yelsesbesvÃ¦r;D;1
+D08;Flatulens/oppblÃ¥sthet/raping;D;1
 D09;Kvalme;D;1
 D10;Oppkast/brekninger;D;1
-D11;Diaré;D;1
+D11;DiarÃ©;D;1
 D12;Forstoppelse;D;1
 D13;Gulsott;D;1
 D14;Oppkast med blod/hematemese;D;1
 D15;Melena;D;1
-D16;Rektalblødning;D;1
-D17;Inkontinens avføring;D;1
-D18;Endring i avføring/avføringsvane;D;1
-D19;Tenner/tannkjøtt symptomer/plager;D;1
+D16;RektalblÃ¸dning;D;1
+D17;Inkontinens avfÃ¸ring;D;1
+D18;Endring i avfÃ¸ring/avfÃ¸ringsvane;D;1
+D19;Tenner/tannkjÃ¸tt symptomer/plager;D;1
 D20;Munn/tunge/lepper symptomer/plager;D;1
-D21;Svelgebesvær;D;1
-D23;Forstørret lever;D;1
+D21;SvelgebesvÃ¦r;D;1
+D23;ForstÃ¸rret lever;D;1
 D24;Abdominal oppfylling/kul IKA;D;1
 D25;Utspilt abdomen;D;1
-D26;Engstelig for kreft fordøyelsesyst;D;1
-D27;Engstelig for fordøyelsesykdom IKA;D;1
-D28;Redusert funksjonsevne fordøy probl;D;1
-D29;Fordøyelsesyst symptomer/plager IKA;D;1
+D26;Engstelig for kreft fordÃ¸yelsesyst;D;1
+D27;Engstelig for fordÃ¸yelsesykdom IKA;D;1
+D28;Redusert funksjonsevne fordÃ¸y probl;D;1
+D29;FordÃ¸yelsesyst symptomer/plager IKA;D;1
 D70;Tarminfeksjon;D;2
 D71;Kusma;D;2
 D72;Virushepatitt;D;2
-D73;Gastroenteritt antatt infeksiøs;D;2
+D73;Gastroenteritt antatt infeksiÃ¸s;D;2
 D74;Ondartet svulst magesekk;D;2
 D75;Ondartet svulst tykktarm/endetarm;D;2
 D76;Ondartet svulst bukspyttkjertel;D;2
-D77;Ondartet svulst fordøyelsesyst IKA;D;2
-D78;Godartet/uspes svulst fordøyelsessys;D;2
-D79;Fremmedlegeme fordøyelsessystemet;D;2
-D80;Skade fordøyelsesystemet IKA;D;2
-D81;Medfødt feil fordøyelsesystem;D;2
-D82;Tenner/tannkjøtt sykdom;D;2
+D77;Ondartet svulst fordÃ¸yelsesyst IKA;D;2
+D78;Godartet/uspes svulst fordÃ¸yelsessys;D;2
+D79;Fremmedlegeme fordÃ¸yelsessystemet;D;2
+D80;Skade fordÃ¸yelsesystemet IKA;D;2
+D81;MedfÃ¸dt feil fordÃ¸yelsesystem;D;2
+D82;Tenner/tannkjÃ¸tt sykdom;D;2
 D83;Munn/tunge/lepper sykdom;D;2
-D84;Spiserørssykdom;D;2
-D85;Sår i tolvfingertarm;D;2
-D86;Magesår IKA;D;2
+D84;SpiserÃ¸rssykdom;D;2
+D85;SÃ¥r i tolvfingertarm;D;2
+D86;MagesÃ¥r IKA;D;2
 D87;Funksjonelle plager magesekk;D;2
 D88;Appendisitt;D;2
 D89;Lyskebrokk;D;2
@@ -168,101 +168,101 @@ D90;Mellomgulvsbrokk;D;2
 D91;Abdominalt brokk IKA;D;2
 D92;Divertikkelsykdom i tarm;D;2
 D93;Irritabel tarm-syndrom;D;2
-D94;Kronisk enteritt/ulcerøs kolitt;D;2
+D94;Kronisk enteritt/ulcerÃ¸s kolitt;D;2
 D95;Analfissur/perianal abscess;D;2
 D96;Orme-/parasittsykdom;D;2
 D97;Leversykdom IKA;D;2
 D98;Galleveisbetennelse/gallesten;D;2
-D99;Sykdom i fordøyelsessystemet IKA;D;2
-D991;Utbruddssykdom definert av FHI, fordøyelsessystemet;D;2
-D992;Utbruddssykdom definert av FHI, fordøyelsessystemet;D;2
-D993;Utbruddssykdom definert av FHI, fordøyelsessystemet;D;2
-D994;Utbruddssykdom definert av FHI, fordøyelsessystemet;D;2
-D995;Utbruddssykdom definert av FHI, fordøyelsessystemet;D;2
-D996;Utbruddssykdom definert av FHI, fordøyelsessystemet;D;2
-D997;Utbruddssykdom definert av FHI, fordøyelsessystemet;D;2
-D998;Utbruddssykdom definert av FHI, fordøyelsessystemet;D;2
-D999;Utbruddssykdom definert av FHI, fordøyelsessystemet;D;2
-F01;Øyesmerte;F;1
-F02;Rødt øye;F;1
-F03;Tåreflod/sekresjon øye;F;1
-F04;Synlige flekker/tråder i synsfelt;F;1
+D99;Sykdom i fordÃ¸yelsessystemet IKA;D;2
+D991;Utbruddssykdom definert av FHI, fordÃ¸yelsessystemet;D;2
+D992;Utbruddssykdom definert av FHI, fordÃ¸yelsessystemet;D;2
+D993;Utbruddssykdom definert av FHI, fordÃ¸yelsessystemet;D;2
+D994;Utbruddssykdom definert av FHI, fordÃ¸yelsessystemet;D;2
+D995;Utbruddssykdom definert av FHI, fordÃ¸yelsessystemet;D;2
+D996;Utbruddssykdom definert av FHI, fordÃ¸yelsessystemet;D;2
+D997;Utbruddssykdom definert av FHI, fordÃ¸yelsessystemet;D;2
+D998;Utbruddssykdom definert av FHI, fordÃ¸yelsessystemet;D;2
+D999;Utbruddssykdom definert av FHI, fordÃ¸yelsessystemet;D;2
+F01;Ã˜yesmerte;F;1
+F02;RÃ¸dt Ã¸ye;F;1
+F03;TÃ¥reflod/sekresjon Ã¸ye;F;1
+F04;Synlige flekker/trÃ¥der i synsfelt;F;1
 F05;Synsforstyrrelse IKA;F;1
-F13;Øye unormal følelse;F;1
-F14;Øye unormal bevegelse;F;1
-F15;Øye unormalt utseende;F;1
-F16;Øyelokk symptomer/plager;F;1
+F13;Ã˜ye unormal fÃ¸lelse;F;1
+F14;Ã˜ye unormal bevegelse;F;1
+F15;Ã˜ye unormalt utseende;F;1
+F16;Ã˜yelokk symptomer/plager;F;1
 F17;Briller symptomer/plager;F;1
 F18;Kontaktlinser symptomer/plager;F;1
-F27;Engstelig for øyesykdom;F;1
-F28;Redusert funksjonsevne pga øyeprobl;F;1
-F29;Øye symptomer/plager IKA;F;1
-F70;Infeksiøs konjunktivitt;F;2
+F27;Engstelig for Ã¸yesykdom;F;1
+F28;Redusert funksjonsevne pga Ã¸yeprobl;F;1
+F29;Ã˜ye symptomer/plager IKA;F;1
+F70;InfeksiÃ¸s konjunktivitt;F;2
 F71;Allergisk konjunktivitt;F;2
-F72;Øyelokkbetennelse;F;2
-F73;Øye infeksjon/betennelse IKA;F;2
-F74;Svulst i øye/øyehule;F;2
-F75;Kontusjon/blødning i øye;F;2
-F76;Fremmedlegeme øye;F;2
-F79;Skade øye IKA;F;2
-F80;Tåreveisstenose/atresi spedbarn;F;2
-F81;Medfødt feil øye IKA;F;2
-F82;Netthinneløsning/rift;F;2
+F72;Ã˜yelokkbetennelse;F;2
+F73;Ã˜ye infeksjon/betennelse IKA;F;2
+F74;Svulst i Ã¸ye/Ã¸yehule;F;2
+F75;Kontusjon/blÃ¸dning i Ã¸ye;F;2
+F76;Fremmedlegeme Ã¸ye;F;2
+F79;Skade Ã¸ye IKA;F;2
+F80;TÃ¥reveisstenose/atresi spedbarn;F;2
+F81;MedfÃ¸dt feil Ã¸ye IKA;F;2
+F82;NetthinnelÃ¸sning/rift;F;2
 F83;Retinopati;F;2
 F84;Makuladegenerasjon;F;2
-F85;Hornhinnesår;F;2
+F85;HornhinnesÃ¥r;F;2
 F86;Trakom;F;2
 F91;Brytningsforstyrrelse;F;2
-F92;Grå stær/katarakt;F;2
+F92;GrÃ¥ stÃ¦r/katarakt;F;2
 F93;Glaukom;F;2
 F94;Blindhet;F;2
 F95;Skjeling/strabisme;F;2
-F99;Øyesykdom IKA;F;2
-H01;Øresmerte/øreverk;H;1
-H02;Hørsel symptomer/plager;H;1
-H03;Øresus;H;1
-H04;Øreflod/sekresjon;H;1
-H05;Blødning øre;H;1
-H13;Øreplugg/øretetthet;H;1
-H15;Bekymret/opptatt av ørenes utseende;H;1
-H27;Engstelig for øresykdom;H;1
-H28;Redusert funksjonsevne pga øreprobl;H;1
-H29;Øre symptomer/plager IKA;H;1
-H70;Ytre øre betennelse;H;2
-H71;Mellomørebetennelse akutt;H;2
-H72;Mellomørebetennelse serøs;H;2
+F99;Ã˜yesykdom IKA;F;2
+H01;Ã˜resmerte/Ã¸reverk;H;1
+H02;HÃ¸rsel symptomer/plager;H;1
+H03;Ã˜resus;H;1
+H04;Ã˜reflod/sekresjon;H;1
+H05;BlÃ¸dning Ã¸re;H;1
+H13;Ã˜replugg/Ã¸retetthet;H;1
+H15;Bekymret/opptatt av Ã¸renes utseende;H;1
+H27;Engstelig for Ã¸resykdom;H;1
+H28;Redusert funksjonsevne pga Ã¸reprobl;H;1
+H29;Ã˜re symptomer/plager IKA;H;1
+H70;Ytre Ã¸re betennelse;H;2
+H71;MellomÃ¸rebetennelse akutt;H;2
+H72;MellomÃ¸rebetennelse serÃ¸s;H;2
 H73;Tuba auditiva betennelse;H;2
-H74;Mellomørebetennelse kronisk;H;2
-H75;Svulst øre;H;2
-H76;Fremmedlegeme øre;H;2
+H74;MellomÃ¸rebetennelse kronisk;H;2
+H75;Svulst Ã¸re;H;2
+H76;Fremmedlegeme Ã¸re;H;2
 H77;Perforert trommehinne IKA;H;2
-H78;Overflateskade ytre øre;H;2
-H79;Skade øre IKA;H;2
-H80;Medfødt feil øre;H;2
-H81;Ørevoks;H;2
+H78;Overflateskade ytre Ã¸re;H;2
+H79;Skade Ã¸re IKA;H;2
+H80;MedfÃ¸dt feil Ã¸re;H;2
+H81;Ã˜revoks;H;2
 H82;Svimmelhetssyndrom;H;2
 H83;Otosklerose;H;2
-H84;Hørselstap aldersbetinget;H;2
-H85;Hørselstap støyskade;H;2
-H86;Døvhet/hørselstap IKA;H;2
-H99;Øresykdom IKA;H;2
+H84;HÃ¸rselstap aldersbetinget;H;2
+H85;HÃ¸rselstap stÃ¸yskade;H;2
+H86;DÃ¸vhet/hÃ¸rselstap IKA;H;2
+H99;Ã˜resykdom IKA;H;2
 K01;Smerte relatert til hjertet;K;1
-K02;Trykk/sammensnøring hjertet;K;1
-K03;Smerte relatert til kretsløpet IKA;K;1
+K02;Trykk/sammensnÃ¸ring hjertet;K;1
+K03;Smerte relatert til kretslÃ¸pet IKA;K;1
 K04;Hjertebank;K;1
 K05;Uregelmessige hjerteslag IKA;K;1
 K06;Utvidede vener;K;1
-K07;Hovne ankler/ødem;K;1
-K22;Økt risiko for hjerte-karsykdom;K;1
+K07;Hovne ankler/Ã¸dem;K;1
+K22;Ã˜kt risiko for hjerte-karsykdom;K;1
 K24;Engstelig for hjertesykdom;K;1
-K25;Engstelig for høyt blodtrykk;K;1
+K25;Engstelig for hÃ¸yt blodtrykk;K;1
 K27;Engstelig for hjerte-karsykdom IKA;K;1
 K28;Redus funksjonsevne hjerte-karprobl;K;1
 K29;Hjerte-karsyst symptomer/plager IKA;K;1
 K70;Infeksjon hjerte-karsystemet;K;2
 K71;Reumatisk feber/hjertesykdom;K;2
 K72;Svulst i hjerte;K;2
-K73;Medfødt feil hjerte-karsystemet;K;2
+K73;MedfÃ¸dt feil hjerte-karsystemet;K;2
 K74;Iskemisk hjertesykdom med angina;K;2
 K75;Akutt hjerteinfarkt;K;2
 K76;Iskemisk hjertesykdom kronisk IKA;K;2
@@ -274,17 +274,17 @@ K81;Bilyd hjerte/arterier IKA;K;2
 K82;Pulmonal hjertesykdom;K;2
 K83;Hjerteklaffesykdom IKA;K;2
 K84;Hjertesykdom IKA;K;2
-K85;Forhøyet blodtrykk IKA;K;2
+K85;ForhÃ¸yet blodtrykk IKA;K;2
 K86;Hypertensjon ukomplisert;K;2
 K87;Hypertensjon med komplikasjoner;K;2
 K88;Postural hypotensjon;K;2
-K89;Forbigående cerebral iskemi;K;2
+K89;ForbigÃ¥ende cerebral iskemi;K;2
 K90;Hjerneslag;K;2
-K91;Cerebrovaskulær sykdom;K;2
+K91;CerebrovaskulÃ¦r sykdom;K;2
 K92;Aterosklerose/perifer karsykdom;K;2
 K93;Lungeemboli;K;2
-K94;Årebetennelse;K;2
-K95;Åreknuter underekstremitet;K;2
+K94;Ã…rebetennelse;K;2
+K95;Ã…reknuter underekstremitet;K;2
 K96;Hemoroider;K;2
 K99;Hjerte-karsykdom IKA;K;2
 L01;Nakke symptomer/plager;L;1
@@ -296,13 +296,13 @@ L07;Kjeve symptomer/plager;L;1
 L08;Skulder symptomer/plager;L;1
 L09;Arm symptomer/plager;L;1
 L10;Albue symptomer/plager;L;1
-L11;Håndledd symptomer/plager;L;1
-L12;Hånd/finger symptomer/plager;L;1
+L11;HÃ¥ndledd symptomer/plager;L;1
+L12;HÃ¥nd/finger symptomer/plager;L;1
 L13;Hofte symptomer/plager;L;1
-L14;Legg/lår symptomer/plager;L;1
+L14;Legg/lÃ¥r symptomer/plager;L;1
 L15;Kne symptomer/plager;L;1
 L16;Ankel symptomer/plager;L;1
-L17;Fot/tå symptomer/plager;L;1
+L17;Fot/tÃ¥ symptomer/plager;L;1
 L18;Utbredte muskelsmerter/fibromyalgi;L;1
 L19;Muskel symptomer/plager IKA;L;1
 L20;Ledd symptomer/plager IKA;L;1
@@ -314,19 +314,19 @@ L70;Infeksjon muskel-skjelettsystemet;L;2
 L71;Ondartet svulst muskel-skj-syst;L;2
 L72;Brudd underarm;L;2
 L73;Brudd legg/ankel;L;2
-L74;Brudd hånd/fot;L;2
-L75;Brudd lårben/lårhals;L;2
+L74;Brudd hÃ¥nd/fot;L;2
+L75;Brudd lÃ¥rben/lÃ¥rhals;L;2
 L76;Brudd IKA;L;2
 L77;Forstuving/forstrekking ankel;L;2
 L78;Forstuving/forstrekking kne;L;2
 L79;Forstuving/forstrekking ledd IKA;L;2
 L80;Dislokasjon/subluksasjon;L;2
 L81;Skade muskel-skj-syst IKA;L;2
-L82;Medfødt feil muskel-skj-syst;L;2
+L82;MedfÃ¸dt feil muskel-skj-syst;L;2
 L83;Nakkesyndrom;L;2
-L84;Ryggsyndrom uten smerteutstråling;L;2
-L85;Ervervet deformitet ryggsøyle;L;2
-L86;Ryggsyndrom med smerteutstråling;L;2
+L84;Ryggsyndrom uten smerteutstrÃ¥ling;L;2
+L85;Ervervet deformitet ryggsÃ¸yle;L;2
+L86;Ryggsyndrom med smerteutstrÃ¥ling;L;2
 L87;Bursitt/tendinitt/synovitt IKA;L;2
 L88;Reumatoid artritt/reumatisk sykdom;L;2
 L89;Hofteleddsartrose;L;2
@@ -343,8 +343,8 @@ L99;Muskel-skjelettsykdom IKA;L;2
 N01;Hodepine;N;1
 N03;Ansiktssmerte;N;1
 N04;Restless legs;N;1
-N05;Prikking/parestesi i hender/føtter;N;1
-N06;Forstyrrelser i hudens følsomhet IKA;N;1
+N05;Prikking/parestesi i hender/fÃ¸tter;N;1
+N06;Forstyrrelser i hudens fÃ¸lsomhet IKA;N;1
 N07;Krampeanfall/kramper;N;1
 N08;Unormale/ufrivillige bevegelser;N;1
 N16;Forstyrrelse i lukt/smak;N;1
@@ -365,7 +365,7 @@ N76;Uspesifisert svulst nervesystemet;N;2
 N79;Hjernerystelse;N;2
 N80;Hodeskade IKA;N;2
 N81;Skade nervesystemet IKA;N;2
-N85;Medfødt feil nervesystemet;N;2
+N85;MedfÃ¸dt feil nervesystemet;N;2
 N86;Multippel sklerose;N;2
 N87;Parkinsonisme;N;2
 N88;Epilepsi;N;2
@@ -377,18 +377,18 @@ N93;Carpal tunnel syndrom;N;2
 N94;Perifer nevropati;N;2
 N95;Tensjonshodepine;N;2
 N99;Sykdom i nervesystemet IKA;N;2
-P01;Følelse angst/nervøs/anspent;P;1
+P01;FÃ¸lelse angst/nervÃ¸s/anspent;P;1
 P02;Psykisk ubalanse situasjonsbetinget;P;1
-P03;Depresjonsfølelse;P;1
-P04;Irritabel atferd/følelse;P;1
-P05;Senilitet, atferd/følelse gammel;P;1
-P06;Søvnforstyrrelse;P;1
+P03;DepresjonsfÃ¸lelse;P;1
+P04;Irritabel atferd/fÃ¸lelse;P;1
+P05;Senilitet, atferd/fÃ¸lelse gammel;P;1
+P06;SÃ¸vnforstyrrelse;P;1
 P07;Seksuell drift/lyst hemmet;P;1
 P08;Seksuell tilfredsstillelse hemmet;P;1
 P09;Seksuell legning bekymret for;P;1
 P10;Stamming/tics;P;1
 P11;Spiseforstyrrelse hos barn;P;1
-P12;Sengevæting/enuresis IKA;P;1
+P12;SengevÃ¦ting/enuresis IKA;P;1
 P13;Enkoprese;P;1
 P15;Kronisk alkoholmisbruk;P;1
 P16;Akutt alkoholmisbruk;P;1
@@ -410,7 +410,7 @@ P73;Affektiv lidelse;P;2
 P74;Angstlidelse;P;2
 P75;Dissosiativ/somatoform lidelse;P;2
 P76;Depressiv lidelse;P;2
-P77;Selvmord/selvmordsforsøk;P;2
+P77;Selvmord/selvmordsforsÃ¸k;P;2
 P78;Nevrasteni;P;2
 P79;Fobi/obsessiv-kompulsiv lidelse;P;2
 P80;Personlighetsforstyrrelse;P;2
@@ -421,11 +421,11 @@ P86;Anorexia nervosa/bulimi;P;2
 P98;Psykose IKA;P;2
 P99;Psykisk lidelse IKA;P;2
 R01;Smerte luftveier;R;1
-R02;Kortpustethet/dyspné;R;1
+R02;Kortpustethet/dyspnÃ©;R;1
 R03;Piping i brystet;R;1
 R04;Pusteproblem IKA;R;1
 R05;Hoste;R;1
-R06;Neseblødning;R;1
+R06;NeseblÃ¸dning;R;1
 R07;Nysing/tetthet i nese;R;1
 R08;Nese symptomer/plager IKA;R;1
 R09;Bihule symptomer/plager IKA;R;1
@@ -437,11 +437,11 @@ R26;Engstelig for kreft luftveier;R;1
 R27;Engstelig for sykdom luftveier IKA;R;1
 R28;Redusert funksjonsevne luftveisprobl;R;1
 R29;Luftveier symptomer/plager IKA;R;1
-R33;Mikrobiologisk/immunologisk prøve;R;3
+R33;Mikrobiologisk/immunologisk prÃ¸ve;R;3
 R71;Kikhoste;R;2
 R72;Streptokokkhals;R;2
 R73;Nesebyll;R;2
-R74;Akutt øvre luftveisinfeksjon;R;2
+R74;Akutt Ã¸vre luftveisinfeksjon;R;2
 R75;Bihulebetennelse;R;2
 R76;Akutt tonsillitt;R;2
 R77;Akutt laryngitt/trakeitt;R;2
@@ -456,7 +456,7 @@ R85;Ondartet svulst luftveier IKA;R;2
 R86;Godartet svulst luftveier;R;2
 R87;Fremmedlegeme i nese/larynks/bronkie;R;2
 R88;Skade luftveier IKA;R;2
-R89;Medfødt feil luftveier;R;2
+R89;MedfÃ¸dt feil luftveier;R;2
 R90;Hypertrofi tonsiller/adenoid vev;R;2
 R92;Uspesifisert svulst luftveier;R;2
 R95;Kronisk obstruktiv lungesykdom;R;2
@@ -473,30 +473,30 @@ R996;Utbruddssykdom definert av FHI, luftveier;R;2
 R997;Utbruddssykdom definert av FHI, luftveier;R;2
 R998;Utbruddssykdom definert av FHI, luftveier;R;2
 R999;Utbruddssykdom definert av FHI, luftveier;R;2
-S01;Smerte/ømhet hud;S;1
-S02;Hudkløe;S;1
+S01;Smerte/Ã¸mhet hud;S;1
+S02;HudklÃ¸e;S;1
 S03;Vorter;S;1
 S04;Lokalisert hevelse/kul hud;S;1
 S05;Utbredte hevelser/kuler hud;S;1
 S06;Lokalisert utslett hud;S;1
 S07;Utbredt utslett hud;S;1
 S08;Forandring av hudfarge IKA;S;1
-S09;Infeksjon finger/tå;S;1
+S09;Infeksjon finger/tÃ¥;S;1
 S10;Abscess/furunkel;S;1
 S11;Hudinfeksjon posttraumatisk;S;1
 S12;Insektstikk/bitt;S;1
 S13;Bitt av dyr/menneske;S;1
-S14;Forbrenning/skålding;S;1
+S14;Forbrenning/skÃ¥lding;S;1
 S15;Fremmedlegeme hud;S;1
 S16;Kontusjon/slag hud;S;1
-S17;Skrubbsår/blemmer;S;1
-S18;Åpent sår/kutt;S;1
+S17;SkrubbsÃ¥r/blemmer;S;1
+S18;Ã…pent sÃ¥r/kutt;S;1
 S19;Skade hud/underhud IKA;S;1
 S20;Liktorn/fortykket underhud;S;1
 S21;Hudstruktur symptomer/plager;S;1
 S22;Negl symptomer/plager;S;1
-S23;Håravfall/skallethet;S;1
-S24;Hår/hodebunn symptomer/plager IKA;S;1
+S23;HÃ¥ravfall/skallethet;S;1
+S24;HÃ¥r/hodebunn symptomer/plager IKA;S;1
 S26;Engstelig for kreft hud;S;1
 S27;Engstelig for hudsykdom IKA;S;1
 S28;Redusert funksjonsevne pga hudprobl;S;1
@@ -511,13 +511,13 @@ S76;Hudinfeksjon IKA;S;2
 S77;Ondartet svulst hud;S;2
 S78;Lipom;S;2
 S79;Godartet/uspesifisert svulst hud IKA;S;2
-S80;Solutløst keratose/solforbrenning;S;2
+S80;SolutlÃ¸st keratose/solforbrenning;S;2
 S81;Hemangiom/lymfangiom;S;2
 S82;Pigmentnevus;S;2
-S83;Medfødt feil hud/underhud IKA;S;2
+S83;MedfÃ¸dt feil hud/underhud IKA;S;2
 S84;Brennkopper;S;2
 S85;Pilonidalcyste/-fistel;S;2
-S86;Seboréisk dermatitt;S;2
+S86;SeborÃ©isk dermatitt;S;2
 S87;Atopisk dermatitt/eksem;S;2
 S88;Kontakt-/allergisk dermatitt IKA;S;2
 S89;Bleiedermatitt;S;2
@@ -528,40 +528,40 @@ S93;Talgcyste;S;2
 S94;Inngrodd negl;S;2
 S95;Molluscum contagiosum;S;2
 S96;Akne;S;2
-S97;Kronisk hudsår;S;2
+S97;Kronisk hudsÃ¥r;S;2
 S98;Urticaria;S;2
 S99;Hud/underhud sykdom IKA;S;2
-T01;Økt tørste;T;1
-T02;Økt matlyst;T;1
+T01;Ã˜kt tÃ¸rste;T;1
+T02;Ã˜kt matlyst;T;1
 T03;Nedsatt matlyst;T;1
-T04;Ernæringsproblem barn;T;1
-T05;Ernæringsproblem voksen;T;1
-T07;Vektøkning;T;1
+T04;ErnÃ¦ringsproblem barn;T;1
+T05;ErnÃ¦ringsproblem voksen;T;1
+T07;VektÃ¸kning;T;1
 T08;Vekttap;T;1
 T10;Forsinket vekst;T;1
-T11;Uttørring;T;1
+T11;UttÃ¸rring;T;1
 T26;Engstelig for kreft endokrine system;T;1
-T27;Engstelig endokr/metabol/ernær sykd;T;1
-T28;Red funk evne endo/metab/ernær probl;T;1
-T29;Endok/metab/ernær sympt/plager IKA;T;1
+T27;Engstelig endokr/metabol/ernÃ¦r sykd;T;1
+T28;Red funk evne endo/metab/ernÃ¦r probl;T;1
+T29;Endok/metab/ernÃ¦r sympt/plager IKA;T;1
 T70;Infeksjon endokrine system;T;2
 T71;Ondartet svulst tyreoidea;T;2
 T72;Godartet svulst tyreoidea;T;2
 T73;Svulst endokrine organ IKA;T;2
 T78;Ductus/cystis tyreoglossus;T;2
-T80;Medfødt feil endokr/metabol syst IKA;T;2
+T80;MedfÃ¸dt feil endokr/metabol syst IKA;T;2
 T81;Struma;T;2
 T82;Fedme;T;2
 T83;Overvekt;T;2
 T85;Hypertyreose/tyreotoksikose;T;2
-T86;Hypotyreose/myksødem;T;2
+T86;Hypotyreose/myksÃ¸dem;T;2
 T87;Hypoglykemi;T;2
 T89;Diabetes type 1;T;2
 T90;Diabetes type 2;T;2
-T91;Vitaminmangel/ernæringsforstyrrelse;T;2
+T91;Vitaminmangel/ernÃ¦ringsforstyrrelse;T;2
 T92;Urinsyregikt;T;2
 T93;Lipidstoffskifte forstyrrelse;T;2
-T99;Endokrin/metabol/ernær sykd IKA;T;2
+T99;Endokrin/metabol/ernÃ¦r sykd IKA;T;2
 U01;Smerte vannlating;U;1
 U02;Hyppig vannlating;U;1
 U04;Urininkontinens;U;1
@@ -569,7 +569,7 @@ U05;Vannlatingsproblemer IKA;U;1
 U06;Hematuri;U;1
 U07;Urin symptomer/plager IKA;U;1
 U08;Urinretensjon;U;1
-U13;Blære symptomer/plager IKA;U;1
+U13;BlÃ¦re symptomer/plager IKA;U;1
 U14;Nyre symptomer/plager;U;1
 U26;Engstelig for kreft urinveier;U;1
 U27;Engstelig for sykdom urinveier IKA;U;1
@@ -579,20 +579,20 @@ U70;Nyrebekkenbetennelse;U;2
 U71;Cystitt/urinveisinfeksjon IKA;U;2
 U72;Uretritt;U;2
 U75;Ondartet svulst nyre;U;2
-U76;Ondartet svulst urinblære;U;2
+U76;Ondartet svulst urinblÃ¦re;U;2
 U77;Ondartet svulst urinveier IKA;U;2
 U78;Godartet svulst urinveier;U;2
 U79;Uspesifisert svulst urinveier;U;2
 U80;Skade urinveier;U;2
-U85;Medfødt feil urinveier;U;2
+U85;MedfÃ¸dt feil urinveier;U;2
 U88;Glomerulonefritt/nefropati;U;2
 U90;Ortostatisk proteinuri;U;2
 U95;Sten i urinveier;U;2
-U98;Unormal urinprøve IKA;U;2
+U98;Unormal urinprÃ¸ve IKA;U;2
 U99;Urinveissykdom IKA;U;2
-W01;Spørsmål om svangerskap;W;1
+W01;SpÃ¸rsmÃ¥l om svangerskap;W;1
 W02;Engstelig for svangerskap;W;1
-W03;Blødning svangerskap;W;1
+W03;BlÃ¸dning svangerskap;W;1
 W05;Kvalme/brekninger svangerskap;W;1
 W10;Prevensjon postkoital antikonsepsjon;W;1
 W11;Prevensjon p-pille;W;1
@@ -600,49 +600,49 @@ W12;Prevensjon spiral;W;1
 W13;Sterilisering (K);W;1
 W14;Prevensjon IKA (K);W;1
 W15;Infertilitet (K);W;1
-W17;Blødning etter fødsel;W;1
+W17;BlÃ¸dning etter fÃ¸dsel;W;1
 W18;Postpartum symptomer/plager IKA;W;1
 W19;Amming symptomer/plager;W;1
 W21;Bekymret/opptatt av utseende sv skap;W;1
-W27;Engstelig for komplik sv skap/fødsel;W;1
+W27;Engstelig for komplik sv skap/fÃ¸dsel;W;1
 W28;Red funksjonsevne svangerskapsprobl;W;1
-W29;Sv skap/fødsel sympt/plager IKA;W;1
+W29;Sv skap/fÃ¸dsel sympt/plager IKA;W;1
 W70;Infeksjon/sepsis barseltid;W;2
 W71;Infeksjon som kompliser sv skap IKA;W;2
 W72;Ondartet svulst svangerskap;W;2
 W73;Godartet/uspes svulst sv skap;W;2
 W75;Skade som kompliserer svangerskap;W;2
-W76;Medfødt feil som kompliserer sv skap;W;2
+W76;MedfÃ¸dt feil som kompliserer sv skap;W;2
 W78;Svangerskap bekreftet;W;2
 W781;Svangerskapskontroll;W;2
-W79;Uønsket svangerskap;W;2
+W79;UÃ¸nsket svangerskap;W;2
 W80;Ekstrauterint svangerskap;W;2
 W81;Svangerskapsforgiftning;W;2
 W82;Abort spontan;W;2
 W83;Abort fremkalt;W;2
-W84;Svangerskap høyrisiko;W;2
+W84;Svangerskap hÃ¸yrisiko;W;2
 W85;Svangerskapsdiabetes;W;2
-W90;Ukomplisert fødsel levendefødt barn;W;2
-W91;Ukomplisert fødsel dødfødt barn;W;2
-W92;Komplisert fødsel levendefødt barn;W;2
-W93;Komplisert fødsel dødfødt barn;W;2
+W90;Ukomplisert fÃ¸dsel levendefÃ¸dt barn;W;2
+W91;Ukomplisert fÃ¸dsel dÃ¸dfÃ¸dt barn;W;2
+W92;Komplisert fÃ¸dsel levendefÃ¸dt barn;W;2
+W93;Komplisert fÃ¸dsel dÃ¸dfÃ¸dt barn;W;2
 W94;Mastitt i barseltid;W;2
 W95;Brystsykdom i sv skap/barseltid IKA;W;2
 W96;Komplikasjoner i barseltid IKA;W;2
-W99;Svangersk/føds/barsel sykd IKA;W;2
-X01;Smerte kjønnsorgan (K);X;1
+W99;Svangersk/fÃ¸ds/barsel sykd IKA;W;2
+X01;Smerte kjÃ¸nnsorgan (K);X;1
 X02;Menstruasjonssmerter;X;1
 X03;Intermenstruelle smerter;X;1
 X04;Smerte samleie (K);X;1
 X05;Menstruasjon sparsom/sjelden;X;1
 X06;Menstruasjon kraftig;X;1
 X07;Menstruasjon uregelmessig/hyppig;X;1
-X08;Intermenstruell blødning;X;1
+X08;Intermenstruell blÃ¸dning;X;1
 X09;Premenstruelle symptomer/plager;X;1
 X10;Forskyvning menstruasjon;X;1
 X11;Klimakterium symptomer/plager;X;1
-X12;Postmenopausal blødning;X;1
-X13;Blødning etter samleie;X;1
+X12;Postmenopausal blÃ¸dning;X;1
+X13;BlÃ¸dning etter samleie;X;1
 X14;Utflod fra skjeden;X;1
 X15;Skjede symptomer/plager IKA;X;1
 X16;Vulva symptomer/plager;X;1
@@ -652,13 +652,13 @@ X19;Kul i bryst IKA (K);X;1
 X20;Brystvorte symptomer/plager (K);X;1
 X21;Bryst symptomer/plager IKA (K);X;1
 X22;Bekymret/oppt av utseende bryst (K);X;1
-X23;Engstelig for kjønnssykdom (K);X;1
+X23;Engstelig for kjÃ¸nnssykdom (K);X;1
 X24;Engstelig for seksuell dysfunk (K);X;1
-X25;Engstelig for kreft kjønnsorgan (K);X;1
+X25;Engstelig for kreft kjÃ¸nnsorgan (K);X;1
 X26;Engstelig for brystkreft (K);X;1
 X27;Engstelig sykd kj org/bryst IKA (K);X;1
-X28;Red funksjonevne probl kjønnsorg (K);X;1
-X29;Kjønnsorgan sympt/plager IKA (K);X;1
+X28;Red funksjonevne probl kjÃ¸nnsorg (K);X;1
+X29;KjÃ¸nnsorgan sympt/plager IKA (K);X;1
 X70;Syfilis (K);X;2
 X71;Gonokokkinfeksjon (K);X;2
 X72;Candidainfeksjon urogenitalt (K);X;2
@@ -666,26 +666,26 @@ X73;Trikomonasinfeksjon urogenitalt (K);X;2
 X74;Underlivsinfeksjon IKA (K);X;2
 X75;Ondartet svulst livmorhals;X;2
 X76;Ondartet svulst bryst (K);X;2
-X77;Ondartet svulst kjønnsorg IKA (K);X;2
+X77;Ondartet svulst kjÃ¸nnsorg IKA (K);X;2
 X78;Godartet svulst livmor;X;2
 X79;Godartet svulst bryst (K);X;2
-X80;Godartet svulst kjønnsorg IKA (K);X;2
-X81;Uspes svulst kjønnsorg IKA (K);X;2
-X82;Skade kjønnsorgan (K);X;2
-X83;Medfødt feil kjønnsorgan (K);X;2
+X80;Godartet svulst kjÃ¸nnsorg IKA (K);X;2
+X81;Uspes svulst kjÃ¸nnsorg IKA (K);X;2
+X82;Skade kjÃ¸nnsorgan (K);X;2
+X83;MedfÃ¸dt feil kjÃ¸nnsorgan (K);X;2
 X84;Vaginitt/vulvitt IKA;X;2
 X85;Sykdom i livmorhals IKA;X;2
 X86;Cytologi livmorhals unormal;X;2
-X87;Fremfall kjønnsorgan (K);X;2
+X87;Fremfall kjÃ¸nnsorgan (K);X;2
 X88;Godartet mammadysplasi;X;2
 X89;Premenstruelt tensjonssyndrom;X;2
 X90;Genital herpesvirusinfeksjon (K);X;2
 X91;Condylomata acuminata (K);X;2
 X92;Klamydiainfeksjon urogenitalt (K);X;2
-X99;Kjønnsorgan sykdom IKA (K);X;2
+X99;KjÃ¸nnsorgan sykdom IKA (K);X;2
 Y01;Smerte penis;Y;1
 Y02;Smerte testikkel/skrotum;Y;1
-Y03;Utflod urinrør/penis;Y;1
+Y03;Utflod urinrÃ¸r/penis;Y;1
 Y04;Penis symptomer/plager IKA;Y;1
 Y05;Skrotum/testikkel sympt/plager IKA;Y;1
 Y06;Prostata symptomer/plager;Y;1
@@ -696,11 +696,11 @@ Y13;Sterilisering (M);Y;1
 Y14;Prevensjon IKA (M);Y;1
 Y16;Bryst symptomer/plager (M);Y;1
 Y24;Engstelig for seksuell dysfunk (M);Y;1
-Y25;Engstelig for kjønnsykdom (M);Y;1
-Y26;Engstelig for kreft kjønnsorgan (M);Y;1
-Y27;Engstelig for sykd kjønnsorg IKA (M);Y;1
-Y28;Red funksjonsevne prob kjønnsorg (M);Y;1
-Y29;Kjønnsorgan sympt/plager IKA (M);Y;1
+Y25;Engstelig for kjÃ¸nnsykdom (M);Y;1
+Y26;Engstelig for kreft kjÃ¸nnsorgan (M);Y;1
+Y27;Engstelig for sykd kjÃ¸nnsorg IKA (M);Y;1
+Y28;Red funksjonsevne prob kjÃ¸nnsorg (M);Y;1
+Y29;KjÃ¸nnsorgan sympt/plager IKA (M);Y;1
 Y70;Syfilis (M);Y;2
 Y71;Gonokokkinfeksjon (M);Y;2
 Y72;Genital herpesvirusinfeksjon (M);Y;2
@@ -709,17 +709,17 @@ Y74;Orkitt/epididymitt;Y;2
 Y75;Balanopostitt;Y;2
 Y76;Condylomata acuminata (M);Y;2
 Y77;Ondartet svulst prostata;Y;2
-Y78;Ondartet svulst kjønnsorg IKA (M);Y;2
-Y79;Godartet/uspes svulst kjønnsorg (M);Y;2
-Y80;Skade kjønnsorgan (M);Y;2
-Y81;Fimose/overflødig forhud;Y;2
+Y78;Ondartet svulst kjÃ¸nnsorg IKA (M);Y;2
+Y79;Godartet/uspes svulst kjÃ¸nnsorg (M);Y;2
+Y80;Skade kjÃ¸nnsorgan (M);Y;2
+Y81;Fimose/overflÃ¸dig forhud;Y;2
 Y82;Hypospadi;Y;2
 Y83;Ikke-descendert testikkel;Y;2
-Y84;Medfødt feil kjønnsorgan IKA (M);Y;2
+Y84;MedfÃ¸dt feil kjÃ¸nnsorgan IKA (M);Y;2
 Y85;Prostatahyperplasi;Y;2
 Y86;Hydrocele;Y;2
-Y99;Kjønnsorgan sykdom IKA (M);Y;2
-Z01;Problem økonomi/fattigdom;Z;1
+Y99;KjÃ¸nnsorgan sykdom IKA (M);Y;2
+Z01;Problem Ã¸konomi/fattigdom;Z;1
 Z02;Problem drikkevann/mat;Z;1
 Z03;Problem bolig/nabolag;Z;1
 Z04;Problem sosialt/kulturelt;Z;1
@@ -729,18 +729,18 @@ Z07;Problem utdannelse;Z;1
 Z08;Problem sosial velferd/trygd;Z;1
 Z09;Problem jus/politi;Z;1
 Z10;Problem helsetjen/tilgjengelighet;Z;1
-Z11;Problem det å være syk/compliance;Z;1
+Z11;Problem det Ã¥ vÃ¦re syk/compliance;Z;1
 Z12;Problem mellom samlivspartnere;Z;1
 Z13;Problem atferd samlivspartner;Z;1
 Z14;Problem sykdom hos partner;Z;1
-Z15;Problem tap/dødsfall av partner;Z;1
+Z15;Problem tap/dÃ¸dsfall av partner;Z;1
 Z16;Problem med/i forhold til barn;Z;1
 Z18;Problem sykdom hos barn;Z;1
-Z19;Problem tap/dødsfall av barn;Z;1
+Z19;Problem tap/dÃ¸dsfall av barn;Z;1
 Z20;Problem forhold til foreldre/familie;Z;1
 Z21;Problem atferd foreldre/familie;Z;1
 Z22;Problem med sykdom hos foreldre/fam;Z;1
-Z23;Problem tap/dødsfall av foreldre/fam;Z;1
+Z23;Problem tap/dÃ¸dsfall av foreldre/fam;Z;1
 Z24;Problem med forhold til venner;Z;1
 Z25;Problem vold/traumatisk hendelse;Z;1
 Z27;Engstelig for sosialt problem;Z;1

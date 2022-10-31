@@ -1,4 +1,4 @@
-/*Ratefigur med todelt søyle, eks andel off/privat eller andel kreft/ikke kreft*/
+/*Ratefigur med todelt sÃ¸yle, eks andel off/privat eller andel kreft/ikke kreft*/
 
 /* Need to run the 'merge' macro first before running this one.  The output from 'merge' is the input for this */
 /* creates a figure so that first column is rate from dataset1, and second column from dataset2 */
@@ -100,7 +100,7 @@ if tot_rate_&aar3 gt tot_max then tot_max = tot_rate_&aar3;
 
 
 *create 3 variables that look exactly like bohf;
-*use them to draw scatter plot (årsvariasion) so that we can use the label for keylegend;
+*use them to draw scatter plot (Ã¥rsvariasion) so that we can use the label for keylegend;
 bohf&aar1=bohf;
 bohf&aar2=bohf;
 bohf&aar3=bohf;
@@ -121,7 +121,7 @@ by descending tot_rate2;
 run;
 
 %if &sprak=no %then %do;
-	%let opptak_txt = 'Bosatte i opptaksområdene';
+	%let opptak_txt = 'Bosatte i opptaksomrÃ¥dene';
 	%let format_percent = nlpct8.1;
 %end;
 %else %if &sprak=en %then %do;

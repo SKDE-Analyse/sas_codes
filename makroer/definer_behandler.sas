@@ -2,13 +2,13 @@
 
 /*!
 
-Makro for å definere behandlende sykehus i Helse Nord, der det skilles på
-eget lokalsykehus og andre sykehus etter følgende inndeling:
+Makro for Ã¥ definere behandlende sykehus i Helse Nord, der det skilles pÃ¥
+eget lokalsykehus og andre sykehus etter fÃ¸lgende inndeling:
 
 ```sas
 1="Eget lokalsykehus"
-2="UNN Tromsø"
-3="NLSH Bodø"
+2="UNN TromsÃ¸"
+3="NLSH BodÃ¸"
 4="Annet sykehus i eget HF"
 5="Annet HF i HN"
 6="HF i andre RHF"
@@ -18,15 +18,15 @@ eget lokalsykehus og andre sykehus etter følgende inndeling:
 10="NLSH HF"
 ```
 
-Hvis sykehus er kodet på HF-nivå så kodes det som eget lokalsykehus.
+Hvis sykehus er kodet pÃ¥ HF-nivÃ¥ sÃ¥ kodes det som eget lokalsykehus.
 
 */
 
 proc format;
 value behandler
 1="Eget lokalsykehus"
-2="UNN Tromsø"
-3="NLSH Bodø"
+2="UNN TromsÃ¸"
+3="NLSH BodÃ¸"
 4="Annet sykehus i eget HF"
 5="Annet HF i HN"
 6="HF i andre RHF"
@@ -72,7 +72,7 @@ If BoSHHN=2 then do;
 end;
 
 /*
-Tromsø
+TromsÃ¸
 */
 If BoSHHN=3 then do;
 	If BehSh in (21,24,25,26) then Behandler=1;
@@ -119,7 +119,7 @@ If BoSHHN=5 then do;
 end;
 
 /*
-Vesterålen
+VesterÃ¥len
 */
 If BoSHHN=6 then do;
 	If BehSh in (31) then Behandler=1;
@@ -151,7 +151,7 @@ If BoSHHN=7 then do;
 end;
 
 /*
-Bodø
+BodÃ¸
 */
 If BoSHHN=8 then do;
 	If BehSh in (33) then Behandler=1;
@@ -182,7 +182,7 @@ If BoSHHN=9 then do;
 end;
 
 /*
-Mosjøen
+MosjÃ¸en
 */
 If BoSHHN=10 then do;
 	If BehSh in (40,42) then Behandler=1;
@@ -198,7 +198,7 @@ If BoSHHN=10 then do;
 end;
 
 /*
-Sandnessjøen
+SandnessjÃ¸en
 */
 If BoSHHN=11 then do;
 	If BehSh in (40,43) then Behandler=1;

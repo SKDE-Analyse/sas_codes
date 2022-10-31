@@ -7,12 +7,12 @@ bildeformat = pdf, fontst = 9, xskala =, xlabel=);
 /*!
 ### Beskrivelse
 
-Makro for å lage ratefigur. Makroen bruker rateprogrammet for å lage rater.
+Makro for Ã¥ lage ratefigur. Makroen bruker rateprogrammet for Ã¥ lage rater.
 
 ### Parametre
 
-- `dsn`: datasettet med (aggregerte) date. Må inneholde følgende variabler: alder, ermann, komnr, bydel, "rate1", "rate2", der
-navnene på "rate1" og "rate2" sendes inn som egne argumenter.
+- `dsn`: datasettet med (aggregerte) date. MÃ¥ inneholde fÃ¸lgende variabler: alder, ermann, komnr, bydel, "rate1", "rate2", der
+navnene pÃ¥ "rate1" og "rate2" sendes inn som egne argumenter.
 - `fignavn` (=&dsn._&rate1._&rate2, hvis ikke oppgitt): figurnavn 
 - `mappe` (= "\\hn.helsenord.no\RHF\SKDE\Analyse\Data\SAS\Bildefiler"): mappen der figur skal lagres
 
@@ -50,7 +50,7 @@ to_ant = ant_opphold;
 run;
 
 
-/*Slå sammen en og to*/
+/*SlÃ¥ sammen en og to*/
 data smelt;
 set en to;
 format type type.;
@@ -126,7 +126,7 @@ run;
 %macro splittet_figur(dsn =, figurnavn =, bildeformat =, mappe = , label_en =, label_to =, label_tre =, fontst =, xskala =);
 
 /* 
-Splittet søyle-figur 
+Splittet sÃ¸yle-figur 
 */
 
 %let soylebredde = 0.8;
@@ -144,7 +144,7 @@ hbarparm category=bohf response=rate_en_no / outlineattrs=(color=CX4C4C4C) filla
 xaxis label="&xlabel" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=&fontst);
 Keylegend "hp2" "hp1"/ noborder location=inside position=bottomright down=2;
 Yaxistable en_ant to_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst) 
+yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=&fontst) 
          offsetmax=0.03 offsetmin=0.03 type=discrete discreteorder=data valueattrs=(size=&fontst) ;
 
 Format andel percent8. en_ant to_ant  ratesnitt_no rate_en_no nlnum8.0 ;
@@ -158,7 +158,7 @@ ods graphics off;
 
 
 /*
-Makro for å definere navn over kolonner
+Makro for Ã¥ definere navn over kolonner
 */
 /*
 Definere hva som skrives over kolonnene 1, 2 og 3
@@ -199,7 +199,7 @@ Definere hva som skrives over kolonnene 1, 2 og 3
 
 
 
-/* Ikke rør originalt datasett */
+/* Ikke rÃ¸r originalt datasett */
 
 data tmp_figur;
 set &dsn;

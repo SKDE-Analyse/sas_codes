@@ -26,7 +26,7 @@ INPUT FOR HVER FIGUR:
 %merge(ant_datasett=3, dsn_ut=Personer_&tema);
 
 %let fignavn=Personer;
-%let tittel=Antall personer i primærhelsetjenesten for kols. Kjønns- og aldersstandardiserte rater per 10 000 innbyggere. Gjennomsnitt per år i perioden 2013-15.;
+%let tittel=Antall personer i primÃ¦rhelsetjenesten for kols. KjÃ¸nns- og aldersstandardiserte rater per 10 000 innbyggere. Gjennomsnitt per Ã¥r i perioden 2013-15.;
 %let xlabel= Personer med kols hos fastlege eller legevakt per 10 000 innbyggere;
 %let tabellvar1=antall_1;
 %let tabellvar2=antall_2_1;
@@ -56,7 +56,7 @@ if &rv1 lt &nkrav then do;
 end;
 
 *create 3 variables that look exactly like bohf;
-*use them to draw scatter plot (årsvariasion) so that we can use the label for keylegend;
+*use them to draw scatter plot (Ã¥rsvariasion) so that we can use the label for keylegend;
 bohf&aar1=bohf;
 bohf&aar2=bohf;
 bohf&aar3=bohf;
@@ -65,7 +65,7 @@ format bohf&aar1 bohf&aar2 bohf&aar3 &bohf_format..;
 
 run;
 
-/*Forholdstall som kan vises på figuren*/
+/*Forholdstall som kan vises pÃ¥ figuren*/
 Data _null_;
 set &datasett;
 call symput('FT1',trim(left(put(FT,8.2))));
@@ -140,7 +140,7 @@ hbarparm category=bohf response=Snittrate / fillattrs=(color=CXC3C3C3) outlineat
 Yaxistable &tabellvariable /Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
 
 %if &sprak=no %then %do;
-    yaxis display=(noticks noline) label='Bosatte i opptaksområdene' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
+    yaxis display=(noticks noline) label='Bosatte i opptaksomrÃ¥dene' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
 %end;
 %else %if &sprak=en %then %do;
     yaxis display=(noticks noline) label='Hospital referral areas' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
