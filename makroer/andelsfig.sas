@@ -141,7 +141,7 @@ proc sgplot data=&datasett noborder noautolegend sganno=&anno pad=(Bottom=5%);
 
 	Yaxistable &tabellvariable / Label location=inside labelpos=bottom position=right valueattrs=(size=8 family=arial) labelattrs=(size=8);
 	%if &sprak=no %then %do;
-    yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=8);
+    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=8);
 	%end;
 	%else %if &sprak=en %then %do;
     yaxis display=(noticks noline) label='Hospital referral area' labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=8);

@@ -56,7 +56,7 @@ series x=aar y=nrate /lineattrs=(color=darkgrey pattern=2) name="norge" legendla
 scatter X = aar Y = RV_just_rate / filledoutlinedmarkers markerfillattrs=(color=black) markeroutlineattrs=(color=black)
    markerattrs=(symbol=circlefilled);
 keylegend "norge" / noborder position=top;
-colaxis label='Ã…r' valueattrs=(size=5) labelattrs=(size=8 weight=bold);
+colaxis label='År' valueattrs=(size=5) labelattrs=(size=8 weight=bold);
 rowaxis label="&aksetekst" valueattrs=(size=6) labelattrs=(size=8 weight=bold);
 RUN; ods listing close;
 

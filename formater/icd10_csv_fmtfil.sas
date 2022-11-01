@@ -1,14 +1,14 @@
 /* Endringslogg: Sist endret av Tove 21.06.2021 */
 
-/* Makro for Ã¥ lage formater til boomrÃ¥der */
-/* Husk Ã¥ definere filbane fÃ¸r makro kjÃ¸res */
+/* Makro for å lage formater til boområder */
+/* Husk å definere filbane før makro kjøres */
 
 /* Input: CSV-file:
             ICD10.csv
             
 */
 /* Output fem formater:
-      Navn pÃ¥ formatene:
+      Navn på formatene:
          icd10_fmt 
          
 */

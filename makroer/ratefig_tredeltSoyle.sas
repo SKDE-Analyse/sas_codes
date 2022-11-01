@@ -81,7 +81,7 @@ Andel&del3.=RateSnitt&del3./RateSnitt_tot;
 
 tot_antall=&del1 + &del2 + &del3;
 
-pros_plass= + 0.01;/* avstand fra x=0, eventuelt RateSnitt_tot -0.02 hvis ETTER sÃ¸ylen */;
+pros_plass= + 0.01;/* avstand fra x=0, eventuelt RateSnitt_tot -0.02 hvis ETTER søylen */;
 if bohf=8888 then do;
 RateSnittN_tot = RateSnittN&del1. + RateSnittN&del2. + RateSnittN&del3.;
 RateSnittN_12 = RateSnittN&del1. + RateSnittN&del2.;
@@ -109,7 +109,7 @@ run;
 
 
 %if &sprak=no %then %do;
-	%let opptak_txt = 'Bosatte i opptaksomrÃ¥dene';
+	%let opptak_txt = 'Bosatte i opptaksområdene';
 	%let format_percent = nlpct8.0;
 	%let format_num = nlnum8.0;
 %end;

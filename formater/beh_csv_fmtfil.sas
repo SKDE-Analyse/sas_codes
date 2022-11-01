@@ -1,9 +1,9 @@
 /* Endringslogg: Sist endret av Janice 17.06.2021 */
 
-/* Makro for Ã¥ sette pÃ¥ formater for behsh, behhf, behrhf */
-/* Husk Ã¥ definere filbane fÃ¸r makro kjÃ¸res */
+/* Makro for å sette på formater for behsh, behhf, behrhf */
+/* Husk å definere filbane før makro kjøres */
 
-/* Navn pÃ¥ formatene:
+/* Navn på formatene:
    behsh_fmt
    behhf_fmt
    behhfkort_fmt
@@ -21,7 +21,7 @@
         run; 
         */
 
-/* Det gjÃ¸res en kontroll etter innlasting av CSV for Ã¥ sjekke for duplikate verdier */
+/* Det gjøres en kontroll etter innlasting av CSV for å sjekke for duplikate verdier */
 /* Hvis det er duplikate verdier slettes datasettet behandler og det kommer en melding om ABORT i SAS-logg */
 
 
@@ -62,13 +62,13 @@ run;
 /* --------------------------------------------------------------- */
 /*  Kontroll at det ikke er duplikate organisasjonsnummer i filen  */  
 /* --------------------------------------------------------------- */
-/* Sortere etter organisasjonsnummer fÃ¸rst */
+/* Sortere etter organisasjonsnummer først */
 proc sort data=behandler;
 by orgnr;
 run;
 
 /* Hvis duplikat blir makro-variabel duplikat = 1 */
-/* SAS gjÃ¸r i tillegg en ABORT */
+/* SAS gjør i tillegg en ABORT */
 data behandler;
 set behandler;
 by orgnr;

@@ -1,13 +1,13 @@
 
 %macro rateprogram_test(branch = null, lagNyRef = 0);
 /*!
-KjÃ¸r tester av rateprogrammet
+Kjør tester av rateprogrammet
 */
 
 %include "&filbane/tests/makroer_rateprogram.sas";
 
 /*
-Test av rateprogrammet hver for seg, uavhengig av rekkefÃ¸lge
+Test av rateprogrammet hver for seg, uavhengig av rekkefølge
 
 Referansedatasettene lages her, hvis bedt om.
 */
@@ -16,7 +16,7 @@ Referansedatasettene lages her, hvis bedt om.
 %testAnno(branch = &branch, slettDatasett = 1, lagReferanse = &lagNyRef);
 
 /*
-Test av rateprogrammet i sin helhet. KjÃ¸rer rateprogrammet fra A til Ã….
+Test av rateprogrammet i sin helhet. Kjører rateprogrammet fra A til Å.
 */
 %testAnno(branch = &branch, slettDatasett = 0, lagReferanse = 0);
 %testUtvalgX(alene = 0, branch = &branch, slettDatasett = 0, definerVariabler = 1, lagReferanse = 0);

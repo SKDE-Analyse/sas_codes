@@ -1,10 +1,10 @@
 /* Opprettet 31.03.2022 Tove J */
 
-/* Makro for Ã¥ sette pÃ¥ formater for avtalespesialister - fungerer kun nÃ¥r vi ser pÃ¥ avtspes data separat. 
+/* Makro for å sette på formater for avtalespesialister - fungerer kun når vi ser på avtspes data separat. 
     Variabel institusjonID inneholder orgnr i somatikk-fil, her er det reshID-er. */
-/* Husk Ã¥ definere filbane fÃ¸r makro kjÃ¸res */
+/* Husk å definere filbane før makro kjøres */
 
-/* Navn pÃ¥ formatene:
+/* Navn på formatene:
 
 */
 
@@ -16,7 +16,7 @@
         run; 
         */
 
-/* Det gjÃ¸res en kontroll etter innlasting av CSV for Ã¥ sjekke for duplikate verdier */
+/* Det gjøres en kontroll etter innlasting av CSV for å sjekke for duplikate verdier */
 /* Hvis det er duplikate verdier slettes datasettet behandler og det kommer en melding om ABORT i SAS-logg */
 
 
@@ -40,13 +40,13 @@ run;
 /* --------------------------------------------------------------- */
 /*  Kontroll at det ikke er duplikate organisasjonsnummer i filen  */  
 /* --------------------------------------------------------------- */
-/* Sortere etter organisasjonsnummer fÃ¸rst */
+/* Sortere etter organisasjonsnummer først */
 proc sort data=avt;
 by orgnr;
 run;
 
 /* Hvis duplikat blir makro-variabel duplikat = 1 */
-/* SAS gjÃ¸r i tillegg en ABORT */
+/* SAS gjør i tillegg en ABORT */
 data avt;
 set avt;
 by orgnr;

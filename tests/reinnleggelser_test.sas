@@ -1,24 +1,24 @@
 %macro reinnleggelser_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
-Makro for Ã¥ teste reinnleggelse-makro.
+Makro for å teste reinnleggelse-makro.
 
-KjÃ¸rer reinnleggelse-makroen pÃ¥ et test-datasett (`test.reinn_start`).
+Kjører reinnleggelse-makroen på et test-datasett (`test.reinn_start`).
 Sammenligner dette datasettet med en referanse (`test.ref_reinn1` og `test.ref_reinn2`).
 
 ### Parametre
 
-- `branch = master`: Bestemmer hvilken reinnleggelse-makro som kjÃ¸res (hvilken mappe den ligger i)
+- `branch = master`: Bestemmer hvilken reinnleggelse-makro som kjøres (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset1` og `testset2`.
-- `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.reinn_start` pÃ¥ nytt.
-- `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_reinn1` og `test.ref_reinn2` pÃ¥ nytt.
+- `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.reinn_start` på nytt.
+- `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_reinn1` og `test.ref_reinn2` på nytt.
 
 */
 
 %include "&filbane/makroer/reinnleggelser.sas";
 
 /*
-Lage nytt startsett, basert pÃ¥ test.pseudosens_avd_magnus
+Lage nytt startsett, basert på test.pseudosens_avd_magnus
 */
 %if &lagNyStart ne 0 %then %do;
 

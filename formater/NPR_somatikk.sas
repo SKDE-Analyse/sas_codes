@@ -1,20 +1,20 @@
 /*
 Oppdatert av Linda Leivseth 10. september 2018. 
 
-Formater er hentet fra NPR-melding v. 53.1.1 (gylding for rapportering av Ã¥rsdata 2017), _NAVN-variabler i data, ISF regelverk 2017, SAMDATA og value labels fra tidligere Ã¥r. 
-Det ble ikke gjort en slik detaljert gjennomgang ved fjorÃ¥rets tilreggelegging av data. Det er derfor usikkert nÃ¥r noen av endringene har funnet sted. Selv om det oppgis at en kode eller at en tekst er 
-endret i NPR-melding 53.1.1 (2017) kan endringen ha vÃ¦rt gjort tidligere. 
+Formater er hentet fra NPR-melding v. 53.1.1 (gylding for rapportering av årsdata 2017), _NAVN-variabler i data, ISF regelverk 2017, SAMDATA og value labels fra tidligere år. 
+Det ble ikke gjort en slik detaljert gjennomgang ved fjorårets tilreggelegging av data. Det er derfor usikkert når noen av endringene har funnet sted. Selv om det oppgis at en kode eller at en tekst er 
+endret i NPR-melding 53.1.1 (2017) kan endringen ha vært gjort tidligere. 
 */
 
 proc format;
 
 
 value NPRID_REG
-      1 = 'FÃ¸dselsnummer/ D-nummer er ok.'  
-      2 = 'Ulikt kjÃ¸nn i fÃ¸dselsnummer/ D-nummer og i aktivitetsdata.'  
-      3 = 'Ulikt fÃ¸dselsÃ¥r i fÃ¸dselsnummer/ D-nummer og i aktivitetsdata.'  
-      4 = 'FÃ¸dselsnummer/ D-nummer mangler.'  
-      5 = 'DÃ¸dsdato i Det sentrale folkeregister er fÃ¸r inndato.' ;
+      1 = 'Fødselsnummer/ D-nummer er ok.'  
+      2 = 'Ulikt kjønn i fødselsnummer/ D-nummer og i aktivitetsdata.'  
+      3 = 'Ulikt fødselsår i fødselsnummer/ D-nummer og i aktivitetsdata.'  
+      4 = 'Fødselsnummer/ D-nummer mangler.'  
+      5 = 'Dødsdato i Det sentrale folkeregister er før inndato.' ;
   
    value KJONN
       0 = 'Ikke kjent'  
@@ -24,39 +24,39 @@ value NPRID_REG
 	  
    value HENVFRATJENESTE
       1 = 'Pasienten selv'  
-      2 = 'Fastlege/primÃ¦rlege'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      4 = 'Spesialisthelsetjeneste'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
+      2 = 'Fastlege/primærlege'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      4 = 'Spesialisthelsetjeneste'  /* Utgått før NPR-melding 53.1.1 - 2017 */
       3 = 'NULL' /*ny 2020*/
-      5 = 'Barnehage, skolesektor, PPT'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      6 = 'Sosialtjeneste, barnevern'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      7 = 'Politi, fengsel, rettsvesen'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      8 = 'Rehabiliteringsinstitusjoner, sykehjem'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
+      5 = 'Barnehage, skolesektor, PPT'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      6 = 'Sosialtjeneste, barnevern'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      7 = 'Politi, fengsel, rettsvesen'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      8 = 'Rehabiliteringsinstitusjoner, sykehjem'  /* Utgått før NPR-melding 53.1.1 - 2017 */
       9 = 'Andre tjenester'  
       10 = 'Privatpraktiserede spesialister'  
-      21 = 'Legevakt'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      22 = 'Kiropraktor'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      23 = 'Manuellterapeut'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-	  28 = 'Fastlege/primÃ¦rlege/legevaktslege' /* Ny kode i NPR-melding 53.1.1 - 2017 */
+      21 = 'Legevakt'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      22 = 'Kiropraktor'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      23 = 'Manuellterapeut'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+	  28 = 'Fastlege/primærlege/legevaktslege' /* Ny kode i NPR-melding 53.1.1 - 2017 */
       41 = 'Somatisk spesialisthelsetjeneste'  
       42 = 'Tverrfaglig spesialisert rusbehandling'  
-      43 = 'Distriktspsykiatrisk senter (DPS)'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
+      43 = 'Distriktspsykiatrisk senter (DPS)'  /* Utgått før NPR-melding 53.1.1 - 2017 */
 	  44 = 'Psykisk helsevern' /* Ny kode i NPR-melding 53.1.1 - 2017 */
-      49 = 'Annen institusjon innen psykisk helsevern'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      81 = 'Rehabiliteringsinstitusjoner'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      82 = 'Sykehjem' /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
+      49 = 'Annen institusjon innen psykisk helsevern'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      81 = 'Rehabiliteringsinstitusjoner'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      82 = 'Sykehjem' /* Utgått før NPR-melding 53.1.1 - 2017 */
 	  88 = 'Andre kommunale tjenester' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
  
    value HENVTYPE
-      1 = 'Utredning'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      2 = 'Behandling (eventuelt ogsÃ¥ inkludert videre utredning)'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      3 = 'Kontroll'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      4 = 'Generert for Ã˜-hjelpspasient'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      5 = 'Friskt nyfÃ¸dt barn'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      6 = 'Graviditet'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      7 = 'Omsorg, botilbud eller annet' /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
+      1 = 'Utredning'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      2 = 'Behandling (eventuelt også inkludert videre utredning)'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      3 = 'Kontroll'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      4 = 'Generert for Ø-hjelpspasient'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      5 = 'Friskt nyfødt barn'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      6 = 'Graviditet'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      7 = 'Omsorg, botilbud eller annet' /* Utgått før NPR-melding 53.1.1 - 2017 */
 	  10 = 'Utredning/behandling' /* Ny kode i NPR-melding 53.1.1 - 2017 */
-	  11 = 'RÃ¥d til henviser' /* Ny kode i NPR-melding 53.1.1 - 2017 */
-	  99 = 'Ã˜vrige henvisninger' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
+	  11 = 'Råd til henviser' /* Ny kode i NPR-melding 53.1.1 - 2017 */
+	  99 = 'Øvrige henvisninger' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
 	  
    value FRITTSYKEHUSVALG
       1 = 'Ja'  
@@ -75,7 +75,7 @@ value NPRID_REG
    value $FAGOMRADE
      '' = 'Manglende registrering'  
      '010' = 'Generell kirurgi'  
-     '020' = 'Barnekirurgi (under 15 Ã¥r)'  
+     '020' = 'Barnekirurgi (under 15 år)'  
      '030' = 'Gasteroenterologisk kirurgi'  
      '040' = 'Karkirurgi'  
      '050' = 'Ortopedisk kirurgi (inklusiv revmakirurgi)'  
@@ -88,25 +88,25 @@ value NPRID_REG
      '110' = 'Generell indremedisin'  
      '120' = 'Blodsykdommer (hematologi)'  
      '130' = 'Endokrinologi'  
-     '140' = 'FordÃ¸yelsessykdommer'  
+     '140' = 'Fordøyelsessykdommer'  
      '150' = 'Hjertesykdommer'  
      '160' = 'Infeksjonssykdommer'  
      '170' = 'Lungesykdommer'  
      '180' = 'Nyresykdommer'  
      '190' = 'Revmatiske sykdommer (revmatologi)'  
-     '200' = 'Kvinnesykdommer og elektiv fÃ¸dselshjelp'  
+     '200' = 'Kvinnesykdommer og elektiv fødselshjelp'  
      '210' = 'Anestesiologi'  
      '220' = 'Barnesykdommer'  
      '230' = 'Fysikalsk medisin og (re) habilitering'  
-     '231' = 'Rehabilitering'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-     '232' = 'Habilitering'   /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
+     '231' = 'Rehabilitering'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+     '232' = 'Habilitering'   /* Utgått før NPR-melding 53.1.1 - 2017 */
      '233' = 'Habilitering barn og unge'  
      '234' = 'Habilitering voksne'  
      '240' = 'Hud og veneriske sykdommer'  
      '250' = 'Nevrologi'  
      '260' = 'Klinisk nevrofysiologi'  
-     '290' = 'Ã˜re-nese-hals sykdommer'  
-     '300' = 'Ã˜yesykdommer'  
+     '290' = 'Øre-nese-hals sykdommer'  
+     '300' = 'Øyesykdommer'  
      '310' = 'Psykisk helsevern barn og unge'  
      '320' = 'Psykisk helsevern voksne'  
      '330' = 'Yrkes- og arbeidsmedisin'  
@@ -124,7 +124,7 @@ value NPRID_REG
      '823' = 'Medisinsk mikrobiologi'  
      '830' = 'Immunologi og transfusjonsmedisin'  
      '840' = 'Medisinsk genetikk'  
-     '851' = 'NukleÃ¦rmedisin'  
+     '851' = 'Nukleærmedisin'  
      '852' = 'Radiologi'  
      '853' = 'Onkologi'  
      '860' = 'Patologi'  
@@ -133,34 +133,34 @@ value NPRID_REG
 	 	 
    value HENVTILTJENESTE
       1 = 'Pasienten selv'  
-      2 = 'Fastlege/primÃ¦rlege'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      4 = 'Spesialisthelsetjeneste'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      5 = 'Barnehage, skolesektor, PPT'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      6 = 'Sosialtjeneste, barnevern'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      7 = 'Politi, fengsel, rettsvesen'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      8 = 'Rehabiliteringsinstitusjoner, sykehjem'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
+      2 = 'Fastlege/primærlege'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      4 = 'Spesialisthelsetjeneste'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      5 = 'Barnehage, skolesektor, PPT'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      6 = 'Sosialtjeneste, barnevern'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      7 = 'Politi, fengsel, rettsvesen'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      8 = 'Rehabiliteringsinstitusjoner, sykehjem'  /* Utgått før NPR-melding 53.1.1 - 2017 */
       9 = 'Andre tjenester'  
       10 = 'Privatpraktiserede spesialister'  
-      21 = 'Legevakt'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      22 = 'Kiropraktor'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      23 = 'Manuellterapeut'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-	  28 = 'Fastlege/primÃ¦rlege/legevaktslege' /* Ny kode i NPR-melding 53.1.1 - 2017 */
+      21 = 'Legevakt'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      22 = 'Kiropraktor'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      23 = 'Manuellterapeut'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+	  28 = 'Fastlege/primærlege/legevaktslege' /* Ny kode i NPR-melding 53.1.1 - 2017 */
       41 = 'Somatisk spesialisthelsetjeneste'  
       42 = 'Tverrfaglig spesialisert rusbehandling'  
-      43 = 'Distriktspsykiatrisk senter (DPS)'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
+      43 = 'Distriktspsykiatrisk senter (DPS)'  /* Utgått før NPR-melding 53.1.1 - 2017 */
 	  44 = 'Psykisk helsevern' /* Ny kode i NPR-melding 53.1.1 - 2017 */
-      49 = 'Annen institusjon innen psykisk helsevern'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      81 = 'Rehabiliteringsinstitusjoner'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-      82 = 'Sykehjem' /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
+      49 = 'Annen institusjon innen psykisk helsevern'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      81 = 'Rehabiliteringsinstitusjoner'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+      82 = 'Sykehjem' /* Utgått før NPR-melding 53.1.1 - 2017 */
 	  88 = 'Andre kommunale tjenester' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
 
    value NYTILSTAND
-      1 = 'FÃ¸rste gangs henvisning, ny tilstand'  
+      1 = 'Første gangs henvisning, ny tilstand'  
       2 = 'Tilstanden er diagnostisert tidligere' ;
 	  
    value DEBITOR
-      1 = 'OrdinÃ¦r pasient. Opphold finansiert gjennom ISF, HELFO, og ordinÃ¦r finansiering innen psykisk helse og TSB'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
-      11 = 'Konvensjonspasient behandlet ved Ã¸-hjelp'  
+      1 = 'Ordinær pasient. Opphold finansiert gjennom ISF, HELFO, og ordinær finansiering innen psykisk helse og TSB'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      11 = 'Konvensjonspasient behandlet ved ø-hjelp'  
       12 = 'Pasient  fra land uten konvensjonsavtale (selvbetalende)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       13	= 'Folketrygdfinansiert behandling via Helfo for pasienter bosatt i utlandet, men med medlemskap i folketrygden' /* ny 2020*/
       20 = 'Sykepengeprosjekt, Raskere tilbake'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
@@ -169,24 +169,24 @@ value NPRID_REG
       30 = 'Selvbetalende norsk pasient og selvbetalende konvensjonspasient'  
 	  32 = 'Selvbetalende pasient etter Eus pasientrettighetsdirektiv' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
       40 = 'Anbudspasient finansiert via ISF'  
-	  41 = 'Anbudspasient pÃ¥ avtalen for Helse Ã˜st RHF' /* Gammel og utgÃ¥tt kode */                          
-	  42 = 'Anbudspasient pÃ¥ avtalen for Helse SÃ¸r RHF' /* Gammel og utgÃ¥tt kode */ 
-      43 = 'Anbudspasient pÃ¥ avtalen for Helse Vest RHF'  
-      44 = 'Anbudspasient pÃ¥ avtalen for Helse Midt-Norge RHF'  
-      45 = 'Anbudspasient pÃ¥ avtalen for Helse Nord RHF'  
-      47 = 'Anbudspasient pÃ¥ avtalen for Helse SÃ¸r-Ã˜st RHF'  
+	  41 = 'Anbudspasient på avtalen for Helse Øst RHF' /* Gammel og utgått kode */                          
+	  42 = 'Anbudspasient på avtalen for Helse Sør RHF' /* Gammel og utgått kode */ 
+      43 = 'Anbudspasient på avtalen for Helse Vest RHF'  
+      44 = 'Anbudspasient på avtalen for Helse Midt-Norge RHF'  
+      45 = 'Anbudspasient på avtalen for Helse Nord RHF'  
+      47 = 'Anbudspasient på avtalen for Helse Sør-Øst RHF'  
       50 = 'Opphold hos avtalespesialist finansiert via ISF'  
-      51 = 'Regional kurdÃ¸gnfinansiering' /*ny 2020*/
+      51 = 'Regional kurdøgnfinansiering' /*ny 2020*/
       60 = 'Forsikringsfinansiert opphold'  
       70 = 'HELFO formidlet opphold ved fristbrudd'  
-      80 = 'Opphold pÃ¥ avtale med HF/RHF. Ikke anbudsavtale' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      80 = 'Opphold på avtale med HF/RHF. Ikke anbudsavtale' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       90 = 'Godkjent fritt behandlingsvalg (FBV)' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       99 = 'Annet' ;
 	   	  
    value $EPISODEFAG
 	 '' = 'Manglende registrering'  
      '010' = 'Generell kirurgi'  
-     '020' = 'Barnekirurgi (under 15 Ã¥r)'  
+     '020' = 'Barnekirurgi (under 15 år)'  
      '030' = 'Gasteroenterologisk kirurgi'  
      '040' = 'Karkirurgi'  
      '050' = 'Ortopedisk kirurgi (inklusiv revmakirurgi)'  
@@ -199,27 +199,27 @@ value NPRID_REG
      '110' = 'Generell indremedisin'  
      '120' = 'Blodsykdommer (hematologi)'  
      '130' = 'Endokrinologi'  
-     '140' = 'FordÃ¸yelsessykdommer'  
+     '140' = 'Fordøyelsessykdommer'  
      '150' = 'Hjertesykdommer'  
      '160' = 'Infeksjonssykdommer'  
      '170' = 'Lungesykdommer'  
      '180' = 'Nyresykdommer'  
      '190' = 'Revmatiske sykdommer (revmatologi)'  
-     '200' = 'Kvinnesykdommer og elektiv fÃ¸dselshjelp'  
+     '200' = 'Kvinnesykdommer og elektiv fødselshjelp'  
      '210' = 'Anestesiologi'  
      '220' = 'Barnesykdommer'  
      '230' = 'Fysikalsk medisin og (re) habilitering'  
-     '231' = 'Rehabilitering'  /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
-     '232' = 'Habilitering'   /* UtgÃ¥tt fÃ¸r NPR-melding 53.1.1 - 2017 */
+     '231' = 'Rehabilitering'  /* Utgått før NPR-melding 53.1.1 - 2017 */
+     '232' = 'Habilitering'   /* Utgått før NPR-melding 53.1.1 - 2017 */
      '233' = 'Habilitering barn og unge'  
      '234' = 'Habilitering voksne'  
      '240' = 'Hud og veneriske sykdommer'  
      '250' = 'Nevrologi'  
      '260' = 'Klinisk nevrofysiologi'  
-	 '270' = 'Ukjent fagomrÃ¥de, brukes i 2013 og 2014' /* Finner ikke kodeverdi i NPR-meldig eller pÃ¥ volven.no */
-	 '280' = 'Ukjent fagomrÃ¥de, brukes i 2013 og 2014' /* Finner ikke kodeverdi i NPR-meldig eller pÃ¥ volven.no */
-     '290' = 'Ã˜re-nese-hals sykdommer'  
-     '300' = 'Ã˜yesykdommer'  
+	 '270' = 'Ukjent fagområde, brukes i 2013 og 2014' /* Finner ikke kodeverdi i NPR-meldig eller på volven.no */
+	 '280' = 'Ukjent fagområde, brukes i 2013 og 2014' /* Finner ikke kodeverdi i NPR-meldig eller på volven.no */
+     '290' = 'Øre-nese-hals sykdommer'  
+     '300' = 'Øyesykdommer'  
      '310' = 'Psykisk helsevern barn og unge'  
      '320' = 'Psykisk helsevern voksne'  
      '330' = 'Yrkes- og arbeidsmedisin'  
@@ -237,7 +237,7 @@ value NPRID_REG
      '823' = 'Medisinsk mikrobiologi'  
      '830' = 'Immunologi og transfusjonsmedisin'  
      '840' = 'Medisinsk genetikk'  
-     '851' = 'NukleÃ¦rmedisin'  
+     '851' = 'Nukleærmedisin'  
      '852' = 'Radiologi'  
      '853' = 'Onkologi'  
      '860' = 'Patologi'  
@@ -256,11 +256,11 @@ value NPRID_REG
       10 = 'Pasienthotell'  
       11 = 'Sykehjem/aldershjem'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       12 = 'Ugyldig kode - Annen enhet innen TSB ved egen helseinstitusjon'  /* Ikke i NPR-melding 53.1.1 */
-      13 = 'Ugyldig kode - IntermediÃ¦renhet/forsterket sykehjem'  /* Ikke i NPR-melding 53.1.1 */
+      13 = 'Ugyldig kode - Intermediærenhet/forsterket sykehjem'  /* Ikke i NPR-melding 53.1.1 */
       14 = 'Ugyldig kode - Kommunal legevakt'  /* Ikke i NPR-melding 53.1.1 */
       15 = 'Ugyldig kode'  /* Ikke i NPR-melding 53.1.1 */
       16 = 'Ugyldig kode - Distriktspsykiatrisk senter'  /* Ikke i NPR-melding 53.1.1 */
-      21 = 'Kommunal akutt dÃ¸gnenhet (KAD)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      21 = 'Kommunal akutt døgnenhet (KAD)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       22 = 'Ugyldig kode - Barneverninstitusjon'  /* Ikke i NPR-melding 53.1.1 */
 	  23 = 'Ugyldig kode - Beredskapshjem/fosterhjem'  /* Ikke i NPR-melding 53.1.1 */
 	  88 = 'Annet'
@@ -273,15 +273,15 @@ value NPRID_REG
  
    value INNTILSTAND
       1 = 'Levende ved ankomst til institusjon'  
-      2 = 'DÃ¸d ved ankomst'  
-      3 = 'Levende fÃ¸dt i sykehus' ;
+      2 = 'Død ved ankomst'  
+      3 = 'Levende født i sykehus' ;
 	  
    value INNMATEHAST
       1 = 'Akutt = uten opphold / venting'  
       2 = 'Ikke akutt, men behandling innen 6 timer'  
       3 = 'Venting mellom 6 og 24 timer'  
       4 = 'Planlagt' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
-	  5 = 'TilbakefÃ¸ring av pasient fra annet sykehus';
+	  5 = 'Tilbakeføring av pasient fra annet sykehus';
 	  
    value TILSTED
       1 = 'Bosted/arbeidssted'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
@@ -295,11 +295,11 @@ value NPRID_REG
       10 = 'Pasienthotell'  
       11 = 'Sykehjem/aldershjem'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       12 = 'Ugyldig kode - Annen enhet innen TSB ved egen helseinstitusjon'  /* Ikke i NPR-melding 53.1.1 */
-      13 = 'Ugyldig kode - IntermediÃ¦renhet/forsterket sykehjem'  /* Ikke i NPR-melding 53.1.1 */
+      13 = 'Ugyldig kode - Intermediærenhet/forsterket sykehjem'  /* Ikke i NPR-melding 53.1.1 */
       14 = 'Ugyldig kode - Kommunal legevakt'  /* Ikke i NPR-melding 53.1.1 */
       15 = 'Ugyldig kode'  /* Ikke i NPR-melding 53.1.1 */
       16 = 'Ugyldig kode - Distriktspsykiatrisk senter'  /* Ikke i NPR-melding 53.1.1 */
-      21 = 'Kommunal akutt dÃ¸gnenhet (KAD)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      21 = 'Kommunal akutt døgnenhet (KAD)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       22 = 'Ugyldig kode - Barneverninstitusjon'  /* Ikke i NPR-melding 53.1.1 */
 	  23 = 'Ugyldig kode - Beredskapshjem/fosterhjem'  /* Ikke i NPR-melding 53.1.1 */
 	  88 = 'Annet'
@@ -312,17 +312,17 @@ value NPRID_REG
 	  
    value UTTILSTAND
       1 = 'Som levende'  
-      2 = 'Som dÃ¸d'  
+      2 = 'Som død'  
       3 = 'Suicid' ;
 	  
    value TYPETIDSPUNKT
       1 = 'Tidspunkt for varsling til kommunen om innlagt pasient'  
-      2 = 'Tidspunkt for nÃ¥r pasient er utskrivningsklar'  
+      2 = 'Tidspunkt for når pasient er utskrivningsklar'  
       3 = 'Tidspunkt for varsel til kommunen om utskrivningsklar pasient'  
       4 = 'Tidspunkt for avmelding av pasient'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       6 = 'Tidspunkt for melding til sykehuset om at kommunen ikke kan ta imot pasient'  
       7 = 'Tidspunkt for melding til sykehuset om at kommunen kan ta imot pasient'  
-      12 = 'Tidspunkt for nÃ¥r pasient er overfÃ¸ringsklar' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
+      12 = 'Tidspunkt for når pasient er overføringsklar' /* Ny tekst i NPR-melding 53.1.1 - 2017 */
 	  31 = 'Helfo varslet om fristbrudd' /* Ny kode i NPR-melding 53.1.1 - 2017 */
 	  32 = 'Avtale med pasient om at Helfo ikke skal varsles om fristbrudd' /* Ny kode i NPR-melding 53.1.1 - 2017 */ ;
   
@@ -331,13 +331,13 @@ value NPRID_REG
       2 = 'Poliklinisk kontakt' ;
 	  
    value OMSORGSNIVA
-      1 = 'DÃ¸gnopphold'  
+      1 = 'Døgnopphold'  
       2 = 'Dagbehandling'  
       3 = 'Poliklinisk konsultasjon/kontakt'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
-      8 = 'Poliklinisk kontakt for inneliggende pasient - for strÃ¥leterapi' /* Ny tekst i NPR-melding 53.1.1 - 2017 (LL har lagt til "for strÃ¥leterapi", se volven.no) */ ;
+      8 = 'Poliklinisk kontakt for inneliggende pasient - for stråleterapi' /* Ny tekst i NPR-melding 53.1.1 - 2017 (LL har lagt til "for stråleterapi", se volven.no) */ ;
 	  
- /*  value OPPHOLDSTYPE - Variabelen er ikke lenger i bruk. SvÃ¦rt fÃ¥ episoder har informasjon om oppholdstype i 2017. 
-      1 = 'HeldÃ¸gnsopphold'  
+ /*  value OPPHOLDSTYPE - Variabelen er ikke lenger i bruk. Svært få episoder har informasjon om oppholdstype i 2017. 
+      1 = 'Heldøgnsopphold'  
       2 = 'Dagopphold' ; */
 	  
    value KONTAKTTYPE
@@ -345,16 +345,16 @@ value NPRID_REG
       2 = 'Behandling'  
       3 = 'Kontroll'  
       5 = 'Indirekte pasientkontakt'  /*Arbeid eller aktivitet knyttet til helsehjelpen som gis til en pasient uten at pasienten deltar.*/
-      6 = 'Videokonsultasjon' /*Polikliniske konsultasjoner med pasient gjennomfÃ¸rt over video som oppfyller krav i ISF-regelverket for videokonsultasjoner. Midlertidig kode*/
-      7 = 'Telefonkonsultasjon' /*Tidl. 'Telefonkonsultasjon med egenandel'. Polikliniske konsultasjoner med pasient gjennomfÃ¸rt over telefon som oppfyller krav i ISF-regelverket for telefonkonsultasjoner. Midlertidig kode med egenandel*/
+      6 = 'Videokonsultasjon' /*Polikliniske konsultasjoner med pasient gjennomført over video som oppfyller krav i ISF-regelverket for videokonsultasjoner. Midlertidig kode*/
+      7 = 'Telefonkonsultasjon' /*Tidl. 'Telefonkonsultasjon med egenandel'. Polikliniske konsultasjoner med pasient gjennomført over telefon som oppfyller krav i ISF-regelverket for telefonkonsultasjoner. Midlertidig kode med egenandel*/
       12 = 'Pasientadministrert behandling'  
-      13 = 'OpplÃ¦ring'
+      13 = 'Opplæring'
 	  14 = 'Screening'
 	  99 = 'Annet';
 	  
 	  
    value STEDAKTIVITET
-      1 = 'PÃ¥ egen helseinstitusjon'  
+      1 = 'På egen helseinstitusjon'  
       2 = 'Hos ekstern instans'  
       3 = 'Telemedisinsk behandling (der behandlende lege er)' /* Ny tekst i NPR-melding 53.1.1 - 2017 */ 
       4 = 'Hjemme hos pasienten'  
@@ -368,27 +368,27 @@ value NPRID_REG
       3 = 'Familiebehandling'  
       4 = 'Gruppebehandling'  
       5 = 'Annet'  
-      6 = 'MiljÃ¸terapi'  
+      6 = 'Miljøterapi'  
       7 = 'Nettverksterapi'  
       8 = 'Fysisk trening' ;
 	  
    value POLINDIR
-      1 = 'ErklÃ¦ring/uttalelse/melding'  
-      2 = 'MÃ¸te. Samarbeid (om pasient) med annet helsepersonell i spesialisthelsetjenesten'  
-	 22 = 'SamarbeidsmÃ¸te (om pasient) med fÃ¸rstelinjetjenesten' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
-	 23 = 'SamarbeidsmÃ¸te (om pasient) med annen tjeneste' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+      1 = 'Erklæring/uttalelse/melding'  
+      2 = 'Møte. Samarbeid (om pasient) med annet helsepersonell i spesialisthelsetjenesten'  
+	 22 = 'Samarbeidsmøte (om pasient) med førstelinjetjenesten' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+	 23 = 'Samarbeidsmøte (om pasient) med annen tjeneste' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
 	  3 = 'Aktivitetsgruppe'  
       5 = 'Brev'  
       6 = 'e-post'  
       7 = 'Telefon (uten pasientens deltakelse)'  
-	 71 = 'TelefonmÃ¸te (om pasient) med fÃ¸rstelinjetjenesten' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+	 71 = 'Telefonmøte (om pasient) med førstelinjetjenesten' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
       8 = 'Tele-/videokonferanse (uten pasientens deltakelse)'  /* Ny tekst i NPR-melding 53.1.1 - 2017 */
       11 = 'Telemedisin (med pasientens deltakelse)'  
       12 = 'Telefonsamtale med pasient' /*Samtale med pasient. Omfatter kun enkle samtaler som ikke oppfyller kravene til telefonkonsultasjon.*/
-      13 = 'Telefonkonsultasjon med egenandel' /*ny 2020, utgÃ¥r fra 01.01.2021 */
-	  17 = 'Videokonsultasjoner' /*UtgÃ¥r fra 01.01.2021 */
+      13 = 'Telefonkonsultasjon med egenandel' /*ny 2020, utgår fra 01.01.2021 */
+	  17 = 'Videokonsultasjoner' /*Utgår fra 01.01.2021 */
 	  18 = 'Videosamtaler ol.'
-      21 = 'Teknisk episode (pakkeforlÃ¸p, innregistrering kvalitetsregistre)' /*Skal brukes dersom det mÃ¥ opprettes en teknisk episode for registrering av prosedyrer PakkeforlÃ¸p og innrapportering til kvalitetsregistre*/
+      21 = 'Teknisk episode (pakkeforløp, innregistrering kvalitetsregistre)' /*Skal brukes dersom det må opprettes en teknisk episode for registrering av prosedyrer Pakkeforløp og innrapportering til kvalitetsregistre*/
 	  ;
 	  
 
@@ -430,34 +430,34 @@ value NPRID_REG
    value REHABTYPE /* Ikke oppgitt i utlevering 2018 */
      1 = 'Vanlig'  
      2 = 'Kompleks'  
-     3 = 'SekundÃ¦r' ;
+     3 = 'Sekundær' ;
 	 
    value HDG /* Hentet fra ISF-regleverket 2017 */
       1 = 'Sykdommer i nervesystemet'  
-      2 = 'Ã˜yesykdommer'  
-      3 = 'Ã˜re-, nese- og halssykdommer'  
-      4 = 'Sykdommer i Ã¥ndedrettsorganene'  
+      2 = 'Øyesykdommer'  
+      3 = 'Øre-, nese- og halssykdommer'  
+      4 = 'Sykdommer i åndedrettsorganene'  
       5 = 'Sykdommer i sirkulasjonsorganene'  
-      6 = 'Sykdommer i fordÃ¸yelsesorganene'  
+      6 = 'Sykdommer i fordøyelsesorganene'  
       7 = 'Sykdommer i lever, galleveier og bukspyttkjertel'  
       8 = 'Sykdommer i muskel-, skjelettsystemet og bindevev'  
       9 = 'Sykdommer i hud og underhud'  
-      10 = 'Indresekretoriske-, ernÃ¦rings- og stoffskiftesykdommer'  
+      10 = 'Indresekretoriske-, ernærings- og stoffskiftesykdommer'  
       11 = 'Nyre- og urinveissykdommer'  
-      12 = 'Sykdommer i mannlige kjÃ¸nnsorganer'  
-      13 = 'Sykdommer i kvinnelige kjÃ¸nnsorganer'  
-      14 = 'Sykdommer under svangerskap, fÃ¸dsel og barseltid'  
-      15 = 'NyfÃ¸dte med tilstander som har oppstÃ¥tt i perinatalperioden'  
+      12 = 'Sykdommer i mannlige kjønnsorganer'  
+      13 = 'Sykdommer i kvinnelige kjønnsorganer'  
+      14 = 'Sykdommer under svangerskap, fødsel og barseltid'  
+      15 = 'Nyfødte med tilstander som har oppstått i perinatalperioden'  
       16 = 'Sykdommer i blod, bloddannende organer og immunapparat'  
       17 = 'Myeloproliferative sykdommer og lite differensierte svulster'  
-      18 = 'InfeksiÃ¸se og parasittÃ¦re sykdommer'  
+      18 = 'Infeksiøse og parasittære sykdommer'  
       19 = 'Psykiske lidelser og rusproblemer'  
       21 = 'Skade, forgiftninger og toksiske effekter av medikamenter/andre stoffer, medikamentmisbruk og organiske sinnslidelser fremkalt av disse'  
       22 = 'Forbrenninger'  
-      23 = 'Faktorer som pÃ¥virker helsetilstand - andre kontakter med helsetjenesten'
+      23 = 'Faktorer som påvirker helsetilstand - andre kontakter med helsetjenesten'
       24 = 'Signifikant multitraume'
       30 = 'Sykdommer i bryst'  
-      40 = 'Kategorier pÃ¥ tvers av flere hoveddiagnosegrupper'  
+      40 = 'Kategorier på tvers av flere hoveddiagnosegrupper'  
       99 = 'Kategorier for feil og uvanlige diagnose-prosedyrekombinasjoner' ;
 	  
    value UTFORENDEHELSEPERSON /* Antar denne er lik value label for polUtforende */
@@ -471,15 +471,15 @@ value NPRID_REG
       8 = 'Jordmor'  
       9 = 'Annet helsepersonell'  
       11 = 'Audiograf'  
-      12 = 'BioingeniÃ¸r'  
+      12 = 'Bioingeniør'  
       13 = 'Ergoterapeut'  
       14 = 'Fysioterapeut'  
-      15 = 'Klinisk ernÃ¦ringsfysiolog'  
+      15 = 'Klinisk ernæringsfysiolog'  
       16 = 'Radiograf'  
       17 = 'Tannlege' 
 	  18 = 'Ortoptist' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
-	  19 = 'OrtopediingeniÃ¸r' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
-	  20 = 'FarmasÃ¸yt' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+	  19 = 'Ortopediingeniør' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
+	  20 = 'Farmasøyt' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
 	  21 = 'Fotterapeut' /* Ny kode i NPR-melding 53.1.1 - 2017 */ 
      22 = 'Genetiker'   /* ny 2020 */
      23 = 'Logoped'  /* ny 2020 */
@@ -488,14 +488,14 @@ value NPRID_REG
      26 = 'Audiofysiker'  /* ny 2020 */
      27 = 'Kiropraktor'  /* ny 2020 */
      28 = 'Helsesykepleier'  /* ny 2020 */
-     29 = 'StrÃ¥leterapeut'  /* ny 2020 */ 
+     29 = 'Stråleterapeut'  /* ny 2020 */ 
      30 = 'Tannpleier' /* fra 2020 */
      ;
    
    value GYLDIG /* Ikke oppgitt i utlevering 2018 */
       0 = ' ' /* Gjelder kun NCRP i 2017. Fikk vite betydningen fra Marte Kjelvik i NPR. */ 
       1 = 'Gyldig'  
-      8 = 'UtgÃ¥tt - mÃ¥ oppdateres'  
+      8 = 'Utgått - må oppdateres'  
       9 = 'Ugyldig' ;	  
     
    value ISF_OPPHOLD /* Ikke oppgitt i utlevering 2018 */
@@ -511,7 +511,7 @@ value NPRID_REG
       5 = 'Polikl'  
       6 = 'Polikl rehab'  
       7 = 'Polikl kjemoterapi'  
-      8 = 'Polikl strÃ¥leterapi'  
+      8 = 'Polikl stråleterapi'  
       9 = 'Dialyse 0 lgd' ;
 	  
    value AKTIVITETSKATEGORI2F
@@ -519,7 +519,7 @@ value NPRID_REG
       2 = 'Poliklinisk konsultasjon' ;
 	  
    value AKTIVITETSKATEGORI3F
-      1 = 'DÃ¸gnopphold'  
+      1 = 'Døgnopphold'  
       2 = 'Dagbehandling'  
       3 = 'Poliklinisk konsultasjon' ;
 	  
@@ -533,49 +533,49 @@ value pakkeforlop
 1 = 'Ja'
 2 = 'Nei';
 
-value ICD_KAP /* Sjekket mot og oppdatert basert pÃ¥ ICD-10 versjon 2017 pÃ¥ ehelse.no */
+value ICD_KAP /* Sjekket mot og oppdatert basert på ICD-10 versjon 2017 på ehelse.no */
       1 = 'Kapittel I Visse infeksjonssykdommer og parasittsykdommer (A00-B99)'  
       2 = 'Kapittel II Svulster (C00-D48)'  
-      3 = 'Kapittel III Sykdommer i blod og bloddannende organer og visse tilstander som angÃ¥r immunsystemet (D50-D89)'  
-      4 = 'Kapittel IV Endokrine sykdommer, ernÃ¦ringssykdommer og metabolske forstyrrelse (E00-E90)'  
+      3 = 'Kapittel III Sykdommer i blod og bloddannende organer og visse tilstander som angår immunsystemet (D50-D89)'  
+      4 = 'Kapittel IV Endokrine sykdommer, ernæringssykdommer og metabolske forstyrrelse (E00-E90)'  
       5 = 'Kapittel V Psykiske lidelser og atferdsforstyrrelser (F00-F99)'  
       6 = 'Kapittel VI Sykdommer i nervesystemet (G00-G99)'  
-      7 = 'Kapittel VII Sykdommer i Ã¸yet og Ã¸yets omgivelser (H00-H59)'  
-      8 = 'Kapittel VIII Sykdommer i Ã¸re og Ã¸rebensknute (processus mastoideus) (H60-H95)'  
+      7 = 'Kapittel VII Sykdommer i øyet og øyets omgivelser (H00-H59)'  
+      8 = 'Kapittel VIII Sykdommer i øre og ørebensknute (processus mastoideus) (H60-H95)'  
       9 = 'Kapittel IX Sykdommer i sirkulasjonssystemet (I00-I99)'  
-      10 = 'Kapittel X Sykdommer i Ã¥ndedrettssystemet (J00-J99)'  
-      11 = 'Kapittel XI Sykdommer i fordÃ¸yelsessystemet (K00-K93)'  
+      10 = 'Kapittel X Sykdommer i åndedrettssystemet (J00-J99)'  
+      11 = 'Kapittel XI Sykdommer i fordøyelsessystemet (K00-K93)'  
       12 = 'Kapittel XII Sykdommer i hud og underhud (L00-L99)'  
       13 = 'Kapittel XIII Sykdommer i muskel-skjelettsystemet og bindevev (M00-M99)'  
-      14 = 'Kapittel XIV Sykdommer i urin- og kjÃ¸nnsorganer (N00-N99)'  
-      15 = 'Kapittel XV Svangerskap, fÃ¸dsel og barseltid (O00-O99)'  
-      16 = 'Kapittel XVI Visse tilstander som oppstÃ¥r i perinatalperioden (P00-P96)'  
-      17 = 'Kapittel XVII MedfÃ¸dte misdannelser, deformiteter og kromosomavvik (Q00-Q99)'  
+      14 = 'Kapittel XIV Sykdommer i urin- og kjønnsorganer (N00-N99)'  
+      15 = 'Kapittel XV Svangerskap, fødsel og barseltid (O00-O99)'  
+      16 = 'Kapittel XVI Visse tilstander som oppstår i perinatalperioden (P00-P96)'  
+      17 = 'Kapittel XVII Medfødte misdannelser, deformiteter og kromosomavvik (Q00-Q99)'  
       18 = 'Kapittel XVIII Symptomer, tegn, unormale kliniske funn og laboratoriefunn,IKAS (R00-R99)'  
-      19 = 'Kapittel XIX Skader, forgiftninger og visse andre konsekvenser av ytre Ã¥rsaker (S00-T98)'  
-      20 = 'Kapittel XX Ytre Ã¥rsaker til sykdommer, skader og dÃ¸dsfall (V0n-Y98)'  
+      19 = 'Kapittel XIX Skader, forgiftninger og visse andre konsekvenser av ytre årsaker (S00-T98)'  
+      20 = 'Kapittel XX Ytre årsaker til sykdommer, skader og dødsfall (V0n-Y98)'  
       21 = 'Kapittel XXI Faktorer som har betydning for helsetilstand og kontakt med helsetjenesten (Z00-Z99)' ;
 
 value individuellplan /* ny 2020 */
       1	 = 'Pasienten oppfyller ikke kriteriene'
-      2	 = 'Pasienten har avslÃ¥tt tilbud om IP'
+      2	 = 'Pasienten har avslått tilbud om IP'
       4	 = 'IP er under arbeid i spesialisthelsethenesten'
       5	 = 'Pasienten har allerede en IP'
       9	 = 'Ukjent med status for individuell plan'
       11	 = 'Pasienten oppfyller kriteriene'
-      21	 = 'Pasienten Ã¸nsker individuell plan, samtykke foreligger'
+      21	 = 'Pasienten ønsker individuell plan, samtykke foreligger'
       31	 = 'Melding om behov for IP sendt kommunen'
       101 = 'Ja, virksom plan'
       102 = 'Nei, individuell plan er ikke utarbeidet/planprosess ikke igangsatt'
-      103 = 'Nei, Ã¸nsker ikke individuell plan'
+      103 = 'Nei, ønsker ikke individuell plan'
       104 = 'Nei, oppfyller ikke retten til individuell plan'
       105 = 'Melding om behov for individuell plan er sendt kommunen'
       106 = 'Ukjent med status';
 
 value epikriseSamtykke /* ny 2020 */
       1 = 'Ja, samtykke er innhentet'
-      2 = 'Pasientens samtykke er ikke pÃ¥krevet i dette tilfellet'
-      3 = 'Svar pÃ¥ forespÃ¸rsel e.l. som pasienten har gitt samtykke til'
+      2 = 'Pasientens samtykke er ikke påkrevet i dette tilfellet'
+      3 = 'Svar på forespørsel e.l. som pasienten har gitt samtykke til'
       4 = 'Nei, pasienten har ikke gitt sitt samtykke';
 
 value spesialist /* ny 2020 */
@@ -589,7 +589,7 @@ value rolle /* ny 2020*/
       
 value fylke /* added 08.04.2021*/
       0	= '0	Ugyldig/blank'
-      1	= '1	Ã˜stfold'
+      1	= '1	Østfold'
       2	= '2	Akershus'
       3	= '3	Oslo'
       4	= '4	Hedmark'
@@ -602,9 +602,9 @@ value fylke /* added 08.04.2021*/
       11	= '11 Rogaland'
       12	= '12 Hordaland'
       14	= '14 Sogn og Fjordane'
-      15	= '15 MÃ¸re og Romsdal'
-      16	= '16 SÃ¸r-TrÃ¸ndelag'
-      17	= '17 Nord-TrÃ¸ndelag'
+      15	= '15 Møre og Romsdal'
+      16	= '16 Sør-Trøndelag'
+      17	= '17 Nord-Trøndelag'
       18	= '18 Nordland'
       19	= '19 Troms'
       20	= '20 Finnmark'
@@ -614,7 +614,7 @@ value fylke /* added 08.04.2021*/
       38 = '38 Vestfold og Telemark'   /* ny 2020*/
       42 = '42 Agder'                  /* ny 2020*/
       46 = '46 Vestland'               /* ny 2020*/
-      50 = '50 TrÃ¸ndelag'              
+      50 = '50 Trøndelag'              
       54 = '54 Troms og Finnmark'      /* ny 2020*/
       88	= '88 Ikke spesifisert'
       99	= '99 Utlendinger'
@@ -628,7 +628,7 @@ value region /* added 08.04.2021*/
       4 = 'Helse Midt-Norge'
       5 = 'Helse Nord'
       6 = 'Utlendinger/annet'
-      7 = 'Helse SÃ¸r-Ã˜st'
+      7 = 'Helse Sør-Øst'
       9 = 'Utlendinger/annet' /* ny 2021 - erstatter #6 */;
 
 value SEKTOR

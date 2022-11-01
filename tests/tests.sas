@@ -1,6 +1,6 @@
 /*!
-Hovedtestfil som leser inn alle testene, slik at disse kan kjÃ¸res.
-Inneholder ogsÃ¥ felles makroer som testene bruker.
+Hovedtestfil som leser inn alle testene, slik at disse kan kjøres.
+Inneholder også felles makroer som testene bruker.
 */
 
 /* Inkluder alle testene */
@@ -23,7 +23,7 @@ Inneholder ogsÃ¥ felles makroer som testene bruker.
 
 %macro test(branch = master, lag_ny_referanse = 0);
 /*!
-Makro som kjÃ¸rer alle testene
+Makro som kjører alle testene
 */
 
 %deleteAll;
@@ -51,22 +51,22 @@ Makro som kjÃ¸rer alle testene
 %macro sammenlignData(fil =, lagReferanse = 0, crit =);
 
 /*!
-Makro for Ã¥ sammenligne to datasett, der referansedatasettet ligger i mappa filbane/tests/data/a\`.
+Makro for å sammenligne to datasett, der referansedatasettet ligger i mappa filbane/tests/data/a\`.
 
 */
 
 %if &lagReferanse ne 0 %then %do;
 /*
-Lagre data pÃ¥ disk
+Lagre data på disk
 */
 
 data tmp;
 set &fil;
-/* Fjern alle formater fÃ¸r lagring */
+/* Fjern alle formater før lagring */
 FORMAT _ALL_ ; 
 run;
 
-/* Lagre data som csv pÃ¥ disk */
+/* Lagre data som csv på disk */
 proc export data=tmp outfile="&filbane/tests/data/&fil..csv" dbms=csv replace;
 run;
 
@@ -77,16 +77,16 @@ proc import datafile = "&filbane/tests/data/&fil..csv" out=ref_&fil dbms=csv rep
 run;
 
 /*
-Lagre som csv og importer tilbake igjen, for Ã¥ fÃ¥ mest mulig likt utgangspunkt
+Lagre som csv og importer tilbake igjen, for å få mest mulig likt utgangspunkt
 */
 
 data tmp;
 set &fil; 
-/* Fjern alle formater fÃ¸r lagring */
+/* Fjern alle formater før lagring */
 FORMAT _ALL_ ; 
 run;
 
-/* Skriv data til csv pÃ¥ work og importer data fra samme fil, for Ã¥ fÃ¥ tilsvarende data som referanse */
+/* Skriv data til csv på work og importer data fra samme fil, for å få tilsvarende data som referanse */
 proc export data=tmp outfile="%sysfunc(pathname(work))\tmp.csv" dbms=csv replace;
 run;
 proc import datafile = "%sysfunc(pathname(work))\tmp.csv" out=test_&fil dbms=csv replace;

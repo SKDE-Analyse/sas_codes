@@ -1,5 +1,5 @@
-/* Makroen lager formater basert pÃ¥ SAS-datasett lokalisert pÃ¥ mappen HNREF */
-/* SAS-datasettene pÃ¥ HNREF er lagd ut fra CSV-filen 'behandler.csv', se: ../formater/beh_csv_fmtfil.sas. */
+/* Makroen lager formater basert på SAS-datasett lokalisert på mappen HNREF */
+/* SAS-datasettene på HNREF er lagd ut fra CSV-filen 'behandler.csv', se: ../formater/beh_csv_fmtfil.sas. */
 /* Sist endret: Janice 17.06.2021 */
 proc format cntlin=hnref.fmtfil_behsh; run;
 proc format cntlin=hnref.fmtfil_behhf; run;

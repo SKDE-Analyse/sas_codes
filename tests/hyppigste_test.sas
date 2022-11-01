@@ -1,24 +1,24 @@
 %macro hyppigste_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
-Makro for Ã¥ teste hyppigste-makro.
+Makro for å teste hyppigste-makro.
 
-KjÃ¸rer hyppigste-makroen pÃ¥ et test-datasett (`test.hyppigste_start`).
+Kjører hyppigste-makroen på et test-datasett (`test.hyppigste_start`).
 Sammenligner dette datasettet med en referanse (`test.ref_hyppigste_&navn`).
 
 ### Parametre
 
-- `branch = master`: Bestemmer hvilken hyppigste-makro som kjÃ¸res (hvilken mappe den ligger i)
+- `branch = master`: Bestemmer hvilken hyppigste-makro som kjøres (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset_:`.
-- `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.hyppigste_start` pÃ¥ nytt.
-- `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_hyppigste_&navn` pÃ¥ nytt.
+- `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.hyppigste_start` på nytt.
+- `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_hyppigste_&navn` på nytt.
 
 */
 
 %include "&filbane/makroer/hyppigste.sas";
 
 /*
-Lage nytt startsett, basert pÃ¥ test.pseudosens_avd_magnus og test.pseudosens_avtspes_magnus
+Lage nytt startsett, basert på test.pseudosens_avd_magnus og test.pseudosens_avtspes_magnus
 etter eoc.
 */ 
 %if &lagNyStart ne 0 %then %do;
@@ -42,7 +42,7 @@ proc delete data = tmp;
 
 #### Test default
 
-KjÃ¸rer med `%hyppigste(VarName=hdiag, data_inn=test.hyppigste_start, test = hyppigste_&navn);`
+Kjører med `%hyppigste(VarName=hdiag, data_inn=test.hyppigste_start, test = hyppigste_&navn);`
 
 */
 
@@ -55,7 +55,7 @@ KjÃ¸rer med `%hyppigste(VarName=hdiag, data_inn=test.hyppigste_start, test = hyp
 /*!
 #### Test Ant_i_liste
 
-KjÃ¸rer med `Ant_i_liste = 20`
+Kjører med `Ant_i_liste = 20`
 
 */
 
@@ -68,7 +68,7 @@ KjÃ¸rer med `Ant_i_liste = 20`
 /*!
 #### Test VarName
 
-KjÃ¸rer med `VarName=behsh`
+Kjører med `VarName=behsh`
 
 */
 
@@ -81,7 +81,7 @@ KjÃ¸rer med `VarName=behsh`
 /*!
 #### Test where
 
-KjÃ¸rer med `Where=Where Behrhf=1`
+Kjører med `Where=Where Behrhf=1`
 
 */
 

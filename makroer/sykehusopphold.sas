@@ -1,10 +1,10 @@
 /* This is a macro to replace the old Episode of Care */
 /* It takes the aggrshoppID_Lnr from NPR as a starting point, 
-   and adds on overf√∏ring to other sykehus within a specified time (defult 8 hours) */
+   and adds on overf¯ring to other sykehus within a specified time (defult 8 hours) */
    
 %macro sykehusopphold(
   dsn=, 
-  overforing_tid=28800 /*tid mellom opphold sammensl√•ing*/, 
+  overforing_tid=28800 /*tid mellom opphold sammenslÂing*/, 
   forste_hastegrad = 1, 
   behold_datotid=0,
   nulle_liggedogn = 0,
@@ -12,8 +12,8 @@
 /*!
 
  ### Beskrivelse
-Makro for √• markere opphold som regnes som en sykehusepisode. 
-Inndatasettet m√• inneholde pid, inndato, utdato, inntid, uttid, aar, alder, aggrshoppid_lnr, aktivitetskategori3, hastegrad, uttilstand, behsh
+Makro for Â markere opphold som regnes som en sykehusepisode. 
+Inndatasettet mÂ inneholde pid, inndato, utdato, inntid, uttid, aar, alder, aggrshoppid_lnr, aktivitetskategori3, hastegrad, uttilstand, behsh
 
 ```
 %sykehusopphold(dsn=, overforing_tid=28800, forste_hastegrad=1, behold_datotid=0, nulle_liggedogn=0, minaar=0);
@@ -21,40 +21,40 @@ Inndatasettet m√• inneholde pid, inndato, utdato, inntid, uttid, aar, alder, agg
 ### Parametre
 
 ### Input
-- `dsn`: datasett man utf√∏rer analysen p√• 
-- `overforing_tid` (=28800): tidskrav i sekunder (default 8 timer) for opphold med tidsdifferanse - m√• v√¶re et tall
-- `forste_hastegrad` (=1): Hastegrad for f√∏rste kontakt hvis ulik 0. Hvis 0: hastegrad for f√∏rste d√∏gnopphold
-- `behold_datotid` (=0): Hvis ulik 0, s√• beholdes disse 
-- `nulle_liggedogn` (=0): Hvis forskjellig fra null, s√• settes antall SHO_liggedogn til null hvis opphold er <8 timer
-- `minaar` (=0): dersom man √∏nsker √• bruke f√∏rste opphold for √• definere SHO_Aar
+- `dsn`: datasett man utf¯rer analysen pÂ 
+- `overforing_tid` (=28800): tidskrav i sekunder (default 8 timer) for opphold med tidsdifferanse - mÂ vÊre et tall
+- `forste_hastegrad` (=1): Hastegrad for f¯rste kontakt hvis ulik 0. Hvis 0: hastegrad for f¯rste d¯gnopphold
+- `behold_datotid` (=0): Hvis ulik 0, sÂ beholdes disse 
+- `nulle_liggedogn` (=0): Hvis forskjellig fra null, sÂ settes antall SHO_liggedogn til null hvis opphold er <8 timer
+- `minaar` (=0): dersom man ¯nsker Â bruke f¯rste opphold for Â definere SHO_Aar
   
 Episode of care omfatter da:
-- Dersom inndatotid p√• nytt opphold er f√∏r utdatotid p√• forrige opphold
-- Dersom nytt opphold er innen *x* sekunder fra utdatotid p√• forrige opphold
+- Dersom inndatotid pÂ nytt opphold er f¯r utdatotid pÂ forrige opphold
+- Dersom nytt opphold er innen *x* sekunder fra utdatotid pÂ forrige opphold
 
 
  
 ### Output
 Makroen lager 12 (eventuelt 14) nye variabler:
-1.  `SHO_nr_pid`: Nummererte SHO-opphold pr pid, dersom SHO best√•r av flere opphold har disse samme nummer
+1.  `SHO_nr_pid`: Nummererte SHO-opphold pr pid, dersom SHO bestÂr av flere opphold har disse samme nummer
 2.  `SHO_id`: Unik ID per sykehusopphold (pid+SHO_nr_pid)
 3.  `SHO_Intern_nr`: Nummerer oppholdene innenfor hver SHO for hver pid
 4.  `SHO_Antall_i_SHO`: Antall opphold i SHO
-5.  `SHO_inndato`: inndato p√• f√∏rste opphold i SHO
-6.  `SHO_utdato`: utdato p√• siste opphold i SHO
-7.  [eventuelt] `SHO_inndatotid`: inntid (dato og tidspunkt) p√• f√∏rste opphold i SHO (hvis behold_datotid ulik 0))
-8.  [eventuelt] `SHO_utdatotid`: uttid (dato og tidspunkt) p√• siste opphold i SHO (hvis behold_datotid ulik 0))
-9.  `SHO_aar`: √•r ved utskriving - alternativt minaar=1 (√•r ved f√∏rste opphold)
-10. `SHO_liggetid`: tidsdifferanse mellom inndatotid p√• det f√∏rste oppholdet og utdatotid p√• det siste oppholdet i SHO
-11. `SHO_aktivitetskategori3`: 1 hvis ett av oppholdene er d√∏gn, eller 2 hvis ett av oppholdene er dag (og ingen d√∏gn), eller 3 hvis oppholdene er kun poli
+5.  `SHO_inndato`: inndato pÂ f¯rste opphold i SHO
+6.  `SHO_utdato`: utdato pÂ siste opphold i SHO
+7.  [eventuelt] `SHO_inndatotid`: inntid (dato og tidspunkt) pÂ f¯rste opphold i SHO (hvis behold_datotid ulik 0))
+8.  [eventuelt] `SHO_utdatotid`: uttid (dato og tidspunkt) pÂ siste opphold i SHO (hvis behold_datotid ulik 0))
+9.  `SHO_aar`: Âr ved utskriving - alternativt minaar=1 (Âr ved f¯rste opphold)
+10. `SHO_liggetid`: tidsdifferanse mellom inndatotid pÂ det f¯rste oppholdet og utdatotid pÂ det siste oppholdet i SHO
+11. `SHO_aktivitetskategori3`: 1 hvis ett av oppholdene er d¯gn, eller 2 hvis ett av oppholdene er dag (og ingen d¯gn), eller 3 hvis oppholdene er kun poli
 12. `SHO_hastegrad`: 1 hvis ett av oppholdene er akutt, 4 ellers
-13. `SHO_forste_hastegrad`: Hastegrad for f√∏rste avdelingsopphold. 1 for akutt, 4 for elektiv
-14. `SHO_uttilstand`: max(uttilstand) for oppholdene i en SHO ("som d√∏d" hvis ett av oppholdene er "som d√∏d")
+13. `SHO_forste_hastegrad`: Hastegrad for f¯rste avdelingsopphold. 1 for akutt, 4 for elektiv
+14. `SHO_uttilstand`: max(uttilstand) for oppholdene i en SHO ("som d¯d" hvis ett av oppholdene er "som d¯d")
 
 
 ### Endringslogg
 - 07.09.2021 Opprettet av Janice Shu
-- juni 2022, fikset bug som ga duplikate sho_id (den slo sammen rader som ikke h√∏rte sammen, og ga dermed feil i sho-variablene)
+- juni 2022, fikset bug som ga duplikate sho_id (den slo sammen rader som ikke h¯rte sammen, og ga dermed feil i sho-variablene)
  */
 
 /* Slette SHO-variabler og andre variabler som lages i denne makroen */
@@ -109,12 +109,12 @@ Data &dsn;
 	Oppholdsnr+1;	
 run;
 
-/*sortere p√• aktivitetskategori, d√∏gn kommer f√∏rst*/
+/*sortere pÂ aktivitetskategori, d¯gn kommer f¯rst*/
 proc sort data=&dsn;
   by aktivitetskategori3 pid inndatotid utdatotid;
 run;
 
-/*IDENTIFISERE OVERF√òRINGER */
+/*IDENTIFISERE OVERFÿRINGER */
 data Overforinger;
 set &dsn(keep=pid aar uttilstand alder aggrshoppid_lnr utdato inndato 
     inndatotid utdatotid behsh aktivitetskategori3 hastegrad oppholdsnr);
@@ -127,21 +127,21 @@ retain pasient_flag;
   	lag_aktkat3=lag(aktivitetskategori3);
   	lag_hastegrad=lag(hastegrad);
 
-  /*overf√∏ring p√• d√∏gnopphold*/
+  /*overf¯ring pÂ d¯gnopphold*/
   if aktivitetskategori3=1 then do;
 
 	if (PID=LAG_PID) then do;
 		/* dager differansen */
 		Dager_mellom=InnDato-LAG_UtDato;
 		/* Beregne tidsdifferansen mellom opphold */
-		Sek_mellom=inndatotid-lag_utdatotid; /* Tidsdifferanse (sekunder) mellom inndatotid p√• dette oppholdet og utdatotid p√• forrige opphold */
+		Sek_mellom=inndatotid-lag_utdatotid; /* Tidsdifferanse (sekunder) mellom inndatotid pÂ dette oppholdet og utdatotid pÂ forrige opphold */
 		/* increase flag value if there is a longer break between opphold */
     	if Dager_mellom>1 then do; 
       pasient_flag + 1;
     	end;
     end;
 
-	else do; /* sett til variabel pasient_flag til null n√•r pid skifter */
+	else do; /* sett til variabel pasient_flag til null nÂr pid skifter */
     pasient_flag = 1;
 	end;
 
@@ -149,8 +149,8 @@ retain pasient_flag;
   end;
 run;
 
-/* turn the file upside down so that we can flag the opphold that preceeds the overf√∏ring*/
-/* look at only d√∏gn  */
+/* turn the file upside down so that we can flag the opphold that preceeds the overf¯ring*/
+/* look at only d¯gn  */
 proc sort data=Overforinger;
   by aktivitetskategori3 pid descending Oppholdsnr;
 run;
@@ -169,7 +169,7 @@ data overforing_updown;
 run;
 %end;
 
-/* 1) f√∏rst la radene med overforing f√• samme aggrshopp*/
+/* 1) f¯rst la radene med overforing fÂ samme aggrshopp*/
 PROC SQL;
 	CREATE TABLE Overforinger AS 
 	SELECT *, MAX(aggrshoppID_Lnr) AS max_aggrshopp 
@@ -178,7 +178,7 @@ PROC SQL;
 QUIT;
 
 
-/* 2) alle aggrshoppid_lnr som inng√•r i overforing gis lik aggrshopp */
+/* 2) alle aggrshoppid_lnr som inngÂr i overforing gis lik aggrshopp */
 proc sort data=overforinger nodupkey out=overforinger_out(rename=(max_aggrshopp=ny_aggrshopp) keep=aggrshoppid_lnr max_aggrshopp);
 by aggrshoppID_Lnr ; where overforing ne . and aggrshoppid_lnr ne 1; run;
 proc sort data=overforinger;by aggrshoppid_lnr;run;
@@ -198,14 +198,14 @@ merge overforinger2 (in=a) overforinger2_out(in=b);
 by pid overforing;
 run;
 
-/*fikse final_aggrshopp for overf√∏ringer med flere isf-opphold(aggrshopper)*/
+/*fikse final_aggrshopp for overf¯ringer med flere isf-opphold(aggrshopper)*/
 data overforinger3;
 set overforinger3;
 if ny_aggrshopp ne . then final_aggrshopp = ny_aggrshopp;
 else if ny_aggrshopp2 ne . then final_aggrshopp = ny_aggrshopp2;
 run;
 
-/*lager en temp_id, gi lik id- til alle rader, b√•de isf-opphold og overf√∏ringer vi har identifisert*/
+/*lager en temp_id, gi lik id- til alle rader, bÂde isf-opphold og overf¯ringer vi har identifisert*/
 data overforinger4;
 set overforinger3;
 if aggrshoppid_lnr eq 1 and overforing eq . then temp_id = 1; 
@@ -219,7 +219,7 @@ else if aggrshoppid_lnr gt 1 then do;
 	end;
 run;
 
-/*aggregere oppholdsnr p√• overforing og temp_id*/
+/*aggregere oppholdsnr pÂ overforing og temp_id*/
 PROC SQL;
 	CREATE TABLE overforinger4 AS 
 	SELECT *, MIN(oppholdsnr) as min_opphold
@@ -239,13 +239,13 @@ data Overforinger4;
 
   length SHO_id 8;
   format SHO_id 13.;
-/*overf√∏ringer som inng√•r i isf-opphold*/
+/*overf¯ringer som inngÂr i isf-opphold*/
 if overforing ne . and temp_id > 1 			then sho_id = pid*1000 + min_opphold2;
-/*overf√∏ringer som ikke inng√•r i isf-opphold*/
+/*overf¯ringer som ikke inngÂr i isf-opphold*/
 else if overforing ne . and temp_id eq 1 	then sho_id = pid*1000 + min_opphold;
-/*ikke overf√∏ring, men sho etter isf-definisjon (aggrshoppid_lnr har verdi) */
+/*ikke overf¯ring, men sho etter isf-definisjon (aggrshoppid_lnr har verdi) */
 else if overforing eq . and temp_id ne 1 	then sho_id = pid*1000 + min_opphold2;
-/*ikke overf√∏ring, ikke sho etter isf-definisjon (aggrshoppid_lnr lik 1) */
+/*ikke overf¯ring, ikke sho etter isf-definisjon (aggrshoppid_lnr lik 1) */
 else if overforing eq . and temp_id eq 1 	then sho_id = pid*1000 + oppholdsnr;
 run;
 
@@ -303,12 +303,12 @@ QUIT;
 data overforinger4;
 set overforinger4;
 	SHO_liggetid=SHO_utdato-SHO_inndato;
-%if &nulle_liggedogn ne 0 %then %do; /* Nulle ut liggetid hvis oppholdet er mindre enn √•tte timer */
+%if &nulle_liggedogn ne 0 %then %do; /* Nulle ut liggetid hvis oppholdet er mindre enn Âtte timer */
 	if SHO_utdatotid - SHO_inndatotid < 28800 then SHO_liggetid = 0;
 %end;
 run;
 
-/*Hastegrad for f√∏rste opphold, hvis forste_hastegrad = 1, eller f√∏rste d√∏gnopphold*/
+/*Hastegrad for f¯rste opphold, hvis forste_hastegrad = 1, eller f¯rste d¯gnopphold*/
 proc sort data=overforinger4;
 %if &forste_hastegrad ne 0 %then %do;
 by SHO_id SHO_Intern_nr inndatotid utdatotid;
@@ -347,7 +347,7 @@ run;
 data overforinger4;
 set overforinger4;
 if SHO_hastegrad = 99 then SHO_hastegrad = .;
-/* Nulle ligged√∏gn hvis poliklinisk kontakt */
+/* Nulle ligged¯gn hvis poliklinisk kontakt */
 if SHO_aktivitetskategori3 = 3 then SHO_liggetid = 0;
 drop lag_pid pasient_flag temp_id lag_utdato lag_behsh 
 		min_opphold min_opphold2 inndatotid utdatotid forste_hastegrad aktkat lag_aktkat3

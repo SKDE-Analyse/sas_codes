@@ -1,36 +1,36 @@
 %macro ratefigur_tredelt(
     dsn=, /*tilrettelagt datasett*/
-    var1=, /*variabel fÃ¸rste del av sÃ¸ylen*/
-    var2=, /*Variabel andre del av sÃ¸ylen*/
-    var3=, /*Variabel tredje del av sÃ¸ylen*/
-    label1=, /*Legendnavn fÃ¸rste del */
+    var1=, /*variabel første del av søylen*/
+    var2=, /*Variabel andre del av søylen*/
+    var3=, /*Variabel tredje del av søylen*/
+    label1=, /*Legendnavn første del */
     label2=, /*Legendnavn andre del*/
     label3=, /*Legendnavn tredje del*/
     /*Y-axsis table*/
     ant_kol= 2, /* Antall kolonner i y-axsis table (1,2,3), uten tabell hvis blank */
-    tabvar1=, /* Variabel til FÃ¸rste kolonne i Y-axis table*/
+    tabvar1=, /* Variabel til Første kolonne i Y-axis table*/
     tabvar2=, /* Variabel til Andre kolonne i Y-axis table*/
     tabvar3=, /* Variabel til Tredje kolonne i Y-axis table*/
-    tablabel1=, /* Overskrift til FÃ¸rste kolonne i Y-axis table*/
+    tablabel1=, /* Overskrift til Første kolonne i Y-axis table*/
     tablabel2=, /* Overskrift til Andre kolonne i Y-axis table*/
     tablabel3=, /* Overskrift til Tredje kolonne i Y-axis table*/
-    fmt_tabvar1=, /* Format til variabel FÃ¸rste kolonne i Y-axis table*/
+    fmt_tabvar1=, /* Format til variabel Første kolonne i Y-axis table*/
     fmt_tabvar2=, /* Format til variabel Andre kolonne i Y-axis table*/
     fmt_tabvar3=, /* Format til variabel Tredje kolonne i Y-axis table*/
     sprak=no /*=en*/, /*Norsk eller engelsk tekst i figur, default satt til norsk*/
-    bo=bohf /*=borhf eller =boshhn*/,  /*OpptaksomrÃ¥der, default satt til bohf*/
+    bo=bohf /*=borhf eller =boshhn*/,  /*Opptaksområder, default satt til bohf*/
     bildeformat=png, /*Bildeformat, default satt til png*/
-    skala=, /*Bestemmes av data nÃ¥r ikke angitt*/
-    figurnavn = , /*FÃ¸rste del av figurnavn*/
+    skala=, /*Bestemmes av data når ikke angitt*/
+    figurnavn = , /*Første del av figurnavn*/
     xlabel =  /*Tekst under x-aksen*/
 );
 /*! 
 ### Beskrivelse
 
-Makro for Ã¥ lage tredelt sÃ¸ylefigur.
+Makro for å lage tredelt søylefigur.
 
 ```
-Kortversjon (kjÃ¸res med default verdier for resten):
+Kortversjon (kjøres med default verdier for resten):
 %ratefigur_tredelt(dsn= ,var1= ,var2= ,var3= ,
     label1= ,label2= ,label3= ,
     tabvar1= ,tabvar2= ,
@@ -41,12 +41,12 @@ Kortversjon (kjÃ¸res med default verdier for resten):
 ```
 ### Input
 - Ett tilpasset datasett fra rateprogram
-- Ett let-statement for Ã¥ angi &bildesti (%let bildesti = &filbane/Analyse/prosjekter/eksempelmappe/figurer;)
+- Ett let-statement for å angi &bildesti (%let bildesti = &filbane/Analyse/prosjekter/eksempelmappe/figurer;)
 - Ett include-statement for angi &anno
-- Ett include-statement for Ã¥ angi sti til makro (%include "&filbane/rateprogram/ratefigur_tredelt.sas";)
+- Ett include-statement for å angi sti til makro (%include "&filbane/rateprogram/ratefigur_tredelt.sas";)
 
 ### Output
-- bildefil med valgt format lagres pÃ¥ angitt bildesti
+- bildefil med valgt format lagres på angitt bildesti
 
 ### Endringslogg:
 - februar 2022 opprettet, Frank
@@ -81,13 +81,13 @@ run;
 %let skala=/*values=(0 to 1.5 by 0.5)*/;
 
 %if &sprak=no %then %do;
-	%let opptak_txt = "Bosatte i opptaksomrÃ¥dene";
+	%let opptak_txt = "Bosatte i opptaksområdene";
 %end;
 %else %if &sprak=en %then %do;
 	%let opptak_txt = "Hospital referral area";
 %end;
 
-/*figur tegner fÃ¸rst total rate, deretter sum av del1 og del2, deretter del1 til sist. */
+/*figur tegner først total rate, deretter sum av del1 og del2, deretter del1 til sist. */
 ODS Graphics ON /reset=All imagename="&figurnavn._&bo._tredelt" imagefmt=&bildeformat border=off height=500px ;
 ODS Listing Image_dpi=300 GPATH="&bildesti";
 proc sgplot data=xyz_&dsn noborder noautolegend sganno=anno pad=(Bottom=5%);
