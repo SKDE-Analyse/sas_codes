@@ -1,8 +1,8 @@
 %macro deleteALL;
 /*!
-Makro som sletter alle makro-variabler, slik at man slipper å restarte SAS EG.
+Makro som sletter alle makro-variabler, slik at man slipper Ã¥ restarte SAS EG.
 
-"Stjålet" fra https://blogs.sas.com/content/sastraining/2018/05/07/deleting-global-macro-variables/
+"StjÃ¥let" fra https://blogs.sas.com/content/sastraining/2018/05/07/deleting-global-macro-variables/
 
 */
 

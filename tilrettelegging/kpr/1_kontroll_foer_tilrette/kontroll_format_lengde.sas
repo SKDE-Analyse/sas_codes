@@ -1,5 +1,5 @@
 /*************************************************/
-/*lik lengde og format på tvers av år i lik kilde*/
+/*lik lengde og format pÃ¥ tvers av Ã¥r i lik kilde*/
 /*************************************************/
 
 %macro kontroll_format_lengde;
@@ -21,7 +21,7 @@ proc sort data=stable_&sektor. nodupkey out=unike_navn_&sektor.;
 by name;
 run;
 
-/*koble på lengde, format, type fra de ulike årene*/
+/*koble pÃ¥ lengde, format, type fra de ulike Ã¥rene*/
 proc sql;
 	create table felles_lengde_&sektor. as 
 	select a.name, 

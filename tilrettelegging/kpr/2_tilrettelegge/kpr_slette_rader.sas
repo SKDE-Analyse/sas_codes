@@ -2,22 +2,22 @@
 /*! 
 ### Beskrivelse
 
-Makroen gjør følgende:
+Makroen gjÃ¸r fÃ¸lgende:
 Hvis "kpr_lnr" er missing -> slette radene.
 
-Makroen kjøres først på hovedfilen (regning), hvor det i steg 1 lages et datasett, "slette_.&aar", som inneholder alle "enkeltregning_lnr" hvor "kpr_lnr" er missing.
+Makroen kjÃ¸res fÃ¸rst pÃ¥ hovedfilen (regning), hvor det i steg 1 lages et datasett, "slette_.&aar", som inneholder alle "enkeltregning_lnr" hvor "kpr_lnr" er missing.
 I steg 2 lages &utdata hvor kun "enkeltregning_lnr" som har "kpr_lnr" beholdes. 
 
-Når makroen brukes på takst- eller diagnosefilene er det kun steg 2 som kjøres.
-	- NB: må kjøre tilrettelegging på hovedfil (regning) før diagnose- og takstfil.
-	- Bruker &aar. som suffix for å forhindre feil på tvers av årssettene
+NÃ¥r makroen brukes pÃ¥ takst- eller diagnosefilene er det kun steg 2 som kjÃ¸res.
+	- NB: mÃ¥ kjÃ¸re tilrettelegging pÃ¥ hovedfil (regning) fÃ¸r diagnose- og takstfil.
+	- Bruker &aar. som suffix for Ã¥ forhindre feil pÃ¥ tvers av Ã¥rssettene
  
 ```
 %kpr_slette_rader(inndata=, utdata=);
 ```
 ### Input 
       - inndata: mottatt datasett, f.eks HNMOT.KPR_L_ENKELTREGNING_2017_M21T2
-	  - aar: årssett det gjelder, f.eks 2017
+	  - aar: Ã¥rssett det gjelder, f.eks 2017
       
 ### Output 
       - utdata: inndata hvor rader med manglende "kpr_lnr" er slettet

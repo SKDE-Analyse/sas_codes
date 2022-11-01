@@ -1,24 +1,24 @@
 %macro boomraader_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
-Makro for å teste boomraader-makro.
+Makro for Ã¥ teste boomraader-makro.
 
-Kjører boomraader-makroen på et test-datasett (`test.boomr_start`).
+KjÃ¸rer boomraader-makroen pÃ¥ et test-datasett (`test.boomr_start`).
 Sammenligner dette datasettet med en referanse (`test.ref_boomr_&navn`).
 
 ### Parametre
 
-- `branch = master`: Bestemmer hvilken boomraader-makro som kjøres (hvilken mappe den ligger i)
+- `branch = master`: Bestemmer hvilken boomraader-makro som kjÃ¸res (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset_:`.
-- `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.boomr_start` på nytt.
-- `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_boomr_&navn` på nytt.
+- `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.boomr_start` pÃ¥ nytt.
+- `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_boomr_&navn` pÃ¥ nytt.
 
 */
 
 %include "&filbane/makroer/boomraader.sas";
 
 /*
-Lage nytt startsett, basert på test.pseudosens_avd_magnus
+Lage nytt startsett, basert pÃ¥ test.pseudosens_avd_magnus
 */
 %if &lagNyStart ne 0 %then %do;
 

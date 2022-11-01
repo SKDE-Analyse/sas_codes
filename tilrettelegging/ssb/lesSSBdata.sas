@@ -1,20 +1,20 @@
 %macro lesSSBdata(aar=, utdata = , bydel = 0);
 
 /*!
-Makro for å lese Excel-fil med innbyggertall fra SSB
+Makro for Ã¥ lese Excel-fil med innbyggertall fra SSB
 
-Følgende må gjøres før denne makroen kjøres
+FÃ¸lgende mÃ¥ gjÃ¸res fÃ¸r denne makroen kjÃ¸res
 1. Last ned data fra SSB som *Semikolonseparert med overskrift (csv)*.
 Velg: Tabell - Visining 1 og lagre fil som Semikolonseparert med overskrift (CSV)
-	a. Kommune: tabell 07459: Alders- og kjønnsfordeling i kommuner, fylker og hele landets befolkning (K) 1986 - 2019
-	b. Bydel: tabell 10826: Alders- og kjønnsfordeling for befolkningen i de 4 største byene (B) 2001 - 2019
-2. Åpne csv-fil i Excel
-  - Fjern i to øverste radene
-  - Erstatt `kjønn` med `kjonn` og `Personer ÅÅÅÅ` med `Personer`
+	a. Kommune: tabell 07459: Alders- og kjÃ¸nnsfordeling i kommuner, fylker og hele landets befolkning (K) 1986 - 2019
+	b. Bydel: tabell 10826: Alders- og kjÃ¸nnsfordeling for befolkningen i de 4 stÃ¸rste byene (B) 2001 - 2019
+2. Ã…pne csv-fil i Excel
+  - Fjern i to Ã¸verste radene
+  - Erstatt `kjÃ¸nn` med `kjonn` og `Personer Ã…Ã…Ã…Ã…` med `Personer`
   - Sjekk at fanen heter `Personer`
   - Lagre som `xlxs`-fil med navnet `Innb20XX_bydel` eller `Innb20XX_kommune` i mappen `Analyse\Data\SAS\Tilrettelegging\Innbyggere`.
 
-Makroen gjør følgende:
+Makroen gjÃ¸r fÃ¸lgende:
 - Leser fanen `Personer` fra filen `Innb&aar._bydel` (hvis `bydel ne 0`) eller `Innb&aar._kommune` (hvis `bydel = 0`).
 - Konverterer variablene fra *character* til *numeric*. 
 - Lagrer et sas-datasett med navnet `&utdata`.
@@ -61,7 +61,7 @@ drop bydel_string;
 /*
 Ta ut Oslo, Bergen, Trondheim og Stavanger fra kommunefil 
 '0301'=Oslo, '1103'=Stavanger, '1201'=Bergen, 
-'1601'=Trondheim før 2018, '5001'=Trondheim fra 2018
+'1601'=Trondheim fÃ¸r 2018, '5001'=Trondheim fra 2018
 */
 where not (substr(region,1,4) in ('0301', '1103', '1201', '1601', '5001'));
 
@@ -77,7 +77,7 @@ komnr=input(komnr_string,4.);
 drop komnr_string;
 
 
-/* Fjerne " år" i alder og endre den til numerisk */
+/* Fjerne " Ã¥r" i alder og endre den til numerisk */
 alder_string = substr(alder, 1, length(alder)-3);
 drop alder;
 
@@ -96,7 +96,7 @@ innbyggere = Personer;
 drop kjonn region Personer;
 
 /* 
-Bruker antall innbyggere 1. januar for år X + 1 som innbyggertall for år X 
+Bruker antall innbyggere 1. januar for Ã¥r X + 1 som innbyggertall for Ã¥r X 
 */
 aar = %eval(&aar - 1);
 

@@ -60,7 +60,7 @@ set to test;
 run;
 
 
-/*Slå sammen en og to*/
+/*SlÃ¥ sammen en og to*/
 data andeler;
 set en to;
 format type type.;
@@ -122,7 +122,7 @@ hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6);
 	  scatter y=BoHf x=posisjon / datalabel=andel datalabelpos=left markerattrs=(size=0) name="sc" 
           datalabelattrs=(color=black);
      Yaxistable en_ant antopph /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst ) type=discrete discreteorder=data valueattrs=(size=&fontst);
+    yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=&fontst ) type=discrete discreteorder=data valueattrs=(size=&fontst);
   xaxis label="Andel"   labelattrs=(size=&fontst) offsetmin=0.02 valueattrs=(size=&fontst);
      Format andel percent8.1 en_ant antopph nlnum8.0 ;
 		
@@ -139,7 +139,7 @@ hbarparm category=bohf response=andel / nooutline fillattrs=(color=CX95BDE6);
 	  scatter y=BoHf x=posisjon / datalabel=andel datalabelpos=left markerattrs=(size=0) name="sc" 
           datalabelattrs=(color=black);
      Yaxistable en_ant antopph /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7 ) type=discrete discreteorder=data valueattrs=(size=7);
+    yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=7 ) type=discrete discreteorder=data valueattrs=(size=7);
   xaxis label="Andel"   labelattrs=(size=7) offsetmin=0.02 valueattrs=(size=7);
      Format andel percent8.1 en_ant antopph nlnum8.0 ;
 		

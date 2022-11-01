@@ -10,9 +10,9 @@
  * Total *
 **********/
 
-%let RV_variabelnavn= tot; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= tot; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -26,9 +26,9 @@ run;
 
  %if &unik ne 0 %then %do;
 /******  tot_unik  ****************************************************************/
-%let RV_variabelnavn= tot_unik; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= tot_unik; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -50,9 +50,9 @@ run;
  ***************/
 
 /******  poli  ****************************************************************/
-%let RV_variabelnavn= poli; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= poli; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -67,9 +67,9 @@ run;
 %if &offentlig ne 0 %then %do;
 
 /******  poli_off  ****************************************************************/
-%let RV_variabelnavn= poli_off; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._off; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._off; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= poli_off; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._off; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._off; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -86,9 +86,9 @@ run;
 
 %if &privat ne 0 %then %do;
 /******  poli_priv  ****************************************************************/
-%let RV_variabelnavn= poli_priv; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._priv; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._priv; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= poli_priv; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._priv; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._priv; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -108,9 +108,9 @@ run;
  %if &unik ne 0 %then %do;
 
 /******  poli_unik  ****************************************************************/
-%let RV_variabelnavn= poli_unik; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= poli_unik; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -126,9 +126,9 @@ run;
 %if &offentlig ne 0 %then %do;
 
 /******  off_unik  ****************************************************************/
-%let RV_variabelnavn= off_unik; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= off_unik; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -145,9 +145,9 @@ run;
 
 %if &privat ne 0 %then %do;
 /******  priv_unik  ****************************************************************/
-%let RV_variabelnavn= priv_unik; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= priv_unik; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -169,9 +169,9 @@ run;
 %if &hastegrad ne 0 %then %do;
 
 /******  elek  ****************************************************************/
-%let RV_variabelnavn= elek; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= elek; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -185,9 +185,9 @@ run;
 
 
 /******  ohj  ****************************************************************/
-%let RV_variabelnavn= ohj; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= ohj; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -208,9 +208,9 @@ run;
 %if &innlegg ne 0 %then %do;
 
  /******  inn  ****************************************************************/
-%let RV_variabelnavn= inn; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= inn; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._&RV_variabelnavn; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;
@@ -224,9 +224,9 @@ run;
 
 
 /******  eoc_liggetid  ****************************************************************/
-%let RV_variabelnavn= eoc_liggetid; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = &agg_var._liggetid; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = &agg_var._liggetid; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
+%let RV_variabelnavn= eoc_liggetid; /*navn pÃ¥ ratevariabel i det aggregerte datasettet*/
+%Let ratevariabel = &agg_var._liggetid; /*Brukes til Ã¥ lage "pene" overskrifter*/
+%Let forbruksmal = &agg_var._liggetid; /*Brukes til Ã¥ lage tabell-overskrift i Ã…rsvarfig, gir ogsÃ¥ navn til 'ut'-datasett*/
 
 %utvalgx;
 %omraadeNorge;

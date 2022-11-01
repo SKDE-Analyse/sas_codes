@@ -1,41 +1,41 @@
 %macro ratefigur_5aarsvar(
     dsn=, /*Grunnlagsdatsettet for figur, som regel utdata fra rateprogram*/
-    /*dsn må inneholde variablene rate: og nrate*/
+    /*dsn mÃ¥ inneholde variablene rate: og nrate*/
     yvariabel1=antsnitt, /*Variabel 1 til Y-axis table, antsnitt som default*/
 	yvariabel2=popsnitt, /*Variabel 2 til Y-axis table, popsnitt som default*/
 	ylabel1=Antall, /*Label til Y-axis table, variabel 1, , Antall som default*/
 	ylabel2=Innbyggere, /*Label til Y-axis table, variabel 2, Innbyggere som default*/
-	yvarformat1=Nlnum8.0, /*Format på Y-axis table variabel 1, Nlnum8.0 som default 1*/
-	yvarformat2=NLnum8.0, /*Format på Y-axis table variabel 2, Nlnum8.0 som default*/
+	yvarformat1=Nlnum8.0, /*Format pÃ¥ Y-axis table variabel 1, Nlnum8.0 som default 1*/
+	yvarformat2=NLnum8.0, /*Format pÃ¥ Y-axis table variabel 2, Nlnum8.0 som default*/
     bo=bohf, /*BoHf, BoRHF eller BoShHN, BoHF som default*/
-    start=, /* Startår */
-    slutt=, /* Sluttår */
-    soyle=1, /*1 dersom man ønsker Norge som søyle, tom dersom Norge som ref linje, 1 som default */
-    skala=, /* Skala på x-aksen på figurene - eks: values=(0 to 0.8 by 0.2), ikke angitt som default */
+    start=, /* StartÃ¥r */
+    slutt=, /* SluttÃ¥r */
+    soyle=1, /*1 dersom man Ã¸nsker Norge som sÃ¸yle, tom dersom Norge som ref linje, 1 som default */
+    skala=, /* Skala pÃ¥ x-aksen pÃ¥ figurene - eks: values=(0 to 0.8 by 0.2), ikke angitt som default */
     lagre=1, /*lik 1 dersom lagring av bildefil, 1 som default*/
-    figurnavn=, /*navn på bildefil - filnavn blir: &figurnavn._&bo._aarsvar*/
+    figurnavn=, /*navn pÃ¥ bildefil - filnavn blir: &figurnavn._&bo._aarsvar*/
     bildeformat=png, /*Format, png som default*/
     xlabel =  /*Tekst under x-aksen*/
 );
 /*! 
 ### Beskrivelse
 
-Makro for å lage ratefigur med årsvariasjon, tilpasset fem år. 
+Makro for Ã¥ lage ratefigur med Ã¥rsvariasjon, tilpasset fem Ã¥r. 
 Symbolene er endret ifht opprinnelig makro %ratefigur_aarsvar.
 
 ```
-kortversjon (kjøres med default verdier for resten)
+kortversjon (kjÃ¸res med default verdier for resten)
 %ratefig_5aarsvar(dsn=, start=, slutt=, figurnavn=);
 ```
 ### Input
 - datasett/output fra rateprogram
-- datasett må inneholde alle rate-variabelene og nrate
+- datasett mÃ¥ inneholde alle rate-variabelene og nrate
 
-- følgende let-statement:
+- fÃ¸lgende let-statement:
     - 
 
 ### Output
-- bildefil med valgt format lagres på angitt bildesti
+- bildefil med valgt format lagres pÃ¥ angitt bildesti
 
 ### Endringslogg:
 - mai 2022 opprettet, Tove
@@ -78,7 +78,7 @@ call symput('NorgeSnitt',(nrate));
 end;
 run;
 
-/*Legg på format på y-axis table variable*/
+/*Legg pÃ¥ format pÃ¥ y-axis table variable*/
 data xyz_&dsn;
 set xyz_&dsn;
 yvar1=&yvariabel1;
@@ -88,7 +88,7 @@ format yvar1 &yvarformat1 yvar2 &yvarformat2;
 drop min max;
 run;
 
-/*legg på max og min for den aktuelle perioden*/
+/*legg pÃ¥ max og min for den aktuelle perioden*/
 data xyz_&dsn;
 set xyz_&dsn;
 max=max(of rate&start-rate&slutt);
@@ -122,7 +122,7 @@ Yaxistable yvar1 yvar2 /Label location=inside position=right labelpos=top valuea
 %if &soyle = 1 %then %do;
 Yaxistable yvar1 yvar2 /Label location=inside position=right labelpos=bottom valueattrs=(size=8 family=arial) labelattrs=(size=8);
 %end;
-yaxis display=(noticks noline) label='Bosatte i opptaksområde' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=8);
+yaxis display=(noticks noline) label='Bosatte i opptaksomrÃ¥de' labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=8);
 
 xaxis /*display=(nolabel)*/ offsetmin=0.02 &skala label="&xlabel" valueattrs=(size=8) offsetmax=0.05 ;
 
