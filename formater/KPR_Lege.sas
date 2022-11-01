@@ -29,7 +29,7 @@ Proc format;
       1 = 'Annet'
       2 = 'Enkel kontakt'
       3 = 'Konsultasjon'
-      4 = 'Sykebesøk'
+      4 = 'SykebesÃ¸k'
       5 = 'Tverrfaglig samarbeid'
       6 = 'Administrativt arbeid'
       0 = 'Ukjent'
@@ -43,20 +43,20 @@ Proc format;
 value $icpc2_Kap
      'A' = "Allment og uspesifisert"
      'B' = "Blod, bloddannende organer og immunsystemet "
-     'D' = "Fordøyelsessystemet"
-     'F' = "Øye"
-     'H' = "Øre"
+     'D' = "FordÃ¸yelsessystemet"
+     'F' = "Ã˜ye"
+     'H' = "Ã˜re"
      'K' = "Hjerte-karsystemet"
      'L' = "Muskel og skjelettsystemet"
      'N' = "Nervesystemet"
      'P' = "Psykisk"
      'R' = "Luftveier"
      'S' = "Hud"
-     'T' = "Endokrine, metabolske og ernæringsmessige problemer"
+     'T' = "Endokrine, metabolske og ernÃ¦ringsmessige problemer"
      'U' = "Urinveier"
-     'W' = "Svangerskap, fødsel og familieplanlegging"
-     'X' = "Kvinnelige kjønnsorganer"
-     'Y' = "Mannlige kjønnsorganer"
+     'W' = "Svangerskap, fÃ¸dsel og familieplanlegging"
+     'X' = "Kvinnelige kjÃ¸nnsorganer"
+     'Y' = "Mannlige kjÃ¸nnsorganer"
      'Z' = "Sosiale problemer"
      ;
 
@@ -67,7 +67,7 @@ value $icpc2_Kap
      ;
 value $fritakskode
       'A' = 'Smittefarlig sykdom'
-      'B' = 'Barn under 16 år'
+      'B' = 'Barn under 16 Ã¥r'
       'C' = ''
       'D' = ''
       'E' = ''
@@ -75,16 +75,16 @@ value $fritakskode
       'G' = 'HIV-infeksjon'
       'H' = 'Pasientens tilstand til hinder for avkreving av egenandel'
       'I' = 'Innsatt i fengel/sikringsanstalt'
-      'J' = 'Barn under 18 år psykoterapeutisk/psykiatrisk behandling'
+      'J' = 'Barn under 18 Ã¥r psykoterapeutisk/psykiatrisk behandling'
       'K' = 'Krigsskade'
-      'M' = 'Militærperson, vernepliktig'
-      'N' = 'Fritak ved undersøkelse på Statens barnehus'
-      'O' = 'Oppsøkende behandling overfor rusmiddelavhengige'
-      'P' = 'Allmennlegetjenester der det gis oppsøkende helsehjelp'
-      'R' = 'Akutt behandling av vold i nære relasjoner/seksuelle overgrep'
+      'M' = 'MilitÃ¦rperson, vernepliktig'
+      'N' = 'Fritak ved undersÃ¸kelse pÃ¥ Statens barnehus'
+      'O' = 'OppsÃ¸kende behandling overfor rusmiddelavhengige'
+      'P' = 'Allmennlegetjenester der det gis oppsÃ¸kende helsehjelp'
+      'R' = 'Akutt behandling av vold i nÃ¦re relasjoner/seksuelle overgrep'
       'S' = 'Svangerskap'
       'U' = ''
-      'W' = 'Veiledning om, innsetting eller fjerning av langtidsvirkende prevensjon til kvinner i fertil alder som får behandling i Legemiddelassistert rehabilitering (LAR)'
+      'W' = 'Veiledning om, innsetting eller fjerning av langtidsvirkende prevensjon til kvinner i fertil alder som fÃ¥r behandling i Legemiddelassistert rehabilitering (LAR)'
       'Y' = 'Yrkesskade'
       ; 
 run;

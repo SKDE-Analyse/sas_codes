@@ -1,19 +1,19 @@
 %macro ratefigur_aarsvar_eng(
     dsn=, /*Grunnlagsdatsettet for figur, som regel utdata fra rateprogram*/
-    /*dsn må inneholde variablene rate: og nrate*/
+    /*dsn mÃ¥ inneholde variablene rate: og nrate*/
     yvariabel1=, /*Variabel 1 til Y-axis table*/
 	yvariabel2=, /*Variabel 2 til Y-axis table*/
 	ylabel1=Patients, /*Label til Y-axis table, variabel 1, , Patients som default*/
 	ylabel2=Inhabitants, /*Label til Y-axis table, variabel 2, Inhabitants som default*/
-	yvarformat1=8.0, /*Format på Y-axis table variabel 1, 8.0 som default 1*/
-	yvarformat2=8.0, /*Format på Y-axis table variabel 2, 8.0 som default*/
+	yvarformat1=8.0, /*Format pÃ¥ Y-axis table variabel 1, 8.0 som default 1*/
+	yvarformat2=8.0, /*Format pÃ¥ Y-axis table variabel 2, 8.0 som default*/
     bo=bohf, /*BoHf, BoRHF eller BoShHN, BoHF som default*/
-    start=, /* Startår */
-    slutt=, /* Sluttår */
-    soyle=1, /*1 dersom man ønsker Norge som søyle, tom dersom Norge som ref linje, 1 som default */
-    skala=, /* Skala på x-aksen på figurene - eks: values=(0 to 0.8 by 0.2), ikke angitt som default */
+    start=, /* StartÃ¥r */
+    slutt=, /* SluttÃ¥r */
+    soyle=1, /*1 dersom man Ã¸nsker Norge som sÃ¸yle, tom dersom Norge som ref linje, 1 som default */
+    skala=, /* Skala pÃ¥ x-aksen pÃ¥ figurene - eks: values=(0 to 0.8 by 0.2), ikke angitt som default */
     lagre=1, /*lik 1 dersom lagring av bildefil, 1 som default*/
-    figurnavn=, /*navn på bildefil*/
+    figurnavn=, /*navn pÃ¥ bildefil*/
     bildeformat=png, /*Format, png som default*/
     xlabel =  /*Tekst under x-aksen*/
 );
@@ -21,23 +21,23 @@
 /*! 
 ### Beskrivelse
 
-Makro for å lage ratefigur med årsvariasjon.
+Makro for Ã¥ lage ratefigur med Ã¥rsvariasjon.
 
 ```
-kortversjon (kjøres med default-verdier for resten)
+kortversjon (kjÃ¸res med default-verdier for resten)
 %ratefig_aarsvar(dsn=, yvariabel1=, yvariabel2=, start=, slutt=, figurnavn=);
 ```
 ### Input
 - datasett/output fra rateprogram
-- datasett må inneholde alle rate-variabelene og nrate
+- datasett mÃ¥ inneholde alle rate-variabelene og nrate
 
-- følgende let-statement:
+- fÃ¸lgende let-statement:
     - bildesti
--følgende include-statement
+-fÃ¸lgende include-statement
     anno
 
 ### Output
-- bildefil med valgt format lagres på angitt bildesti
+- bildefil med valgt format lagres pÃ¥ angitt bildesti
 
 ### Endringslogg:
 - februar 2022 opprettet, Frank
@@ -84,7 +84,7 @@ call symput('NorgeSnitt',(nrate));
 end;
 run;
 
-/*Legg på format på y-axis table variable*/
+/*Legg pÃ¥ format pÃ¥ y-axis table variable*/
 data xyz_&dsn;
 set xyz_&dsn;
 yvar1=&yvariabel1;
@@ -94,7 +94,7 @@ format yvar1 &yvarformat1 yvar2 &yvarformat2;
 drop min max;
 run;
 
-/*legg på max og min for den aktuelle perioden*/
+/*legg pÃ¥ max og min for den aktuelle perioden*/
 data xyz_&dsn;
 set xyz_&dsn;
 max=max(of rate&start-rate&slutt);

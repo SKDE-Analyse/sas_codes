@@ -11,8 +11,8 @@ Lage datasett klart for ratefigurer ala offentlig/privat
 
 ### Parametre
 
-1. `type1`: navn på datasett 1 fra ratestrøm for bohf (for eksempel off)
-2. `type2`: navn på datasett 2 fra annen ratestrøm for bohf (for eksempel priv)
+1. `type1`: navn pÃ¥ datasett 1 fra ratestrÃ¸m for bohf (for eksempel off)
+2. `type2`: navn pÃ¥ datasett 2 fra annen ratestrÃ¸m for bohf (for eksempel priv)
 
 ### Forfattere
 
@@ -56,7 +56,7 @@ data &type1._priv;
 set &type1._priv;
 if type=1 then ratesnitt=ratesnitt_type1;
 if type=2 then ratesnitt=ratesnitt_type2;
-format ratesnitt_type1 ratesnitt_type2 Norge_totalt totalsnitt andel_type1 NLNUM8.0; /* Formatet gir åpenrom som tusenskilletegn og komma som desimaltegn */
+format ratesnitt_type1 ratesnitt_type2 Norge_totalt totalsnitt andel_type1 NLNUM8.0; /* Formatet gir Ã¥penrom som tusenskilletegn og komma som desimaltegn */
 /*format andel_offentlig NLNUM8.0;*/
 
 run;

@@ -60,7 +60,7 @@ set to test;
 run;
 
 
-/*Slå sammen en og to*/
+/*SlÃ¥ sammen en og to*/
 data andeler;
 set en to;
 format type type.;

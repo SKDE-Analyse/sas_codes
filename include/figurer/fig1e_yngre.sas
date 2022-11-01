@@ -1,5 +1,5 @@
 /*
-Årsvariasjonfigur, en kolonne
+Ã…rsvariasjonfigur, en kolonne
 */
 
 %let soylebredde = 0.8;
@@ -17,8 +17,8 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 			 scatter x=rate2015 y=BOHF / markerattrs=(symbol=Diamondfilled size=9 color=black);		
 		Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
      Yaxistable &varnavn /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst) type=discrete discreteorder=data valueattrs=(size=&fontst);
- xaxis label=" Antall pr. 1 000 innbyggere (50 - 74 år)" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=&fontst);
+    yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=&fontst) type=discrete discreteorder=data valueattrs=(size=&fontst);
+ xaxis label=" Antall pr. 1 000 innbyggere (50 - 74 Ã¥r)" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=&fontst);
      inset 
 		(
 	 	"(*ESC*){unicode'25cf'x}"="   2013"

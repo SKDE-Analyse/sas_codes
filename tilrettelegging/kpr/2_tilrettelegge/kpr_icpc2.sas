@@ -1,7 +1,7 @@
 /* 
 - Lage egen variabel som heter icpc2_hdiag, icpc2_kap, icpc2_type
     - gjelder for de med kodeverk 1 og 2 (icpc2 og icpc2 beriket)
-    - flertallet bruker icpc2, slik at icpc2 beriket gis også en vanlig icpc2-kode
+    - flertallet bruker icpc2, slik at icpc2 beriket gis ogsÃ¥ en vanlig icpc2-kode
  */
 
 %macro kpr_icpc2(inndata=, utdata=);
@@ -17,7 +17,7 @@
 
 data icpc2_data icpc2b_data rest;
   set &inndata;
-  drop icpc2: ; /*slette gamle icpc2_*variabler hvis makro kjøres to ganger på samme datasett*/
+  drop icpc2: ; /*slette gamle icpc2_*variabler hvis makro kjÃ¸res to ganger pÃ¥ samme datasett*/
   if 		kodeverk_kpr eq 1 then output icpc2_data;
   else if 	kodeverk_kpr eq 2 then output icpc2b_data;
   else output rest;
@@ -31,7 +31,7 @@ data icpc2_data2;
 length &diag. $20;
 set icpc2_data;
 
-/*hent ut første tegn*/
+/*hent ut fÃ¸rste tegn*/
 forste_tegn_tmp = substr(&var.,1,1);
 /*hent ut tegn to og tre*/
 type_tmp = substr(&var.,2,2);
@@ -63,9 +63,9 @@ data icpc2b_data2;
 length &diag. $20;
 set icpc2b_data;
 
-/*hent ut første tegn*/
+/*hent ut fÃ¸rste tegn*/
 forste_tegn_tmp = substr(&var.,1,1);
-/*fjerne fire siste tegn som utgjør beriket*/
+/*fjerne fire siste tegn som utgjÃ¸r beriket*/
 type_tmp = substr(&var.,2, length(&var.)-5);
 
 /*-------------------------------------------------*/

@@ -2,10 +2,10 @@
 
 /*!
 
-Makro for å redusere størrelsen på variabler i datasettet.
+Makro for Ã¥ redusere stÃ¸rrelsen pÃ¥ variabler i datasettet.
 
-Opprinnelig har alle variablene en størrelse på 8 byte. 
-De fleste variablene trenger ikke okkupere så mye plass.
+Opprinnelig har alle variablene en stÃ¸rrelse pÃ¥ 8 byte. 
+De fleste variablene trenger ikke okkupere sÃ¥ mye plass.
 
 */
 

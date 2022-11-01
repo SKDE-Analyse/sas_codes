@@ -1,35 +1,35 @@
 %macro ratefig_tredelt_andelkolonne(
-    del1=, /*Datasett første del av søylen*/
-    del2=, /*Datasett andre del av søylen*/
-    del3=, /*Datasett tredje del av søylen*/
-    label_1=, /*Legendnavn første del */
+    del1=, /*Datasett fÃ¸rste del av sÃ¸ylen*/
+    del2=, /*Datasett andre del av sÃ¸ylen*/
+    del3=, /*Datasett tredje del av sÃ¸ylen*/
+    label_1=, /*Legendnavn fÃ¸rste del */
     label_2=, /*Legendnavn andre del*/
     label_3=, /*Legendnavn tredje del*/
-    tabellvariable=andel_12, /*Variabel som brukes til kolonnen til høyre, default satt til sum av andel 1 + andel 2*/
-    labeltab=andel_1+2, /*Tekst til kolonnen til høyre*/
+    tabellvariable=andel_12, /*Variabel som brukes til kolonnen til hÃ¸yre, default satt til sum av andel 1 + andel 2*/
+    labeltab=andel_1+2, /*Tekst til kolonnen til hÃ¸yre*/
     sprak=no /*=en*/, /*Norsk eller engelsk tekst i figur, default satt til norsk*/
-    bo=bohf /*=borhf eller =boshhn*/,  /*Opptaksområder, default satt til bohf*/
+    bo=bohf /*=borhf eller =boshhn*/,  /*OpptaksomrÃ¥der, default satt til bohf*/
     bildeformat=png, /*Bildeformat, default satt til png*/
-    skala=, /*Bestemmes av data når ikke angitt*/
-    figurnavn = , /*Første del av figurnavn*/
+    skala=, /*Bestemmes av data nÃ¥r ikke angitt*/
+    figurnavn = , /*FÃ¸rste del av figurnavn*/
     xlabel =  /*Tekst under x-aksen*/
 );
 /*! 
 ### Beskrivelse
 
-Makro for å lage tredelt søylefigur.
+Makro for Ã¥ lage tredelt sÃ¸ylefigur.
 
 ```
-Kortversjon (kjøres med default verdier for resten):
+Kortversjon (kjÃ¸res med default verdier for resten):
 %ratefig_tredelt_andelkolonne(del1=, del2=, del3=, label_1=, label_2=, label_3=, figurnavn=, xlabel= )
 ```
 ### Input
 - Tre datasett/output fra rateprogram (del1, del2 og del3)
-- Ett let-statement for å angi &bildesti
-- Ett include-statement for å angi &anno 
+- Ett let-statement for Ã¥ angi &bildesti
+- Ett include-statement for Ã¥ angi &anno 
 
 ### Output
-- bildefil med valgt format lagres på angitt bildesti
+- bildefil med valgt format lagres pÃ¥ angitt bildesti
 - datasettet som lages i makroen
 
 ### Endringslogg:
@@ -64,7 +64,7 @@ quit;
 %let skala=/*values=(0 to 1.5 by 0.5)*/;
 
 %if &sprak=no %then %do;
-	%let opptak_txt = "Bosatte i opptaksområdene";
+	%let opptak_txt = "Bosatte i opptaksomrÃ¥dene";
 	%let format_percent = nlpct8.0;
 	%let format_num = nlnum8.0;
 %end;
@@ -73,7 +73,7 @@ quit;
 	%let format_percent = percent8.0;
 	%let format_num = comma8.0;
 %end;
-/*figur tegner først total rate, deretter sum av del1 og del2, deretter del1 til sist. */
+/*figur tegner fÃ¸rst total rate, deretter sum av del1 og del2, deretter del1 til sist. */
 ODS Graphics ON /reset=All imagename="&figurnavn._&bo._tredelt" imagefmt=&bildeformat. border=off height=500px ;
 ODS Listing Image_dpi=300 GPATH="&bildesti";
 proc sgplot data=&figurnavn._&bo. noborder noautolegend sganno=anno pad=(Bottom=5%);

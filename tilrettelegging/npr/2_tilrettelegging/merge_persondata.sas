@@ -1,6 +1,6 @@
 %Macro Merge_persondata (innDataSett=, persondata=, utDataSett=);
 /*!
- Kobler først på variablene emigrert og dodDato fra egen fil 
+ Kobler fÃ¸rst pÃ¥ variablene emigrert og dodDato fra egen fil 
  */
 
 

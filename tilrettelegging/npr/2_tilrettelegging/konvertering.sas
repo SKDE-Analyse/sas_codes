@@ -14,7 +14,7 @@ MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 
 Data &Utdatasett;
 Set &Inndatasett 
-/*Tove 01.04.2022: kan ikke kjøres på avtspes-tilrettelegging, men skal kjøres i somatikk-tilrettelegging.*/
+/*Tove 01.04.2022: kan ikke kjÃ¸res pÃ¥ avtspes-tilrettelegging, men skal kjÃ¸res i somatikk-tilrettelegging.*/
 %if &somatikk ne 0 %then %do;
 (rename=(episodeFag=episodefag_org)) 
 %end;
@@ -30,12 +30,12 @@ drop oppholdstype /*Tove 30.03.2022: 'oppholdstype' i mottatte data er tom - fje
 */
 
 /*!
-- Lager `pid` fra `LNr` (løpenummer) og sletter `LNr`
+- Lager `pid` fra `LNr` (lÃ¸penummer) og sletter `LNr`
 */
 rename &pid = PID;
 
 /*!
-- Generere `bydel_org` fra `bydel` og `bydel2_org` fra `bydel2`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
+- Generere `bydel_org` fra `bydel` og `bydel2_org` fra `bydel2`. Dropper sÃ¥ `bydel` slik at den ikke ligger pÃ¥ fila nÃ¥r ny variabel kalt `bydel` skal genereres i neste makro
 */
 
 %if &datagrunnlag=SKDE %then %do;
@@ -55,7 +55,7 @@ rename &pid = PID;
 ###	Fjerner blanke felt og punktum i stringvariable, samt ny navngiving. For 2014 navnes dup_tilstand til Tdiag.
 */
 		/*
-		- Episodefag manglet ledende null for avtalespesialister enkelte år.
+		- Episodefag manglet ledende null for avtalespesialister enkelte Ã¥r.
 		- convert to character if numeric
 		*/
 %if &somatikk ne 0 %then %do;
