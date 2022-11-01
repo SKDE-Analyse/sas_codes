@@ -1,14 +1,14 @@
-/* Makro for å lage behandler (BEHSH, BEHHF, BEHRHF). */
-/* Den bruker variabelen 'behandlingsstedkode2' (RHF datagrunnlag) som lages i tilretteleggingen for å definere behandler */
-/* Alle linjer må ha gyldig orgnr/behandler - det fikses i tilrettelegging */
+/* Makro for Ã¥ lage behandler (BEHSH, BEHHF, BEHRHF). */
+/* Den bruker variabelen 'behandlingsstedkode2' (RHF datagrunnlag) som lages i tilretteleggingen for Ã¥ definere behandler */
+/* Alle linjer mÃ¥ ha gyldig orgnr/behandler - det fikses i tilrettelegging */
 
-/* Det gjøres en kontroll etter innlasting av CSV for å sjekke at det ikke er duplikate verdier */
+/* Det gjÃ¸res en kontroll etter innlasting av CSV for Ã¥ sjekke at det ikke er duplikate verdier */
 /* Hvis det er duplikate verdier slettes datasettet behandler og det kommer en melding om ABORT i SAS-logg */
 
 %macro behandler(inndata=, beh=behandlingsstedkode2, utdata=);
 
 
-/* Hente inn CSV-fil for å lage behandler */
+/* Hente inn CSV-fil for Ã¥ lage behandler */
 data beh;
   infile "&filbane/formater/behandler.csv"
   delimiter=';'
@@ -46,13 +46,13 @@ run;
 /* --------------------------------------------------------------- */
 /*  Kontroll at det ikke er duplikate organisasjonsnummer i filen  */  
 /* --------------------------------------------------------------- */
-/* Sortere etter organisasjonsnummer først */
+/* Sortere etter organisasjonsnummer fÃ¸rst */
 proc sort data=beh;
 by orgnr;
 run;
 
 /* Hvis duplikat blir makro-variabel duplikat = 1 */
-/* SAS gjør i tillegg en ABORT */
+/* SAS gjÃ¸r i tillegg en ABORT */
 data beh;
 set beh;
 by orgnr;
@@ -70,7 +70,7 @@ run;
 %end;
 
 
-/*ta med de variablene som trengs til å lage behandler*/
+/*ta med de variablene som trengs til Ã¥ lage behandler*/
 data beh(keep=orgnr behsh behhf behrhf);
 set beh;
 run;

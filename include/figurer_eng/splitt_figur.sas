@@ -27,7 +27,7 @@ to_ant = ant_opphold;
 run;
 
 
-/*Slå sammen en og to*/
+/*SlÃ¥ sammen en og to*/
 data smelt;
 set en to;
 format type type.;

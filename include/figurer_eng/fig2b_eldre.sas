@@ -1,5 +1,5 @@
 /* 
-Splittet søyle-figur - befolkningssammensetningen
+Splittet sÃ¸yle-figur - befolkningssammensetningen
 */
 
 %let soylebredde = 0.8;

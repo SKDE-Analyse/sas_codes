@@ -21,7 +21,7 @@ Keylegend 'h1' / noborder location=inside position=bottomright across=1;
 Yaxistable en_ant  to_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
 
 
-yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst) 
+yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=&fontst) 
          offsetmax=0.03 offsetmin=0.03 type=discrete discreteorder=data valueattrs=(size=&fontst) ;
 xaxis offsetmin=0.02 OFFSETMAX=0.02  values=(0.0 to 0.10 by 0.01) valuesformat=percent8.0 
          valueattrs=(size=&fontst) /*Display=(Nolabel)*/ label='Andel av totalbefolkningen' labelattrs=(size=&fontst);

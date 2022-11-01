@@ -1,5 +1,5 @@
 /* 
-Splittet søyle-figur 
+Splittet sÃ¸yle-figur 
 */
 
 %let soylebredde = 0.8;

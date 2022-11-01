@@ -1,5 +1,5 @@
 /* 
-Splittet søyle-figur 
+Splittet sÃ¸yle-figur 
 */
 
 %let soylebredde = 0.8;
@@ -14,10 +14,10 @@ hbarparm category=bohf response=rate_en / outlineattrs=(color=CX00509E) fillattr
 hbarparm category=bohf response=rate_en_no / outlineattrs=(color=CX4C4C4C) fillattrs=(color=CX4C4C4C) barwidth=&soylebredde;
      scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0) datalabelattrs=(color=black size=7) ;
      scatter x=plass y=bohf /datalabel=Andel  datalabelpos=right markerattrs=(size=0) datalabelattrs=(color=white WEIGHT=BOLD size=7);
-xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=&fontst);
+xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 Ã¥r)" labelattrs=(color=black size=&fontst) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=&fontst);
 Keylegend "hp2" "hp1"/ noborder location=inside position=bottomright down=2;
 Yaxistable en_ant to_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst) 
+yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=&fontst) 
          offsetmax=0.03 offsetmin=0.03 type=discrete discreteorder=data valueattrs=(size=&fontst) ;
 
 Format andel percent8. en_ant to_ant  ratesnitt_no rate_en_no nlnum8.0 ;

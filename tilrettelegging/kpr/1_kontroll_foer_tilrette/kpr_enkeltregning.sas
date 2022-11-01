@@ -7,7 +7,7 @@ proc sql;
 		case when enkeltregning_lnr in (select enkeltregning_lnr from &takst ) then 1 end as ok_takst
 	from &hoved;
 quit;
-/*datasett skal være tomt hvis alt er ok*/
+/*datasett skal vÃ¦re tomt hvis alt er ok*/
 data regning_fail_&aar.;
 set regninglnr_&aar.;
 if ok_diag ne 1 or ok_takst ne 1;

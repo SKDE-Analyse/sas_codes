@@ -16,7 +16,7 @@ value Sykehus
 run;
 
 proc format;
-value $INTENTION_fmt /*Formålet med strålingen*/
+value $INTENTION_fmt /*FormÃ¥let med strÃ¥lingen*/
 'A' = 'Annet'
 'F' = 'Profylaktisk'
 'K' = 'Kurativt'

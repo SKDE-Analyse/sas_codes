@@ -38,7 +38,7 @@ run;
 
 
 
-/*Slå sammen en og to*/
+/*SlÃ¥ sammen en og to*/
 data &navn_en._andeler;
 set en to tre;
 format type type.;
