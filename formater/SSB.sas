@@ -286,4 +286,11 @@ value flytting
 2 = 'utvandring'
 3 = 'innvandring'
 4 = 'flytting innen kommunen';
+
+/* Egenprodusert for befolkningsfremskrivingsdata */
+value alternativ
+-1 = "Lav nasjonal vekst (LLML)"
+0 = "Hovedalternativet (MMMM)"
+1 = "Høy nasjonal vekst (HHMH)";
+
 run;
