@@ -1,4 +1,4 @@
-
+﻿
 %macro oversiktstabell_helseatlas;
 * Calculate average age;
 

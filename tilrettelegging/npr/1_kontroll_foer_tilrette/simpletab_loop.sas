@@ -1,4 +1,4 @@
-/* Selecting all the variables from a dataset and run tabulate on the vars; */
+﻿/* Selecting all the variables from a dataset and run tabulate on the vars; */
 
 /* code in a sas project to create a list of variables before running the macro */
 

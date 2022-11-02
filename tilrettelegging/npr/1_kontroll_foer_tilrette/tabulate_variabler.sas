@@ -1,4 +1,4 @@
-/* create frequency table for a variable */
+﻿/* create frequency table for a variable */
 %macro simpletab(dsn=, var=);
 options locale=NB_no;
 

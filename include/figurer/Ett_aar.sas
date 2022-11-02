@@ -1,4 +1,4 @@
-
+﻿
 
 
 /* 	Henter antall personer fra unik-datasett	*/

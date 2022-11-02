@@ -1,4 +1,4 @@
-
+﻿
 
 
 /* Setter sammen datasett	*/

@@ -1,4 +1,4 @@
-proc sgplot data=agg_alder_kjonn noautolegend noborder sganno=annoarsvar pad=(Bottom=5%);
+﻿proc sgplot data=agg_alder_kjonn noautolegend noborder sganno=annoarsvar pad=(Bottom=5%);
 	vbar alder / response=tot stat=sum group=ermann groupdisplay=cluster name="Vbar";
 	keylegend "Vbar" / location=outside position=topright noborder titleattrs=(size=6);
     yaxis display=(noticks noline) values=&skala_alder label=&label_alder 
