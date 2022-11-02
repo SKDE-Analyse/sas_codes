@@ -1,4 +1,4 @@
-/*
+﻿/*
 Dataene fra SSB hentes gjennom deres API med R (enklest slik)
 Koden for å hente data fra SSB ligger på Data/R/SSB-api
 */
