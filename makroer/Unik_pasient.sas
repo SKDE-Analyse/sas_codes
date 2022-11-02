@@ -1,4 +1,4 @@
-%macro Unik_pasient(inn_data=, pr_aar=, sorter=, Pid=PID, Merke_variabel=);
+﻿%macro Unik_pasient(inn_data=, pr_aar=, sorter=, Pid=PID, Merke_variabel=);
 
 /*!
 ### Beskrivelse

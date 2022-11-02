@@ -1,4 +1,4 @@
-/* Makro for å lage behandler (BEHSH, BEHHF, BEHRHF). */
+﻿/* Makro for å lage behandler (BEHSH, BEHHF, BEHRHF). */
 /* Den bruker variabelen 'behandlingsstedkode2' (RHF datagrunnlag) som lages i tilretteleggingen for å definere behandler */
 /* Alle linjer må ha gyldig orgnr/behandler - det fikses i tilrettelegging */
 

@@ -1,4 +1,4 @@
-%macro andelsfig_0_100(n_datasett=, text_a1=, sortby=andel_ds1, bildeformat=png, noxlabel=0, sprak=no);
+﻿%macro andelsfig_0_100(n_datasett=, text_a1=, sortby=andel_ds1, bildeformat=png, noxlabel=0, sprak=no);
 
 %merge(ant_datasett=&n_datasett, dsn_ut=qwerty_m); 
 

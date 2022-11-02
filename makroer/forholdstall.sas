@@ -1,4 +1,4 @@
-%macro forholdstall (ds=&forbruksmal._bohf, tab=0);
+﻿%macro forholdstall (ds=&forbruksmal._bohf, tab=0);
 
 /*Lager kopi av inndatasett, navner om variabel som gir antall obs*/
 data &ds._to;

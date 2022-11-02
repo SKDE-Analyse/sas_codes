@@ -1,4 +1,4 @@
-%macro kpr_ugyldig_bo(inndata= , utdata= );
+﻿%macro kpr_ugyldig_bo(inndata= , utdata= );
 /*! 
 ### Beskrivelse
 

@@ -1,4 +1,4 @@
-%macro sykehus_beh_sh(dsn=);
+﻿%macro sykehus_beh_sh(dsn=);
 data &dsn;
 Set &dsn;	
 	if Sykehus_ID=85 then BehSH=11; /*'Klinikk Kirkenes'*/

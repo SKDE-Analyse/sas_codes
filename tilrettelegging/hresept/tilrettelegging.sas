@@ -1,4 +1,4 @@
-%macro hresept(inndata=, utdata=, ettersjekk = 1);
+﻿%macro hresept(inndata=, utdata=, ettersjekk = 1);
 
 data qwerty_temp;
 set &inndata;

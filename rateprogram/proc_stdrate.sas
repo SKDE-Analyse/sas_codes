@@ -1,4 +1,4 @@
-%macro proc_stdrate(
+﻿%macro proc_stdrate(
     dsn=, /*Grunnlagsdatsettet det skal beregnes rater fra*/
     rate_var=, /*Ratevariabel, kan være aggregert (verdier større enn en) eller dikotom (0,1)*/
     bo=bohf, /*BoHf, BoRHF eller BoShHN, BoHf er default*/

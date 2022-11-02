@@ -1,4 +1,4 @@
-%macro reduser_lengde(innDataSett=, utDataSett=);
+﻿%macro reduser_lengde(innDataSett=, utDataSett=);
 
 /*!
 

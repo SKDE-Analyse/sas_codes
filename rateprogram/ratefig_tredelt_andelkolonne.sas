@@ -1,4 +1,4 @@
-%macro ratefig_tredelt_andelkolonne(
+﻿%macro ratefig_tredelt_andelkolonne(
     del1=, /*Datasett første del av søylen*/
     del2=, /*Datasett andre del av søylen*/
     del3=, /*Datasett tredje del av søylen*/

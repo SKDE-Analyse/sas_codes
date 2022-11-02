@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $NCSP_2015F
 'AAA00'="AAA00 Eksplorativ kraniotomi"
 'AAA10'="AAA10 Biopsi via kraniotomi"

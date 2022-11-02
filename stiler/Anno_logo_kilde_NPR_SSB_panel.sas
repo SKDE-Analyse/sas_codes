@@ -1,4 +1,4 @@
-data anno1;
+﻿data anno1;
 retain drawspace "graphpercent" widthunit "percent" heightunit "percent"
 linethickness 1 /*textsize 8*/;
 length function $ 9 anchor $ 13;

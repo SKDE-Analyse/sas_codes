@@ -1,4 +1,4 @@
-/* Lagre figurer */
+﻿/* Lagre figurer */
 
 Options Nocenter locale=nb_NO;
 ODS Listing style=Bard;

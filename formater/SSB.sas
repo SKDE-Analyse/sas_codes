@@ -1,4 +1,4 @@
-Proc format;
+﻿Proc format;
 /*NUS Nivå - første siffer i NUS-koden*/
 value nus1_9niva_fmt
 0='Ingen utdanning og førskoleutdanning Under skoleplikt'

@@ -1,4 +1,4 @@
-%macro lag_figur(dsn = , fignavn = , mappe ="\\hn.helsenord.no\RHF\SKDE\Analyse\Data\SAS\Bildefiler",  
+﻿%macro lag_figur(dsn = , fignavn = , mappe ="\\hn.helsenord.no\RHF\SKDE\Analyse\Data\SAS\Bildefiler",  
 rate1 = off, ratenavn1a = , ratenavn1b =, 
 rate2 = priv, ratenavn2a =, ratenavn2b =,
 rate3 = , ratenavn3a =, ratenavn3b =,

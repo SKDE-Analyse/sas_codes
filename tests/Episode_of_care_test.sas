@@ -1,4 +1,4 @@
-%macro Episode_of_care_test(branch=null, debug = 0, lagNyRef = 0, lagNyStart = 0);
+﻿%macro Episode_of_care_test(branch=null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste EoC-makro.

@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $ATC_2017_medkodeF
 'V09AB02'="V09AB02 Jodioloprid (123I)"
 'V09AB03'="V09AB03 Jodioflupane (123I)"

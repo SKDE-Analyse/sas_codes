@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 - Lage egen variabel som heter icpc2_hdiag, icpc2_kap, icpc2_type
     - gjelder for de med kodeverk 1 og 2 (icpc2 og icpc2 beriket)
     - flertallet bruker icpc2, slik at icpc2 beriket gis også en vanlig icpc2-kode

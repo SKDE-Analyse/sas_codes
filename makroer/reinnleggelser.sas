@@ -1,4 +1,4 @@
-%macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd, kun_innleggelser = 1);
+﻿%macro reinnleggelser(dsn=, ReInn_Tid = 30, eks_diag=0, primaer = alle, forste_utdato =0, siste_utdato ='31Dec2020'd, kun_innleggelser = 1);
 
 /*!
 ### Beskrivelse

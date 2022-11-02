@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 
 Fordele de tilrettelagte variablene i to datasett
 */

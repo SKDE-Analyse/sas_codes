@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 Macro som beregner antall missing-verdier for alle variabler i et datasett.
 
 ## INPUT:

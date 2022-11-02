@@ -1,4 +1,4 @@
-%Macro Avledede (innDataSett=, utDataSett=);
+﻿%Macro Avledede (innDataSett=, utDataSett=);
 
 /*!
 

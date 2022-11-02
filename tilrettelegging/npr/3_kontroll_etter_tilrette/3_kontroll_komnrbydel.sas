@@ -1,4 +1,4 @@
-/* check output new komnr is on the boomr list*/
+﻿/* check output new komnr is on the boomr list*/
 
 %macro kontroll_komnrbydel(inndata= , aar=);  /*kontrollere om tilrettelagte data har gyldig komnr*/
 

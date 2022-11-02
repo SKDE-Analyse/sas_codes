@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 Hovedtestfil som leser inn alle testene, slik at disse kan kjøres.
 Inneholder også felles makroer som testene bruker.
 */

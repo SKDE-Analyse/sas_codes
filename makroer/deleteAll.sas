@@ -1,4 +1,4 @@
-%macro deleteALL;
+﻿%macro deleteALL;
 /*!
 Makro som sletter alle makro-variabler, slik at man slipper å restarte SAS EG.
 

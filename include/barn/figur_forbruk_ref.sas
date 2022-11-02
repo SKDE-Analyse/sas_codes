@@ -1,4 +1,4 @@
-proc sgplot data=&bo&fig&RV_fa noborder noautolegend sganno=ANNOARSVAR pad=(Bottom=5%) ;
+﻿proc sgplot data=&bo&fig&RV_fa noborder noautolegend sganno=ANNOARSVAR pad=(Bottom=5%) ;
      highlow y=&&Bo low=numlow high=numhigh / type=bar name="hl1" lineattrs=(color=CX00509E);
           styleattrs datacolors=(CX95BDE6);
      Refline Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=2) name="Ref1";

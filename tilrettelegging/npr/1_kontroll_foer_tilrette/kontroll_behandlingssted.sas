@@ -1,4 +1,4 @@
-%macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode, sektor=som); 
+﻿%macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode, sektor=som); 
 /*!
 ### Beskrivelse
 

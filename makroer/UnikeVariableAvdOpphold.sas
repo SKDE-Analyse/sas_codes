@@ -1,4 +1,4 @@
-%macro UnikeVariableAvdOpphold(variabler=, dsn=, prefix=, extrawhere=);
+﻿%macro UnikeVariableAvdOpphold(variabler=, dsn=, prefix=, extrawhere=);
 
 /*!
 ### Beskrivelse

@@ -1,4 +1,4 @@
-%macro kpr_antall;
+﻿%macro kpr_antall;
 /* ------------------------ */
 /* REGNINGSFILEN/HOVEDFILEN */
 /* ------------------------ */

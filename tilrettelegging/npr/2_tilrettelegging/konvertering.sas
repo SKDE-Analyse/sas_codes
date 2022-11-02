@@ -1,4 +1,4 @@
-%Macro Konvertering (Inndatasett=, Utdatasett=, pid=);
+﻿%Macro Konvertering (Inndatasett=, Utdatasett=, pid=);
 
 /*!
 

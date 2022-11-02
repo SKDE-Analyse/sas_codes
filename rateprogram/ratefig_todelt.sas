@@ -1,4 +1,4 @@
-%macro ratefig_todelt(
+﻿%macro ratefig_todelt(
     del1=, /*Datasett første del av søylen*/
     del2=, /*Datasett andre del av søylen*/
     label_1=, /*Legendnavn første del */

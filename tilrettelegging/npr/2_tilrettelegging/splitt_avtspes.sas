@@ -1,4 +1,4 @@
-%macro splitt_avtspes(innData =, phvData =, enkelData=, spesData= );
+﻿%macro splitt_avtspes(innData =, phvData =, enkelData=, spesData= );
 
 /*!
 Ta ut konsultasjoner der kontakt er ulik 4 eller 5 og legg i egen fil,

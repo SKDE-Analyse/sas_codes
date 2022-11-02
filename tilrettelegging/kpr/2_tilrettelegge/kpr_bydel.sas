@@ -1,4 +1,4 @@
-%macro kpr_bydel(inndata=, utdata=, bydel=bydel_kpr);
+﻿%macro kpr_bydel(inndata=, utdata=, bydel=bydel_kpr);
 
 data &utdata(drop=bydel_tmp);
   set &inndata;

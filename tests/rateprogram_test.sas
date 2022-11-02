@@ -1,4 +1,4 @@
-
+﻿
 %macro rateprogram_test(branch = null, lagNyRef = 0);
 /*!
 Kjør tester av rateprogrammet

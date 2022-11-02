@@ -1,4 +1,4 @@
-%macro lengde_formater(inndata=, utdata=);
+﻿%macro lengde_formater(inndata=, utdata=);
 
 data &utdata;
 /* alle datasettene */

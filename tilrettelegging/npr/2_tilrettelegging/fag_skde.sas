@@ -1,4 +1,4 @@
-%macro fag_skde;
+﻿%macro fag_skde;
 
 if institusjonID=113255 then FAG_SKDE=11; /* Einar Christiansen - 'Kirurgi, urologi' */ 
 

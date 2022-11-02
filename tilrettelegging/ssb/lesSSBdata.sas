@@ -1,4 +1,4 @@
-%macro lesSSBdata(aar=, utdata = , bydel = 0);
+﻿%macro lesSSBdata(aar=, utdata = , bydel = 0);
 
 /*!
 Makro for å lese Excel-fil med innbyggertall fra SSB

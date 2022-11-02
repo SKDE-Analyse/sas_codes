@@ -1,4 +1,4 @@
-proc template;
+﻿proc template;
 source Styles.HTMLBlue;
 define style Styles.Stil_figur;
    parent = styles.HTMLBlue;

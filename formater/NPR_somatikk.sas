@@ -1,4 +1,4 @@
-/*
+﻿/*
 Oppdatert av Linda Leivseth 10. september 2018. 
 
 Formater er hentet fra NPR-melding v. 53.1.1 (gylding for rapportering av årsdata 2017), _NAVN-variabler i data, ISF regelverk 2017, SAMDATA og value labels fra tidligere år. 

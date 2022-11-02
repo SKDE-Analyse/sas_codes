@@ -1,4 +1,4 @@
-/*-----------------------------------------
+﻿/*-----------------------------------------
 Legge til Antall_opphold på PID
 Opprettet av FO august 2012
 Redigert FO 17/10-2012

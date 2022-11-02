@@ -1,4 +1,4 @@
-/*
+﻿/*
 Årsvariasjonfigur 50-75 år
 */
 

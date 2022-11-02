@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $drg
 
 /* Formater fra fil DRG/DRG_2016.sas lagt til 10/11/2017 */

@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $NCMP_2014F
 'AAAA00'="AAAA00 EEG overvåking med ekstrakranielle elektroder"
 'AAAA05'="AAAA05 EEG overvåking med intrakranielle elektroder"

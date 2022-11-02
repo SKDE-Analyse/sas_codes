@@ -1,4 +1,4 @@
-/* antall innleggelse, &var, poli, etc , per behandlingssykehus / HF */
+﻿/* antall innleggelse, &var, poli, etc , per behandlingssykehus / HF */
 
 /* Se om antall liggedøgn samsvarer med tidligere år  */
 

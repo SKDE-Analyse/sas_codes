@@ -1,4 +1,4 @@
-/*
+﻿/*
 Formater for variabler generert av SKDE.
 Oppdatert av Linda Leivseth september 2018. 
 */

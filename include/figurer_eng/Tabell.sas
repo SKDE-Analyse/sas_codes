@@ -1,4 +1,4 @@
-/*Andel kvinner*/
+﻿/*Andel kvinner*/
 
 PROC TABULATE DATA=&ratenavn._&RV_variabelnavn._RV OUT=&ratenavn._&RV_variabelnavn._ermann; 
 	VAR RV;

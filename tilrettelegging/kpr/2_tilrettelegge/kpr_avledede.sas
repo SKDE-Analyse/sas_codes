@@ -1,4 +1,4 @@
-
+﻿
 %macro kpr_avledede(inndata= , utdata=);
 data &utdata;
 set &inndata;

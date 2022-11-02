@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $ICD10kap2016F
 1="Kapittel I: Visse infeksjonssykdommer og parasittsykdommer"
 2="Kapittel II: Svulster"
