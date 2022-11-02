@@ -1,4 +1,4 @@
-%macro kpr_slette_rader(inndata=, utdata=);
+﻿%macro kpr_slette_rader(inndata=, utdata=);
 /*! 
 ### Beskrivelse
 

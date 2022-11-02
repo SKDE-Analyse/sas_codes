@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $ncmp
 
 /* Formater fra fil Prosedyrekoder/NCMP_2016_medKode.sas lagt til 10/11/2017 */

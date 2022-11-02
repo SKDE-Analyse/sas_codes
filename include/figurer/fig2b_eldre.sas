@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 Splittet søyle-figur - befolkningssammensetningen
 */
 

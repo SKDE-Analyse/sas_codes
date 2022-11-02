@@ -1,4 +1,4 @@
-
+﻿
 value ICD10KatBlokk
 1='A00-A09 Infeksiøse tarmsykdommer'
 2='A15-A19 Tuberkulose'

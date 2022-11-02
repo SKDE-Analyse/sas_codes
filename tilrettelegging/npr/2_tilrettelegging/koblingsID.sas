@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 MACROER FOR Å KOBLINGS_ID 
 */
 

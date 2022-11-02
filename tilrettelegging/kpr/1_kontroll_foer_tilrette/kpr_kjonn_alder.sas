@@ -1,4 +1,4 @@
-%macro kpr_kjonn_alder(inndata=);
+﻿%macro kpr_kjonn_alder(inndata=);
 
 proc sort data=&inndata;
   by kpr_lnr;

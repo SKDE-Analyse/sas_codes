@@ -1,4 +1,4 @@
-%macro def_aspes_kontakt(inndata=, utdata=);
+﻿%macro def_aspes_kontakt(inndata=, utdata=);
 Data &utdata;
 	Set &inndata;
 

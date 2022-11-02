@@ -1,4 +1,4 @@
-/* Avtalespesialister files have around 10 000 lines with unknown kjønn. */
+﻿/* Avtalespesialister files have around 10 000 lines with unknown kjønn. */
 /* Some of these do have known kjønn on file on a different line */
 /* This program saves the original kjonn to kjonn_org and makes a new variable kjonn with replacement for unknow where possible */
 /* Created 09.04.2021 */

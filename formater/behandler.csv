@@ -1,4 +1,4 @@
-orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_navn;behrhf_navnkort;behrhf_navnkortest;kommentar
+ï»¿orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_navn;behrhf_navnkort;behrhf_navnkortest;kommentar
 983974880;Finnmarkssykehuset HF;10;Finnmarkssykehuset HF;1;Finnmarkssykehuset HF;Finnmarkssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 974795930;Finnmarkssykehuset HF Klinikk Kirkenes;11;Klinikk Kirkenes;1;Finnmarkssykehuset HF;Finnmarkssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 974795833;Finnmarkssykehuset HF Klinikk Hammerfest;12;Klinikk Hammerfest;1;Finnmarkssykehuset HF;Finnmarkssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
@@ -6,75 +6,75 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 974285959;Finnmarkssykehuset, Karasjok;12;Klinikk Hammerfest;1;Finnmarkssykehuset HF;Finnmarkssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 979873190;Finnmarkssykehuset, Alta;12;Klinikk Hammerfest;1;Finnmarkssykehuset HF;Finnmarkssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 983974899;Universitetssykehuset i Nord-Norge HF;20;UNN HF;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
-974795787;Universitetssykehuset i Nord-Norge, Tromsø;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
-821847052;Universitetssykehuset Nord-Norge HF avd Storslett- somatikk;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
-921837755;Universitetssykehuset Nord-Norge HF avd Bardu- somatikk;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
-921837798;Universitetssykehuset Nord-Norge HF avd Finnsnes- somatikk;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
-9747957870;Universitetssykehuset i Nord-Norge, Tromsø - stråleterapi;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Ekstra null i orgnr, stråleenhet.
-993515396;UNN HF rehabilitering/habilitering Tromsø;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 13.jan 2021: 2020-data, orgnr rehab enheter I HN.
-974795744;Universitetssykehuset Nord-Norge HF almenn psykiatrisk avdeling;21;UNN Tromsø;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 20.jan 2021: 2020-data, orgnr til psykiatrisk avdeling
+974795787;Universitetssykehuset i Nord-Norge, TromsÃ¸;21;UNN TromsÃ¸;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
+821847052;Universitetssykehuset Nord-Norge HF avd Storslett- somatikk;21;UNN TromsÃ¸;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
+921837755;Universitetssykehuset Nord-Norge HF avd Bardu- somatikk;21;UNN TromsÃ¸;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
+921837798;Universitetssykehuset Nord-Norge HF avd Finnsnes- somatikk;21;UNN TromsÃ¸;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
+9747957870;Universitetssykehuset i Nord-Norge, TromsÃ¸ - strÃ¥leterapi;21;UNN TromsÃ¸;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Ekstra null i orgnr, strÃ¥leenhet.
+993515396;UNN HF rehabilitering/habilitering TromsÃ¸;21;UNN TromsÃ¸;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 13.jan 2021: 2020-data, orgnr rehab enheter I HN.
+974795744;Universitetssykehuset Nord-Norge HF almenn psykiatrisk avdeling;21;UNN TromsÃ¸;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 20.jan 2021: 2020-data, orgnr til psykiatrisk avdeling
 974795639;Universitetssykehuset i Nord-Norge, Harstad;22;UNN Harstad;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
 993515507;UNN HF rehabilitering/habilitering Harstad;22;UNN Harstad;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 13.jan 2021: 2020-data, orgnr rehab enheter I HN.
 974795396;Universitetssykehuset i Nord-Norge, Narvik;23;UNN Narvik;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;
 993515450;UNN HF rehabilitering/habilitering Narvik;23;UNN Narvik;2;UNN HF;UNN;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 13.jan 2021: 2020-data, orgnr rehab enheter I HN.
 983974910;Nordlandssykehuset;30;NLSH HF;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
-974795574;Nordlandssykehuset Vesterålen;31;NLSH Vesterålen;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
-996722201;Nordlandssykehuset HF, Habilitering/rehabilitering, Stokmarknes;31;NLSH Vesterålen;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
+974795574;Nordlandssykehuset VesterÃ¥len;31;NLSH VesterÃ¥len;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
+996722201;Nordlandssykehuset HF, Habilitering/rehabilitering, Stokmarknes;31;NLSH VesterÃ¥len;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 974795558;Nordlandssykehuset  Lofoten;32;NLSH Lofoten;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 993573159;Nordlandssykehuset HF, Habilitering/rehabilitering, Gravdal;32;NLSH Lofoten;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
-974049767;Steigen fødestue;33;NLSH Bodø;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
-974795361;Nordlandssykehuset Bodø;33;NLSH Bodø;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
-993562718;Nordlandssykehuset HF, Habilitering/rehabilitering, Bodø;33;NLSH Bodø;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
+974049767;Steigen fÃ¸destue;33;NLSH BodÃ¸;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
+974795361;Nordlandssykehuset BodÃ¸;33;NLSH BodÃ¸;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
+993562718;Nordlandssykehuset HF, Habilitering/rehabilitering, BodÃ¸;33;NLSH BodÃ¸;3;Nordlandssykehuset HF;Nordlandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 983974929;Helgelandssykehuset HF;40;Helgelandssykehuset HF;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 974795515;Helgelandssykehuset HF Mo i Rana;41;Helgelandssykehuset Mo i Rana;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 975326535;Helgelandssykehuset HF Mo i Rana voksenpsykiatri;41;Helgelandssykehuset Mo i Rana;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 12.jan 2021: 2016-data, orgnr til Mo i Rana voksenpsykiatri/poliklinikk.
-974795485;Helgelandssykehuset HF Mosjøen;42;Helgelandssykehuset Mosjøen;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
-974795477;Helgelandssykehuset HF Sandnessjøen;43;Helgelandssykehuset Sandnessjøen;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
-874044342;Helgelandssykehuset HF Brønnøysund fødestue;43;Helgelandssykehuset Sandnessjøen;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
-974753898;Helse Nord-Trøndelag HF -  Namsos;51;Sykehuset Namsos;5;Helse Nord-Trøndelag HF;Helse Nord-Trøndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-994974270;Helse Nord-Trøndelag, Namsos rehabilitering;51;Sykehuset Namsos;5;Helse Nord-Trøndelag HF;Helse Nord-Trøndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-974754118;Helse Nord-Trøndelag HF -  Levanger;52;Sykehuset Levanger;5;Helse Nord-Trøndelag HF;Helse Nord-Trøndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-994958682;Helse Nord-Trøndelag, Levanger rehabilitering;52;Sykehuset Levanger;5;Helse Nord-Trøndelag HF;Helse Nord-Trøndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+974795485;Helgelandssykehuset HF MosjÃ¸en;42;Helgelandssykehuset MosjÃ¸en;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
+974795477;Helgelandssykehuset HF SandnessjÃ¸en;43;Helgelandssykehuset SandnessjÃ¸en;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
+874044342;Helgelandssykehuset HF BrÃ¸nnÃ¸ysund fÃ¸destue;43;Helgelandssykehuset SandnessjÃ¸en;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
+974753898;Helse Nord-TrÃ¸ndelag HF -  Namsos;51;Sykehuset Namsos;5;Helse Nord-TrÃ¸ndelag HF;Helse Nord-TrÃ¸ndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+994974270;Helse Nord-TrÃ¸ndelag, Namsos rehabilitering;51;Sykehuset Namsos;5;Helse Nord-TrÃ¸ndelag HF;Helse Nord-TrÃ¸ndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+974754118;Helse Nord-TrÃ¸ndelag HF -  Levanger;52;Sykehuset Levanger;5;Helse Nord-TrÃ¸ndelag HF;Helse Nord-TrÃ¸ndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+994958682;Helse Nord-TrÃ¸ndelag, Levanger rehabilitering;52;Sykehuset Levanger;5;Helse Nord-TrÃ¸ndelag HF;Helse Nord-TrÃ¸ndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 883974832;St. Olavs Hospital HF;60;St. Olavs Hospital HF;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Hovedenhet til St.Olavs hospital manglet i oversikten. Satt til behsh 60.
-913461223;St Olavs hospital, Fysikalsk medisin Øya;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+913461223;St Olavs hospital, Fysikalsk medisin Ã˜ya;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 973254782;St Olavs hospital, Trondsletten habiliteringssenter;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974749025;St Olavs Hospital, Trondheim;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974749815;St Olavs hospital, Fysikalsk medisin Lian;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-9747490250;St. Olavs Hospital HF, Trondheim - stråleterapi;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Ekstra null i orgnr, stråleenhet.
-997692888;St. Olavs hospital HF - laboratorier øya;61;St. Olavs Hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 13.jan 2021: 2020-data, orgnr til St. Olavs laboratorier Øya.
-8839748320;St. Olavs hospital HF - stråleterapi;61;St. Olavs hospital, Trondheim;6;St. Olavs hospital HF;St. Olavs hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 20.jan 2021: 2020-data, orgnr med ekstra null (stråleenhet), orgnr tilhører hovedenhet(HF).
+9747490250;St. Olavs Hospital HF, Trondheim - strÃ¥leterapi;61;St. Olavs hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Ekstra null i orgnr, strÃ¥leenhet.
+997692888;St. Olavs hospital HF - laboratorier Ã¸ya;61;St. Olavs Hospital, Trondheim;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 13.jan 2021: 2020-data, orgnr til St. Olavs laboratorier Ã˜ya.
+8839748320;St. Olavs hospital HF - strÃ¥leterapi;61;St. Olavs hospital, Trondheim;6;St. Olavs hospital HF;St. Olavs hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 20.jan 2021: 2020-data, orgnr med ekstra null (strÃ¥leenhet), orgnr tilhÃ¸rer hovedenhet(HF).
 927691787;St Olavs Hospital HF Oppdal hemodialysesatelitt;61;St. Olavs hospital, Trondheim;6;St. Olavs hospital HF;St. Olavs hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 30.03.2022: RHF data somatikk.
-927691914;St Olavs Hospital HF Frøya hemodialysesatelitt;61;St. Olavs hospital, Trondheim;6;St. Olavs hospital HF;St. Olavs hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 30.03.2022: RHF data somatikk.
+927691914;St Olavs Hospital HF FrÃ¸ya hemodialysesatelitt;61;St. Olavs hospital, Trondheim;6;St. Olavs hospital HF;St. Olavs hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 30.03.2022: RHF data somatikk.
 974329506;St Olavs hospital, Orkdal;62;St. Olavs hospital, Orkdal;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-974749505;St Olavs hospital, Røros;63;St. Olavs hospital, Røros;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+974749505;St Olavs hospital, RÃ¸ros;63;St. Olavs hospital, RÃ¸ros;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 995413388;St Olavs hospital, Hysnes helsefort;64;St. Olavs hospital, Hysnes helsefort;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-915621457;St Olavs hospital, Ørland;65;St. Olavs hospital, Ørland;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-920196357;St Olavs Hospital HF rehabilitering Ørlandet;65;St. Olavs hospital, Ørland;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-997005562;Helse Møre og Romsdal HF;70;Helse Møre og Romsdal HF;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 30.03.2022: RHF data somatikk.
-974745569;Helse Møre og Romsdal HF Molde sjukehus;71;Molde sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-984038135;Helse Møre og Romsdal HF, Voksenhabilitering Molde;71;Molde sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-974746948;Helse Møre og Romsdal HF Kristiansund sjukehus;72;Kristiansund sykehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-974747138;Helse Møre og Romsdal HF Ålesund sjukehus;73;Ålesund sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-912777294;Helse Møre og Romsdal HF seksjon vaksenhabilitering Ålesund;73;Ålesund sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-916126611;Helse Møre og Romsdal HF seksjon for habilitering barn og unge Ålesund;73;Ålesund sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-9747471380;Helse Møre og Romsdal HF, Ålesund - stråleterapi;73;Ålesund sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Ekstra null i orgnr, stråleenhet.
-974747545;Helse Møre og Romsdal HF Volda sjukehus;74;Volda sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-974577216;Helse Møre og Romsdal HF Klinikk for Rehabilitering (Mork);75;Mork Rehabiliteringssenter;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-974576929;Helse Møre og Romsdal HF, Nevrohjemmet;76;Nevrohjemmet rehabiliteringssenter;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-974577054;Helse Møre og Romsdal HF, Aure rehabiliteringssenter;77;Aure rehabiliteringssenter;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-983974732;Helse Førde HF;90;Helse Førde HF;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
-974744570;Helse Førde, Førde;91;Førde sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
-974745364;Helse Førde, Nordfjord;92;Nordfjord sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
-974745089;Helse Førde, Lærdal;93;Lærdal sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
-974743914;Helse Førde, Florø;94;Florø sykehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
-922643202;Helse Førde HF Sogndal poliklinikk;95;Sogndal poliklinikk;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Sogndal poliklinikk under Helse Førde HF. 
+915621457;St Olavs hospital, Ã˜rland;65;St. Olavs hospital, Ã˜rland;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+920196357;St Olavs Hospital HF rehabilitering Ã˜rlandet;65;St. Olavs hospital, Ã˜rland;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+997005562;Helse MÃ¸re og Romsdal HF;70;Helse MÃ¸re og Romsdal HF;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 30.03.2022: RHF data somatikk.
+974745569;Helse MÃ¸re og Romsdal HF Molde sjukehus;71;Molde sjukehus;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+984038135;Helse MÃ¸re og Romsdal HF, Voksenhabilitering Molde;71;Molde sjukehus;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+974746948;Helse MÃ¸re og Romsdal HF Kristiansund sjukehus;72;Kristiansund sykehus;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+974747138;Helse MÃ¸re og Romsdal HF Ã…lesund sjukehus;73;Ã…lesund sjukehus;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+912777294;Helse MÃ¸re og Romsdal HF seksjon vaksenhabilitering Ã…lesund;73;Ã…lesund sjukehus;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+916126611;Helse MÃ¸re og Romsdal HF seksjon for habilitering barn og unge Ã…lesund;73;Ã…lesund sjukehus;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+9747471380;Helse MÃ¸re og Romsdal HF, Ã…lesund - strÃ¥leterapi;73;Ã…lesund sjukehus;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Ekstra null i orgnr, strÃ¥leenhet.
+974747545;Helse MÃ¸re og Romsdal HF Volda sjukehus;74;Volda sjukehus;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+974577216;Helse MÃ¸re og Romsdal HF Klinikk for Rehabilitering (Mork);75;Mork Rehabiliteringssenter;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+974576929;Helse MÃ¸re og Romsdal HF, Nevrohjemmet;76;Nevrohjemmet rehabiliteringssenter;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+974577054;Helse MÃ¸re og Romsdal HF, Aure rehabiliteringssenter;77;Aure rehabiliteringssenter;7;Helse MÃ¸re og Romsdal HF;Helse MÃ¸re og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+983974732;Helse FÃ¸rde HF;90;Helse FÃ¸rde HF;9;Helse FÃ¸rde HF;Helse FÃ¸rde;3;Helse Vest RHF;Helse Vest;Vest;
+974744570;Helse FÃ¸rde, FÃ¸rde;91;FÃ¸rde sjukehus;9;Helse FÃ¸rde HF;Helse FÃ¸rde;3;Helse Vest RHF;Helse Vest;Vest;
+974745364;Helse FÃ¸rde, Nordfjord;92;Nordfjord sjukehus;9;Helse FÃ¸rde HF;Helse FÃ¸rde;3;Helse Vest RHF;Helse Vest;Vest;
+974745089;Helse FÃ¸rde, LÃ¦rdal;93;LÃ¦rdal sjukehus;9;Helse FÃ¸rde HF;Helse FÃ¸rde;3;Helse Vest RHF;Helse Vest;Vest;
+974743914;Helse FÃ¸rde, FlorÃ¸;94;FlorÃ¸ sykehus;9;Helse FÃ¸rde HF;Helse FÃ¸rde;3;Helse Vest RHF;Helse Vest;Vest;
+922643202;Helse FÃ¸rde HF Sogndal poliklinikk;95;Sogndal poliklinikk;9;Helse FÃ¸rde HF;Helse FÃ¸rde;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Sogndal poliklinikk under Helse FÃ¸rde HF. 
 983974724;Helse Bergen HF;100;Helse Bergen HF;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 27.okt 2021: korrigere behsh. Helse Bergen HF = 100, og skadepoliklinikk = 104.
 973923811;Helse Bergen, Habilitering Voksne;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974557169;Helse Bergen, Rehabilitering;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974557746;Helse Bergen, Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
-996663191;Helse Bergen, Laboratorie og røntgen Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
+996663191;Helse Bergen, Laboratorie og rÃ¸ntgen Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 997512189;Helse Bergen HF seksjon for behandlingshjelpemidler medisinsk-teknisk avd Haukeland;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
-9745577460;Helse Bergen HF, Haukeland - stråleterapi;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Ekstra null i orgnr, stråleenhet.
+9745577460;Helse Bergen HF, Haukeland - strÃ¥leterapi;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Ekstra null i orgnr, strÃ¥leenhet.
 874743372;Helse Bergen, Kysthospitalet i Hagevik;102;Kysthospitalet i Hagevik;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974743272;Helse Bergen, Voss;103;Voss sjukehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 973925032;Bergen legevakt;104;Bergen legevakt;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
@@ -98,103 +98,103 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 873862122;Helse Stavanger, Rehabilitering;121;Stavanger universitetssykehus;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;
 974624680;Helse Stavanger, HABU;121;Stavanger universitetssykehus;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;
 974703300;Helse Stavanger, Stavanger universitetssjukehus;121;Stavanger universitetssykehus;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;
-9747033000;Helse Stavanger HF, Stavanger - stråleterapi;121;Stavanger universitetssykehus;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;Ekstra null i orgnr, stråleenhet.
+9747033000;Helse Stavanger HF, Stavanger - strÃ¥leterapi;121;Stavanger universitetssykehus;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;Ekstra null i orgnr, strÃ¥leenhet.
 974703327;Helse Stavanger, Egersund;122;Helse Stavanger, Egersund;12;Helse Stavanger HF;Helse Stavanger;3;Helse Vest RHF;Helse Vest;Vest;
 974737779;Betanien spesialistpoliklinikk;131;Betanien spesialistpoliklinikk Bergen;13;Resterende Helse Vest RHF;Resterende Helse Vest;3;Helse Vest RHF;Helse Vest;Vest;
 922716552;BETANIEN SYKEHUS AS;131;Betanien spesialistpoliklinikk Bergen;13;Resterende Helse Vest RHF;Resterende Helse Vest;3;Helse Vest RHF;Helse Vest;Vest;
 973156829;Haugesund sanitetsforenings revmatismesykehus;132;Haugesund sanitetsforenings revm.sykehus;13;Resterende Helse Vest RHF;Resterende Helse Vest;3;Helse Vest RHF;Helse Vest;Vest;
 986106839;Haugesund sanitetsforenings revmatismesykehus;132;Haugesund sanitetsforenings revm.sykehus;13;Resterende Helse Vest RHF;Resterende Helse Vest;3;Helse Vest RHF;Helse Vest;Vest;
-894166762;Vestre Viken HF;140;Vestre Viken HF;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 30.03.2021: somatikk RHF-data jan/feb 2021.
-974631326;Vestre Viken, Drammen;141;Drammen sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974606305;Vestre Viken, Habiliteringssenteret Drammen;141;Drammen sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974705788;Vestre Viken, Bærum;142;Bærum sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-874606162;Vestre Viken, Hallingdal sjukestugu;143;Ringerike sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974631407;Vestre Viken, Ringerike;143;Ringerike sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974631385;Vestre Viken, Kongsberg;144;Kongsberg sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-983975267;Sykehuset Telemark HF;150;Sykehuset Telemark HF;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974568209;Sykehuset Telemark, Habilitering barn og unge;151;Sykehuset Telemark Skien;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974633191;Sykehuset Telemark, Skien/Porsgrunn;151;Sykehuset Telemark Skien;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974633221;Sykehuset Telemark HF Porsgrunn - somatikk;151;Sykehuset Telemark Skien;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-983974155;Sykehuset Telemark, Kragerø;152;Sykehuset Telemark Kragerø;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974633159;Sykehuset Telemark, Notodden;153;Sykehuset Telemark Notodden;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974798379;Sykehuset Telemark, Rjukan;154;Sykehuset Telemark Rjukan;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974568225;Sykehuset Telemark, Nordagutu;155;Sykehuset Telemark Nordagutu;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974706490;Akershus universitetssykehus;160;Akershus universitetssykehus HF;16;Akershus universitetssykehus HF;Akershus universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974705192;Akershus universitetssykehus, Ski;160;Akershus universitetssykehus HF;16;Akershus universitetssykehus HF;Akershus universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-983971636;Akershus universitetssykehus HF;160;Akershus universitetssykehus HF;16;Akershus universitetssykehus HF;Akershus universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-925781584;Akershus universitetssykehus - Gardermoen;160;Akershus universitetssykehus HF;16;Akershus universitetssykehus HF;Akershus universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 14.07.2021: 1.tertial 2021 RHF-data.
-974631776;Akershus universitetssykehus - Kongsvinger;161;Akershus universitetssykehus - Kongsvinger;16;Akershus universitetssykehus HF;Akershus universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;1.jan.2021: Kongsvinger sykehus gikk fra Sykehuset Innlandet HF til Akershus HF 1.feb.2019. Skiftet behsh fra 174 til 161. Ingen endring RHF.
-983971709;SYKEHUSET INNLANDET HF;170;Sykehuset Innlandet HF;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974631768;Sykehuset Innlandet, Elverum;171;Sykehuset Innlandet, Elverum;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974632535;Sykehuset Innlandet, Gjøvik;172;Sykehuset Innlandet, Gjøvik;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-874632562;Sykehuset Innlandet, Lillehammer;173;Sykehuset Innlandet, Lillehammer;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-975326136;Sykehuset Innlandet, Habiliteringstjenesten i Oppland, Lillehammer;173;Sykehuset Innlandet, Lillehammer;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974725215;Sykehuset Innlandet, Tynset;175;Sykehuset Innlandet, Tynset;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974632543;Sykehuset Innlandet, Granheim lungesykehus;176;Sykehuset Innlandet, Granheim;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-874631752;Sykehuset Innlandet, Ottestad;177;Sykehuset Innlandet, Ottestad;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974724960;Sykehuset Innlandet, Hamar;178;Sykehuset Innlandet, Hamar;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-9747249600;Sykehuset Innlandet, Hamar - stråleterapi;178;Sykehuset Innlandet, Hamar;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
-974116650;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark, Furnes;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-820921852;Sykehuset Innlandet HF - Hadeland spesialistsenter;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-821611512;Sykehuset Innlandet HF - Valdres spesialistsenter;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-922087407;Sykehuset Innlandet HF - Nord-Gudbrandsdal lokalmed senter;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-976200683;Sykehuset Innlandet HF - rehabiliteringsavdelingen Gjøvik;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-993467049;OUS HF;180;Oslo universitetssykehus HF;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-874716782;OUS, Rikshospitalet;181;OUS, Rikshospitalet;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974588951;OUS, Aker;182;OUS, Aker;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974589087;OUS, Oslo legevakt;183;OUS, Oslo legevakt;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974589095;OUS, Ullevål;184;OUS, Ullevål;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-9745890950;OUS HF, Ullevål - stråleterapi;184;OUS, Ullevål;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
-974705761;OUS, Spesialsykehuset for epilepsi;185;OUS, Spesialsykehuset for epilepsi;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974707152;OUS, Radiumhospitalet;186;OUS, Radiumhospitalet;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-9747071520;OUS HF Radiumhospitalet - stråleterapi;186;OUS, Radiumhospitalet;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
-974728230;OUS, Geilomo barnesykehus;187;OUS, Geilomo barnesykehus;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974798263;OUS, Voksentoppen;188;OUS, Voksentoppen;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-975298744;OUS, Olafiaklinikken;189;OUS, Olafiaklinikken;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-923854215;Oslo universitetssykehus HF - Sophies Minde Bryn;189;OUS, Olafiaklinikken;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974589214;Sunnaas sykehus;190;Sunnaas sykehus;19;Sunnaas sykehus HF;Sunnaas sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-883971752;Sunnaas sykehus HF;190;Sunnaas sykehus;19;Sunnaas sykehus HF;Sunnaas sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 20.jan 2021: 2019-data, institusjonid viser til hovedenhet Sunnaas sykehus.
-914356199;Sunnaas sykehus, Nesodden poliklinikk;191;Sunnaas sykehus, Nesodden poliklinikk;19;Sunnaas sykehus HF;Sunnaas sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-994869736;Sunnaas sykehus, Aker poliklinikk;192;Sunnaas sykehus, Aker poliklinikk;19;Sunnaas sykehus HF;Sunnaas sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974633752;Sykehuset Østfold;200;Sykehuset Østfold HF;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-983971768;Sykehuset Østfold HF;200;Sykehuset Østfold HF;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974633698;Sykehuset Østfold, Moss;201;Sykehuset Østfold, Moss;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974634052;Sykehuset Østfold, Fysioterapi;201;Sykehuset Østfold, Moss;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974703734;Sykehuset Østfold, Sarpsborg;202;Sykehuset Østfold, Sarpsborg;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974703769;Sykehuset Østfold, Habiliteringstjenesten;202;Sykehuset Østfold, Sarpsborg;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974633655;Sykehuset Østfold HF Askim - somatikk;203;Sykehuset Østfold, Askim;20;Sykehuset Østfold HF;Sykehuset Østfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-983975240;Sørlandet sykehus HF;210;Sørlandet sykehus HF;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974595230;Sørlandet sykehus, Rehabilitering Kongsgård;211;Sørlandet sykehus, Kristiansand;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974733013;Sørlandet sykehus, Kristiansand;211;Sørlandet sykehus, Kristiansand;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-9747330130;Sørlandet sykehus, Kristiansand - stråleterapi;211;Sørlandet sykehus, Kristiansand;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
-974631091;Sørlandet sykehus, Arendal;212;Sørlandet sykehus, Arendal;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-996891216;Sørlandet sykehus HF rehabilitering Arendal;212;Sørlandet sykehus, Arendal;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974595214;Sørlandet sykehus, Flekkefjord;213;Sørlandet sykehus, Flekkefjord;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-976245849;Sørlandet sykehus HF - habilitering for voksne Arendal;214;Sørlandet sykehus, Spesialsykehuset for rehabilitering, Kris;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-993524158;Sørlandet sykehus HF - medisinsk service Arendal;215;Sørlandet sykehus HF - medisinsk service Arendal;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-993524387;Sørlandet sykehus HF - medisinsk service Flekkefjord;216;Sørlandet sykehus HF - medisinsk service Flekkefjord;21;Sørlandet sykehus HF;Sørlandet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-983975259;Sykehuset i Vestfold HF;220;Sykehuset i Vestfold HF;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 06.08.2021:SKDE data somatikk
-974633574;Sykehuset i Vestfold HF, somatikk Tønsberg;221;Sykehuset i Vestfold, Tønsberg;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974575396;Sykehuset i Vestfold, Rehabilitering Stavern;222;Sykehuset i Vestfold, Rehabilitering Kysthospitalet Stavern;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-899643992;Sykehuset i Vestfold, Somatikk Solvang;223;Sykehuset i Vestfold, Somatikk Solvang;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974117002;Sykehuset i Vestfold, Habilitering Solvang;224;Sykehuset i Vestfold, Habilitering Solvang;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-823247672;Sykehuset i Vestfold HF - somatikk Sandefjord;225;Sykehuset i Vestfold, somatikk Sandefjord;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-824674892;Sykehuset i Vestfold HF - fysikalsk medisin og rehabilitering Tønsberg - Bjellandåsen;226;Sykehuset i Vestfold, fysikalsk medisin og rehabilitering;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974633558;Sykehuset i Vestfold HF - somatikk Larvik;227;Sykehuset i Vestfold, somatikk Larvik;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974116804;Diakonhjemmet sykehus;230;Diakonhjemmet sykehus;23;Diakonhjemmet sykehus;Diakonhjemmet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-982791952;Diakonhjemmet sykehus AS;230;Diakonhjemmet sykehus;23;Diakonhjemmet sykehus;Diakonhjemmet sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 20.jan 2021: 2019-data, institusjonid viser til hovedenhet Diakonhjemmet sykehus AS.
-974207532;Lovisenberg diakonale sykehus;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-920800041;Lovisenberg Diakonale sykehus hospice sangen avd Hamar;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-965985166;Lovisenberg diakonale sykehus AS;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 20.jan 2021: 2019-data, institusjonid viser til hovedenhet Lovisenberg diakonale sykehus AS.
-985962170;Martina Hansens Hospital;251;Martina Hansens Hospital;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-974116588;Martina Hansens hospital sykehuset;251;Martina Hansens Hospital;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-924445114;Martina Hansens hospital avd radiologi;251;Martina Hansens Hospital;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Underenhet til Martina Hansens Hospital, legges til behsh 251 sammen med hovedenhet.
-981275721;Betanien hospital;252;Betanien Hospital Skien;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-873255102;Betanien hospital;252;Betanien Hospital Skien;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 30.03.2022: RHF data somatikk.
-985773238;Revmatismesykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-973254979;Revmatisme sykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
-984630492;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;"Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader.
-997506499;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader."
+894166762;Vestre Viken HF;140;Vestre Viken HF;14;Vestre Viken HF;Vestre Viken;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Oppdatert 30.03.2021: somatikk RHF-data jan/feb 2021.
+974631326;Vestre Viken, Drammen;141;Drammen sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974606305;Vestre Viken, Habiliteringssenteret Drammen;141;Drammen sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974705788;Vestre Viken, BÃ¦rum;142;BÃ¦rum sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+874606162;Vestre Viken, Hallingdal sjukestugu;143;Ringerike sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974631407;Vestre Viken, Ringerike;143;Ringerike sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974631385;Vestre Viken, Kongsberg;144;Kongsberg sykehus;14;Vestre Viken HF;Vestre Viken;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+983975267;Sykehuset Telemark HF;150;Sykehuset Telemark HF;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974568209;Sykehuset Telemark, Habilitering barn og unge;151;Sykehuset Telemark Skien;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974633191;Sykehuset Telemark, Skien/Porsgrunn;151;Sykehuset Telemark Skien;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974633221;Sykehuset Telemark HF Porsgrunn - somatikk;151;Sykehuset Telemark Skien;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+983974155;Sykehuset Telemark, KragerÃ¸;152;Sykehuset Telemark KragerÃ¸;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974633159;Sykehuset Telemark, Notodden;153;Sykehuset Telemark Notodden;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974798379;Sykehuset Telemark, Rjukan;154;Sykehuset Telemark Rjukan;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974568225;Sykehuset Telemark, Nordagutu;155;Sykehuset Telemark Nordagutu;15;Sykehuset Telemark HF;Sykehuset Telemark;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974706490;Akershus universitetssykehus;160;Akershus universitetssykehus HF;16;Akershus universitetssykehus HF;Akershus universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974705192;Akershus universitetssykehus, Ski;160;Akershus universitetssykehus HF;16;Akershus universitetssykehus HF;Akershus universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+983971636;Akershus universitetssykehus HF;160;Akershus universitetssykehus HF;16;Akershus universitetssykehus HF;Akershus universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+925781584;Akershus universitetssykehus - Gardermoen;160;Akershus universitetssykehus HF;16;Akershus universitetssykehus HF;Akershus universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Oppdatert 14.07.2021: 1.tertial 2021 RHF-data.
+974631776;Akershus universitetssykehus - Kongsvinger;161;Akershus universitetssykehus - Kongsvinger;16;Akershus universitetssykehus HF;Akershus universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;1.jan.2021: Kongsvinger sykehus gikk fra Sykehuset Innlandet HF til Akershus HF 1.feb.2019. Skiftet behsh fra 174 til 161. Ingen endring RHF.
+983971709;SYKEHUSET INNLANDET HF;170;Sykehuset Innlandet HF;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974631768;Sykehuset Innlandet, Elverum;171;Sykehuset Innlandet, Elverum;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974632535;Sykehuset Innlandet, GjÃ¸vik;172;Sykehuset Innlandet, GjÃ¸vik;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+874632562;Sykehuset Innlandet, Lillehammer;173;Sykehuset Innlandet, Lillehammer;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+975326136;Sykehuset Innlandet, Habiliteringstjenesten i Oppland, Lillehammer;173;Sykehuset Innlandet, Lillehammer;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974725215;Sykehuset Innlandet, Tynset;175;Sykehuset Innlandet, Tynset;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974632543;Sykehuset Innlandet, Granheim lungesykehus;176;Sykehuset Innlandet, Granheim;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+874631752;Sykehuset Innlandet, Ottestad;177;Sykehuset Innlandet, Ottestad;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974724960;Sykehuset Innlandet, Hamar;178;Sykehuset Innlandet, Hamar;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+9747249600;Sykehuset Innlandet, Hamar - strÃ¥leterapi;178;Sykehuset Innlandet, Hamar;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Ekstra null i orgnr, strÃ¥leenhet.
+974116650;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark, Furnes;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+820921852;Sykehuset Innlandet HF - Hadeland spesialistsenter;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+821611512;Sykehuset Innlandet HF - Valdres spesialistsenter;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+922087407;Sykehuset Innlandet HF - Nord-Gudbrandsdal lokalmed senter;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+976200683;Sykehuset Innlandet HF - rehabiliteringsavdelingen GjÃ¸vik;179;Sykehuset Innlandet, Habiliteringstjenesten i Hedmark;17;Sykehuset Innlandet HF;Sykehuset Innlandet;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+993467049;OUS HF;180;Oslo universitetssykehus HF;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+874716782;OUS, Rikshospitalet;181;OUS, Rikshospitalet;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974588951;OUS, Aker;182;OUS, Aker;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974589087;OUS, Oslo legevakt;183;OUS, Oslo legevakt;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974589095;OUS, UllevÃ¥l;184;OUS, UllevÃ¥l;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+9745890950;OUS HF, UllevÃ¥l - strÃ¥leterapi;184;OUS, UllevÃ¥l;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Ekstra null i orgnr, strÃ¥leenhet.
+974705761;OUS, Spesialsykehuset for epilepsi;185;OUS, Spesialsykehuset for epilepsi;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974707152;OUS, Radiumhospitalet;186;OUS, Radiumhospitalet;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+9747071520;OUS HF Radiumhospitalet - strÃ¥leterapi;186;OUS, Radiumhospitalet;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Ekstra null i orgnr, strÃ¥leenhet.
+974728230;OUS, Geilomo barnesykehus;187;OUS, Geilomo barnesykehus;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974798263;OUS, Voksentoppen;188;OUS, Voksentoppen;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+975298744;OUS, Olafiaklinikken;189;OUS, Olafiaklinikken;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+923854215;Oslo universitetssykehus HF - Sophies Minde Bryn;189;OUS, Olafiaklinikken;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974589214;Sunnaas sykehus;190;Sunnaas sykehus;19;Sunnaas sykehus HF;Sunnaas sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+883971752;Sunnaas sykehus HF;190;Sunnaas sykehus;19;Sunnaas sykehus HF;Sunnaas sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Oppdatert 20.jan 2021: 2019-data, institusjonid viser til hovedenhet Sunnaas sykehus.
+914356199;Sunnaas sykehus, Nesodden poliklinikk;191;Sunnaas sykehus, Nesodden poliklinikk;19;Sunnaas sykehus HF;Sunnaas sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+994869736;Sunnaas sykehus, Aker poliklinikk;192;Sunnaas sykehus, Aker poliklinikk;19;Sunnaas sykehus HF;Sunnaas sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974633752;Sykehuset Ã˜stfold;200;Sykehuset Ã˜stfold HF;20;Sykehuset Ã˜stfold HF;Sykehuset Ã˜stfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+983971768;Sykehuset Ã˜stfold HF;200;Sykehuset Ã˜stfold HF;20;Sykehuset Ã˜stfold HF;Sykehuset Ã˜stfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974633698;Sykehuset Ã˜stfold, Moss;201;Sykehuset Ã˜stfold, Moss;20;Sykehuset Ã˜stfold HF;Sykehuset Ã˜stfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974634052;Sykehuset Ã˜stfold, Fysioterapi;201;Sykehuset Ã˜stfold, Moss;20;Sykehuset Ã˜stfold HF;Sykehuset Ã˜stfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974703734;Sykehuset Ã˜stfold, Sarpsborg;202;Sykehuset Ã˜stfold, Sarpsborg;20;Sykehuset Ã˜stfold HF;Sykehuset Ã˜stfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974703769;Sykehuset Ã˜stfold, Habiliteringstjenesten;202;Sykehuset Ã˜stfold, Sarpsborg;20;Sykehuset Ã˜stfold HF;Sykehuset Ã˜stfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974633655;Sykehuset Ã˜stfold HF Askim - somatikk;203;Sykehuset Ã˜stfold, Askim;20;Sykehuset Ã˜stfold HF;Sykehuset Ã˜stfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+983975240;SÃ¸rlandet sykehus HF;210;SÃ¸rlandet sykehus HF;21;SÃ¸rlandet sykehus HF;SÃ¸rlandet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974595230;SÃ¸rlandet sykehus, Rehabilitering KongsgÃ¥rd;211;SÃ¸rlandet sykehus, Kristiansand;21;SÃ¸rlandet sykehus HF;SÃ¸rlandet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974733013;SÃ¸rlandet sykehus, Kristiansand;211;SÃ¸rlandet sykehus, Kristiansand;21;SÃ¸rlandet sykehus HF;SÃ¸rlandet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+9747330130;SÃ¸rlandet sykehus, Kristiansand - strÃ¥leterapi;211;SÃ¸rlandet sykehus, Kristiansand;21;SÃ¸rlandet sykehus HF;SÃ¸rlandet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Ekstra null i orgnr, strÃ¥leenhet.
+974631091;SÃ¸rlandet sykehus, Arendal;212;SÃ¸rlandet sykehus, Arendal;21;SÃ¸rlandet sykehus HF;SÃ¸rlandet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+996891216;SÃ¸rlandet sykehus HF rehabilitering Arendal;212;SÃ¸rlandet sykehus, Arendal;21;SÃ¸rlandet sykehus HF;SÃ¸rlandet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974595214;SÃ¸rlandet sykehus, Flekkefjord;213;SÃ¸rlandet sykehus, Flekkefjord;21;SÃ¸rlandet sykehus HF;SÃ¸rlandet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+976245849;SÃ¸rlandet sykehus HF - habilitering for voksne Arendal;214;SÃ¸rlandet sykehus, Spesialsykehuset for rehabilitering, Kris;21;SÃ¸rlandet sykehus HF;SÃ¸rlandet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+993524158;SÃ¸rlandet sykehus HF - medisinsk service Arendal;215;SÃ¸rlandet sykehus HF - medisinsk service Arendal;21;SÃ¸rlandet sykehus HF;SÃ¸rlandet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+993524387;SÃ¸rlandet sykehus HF - medisinsk service Flekkefjord;216;SÃ¸rlandet sykehus HF - medisinsk service Flekkefjord;21;SÃ¸rlandet sykehus HF;SÃ¸rlandet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+983975259;Sykehuset i Vestfold HF;220;Sykehuset i Vestfold HF;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Oppdatert 06.08.2021:SKDE data somatikk
+974633574;Sykehuset i Vestfold HF, somatikk TÃ¸nsberg;221;Sykehuset i Vestfold, TÃ¸nsberg;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974575396;Sykehuset i Vestfold, Rehabilitering Stavern;222;Sykehuset i Vestfold, Rehabilitering Kysthospitalet Stavern;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+899643992;Sykehuset i Vestfold, Somatikk Solvang;223;Sykehuset i Vestfold, Somatikk Solvang;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974117002;Sykehuset i Vestfold, Habilitering Solvang;224;Sykehuset i Vestfold, Habilitering Solvang;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+823247672;Sykehuset i Vestfold HF - somatikk Sandefjord;225;Sykehuset i Vestfold, somatikk Sandefjord;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+824674892;Sykehuset i Vestfold HF - fysikalsk medisin og rehabilitering TÃ¸nsberg - BjellandÃ¥sen;226;Sykehuset i Vestfold, fysikalsk medisin og rehabilitering;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974633558;Sykehuset i Vestfold HF - somatikk Larvik;227;Sykehuset i Vestfold, somatikk Larvik;22;Sykehuset i Vestfold HF;Sykehuset i Vestfold;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974116804;Diakonhjemmet sykehus;230;Diakonhjemmet sykehus;23;Diakonhjemmet sykehus;Diakonhjemmet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+982791952;Diakonhjemmet sykehus AS;230;Diakonhjemmet sykehus;23;Diakonhjemmet sykehus;Diakonhjemmet sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Oppdatert 20.jan 2021: 2019-data, institusjonid viser til hovedenhet Diakonhjemmet sykehus AS.
+974207532;Lovisenberg diakonale sykehus;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+920800041;Lovisenberg Diakonale sykehus hospice sangen avd Hamar;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+965985166;Lovisenberg diakonale sykehus AS;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Oppdatert 20.jan 2021: 2019-data, institusjonid viser til hovedenhet Lovisenberg diakonale sykehus AS.
+985962170;Martina Hansens Hospital;251;Martina Hansens Hospital;25;Resterende Helse SÃ¸r-Ã˜st RHF;Resterende Helse SÃ¸r-Ã˜st;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+974116588;Martina Hansens hospital sykehuset;251;Martina Hansens Hospital;25;Resterende Helse SÃ¸r-Ã˜st RHF;Resterende Helse SÃ¸r-Ã˜st;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+924445114;Martina Hansens hospital avd radiologi;251;Martina Hansens Hospital;25;Resterende Helse SÃ¸r-Ã˜st RHF;Resterende Helse SÃ¸r-Ã˜st;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Underenhet til Martina Hansens Hospital, legges til behsh 251 sammen med hovedenhet.
+981275721;Betanien hospital;252;Betanien Hospital Skien;25;Resterende Helse SÃ¸r-Ã˜st RHF;Resterende Helse SÃ¸r-Ã˜st;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+873255102;Betanien hospital;252;Betanien Hospital Skien;25;Resterende Helse SÃ¸r-Ã˜st RHF;Resterende Helse SÃ¸r-Ã˜st;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Oppdatert 30.03.2022: RHF data somatikk.
+985773238;Revmatismesykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse SÃ¸r-Ã˜st RHF;Resterende Helse SÃ¸r-Ã˜st;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+973254979;Revmatisme sykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse SÃ¸r-Ã˜st RHF;Resterende Helse SÃ¸r-Ã˜st;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;
+984630492;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse SÃ¸r-Ã˜st RHF;Resterende Helse SÃ¸r-Ã˜st;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;"Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader.
+997506499;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse SÃ¸r-Ã˜st RHF;Resterende Helse SÃ¸r-Ã˜st;4;Helse SÃ¸r-Ã˜st RHF;Helse SÃ¸r-Ã˜st;SÃ¸r-Ã˜st;Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR  		er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader."
 974316285;Haraldsplass diakonale sykehus AS;260;Haraldsplass diakonale sykehus;26;Haraldsplass diakonale sykehus;Haraldsplass diakonale sykehus;3;Helse Vest RHF;Helse Vest;Vest;
 984027737;Haraldsplass diakonale sykehus AS;260;Haraldsplass diakonale sykehus;26;Haraldsplass diakonale sykehus;Haraldsplass diakonale sykehus;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 30.03.2022: RHF data somatikk.
 813381192;Aleris Helse AS Stavanger;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
@@ -203,9 +203,9 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 897351102;Akademikliniken Oslo AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 914751934;Privathospitalet AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 941455077;Medi 3 AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-971049456;Mjøskirurgene;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+971049456;MjÃ¸skirurgene;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 971937548;EEG Labora;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-972140295;NIMI AS Avd. Mini Ullevål;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+972140295;NIMI AS Avd. Mini UllevÃ¥l;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 972149519;Teres Rosenborg;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 973129856;Volvat medisinske senter AS Oslo;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 973144383;LHL-klinikkene Feiring;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
@@ -219,27 +219,27 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 977208734;Privatsykehuset Haugesund AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 980693732;Ringvoll klinikken AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 980859754;Privathospitalet AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-981096363;Teres Sørlandsparken;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+981096363;Teres SÃ¸rlandsparken;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 981541499;Teres Colosseum;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 982755999;Volvat Stokkan;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-983084478;Volvat Tromsø;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+983084478;Volvat TromsÃ¸;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 983896383;Teres Colosseum Stavanger;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 985766924;Bergen Spine Center;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 987954167;IbsenSykehuset AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 991811869;Kolibri Medical AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-993240184;Aleris Helse AS Tromsø;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+993240184;Aleris Helse AS TromsÃ¸;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 995590794;SVC Norge AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-995818728;Teres Klinikken Bodø;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-996860884;Somni Søvnsenter og Spesialisthelsetjenester AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+995818728;Teres Klinikken BodÃ¸;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+996860884;Somni SÃ¸vnsenter og Spesialisthelsetjenester AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 912817318;Somni AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 914480752;Moloklinikken AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 915411223;Kalbakkenklinikken AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 916269331;A-Medi AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 916588224;Preventia AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 998558271;Oslo medisinske senter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-999230008;Ifocus øyeklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+999230008;Ifocus Ã¸yeklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 812794922;Colosseum Mann AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-817178782;Medi 3 Ringvoll Klinikken AS, avd Kirurgi Hobøl;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+817178782;Medi 3 Ringvoll Klinikken AS, avd Kirurgi HobÃ¸l;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 912011135;Medi 3 Ringvoll Klinikken AS, avd Oslo;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 914491908;Colosseumklinikken medisinske senter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 916603290;Sandvika Nevrosenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
@@ -250,15 +250,15 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 914607493;Colosseumklinikken Medisinske senter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 918289593;Volvat medisinske senter AS Moss;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 919028513;LHL-sykehuset Vestfold;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-919729333;Aleris Helse AS avd Ålesund;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-919749547;Volvat medisinske senter AS Bergen-Åsane;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+919729333;Aleris Helse AS avd Ã…lesund;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+919749547;Volvat medisinske senter AS Bergen-Ã…sane;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 920248829;LHL sykehuset Gardermoen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 920970893;Kolbotn Hjertesenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 921008104;Evjeklinikken AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 964249075;Vikersund bad rehabiliteringssenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 974183749;Volvat medisinske senter AS Fredrikstad;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 976343506;Volvat medisinske senter AS Bergen - Lagunen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-987621249;Ibsensykehuset Gjøvik AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+987621249;Ibsensykehuset GjÃ¸vik AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 988192996;N.K.S. Helsehus Akershus AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 991133720;Oslo hjerteklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 995111209;LHL-klinikkene Bergen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
@@ -278,19 +278,19 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 974116669;Vikersund bad rehabiliteringssenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 976003799;Unicare friskvern;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 977212901;Privatsykehuset Haugesund AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-979819706;Aleris medisinske senter Strømmen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+979819706;Aleris medisinske senter StrÃ¸mmen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 991828702;Forusakutten AS - avd Sandnes;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-996087212;Ullevål Hageby hjertesenter Odd Johansen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-998562708;Medi 3 AS - avd Ålesund;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
-999458610;Ibsensykehuset Gjøvik AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+996087212;UllevÃ¥l Hageby hjertesenter Odd Johansen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+998562708;Medi 3 AS - avd Ã…lesund;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+999458610;Ibsensykehuset GjÃ¸vik AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 922950172;COLOSSEUM FAUST AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
 976520165;Valnesfjord Helsesportsenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
-987407557;Ifocus øyeklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
+987407557;Ifocus Ã¸yeklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
 987658584;UNICARE BAKKE AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 13.jan 2021: 2020-data, orgnr til private enheter.
-999204546;Orbita øyelegesenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 20.jan 2021: 2020-data, institusjonid viser til ny privat aktør.
+999204546;Orbita Ã¸yelegesenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 20.jan 2021: 2020-data, institusjonid viser til ny privat aktÃ¸r.
 871426902;Godthaab;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-888082042;Stamina Helse, Bodø;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-912041379;Høyenhall;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+888082042;Stamina Helse, BodÃ¸;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+912041379;HÃ¸yenhall;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 912663272;MyWorkout;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 913220684;LHL Trondheim;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 915354513;Kastvollen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
@@ -305,55 +305,55 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 959678839;Hokksund;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 961721652;Muritunet;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 966867450;Landaasen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-971436875;Beitostølen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+971436875;BeitostÃ¸len;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 974116464;Betania Malvik;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 974116774;Conrad Svendsen Senter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 974157411;Skibotnsenteret;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-974987562;Røysumtunet;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-926295160;Diakonistifelsen Røysum avd Nordre Skogskoleveg;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 07.04.2022: rehab institusjon i RHF 2021 T3 data.
+974987562;RÃ¸ysumtunet;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+926295160;Diakonistifelsen RÃ¸ysum avd Nordre Skogskoleveg;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 07.04.2022: rehab institusjon i RHF 2021 T3 data.
 976516745;Valnesfjord;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 976547993;Fram Helserehab;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-976724895;PTØ-Senteret Hamar;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-976867017;PTØ-Gardermoen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+976724895;PTÃ˜-Senteret Hamar;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+976867017;PTÃ˜-Gardermoen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 977155673;Ravneberghaugen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 979757751;Catosenteret;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 980395588;Grande;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 980684997;Finnmark;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 980924076;Nord-Norges Kurbad;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 980973549;Skogli;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-981027035;Røros;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+981027035;RÃ¸ros;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 983213421;Hernes;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-983478778;Jeløy kurbad;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-971608048;Unicare Jeløy AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 07.04.2022: rehab institusjon i RHF 2021 T3 data.
+983478778;JelÃ¸y kurbad;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+971608048;Unicare JelÃ¸y AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 07.04.2022: rehab institusjon i RHF 2021 T3 data.
 984036655;Helgeland Rehabilitering;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-984756712;Friskgården;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+984756712;FriskgÃ¥rden;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 985311013;Coperiosenteret;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 986358668;Hakadal MSSenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-986823611;Meråker;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+986823611;MerÃ¥ker;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 986923845;Namdal;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 987552433;Evjeklinikken;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-988351199;Tonsåsen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-988413216;Åstveit;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-990772525;Stamina Helse, Tromsø;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-991441654;Oppfølgingsenheten Frisk;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+988351199;TonsÃ¥sen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+988413216;Ã…stveit;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+990772525;Stamina Helse, TromsÃ¸;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+991441654;OppfÃ¸lgingsenheten Frisk;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 992168781;NIMI Ringerike;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-993425273;Eiksåsen MSSenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+993425273;EiksÃ¥sen MSSenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 994675273;Idrettens Helsesenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-997808347;Krokeidesenteret_Nærland;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+997808347;Krokeidesenteret_NÃ¦rland;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 998725186;HLF Briskeby;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-999087345;Sørlandets Eiken;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
+999087345;SÃ¸rlandets Eiken;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 999238351;NIMI AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
-824306532;Oppfølgingsenheten Frisk AS avd Elverum;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+824306532;OppfÃ¸lgingsenheten Frisk AS avd Elverum;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
 871815402;Unicare Hokksund AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
 872338012;Muritunet AS avd Valldal;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-918996796;Oppfølgingsenheten Frisk AS avd Randaberg;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-918997202;Oppfølgingsenheten Frisk AS avd Oslo sentrum;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-918997539;Oppfølgingsenheten Frisk AS avd Hamar;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-919693215;PTØ senteret Stavanger;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-919693282;PTØ senteret Trondheim (slettet 11.11.2020);300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-919854677;Muritunet AS avd Moa (Ålesund);300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-919968001;Oppfølgingsenheten Frisk AS avd Trondheim;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-922186154;Unicare Røros;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+918996796;OppfÃ¸lgingsenheten Frisk AS avd Randaberg;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+918997202;OppfÃ¸lgingsenheten Frisk AS avd Oslo sentrum;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+918997539;OppfÃ¸lgingsenheten Frisk AS avd Hamar;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+919693215;PTÃ˜ senteret Stavanger;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+919693282;PTÃ˜ senteret Trondheim (slettet 11.11.2020);300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+919854677;Muritunet AS avd Moa (Ã…lesund);300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+919968001;OppfÃ¸lgingsenheten Frisk AS avd Trondheim;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+922186154;Unicare RÃ¸ros;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
 922186391;Unicare Helsefort;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
 922688117;Skibotn Helse og Rehabilitering AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
 971725214;Unicare Landaasen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
@@ -361,32 +361,32 @@ orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_na
 971821205;Stiftelsen Hernes institutt;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
 973254618;Ringen Rehabiliteringssenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
 974124262;Selli Rehabiliteringssenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-974841894;Sørlandets rehabiliteringssenter Eiken AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-991521607;Oppfølgingsenheten Frisk AS avd Moelv;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-993189855;Oppfølgingsenheten Frisk AS avd Elverum (slettet 25.06.2020);300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+974841894;SÃ¸rlandets rehabiliteringssenter Eiken AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+991521607;OppfÃ¸lgingsenheten Frisk AS avd Moelv;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
+993189855;OppfÃ¸lgingsenheten Frisk AS avd Elverum (slettet 25.06.2020);300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
 922047847;Skibotn Helse og Rehabilitering AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2019/2020 rehab fila.
-825222332;LHL klinikken Tønsberg;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021.
+825222332;LHL klinikken TÃ¸nsberg;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021.
 919122609;LHL sykehuset Vestfold;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021.
 922436029;Retscreen AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021.
 924642653;Majorstuen spesialistsenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021.
 921210256;Ringerike spesialistsenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 29.03.2021: somatikk RHF-data jan/feb 2021.
 978654657;Medicus AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.04.2021: somatikk RHF-data mars 2021.
-971815345;Meråker kurbad AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.04.2021: rehab RHF-data mars 2021.
-972013676;Røde kors Haugland rehabiliteringssenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.04.2021: rehab RHF-data mars 2021.
-973280872;Stiftelsen Beitostølen helsesportsenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.04.2021: rehab RHF-data mars 2021.
+971815345;MerÃ¥ker kurbad AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.04.2021: rehab RHF-data mars 2021.
+972013676;RÃ¸de kors Haugland rehabiliteringssenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.04.2021: rehab RHF-data mars 2021.
+973280872;Stiftelsen BeitostÃ¸len helsesportsenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.04.2021: rehab RHF-data mars 2021.
 912685519;Treningsklinikken;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.04.2021: rehab RHF-data mars 2021.
 926922394;HELSE I HARDANGER AS AVD REHABILITERING;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 820491432;Livel AS avd Ringerike;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.07.2021: 1.tertial 2021 RHF-data.
-921458681;Livel AS avd Bærum;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.07.2021: 1.tertial 2021 RHF-data.
+921458681;Livel AS avd BÃ¦rum;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.07.2021: 1.tertial 2021 RHF-data.
 893140832;Stiftelsen Barnas fysioterapisenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 06.08.2021:SKDE data somatikk
-915378404;Sykehuset Oslo Øst;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 06.08.2021:SKDE data somatikk
+915378404;Sykehuset Oslo Ã˜st;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 06.08.2021:SKDE data somatikk
 921634137;Faust medisinske senter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 06.08.2021:SKDE data somatikk
-996078841;Ullevål Hageby hjertesenter Odd Johansen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 06.08.2021:SKDE data somatikk
+996078841;UllevÃ¥l Hageby hjertesenter Odd Johansen;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 06.08.2021:SKDE data somatikk
 825145842;Kongsvinger ortopedi Nesland;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
 827205842;Christiania hjerteklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
 914191378;Parsennklinikken AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
 915789528;VOLVAT medisinske senter AS nordnorsk hudlegesenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
-973876457;Mjøs kirurgene lege og spesialistsenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
+973876457;MjÃ¸s kirurgene lege og spesialistsenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
 990240116;VOLVAT medisinske senter AS Bergen - Ulriksdal;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
 995765691;Rehabilitering Vest AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 07.04.2022: rehab institusjon i RHF 2021 T3 data.
 996723119;Legevakt Vest AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 04.07.2022: somatikk 2022 T1. Allmenn legetjeneste, legevakt, bedriftshelsetjeneste og privat legespesialistpraksis. 

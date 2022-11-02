@@ -1,4 +1,4 @@
-%macro unik_pasient_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
+﻿%macro unik_pasient_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste unik_pasient-makro.

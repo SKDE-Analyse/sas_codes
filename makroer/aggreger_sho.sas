@@ -1,4 +1,4 @@
-%macro aggreger(inndata = , utdata = , agg_var = , mappe = work);
+﻿%macro aggreger(inndata = , utdata = , agg_var = , mappe = work);
 
 /*!
 Makro for å aggregere datasett, slik at det kan brukes i rateprogrammet.

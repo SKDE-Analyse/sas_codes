@@ -1,4 +1,4 @@
-/*Ratefigur med todelt søyle, eks andel off/privat eller andel kreft/ikke kreft*/
+﻿/*Ratefigur med todelt søyle, eks andel off/privat eller andel kreft/ikke kreft*/
 
 /* Need to run the 'merge' macro first before running this one.  The output from 'merge' is the input for this */
 /* creates a figure so that first column is rate from dataset1, and second column from dataset2 */

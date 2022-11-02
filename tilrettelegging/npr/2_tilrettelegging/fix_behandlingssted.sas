@@ -1,4 +1,4 @@
-/* Makroen fix_behandlingssted bruker mottatt variabel 'behandlingsstedkode' til å lage 'behandlingsstedkode2' */
+﻿/* Makroen fix_behandlingssted bruker mottatt variabel 'behandlingsstedkode' til å lage 'behandlingsstedkode2' */
 /* Den korrigerer feil i de enkelte år, og hos radene som mangler 'behandlingsstedkode' brukes variabel 'institusjonID'  */
 /* OBS: Feilene angitt for de enkelte år gjelder RHF-data. */
 /* Mottatt variabel behandlingsstedkode beholdes uendret */

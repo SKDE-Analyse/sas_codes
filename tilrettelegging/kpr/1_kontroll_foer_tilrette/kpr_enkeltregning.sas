@@ -1,4 +1,4 @@
-/* MAKRO: FRA HOVEDFIL TIL SATELITT */
+﻿/* MAKRO: FRA HOVEDFIL TIL SATELITT */
 %macro kpr_enkeltregning;
 proc sql;
 	create table regninglnr_&aar. as

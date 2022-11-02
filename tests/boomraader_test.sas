@@ -1,4 +1,4 @@
-%macro boomraader_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
+﻿%macro boomraader_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste boomraader-makro.

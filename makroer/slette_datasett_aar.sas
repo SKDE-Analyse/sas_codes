@@ -1,4 +1,4 @@
-/*Macro for å gå gjennom alle datasett i en angitt mappe og slette 
+﻿/*Macro for å gå gjennom alle datasett i en angitt mappe og slette 
 alle datasett som inneholder rader med data fra et angitt år 
 (dvs. som har rader der variabelen "aar" er lik et angitt årstall)
 

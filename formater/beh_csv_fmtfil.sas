@@ -1,4 +1,4 @@
-/* Endringslogg: Sist endret av Janice 17.06.2021 */
+﻿/* Endringslogg: Sist endret av Janice 17.06.2021 */
 
 /* Makro for å sette på formater for behsh, behhf, behrhf */
 /* Husk å definere filbane før makro kjøres */

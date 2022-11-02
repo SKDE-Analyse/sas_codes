@@ -1,4 +1,4 @@
-%macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
+﻿%macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
 
 /*! 
 ### Beskrivelse

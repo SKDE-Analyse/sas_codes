@@ -1,4 +1,4 @@
-%macro type1_type2_bohf(type1=, type2=);
+﻿%macro type1_type2_bohf(type1=, type2=);
 
 /*!
 ### Beskrivelse

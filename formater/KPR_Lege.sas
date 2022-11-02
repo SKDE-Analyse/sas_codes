@@ -1,4 +1,4 @@
-Proc format;
+﻿Proc format;
 
  value tjenestetype_kpr
 	 1 = 'Fastlege'

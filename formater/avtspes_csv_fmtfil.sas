@@ -1,4 +1,4 @@
-/* Opprettet 31.03.2022 Tove J */
+﻿/* Opprettet 31.03.2022 Tove J */
 
 /* Makro for å sette på formater for avtalespesialister - fungerer kun når vi ser på avtspes data separat. 
     Variabel institusjonID inneholder orgnr i somatikk-fil, her er det reshID-er. */

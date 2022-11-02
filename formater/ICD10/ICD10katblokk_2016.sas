@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $ICD10katblokk2016F
 1='A00-A09 Infeksiøse tarmsykdommer'
 2='A15-A19 Tuberkulose'

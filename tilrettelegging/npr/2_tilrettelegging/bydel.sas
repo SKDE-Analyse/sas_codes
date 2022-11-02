@@ -1,4 +1,4 @@
-/* Input variable  : bydel2 for RHF (specified in the argument, original bydel var from NPR) */
+﻿/* Input variable  : bydel2 for RHF (specified in the argument, original bydel var from NPR) */
 /* Output variable : bydel (komnr and bydel together) */
 
 %macro bydel(inndata=, utdata=, bydel=bydel2);

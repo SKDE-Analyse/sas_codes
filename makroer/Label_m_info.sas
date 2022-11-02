@@ -1,4 +1,4 @@
-%macro Label_m_info(inn_data=, Label_variabel=, Info_variabel=, Info_variabel_tekst= );
+﻿%macro Label_m_info(inn_data=, Label_variabel=, Info_variabel=, Info_variabel_tekst= );
 
 /*!
 ### Beskrivelse

@@ -1,10 +1,10 @@
-/* Opprettet 27.11.2019 - Frank Olsen
+ï»¿/* Opprettet 27.11.2019 - Frank Olsen
 Hentet fra Beate Hauglann*/
 
 Proc format;
 value $ICD10_gr_fmt
-'C00–96'='All sites'
-'C00–14'='Mouth, pharynx'
+'C00â€“96'='All sites'
+'C00â€“14'='Mouth, pharynx'
 'C00'='Lip'
 'C01-02'='Tongue'
 'C03-06'='Mouth, other'
@@ -44,7 +44,7 @@ value $ICD10_gr_fmt
 'C61'='Prostate'
 'C62'='Testis'
 'C60, C63'='Other male genital'
-'C64–68'='Urinary organs'
+'C64â€“68'='Urinary organs'
 'C64'='Kidney(excl. renal pelvis)'
 'C65-68'='Urinary tract'
 'C69'='Eye'
@@ -52,7 +52,7 @@ value $ICD10_gr_fmt
 'C73'='Thyroid gland'
 'C37, C74-75'='Other endocrine glands'
 'C39, C76, C80'='Other or unspecified'
-'C81–96'='Lymphoid/haematopoietic tissue'
+'C81â€“96'='Lymphoid/haematopoietic tissue'
 'C81'='Hodgkin lymphoma'
 'C82-86, C96'='Non-Hodgkin lymphoma'
 'C88'='Immunoproliferative disease'
@@ -123,11 +123,11 @@ run;
 
 proc format;
 value LOK_ICD7_omk
-/*Lok. Ca. labii (leppestift-området)*/
+/*Lok. Ca. labii (leppestift-omrÃ¥det)*/
 1400 = 'Overleppe (Lok. Ca. labii)'
 1401 = 'Underleppe (Lok. Ca. labii)'
 1402 = 'Begge lepper (Lok. Ca. labii)'
-1407 = 'Kommissurer (Lok. Ca. labii)' /*før 1983*/
+1407 = 'Kommissurer (Lok. Ca. labii)' /*fÃ¸r 1983*/
 1408 = 'Andre spesifiserte lokal. bl.a. kommissurer (Lok. Ca. labii)'
 1409 = 'Leppe i.n.s (Lok. Ca. labii)'
 
@@ -139,29 +139,29 @@ value LOK_ICD7_omk
 1418 = 'Omfatter store tumores med utbredelse over flere lok (Lok. Ca. linguae)'
 1419 = 'Tunge, i.n.s. (Lok. Ca. linguae)'
 /*Gamle koder*/
-/*- Tungens høyre/venstre side ble tidligere kodet både på 141.9*/
-/*(før 1983) og på 141.8 (fom. 1983 tom. 1985).*/
-/*- Tungemandel ble tidligere (før 1986) kodet 145.0.*/
+/*- Tungens hÃ¸yre/venstre side ble tidligere kodet bÃ¥de pÃ¥ 141.9*/
+/*(fÃ¸r 1983) og pÃ¥ 141.8 (fom. 1983 tom. 1985).*/
+/*- Tungemandel ble tidligere (fÃ¸r 1986) kodet 145.0.*/
 
 /*Lok. Ca. glandula salivariae*/
 1420 = 'Glandula parotis. (Lok. Ca. glandula salivariae)'
 1421 = 'Glandula submandibularis.(Lok. Ca. glandula salivariae)'
 1422 = 'Glandula sublingualis.(Lok. Ca. glandula salivariae)'
-1427 = 'Samlekode for Glandula submandibularis (Lok. Ca. glandula salivariae)' /*før 1983*/
+1427 = 'Samlekode for Glandula submandibularis (Lok. Ca. glandula salivariae)' /*fÃ¸r 1983*/
 1429 = 'Stor spyttkjertel i.n.s. (Lok. Ca. glandula salivariae)'
 
 /*Lok. Ca. baseos oris*/
-1430 = 'Gingiva inferior (nedre). (Lok. Ca. baseos oris)' /*Tannkjøttet i underkjeven. Gumme. Slimhinnen svarende til processus alveolaris inferior.*/
-1431 = 'Regio sublingualis. (Lok. Ca. baseos oris)' /*Ikke på tungens underside, men munngulvet
+1430 = 'Gingiva inferior (nedre). (Lok. Ca. baseos oris)' /*TannkjÃ¸ttet i underkjeven. Gumme. Slimhinnen svarende til processus alveolaris inferior.*/
+1431 = 'Regio sublingualis. (Lok. Ca. baseos oris)' /*Ikke pÃ¥ tungens underside, men munngulvet
 under tungen.*/
 1438 = 'Svulster over flere sublokalisasjoner. (Lok. Ca. baseos oris)'
 1439 = 'Munngulv i.n.s. (Lok. Ca. baseos oris)'
 
 /*Lok. Ca. cavum oris*/
-1440 = 'Bløte/harde gane (palatum molle/durum). Drøvelen (uvula). (Lok. Ca. cavum oris)'
-1441 = 'Gingiva superior (øvre). Tannkjøttet i overkjeven.
+1440 = 'BlÃ¸te/harde gane (palatum molle/durum). DrÃ¸velen (uvula). (Lok. Ca. cavum oris)'
+1441 = 'Gingiva superior (Ã¸vre). TannkjÃ¸ttet i overkjeven.
 Slimhinnen svarende til processus alveolaris superior. (Lok. Ca. cavum oris)'
-1442 = 'Bucca. Kinnslimhinne. Omfatter også slimhinnesiden av leppene. (Lok. Ca. cavum oris)'
+1442 = 'Bucca. Kinnslimhinne. Omfatter ogsÃ¥ slimhinnesiden av leppene. (Lok. Ca. cavum oris)'
 1448 = 'Andre spesifiserte lokalisasjoner i munnhulen. (Lok. Ca. cavum oris)'
 1449 = 'Munnhule i.n.s. Gingiva i.n.s. (Lok. Ca. cavum oris)'
 
@@ -169,8 +169,8 @@ Slimhinnen svarende til processus alveolaris superior. (Lok. Ca. cavum oris)'
 1450 = 'Tonsille, halsmandel (tonsilla palatina) (Lok. Ca. mesopharyngis (oropharyngis)).'
 1451 = 'Vallecula epiglottica. (Lok. Ca. mesopharyngis (oropharyngis))'
 1452 = 'Overside av epiglottis. (Lok. Ca. mesopharyngis (oropharyngis))'
-1457 = 'Mesopharynx , andre lokalisasjoner. (Lok. Ca. mesopharyngis (oropharyngis))Ble kodet som 145.8 før 1983'
-1458 = 'Mesopharynx i.n.s., før 1983 (Lok. Ca. mesopharyngis (oropharyngis))'
+1457 = 'Mesopharynx , andre lokalisasjoner. (Lok. Ca. mesopharyngis (oropharyngis))Ble kodet som 145.8 fÃ¸r 1983'
+1458 = 'Mesopharynx i.n.s., fÃ¸r 1983 (Lok. Ca. mesopharyngis (oropharyngis))'
 1459 = 'Mesopharynx i.n.s (Lok. Ca. mesopharyngis (oropharyngis))'
 /*Gamle koder:*/
 /*- Tungemandel (tonsilla lingualis, tidligere 145.0) kodes til 141.0.*/
@@ -180,12 +180,12 @@ Slimhinnen svarende til processus alveolaris superior. (Lok. Ca. cavum oris)'
 1460 = 'Epipharynx = nasopharynx = rhinopharynx,
 tonsilla pharyngea (falsk mandel).'
 /*Gamle koder*/
-/*146.0 Falsk mandel (tonsilla pharyngea) ble før 1986 kodet 145.0.*/
+/*146.0 Falsk mandel (tonsilla pharyngea) ble fÃ¸r 1986 kodet 145.0.*/
 
 /*Lok. Ca. hypopharyngis*/
 1470 = 'Hypopharynx, nederste del av svelget.
 Hypopharynx i.n.s. og epiglottis i.n.s.'
-/*Omfatter bl.a. plica pharyngo-epiglottica, den frie øvre rand*/
+/*Omfatter bl.a. plica pharyngo-epiglottica, den frie Ã¸vre rand*/
 /*av epiglottis, plica aryepiglottica, tuberculum cuneiforme,*/
 /*tuberculum corniculatum, incisura inter-arytenoidea, regio*/
 /*retroarytenoidea, recessus piriformis, regio retro-cricoidea,*/
@@ -195,19 +195,19 @@ Hypopharynx i.n.s. og epiglottis i.n.s.'
 1481 = 'Bronchiogen halscyste'
 
 /*Lok. Ca. oesophagi*/
-1500 = 'Oesophagus, spiserør, 15-23 cm fra tannrekken,
-øvre (proximale) 1/3. Overgang hypopharynx - oesophagus.'
-1501 = 'Oesophagus, spiserør, 24-32 cm fra tannrekken, midtre 1/3.'
-1502 = 'Oesophagus, spiserør, 33-44 cm fra tannrekken, nedre (distale) 1/3.'
-1508 = 'Oesophagus, spiserør, Utbredt over flere sub-lokalisajoner.'
+1500 = 'Oesophagus, spiserÃ¸r, 15-23 cm fra tannrekken,
+Ã¸vre (proximale) 1/3. Overgang hypopharynx - oesophagus.'
+1501 = 'Oesophagus, spiserÃ¸r, 24-32 cm fra tannrekken, midtre 1/3.'
+1502 = 'Oesophagus, spiserÃ¸r, 33-44 cm fra tannrekken, nedre (distale) 1/3.'
+1508 = 'Oesophagus, spiserÃ¸r, Utbredt over flere sub-lokalisajoner.'
 1509 = 'Oesophagus i.n.s.'
 
 /*Lok. Ca. ventriculi*/
 1510 = 'Pars pylorica, canalis, angulus, antrum. (Lok. Ca. ventriculi)'
 1511 = 'Corpus. (Lok. Ca. ventriculi)'
-1512 = 'Cardia, fundus, øvre del av ventrikkel. (Lok. Ca. ventriculi)'
-/*1513 = 'Utbredt ventrikkelcancer. Utgått.'*/
-1514 = 'Tidligere ventrikkel-recessert pga. godartet sår
+1512 = 'Cardia, fundus, Ã¸vre del av ventrikkel. (Lok. Ca. ventriculi)'
+/*1513 = 'Utbredt ventrikkelcancer. UtgÃ¥tt.'*/
+1514 = 'Tidligere ventrikkel-recessert pga. godartet sÃ¥r
 i ventrikkel/duodenum. (Lok. Ca. ventriculi)'
 1515 = 'Curvatura minor (Lok. Ca. ventriculi)' /*(fom. 01.01.83).*/
 1516 = 'Curvatura major (Lok. Ca. ventriculi)' /*(fom. 01.01.83).*/
@@ -219,17 +219,17 @@ i ventrikkel/duodenum. (Lok. Ca. ventriculi)'
 1521 = 'Jejunum. (Lok. Ca. duodeni, jejuni, ilei)'
 1522 = 'Ileum. (Lok. Ca. duodeni, jejuni, ilei)'
 1523 = 'Meckels divertikkel. (Lok. Ca. duodeni, jejuni, ilei)'
-1527 = 'Jejunum og ileum, før 1983 (Lok. Ca. duodeni, jejuni, ilei)'
+1527 = 'Jejunum og ileum, fÃ¸r 1983 (Lok. Ca. duodeni, jejuni, ilei)'
 1528 = 'Utbredt over flere sub-lokalisasjoner. (Lok. Ca. duodeni, jejuni, ilei)'
 1529 = 'Tynntarm i.n.s. (Lok. Ca. duodeni, jejuni, ilei)'
 
 /*Lok. Ca. coli*/
 1530 = 'Caecum, colon ascendens, iloecaecal-overgangen. (Lok. Ca. coli)'
 1531 = 'Colon transversum med flexura hepatica og lienalis
-(høyre og venstre flexur). (Lok. Ca. coli)'
+(hÃ¸yre og venstre flexur). (Lok. Ca. coli)'
 1532 = 'Colon descendens. (Lok. Ca. coli)'
-1533 = 'Colon-sigmoideum (evt. 21cm eller mer fra analåpningen). (Lok. Ca. coli)'
-1534 = 'Recto-sigmoideum (20 cm fra analåpningen). (Lok. Ca. coli)'
+1533 = 'Colon-sigmoideum (evt. 21cm eller mer fra analÃ¥pningen). (Lok. Ca. coli)'
+1534 = 'Recto-sigmoideum (20 cm fra analÃ¥pningen). (Lok. Ca. coli)'
 1535 = 'Polypper. (Lok. Ca. coli)'
 1536 = 'Appendix. (Lok. Ca. coli)'
 1539 = 'Colon i.n.s, eksklusive rectum i.n.s. (Lok. Ca. coli)'
@@ -237,40 +237,40 @@ i ventrikkel/duodenum. (Lok. Ca. ventriculi)'
 /*153.6 ble 01.01.83 konvertert til 153.9: Colon, eksklsuve rectum i.n.s.*/
 /*153.8 ble 01.01.83 konvertert til 159.0: Tarm i.n.s.*/
 /*Fra 01.01.83 ble 153.8 brukt for "andre spesifiserte lokalisasjoner*/
-/*i colon". Utgår f.o.m 01.01.86.*/
+/*i colon". UtgÃ¥r f.o.m 01.01.86.*/
 
 /*Lok. Ca. recti, ani*/
 1540 = 'Rectum, ampullen, rectum i.n.s (Lok. Ca. recti, ani).
-tarmavsnittet 5-19 cm fra anal-åpningen. (Lok. Ca. recti, ani)'
+tarmavsnittet 5-19 cm fra anal-Ã¥pningen. (Lok. Ca. recti, ani)'
 1541 = 'Analkanal, endetarm (Lok. Ca. recti, ani);
-tarmavsnittet 0-4 cm fra anal-åpningen. (Lok. Ca. recti, ani)'
+tarmavsnittet 0-4 cm fra anal-Ã¥pningen. (Lok. Ca. recti, ani)'
 1545 = 'Polypper. (Lok. Ca. recti, ani)'
 
 /*Lok. Ca. hepatis*/
 1550 = 'Leverparenchym.'
 1551 = 'Intrahepatiske galleganger.'
-1557 = 'Galleveier i.n.s., før 1983.'
+1557 = 'Galleveier i.n.s., fÃ¸r 1983.'
 1559 = 'Lever i.n.s.'
 
 /*Lok. Ca. vesica felleae*/
-1560 = 'Galleblære'
+1560 = 'GalleblÃ¦re'
 1561 = 'Ekstrahepatiske galleganger (ductus hepaticus, ductus cysticus,
 ductus choledochus).'
 1562 = 'Papilla Vateri.'
 1568 = 'Utbredt over flere sub-lokalisasjoner. (Lok. Ca. vesica felleae)'
 1569 = 'Ekstrahepatiske galleveier i.n.s.'
 /*Gamle koder*/
-/*156 før 1983:*/
+/*156 fÃ¸r 1983:*/
 /*Metastaser og uspesifiserte maligne svulster i lever og*/
 /*galleveier.*/
-/*Fra 1970 bare brukt på dødsattester, men etterhvert gikk man over*/
-/*til lok. 199 for alle meldinger med følgende informasjon:*/
-/*"Tumor i lever, ins. om primær eller sekundær".*/
+/*Fra 1970 bare brukt pÃ¥ dÃ¸dsattester, men etterhvert gikk man over*/
+/*til lok. 199 for alle meldinger med fÃ¸lgende informasjon:*/
+/*"Tumor i lever, ins. om primÃ¦r eller sekundÃ¦r".*/
 /*Fra 01.01.86 vil disse bli kodet til 159.2 (lever/pancreas/*/
 /*galle-veier, -ganger i.n.s.).*/
 /*Konverteringer 01.01.83:*/
 /*156 konvertert til 199.9 (Helt uten opplysning om lokalisasjon).*/
-/*155.1 konvertert til 156.0 (Galleblære).*/
+/*155.1 konvertert til 156.0 (GalleblÃ¦re).*/
 /*155.2 konvertert til 156.1 (Ekstrahepatiske galleganger).*/
 /*155.3 konvertert til 156.2 (Papilla Vateri).*/
 
@@ -278,15 +278,15 @@ ductus choledochus).'
 1570 = 'Caput. (Lok. Ca. pancreatis)'
 1571 = 'Corpus. (Lok. Ca. pancreatis)'
 1572 = 'Cauda. (Lok. Ca. pancreatis)'
-1573 = 'Svulster utgående fra de Langerhanske øyer (endocrine svulster) (Lok. Ca. pancreatis)'
-1577 = 'Andre spesifiserte lokalisasjoner i pancreas, før 1983 (Lok. Ca. pancreatis)'
+1573 = 'Svulster utgÃ¥ende fra de Langerhanske Ã¸yer (endocrine svulster) (Lok. Ca. pancreatis)'
+1577 = 'Andre spesifiserte lokalisasjoner i pancreas, fÃ¸r 1983 (Lok. Ca. pancreatis)'
 1578 = 'Utbredt over flere sub-lokalisasjoner. (Lok. Ca. pancreatis)'
 1579 = 'Pancreas i.n.s. (Lok. Ca. pancreatis)'
 
 /*Lok. Ca. peritonei, omenti, mesenterii*/
 1580 = 'Peritoneum, bukhinnen.'
-1581 = 'Retroperitoneum. Bak bukhinnen. På bakre bukvegg.'
-1588 = 'Andre spesifiserte lokalisasjoner, f.eks. oment, krøs.'
+1581 = 'Retroperitoneum. Bak bukhinnen. PÃ¥ bakre bukvegg.'
+1588 = 'Andre spesifiserte lokalisasjoner, f.eks. oment, krÃ¸s.'
 1589 = 'Peritoneum/retroperitoneum i.n.s.'
 
 /*Lok.*/
@@ -294,7 +294,7 @@ ductus choledochus).'
 1591 = 'Milt'
 1592 = 'Lever/pancreas/galle-veier, -ganger i.n.s.'
 /*Gamle koder*/
-/*01.01.83 ble 153.8 overført til 159.0*/
+/*01.01.83 ble 153.8 overfÃ¸rt til 159.0*/
 /*01.01.86 159.2 (ny). Tidligere 156 og 199.*/
 
 /*Lok. Ca. cavi nasi, sinuum nasi, auris mediae, tubae Eustachii.*/
@@ -302,34 +302,34 @@ ductus choledochus).'
 1601 = 'Sinus maxillaris.'
 1602 = 'Sinus ethmoidalis, sphenoidalis, frontalis.'
 1603 = 'Bihuler i.n.s.'
-1604 = 'Tubae Eustachii, mellomøret, indre øre.'
+1604 = 'Tubae Eustachii, mellomÃ¸ret, indre Ã¸re.'
 1608 = 'Utbredt over to eller flere sub-lokalisasjoner. (Lok. Ca. cavi nasi, sinuum nasi, auris mediae, tubae Eustachii)'
 1609 = 'i.n.s. lokalisasjon i nese/bihule-systemet.'
 
 /*Lok. Ca. laryngis.*/
 1610 = 'Supraglottisk' /*(strupesiden: baksiden av epiglottis),
-strupelokket, plicae ventricularis, de falske stemmebånd,
+strupelokket, plicae ventricularis, de falske stemmebÃ¥nd,
 arytenoidebrusken, cuneiform-bruskene, corniculat-bruskene,
 ventriculus laryngis, vestibulum laryngis med sinus Morgagni.*/
-1611 = 'Glottisk inkl. de ekte stemmebånd (plicae vocalis).'
+1611 = 'Glottisk inkl. de ekte stemmebÃ¥nd (plicae vocalis).'
 1612 = 'Subglottisk, cricoidbrusken.'
-1613 = 'Utbredt cancer i larynx, før 1983'
+1613 = 'Utbredt cancer i larynx, fÃ¸r 1983'
 1618 = 'Utbredt over flere sublokalisasjoner. (Lok. Ca. laryngis)'
 1619 = 'Larynx i.n.s.; omfatter brusk i larynx.'
 
 /*Lok. Ca. tracheae, bronci, pulmonis.*/
-1620 = 'Trachea, luftrør.'
+1620 = 'Trachea, luftrÃ¸r.'
 1621 = 'Bronchier, lunger.'
-1623 = 'Før 1983: Multiple lokalisasjoner.'
-1627 = 'Før 1983: "Neopl.mal. bronchi, pulmonis et pleurae primarium
-sive secundarium non descriptum." Før 1983: 163.x.'
+1623 = 'FÃ¸r 1983: Multiple lokalisasjoner.'
+1627 = 'FÃ¸r 1983: "Neopl.mal. bronchi, pulmonis et pleurae primarium
+sive secundarium non descriptum." FÃ¸r 1983: 163.x.'
 1629 = 'Nedre luftveier i.n.s.'
 
 /*Lok. Ca. pleurae.*/
 1630 = 'Brysthinne, pleura.'
 /*Gamle koder/konverteringer.*/
-/*Tidligere 163.0: Sekundære eller i.n.s. svulster i i bronchier, lunger*/
-/*og brysthinne; nå lokalisasjon 199.*/
+/*Tidligere 163.0: SekundÃ¦re eller i.n.s. svulster i i bronchier, lunger*/
+/*og brysthinne; nÃ¥ lokalisasjon 199.*/
 
 /*Lok. Ca. mediastini, thymi, cordis.*/
 1640 = 'Mediastinum.'
@@ -337,7 +337,7 @@ sive secundarium non descriptum." Før 1983: 163.x.'
 1642 = 'Hjerteposen, pericard.'
 1643 = 'Brissel, thymus.'
 /*Gamle koder/konverteringer:*/
-/*164.3: ble tidligere kodet på 195.x.*/
+/*164.3: ble tidligere kodet pÃ¥ 195.x.*/
 
 /*Lok. Ca. mammae.*/
 1700 = 'Vesentlig medialt beliggende. (Lok. Ca. mammae)'
@@ -345,12 +345,12 @@ sive secundarium non descriptum." Før 1983: 163.x.'
 1702 = 'Vesentlig sentralt beliggende. (Lok. Ca. mammae)'
 1703 = 'Utbredt tumor som inntar det meste av eller hele mamma.'
 /*170.0-170.3: se nedenfor*/
-1704 = 'Utbredt tumor som inntar det meste av eller hele mamma. Samtidig tumor i begge mamma, før 1983'
+1704 = 'Utbredt tumor som inntar det meste av eller hele mamma. Samtidig tumor i begge mamma, fÃ¸r 1983'
 1705 = 'Mamma, brystkjertel, inkl. papillen.'
 1708 = 'Andre spesifikke lokalisasjoner i mamma, aberrant mamma.'
-1709 = 'Mamma i.n.s. Før 1986.'
+1709 = 'Mamma i.n.s. FÃ¸r 1986.'
 /*Kommentar*/
-/*170.0-170.3 kodes kun på meldinger fra DNR.*/
+/*170.0-170.3 kodes kun pÃ¥ meldinger fra DNR.*/
 /*170.0 Vesentlig medialt beliggende.*/
 /*170.1 Vesentlig lateralt beliggende.*/
 /*170.2 Vesentlig sentralt beliggende.*/
@@ -361,7 +361,7 @@ sive secundarium non descriptum." Før 1983: 163.x.'
 
 /*Lok. Ca. corporis uteri.*/
 1720 = 'Livmorlegemet, corpus uteri.'
-1721 = 'Malign tumor oppstått i endometriosefocus.'
+1721 = 'Malign tumor oppstÃ¥tt i endometriosefocus.'
 
 /*Lok. Placenta.*/
 1730 = 'Placenta, morkake.'
@@ -372,7 +372,7 @@ sive secundarium non descriptum." Før 1983: 163.x.'
 
 /*Lok. Ca. ovarii, tubae, ligamenti.*/
 1750 = 'Ovarium, eggstokk.'
-1751 = 'Bilateral, før 1983.'
+1751 = 'Bilateral, fÃ¸r 1983.'
 1752 = 'Tube, eggleder.'
 1753 = 'Ekstragonadal germinalcellesvulst.'
 1758 = 'Andre spesifiserte lokalisasjoner i adnex, f.eks.
@@ -383,18 +383,18 @@ parametriet/ligamenter.'
 1760 = 'Vulva, ytre genitalia, inkluderer clitoris,
 gl. Bartholini, labium majus og minus.'
 1761 = 'Vagina, skjede.'
-1762 = 'Uterus og ovarium samtidig (før 1983).'
+1762 = 'Uterus og ovarium samtidig (fÃ¸r 1983).'
 1768 = 'Utbredt i ytre genitalia eller vagina.'
 1769 = 'Kvinnelige genitalia i.n.s. (ytre og indre)'
 
 /*Lok. Ca. prostata.*/
-1770 = 'Prostata, blærehalskjertel.'
+1770 = 'Prostata, blÃ¦rehalskjertel.'
 1771 = 'Vesiculae seminales.'
-1779 = '177.0 (alle før 1980)'
+1779 = '177.0 (alle fÃ¸r 1980)'
 
 /*Lok. Ca. testis.*/
 1780 = 'Testis (inkluderer tubuli seminiferis og rete testis).'
-1781 = 'Ektopisk testis. Retinert testis. Både operert og ikke operert.'
+1781 = 'Ektopisk testis. Retinert testis. BÃ¥de operert og ikke operert.'
 1782 = 'Epididymis.'
 1783 = 'Ductus deferens, funiculus spermaticus.'
 1784 = 'Ekstragonadal germinalcellesvulst.'
@@ -408,27 +408,27 @@ gl. Bartholini, labium majus og minus.'
 1798 = 'Utbredt over flere sublokalisasjoner. (Lok. Ca. penis)'
 1799 = 'Mannlige genitalia i.n.s.'
 /*Kommentar*/
-/*Malignt melanom på scrotum kodes på 190.6.*/
+/*Malignt melanom pÃ¥ scrotum kodes pÃ¥ 190.6.*/
 
 /*Lok. Ca. renis.*/
 1800 = 'Nyre.'
 1801 = 'Nyrebekken, pelvis.'
 1802 = 'Ureter, urinleder.'
-1808 = 'Utbredt over flere sublokalisasjoner. (Lok. Ca. renis)' /*Ved tvil spør lege.*/
-1809 = 'Øvre urinveier i.n.s.'
+1808 = 'Utbredt over flere sublokalisasjoner. (Lok. Ca. renis)' /*Ved tvil spÃ¸r lege.*/
+1809 = 'Ã˜vre urinveier i.n.s.'
 
 /*Lok. Ca. vesicae urinariae.*/
-1810 = 'Blære.'
+1810 = 'BlÃ¦re.'
 1811 = 'Urethra.'
-1813 = 'Paraurethrale kjertler (brukes ved tvil om prostata eller blære).'
+1813 = 'Paraurethrale kjertler (brukes ved tvil om prostata eller blÃ¦re).'
 1814 = 'Urachus rest.'
-1818 = 'Utbredt over flere sublokalisasjoner. (Lok. Ca. vesicae urinariae)' /* Ved tvil spør lege.*/
+1818 = 'Utbredt over flere sublokalisasjoner. (Lok. Ca. vesicae urinariae)' /* Ved tvil spÃ¸r lege.*/
 1819 = 'Nedre urinveier i.n.s.'
 
 /*Lok. Ca. cutis - basalcellecarcinom.*/
-1890 = 'Hud, ytre øre. Lok. Ca. cutis - basalcellecarcinom'
-1891 = 'Øyelokk med øyenvinkel, unntatt conjunctiva oculi. Lok. Ca. cutis - basalcellecarcinom'
-1892 = 'Ansiktet og hodet forøvrig, inkl. hodebunn, orbitalregionen,
+1890 = 'Hud, ytre Ã¸re. Lok. Ca. cutis - basalcellecarcinom'
+1891 = 'Ã˜yelokk med Ã¸yenvinkel, unntatt conjunctiva oculi. Lok. Ca. cutis - basalcellecarcinom'
+1892 = 'Ansiktet og hodet forÃ¸vrig, inkl. hodebunn, orbitalregionen,
 hake, kinn. Lok. Ca. cutis - basalcellecarcinom'
 1893 = 'Hals, kropp, nakke, skulder, lyske, axiller, nates, hofte
 unntatt genitalhud (lok. 176/179). Lok. Ca. cutis - basalcellecarcinom'
@@ -439,29 +439,29 @@ unntatt genitalhud (lok. 176/179). Lok. Ca. cutis - basalcellecarcinom'
 1899 = 'Hud i.n.s. Lok. Ca. cutis - basalcellecarcinom'
 /*Kommentar:*/
 /*Denne lokalisasjon taes i bruk fom. 01.01.86.*/
-/*189.8 brukes ved 2. gangs opptreden av ny hudtumor efter 4 måneder.*/
-/*Personen får da en ny akkumulert record med 189.8 mens den første blir*/
-/*stående med spesifikk lokalisasjon. Ved ny hudtumor innen 4 måneder*/
-/*skal det være kun en akkumulert record, men lokalisasjonen skal endres*/
+/*189.8 brukes ved 2. gangs opptreden av ny hudtumor efter 4 mÃ¥neder.*/
+/*Personen fÃ¥r da en ny akkumulert record med 189.8 mens den fÃ¸rste blir*/
+/*stÃ¥ende med spesifikk lokalisasjon. Ved ny hudtumor innen 4 mÃ¥neder*/
+/*skal det vÃ¦re kun en akkumulert record, men lokalisasjonen skal endres*/
 /*til 189.8. (fom. 01.01.86). Denne lokalisasjonen er fjernet fra standarduttrekk, jf. Cancer in Norway.*/
 
 /*Lok. Ca. cutis - melanoma malignum.*/
-1900 = 'Ansikt inkl. øyelokk, hals, nakke, hodebunn,
-ytre øre og øregang. (Lok. Ca. cutis - melanoma malignum)'
+1900 = 'Ansikt inkl. Ã¸yelokk, hals, nakke, hodebunn,
+ytre Ã¸re og Ã¸regang. (Lok. Ca. cutis - melanoma malignum)'
 1901 = 'Kropp, skulder, hofte, lyske, axiller, nates. (Lok. Ca. cutis - melanoma malignum)'
 1902 = 'Overekstremiteter. (Lok. Ca. cutis - melanoma malignum)'
-1903 = 'Føtter, nedenfor ankel.(Lok. Ca. cutis - melanoma malignum)'
-1904 = 'Underekstremiteter over eller på ankel. (Lok. Ca. cutis - melanoma malignum)'
+1903 = 'FÃ¸tter, nedenfor ankel.(Lok. Ca. cutis - melanoma malignum)'
+1904 = 'Underekstremiteter over eller pÃ¥ ankel. (Lok. Ca. cutis - melanoma malignum)'
 1905 = 'Perianalt. (Lok. Ca. cutis - melanoma malignum)'
 1906 = 'Scrotum. (Lok. Ca. cutis - melanoma malignum)'
-1907 = 'Mamma (begge kjønn). For menn: kun pigmentert område. (Lok. Ca. cutis - melanoma malignum)'
+1907 = 'Mamma (begge kjÃ¸nn). For menn: kun pigmentert omrÃ¥de. (Lok. Ca. cutis - melanoma malignum)'
 1908 = 'Andre spesifiserte lokalisasjoner / sub-unguinalt. (Lok. Ca. cutis - melanoma malignum)'
 1909 = 'Hud i.n.s. (Lok. Ca. cutis - melanoma malignum)'
 
 /*Lok. Ca. cutis - (ekskl. melanom, basalcellecarcinom).*/
-1910 = 'Hud, ytre øre. (Lok. Ca. cutis - ekskl. melanom, basalcellecarcinom)'
-1911 = 'Øyelokk med øyenvinkel, unntatt conjunctiva oculi. (Lok. Ca. cutis - ekskl. melanom, basalcellecarcinom)'
-1912 = 'Ansiktet og hodet forøvrig, inkl. hodebunn, orbitalregionen,
+1910 = 'Hud, ytre Ã¸re. (Lok. Ca. cutis - ekskl. melanom, basalcellecarcinom)'
+1911 = 'Ã˜yelokk med Ã¸yenvinkel, unntatt conjunctiva oculi. (Lok. Ca. cutis - ekskl. melanom, basalcellecarcinom)'
+1912 = 'Ansiktet og hodet forÃ¸vrig, inkl. hodebunn, orbitalregionen,
 hake, kinn. (Lok. Ca. cutis - ekskl. melanom, basalcellecarcinom)'
 1913 = 'Hals, kropp, nakke, skulder, lyske, axiller, nates, hofte unntatt
 genitalhud (lok. 176/179) samt Pagets sykdom i papilla mammae. (Lok. Ca. cutis - ekskl. melanom, basalcellecarcinom)'
@@ -471,32 +471,32 @@ genitalhud (lok. 176/179) samt Pagets sykdom i papilla mammae. (Lok. Ca. cutis -
 1918 = 'Multiple lokalisasjoner, se kommentar. (Lok. Ca. cutis - ekskl. melanom, basalcellecarcinom)'
 1919 = 'Hud i.n.s. (Lok. Ca. cutis - ekskl. melanom, basalcellecarcinom)'
 /*Kommentar:*/
-/*191.8 brukes ved 2. gangs opptreden av ny hudtumor etter 4 måneder.*/
-/*Personen får da en ny akkumulert record med 191.8 mens den første blir*/
-/*stående med spesifikk lokalisasjon. Ved ny hudtumor innen 4 måneder*/
-/*skal det være kun en akkumulert record, men lokalisasjonen skal endres*/
-/*til 191.8. Gjelder også Kaposis sarcom.*/
+/*191.8 brukes ved 2. gangs opptreden av ny hudtumor etter 4 mÃ¥neder.*/
+/*Personen fÃ¥r da en ny akkumulert record med 191.8 mens den fÃ¸rste blir*/
+/*stÃ¥ende med spesifikk lokalisasjon. Ved ny hudtumor innen 4 mÃ¥neder*/
+/*skal det vÃ¦re kun en akkumulert record, men lokalisasjonen skal endres*/
+/*til 191.8. Gjelder ogsÃ¥ Kaposis sarcom.*/
 
 /*Lok. Ca. oculi.*/
-1920 = 'Øyet, bulbus oculi, unntatt øyelokk. (Lok. Ca. oculi).'
-1921 = 'Orbita; dvs. bløtdeler. (Lok. Ca. oculi)'
-1922 = 'Tårekjertler, tåresekk. (Lok. Ca. oculi)'
-1923 = 'Tårekanal. (Lok. Ca. oculi)'
-1924 = 'Conjunctiva (øyets bindehinne, øyelokkets innside). (Lok. Ca. oculi)'
-1925 = 'Andre spesifiserte lokalisasjoner i øyet. (Lok. Ca. oculi)'
-1927 = 'Øye og orbita (ekskl. øyelokk), før 1983 (Lok. Ca. oculi)'
+1920 = 'Ã˜yet, bulbus oculi, unntatt Ã¸yelokk. (Lok. Ca. oculi).'
+1921 = 'Orbita; dvs. blÃ¸tdeler. (Lok. Ca. oculi)'
+1922 = 'TÃ¥rekjertler, tÃ¥resekk. (Lok. Ca. oculi)'
+1923 = 'TÃ¥rekanal. (Lok. Ca. oculi)'
+1924 = 'Conjunctiva (Ã¸yets bindehinne, Ã¸yelokkets innside). (Lok. Ca. oculi)'
+1925 = 'Andre spesifiserte lokalisasjoner i Ã¸yet. (Lok. Ca. oculi)'
+1927 = 'Ã˜ye og orbita (ekskl. Ã¸yelokk), fÃ¸r 1983 (Lok. Ca. oculi)'
 1928 = 'Utbredt over flere sublokalisasjoner. (Lok. Ca. oculi)'
-1929 = 'Øye i.n.s. (Lok. Ca. oculi)'
+1929 = 'Ã˜ye i.n.s. (Lok. Ca. oculi)'
 
 /*Lok. Ca. cerebri, medullae, meningum, systematis nervosi.*/
 1930 = 'Hjerne og medulla oblongata (forlengede marg).'
 /*/*Omfatter ikke hypofyse og corpus pineale; -*/*/
 /*/*bruk underlokalisasjon 393.x (Se kommentar).*/*/
-1931 = 'Hjernenerver, intrakranielt forløp.'
+1931 = 'Hjernenerver, intrakranielt forlÃ¸p.'
 1932 = 'Hjernehinner, meninger.'
 1933 = 'Medulla spinalis, ryggmargen.'
 1934 = 'Ryggmargens hinner.'
-1935 = 'Perifere nerver, også hjernenerver når de går ekstrakranielt.'
+1935 = 'Perifere nerver, ogsÃ¥ hjernenerver nÃ¥r de gÃ¥r ekstrakranielt.'
 1936 = 'Sympatiske nervesystem.'
 1937 = 'Andre spesifiserte lokalisasjoner i CNS og PNS.'
 1938 = 'Utbredt over flere sublokalisasjoner. (Lok. Ca. cerebri, medullae, meningum, systematis nervosi)'
@@ -514,7 +514,7 @@ genitalhud (lok. 176/179) samt Pagets sykdom i papilla mammae. (Lok. Ca. cutis -
 1955 = 'Cranieopharyngealkanal.'
 1956 = 'Andre spesifiserte lokalisasjoner i endokrine organer
 (glomus jugulare, glomus caroticus, autonome ganglier). Lok. Ca. thyreoideae'
-1958 = 'Andre, før 1986. Lok. Ca. thyreoideae'
+1958 = 'Andre, fÃ¸r 1986. Lok. Ca. thyreoideae'
 1959 = 'Endokrine organ i.n.s. Lok. Ca. thyreoideae'
 
 /*Lok. Ca. ossis/cartilaginis.*/
@@ -523,28 +523,28 @@ genitalhud (lok. 176/179) samt Pagets sykdom i papilla mammae. (Lok. Ca. cutis -
 1962 = 'Ryggrad (columna). (Lok. Ca. ossis/cartilaginis)'
 1963 = 'Ribben (costa), brystben (sternum), kraveben (clavicula). (Lok. Ca. ossis/cartilaginis)'
 1964 = 'Skulderblad (scapula), over- og underarm. (Lok. Ca. ossis/cartilaginis)'
-1965 = 'Hånd, fingre, fot, tær. (Lok. Ca. ossis/cartilaginis)'
+1965 = 'HÃ¥nd, fingre, fot, tÃ¦r. (Lok. Ca. ossis/cartilaginis)'
 1966 = 'Bekkenben (pelvis) ): os coecygis, sacrum, ischii, ilii. (Lok. Ca. ossis/cartilaginis)'
-1967 = 'Lår, legg over ankelen. (Lok. Ca. ossis/cartilaginis)'
+1967 = 'LÃ¥r, legg over ankelen. (Lok. Ca. ossis/cartilaginis)'
 1968 = 'Andre spesifiserte lokalisasjoner inklusive multiple
 lokalisasjoner. (Lok. Ca. ossis/cartilaginis)'
 1969 = 'Knokler i.n.s. (Lok. Ca. ossis/cartilaginis)'
 
-/*Lok. Bløtdeltumores.*/
-1970 = 'Hode, ansikt, hals. Lok. Bløtdeltumores'
-1971 = ' Kropp, inkl. nates, axille, lyske. Lok. Bløtdeltumores'
-1972 = 'Skulder, overekstremitet. Lok. Bløtdeltumores'
-1973 = 'Hofte, underekstremitet. Lok. Bløtdeltumores'
-1977 = 'Multiple svulster i bløtvev, før 1983. Lok. Bløtdeltumores'
-1978 = 'Andre spesifiserte lokalisasjoner i bløtdeler. Lok. Bløtdeltumores'
-1979 = 'Bløtdeler i.n.s. Lok. Bløtdeltumores'
+/*Lok. BlÃ¸tdeltumores.*/
+1970 = 'Hode, ansikt, hals. Lok. BlÃ¸tdeltumores'
+1971 = ' Kropp, inkl. nates, axille, lyske. Lok. BlÃ¸tdeltumores'
+1972 = 'Skulder, overekstremitet. Lok. BlÃ¸tdeltumores'
+1973 = 'Hofte, underekstremitet. Lok. BlÃ¸tdeltumores'
+1977 = 'Multiple svulster i blÃ¸tvev, fÃ¸r 1983. Lok. BlÃ¸tdeltumores'
+1978 = 'Andre spesifiserte lokalisasjoner i blÃ¸tdeler. Lok. BlÃ¸tdeltumores'
+1979 = 'BlÃ¸tdeler i.n.s. Lok. BlÃ¸tdeltumores'
 /*Kommentar*/
-/*Bløtdelssvulster i ledd, leddbånd, leddkapsel, sene, seneskjede,*/
-/*muskulatur, fettvev, bindevev når den er lokalisert utenom spesifikke*/
+/*BlÃ¸tdelssvulster i ledd, leddbÃ¥nd, leddkapsel, sene, seneskjede,*/
+/*muskulatur, fettvev, bindevev nÃ¥r den er lokalisert utenom spesifikke*/
 /*organer med eget lokalisasjonsnummer.*/
 
 /*Lok. Andre og uspesifiserte organer.*/
-1990 = 'Ukjent, før 1993'
+1990 = 'Ukjent, fÃ¸r 1993'
 1991 = 'Utilstrekkelig spesifiserte lokalisasjoner i hode/hals/ansikt.'
 1992 = 'Utilstrekkelig spesifiserte lokalisasjoner i thorax.'
 1993 = 'Utilstrekkelig spesifiserte lokalisasjoner i abdomen.'
@@ -559,15 +559,15 @@ lokalisasjoner. (Lok. Ca. ossis/cartilaginis)'
 retroauricularius, samt suboccipitale lymfeknuter. Lok. Ca. lymphonodorum'
 2061 = 'Intrathoracalt.Lok. Ca. lymphonodorum'
 2062 = ' Intraabdominalt. Lok. Ca. lymphonodorum'
-2063 = 'Axiller, andre lymfeknuter på overekstremiteter. Lok. Ca. lymphonodorum'
-2064 = 'Lysker, andre lymfeknuter på underekstremiteter. Lok. Ca. lymphonodorum'
+2063 = 'Axiller, andre lymfeknuter pÃ¥ overekstremiteter. Lok. Ca. lymphonodorum'
+2064 = 'Lysker, andre lymfeknuter pÃ¥ underekstremiteter. Lok. Ca. lymphonodorum'
 2065 = 'ved underlok. Lok. Ca. lymphonodorum'
-2066 = 'Hud (mycosis fungoides), før 1986. Lok. Ca. lymphonodorum '
-2068 = 'Multiple lokalisasjoner", "Generell glandelsvulst, før 1993. Lok. Ca. lymphonodorum'
+2066 = 'Hud (mycosis fungoides), fÃ¸r 1986. Lok. Ca. lymphonodorum '
+2068 = 'Multiple lokalisasjoner", "Generell glandelsvulst, fÃ¸r 1993. Lok. Ca. lymphonodorum'
 2069 = 'Lymfeknuter i.n.s. Lok. Ca. lymphonodorum'
 /*Kommentar:*/
 /*Ved malignt lymfom i andre organer brukes 206.5 med spesifikk under-*/
-/*lokalisasjon. Gjelder også hud.*/
+/*lokalisasjon. Gjelder ogsÃ¥ hud.*/
 /*Benmargsaffeksjon betyr stadium IV, og skal ha lokalisasjon 206.9.*/
 
 /*Lok. Benmarg*/

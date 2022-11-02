@@ -1,4 +1,4 @@
-/*
+﻿/*
 Forholdstall mellom ung og gammel
 */
 

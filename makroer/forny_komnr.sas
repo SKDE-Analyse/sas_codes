@@ -1,4 +1,4 @@
-%macro forny_komnr(inndata=, kommune_nr=komnrhjem2);
+﻿%macro forny_komnr(inndata=, kommune_nr=komnrhjem2);
 /*! 
 ### Beskrivelse
 

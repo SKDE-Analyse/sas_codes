@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $DRG_2013F
 '1A'="DRG 1A Intrakraniell operasjon for svulst i sentralnervesystemet"
 '1B'="DRG 1B Annen intrakraniell vaskulær operasjon"

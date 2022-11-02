@@ -1,4 +1,4 @@
-/* Opprettet 27.11.2019 - Frank Olsen
+﻿/* Opprettet 27.11.2019 - Frank Olsen
 Hentet fra Beate Hauglann*/
 
 proc format; 

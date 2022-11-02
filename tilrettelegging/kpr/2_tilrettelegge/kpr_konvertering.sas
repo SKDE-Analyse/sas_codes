@@ -1,4 +1,4 @@
-%macro kpr_konvertering(inndata= , utdata=);
+﻿%macro kpr_konvertering(inndata= , utdata=);
 
 data &utdata;
 set &inndata;

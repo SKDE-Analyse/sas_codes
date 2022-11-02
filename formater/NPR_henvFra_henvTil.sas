@@ -1,4 +1,4 @@
-/*
+﻿/*
 Formater for variabler med lange lister over organisasjonsnummer. 
 */
 

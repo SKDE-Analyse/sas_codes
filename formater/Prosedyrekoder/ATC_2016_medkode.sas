@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $ATC_2016_medkodeF
 'V09AA01'="V09AA01 Technetium (99mTc) eksametasim"
 'V09AA02'="V09AA02 Technetium (99mTc) bikisat"

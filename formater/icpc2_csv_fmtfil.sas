@@ -1,4 +1,4 @@
-
+﻿
 data icpc2;
   infile "&filbane/formater/icpc2.csv"
   delimiter=';'

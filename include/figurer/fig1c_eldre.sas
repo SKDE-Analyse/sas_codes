@@ -1,4 +1,4 @@
-/*
+﻿/*
 Årsvariasjonfigur, ett år
 */
 

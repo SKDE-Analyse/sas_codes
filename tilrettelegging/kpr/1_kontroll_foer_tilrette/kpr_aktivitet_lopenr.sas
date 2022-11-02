@@ -1,4 +1,4 @@
-/* *Makro teller opp antall bosted og enkeltregninger per pasient/løpenummer */
+﻿/* *Makro teller opp antall bosted og enkeltregninger per pasient/løpenummer */
 %macro kpr_aktivitet_lopenr(inndata=);
 proc sql;
 	create table pr_lopenr_&aar. as
