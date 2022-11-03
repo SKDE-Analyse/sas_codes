@@ -1,10 +1,10 @@
-%macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
+ï»¿%macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
 
 /*! 
 ### Beskrivelse
 
-Makro for å kontrollere at mottatte data inneholder gyldige komnr og bydel
-Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
+Makro for Ã¥ kontrollere at mottatte data inneholder gyldige komnr og bydel
+Den sier ikke noe om det er lÃ¸penr ifeks Oslo 0301 som mangler bydel
 
 ```
 %kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=)
@@ -20,10 +20,10 @@ Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
       - Error lister gir oversikt over ugyldige komnr eller bydeler i mottatt data.  De lages som SAS, og printes ut til results vinduet hvis det er noe.
 
 ### Endringslogg:
-    - Opprettet før 2020
+    - Opprettet fÃ¸r 2020
     - september 2021, Janice
           - dokumentasjon markdown
-          - bydel til numerisk før kombineres med komnr
+          - bydel til numerisk fÃ¸r kombineres med komnr
           - error lister printes ut
     - november 2021, Tove
           - inkluderer tidligere bydelskommuner 1201 og 4601 i steg 2 hvor bydel kontrolleres 
@@ -137,8 +137,6 @@ set liste_bydel;
 if bydel = . then delete;
 run;
 
-
-
 /* -------------------------------------------------------- */
 /* 2. Hente ut variabel 'komnr' og 'bydel' fra mottatte data*/
 /* -------------------------------------------------------- */
@@ -177,13 +175,12 @@ set mottatt_bydel;
 if bydel = . then delete;
 run;
 
-
 /* -------------------------------------------- */
 /* 3. Sammenligne mottatte data mot CSV-filer   */
 /* -------------------------------------------- */
 
 /*sammenligne mottatte komnr med csv-fil*/
-/*Outputfiler 'error' inneholder komnr i mottatte data som ikke er i vår liste med godkjente komnr*/
+/*Outputfiler 'error' inneholder komnr i mottatte data som ikke er i vÃ¥r liste med godkjente komnr*/
 data godkjent_komnr_&aar error_komnr_&aar;
 merge mottatt_komnr (in=a) liste_komnr (in=b);
 by komnr2;
@@ -193,11 +190,24 @@ if felles then output godkjent_komnr_&aar;
 if feil then output error_komnr_&aar;
 run;
 
-title "error komnr i &aar. filen";
+/* sjekk om kommune error-fil har innhold */
+%let dsid=%sysfunc(open(error_komnr_&aar));
+%let nobs=%sysfunc(attrn(&dsid,any));
+%let dsid=%sysfunc(close(&dsid)); 
+
+/* printes hvis det er innhold i error-fil */
+title color=red height=5 "5a: det er ugyldige verdier for komnr i &aar.-filen";
 proc print data=error_komnr_&aar; run;
 
+/* hvis error-fil er tom, print gyldige obs fra mottatt */
+%if &nobs eq 0 %then %do;
+title color= darkblue height=5  "5a: alle mottatte kommunenummer er gyldige";
+proc freq data=mottatt_komnr;
+tables komnr2 / missing nopercent; run;
+%end;
+
 /*sammenligne bydel med csv-fil*/
-/*Outputfiler 'error' inneholder bydel i mottatte data som ikke er i vår liste med godkjente bydeler*/
+/*Outputfiler 'error' inneholder bydel i mottatte data som ikke er i vÃ¥r liste med godkjente bydeler*/
 data godkjent_bydel_&aar error_bydel_&aar;
 merge mottatt_bydel (in=a) liste_bydel (in=b);
 by bydel;
@@ -207,10 +217,21 @@ if felles then output godkjent_bydel_&aar;
 if feil then output error_bydel_&aar;
 run;
 
-title "error bydel i &aar. filen";
+/* sjekk om bydel error-fil har innhold */
+%let dsid2=%sysfunc(open(error_bydel_&aar));
+%let nobs2=%sysfunc(attrn(&dsid2,any));
+%let dsid2=%sysfunc(close(&dsid2)); 
+
+title color=red height=5 "5b: det er feil med bydel i &aar.-filen";
 proc print data=error_bydel_&aar; run;
 title;
 
+/* hvis error-fil er tom, print gyldige obs fra mottatte */
+%if &nobs2 eq 0 %then %do;
+title color= darkblue height=5  "5b: alle mottatte bydeler er gyldige";
+proc freq data=mottatt_bydel;
+tables bydel /  missing nopercent; ; run;
+%end;
 %mend;
 
 

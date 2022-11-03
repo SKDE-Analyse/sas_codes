@@ -1,22 +1,22 @@
-%macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode, sektor=som); 
+ï»¿%macro kontroll_behandlingssted(inndata=, aar= , beh=); 
 /*!
 ### Beskrivelse
 
-Makro for å kontrollere om variabel 'behandlingsstedkode' eller 'behandlingssted2' i somatikk-data og 'institusjonid' i avtspes-data har en kjent verdi.
-Kontrollen gjennomføres ved at mottatte verdier sjekkes mot CSV-filer som inneholder organisasjonsnummer for somatikk-data og reshid for avtalespesialist-data. 
+Makro for Ã¥ kontrollere om variabel 'behandlingsstedkode' eller 'behandlingssted2' i somatikk-data og 'institusjonid' i avtspes-data har en kjent verdi.
+Kontrollen gjennomfÃ¸res ved at mottatte verdier sjekkes mot CSV-filer som inneholder organisasjonsnummer for somatikk-data og reshid for avtalespesialist-data. 
 
-Ukjente verdier (fra datasettet error_liste_'aar') kontrolleres mot brønnøysundregisteret eller reshid-registeret.
-Hvis verdien i error_listen er et gyldig organisasjonsnummer eller reshid så skal CSV-fil oppdateres.
+Ukjente verdier (fra datasettet error_liste_'aar') kontrolleres mot brÃ¸nnÃ¸ysundregisteret eller reshid-registeret.
+Hvis verdien i error_listen er et gyldig organisasjonsnummer eller reshid sÃ¥ skal CSV-fil oppdateres.
 Hvis ikke korrigeres ugyldig verdi i tilretteleggingen steg 2.
 
-Eksempel på bruk:
+Eksempel pÃ¥ bruk:
 Somatikk:           %kontroll_behandlingssted(inndata=hnmot.SOM_2022_M22T1, aar=2022);
 Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, aar=2022,beh=institusjonid , sektor=avtspes);
 
 
 ### Input 
 - inndata: Filen med behandlingssted-variabel som skal kontrolleres, f.eks hnmot.m20t3_som_2020.
-- aar: Brukes for å gi unike navn til output-errorfiler.
+- aar: Brukes for Ã¥ gi unike navn til output-errorfiler.
 - beh: Organisasjonsnummer eller reshid som skal kontrolleres, default er 'behandlingsstedkode' for RHF-data. Hvis kontroll av SKDE-data endres det til 'behandlingssted2', eller ved kontroll av reshid i avtalespesialist-data endres det til 'institusjonid'.
 - sektor: Default er 'som' for somatikk-data, det velges 'aspes' hvis avtalespesialist-data. 
 
@@ -31,7 +31,8 @@ Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, aa
 - September 2021, Tove, dokumentasjon markdown
 */
 
-%if &sektor=som or &sektor=rehab %then %do;
+%if &beh eq behandlingsstedkode %then %do;
+
 data orgnr;
   infile "&filbane/formater/behandler.csv"
   delimiter=';'
@@ -67,7 +68,7 @@ data orgnr;
 run;
 %end;
 
-%if &sektor=aspes or &sektor=avtspes %then %do;
+%if &beh eq institusjonid %then %do;
 data orgnr;
   infile "&filbane/formater/avtalespesialister.csv"
   delimiter=';'
@@ -116,16 +117,31 @@ proc sql;
 quit;
 
 /*hvor mange linjer har gyldig/ugyldig orgnr*/
+title color= purple height=5 
+    "6a: behandler-ID: antall og andel rader med gyldig/ugyldig verdi. Se i output-fil 'error_behandler_&aar' for hvilke verdier det gjelder." "test";
 proc freq data=tmp_data; 
 tables gyldig/missing; 
 run;
-
+title;
 /*printe ut fil med ugyldig behandler/orgnr*/
 /*disse fikses i tilrettelegging*/
-proc sort data=tmp_data nodupkey out=error_liste_&aar(keep=&beh);
+proc sort data=tmp_data nodupkey out=error_behandler_&aar(keep=&beh);
 by &beh; where ugyldig = 1; run;
 
-proc datasets nolist;
-delete flagg_org tmp_data orgnr beh_liste mottatt_beh;
+%if &beh = behandlingsstedkode and &chk4 /*institusjonid*/ ne 0 %then %do;
+/*data som har missing behandlingssted*/
+data tmp_data2;
+set &inndata(keep=behandlingsstedkode institusjonid);
+where &beh = .;
+format institusjonid org_fmt.;
 run;
-%mend;
+title color= purple height=5 "6b: Hvis missing &beh. sÃ¥ brukes institusjonid som erstatning i tilretteleggingen, har alle radene med missing &beh. oppgitt InstitusjonId? ";
+proc freq data=tmp_data2;
+tables institusjonid  /nocol nopercent norow;
+run;
+%end;
+
+proc datasets nolist;
+delete flagg_org tmp_data tmp_data2 orgnr beh_liste mottatt_beh;
+run;
+%mend kontroll_behandlingssted;
