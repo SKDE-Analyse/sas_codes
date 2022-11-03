@@ -1,36 +1,33 @@
 
 # Dokumentasjon for filen *tests/hyppigste_test.sas*
 
+Makro for Ã¥ teste hyppigste-makro.
 
-## Makro `hyppigste_test`
-
-Makro for å teste hyppigste-makro.
-
-Kjører hyppigste-makroen på et test-datasett (`test.hyppigste_start`).
+KjÃ¸rer hyppigste-makroen pÃ¥ et test-datasett (`test.hyppigste_start`).
 Sammenligner dette datasettet med en referanse (`test.ref_hyppigste_&navn`).
 
 ### Parametre
 
-- `branch = master`: Bestemmer hvilken hyppigste-makro som kjøres (hvilken mappe den ligger i)
+- `branch = main`: Bestemmer hvilken hyppigste-makro som kjÃ¸res (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset_:`.
-- `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.hyppigste_start` på nytt.
-- `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_hyppigste_&navn` på nytt.
+- `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.hyppigste_start` pÃ¥ nytt.
+- `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_hyppigste_&navn` pÃ¥ nytt.
 
 ### Tester
 
 #### Test default
 
-Kjører med `%hyppigste(VarName=hdiag, data_inn=test.hyppigste_start, test = hyppigste_&navn);`
+KjÃ¸rer med `%hyppigste(VarName=hdiag, data_inn=test.hyppigste_start, test = hyppigste_&navn);`
 
 #### Test Ant_i_liste
 
-Kjører med `Ant_i_liste = 20`
+KjÃ¸rer med `Ant_i_liste = 20`
 
 #### Test VarName
 
-Kjører med `VarName=behsh`
+KjÃ¸rer med `VarName=behsh`
 
 #### Test where
 
-Kjører med `Where=Where Behrhf=1`
+KjÃ¸rer med `Where=Where Behrhf=1`
 

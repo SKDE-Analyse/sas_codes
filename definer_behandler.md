@@ -2,16 +2,13 @@
 # Dokumentasjon for filen *makroer/definer_behandler.sas*
 
 
-## Makro `definer_behandler`
-
-
-Makro for å definere behandlende sykehus i Helse Nord, der det skilles på
-eget lokalsykehus og andre sykehus etter følgende inndeling:
+Makro for Ã¥ definere behandlende sykehus i Helse Nord, der det skilles pÃ¥
+eget lokalsykehus og andre sykehus etter fÃ¸lgende inndeling:
 
 ```sas
 1="Eget lokalsykehus"
-2="UNN Tromsø"
-3="NLSH Bodø"
+2="UNN TromsÃ¸"
+3="NLSH BodÃ¸"
 4="Annet sykehus i eget HF"
 5="Annet HF i HN"
 6="HF i andre RHF"
@@ -21,5 +18,5 @@ eget lokalsykehus og andre sykehus etter følgende inndeling:
 10="NLSH HF"
 ```
 
-Hvis sykehus er kodet på HF-nivå så kodes det som eget lokalsykehus.
+Hvis sykehus er kodet pÃ¥ HF-nivÃ¥ sÃ¥ kodes det som eget lokalsykehus.
 

@@ -4,12 +4,12 @@
 
 I korte trekk gjør man følgende
 
-1. Kopier mappen `felleskoder\master` og jobb i den kopierte mappen.
+1. Kopier mappen `felleskoder\main` og jobb i den kopierte mappen.
 2. Lag en sas-fil som heter det samme som makroen man vil lage.
 3. Lag makroen, og dokumenter den.
 4. Lag en test
 5. Dytt opp til egen `branch` på [github](https://github.com/SKDE-Analyse/sas_codes) og lag en `pull request`.
-6. Oppdater `felleskoder\master` (`git pull --rebase`, ev. be Arnfinn gjøre det)
+6. Oppdater `felleskoder\main` (`git pull --rebase`, ev. be Arnfinn gjøre det)
 
 ### Eksempel på makro
 
@@ -38,9 +38,9 @@ Legg inn en forklaring om hva makroen gjør rett under `%macro minNyeMakro;`. St
 Når man lager en makro burde man også lage en test. Denne kan så kjøres senere for å sjekke at makroen ikke er blitt ødelagt. en enkel test kan se slik ut:
 
 ```SAS
-%macro minNyeMakro_test(branch = master, debug = 0, lagNyRef = 0, lagNyStart = 0);
+%macro minNyeMakro_test(branch = main, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
-%include "&filbane\makroer\minNyeMakro.sas";
+%include "&filbane/makroer/minNyeMakro.sas";
 
 data makronavn1;
 set test.minNyeMakro_start;
@@ -59,7 +59,7 @@ Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn 
 
 ```SAS
 /* Øverst i filen */
-%include "&filbane\makroer\tests\minNyeMakro_test.sas";
+%include "&filbane/makroer/tests/minNyeMakro_test.sas";
 
 /* Inne i makroen test*/
 %minNyeMakro_test(branch = &branch, lagNyRef = &lag_ny_referanse);

@@ -1,12 +1,9 @@
 
 # Dokumentasjon for filen *makroer/test_makroer.sas*
 
-
-## Makro `test_makroer`
-
 Makro som skal teste de andre makroene.
 
-Tester for øyeblikket makroene
+Tester for Ã¸yeblikket makroene
 - `Episode_of_care`
 - `reinnleggelser`
 - `boomraader`

@@ -1,28 +1,25 @@
 
 # Dokumentasjon for filen *rateprogram/ratefigur_aarsvar_eng.sas*
 
-
-## Makro `ratefigur_aarsvar_eng`
-
 ### Beskrivelse
 
-Makro for å lage ratefigur med årsvariasjon.
+Makro for Ã¥ lage ratefigur med Ã¥rsvariasjon.
 
 ```
-kortversjon (kjøres med default-verdier for resten)
+kortversjon (kjÃ¸res med default-verdier for resten)
 %ratefig_aarsvar(dsn=, yvariabel1=, yvariabel2=, start=, slutt=, figurnavn=);
 ```
 ### Input
 - datasett/output fra rateprogram
-- datasett må inneholde alle rate-variabelene og nrate
+- datasett mÃ¥ inneholde alle rate-variabelene og nrate
 
-- følgende let-statement:
+- fÃ¸lgende let-statement:
     - bildesti
--følgende include-statement
+-fÃ¸lgende include-statement
     anno
 
 ### Output
-- bildefil med valgt format lagres på angitt bildesti
+- bildefil med valgt format lagres pÃ¥ angitt bildesti
 
 ### Endringslogg:
 - februar 2022 opprettet, Frank

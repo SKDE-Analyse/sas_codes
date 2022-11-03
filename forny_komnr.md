@@ -1,9 +1,6 @@
 
 # Dokumentasjon for filen *makroer/forny_komnr.sas*
 
-
-## Makro `forny_komnr`
-
 ### Beskrivelse
 
 Makro for Ã¥ fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
@@ -23,7 +20,7 @@ Makro for Ã¥ fornye gamle kommunenummer til kommunenummer i bruk pr 1.1.2021 .
 OBS: bydeler blir ikke oppdatert nÃ¥r denne makroen kjÃ¸res. 
 Hvis det er bydeler i datasettet mÃ¥ de fornyes etter at denne makroen er kjÃ¸rt. 
 Se makro 'bydel': 
-- \\&filbane\tilrettelegging\npr\2_tilrettelegging\bydel.sas
+- &filbane/tilrettelegging/npr/2_tilrettelegging/bydel.sas
 
 ### Endringslogg:
 

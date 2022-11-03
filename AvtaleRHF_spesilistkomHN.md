@@ -4,5 +4,5 @@
 
 ## Makro `AvtaleRHF_spesialistkomHN`
 
-Makro for å definere `SpesialistKomHN` og `AvtaleRHF` for avtalespesialister,
-basert på `InstitusjonID`.
+Makro for Ã¥ definere `SpesialistKomHN` og `AvtaleRHF` for avtalespesialister,
+basert pÃ¥ `InstitusjonID`.
