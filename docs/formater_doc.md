@@ -12,5 +12,5 @@ Les inn formater:
 
 Dette er kun de vanligste. Flere finnes i mappen `&filbane/formater/`. Makrovariablen `&filbane` må defineres på forhånd
 ```sas
-%let filbane = <sti til kodebasen vår>;
+%let filbane=/sas_smb/skde_analyse/Data/SAS/felleskoder/main;
 ```

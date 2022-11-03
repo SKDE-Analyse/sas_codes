@@ -10,9 +10,4 @@
 
 ![Alt text](bilder/automakro.png)
 
-- Da vil man få inn kode som kan kjøre rateprogrammet. Pr. 21. juni 2018 ser denne [slik ut](RateprogramAuto).
-
-## Hvordan endre rateprogrammet
-
-- [Prosedyrer for utvikling av koden](kode)
-- [Prosedyrer for testing av koden](testing)
+- Da vil man få inn kode som kan kjøre rateprogrammet. Pr. 2. november 2022 ser denne [slik ut](RateprogramAuto).

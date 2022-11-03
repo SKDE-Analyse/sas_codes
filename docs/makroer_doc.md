@@ -4,12 +4,12 @@
 
 I korte trekk gjør man følgende
 
-1. Kopier mappen `felleskoder\main` og jobb i den kopierte mappen.
+1. Kopier mappen `felleskoder/main` og jobb i den kopierte mappen.
 2. Lag en sas-fil som heter det samme som makroen man vil lage.
 3. Lag makroen, og dokumenter den.
 4. Lag en test
 5. Dytt opp til egen `branch` på [github](https://github.com/SKDE-Analyse/sas_codes) og lag en `pull request`.
-6. Oppdater `felleskoder\main` (`git pull --rebase`, ev. be Arnfinn gjøre det)
+6. Oppdater `felleskoder/main` (`git pull --rebase`, ev. be Arnfinn gjøre det)
 
 ### Eksempel på makro
 
@@ -53,9 +53,9 @@ run;
 %mend;
 ```
 
-Her kjører man makroen på en kopi av datasettet `test.minNyeMakro_start` og tester at resultatet `makronavn1` er likt en referanse. Referansedatasettet er lagret som `tests\data\makronavn1.csv`, og ny referanse lages hvis testen kjøres med `lagNyRef ne 0`. Se i mappen `tests\` for eksempler på bruk av argumentene `branch`, `debug`, `lagNyRef` og `lagNyStart`.
+Her kjører man makroen på en kopi av datasettet `test.minNyeMakro_start` og tester at resultatet `makronavn1` er likt en referanse. Referansedatasettet er lagret som `tests/data/makronavn1.csv`, og ny referanse lages hvis testen kjøres med `lagNyRef ne 0`. Se i mappen `tests\` for eksempler på bruk av argumentene `branch`, `debug`, `lagNyRef` og `lagNyStart`.
 
-Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn følgende kode i filen `tests\tests.sas`:
+Legg denne testen i mappen `tests` i filen `minNyeMakro_test.sas`. Legg så inn følgende kode i filen `tests/tests.sas`:
 
 ```SAS
 /* Øverst i filen */

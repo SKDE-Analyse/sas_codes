@@ -1,100 +1,50 @@
-# Rateprogram.sas
-
-```sas
+%let filbane=/sas_smb/skde_analyse/Data/SAS/felleskoder/main;
 options sasautos=("&filbane/makroer" SASAUTOS);
 
-%include "&filbane/formater/SKDE_somatikk.sas";
-%include "&filbane/formater/NPR_somatikk.sas";
 %include "&filbane/formater/bo.sas";
-%include "&filbane/formater/beh.sas";
-%include "&filbane/formater/komnr.sas";
-
-%include "&filbane/rateprogram/rateberegninger.sas";
 
 %include "&filbane/stiler/stil_figur.sas";
 %include "&filbane/stiler/Anno_logo_kilde_NPR_SSB.sas";
 
-/******  DATAGRUNNLAG  ****************************************************************/
-%let Ratefil=skde_kur.ratetest_11_15;
-%let RV_variabelnavn=poli; /*navn på ratevariabel i det aggregerte datasettet*/
-%Let ratevariabel = Poliklinikk; /*Brukes til å lage "pene" overskrifter*/
-%Let forbruksmal = Konsultasjoner; /*Brukes til å lage tabell-overskrift i Årsvarfig, gir også navn til 'ut'-datasett*/
-%Let innbyggerfil=Innbygg.innb_2004_2017_bydel_allebyer;
-%let manglerKomnr = 0; /* Hvis ulik 0 -> definere komnr og bydel basert på bohf (brukes hvis komnr mangler i datasettet)*/
-%let aldersfigur = 1; /* Settes til null hvis man ikke vil ha ut aldersdistribusjonen i utvalget */
-%let haraldsplass = 0; /* Settes til ulik null hvis man vil dele Bergen i Haukland og Haraldsplass */
-%let indreOslo = 0; /* Settes til ulik null hvis man vil slå sammen Lovisenberg og diakonhjemmet */
-%let bydel = 1; /* Settes til null hvis man ikke har bydel i datasettet */
-%let barn = 0; /* Settes til ulik null hvis man vil ha opptaksområdestruktur som i barnehelseatlaset */
+%include "&filbane/rateprogram/proc_stdrate.sas";
+%proc_stdrate(dsn=, rate_var=, standardaar=, start=, slutt=, utdata=);
 
-/******  HVA ØNSKER DU Å FÅ UT?  **************************************************************/
-%let aarsvarfigur=1; /* Ønsker du Årsvariasjonsfigurer og/eller Konfidensintervallfigurer? */
-%let aarsobs=1;/* dersom du ønsker årsobservasjonene med i figur - dersom ikke må denne stå tom */
-%let NorgeSoyle=1; /* dersom du ønsker Norge som søyle i figur - dersom ikke må det stå =0 */
-%let KIfigur=;
-%let Mine_boomraader=; /* Utvalgte områder til figurer - eks: komnr in (1900:1930) eller bydel in (1:15)*/
-%let vis_ekskludering=1; /* Vis tabeller for ekskludering*/
-/* Hvilke bonivåer ønskes? ja eller nei, hvor 1 betyr ja */
-%let kommune=;      /*Bildefiler*/ %let Fig_AA_kom=;    %let Fig_KI_kom=;
-%let kommune_HN=1;  /*Bildefiler*/ %let Fig_AA_komHN=;  %let Fig_KI_komHN=;
-%let fylke=1;       /*Bildefiler*/ %let Fig_AA_fylke=;  %let Fig_KI_fylke=;
-%let sykehus_HN=1;  /*Bildefiler*/ %let Fig_AA_ShHN=;   %let Fig_KI_ShHN=;
-%let HF=1;          /*Bildefiler*/ %let Fig_AA_HF=;     %let Fig_KI_HF=;
-%let RHF=1;         /*Bildefiler*/ %let Fig_AA_RHF=;    %let Fig_KI_RHF=;
-%let Oslo=;         /*Bildefiler*/ %let Fig_AA_Oslo=;   %let Fig_KI_Oslo=;
-%let Vertskommune_HN=;
-/* Dersom du skal ha bilde-filer */
-%let bildeformat=png; /*Format*/
-%let lagring="\\hn.helsenord.no\RHF\SKDE\Analyse\Data\SAS\Bildefiler"; /*Hvor skal filene lagres*/
-%let hoyde=8.0cm; %let bredde=11.0cm; /*Høyde (8) og Bredde (11) på bildefilene, gjelder kun bilde-filer*/
-%let skala=; /* Skala på x-aksen på figurene - eks: values=(0 to 0.8 by 0.2) */
+%proc_stdrate(
+    dsn=, /*Grunnlagsdatsettet det skal beregnes rater fra*/
+    rate_var=, /*Ratevariabel, kan være aggregert (verdier større enn en) eller dikotom (0,1)*/
+    bo=bohf, /*BoHf, BoRHF eller BoShHN, BoHf er default*/
+    alder_min=0, /*Laveste alder i utvalget, 0 er default*/
+    alder_max=105, /*Høyeste alder i utvalget, 105 er default*/
+    rmult=1000, /*Ratemultiplikator, dvs rate pr, 1000 er default*/
+    indirekte=, /*Settes lik 1 dersom indirekte, ellers direkte metode, direkte er default*/
+    standardaar=, /*Standardiseringsår*/
+    start=, /*Startår*/
+    slutt=, /*Sluttår*/
+    utdata=, /*Navn på utdatasett, utdatasettet er på "wide" form*/
+    long=, /*if long=1 --> skriv ut "langt" datasett, ikke aktivert er default*/
+    innbygg_dsn=innbygg.INNB_SKDE_BYDEL, /*Innbyggerdatasett: innbygg.INNB_SKDE_BYDEL, innbygg.INNB_SKDE_BYDEL er default*/
+    /*Til boområde-makroen: Standard er:(inndata=pop, indreOslo = 0, bydel = 1);*/
+    bodef_indreoslo=0, /*0 er standard, 0 er default*/
+    bodef_bydel=1 /*1 er standard, 1 er default*/
+);
 
-/* Hvilke tabeller ønsker du? */
-%Let Vis_Tabeller=1; /*1=Enkel tabell, 2=Enkel + CV og SCV, 3=Enkel + CV og SCV + Ujusterte rater og KI*/
-%Let TallFormat=NLnum; /*Tallformat i tabeller: NLnum=tusenskilletegn, Excel=klart til excel */
-/* Vil du ha kart? */
-%let kart=; /* ja eller nei */
+/*! 
+### Beskrivelse
 
-%let rateformat=2; /*Antall desimaler på rate: 0,1 eller 2*/
+Makro for å beregne rater
 
-%let Ut_sett=; /*Utdata, dersom du ønsker stor tabell med KI osv., --> Ut_sett=1 */
-
-/******  PERIODE OG ALDER  **************************************************************/
-%let StartÅr=2012;
-%let SluttÅr=2015;
-%Let aar=2015; /* Standardiseringsår defineres her*/
-%Let aldersspenn=in (0:105); /*Definerer det aktuelle aldersspennet: (0:105) --> 0 til 105 år*/
-%Let Alderskategorier=30; /*20, 21, 30, 31, 40, 41, 50, 51 eller 99
-                            20=2-delt med alle aldre, 21=2-delt KUN med aldre med RV
-                            30 3-delt med alle aldre, 31=3-delt KUN med aldre med RV
-                            40=4-delt med alle aldre, 41=4-delt KUN med aldre med RV
-                            50 5-delt med alle aldre, 51=5-delt KUN med aldre med RV
-                            99=Egendefinert(99) */
-%macro Alderkat; /*Må fylles inn dersom egendefinert alderskategorier*/
-if 0<=alder<=14 then alder_ny=1;
-else if 15<=alder<=49 then alder_ny=2;
-else if 50<=alder<=64 then alder_ny=3;
-else if 65<=alder<=79 then alder_ny=4;
-else if 80<=alder then alder_ny=5;
-%mend;
-
-/******  JUSTERING  ********************************************************************/
-%Let aldjust/*=Ermann=1*/; /*Aktiveres KUN dersom KUN aldersjustering*/
-%Let standard = Kjønns- og aldersstandardiserte; /*Brukes til å lage figur og tabell-overskrifter */
-%Let kjonn=(0,1); /*Dersom både menn og kvinner (0,1), dersom kun menn (1), dersom kun kvinner (0)*/
-%Let rate_pr=1000; /*Definerer rate pr 1.000 eller 100.000 innbyggere eller osv */
-%Let boomraade=BoRHF in (1:4); /*Definerer Boområder det skal beregnes rater for utfra BoRHF - her kan man velge andre kriterier, feks BoHF, komnr osv*/
-%Let boomraadeN=BoRHF in (1:4); /*Definerer Boområder som det beregnes "nasjonale" andeler utfra BoRHF - her kan man velge andre kriterier, feks BoHF, komnr osv*/
-%let SnittOmraade=Norge; /*Definerer Snittlinja på figurene - må være samsvar med boomraade ovenfor*/
-
-/******  DU ER FERDIG  *******************************************************************/
-
-/******************************************************************************************/
-%utvalgx;
-
-%rateberegninger;
-
-proc datasets nolist;
-delete RV: Norge: figur: Andel Alder: Bo: HN: Kom: Fylke: VK: bydel: snudd;
-run;
 ```
+kortversjon (kjøres med default verdier for resten)
+%proc_stdrate(dsn=, rate_var=, standardaar=, start=, slutt=, utdata=);
+```
+### Input
+- datasett med variabel det skal beregnes rater på, 
+	- kan være 0,1 variabel eller aggregert
+	- må innheolde bo-nivået det skal kjøres rater på
+
+### Output
+- &utdata + evt. long_&utdata
+
+### Endringslogg:
+- februar 2022 opprettet, Frank
+*/
