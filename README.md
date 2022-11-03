@@ -1,10 +1,10 @@
 [![Bygg og distribuer dokumentasjon](https://github.com/SKDE-Analyse/sas_codes/actions/workflows/create_doc.yml/badge.svg)](https://github.com/SKDE-Analyse/sas_codes/actions/workflows/create_doc.yml)
 [![Les dokumentasjon](https://img.shields.io/badge/Dokumentasjon--grey.svg)](https://skde-analyse.github.io/sas_codes)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/SKDE-Analyse/sas_codes/blob/master/LICENSE)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/SKDE-Analyse/sas_codes/blob/main/LICENSE)
 
 # Felles SAS-koder for SKDE
 
-Dette *repository* inneholder felles SAS-koder brukt ved SKDE. Det er de samme kodene som normalt ligger på `<sas-server-...>\Felleskoder\master` og andre mapper under `Felleskoder`.
+Dette *repository* inneholder felles SAS-koder brukt ved SKDE. Det er de samme kodene som normalt ligger på `<sas-server-...>\felleskoder\main` og andre mapper under `felleskoder`.
 
 ## Hva finnes her (lenke for mer informasjon)?
 

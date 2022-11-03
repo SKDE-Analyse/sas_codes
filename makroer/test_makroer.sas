@@ -1,4 +1,4 @@
-﻿%macro test_makroer(branch=master, lagNyRef = 0, lagNyStart = 0);
+﻿%macro test_makroer(branch=main, lagNyRef = 0, lagNyStart = 0);
 /*!
 Makro som skal teste de andre makroene.
 

@@ -21,7 +21,7 @@ Inneholder også felles makroer som testene bruker.
 
 %include "&filbane/makroer/deleteAll.sas";
 
-%macro test(branch = master, lag_ny_referanse = 0);
+%macro test(branch = main, lag_ny_referanse = 0);
 /*!
 Makro som kjører alle testene
 */
