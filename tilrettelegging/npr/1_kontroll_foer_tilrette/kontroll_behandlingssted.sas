@@ -1,4 +1,4 @@
-%macro kontroll_behandlingssted(inndata=, aar= , beh=); 
+﻿%macro kontroll_behandlingssted(inndata=, aar= , beh=); 
 /*!
 ### Beskrivelse
 
