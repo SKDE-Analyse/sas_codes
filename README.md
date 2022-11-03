@@ -4,7 +4,7 @@
 
 # Felles SAS-koder for SKDE
 
-Dette *repository* inneholder felles SAS-koder brukt ved SKDE. Det er de samme kodene som normalt ligger på `<sas-server-...>\felleskoder\main` og andre mapper under `felleskoder`.
+Dette *repository* inneholder felles SAS-koder brukt ved SKDE. Det er de samme kodene som normalt ligger på `Analyse/Data/SAS/felleskoder/main` og andre mapper under `felleskoder`.
 
 ## Hva finnes her (lenke for mer informasjon)?
 
