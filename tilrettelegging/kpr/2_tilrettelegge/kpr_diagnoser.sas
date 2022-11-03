@@ -1,20 +1,20 @@
-/************************************************/
-/* Makro for å hente diagnoser fra diagnosefilen*/
+ï»¿/************************************************/
+/* Makro for Ã¥ hente diagnoser fra diagnosefilen*/
 /************************************************/
 
 /* 
-Input: 	1) inndata (navn på hovedfil/regningsfil som skal tilrettelegges)
-		2) utdata (navn på utdata, må være ulikt inndata)
+Input: 	1) inndata (navn pÃ¥ hovedfil/regningsfil som skal tilrettelegges)
+		2) utdata (navn pÃ¥ utdata, mÃ¥ vÃ¦re ulikt inndata)
 		3) let-statement (%let aar=, %let suffix=)
 Output: tre variabler 
 		1) hdiag_kpr (hoveddiagnose tilknyttet enkeltregningen)
-		2) kodeverk (angir hvilket kodeverk diagnosen tilhører, f.eks icd10, icpc2 osv. Gjør den om til numerisk.)
+		2) kodeverk (angir hvilket kodeverk diagnosen tilhÃ¸rer, f.eks icd10, icpc2 osv. GjÃ¸r den om til numerisk.)
 		3) ant_bdiag_kpr (antall bidiagnoser tilknyttet enkeltregningen) 
 */
 
 %macro kpr_diagnoser(inndata= , utdata=);
 
-%if &sektor=diagnose %then %do; /*kjøres kun på diagnosedata*/
+%if &sektor=diagnose %then %do; /*kjÃ¸res kun pÃ¥ diagnosedata*/
 data &utdata;
 set &inndata;
 /* - Lager numerisk 'kodeverk_kpr' fra string 'diagnosetabell'. Drop variabel 'diagnosetabell'*/
@@ -29,7 +29,7 @@ run;
 %end;
 
 
-%if &sektor=enkeltregning %then %do; /*Kjøres kun på regningsdata*/
+%if &sektor=enkeltregning %then %do; /*KjÃ¸res kun pÃ¥ regningsdata*/
 /* hente inn hoveddiagnose fra diagnosefilen */
 proc sql;
 	create table tmp_utdata as
@@ -55,7 +55,7 @@ proc sql;
 	where erhoveddiagnose ne 1 /*ikke telle raden som er hoveddiagnose*/
 	group by enkeltregning_lnr;
 quit;
-/* koble på antall bidiagnoser på fil som tilrettelegges */
+/* koble pÃ¥ antall bidiagnoser pÃ¥ fil som tilrettelegges */
 proc sql;
 	create table &utdata as
 	select a.*, b.ant_b as ant_bdiag_kpr

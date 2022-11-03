@@ -1,4 +1,4 @@
-* this macro takes 3 output files from the rateprogram;
+﻿* this macro takes 3 output files from the rateprogram;
 * each of them will form each of the 3 PARTS in the figure (not the total!);
 * the files need to have names that end with "_dp_tot_bohf" (dp stands for diagnose, prosedyre);
 

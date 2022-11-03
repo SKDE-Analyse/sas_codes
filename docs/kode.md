@@ -1,16 +1,16 @@
-# Utvikling av rateprogrammet
+# Utvikling av vår felles sas-kode
 
-I mappen `master` ligger vår stabile versjon av rateprogrammet. Endringer skal helst ikke gjøres direkte her, siden enkelte endringer kan ødelegge rateprogrammet. Vi gjør endringer i separate mapper og dytter opp til [github](https://github.com/SKDE-Analyse/sas_codes) for evaluering av medarbeider, før mappen `master` kan oppdateres.
+I mappen `main` ligger vår stabile versjon av felles sas-kode. Endringer skal helst ikke gjøres direkte her, siden enkelte endringer kan ødelegge for andre. Vi gjør endringer i separate mapper og dytter opp til [github](https://github.com/SKDE-Analyse/sas_codes) for evaluering av medarbeider, før mappen `main` kan oppdateres.
 
 ## Prosedyre
 
 Denne prosedyren forutsetter at [git](https://git-scm.com/) er installert på maskinen og at man har gjort noe ala denne dokumentasjonen: <https://skde-analyse.github.io/dokumentasjon/git.html> (hvis man har gjort sistnevnte på `p`-disken, trenger man ikke gjøre det på nytt på ny maskin).
 
-1. Opprett en egen mappe med en ny versjon av SAS-kodene. Kan gjøres ved å klone siste versjon av master fra [github](https://github.com/SKDE-Analyse/sas_codes):
+1. Opprett en egen mappe med en ny versjon av SAS-kodene. Kan gjøres ved å klone siste versjon av main fra [github](https://github.com/SKDE-Analyse/sas_codes):
 
        git clone githubhn:SKDE-Analyse/sas_codes "ny mappe" # "ny mappe" byttes ut med et mappenavn
 
-2. Lag en egen *branch* der utviklingen kan skje uten å påvirke `master`-branchen:
+2. Lag en egen *branch* der utviklingen kan skje uten å påvirke `main`-branchen:
 
        cd "ny mappe"
        git checkout -b "branch navn"
@@ -30,10 +30,10 @@ Denne prosedyren forutsetter at [git](https://git-scm.com/) er installert på ma
     - Andre ved SKDE kan nå se på koden og se at det ikke er noen åpenbare feil.
     - De kan så eventuelt godkjenne og trykke på `Squash merge`
     - Hvis de ønsker endringer så kan dette gjøres i samme mappe som tidligere (punkt 3) og så gjenta punkt 4. Nye endringer vil da automatisk bli en del av `pull request`en.
-6. Oppdater mappen `master` med nyeste versjon:
+6. Oppdater mappen `main` med nyeste versjon:
 
        cd ..
-       cd master
+       cd main
        git status # Sjekke at ikke noe er endret direkte i denne mappen
        git pull --rebase # dra ned siste oppdateringer fra github
 7. Slett branchen (eventuelt slett mappen)
@@ -41,6 +41,6 @@ Denne prosedyren forutsetter at [git](https://git-scm.com/) er installert på ma
        cd ..
        # rm -rf "ny mappe" # hvis man vil slette mappen og heller lage ny neste gang. Da kan man droppe å gjøre resten.
        cd "ny mappe"
-       git checkout master
+       git checkout main
        git push origin --delete "branch navn"
        git branch -D "branch navn"

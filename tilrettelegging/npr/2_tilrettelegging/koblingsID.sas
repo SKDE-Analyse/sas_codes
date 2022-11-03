@@ -1,22 +1,22 @@
-/*!
-MACROER FOR Å KOBLINGS_ID 
+ï»¿/*!
+MACROER FOR Ã… KOBLINGS_ID 
 */
 
 %macro KoblingsID(innDataSett=, utDataSett=, fil =);
 
 /*!
-Lager en unik id på hver rad, som siden kan brukes til å hente inn mottatte variabler til tilrettelagt data hvis behov.
+Lager en unik id pÃ¥ hver rad, som siden kan brukes til Ã¥ hente inn mottatte variabler til tilrettelagt data hvis behov.
 
 ### Input
 - `innDataSett` 
 - `utDataSett` 
-- `fil`: kan være som`, `avtspes`  eller `rehab`
+- `fil`: kan vÃ¦re som`, `avtspes`  eller `rehab`
 */
 
 /* 
 Tove 31.03.2022: 
-    Lager koblingsid på SOM-fil. Splitt til avd og sho skjer først når tilrettelegging er ferdig.
-    Det gjøres ikke splitt til PARVUS lengre.
+    Lager koblingsid pÃ¥ SOM-fil. Splitt til avd og sho skjer fÃ¸rst nÃ¥r tilrettelegging er ferdig.
+    Det gjÃ¸res ikke splitt til PARVUS lengre.
  */
 
 %if %lowcase(&fil) = avtspes %then %do;

@@ -1,4 +1,4 @@
-/* This is a macro to replace the old Episode of Care */
+﻿/* This is a macro to replace the old Episode of Care */
 /* It takes the aggrshoppID_Lnr from NPR as a starting point, 
    and adds on overføring to other sykehus within a specified time (defult 8 hours) */
    

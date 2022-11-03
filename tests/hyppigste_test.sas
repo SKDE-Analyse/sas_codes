@@ -1,4 +1,4 @@
-%macro hyppigste_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
+﻿%macro hyppigste_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste hyppigste-makro.
@@ -8,7 +8,7 @@ Sammenligner dette datasettet med en referanse (`test.ref_hyppigste_&navn`).
 
 ### Parametre
 
-- `branch = master`: Bestemmer hvilken hyppigste-makro som kjøres (hvilken mappe den ligger i)
+- `branch = main`: Bestemmer hvilken hyppigste-makro som kjøres (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset_:`.
 - `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.hyppigste_start` på nytt.
 - `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_hyppigste_&navn` på nytt.

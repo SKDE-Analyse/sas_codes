@@ -1,4 +1,4 @@
-%macro kpr_var_rekkefolge(inndata= , utdata=);
+﻿%macro kpr_var_rekkefolge(inndata= , utdata=);
 
 Data &Utdata;
 %if &sektor=enkeltregning %then %do;

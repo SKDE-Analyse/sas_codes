@@ -1,4 +1,4 @@
-/* Endringslogg: Sist endret av Janice 17.06.2021 */
+﻿/* Endringslogg: Sist endret av Janice 17.06.2021 */
 
 /* Makro for å lage formater til boområder */
 /* Husk å definere filbane før makro kjøres */

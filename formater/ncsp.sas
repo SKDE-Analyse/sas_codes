@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $ncsp
 
 /* Formater fra fil Prosedyrekoder/NCSP_2016_medKode.sas lagt til 10/11/2017 */

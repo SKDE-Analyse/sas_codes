@@ -1,4 +1,4 @@
-%macro ratefigur_todelt(
+﻿%macro ratefigur_todelt(
     dsn=, /*tilrettelagt datasett*/
     var1=, /*variabel første del av søylen*/
     var2=, /*Variabel andre del av søylen*/

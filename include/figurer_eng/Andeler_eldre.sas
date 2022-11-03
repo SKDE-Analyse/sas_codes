@@ -1,4 +1,4 @@
-
+﻿
 
 Proc format;
 value type
@@ -60,7 +60,7 @@ set to test;
 run;
 
 
-/*Sl� sammen en og to*/
+/*Slå sammen en og to*/
 data andeler;
 set en to;
 format type type.;

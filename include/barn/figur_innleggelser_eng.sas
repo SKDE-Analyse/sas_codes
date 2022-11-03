@@ -1,4 +1,4 @@
-
+﻿
 proc sgplot data=Innlegg noborder noautolegend sganno=ANNOARSVAR pad=(Bottom=5%) ;
      highlow y=&bo low=numlow high=numhigh / type=bar name="hl1" lineattrs=(color=CX00509E);
           styleattrs datacolors=(CX95BDE6);

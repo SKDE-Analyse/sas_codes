@@ -1,4 +1,4 @@
-%macro simpletab;
+﻿%macro simpletab;
 PROC TABULATE
 DATA=&data;	
 	CLASS aar &var /	ORDER=UNFORMATTED MISSING;

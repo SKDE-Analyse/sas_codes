@@ -1,4 +1,4 @@
-/*Macro for å gå gjennom alle datasett i en angitt mappe og liste ut 
+﻿/*Macro for å gå gjennom alle datasett i en angitt mappe og liste ut 
 alle datasett som inneholder rader med data fra et angitt år 
 (dvs. som har rader der variabelen "aar" er lik et angitt årstall), 
 samt alle datasett som ikke inneholder variabelen aar

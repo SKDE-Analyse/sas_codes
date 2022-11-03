@@ -8,7 +8,7 @@ def extractDoc(filename):
     # Extract text in file that are
     # between /*! and */
 
-    macroFile = codecs.open(filename, "r", "latin-1")
+    macroFile = open(filename, "r")
     macroFileContent = macroFile.readlines()
     macroFile.close()
 

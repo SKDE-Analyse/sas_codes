@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $kurid
 '0002'="HØYDOSE CYKLOFOSFAMID (v/TBI)"
 '0003'="BEAM_etopofos"

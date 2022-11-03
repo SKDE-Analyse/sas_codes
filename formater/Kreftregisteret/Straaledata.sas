@@ -1,4 +1,4 @@
-/* Opprettet 27.11.2019 - Frank Olsen
+ï»¿/* Opprettet 27.11.2019 - Frank Olsen
 Hentet fra Beate Hauglann*/
 
 proc format;
@@ -16,7 +16,7 @@ value Sykehus
 run;
 
 proc format;
-value $INTENTION_fmt /*Formålet med strålingen*/
+value $INTENTION_fmt /*FormÃ¥let med strÃ¥lingen*/
 'A' = 'Annet'
 'F' = 'Profylaktisk'
 'K' = 'Kurativt'

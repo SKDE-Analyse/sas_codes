@@ -1,4 +1,4 @@
-
+﻿
 proc sort data=d30_&tema._&RV_variabelnavn._bohf out=dod_30;
 by bohf;
 run;

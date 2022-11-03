@@ -1,4 +1,4 @@
-%macro aggreger_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
+﻿%macro aggreger_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste aggreger-makro.
@@ -8,7 +8,7 @@ Sammenligner dette datasettet med en referanse (`tests/data/agg_&navn.csv`).
 
 ### Parametre
 
-- `branch = master`: Bestemmer hvilken aggreger-makro som kjøres (hvilken mappe den ligger i)
+- `branch = main`: Bestemmer hvilken aggreger-makro som kjøres (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset_:`.
 - `lagNyRef = 0` Hvis ulik null, lage referansedatasettene `tests/data/agg_&navn.csv` på nytt.
 - `lagNyStart = 0`: Hvis ulik null, lage startdatasettet `test.agg_start` på nytt.

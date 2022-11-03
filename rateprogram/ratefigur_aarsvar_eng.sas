@@ -1,4 +1,4 @@
-%macro ratefigur_aarsvar_eng(
+﻿%macro ratefigur_aarsvar_eng(
     dsn=, /*Grunnlagsdatsettet for figur, som regel utdata fra rateprogram*/
     /*dsn må inneholde variablene rate: og nrate*/
     yvariabel1=, /*Variabel 1 til Y-axis table*/

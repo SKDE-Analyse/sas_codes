@@ -1,4 +1,4 @@
-%macro VarFraParvus(dsnMagnus=,var_som=,var_avtspes=, taar = 19);
+﻿%macro VarFraParvus(dsnMagnus=,var_som=,var_avtspes=, taar = 19);
 
 /*!
 ### Beskrivelse

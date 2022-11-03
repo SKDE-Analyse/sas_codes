@@ -1,5 +1,5 @@
-/*
-Andel d�d
+﻿/*
+Andel død
 */
 
 %let soylebredde = 0.8;

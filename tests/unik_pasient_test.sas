@@ -1,4 +1,4 @@
-%macro unik_pasient_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
+﻿%macro unik_pasient_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste unik_pasient-makro.
@@ -8,7 +8,7 @@ Sammenligner dette datasettet med en referanse (`test.ref_unik_pasient_&navn`).
 
 ### Parametre
 
-- `branch = master`: Bestemmer hvilken unik_pasient-makro som kjøres (hvilken mappe den ligger i)
+- `branch = main`: Bestemmer hvilken unik_pasient-makro som kjøres (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset_:`.
 - `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.unik_pasient_start` på nytt.
 - `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_unik_pasient_&navn` på nytt.

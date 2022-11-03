@@ -1,4 +1,4 @@
-%macro boomraader(inndata=, indreOslo = 0, bydel = 1);
+﻿%macro boomraader(inndata=, indreOslo = 0, bydel = 1);
 /*! 
 ### Beskrivelse
 

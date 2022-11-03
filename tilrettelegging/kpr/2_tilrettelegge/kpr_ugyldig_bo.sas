@@ -1,9 +1,9 @@
-%macro kpr_ugyldig_bo(inndata= , utdata= );
+ï»¿%macro kpr_ugyldig_bo(inndata= , utdata= );
 /*! 
 ### Beskrivelse
 
-Makro bruker formatfilen HNREF.FMT_KOMNR til å lage en ny variabel, "kommunenr2", hvor kun gyldige bosted får verdi, dvs radene med ugyldig bosted får missing.
-Makroen kjøres før forny_komnr-makroen i tilretteleggingen. 
+Makro bruker formatfilen HNREF.FMT_KOMNR til Ã¥ lage en ny variabel, "kommunenr2", hvor kun gyldige bosted fÃ¥r verdi, dvs radene med ugyldig bosted fÃ¥r missing.
+Makroen kjÃ¸res fÃ¸r forny_komnr-makroen i tilretteleggingen. 
 
 ```
 %kpr_ugyldig_bosted(inndata= , utdata= )

@@ -1,4 +1,4 @@
-/* formater til bo, beh og komnr og bydel */
+﻿/* formater til bo, beh og komnr og bydel */
 %include "&filbane/formater/bo.sas";
 
 /* formater til behandler og orgnr */

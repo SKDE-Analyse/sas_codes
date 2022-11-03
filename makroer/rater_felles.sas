@@ -1,4 +1,4 @@
-
+﻿
 
 %macro rater_felles(offentlig=1, privat = 1, kun_total = 0, kun_poli = 0, innlegg = 1, hastegrad = 1, unik = 1, Ratefil=helseatl.k_u_&agg_var._18);
 

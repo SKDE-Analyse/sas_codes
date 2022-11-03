@@ -1,4 +1,4 @@
-
+ï»¿
 
 
 /* 	Henter antall personer fra unik-datasett	*/
@@ -102,8 +102,8 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 		scatter x=rate2015 y=BOHF / markerattrs=(symbol=Diamondfilled color=black);
 	Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
     Yaxistable &varnavn &kol_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-	xaxis label=" Antall pr. 1 000 innbyggere (50 - 74 år)"   labelattrs=(color=black size=7 ) &xskala offsetmin=0.02 valueattrs=(size=7);
+    yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
+	xaxis label=" Antall pr. 1 000 innbyggere (50 - 74 Ã¥r)"   labelattrs=(color=black size=7 ) &xskala offsetmin=0.02 valueattrs=(size=7);
      inset 
 		(
 	 	"(*ESC*){unicode'25cf'x}"="   2013"
@@ -125,8 +125,8 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 		scatter x=rate2015 y=BOHF / markerattrs=(symbol=Diamondfilled color=black);
 	Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
     Yaxistable &varnavn &kol_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-	xaxis label=" Antall pr. 1 000 innbyggere (50 - 74 år)"   labelattrs=(color=black size=7 ) &xskala offsetmin=0.02 valueattrs=(size=7);
+    yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
+	xaxis label=" Antall pr. 1 000 innbyggere (50 - 74 Ã¥r)"   labelattrs=(color=black size=7 ) &xskala offsetmin=0.02 valueattrs=(size=7);
      inset 
 		(
 	 	"(*ESC*){unicode'25cf'x}"="   2013"

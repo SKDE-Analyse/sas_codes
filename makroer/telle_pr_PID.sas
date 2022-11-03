@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 Makro som gir oversikt over antall ulike verdier av en variabel, hvilke verdier som forekommer i variabelen og hvor mange ganger hver verdi forekommer, PER PID.
 
 ## INPUT:

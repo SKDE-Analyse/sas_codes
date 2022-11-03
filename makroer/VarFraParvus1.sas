@@ -1,4 +1,4 @@
-%macro VarFraParvus(dsnMagnus=, dsnParvus= , var=);
+﻿%macro VarFraParvus(dsnMagnus=, dsnParvus= , var=);
 
 /*!
 ### Beskrivelse

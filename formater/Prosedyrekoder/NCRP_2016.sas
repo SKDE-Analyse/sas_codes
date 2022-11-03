@@ -1,4 +1,4 @@
-proc format;
+﻿proc format;
 value $NCRP_2016F
 'AAB06K'="Perkutan biopsi av calvariet, ultralydveiledet"
 'AAE11B'="Perkutan trombektomi eller embolektomi i intrakraniell arterie"

@@ -1,4 +1,4 @@
-%macro panelfig(aar1=2013, aar2=2014, aar3=2015, aar4=2016, aar5=2017);
+﻿%macro panelfig(aar1=2013, aar2=2014, aar3=2015, aar4=2016, aar5=2017);
 
 data norge;
   set &tema.&teknikk._dp_tot_bohf_t(keep=rate20: bohf);

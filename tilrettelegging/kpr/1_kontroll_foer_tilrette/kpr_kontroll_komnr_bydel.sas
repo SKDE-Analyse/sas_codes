@@ -1,11 +1,11 @@
-/* Bruke makro fra NPR-tilrettelegging */
+ï»¿/* Bruke makro fra NPR-tilrettelegging */
 %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas";
 
 %macro komnr_ukjent(inndata=, aar=);
 /*! 
 ### Beskrivelse
 
-Makro for å telle opp antall rader, enkeltregninger og kpr_lnr som ikke har gyldig komnr rapportert.
+Makro for Ã¥ telle opp antall rader, enkeltregninger og kpr_lnr som ikke har gyldig komnr rapportert.
 Makroen bruker error_komnr_&aar-filene som er output fra makroen 'kontroll_komnr_bydel.sas'.
 
 ```
@@ -14,7 +14,7 @@ Makroen bruker error_komnr_&aar-filene som er output fra makroen 'kontroll_komnr
 
 ### Input 
       - Inndata: mottatt datasett, f.eks HNMOT.KPR_L_ENKELTREGNING_2017_M21T2
-      - aar:  hvilket år en ønsker å telle rader med ukjent komnr
+      - aar:  hvilket Ã¥r en Ã¸nsker Ã¥ telle rader med ukjent komnr
       
 ### Output 
       - datasett som inneholder radene med ukjent komnr

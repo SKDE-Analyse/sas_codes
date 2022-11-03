@@ -1,4 +1,4 @@
-
+﻿
 
 
 Proc format;
@@ -38,7 +38,7 @@ tot_ant = ant_opphold;
 run;
 
 
-/*Sl� sammen en og to og tot*/
+/*Slå sammen en og to og tot*/
 data smelt;
 set en to tot;
 format type type.;

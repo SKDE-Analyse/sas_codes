@@ -1,4 +1,4 @@
-%macro reinnleggelser_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
+﻿%macro reinnleggelser_test(branch = null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
 Makro for å teste reinnleggelse-makro.
@@ -8,7 +8,7 @@ Sammenligner dette datasettet med en referanse (`test.ref_reinn1` og `test.ref_r
 
 ### Parametre
 
-- `branch = master`: Bestemmer hvilken reinnleggelse-makro som kjøres (hvilken mappe den ligger i)
+- `branch = main`: Bestemmer hvilken reinnleggelse-makro som kjøres (hvilken mappe den ligger i)
 - `debug = 0`: Hvis ulik null, sletter ikke midlertidig referansedatasett `testset1` og `testset2`.
 - `lagNyRef = 0`: Hvis ulik null, lage startdatasettet `test.reinn_start` på nytt.
 - `lagNyStart = 0` Hvis ulik null, lage referansedatasettene `test.ref_reinn1` og `test.ref_reinn2` på nytt.

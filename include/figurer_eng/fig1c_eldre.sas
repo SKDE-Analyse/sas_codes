@@ -1,5 +1,5 @@
-/*
-�rsvariasjonfigur, ett years old
+﻿/*
+Årsvariasjonfigur, ett years old
 */
 
 %let soylebredde = 0.8;

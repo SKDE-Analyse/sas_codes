@@ -1,4 +1,4 @@
-
+﻿
 /*  enkel ratefigur*/
 
 * include format and anno for logo and kilde;

@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 Felles makroer for testing av rateprogrammet. Kan også brukes til produksjon av test-datasett.
 */
 

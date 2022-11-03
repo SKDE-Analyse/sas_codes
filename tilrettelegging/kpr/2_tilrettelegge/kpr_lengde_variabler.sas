@@ -1,4 +1,4 @@
-%macro kpr_lengde_variabler(inndata=, utdata=);
+﻿%macro kpr_lengde_variabler(inndata=, utdata=);
 
 data &utdata;
 /* alle datasettene */

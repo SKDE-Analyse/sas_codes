@@ -1,4 +1,4 @@
-%macro kpr_kjonn_alder(inndata=);
+ï»¿%macro kpr_kjonn_alder(inndata=);
 
 proc sort data=&inndata;
   by kpr_lnr;
@@ -14,7 +14,7 @@ data dupkjonn;
   if first.kpr_lnr =0 or last.kpr_lnr=0 then output;
 run;
 
-title 'ulike kjønn';
+title 'ulike kjÃ¸nn';
 proc sql;
   select count(distinct kpr_lnr) as unikid
   from dupkjonn;
@@ -32,13 +32,13 @@ proc summary data=dupkjonn2 nway ;
   output out=kjonn_kombo;
 run;
 
-title 'kombinasjon av kjønn';
+title 'kombinasjon av kjÃ¸nn';
 proc print data=kjonn_kombo(drop=_type_ rename=(col1=kjonn1 col2=kjonn2));
 run;
 
 
 
-/* Fødselsår */
+/* FÃ¸dselsÃ¥r */
 
 proc sort data=&inndata nodupkey out=lnr_dupfod;
   by kpr_lnr fodselsar; 
@@ -62,13 +62,13 @@ data dupfodtrans;
   diff=col2-col1;
 run;
 
-title 'ulike fodselsår';
+title 'ulike fodselsÃ¥r';
 proc sql;
   select count(distinct kpr_lnr) as unikid
   from dupfodtrans;
 quit;
 
-title 'differanse mellom årene';
+title 'differanse mellom Ã¥rene';
 proc freq data=dupfodtrans;
   tables diff;
 run;

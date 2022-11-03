@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 SAS template for å lage LaTeX-tabeller av SAS-tabeller. Brukes som følger:
 
 ```sas

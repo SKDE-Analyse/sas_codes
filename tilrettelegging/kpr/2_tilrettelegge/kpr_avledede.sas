@@ -1,9 +1,9 @@
-
+ï»¿
 %macro kpr_avledede(inndata= , utdata=);
 data &utdata;
 set &inndata;
 
-%if &sektor=enkeltregning %then %do; /*Kjøres kun på regningsdata*/
+%if &sektor=enkeltregning %then %do; /*KjÃ¸res kun pÃ¥ regningsdata*/
 /* 
 - Rename 'dato' til 'inndato' og 'klokkeslett' til 'inntid'. 
 */

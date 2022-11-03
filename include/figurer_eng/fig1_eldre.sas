@@ -1,5 +1,5 @@
-/*
-�rsvariasjonfigur
+﻿/*
+Årsvariasjonfigur
 */
 
 %let soylebredde = 0.8;

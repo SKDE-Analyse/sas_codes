@@ -1,4 +1,4 @@
-%macro lengde_formater(inndata=, utdata=);
+ï»¿%macro lengde_formater(inndata=, utdata=);
 
 data &utdata;
 /* alle datasettene */
@@ -7,12 +7,12 @@ data &utdata;
     length pid bydel                                                6;
     length ermann                                                   3;
 set &inndata;
-    Label PID='Personentydig løpenummer, numerisk (NPR/SKDE)'; 
+    Label PID='Personentydig lÃ¸penummer, numerisk (NPR/SKDE)'; 
     label Alder='Alder (SKDE)';
-    label BoHF='Opptaksområde (HF) (SKDE)'; format BoHF boHF_fmt.; 
-    label BoRHF='Opptaksområde (RHF) (SKDE)'; format BoRHF boRHF_fmt.; 
-    label BoShHN='Opptaksområde (sykehus HN) (SKDE)';format BoShHN boshhn_fmt.; 
-    label erMann='Er mann (kjønn, mann=1) (SKDE)'; format ErMann ErMann.; 
+    label BoHF='OpptaksomrÃ¥de (HF) (SKDE)'; format BoHF boHF_fmt.; 
+    label BoRHF='OpptaksomrÃ¥de (RHF) (SKDE)'; format BoRHF boRHF_fmt.; 
+    label BoShHN='OpptaksomrÃ¥de (sykehus HN) (SKDE)';format BoShHN boshhn_fmt.; 
+    label erMann='Er mann (kjÃ¸nn, mann=1) (SKDE)'; format ErMann ErMann.; 
     label Fylke='Fylke (pasientens bosted) (SKDE)'; format fylke fylke.;
     label aar='PeriodeAar (NPR)'; format aar best4.;
     label KomNR='Kommunenummer fornyet til gyldig komnr-struktur pr 01.01.2021, numerisk (SKDE)'; format KomNR komnr_fmt.; 

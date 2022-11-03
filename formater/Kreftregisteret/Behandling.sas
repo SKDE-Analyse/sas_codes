@@ -1,4 +1,4 @@
-/* Opprettet 27.11.2019 - Frank Olsen
+﻿/* Opprettet 27.11.2019 - Frank Olsen
 Hentet fra Beate Hauglann*/
 
 proc format;
@@ -8,7 +8,7 @@ value kirurgi
 01 = 'Biopsi uten kirurgisk inngrep/eksplorasjon (Diagnostisk inngrep)' /* (basis 70, 72, 74, 75 eller 76) Solide svulster: Biopsi rettet mot primaersvulst uten kirurgisk eksplorasjon Non-solide svulster: Biopsi av enhver type (lymfeknutebiopsi, ekstirpasjon 
 av overfladisk lymfeknute i diagnostisk oeyemed, benmargsbiopsi, annen organbiopsi)*/
 02 = 'Kirurgisk aapning/eksplorasjon (Diagnostisk inngrep)' /*(f.eks. kraniotomi, torakotomi, laparotomi, osteotomi) med eller uten biopsi*/
-07 = 'Vaktpostlymfeknute (sentinel node) (Diagnostisk inngrep)' /*Uttak av �n eller flere lymfeknuter etter injeksjon av fargestoff eller radioaktiv isotop [For C50 Brystkreft i bruk f.o.m. 22.11.2001] 
+07 = 'Vaktpostlymfeknute (sentinel node) (Diagnostisk inngrep)' /*Uttak av én eller flere lymfeknuter etter injeksjon av fargestoff eller radioaktiv isotop [For C50 Brystkreft i bruk f.o.m. 22.11.2001] 
 [For C44 Malignt melanom i bruk f.o.m. 24.03.2003]*/
 95 = 'Biopsi fra metastase (BASIS 60), lokalt residiv (BASIS 57), svulst som verken kan klassifiseres som primaersvulst eller metastase (BASIS 79) eller biopsi uten svulstvev (BASIS 98) paa histologisk melding. (Diagnostisk inngrep)' 
 /*Klinisk melding krever BASIS 72 (benyttes bare for solide svulster) 
