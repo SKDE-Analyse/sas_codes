@@ -3,10 +3,10 @@
 
 ### Beskrivelse
 
-Makro for Ã¥ lage trodelt sÃ¸ylefigur.
+Makro for å lage trodelt søylefigur.
 
 ```
-Kortversjon (kjÃ¸res med default verdier for resten):
+Kortversjon (kjøres med default verdier for resten):
 %ratefigur_todelt(dsn= ,var1= ,var2= ,
     label1= ,label2= ,
     tabvar1= ,tabvar2= ,
@@ -17,12 +17,12 @@ Kortversjon (kjÃ¸res med default verdier for resten):
 ```
 ### Input
 - Ett tilpasset datasett fra rateprogram
-- Ett let-statement for Ã¥ angi &bildesti (%let bildesti = &filbane/Analyse/prosjekter/eksempelmappe/figurer;)
+- Ett let-statement for å angi &bildesti (%let bildesti = &filbane/Analyse/prosjekter/eksempelmappe/figurer;)
 - Ett include-statement for angi &anno
-- Ett include-statement for Ã¥ angi sti til makro (%include "&filbane/rateprogram/ratefigur_todelt.sas";)
+- Ett include-statement for å angi sti til makro (%include "&filbane/rateprogram/ratefigur_todelt.sas";)
 
 ### Output
-- bildefil med valgt format lagres pÃ¥ angitt bildesti
+- bildefil med valgt format lagres på angitt bildesti
 
 ### Endringslogg:
 - februar 2022 opprettet, Frank

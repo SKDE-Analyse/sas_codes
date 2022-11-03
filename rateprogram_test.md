@@ -4,4 +4,4 @@
 
 ## Makro `rateprogram_test`
 
-KjÃ¸r tester av rateprogrammet
+Kjør tester av rateprogrammet

@@ -3,22 +3,22 @@
 
 ### Beskrivelse
 
-Makro for Ã¥ lage ratefigur med Ã¥rsvariasjon, tilpasset fem Ã¥r. 
+Makro for å lage ratefigur med årsvariasjon, tilpasset fem år. 
 Symbolene er endret ifht opprinnelig makro %ratefigur_aarsvar.
 
 ```
-kortversjon (kjÃ¸res med default verdier for resten)
+kortversjon (kjøres med default verdier for resten)
 %ratefig_5aarsvar(dsn=, start=, slutt=, figurnavn=);
 ```
 ### Input
 - datasett/output fra rateprogram
-- datasett mÃ¥ inneholde alle rate-variabelene og nrate
+- datasett må inneholde alle rate-variabelene og nrate
 
-- fÃ¸lgende let-statement:
+- følgende let-statement:
     - 
 
 ### Output
-- bildefil med valgt format lagres pÃ¥ angitt bildesti
+- bildefil med valgt format lagres på angitt bildesti
 
 ### Endringslogg:
 - mai 2022 opprettet, Tove

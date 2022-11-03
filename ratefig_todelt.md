@@ -3,19 +3,19 @@
 
 ### Beskrivelse
 
-Makro for Ã¥ lage trodelt sÃ¸ylefigur.
+Makro for å lage trodelt søylefigur.
 
 ```
-Kortversjon (kjÃ¸res med default verdier for resten):
+Kortversjon (kjøres med default verdier for resten):
 %ratefig_todelt(del1=, del2=, label_1=, label_2=, labeltab=, figurnavn=, xlabel= )
 ```
 ### Input
 - T0 datasett/output fra rateprogram (del1 og del2)
-- Ett let-statement for Ã¥ angi &bildesti (%let bildesti = &filbane/Analyse/prosjekter/eksempelmappe/figurer;)
-- Ett include-statement for Ã¥ angi &anno 
+- Ett let-statement for å angi &bildesti (%let bildesti = &filbane/Analyse/prosjekter/eksempelmappe/figurer;)
+- Ett include-statement for å angi &anno 
 
 ### Output
-- bildefil med valgt format lagres pÃ¥ angitt bildesti
+- bildefil med valgt format lagres på angitt bildesti
 - datasettet som lages i makroen
 
 ### Endringslogg:

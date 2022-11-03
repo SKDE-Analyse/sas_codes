@@ -3,8 +3,8 @@
 
 ### Beskrivelse
 
-Makro for Ã¥ kontrollere at mottatte data inneholder gyldige komnr og bydel
-Den sier ikke noe om det er lÃ¸penr ifeks Oslo 0301 som mangler bydel
+Makro for å kontrollere at mottatte data inneholder gyldige komnr og bydel
+Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
 
 ```
 %kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=)
@@ -20,10 +20,10 @@ Den sier ikke noe om det er lÃ¸penr ifeks Oslo 0301 som mangler bydel
       - Error lister gir oversikt over ugyldige komnr eller bydeler i mottatt data.  De lages som SAS, og printes ut til results vinduet hvis det er noe.
 
 ### Endringslogg:
-    - Opprettet fÃ¸r 2020
+    - Opprettet før 2020
     - september 2021, Janice
           - dokumentasjon markdown
-          - bydel til numerisk fÃ¸r kombineres med komnr
+          - bydel til numerisk før kombineres med komnr
           - error lister printes ut
     - november 2021, Tove
           - inkluderer tidligere bydelskommuner 1201 og 4601 i steg 2 hvor bydel kontrolleres 

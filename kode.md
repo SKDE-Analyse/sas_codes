@@ -1,6 +1,6 @@
-# Utvikling av rateprogrammet
+# Utvikling av vår felles sas-kode
 
-I mappen `main` ligger vår stabile versjon av rateprogrammet. Endringer skal helst ikke gjøres direkte her, siden enkelte endringer kan ødelegge rateprogrammet. Vi gjør endringer i separate mapper og dytter opp til [github](https://github.com/SKDE-Analyse/sas_codes) for evaluering av medarbeider, før mappen `main` kan oppdateres.
+I mappen `main` ligger vår stabile versjon av felles sas-kode. Endringer skal helst ikke gjøres direkte her, siden enkelte endringer kan ødelegge for andre. Vi gjør endringer i separate mapper og dytter opp til [github](https://github.com/SKDE-Analyse/sas_codes) for evaluering av medarbeider, før mappen `main` kan oppdateres.
 
 ## Prosedyre
 

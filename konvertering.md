@@ -11,8 +11,8 @@ MACRO FOR KONVERTERING AV STRINGER TIL NUMERISK, DATO OG TID
 3. Fjerner blanke felt og punktum i stringvariable, samt ny navngiving
 4. Lager Hdiag / Bdiag
 ### Omkoding av stringer med tall til numeriske variable
-- Lager `pid` fra `LNr` (lÃ¸penummer) og sletter `LNr`
-- Generere `bydel_org` fra `bydel` og `bydel2_org` fra `bydel2`. Dropper sÃ¥ `bydel` slik at den ikke ligger pÃ¥ fila nÃ¥r ny variabel kalt `bydel` skal genereres i neste makro
+- Lager `pid` fra `LNr` (løpenummer) og sletter `LNr`
+- Generere `bydel_org` fra `bydel` og `bydel2_org` fra `bydel2`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
 ### Konvertering av stringer til dato- og tidsvariable
 ###	Fjerner blanke felt og punktum i stringvariable, samt ny navngiving. For 2014 navnes dup_tilstand til Tdiag.
 - Fjerner blanke felt i DRG-koden og justerer til stor bokstav (upcase)
