@@ -163,7 +163,6 @@ length bydel_num 6 bydel 6; /*sette lengde lik 6*/
   format bydel best6.;
   end;
   run;
-run;
 
 /*sortere og laga datasett til kontroll*/
 proc sort data=mottatt_komnr(rename=(komnr=komnr2) keep=komnr); by komnr2; run;
@@ -232,6 +231,12 @@ title color= darkblue height=5  "5b: alle mottatte bydeler er gyldige";
 proc freq data=mottatt_bydel;
 tables bydel /  missing nopercent; ; run;
 %end;
-%mend;
+
+proc datasets nolist;
+delete komnr bydel boomr gyldig_komnr liste_komnr 
+      gyldig_bydel liste_bydel mottatt_komnr mottatt_bydel
+      godkjent_komnr_&aar godkjent_bydel_&aar;
+run;
+%mend kontroll_komnr_bydel;
 
 

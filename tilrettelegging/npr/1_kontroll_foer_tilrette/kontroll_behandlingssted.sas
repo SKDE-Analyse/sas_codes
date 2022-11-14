@@ -118,7 +118,7 @@ quit;
 
 /*hvor mange linjer har gyldig/ugyldig orgnr*/
 title color= purple height=5 
-    "6a: behandler-ID: antall og andel rader med gyldig/ugyldig verdi. Se i output-fil 'error_behandler_&aar' for hvilke verdier det gjelder." "test";
+    "6a: behandler-ID: antall og andel rader med gyldig/ugyldig verdi. Se i output-fil 'error_behandler_&aar' for hvilke verdier det gjelder.";
 proc freq data=tmp_data; 
 tables gyldig/missing; 
 run;
@@ -128,7 +128,7 @@ title;
 proc sort data=tmp_data nodupkey out=error_behandler_&aar(keep=&beh);
 by &beh; where ugyldig = 1; run;
 
-%if &beh = behandlingsstedkode and &chk4 /*institusjonid*/ ne 0 %then %do;
+%if &beh = behandlingsstedkode /*and &institusjonid ne 0 */ %then %do;
 /*data som har missing behandlingssted*/
 data tmp_data2;
 set &inndata(keep=behandlingsstedkode institusjonid);

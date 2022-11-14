@@ -1,5 +1,5 @@
 ﻿%macro min_maks_dato(inndata=);
-title color=darkblue height=5 '2: min og maks: år, inn- og utdato';
+title color=darkblue height=5 '3: min og maks: år, inn- og utdato';
 proc sql;  
 select 	min(aar) 					as minaar, 
 		max(aar) 					as maxaar, 
