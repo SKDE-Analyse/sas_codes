@@ -5,8 +5,7 @@
 /* Det gjøres en kontroll etter innlasting av CSV for å sjekke at det ikke er duplikate verdier */
 /* Hvis det er duplikate verdier slettes datasettet behandler og det kommer en melding om ABORT i SAS-logg */
 
-%macro behandler(inndata=, beh=behandlingsstedkode2, utdata=);
-
+%macro behandler(inndata=, beh=);
 
 /* Hente inn CSV-fil for å lage behandler */
 data beh;
@@ -69,21 +68,29 @@ proc delete data=beh;
 run;
 %end;
 
-
 /*ta med de variablene som trengs til å lage behandler*/
 data beh(keep=orgnr behsh behhf behrhf);
 set beh;
 run;
 
+/* hvis behandlingsstedkode mangler i datasettet så brukes institusjonid */
+data &inndata;
+set &inndata;
+if &beh = . then &beh = institusjonid;
+run;
+
 /*merge behandler med bruk av orgnr*/
 proc sql;
-	create table &utdata as
+	create table &inndata as
 	select * from &inndata a left join beh b
 	on a.&beh=b.orgnr;
 quit;
-
-proc freq data=&utdata;
-  tables behsh behhf behrhf;
+title height=5 "Oversikt behsh, behhf og behrhf i data. NB: ingen skal ha missing!";
+proc freq data=tmp_data;
+  tables behsh behhf behrhf / nocum;
 run;
-
+title;
+proc datasets nolist;
+delete beh;
+run;
 %mend;
