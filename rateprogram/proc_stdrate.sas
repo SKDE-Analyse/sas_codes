@@ -135,7 +135,7 @@ else if alder in (90:94) then nyalder=19;
 else if alder in (95:105) then nyalder=20;
 
 %if &bo=bohf %then %do;
-    where &rate_var ge 1 and bohf in (1:23) and aar in (&start:&slutt);
+    where &rate_var ge 1 and bohf in (1:31) and aar in (&start:&slutt);
     format bohf bohf_fmt.;
 %end;
 %if &bo=borhf %then %do;
