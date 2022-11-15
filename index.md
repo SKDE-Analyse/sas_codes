@@ -53,10 +53,12 @@
 - [rateprogram/proc_stdrate.sas](proc_stdrate)
 - [rateprogram/ratefigur_5aarsvar.sas](ratefigur_5aarsvar)
 - [rateprogram/ratefigur_tredelt.sas](ratefigur_tredelt)
-- [tilrettelegging/npr/1_kontroll_foer_tilrette/simpletab_loop.sas](simpletab_loop)
+- Filen kontroll_mottatte_data.sas er ikke dokumentert.
+- [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_type_lengde.sas](kontroll_type_lengde)
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas](1_kontroll_komnr_bydel)
-- [tilrettelegging/npr/1_kontroll_foer_tilrette/length_format_informat.sas](length_format_informat)
-- [tilrettelegging/npr/1_kontroll_foer_tilrette/tabulate_variabler.sas](tabulate_variabler)
+- [tilrettelegging/npr/1_kontroll_foer_tilrette/antall_pasienter_rader.sas](antall_pasienter_rader)
+- Filen kjonn_fodselsar.sas er ikke dokumentert.
+- Filen min_maks_dato.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas](kontroll_behandlingssted)
 - [tilrettelegging/npr/2_tilrettelegging/AvtaleRHF_spesilistkomHN.sas](AvtaleRHF_spesilistkomHN)
 - Filen Formater.sas er ikke dokumentert.
