@@ -1,4 +1,4 @@
-﻿%macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode, sektor=som); 
+﻿%macro kontroll_behandlingssted(inndata=, aar= , beh=); 
 /*!
 ### Beskrivelse
 
@@ -31,7 +31,8 @@ Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, aa
 - September 2021, Tove, dokumentasjon markdown
 */
 
-%if &sektor=som or &sektor=rehab %then %do;
+%if &beh eq behandlingsstedkode %then %do;
+
 data orgnr;
   infile "&filbane/formater/behandler.csv"
   delimiter=';'
@@ -67,7 +68,7 @@ data orgnr;
 run;
 %end;
 
-%if &sektor=aspes or &sektor=avtspes %then %do;
+%if &beh eq institusjonid %then %do;
 data orgnr;
   infile "&filbane/formater/avtalespesialister.csv"
   delimiter=';'
@@ -116,16 +117,31 @@ proc sql;
 quit;
 
 /*hvor mange linjer har gyldig/ugyldig orgnr*/
+title color= purple height=5 
+    "6a: behandler-ID: antall og andel rader med gyldig/ugyldig verdi. Se i output-fil 'error_behandler_&aar' for hvilke verdier det gjelder.";
 proc freq data=tmp_data; 
 tables gyldig/missing; 
 run;
-
+title;
 /*printe ut fil med ugyldig behandler/orgnr*/
 /*disse fikses i tilrettelegging*/
-proc sort data=tmp_data nodupkey out=error_liste_&aar(keep=&beh);
+proc sort data=tmp_data nodupkey out=error_behandler_&aar(keep=&beh);
 by &beh; where ugyldig = 1; run;
 
-proc datasets nolist;
-delete flagg_org tmp_data orgnr beh_liste mottatt_beh;
+%if &beh = behandlingsstedkode /*and &institusjonid ne 0 */ %then %do;
+/*data som har missing behandlingssted*/
+data tmp_data2;
+set &inndata(keep=behandlingsstedkode institusjonid);
+where &beh = .;
+format institusjonid org_fmt.;
 run;
-%mend;
+title color= purple height=5 "6b: Hvis missing &beh. så brukes institusjonid som erstatning i tilretteleggingen, har alle radene med missing &beh. oppgitt InstitusjonId? ";
+proc freq data=tmp_data2;
+tables institusjonid  /nocol nopercent norow;
+run;
+%end;
+
+proc datasets nolist;
+delete flagg_org tmp_data tmp_data2 orgnr beh_liste mottatt_beh;
+run;
+%mend kontroll_behandlingssted;

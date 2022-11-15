@@ -1,4 +1,4 @@
-﻿%macro ICD(innDataSett=, utDataSett=);
+﻿%macro ICD;
 
 /*!
 
@@ -17,8 +17,6 @@ MACRO FOR ICD-KAPITTEL, KATEGORIBLOKK OG HOVEDDIAGNOSE PÅ TRE TEGN
 /* 2021 - IS THERE A FILE WE CAN DOWNLOAD RATHER THAN USING HARD CODE !!!! */
 /* Download ICD10 format from net , but kap and blokk need to be checked if there are new ICD code that  needs to be included */
 
-Data &Utdatasett;
-Set &Inndatasett;
 
 /*
 ICD10KAP
@@ -331,7 +329,5 @@ else ICD10KatBlokk=.;
 */
 
 Hdiag3tegn=substr(Hdiag,1,3);
-
-run;
 
 %mend;

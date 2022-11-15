@@ -137,8 +137,6 @@ set liste_bydel;
 if bydel = . then delete;
 run;
 
-
-
 /* -------------------------------------------------------- */
 /* 2. Hente ut variabel 'komnr' og 'bydel' fra mottatte data*/
 /* -------------------------------------------------------- */
@@ -165,7 +163,6 @@ length bydel_num 6 bydel 6; /*sette lengde lik 6*/
   format bydel best6.;
   end;
   run;
-run;
 
 /*sortere og laga datasett til kontroll*/
 proc sort data=mottatt_komnr(rename=(komnr=komnr2) keep=komnr); by komnr2; run;
@@ -176,7 +173,6 @@ data mottatt_bydel;
 set mottatt_bydel;
 if bydel = . then delete;
 run;
-
 
 /* -------------------------------------------- */
 /* 3. Sammenligne mottatte data mot CSV-filer   */
@@ -193,8 +189,21 @@ if felles then output godkjent_komnr_&aar;
 if feil then output error_komnr_&aar;
 run;
 
-title "error komnr i &aar. filen";
+/* sjekk om kommune error-fil har innhold */
+%let dsid=%sysfunc(open(error_komnr_&aar));
+%let nobs=%sysfunc(attrn(&dsid,any));
+%let dsid=%sysfunc(close(&dsid)); 
+
+/* printes hvis det er innhold i error-fil */
+title color=red height=5 "5a: det er ugyldige verdier for komnr i &aar.-filen";
 proc print data=error_komnr_&aar; run;
+
+/* hvis error-fil er tom, print gyldige obs fra mottatt */
+%if &nobs eq 0 %then %do;
+title color= darkblue height=5  "5a: alle mottatte kommunenummer er gyldige";
+proc freq data=mottatt_komnr;
+tables komnr2 / missing nopercent; run;
+%end;
 
 /*sammenligne bydel med csv-fil*/
 /*Outputfiler 'error' inneholder bydel i mottatte data som ikke er i vår liste med godkjente bydeler*/
@@ -207,10 +216,27 @@ if felles then output godkjent_bydel_&aar;
 if feil then output error_bydel_&aar;
 run;
 
-title "error bydel i &aar. filen";
+/* sjekk om bydel error-fil har innhold */
+%let dsid2=%sysfunc(open(error_bydel_&aar));
+%let nobs2=%sysfunc(attrn(&dsid2,any));
+%let dsid2=%sysfunc(close(&dsid2)); 
+
+title color=red height=5 "5b: det er feil med bydel i &aar.-filen";
 proc print data=error_bydel_&aar; run;
 title;
 
-%mend;
+/* hvis error-fil er tom, print gyldige obs fra mottatte */
+%if &nobs2 eq 0 %then %do;
+title color= darkblue height=5  "5b: alle mottatte bydeler er gyldige";
+proc freq data=mottatt_bydel;
+tables bydel /  missing nopercent; ; run;
+%end;
+
+proc datasets nolist;
+delete komnr bydel boomr gyldig_komnr liste_komnr 
+      gyldig_bydel liste_bydel mottatt_komnr mottatt_bydel
+      godkjent_komnr_&aar godkjent_bydel_&aar;
+run;
+%mend kontroll_komnr_bydel;
 
 

@@ -1,10 +1,9 @@
 ﻿/* Input variable  : bydel2 for RHF (specified in the argument, original bydel var from NPR) */
 /* Output variable : bydel (komnr and bydel together) */
 
-%macro bydel(inndata=, utdata=, bydel=bydel2);
+%macro bydel(inndata=, bydel=);
 
-
-data &utdata (drop=bydel_tmp);
+data &inndata;
   set &inndata;
 
   bydel_tmp=&bydel;
@@ -22,6 +21,6 @@ if komnr = 301  and bydel_tmp not in (01:17) then bydel_tmp = 0;
 
   /* All other kommune get missing value for bydel */
   else bydel=.;
-
+drop bydel_tmp bydel2;
 run;
 %mend;
