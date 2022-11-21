@@ -84,7 +84,7 @@ value NPRID_REG
      '080' = 'Kjevekirugi og munnhulesykdom'  
      '090' = 'Plastikk-kirurgi'  
      '100' = 'Nevrokirurgi'  
-     '105' = 'Mamma- og para-/tyreoideakirurgi'  
+     '105' = 'Bryst- og endokrinkirurgi'	/*Ny kode fra 2008. Endret tekst i 2022*/
      '110' = 'Generell indremedisin'  
      '120' = 'Blodsykdommer (hematologi)'  
      '130' = 'Endokrinologi'  
