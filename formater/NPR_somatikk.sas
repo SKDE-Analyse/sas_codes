@@ -21,7 +21,7 @@ value NPRID_REG
       1 = 'Mann'  
       2 = 'Kvinne'  
       9 = 'Ikke spesifisert' ;
-	  
+	   
    value HENVFRATJENESTE
       1 = 'Pasienten selv'  
       2 = 'Fastlege/primærlege'  /* Utgått før NPR-melding 53.1.1 - 2017 */
