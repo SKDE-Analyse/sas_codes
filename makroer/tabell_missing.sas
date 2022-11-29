@@ -1,9 +1,9 @@
-/*!
+ï»¿/*!
 Macro som beregner antall missing-verdier for alle variabler i et datasett.
 
 ## INPUT:
-- ds: navn på datasett
-- where: where statement på formen where=where ermann=0;
+- ds: navn pÃ¥ datasett
+- where: where statement pÃ¥ formen where=where ermann=0;
 
 ## OUTPUT:
 

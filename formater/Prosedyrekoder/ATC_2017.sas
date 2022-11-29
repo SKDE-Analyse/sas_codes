@@ -1,10 +1,10 @@
-proc format;
+﻿proc format;
 value $ATC_2017F
 'V09AB02'="Jodioloprid (123I)"
 'V09AB03'="Jodioflupane (123I)"
 'V09AX01'="Indium (111In) pentetsyre"
 'V09AX03'="Jod(124I)CIT"
-'V09AX04'="Flutemetamol (18F)�"
+'V09AX04'="Flutemetamol (18F)Â"
 'V09BA01'="Technetium (99mTc) oksydronsyre"
 'V09BA02'="Technetium (99mTc) medronsyre"
 'V09BA03'="Technetium (99mTc) pyrofosfat"
@@ -25,7 +25,7 @@ value $ATC_2017F
 'V09DA05'="Technetium (99mTc) galtifenin"
 'V09DB01'="Technetium (99mTc) nanokolloid"
 'V09DB02'="Technetium (99mTc) mikrokolloid"
-'V09DB03'="Technetium (99mTc) millimikrosfærer"
+'V09DB03'="Technetium (99mTc) millimikrosfÃ¦rer"
 'V09DB04'="Technetium (99mTc) tinnkolloid"
 'V09DB05'="Technetium (99mTc) svovelkolloid"
 'V09DB06'="Technetium (99mTc) rheniumsulfitt kolloid"
@@ -35,7 +35,7 @@ value $ATC_2017F
 'V09EA02'="Technetium (99mTc)teknegass"
 'V09EA03'="Technetium (99mTc) nanokolloid"
 'V09EB01'="Technetium (99mTc) makrosalb"
-'V09EB02'="Technetium (99mTc) mikrosfærer"
+'V09EB02'="Technetium (99mTc) mikrosfÃ¦rer"
 'V09EX01'="Krypton (81mKr) gass"
 'V09EX02'="Xenon (127Xe) gass"
 'V09EX03'="Xenon (133Xe) gass"

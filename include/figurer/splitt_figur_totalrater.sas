@@ -1,4 +1,4 @@
-
+ï»¿
 
 
 Proc format;
@@ -38,7 +38,7 @@ tot_ant = ant_opphold;
 run;
 
 
-/*Slå sammen en og to og tot*/
+/*SlÃ¥ sammen en og to og tot*/
 data smelt;
 set en to tot;
 format type type.;
@@ -115,21 +115,21 @@ run;
 %let mappe = rapport;
 %let bildeformat = pdf;
 
-%include "&filbane\include\figurer\fig2_eldre.sas";
+%include "&filbane/include/figurer/fig2_eldre.sas";
 
 
 %let fontst = 9;
 %let mappe = faktaark;
 %let bildeformat = pdf;
 
-%include "&filbane\include\figurer\fig2_eldre.sas";
+%include "&filbane/include/figurer/fig2_eldre.sas";
 
 
 %let fontst = 7;
 %let mappe = png;
 %let bildeformat = png;
 
-%include "&filbane\include\figurer\fig2_eldre.sas";
+%include "&filbane/include/figurer/fig2_eldre.sas";
 
 
 
@@ -144,10 +144,10 @@ hbarparm category=bohf response=rate_en_no / outlineattrs=(color=CX4C4C4C) filla
      scatter x=plass y=bohf /datalabel=Andel  datalabelpos=right markerattrs=(size=0) 
 
         datalabelattrs=(color=white  size=7);
-xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=7) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=7);
+xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 Ã¥r)" labelattrs=(color=black size=7) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=7);
 Keylegend "hp2" "hp1"/ noborder location=inside position=bottomright down=2;
 Yaxistable en_ant to_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) 
+yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=7) 
          offsetmax=0.03 offsetmin=0.03 type=discrete discreteorder=data valueattrs=(size=7) ;
 Format andel percent8. en_ant to_ant  ratesnitt_no rate_en_no nlnum8.0 ;
 run;
@@ -164,10 +164,10 @@ hbarparm category=bohf response=rate_en_no / outlineattrs=(color=CX4C4C4C) filla
      scatter x=plass y=bohf /datalabel=Andel  datalabelpos=right markerattrs=(size=0) 
 
         datalabelattrs=(color=white  size=7);
-xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=7) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=7);
+xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 Ã¥r)" labelattrs=(color=black size=7) offsetmin=0.02 OFFSETMAX=0.02  &xskala valuesformat=nlnum8.0   valueattrs=(size=7);
 Keylegend "hp2" "hp1"/ noborder location=inside position=bottomright down=2;
 Yaxistable en_ant to_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) 
+yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=7) 
          offsetmax=0.03 offsetmin=0.03 type=discrete discreteorder=data valueattrs=(size=7) ;
 Format andel percent8. en_ant to_ant  ratesnitt_no rate_en_no nlnum8.0 ;
 run;

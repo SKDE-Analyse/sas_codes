@@ -1,4 +1,4 @@
-/* compare data received at the end of June with the ones at the beginning of July */
+﻿/* compare data received at the end of June with the ones at the beginning of July */
 
 /* move the June data to NPR_DATA */
 /* save the July data in NPR18 */

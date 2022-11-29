@@ -1,4 +1,4 @@
-%Macro Avledede (innDataSett=, utDataSett=);
+ï»¿%Macro Avledede (innDataSett=, utDataSett=);
 
 
 /*!
@@ -6,7 +6,7 @@
 MACRO FOR AVLEDEDE VARIABLE
 
 ### Innhold i macroen:
-1. Retting av ugyldig fødselsår og avleding av aldersgrupper
+1. Retting av ugyldig fÃ¸dselsÃ¥r og avleding av aldersgrupper
 2. Definisjon av Alder, Ald_gr og Ald_gr5
 3. Omkoding av KJONN til ErMann
 5. DRGTypeHastegrad
@@ -20,19 +20,19 @@ Data &Utdatasett;
 set &Inndatasett;
 
 /*!
-- Retting av ugyldig fødselsår
+- Retting av ugyldig fÃ¸dselsÃ¥r
 /*
 
 /*
-I datasettet er det registrert 27 personer over 110 år, som er høyeste oppnådde alder for bosatte i Norge i denne perioden, jfr.
+I datasettet er det registrert 27 personer over 110 Ã¥r, som er hÃ¸yeste oppnÃ¥dde alder for bosatte i Norge i denne perioden, jfr.
 Wikipedias kronologiske liste over eldste levende personer i Norge siden 1964 (http:
 //no.wikipedia.org/wiki/Liste_over_Norges_eldste_personer#Kronologisk_liste_over_eldste_levende_personer_i_Norge_siden_01.01.1964).
-Høyeste alder i datasetett er 141 år. Feilaktig høy alder kan påvirke gjennomsnittsalder i små strata. Velger derfor å definere
-alder som ugyldig når oppgitt alder er høyere enn eldste person registret i Norge på dette tidspunktet.
+HÃ¸yeste alder i datasetett er 141 Ã¥r. Feilaktig hÃ¸y alder kan pÃ¥virke gjennomsnittsalder i smÃ¥ strata. Velger derfor Ã¥ definere
+alder som ugyldig nÃ¥r oppgitt alder er hÃ¸yere enn eldste person registret i Norge pÃ¥ dette tidspunktet.
 
-Satte opprinnelig et krav om at personene måtte være bosatt i Norge, ettersom det er her vi har tall for eldste nålevende personer.
-Dette innebærer imidlertid at mange opphold for personer bosatt i utlandet med alder over 110 år, og en særlig opphopning rundt
-årstallet 1899 (som muligens er feilkoding av 1999 eller missing-verdi).Velger derfor også å nullstille alder for utenlandske borgere etter
+Satte opprinnelig et krav om at personene mÃ¥tte vÃ¦re bosatt i Norge, ettersom det er her vi har tall for eldste nÃ¥levende personer.
+Dette innebÃ¦rer imidlertid at mange opphold for personer bosatt i utlandet med alder over 110 Ã¥r, og en sÃ¦rlig opphopning rundt
+Ã¥rstallet 1899 (som muligens er feilkoding av 1999 eller missing-verdi).Velger derfor ogsÃ¥ Ã¥ nullstille alder for utenlandske borgere etter
 samme regel som for norske.
 */
 
@@ -40,7 +40,7 @@ fodselsar_innrapp=fodselsar;
 fodt_mnd_org=fodt_mnd;
 
 /* JS 17/07/2019- If year and month from persondata is available and valid, then use it as primary source */
-/*10Jul2019 JS - bruker Persondata når fodselsar er ugyldig for alt, ikke bare avtspes*/
+/*10Jul2019 JS - bruker Persondata nÃ¥r fodselsar er ugyldig for alt, ikke bare avtspes*/
 tmp_alder=aar-fodtAar_DSF_190619;
 if fodtAar_DSF_190619 > 1900 and 0 <= tmp_alder <= 110 then 
 do;
@@ -49,7 +49,7 @@ do;
   then fodt_mnd=fodtMnd_DSF_190619;
 end;
 
-/* if fødselsår is still invalid */
+/* if fÃ¸dselsÃ¥r is still invalid */
 if fodselsar > aar or fodselsar=. then fodselsar=9999;
 if aar-fodselsar > 110 then fodselsar=9999;
 
@@ -58,7 +58,7 @@ if utdato lt MDY (1,1,2014) then utdato = .;
 if utdato ge MDY (1,1,2019) then utdato = .;
 
 /*!
-- Definerer Alder basert på Fodselsår
+- Definerer Alder basert pÃ¥ FodselsÃ¥r
 */
 
 Alder=aar-fodselsar;
@@ -94,7 +94,7 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
 hastegrad=.;
 if innmateHast in (1,2,3) then hastegrad=1; /*Akutt*/
 if innmateHast=4 then hastegrad=4; /*Planlagt*/
-if innmateHast=5 then hastegrad=5; /*Tilbakeføring av pasient fra annet sykehus (gjelder fra 2016)*/
+if innmateHast=5 then hastegrad=5; /*TilbakefÃ¸ring av pasient fra annet sykehus (gjelder fra 2016)*/
 
 if DRG_type='M' and hastegrad=4 /*Planlagt*/ then DRGtypeHastegrad=1;
 else if DRG_type='M' and hastegrad=1 /*Akutt*/ then DRGtypeHastegrad=2;
@@ -159,8 +159,8 @@ if Fag_navn = "plastkir" then Fag_SKDE = 17;
 if Fag_navn = "radiologi" then Fag_SKDE = 18;
 if Fag_navn = "revma" then Fag_SKDE = 19;
 if Fag_navn = "urologi" then Fag_SKDE = 20;
-if Fag_navn = "ønh" then Fag_SKDE = 21;
-if Fag_navn = "øye" then Fag_SKDE = 22;
+if Fag_navn = "Ã¸nh" then Fag_SKDE = 21;
+if Fag_navn = "Ã¸ye" then Fag_SKDE = 22;
 if Fag_navn = "onkologi" then Fag_SKDE = 23;
 if Fag_navn = "psykiatri" then Fag_SKDE = 30;
 if Fag_navn = "psykologi" then Fag_SKDE = 31;
@@ -169,7 +169,7 @@ end;
 
 if aar in (2018) or Fag_SKDE=. then do;
 /*
-Kjør makroen 'fag_skde' i filen fag_skde.sas.
+KjÃ¸r makroen 'fag_skde' i filen fag_skde.sas.
 Definerer fag_skde ut ifra institusjonID
 */
 %fag_skde;

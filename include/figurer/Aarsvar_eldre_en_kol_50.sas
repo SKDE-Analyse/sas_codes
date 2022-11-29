@@ -1,4 +1,4 @@
-
+﻿
 
 
 options locale=NB_no;
@@ -73,7 +73,7 @@ run;
 /*	Lager figur	*/
 
 %let figfil = fig1e_yngre;
-%include "&filbane\include\figurer\lag_figur.sas";
+%include "&filbane/include/figurer/lag_figur.sas";
 
 
 /*	Sletter datasett	*/

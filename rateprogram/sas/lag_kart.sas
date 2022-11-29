@@ -1,37 +1,37 @@
-%macro lag_kart;
+ï»¿%macro lag_kart;
 
 /*!
-#### Formål
+#### FormÃ¥l
 {: .no_toc}
 
 #### "Steg for steg"-beskrivelse
 {: .no_toc}
 1. 
 
-#### Avhengig av følgende datasett
+#### Avhengig av fÃ¸lgende datasett
 {: .no_toc}
 -
 
-#### Lager følgende datasett
-{: .no_toc}
-
--
-
-#### Avhengig av følgende variabler
+#### Lager fÃ¸lgende datasett
 {: .no_toc}
 
 -
 
-#### Definerer følgende variabler
-{: .no_toc}
-
-
-#### Kalles opp av følgende makroer
+#### Avhengig av fÃ¸lgende variabler
 {: .no_toc}
 
 -
 
-#### Bruker følgende makroer
+#### Definerer fÃ¸lgende variabler
+{: .no_toc}
+
+
+#### Kalles opp av fÃ¸lgende makroer
+{: .no_toc}
+
+-
+
+#### Bruker fÃ¸lgende makroer
 {: .no_toc}
 
 -
@@ -68,7 +68,7 @@ run;
 proc format;
 value RV_kart 1='Mindre enn gjennomsnitt - 1*st.avvik'
 				2='Rundt gjennomsnitt'
-				3='Større enn gjennomsnitt + 1*st.avvik';
+				3='StÃ¸rre enn gjennomsnitt + 1*st.avvik';
 run;
 
 data &Bo._Agg_rate;
@@ -92,7 +92,7 @@ legend1 ACROSS=1 POSITION=(MIDDLE RIGHT INSIDE)
 LABEL=(JUSTIFY=Left );
 
 /*%if &bo ne bydel %then %do;
-title "Kart &Bo, avvik fra snittet for landet, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
+title "Kart &Bo, avvik fra snittet for landet, &standard rater, &ratevariabel, &Min_alder - &Max_alder Ã¥r, Snitt for perioden";
 proc gmap data=&Bo._Kart map=&kart_&Bo&kartaar density=1;
 id &bo;
 choro col&antall_aar/CDEFAULT=CXFFFF99 midpoints=(1,2,3);
@@ -102,7 +102,7 @@ quit;
 Title; %end;
 
 %if &bo=bydel %then %do;
-title "Kart &Bo, avvik fra snittet for landet, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
+title "Kart &Bo, avvik fra snittet for landet, &standard rater, &ratevariabel, &Min_alder - &Max_alder Ã¥r, Snitt for perioden";
 proc gmap data=&Bo._Kart map=&kart_&Bo&kartaar anno=skdekart.oslo_txt_anno density=1;
 id &bo;
 choro col&antall_aar/CDEFAULT=CXFFFF99 midpoints=(1,2,3) anno=skdekart.oslo_hf_anno;
@@ -116,7 +116,7 @@ Title; %end;*/
 
 goptions reset=pattern;
 %if &bo=BoRHF %then %do;
-title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
+title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder Ã¥r, Snitt for perioden";
 proc gmap data=&Bo._fig map=&kart_&Bo&kartaar density=1;
 where aar=9999;
 id &bo;
@@ -127,7 +127,7 @@ quit;
 Title;
 %end;
 %if &bo ne BoRHF and &bo ne bydel %then %do;
-title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
+title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder Ã¥r, Snitt for perioden";
 proc gmap data=&Bo._fig map=&kart_&Bo&kartaar density=1;
 where aar=9999;
 id &bo;
@@ -138,7 +138,7 @@ quit;
 Title;
 %end;
 %if &bo=bydel %then %do;
-title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder år, Snitt for perioden";
+title "Kart &Bo, &standard rater, &ratevariabel, &Min_alder - &Max_alder Ã¥r, Snitt for perioden";
 proc gmap data=&Bo._fig map=&kart_&Bo&kartaar anno=skdekart.oslo_txt_anno density=1;
 where aar=9999;
 id &bo;

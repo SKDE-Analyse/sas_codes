@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
 
 Fordele de tilrettelagte variablene i to datasett
 */
@@ -14,7 +14,7 @@ Splitte datasett i to
 - Definere hvilke variabler som skal legges i *magnus*
 */
 
-/* Magnus-variabler som finnes i både sykehus-fil og avtspes-fil */
+/* Magnus-variabler som finnes i bÃ¥de sykehus-fil og avtspes-fil */
 %let magnusvar_felles = 
 inndato
 utdato
@@ -55,11 +55,11 @@ behSh
 drg
 drg_type
 HDG
-korrvekt /* Ikke fått data for 2018 */
+korrvekt /* Ikke fÃ¥tt data for 2018 */
 liggetid
 opphold_id
 polUtforende_1
-utTilstand /* Fikk ikke i første utlevering, juni 2018 */
+utTilstand /* Fikk ikke i fÃ¸rste utlevering, juni 2018 */
 intern_kons
 niva
 versjon
@@ -72,7 +72,7 @@ ncmp1-ncmp10
 ncsp1-ncsp10
 fag_skde
 Normaltariff1-Normaltariff15
-Tdiag1-Tdiag5 /* Vil mangle for alle år, bortsett fra 2014. */
+Tdiag1-Tdiag5 /* Vil mangle for alle Ã¥r, bortsett fra 2014. */
 AvtaleRHF
 SpesialistKomHN
 Komplett

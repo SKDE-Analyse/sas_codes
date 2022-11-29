@@ -1,4 +1,4 @@
-/************************************************************************************
+﻿/************************************************************************************
 Lage annoteringsdatasett for logo og kildehenvisning
 ************************************************************************************/
 data Anno;
@@ -10,7 +10,7 @@ retain function "Image";
 	x1 = 98;
 	y1 = 2;
 	width=8;
-	image = "&filbane\Stiler\logo\skde.png";
+	image = "&filbane/Stiler/logo\skde.png";
 output; /*Logo*/
 	function = "text";
 	anchor = "bottomleft";

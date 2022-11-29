@@ -1,6 +1,6 @@
-%Macro Merge_persondata (innDataSett=, utDataSett=, pid=pid);
+ï»¿%Macro Merge_persondata (innDataSett=, utDataSett=, pid=pid);
 /*!
- Kobler først på variablene emigrert og dodDato fra egen fil 
+ Kobler fÃ¸rst pÃ¥ variablene emigrert og dodDato fra egen fil 
  */
 
 
@@ -17,10 +17,10 @@ quit;
 data &utDataSett;
 set &utDataSett;
 label emigrertDato='Emigrert dato - per 19062019 (NPR)';
-label dodDato='Dødedato - per 19062019 (NPR)';
-label fodtAar_DSF_190619='Fødselsår fra f.nr. ved siste kontakt med spes.helsetjenesten';
-label fodtMnd_DSF_190619='Fødselsmåned fra f.nr. ved siste kontakt med spes.helsetjenesten';
-label kjonn_DSF_190619='Kjønn fra f.nr. ved siste kontakt med spes.helsetjenesten';
+label dodDato='DÃ¸dedato - per 19062019 (NPR)';
+label fodtAar_DSF_190619='FÃ¸dselsÃ¥r fra f.nr. ved siste kontakt med spes.helsetjenesten';
+label fodtMnd_DSF_190619='FÃ¸dselsmÃ¥ned fra f.nr. ved siste kontakt med spes.helsetjenesten';
+label kjonn_DSF_190619='KjÃ¸nn fra f.nr. ved siste kontakt med spes.helsetjenesten';
 length dodDato emigrertDato 4;
 run;
 

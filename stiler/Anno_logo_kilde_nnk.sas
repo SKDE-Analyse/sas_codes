@@ -1,4 +1,4 @@
-/************************************************************************************
+﻿/************************************************************************************
 Lage annoteringsdatasett for logo og kildehenvisning
 ************************************************************************************/
 Options locale=NB_no;
@@ -11,7 +11,7 @@ retain function "Image";
 	x1 = 98;
 	y1 = 2;
 	width=12;
-	image = "&filbane\RightCare\Bilder\SKDE_logo\SKDE_figur.jpg";
+	image = "&filbane/RightCare/Bilder/SKDE_logo/SKDE_figur.jpg";
 output; /*Logo*/
 function = "text";
 	anchor = "bottomleft";

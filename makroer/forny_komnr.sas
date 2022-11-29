@@ -1,4 +1,4 @@
-%macro forny_komnr(datasett = , aar = 2018);
+ï»¿%macro forny_komnr(datasett = , aar = 2018);
 
 /*!
 Skriv om kommunenummer til siste kommunestruktur
@@ -7,7 +7,7 @@ pr. 1 januar 2019
 ### Input
 
 - `datasett`: input/output-datasettet
-- `aar`: Hvilket år kommunestrukturen skal hentes fra. Satt til 2018.
+- `aar`: Hvilket Ã¥r kommunestrukturen skal hentes fra. Satt til 2018.
 
 */
 
@@ -19,11 +19,11 @@ set &datasett;
 %if &aar ge 1988 %then %do;
 if komnr = 717 then komnr = 701; /* Borre -> Borre */
 if komnr = 703 then komnr = 701; /* Horten -> Borre */
-if komnr = 721 then komnr = 704; /* Sem -> Tønsberg */
-if komnr = 705 then komnr = 704; /* Tønsberg -> Tønsberg */
+if komnr = 721 then komnr = 704; /* Sem -> TÃ¸nsberg */
+if komnr = 705 then komnr = 704; /* TÃ¸nsberg -> TÃ¸nsberg */
 if komnr = 727 then komnr = 709; /* Hedrum -> Larvik */
 if komnr = 726 then komnr = 709; /* Brunlanes -> Larvik */
-if komnr = 725 then komnr = 709; /* Tjølling -> Larvik */
+if komnr = 725 then komnr = 709; /* TjÃ¸lling -> Larvik */
 if komnr = 708 then komnr = 709; /* Stavern -> Larvik */
 if komnr = 707 then komnr = 709; /* Larvik -> Larvik */
 %end;
@@ -37,21 +37,21 @@ if komnr = 114 then komnr = 105; /* Varteig -> Sarpsborg */
 if komnr = 102 then komnr = 105; /* Sarpsborg -> Sarpsborg */
 if komnr = 414 then komnr = 403; /* Vang -> Hamar */
 if komnr = 401 then komnr = 403; /* Hamar -> Hamar */
-if komnr = 922 then komnr = 906; /* Hisøy -> Arendal */
-if komnr = 921 then komnr = 906; /* Tromøy -> Arendal */
-if komnr = 920 then komnr = 906; /* Øyestad -> Arendal */
+if komnr = 922 then komnr = 906; /* HisÃ¸y -> Arendal */
+if komnr = 921 then komnr = 906; /* TromÃ¸y -> Arendal */
+if komnr = 920 then komnr = 906; /* Ã˜yestad -> Arendal */
 if komnr = 918 then komnr = 906; /* Moland -> Arendal */
 if komnr = 903 then komnr = 906; /* Arendal -> Arendal */
-if komnr = 2016 then komnr = 2004; /* Sørøysund -> Hammerfest */
+if komnr = 2016 then komnr = 2004; /* SÃ¸rÃ¸ysund -> Hammerfest */
 if komnr = 2001 then komnr = 2004; /* Hammerfest -> Hammerfest */
 %end;
 /*******
  1994
 *******/
 %if &aar ge 1994 %then %do;
-if komnr = 134 then komnr = 106; /* Onsøy -> Fredrikstad */
-if komnr = 133 then komnr = 106; /* Kråkerøy -> Fredrikstad */
-if komnr = 131 then komnr = 106; /* Rolvsøy -> Fredrikstad */
+if komnr = 134 then komnr = 106; /* OnsÃ¸y -> Fredrikstad */
+if komnr = 133 then komnr = 106; /* KrÃ¥kerÃ¸y -> Fredrikstad */
+if komnr = 131 then komnr = 106; /* RolvsÃ¸y -> Fredrikstad */
 if komnr = 113 then komnr = 106; /* Borge -> Fredrikstad */
 if komnr = 103 then komnr = 106; /* Fredrikstad -> Fredrikstad */
 %end;
@@ -60,13 +60,13 @@ if komnr = 103 then komnr = 106; /* Fredrikstad -> Fredrikstad */
 *******/
 %if &aar ge 2002 %then %do;
 if komnr = 718 then komnr = 716; /* Ramnes -> Re */
-/*if komnr = 716 then komnr = 716;*/ /* Våle -> Re */
+/*if komnr = 716 then komnr = 716;*/ /* VÃ¥le -> Re */
 %end;
 /*******
  2005
 *******/
 %if &aar ge 2005 %then %do;
-if komnr = 1842 then komnr = 1804; /* Skjerstad lagt under Bodø */
+if komnr = 1842 then komnr = 1804; /* Skjerstad lagt under BodÃ¸ */
 /*if komnr = 1804 then komnr = 1804;*/
 %end;
 /*******
@@ -75,7 +75,7 @@ if komnr = 1842 then komnr = 1804; /* Skjerstad lagt under Bodø */
 %if &aar ge 2006 %then %do;
 if komnr = 1572 then komnr = 1576; /* Tustna -> Aure */
 if komnr = 1569 then komnr = 1576; /* Aure -> Aure */
-if komnr = 1159 then komnr = 1160; /* Ølen -> Vindafjord */
+if komnr = 1159 then komnr = 1160; /* Ã˜len -> Vindafjord */
 if komnr = 1154 then komnr = 1160; /* Vindafjord -> Vindafjord */
 %end;
 /*******
@@ -89,13 +89,13 @@ if komnr = 1503 then komnr = 1505; /* Kristiansund -> Kristiansund */
  2012
 *******/
 %if &aar ge 2012 %then %do;
-  if KomNr in (1723/*Mosvik*/,1729 /*Inderøy*/) then KomNr=1756 /*Inderøy */;
+  if KomNr in (1723/*Mosvik*/,1729 /*InderÃ¸y*/) then KomNr=1756 /*InderÃ¸y */;
 %end;
 /*******
  2013
 *******/
 %if &aar ge 2013 %then %do;
-  if KomNr in (1901/*Harstad*/,1915 /*Bjarkøy*/) then KomNr=1903 /*Harstad*/;
+  if KomNr in (1901/*Harstad*/,1915 /*BjarkÃ¸y*/) then KomNr=1903 /*Harstad*/;
 %end;
 /*******
  2017
@@ -111,16 +111,16 @@ if komnr = 709 then komnr = 712; /* Larvik -> Larvik */
 if komnr = 728 then komnr = 712; /* Lardal -> Larvik */
 if komnr = 702 then komnr = 715; /* Holmestrand -> Holmestrand */
 if komnr = 714 then komnr = 715; /* Hof -> Holmestrand */
-if komnr = 722 then komnr = 729; /* Nøtterøy -> Færder */
-if komnr = 723 then komnr = 729; /* Tjøme -> Færder */
+if komnr = 722 then komnr = 729; /* NÃ¸tterÃ¸y -> FÃ¦rder */
+if komnr = 723 then komnr = 729; /* TjÃ¸me -> FÃ¦rder */
 if komnr = 1624 then komnr = 5054; /* Rissa -> Indre Fosen */
 if komnr = 1718 then komnr = 5054; /* Leksvik -> Indre Fosen */
 /*
-Kun bytte av kommunenummer pga fylkessammenslåing (Trøndelag)
+Kun bytte av kommunenummer pga fylkessammenslÃ¥ing (TrÃ¸ndelag)
 */
 if komnr = 1601 then komnr = 5001;
 if bydel = 160101 then bydel = 500101; /* Midtbyen */
-if bydel = 160102 then bydel = 500102; /* Østbyen */
+if bydel = 160102 then bydel = 500102; /* Ã˜stbyen */
 if bydel = 160103 then bydel = 500103; /* Lerkendal */
 if bydel = 160104 then bydel = 500104; /* Heimdal */
 if bydel = 160199 then bydel = 500199; /* Uoppgitt bydel Trondheim */
@@ -175,7 +175,7 @@ if komnr = 1756 then komnr = 5053;
  2019
 *******/
 %if &aar ge 2019 %then %do;
-if komnr = 1567 then komnr = 5061; /* Rindal skifter fylke 1/1.2019 - Rindal inngår i St.Olavs HF */
+if komnr = 1567 then komnr = 5061; /* Rindal skifter fylke 1/1.2019 - Rindal inngÃ¥r i St.Olavs HF */
 %end;
 
 run;

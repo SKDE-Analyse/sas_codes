@@ -1,4 +1,4 @@
-Proc format;
+ï»¿Proc format;
 
 
 Value BoHF
@@ -6,15 +6,15 @@ Value BoHF
 	2='University Hospital of Northern Norway - residence'
 	3='Nordland Hospital Trust- residence'
 	4='Helgeland Hospital Trust - residence'
-	6='Nord-Trøndelag Hospital Trust - residence'
+	6='Nord-TrÃ¸ndelag Hospital Trust - residence'
 	7="St. Olavs Hospital Trust - residence"
-	8='Møre og Romsdal Hospital Trust - residence'
+	8='MÃ¸re og Romsdal Hospital Trust - residence'
 	9='Haraldsplass Diakonale Sykehus - residence'
-	10='Førde Health Trust - residence'
+	10='FÃ¸rde Health Trust - residence'
 	11='Bergen Health Trust - residence'
 	12='Fonna Health Trust - residence'
 	13='Stavanger Health Trust - residence'
-	14='Østfold Hospital Trust - residence'
+	14='Ã˜stfold Hospital Trust - residence'
 	15='Akershus University Hospital Trust - residence'
 	16='Oslo University Hospital Trust - residence'
 	17='Lovisenberg Diakonale Sykehus - residence'
@@ -23,7 +23,7 @@ Value BoHF
 	20='Vestre Viken Hospital Trust - residence'
 	21='Vestfold Hospital Trust - residence'
 	22='Telemark Hospital Trust - residence'
-	23='Sørlandet Hospital Trust - residence'
+	23='SÃ¸rlandet Hospital Trust - residence'
 	24='Abroad/Svalbard - residence'
 	30='Oslo - residence'
 	31='Inner Oslo - residence'
@@ -35,15 +35,15 @@ Value BoHF_kort
 	2='UNN'
 	3='Nordland'
 	4='Helgeland '
-	6='Nord-Trøndelag'
-	7="St. Olavs"
-	8='Møre og Romsdal'
+	6='Nord-TrÃ¸ndelag'
+	7="St. Olav"
+	8='MÃ¸re og Romsdal'
 	9='Haraldsplass'
-	10='Førde'
+	10='FÃ¸rde'
 	11='Bergen'
 	12='Fonna'
 	13='Stavanger'
-	14='Østfold'
+	14='Ã˜stfold'
 	15='Akershus'
 	16='OUS'
 	17='Lovisenberg'
@@ -52,7 +52,7 @@ Value BoHF_kort
 	20='Vestre Viken'
 	21='Vestfold'
 	22='Telemark'
-	23='Sørlandet'
+	23='SÃ¸rlandet'
 	24='Abroad/Svalbard'
 	30='Oslo'
 	31='Inner Oslo'
@@ -61,7 +61,7 @@ Value BoHF_kort
 	 
 Value Bydel
 	30101 = 'Gamle Oslo'
-	30102 = 'Grünerløkka'
+	30102 = 'GrÃ¼nerlÃ¸kka'
 	30103 = 'Sagene'
 	30104 = 'St. Hanshaugen'
 	30105 = 'Frogner'
@@ -72,31 +72,31 @@ Value Bydel
 	30110 = 'Grorud'
 	30111 = 'Stovner'
 	30112 = 'Alna'
-	30113 = 'Østensjø'
+	30113 = 'Ã˜stensjÃ¸'
 	30114 = 'Nordstrand'
-	30115 = 'Søndre Nordstrand'
+	30115 = 'SÃ¸ndre Nordstrand'
 	30116 = 'Sentrum'
 	30117 = 'Marka'
  	30199 = 'Unknown district Oslo'
-	110301 = 'Hundvåg'
+	110301 = 'HundvÃ¥g'
 	110302 = "Tasta"
-	110303 = "Eiganes/Våland"
+	110303 = "Eiganes/VÃ¥land"
 	110304 = "Madla"
 	110305 = "Storhaug"
-	110306 = "Hillevåg"
+	110306 = "HillevÃ¥g"
 	110307 = "Hinna"
 	110399 = "Unknown district Stavanger"
 	120101 = "Arna"
 	120102 = "Bergenhus"
 	120103 = "Fana"
 	120104 = "Fyllingsdalen"
-	120105 = "Laksevåg"
+	120105 = "LaksevÃ¥g"
 	120106 = "Ytrebygda"
-	120107 = "Årstad"
-	120108 = "Åsane"
+	120107 = "Ã…rstad"
+	120108 = "Ã…sane"
 	120199 = "Unknown district Bergen"
 	160101 = "Midtbyen"
-	160102 = "Østbyen"
+	160102 = "Ã˜stbyen"
 	160103 = "Lerkendal"
 	160104 = "Heimdal"
 	160199 = "Unknown district Trondheim";
@@ -104,7 +104,7 @@ Value Bydel
 Value Bydel_Oslo
 0='Not resident in Oslo'
 01='Gamle Oslo'
-02='Grünerløkka'
+02='GrÃ¼nerlÃ¸kka'
 03='Sagene'
 04='St. Hanshaugen'
 05='Frogner'
@@ -115,21 +115,21 @@ Value Bydel_Oslo
 10='Grorud'
 11='Stovner'
 12='Alna'
-13='Østensjø'
+13='Ã˜stensjÃ¸'
 14='Nordstrand'
-15='Søndre Nordstrand'
+15='SÃ¸ndre Nordstrand'
 16='Sentrum'
 17='Marka'
 99='Unknown district Oslo';
 
 value bydel_Stavanger
 0="Not resident in Stavanger"
-01 = "Hundvåg"
+01 = "HundvÃ¥g"
 02 = "Tasta"
-03 = "Eiganes/Våland"
+03 = "Eiganes/VÃ¥land"
 04 = "Madla"
 05 = "Storhaug"
-06 = "Hillevåg"
+06 = "HillevÃ¥g"
 07 = "Hinna"
 99 = "Unknown district Stavanger";
 
@@ -139,16 +139,16 @@ value bydel_Bergen
 02 = "Bergenhus"
 03 = "Fana"
 04 = "Fyllingsdalen"
-05 = "Laksevåg"
+05 = "LaksevÃ¥g"
 06 = "Ytrebygda"
-07 = "Årstad"
-08 = "Åsane"
+07 = "Ã…rstad"
+08 = "Ã…sane"
 99 = "Unknown district Bergen";
 
 value bydel_Trondheim
 0="Not resident in Trondheim"
 01 = "Midtbyen"
-02 = "Østbyen"
+02 = "Ã˜stbyen"
 03 = "Lerkendal"
 04 = "Heimdal"
 99 = "Unknown district Trondheim" ;
@@ -157,7 +157,7 @@ value bydel_Trondheim
 value bydel_alle
 
 030101 = "01 Gamle Oslo"
-030102 = "02 Grünerløkka"
+030102 = "02 GrÃ¼nerlÃ¸kka"
 030103 = "03 Sagene"
 030104 = "04 St. Hanshaugen"
 030105 = "05 Frogner"
@@ -168,19 +168,19 @@ value bydel_alle
 030110 = "10 Grorud"
 030111 = "11 Stovner"
 030112 = "12 Alna"
-030113 = "13 Østensjø"
+030113 = "13 Ã˜stensjÃ¸"
 030114 = "14 Nordstrand"
-030115 = "15 Søndre Nordstrand"
+030115 = "15 SÃ¸ndre Nordstrand"
 030116 = "16 Sentrum"
 030117 = "17 Marka"
 030199 = "Unknown district Oslo"
 
-110301 = "01 Hundvåg"
+110301 = "01 HundvÃ¥g"
 110302 = "02 Tasta"
-110303 = "03 Eiganes/Våland"
+110303 = "03 Eiganes/VÃ¥land"
 110304 = "04 Madla"
 110305 = "05 Storhaug"
-110306 = "06 Hillevåg"
+110306 = "06 HillevÃ¥g"
 110307 = "07 Hinna"
 110399 = "Unknown district Stavanger"
 
@@ -188,14 +188,14 @@ value bydel_alle
 120102 = "02 Bergenhus"
 120103 = "03 Fana"
 120104 = "04 Fyllingsdalen"
-120105 = "05 Laksevåg"
+120105 = "05 LaksevÃ¥g"
 120106 = "06 Ytrebygda"
-120107 = "07 Årstad"
-120108 = "08 Åsane"
+120107 = "07 Ã…rstad"
+120108 = "08 Ã…sane"
 120199 = "Unknown district Bergen"
 
 160101 = "01 Midtbyen"
-160102 = "02 Østbyen"
+160102 = "02 Ã˜stbyen"
 160103 = "03 Lerkendal"
 160104 = "04 Heimdal"
 160199 = "Unknown district Trondheim" ;
@@ -232,33 +232,33 @@ value BoRHF_kortest
 value BoShHN
 1='Kirkenes - residence'
 2='Hammerfest - residence' 
-3='Tromsø - residence'
+3='TromsÃ¸ - residence'
 4='Harstad - residence'
 5='Narvik - residence' 
-6='Vesterålen - residence'
+6='VesterÃ¥len - residence'
 7='Lofoten - residence' 
-8='Bodø - residence' 
+8='BodÃ¸ - residence' 
 9='Rana - residence' 
-10='Mosjøen - residence' 
-11='Sandnessjøen - residence'
+10='MosjÃ¸en - residence' 
+11='SandnessjÃ¸en - residence'
 8888='Norway';
 
 value BoShHN_kort
 1='Kirkenes'
 2='Hammerfest' 
-3='Tromsø'
+3='TromsÃ¸'
 4='Harstad'
 5='Narvik' 
-6='Vesterålen'
+6='VesterÃ¥len'
 7='Lofoten' 
-8='Bodø' 
+8='BodÃ¸' 
 9='Rana' 
-10='Mosjøen' 
-11='Sandnessjøen'
+10='MosjÃ¸en' 
+11='SandnessjÃ¸en'
 8888='Norway';
 
 value fylke
-1 ='Østfold'
+1 ='Ã˜stfold'
 2 ='Akershus'
 3 ='Oslo'
 4 ='Hedmark'
@@ -271,12 +271,12 @@ value fylke
 11='Rogaland'
 12='Hordaland'
 14='Sogn og Fjordane'
-15='Møre og Romsdal'
-16='Sør-Trøndelag'
-17='Nord-Trøndelag'
+15='MÃ¸re og Romsdal'
+16='SÃ¸r-TrÃ¸ndelag'
+17='Nord-TrÃ¸ndelag'
 18='Nordland'
 19='Troms Romsa'
-20='Finnmark Finnmárku'
+20='Finnmark FinnmÃ¡rku'
 24='Abroad/Svalbard - residence'
 8888='Norway' 
 99='Unknown/invalid municipal nr';

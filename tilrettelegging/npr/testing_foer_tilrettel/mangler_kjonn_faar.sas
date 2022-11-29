@@ -1,4 +1,4 @@
-%macro mangler_kjonn_faar(rot=);
+ï»¿%macro mangler_kjonn_faar(rot=);
 
 data &rot._kjonnfaar_missing;
 set &rot._merged;
@@ -11,8 +11,8 @@ title "&rot";
 proc tabulate data=&rot._kjonnfaar_missing;
 var Kjonn_mangler Fodselsar_mangler;
 table 
-Kjonn_mangler={LABEL="Mangler kjønn"} 
-Fodselsar_mangler={LABEL="Mangler fødselsår"},
+Kjonn_mangler={LABEL="Mangler kjÃ¸nn"} 
+Fodselsar_mangler={LABEL="Mangler fÃ¸dselsÃ¥r"},
 Sum={LABEL="Antall"};
 ;
 run;

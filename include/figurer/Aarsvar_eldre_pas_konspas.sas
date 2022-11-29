@@ -1,4 +1,4 @@
-
+ï»¿
 
 
 
@@ -77,21 +77,21 @@ run;
 %let mappe = rapport;
 %let bildeformat = pdf;
 
-%include "&filbane\include\figurer\fig1b_eldre.sas";
+%include "&filbane/include/figurer/fig1b_eldre.sas";
 
 
 %let fontst = 9;
 %let mappe = faktaark;
 %let bildeformat = pdf;
 
-%include "&filbane\include\figurer\fig1b_eldre.sas";
+%include "&filbane/include/figurer/fig1b_eldre.sas";
 
 
 %let fontst = 7;
 %let mappe = png;
 %let bildeformat = png;
 
-%include "&filbane\include\figurer\fig1b_eldre.sas";
+%include "&filbane/include/figurer/fig1b_eldre.sas";
 
 
 
@@ -106,8 +106,8 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 		scatter x=rate2015 y=BOHF / markerattrs=(symbol=Diamondfilled size=7 color=black);
 	Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
     Yaxistable &varnavn pasienter kons_pr_pas /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-	xaxis label="Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=7 ) offsetmin=0.02 valueattrs=(size=7);
+    yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
+	xaxis label="Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 Ã¥r)" labelattrs=(color=black size=7 ) offsetmin=0.02 valueattrs=(size=7);
      inset 
 		(
 	 	"(*ESC*){unicode'25cf'x}"="   2013"
@@ -128,8 +128,8 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 		scatter x=rate2015 y=BOHF / markerattrs=(symbol=Diamondfilled size=7 color=black);
 	Highlow Y=BOHF low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
     Yaxistable &varnavn pasienter kons_pr_pas /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
-	xaxis label="Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)" labelattrs=(color=black size=7 ) offsetmin=0.02 valueattrs=(size=7);
+    yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=7) type=discrete discreteorder=data valueattrs=(size=7);
+	xaxis label="Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 Ã¥r)" labelattrs=(color=black size=7 ) offsetmin=0.02 valueattrs=(size=7);
      inset 
 		(
 	 	"(*ESC*){unicode'25cf'x}"="   2013"

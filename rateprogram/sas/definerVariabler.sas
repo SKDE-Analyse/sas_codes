@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 Definere variabler
 */
 
@@ -99,9 +99,9 @@ Definere variabler
 
     %gi_verdi(variabel = Ut_sett, verdi = );
 
-    %gi_verdi(variabel = StartÅr, verdi = 2011);
+    %gi_verdi(variabel = StartÃ…r, verdi = 2011);
 
-    %gi_verdi(variabel = SluttÅr, verdi = 2015);
+    %gi_verdi(variabel = SluttÃ…r, verdi = 2015);
 
     %gi_verdi(variabel = aar, verdi = 2014);
 
@@ -111,7 +111,7 @@ Definere variabler
 
     %gi_verdi(variabel = aldjust, verdi = );
 
-    %gi_verdi(variabel = standard, verdi = Kjønns- og aldersstandardiserte);
+    %gi_verdi(variabel = standard, verdi = KjÃ¸nns- og aldersstandardiserte);
 
     %gi_verdi(variabel = kjonn, verdi = (0,1));
 

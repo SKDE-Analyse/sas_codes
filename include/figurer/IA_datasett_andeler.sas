@@ -1,4 +1,4 @@
-
+﻿
 
 
 data &varnavn._andeler_IA;

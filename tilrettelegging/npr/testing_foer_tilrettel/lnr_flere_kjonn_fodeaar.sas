@@ -1,7 +1,7 @@
-
-/*Makroen lager datasett med oversikt over de løpenr som er assosiert med mer enn ett kjønn/fødselsår, */
-/*enten fordi det er flere kjønn/fødselsår registrert i dataene eller fordi det ikke er samsvar mellom populasjonsdata og aktivitetsdata*/
-/*Må sette datasettnavn. Kan også angi løpenummervariabelnavn og dato for populasjonsdata, hvis dette er en del av variabelnavnene for popdatavariablene*/
+ï»¿
+/*Makroen lager datasett med oversikt over de lÃ¸penr som er assosiert med mer enn ett kjÃ¸nn/fÃ¸dselsÃ¥r, */
+/*enten fordi det er flere kjÃ¸nn/fÃ¸dselsÃ¥r registrert i dataene eller fordi det ikke er samsvar mellom populasjonsdata og aktivitetsdata*/
+/*MÃ¥ sette datasettnavn. Kan ogsÃ¥ angi lÃ¸penummervariabelnavn og dato for populasjonsdata, hvis dette er en del av variabelnavnene for popdatavariablene*/
 %macro lnr_flere_kjonn_fodeaar(mappe=NPR18.,dsn=, rot=, lopenr=PID,dato_freg=19062018);
 
 
@@ -14,7 +14,7 @@ run;
 %Merge_persondata(innDataSett=&rot, utDataSett=&rot._merged);
 
 
-/*Sorterer slik at dersom ett lnr er assosiert med mer enn ett kjønn eller ett fødselsår i dataene vil disse lnr få opptre i to eller flere rader, alle andre får en rad pr lnr*/
+/*Sorterer slik at dersom ett lnr er assosiert med mer enn ett kjÃ¸nn eller ett fÃ¸dselsÃ¥r i dataene vil disse lnr fÃ¥ opptre i to eller flere rader, alle andre fÃ¥r en rad pr lnr*/
 Proc sort data=&rot._merged out=&rot._dup nodupkey /*dupout=Duplicate*/;
 by &lopenr kjonn kjonn_ident&dato_freg fodselsar fodselsaar_ident&dato_freg;   
 Run;
@@ -28,20 +28,20 @@ proc sql;
    group by &lopenr;
 quit;
 
-/*Sorterer på nytt*/
+/*Sorterer pÃ¥ nytt*/
 proc sort data=&rot._dup;
 by &lopenr kjonn kjonn_ident&dato_freg fodselsar fodselsaar_ident&dato_freg;
 quit;
 
 /*Beholder bare lnr som opptrer mer enn en gang, og som dermed har registrert 
-mer enn ett kjønn og/eller mer enn ett fødeår i aktivitetsdata eller i populasjonsdata*/
+mer enn ett kjÃ¸nn og/eller mer enn ett fÃ¸deÃ¥r i aktivitetsdata eller i populasjonsdata*/
 data &rot._flere;
 set &rot._dup;
 by &lopenr kjonn kjonn_ident&dato_freg fodselsar fodselsaar_ident&dato_freg;
 where antall>1;
 run;
 
-/*Sorterer på nytt*/
+/*Sorterer pÃ¥ nytt*/
 proc sort data=&rot._dup;
 by &lopenr kjonn kjonn_ident&dato_freg fodselsar fodselsaar_ident&dato_freg;
 quit;
@@ -84,7 +84,7 @@ if Faar_min_id ne Faar_min then Faar_ulik_rapp_id=1;
 if Faar_max_id ne Faar_max then Faar_ulik_rapp_id=1;
 run;
 
-/*Datasett med de som har mer enn ett kjønn/fødselsår registrert i populasjonsdataene*/
+/*Datasett med de som har mer enn ett kjÃ¸nn/fÃ¸dselsÃ¥r registrert i populasjonsdataene*/
 data &rot._flere_popdata;
 set &rot._oversikt; 
 where Kj_id_ulik=1 or Faar_id_ulik=1;
@@ -94,7 +94,7 @@ proc sort data=&rot._flere_popdata;
 by &lopenr;
 run;
 
-/*Datasett med de hvor kjønn/fødselsår er ulikt i populasjonsdata og aktivitetsdata*/
+/*Datasett med de hvor kjÃ¸nn/fÃ¸dselsÃ¥r er ulikt i populasjonsdata og aktivitetsdata*/
 data &rot._ulik_popdata_adata;
 set &rot._oversikt;
 where Kj_ulik_rapp_id=1 or Faar_ulik_rapp_id=1;
@@ -110,12 +110,12 @@ DATA=&rot._OVERSIKT;
 	
 VAR Faar_ulik Faar_id_ulik Kj_ulik_rapp_id Faar_ulik_rapp_id Kj_ulik Kj_id_ulik unik;
 TABLE /* Row Dimension */
-Faar_ulik_rapp_id ={LABEL="Ulikt fødselsår i persondata og aktivitetsdata"}
-Kj_ulik_rapp_id ={LABEL="Ulikt kjønn i persondata og aktivitetsdata"}
-Faar_id_ulik ={LABEL="Mer enn ett fødselsår i persondata"}
-Kj_id_ulik ={LABEL="Mer enn ett kjønn i persondata"}
-Faar_ulik ={LABEL="Mer enn ett fødselsår i aktivitetsdata"} 
-Kj_ulik ={LABEL="Mer enn ett kjønn i aktivitetsdata"}
+Faar_ulik_rapp_id ={LABEL="Ulikt fÃ¸dselsÃ¥r i persondata og aktivitetsdata"}
+Kj_ulik_rapp_id ={LABEL="Ulikt kjÃ¸nn i persondata og aktivitetsdata"}
+Faar_id_ulik ={LABEL="Mer enn ett fÃ¸dselsÃ¥r i persondata"}
+Kj_id_ulik ={LABEL="Mer enn ett kjÃ¸nn i persondata"}
+Faar_ulik ={LABEL="Mer enn ett fÃ¸dselsÃ¥r i aktivitetsdata"} 
+Kj_ulik ={LABEL="Mer enn ett kjÃ¸nn i aktivitetsdata"}
 unik ={LABEL="Unike PID i aktivitetsdata"} ,
 /* Column Dimension */
 N ={LABEL="Antall"} 		;
@@ -127,7 +127,7 @@ title;
 
 %mend lnr_flere_kjonn_fodeaar;
 
-/* Makro som gir frekvenser for NPRId_reg, kjønn og fødselsår i aktivitetsdata og persondata */
+/* Makro som gir frekvenser for NPRId_reg, kjÃ¸nn og fÃ¸dselsÃ¥r i aktivitetsdata og persondata */
 
 %macro freq_akt(rot=, dsn=);
 title "&rot";

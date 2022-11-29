@@ -1,4 +1,4 @@
-/************************************************************************************
+﻿/************************************************************************************
 Lage annoteringsdatasett for logo og kildehenvisning
 ************************************************************************************/
 Options locale=NB_no;
@@ -11,7 +11,7 @@ retain function "Image";
 	x1 = 98;
 	y1 = 7;
 	width=12;
-	image = "&filbane\Stiler\logo\skde.png";
+	image = "&filbane/Stiler/logo\skde.png";
 output; /*Logo*/
 
 run;

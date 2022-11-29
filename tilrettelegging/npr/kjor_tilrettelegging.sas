@@ -1,5 +1,5 @@
-/*!
-Denne filen kjører all tilrettelegging.
+ï»¿/*!
+Denne filen kjÃ¸rer all tilrettelegging.
 
 
 */
@@ -21,27 +21,27 @@ Denne filen kjører all tilrettelegging.
 
 %mend;
 
-/* Definer tilretteleggingsåret*/
+/* Definer tilretteleggingsÃ¥ret*/
 %let taar = 19;
 
-%include "&filbane\tilrettelegging\npr\Formater.sas";
-%include "&filbane\tilrettelegging\npr\konvertering.sas";
-%include "&filbane\tilrettelegging\npr\bobehandler.sas";
-%include "&filbane\tilrettelegging\npr\behandler.sas";
-%include "&filbane\tilrettelegging\npr\avtaleRHF_spesialistkomHN.sas";
-%include "&filbane\tilrettelegging\npr\icd10.sas";
-%include "&filbane\tilrettelegging\npr\avledede.sas";
-%include "&filbane\tilrettelegging\npr\koblingsID.sas";
-%include "&filbane\tilrettelegging\npr\lablerFormater.sas";
-%include "&filbane\tilrettelegging\npr\reduser_lengde.sas";
-%include "&filbane\tilrettelegging\npr\merge_persondata.sas";
-%include "&filbane\tilrettelegging\npr\splitt_avtspes.sas";
-%include "&filbane\tilrettelegging\npr\splitte.sas";
-%include "&filbane\tilrettelegging\npr\fag_skde.sas";
+%include "&filbane/tilrettelegging/npr/Formater.sas";
+%include "&filbane/tilrettelegging/npr/konvertering.sas";
+%include "&filbane/tilrettelegging/npr/bobehandler.sas";
+%include "&filbane/tilrettelegging/npr/behandler.sas";
+%include "&filbane/tilrettelegging/npr/avtaleRHF_spesialistkomHN.sas";
+%include "&filbane/tilrettelegging/npr/icd10.sas";
+%include "&filbane/tilrettelegging/npr/avledede.sas";
+%include "&filbane/tilrettelegging/npr/koblingsID.sas";
+%include "&filbane/tilrettelegging/npr/lablerFormater.sas";
+%include "&filbane/tilrettelegging/npr/reduser_lengde.sas";
+%include "&filbane/tilrettelegging/npr/merge_persondata.sas";
+%include "&filbane/tilrettelegging/npr/splitt_avtspes.sas";
+%include "&filbane/tilrettelegging/npr/splitte.sas";
+%include "&filbane/tilrettelegging/npr/fag_skde.sas";
 
 /************************************
 *************************************
-Kjøre makroene for avdelingsopphold
+KjÃ¸re makroene for avdelingsopphold
 *************************************
 *************************************/
 
@@ -56,7 +56,7 @@ Kjøre makroene for avdelingsopphold
 
 /**********************************
 ***********************************
-Kjøre makroene for sykehusopphold
+KjÃ¸re makroene for sykehusopphold
 ***********************************
 ***********************************/
 
@@ -71,7 +71,7 @@ Kjøre makroene for sykehusopphold
 
 /*************************************
 **************************************
-Kjøre makroene for avtalespesialister
+KjÃ¸re makroene for avtalespesialister
 **************************************
 **************************************/
 

@@ -1,4 +1,4 @@
-%macro Persondata_omkod_konv (InnData=, UtData=);
+﻿%macro Persondata_omkod_konv (InnData=, UtData=);
 
 /* Emigrert_dato og dodDato hentet ut fra Det sentrale folkeregister juni 2018 (19062018?) */ 
 

@@ -1,4 +1,4 @@
-%Macro Konvertering (Inndatasett=, Utdatasett=);
+ï»¿%Macro Konvertering (Inndatasett=, Utdatasett=);
 
 /*!
 
@@ -24,13 +24,14 @@ drop oppholdstype;
 */
 
 /*!
-- Lager `pid` fra `LNr` (løpenummer) og sletter `LNr`
+- Lager `pid` fra `LNr` (lÃ¸penummer) og sletter `LNr`
 */
+/*
 PID=LNr+0;
 Drop LNr;
-
+*/
 /*!
-- Gjør `RehabType` numerisk.
+- GjÃ¸r `RehabType` numerisk.
 */
 %if &somatikk ne 0 %then %do;
 Rehab=RehabType+0;
@@ -39,7 +40,7 @@ rename Rehab=RehabType;
 %end;
 
 /*!
-- Gjør `HDG` numerisk.
+- GjÃ¸r `HDG` numerisk.
 */
 %if &somatikk ne 0 %then %do;
 HDG_num=HDG+0;
@@ -48,7 +49,7 @@ rename HDG_num=HDG;
 %end;
 
 /*!
-- Generere `komNr` fra `KomNrHjem2` og `bydel_innr` fra `bydel`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
+- Generere `komNr` fra `KomNrHjem2` og `bydel_innr` fra `bydel`. Dropper sÃ¥ `bydel` slik at den ikke ligger pÃ¥ fila nÃ¥r ny variabel kalt `bydel` skal genereres i neste makro
 */
 KomNr=KomNrHjem2+0;
 bydel_innr=bydel;
@@ -62,6 +63,7 @@ drop bydel;
 /*!
 - Konvertere `inndato` og `utdato` til datoer
 */
+
 	Inndato1=Input(Inndato,Anydtdte10.);
 	Utdato1=Input(Utdato,Anydtdte10.);
 
@@ -262,7 +264,7 @@ if aar in  (2014,2018) then do;
 end;
 
 /*
-- Episodefag manglet ledende null for avtalespesialister enkelte år.
+- Episodefag manglet ledende null for avtalespesialister enkelte Ã¥r.
 */
 if length(compress(episodefag)) = 2 then episodefag = compress("0"||episodefag);
 if episodefag in ("0","950") then episodefag=999;
@@ -272,7 +274,7 @@ if episodefag in ("0","950") then episodefag=999;
 
 run;
 
-/* For avtalespesialister: Renavner utDato til utDato_org for å ta vare på innrapportert utDato og setter utDato = innDato. */
+/* For avtalespesialister: Renavner utDato til utDato_org for Ã¥ ta vare pÃ¥ innrapportert utDato og setter utDato = innDato. */
 %if &avtspes ne 0 %then %do;
 Data &Utdatasett;
 Set &Utdatasett;
@@ -285,9 +287,9 @@ Data &Utdatasett;
 Set &Utdatasett;
 
 utdato=.;
-utDato=innDato; /* På grunn av feil i innrapportert utDato settes utDato for avtalespesialister til innDato. */
+utDato=innDato; /* PÃ¥ grunn av feil i innrapportert utDato settes utDato for avtalespesialister til innDato. */
 
-if inndato lt MDY (1,1,2014) or inndato ge MDY (1,1,2019) then delete; /*10Jul2019 JS - Inndato før 1.1.2014 og etter 31.12.2018 bør slettes.*/
+if inndato lt MDY (1,1,2014) or inndato ge MDY (1,1,2019) then delete; /*10Jul2019 JS - Inndato fÃ¸r 1.1.2014 og etter 31.12.2018 bÃ¸r slettes.*/
 aar=year(inndato);
 run; 
 %end;

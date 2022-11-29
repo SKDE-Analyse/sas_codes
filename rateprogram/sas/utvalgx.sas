@@ -1,68 +1,68 @@
-
+ï»¿
 %macro utvalgx;
 
 /*!
-#### Formål
+#### FormÃ¥l
 
 - Lager datasettet `utvalgX`
-   - Aggreregerer opp pasienter ut fra inkluderingskriteriene (hvilke år, alder, etc.)
+   - Aggreregerer opp pasienter ut fra inkluderingskriteriene (hvilke Ã¥r, alder, etc.)
    - Henter inn antall innbyggere
-   - Definerer opp boområder
+   - Definerer opp boomrÃ¥der
 
 #### "Steg for steg"-beskrivelse
 
-1. Definerer Periode, År1 etc.
+1. Definerer Periode, Ã…r1 etc.
 2. Lager datasettet utvalgX av &Ratefil
    - RV = &RV_variabelnavn
    - keep RV ermann aar alder komnr bydel
    - alder mellom 106-115 defineres til 105
-   - kjører aldjust (ermann = 1, hvis ikke tom)
+   - kjÃ¸rer aldjust (ermann = 1, hvis ikke tom)
 3. Hvis vis_ekskludering = 1 -> lage tabeller over ekskluderte data i datasett
    - Dette burde flyttes ut i egen makro
 4. Aggregerer RV (i `utvalgX`)
-   - grupperer på `aar, KomNr, bydel, Alder, ErMann`. 
+   - grupperer pÃ¥ `aar, KomNr, bydel, Alder, ErMann`. 
    - ekskluderer data hvis aar utenfor &periode, alder utenfor &aldersspenn, komnr > 2030, og ermann ikke i &kjonn
 5. Lese inn innbyggerfil
    - aggregering av innbyggere, gruppert som over 
    - samme ekskludering som over
-   - legger så innbyggere til `utvalgX`
+   - legger sÃ¥ innbyggere til `utvalgX`
 6. Definere alderskategorier
-   - kjør makro [valg_kategorier](#valg_kategorier)
-   - kjører `proc means` 
-7. Definerer boområder
+   - kjÃ¸r makro [valg_kategorier](#valg_kategorier)
+   - kjÃ¸rer `proc means` 
+7. Definerer boomrÃ¥der
 8. Beregner andeler
    - Lager datasett `Andel`, som brukes i justering i omraade-makroen.
 
    
-#### Avhengig av følgende variabler
+#### Avhengig av fÃ¸lgende variabler
 
-- Ratefil (navnet på det aggregerte datasettet)
-- RV_variabelnavn (variablen det skal beregnes rater på)
+- Ratefil (navnet pÃ¥ det aggregerte datasettet)
+- RV_variabelnavn (variablen det skal beregnes rater pÃ¥)
 - vis_ekskludering (=1 hvis man vil ha ut antall pasienter som er ekskludert)
-- innbyggerfil (navnet på innbyggerfila)
+- innbyggerfil (navnet pÃ¥ innbyggerfila)
 - boomraadeN (?)
 - boomraade (?)
 
-#### Definerer følgende variabler
+#### Definerer fÃ¸lgende variabler
 
 Sjekk hvilke som brukes av andre makroer og hvilke som kun er interne.
 
 - aarsvarfigur=1
-- Periode=(&StartÅr:&SluttÅr)
-- Antall_aar=%sysevalf(&SluttÅr-&StartÅr+2)
-- År1 etc.
+- Periode=(&StartÃ…r:&SluttÃ…r)
+- Antall_aar=%sysevalf(&SluttÃ…r-&StartÃ…r+2)
+- Ã…r1 etc.
 
 
-#### Kalles opp av følgende makroer
+#### Kalles opp av fÃ¸lgende makroer
 
 Ingen
 
-#### Bruker følgende makroer
+#### Bruker fÃ¸lgende makroer
 
 - [valg_kategorier](#valg_kategorier)
 - Boomraader (fra makro-mappen)
 
-#### Lager følgende datasett
+#### Lager fÃ¸lgende datasett
 
 - utvalgx (slettes)
 - innb_aar (slettes)
@@ -72,7 +72,7 @@ Ingen
 
 #### Annet
 
-Første makro som kjøres direkte i rateprogrammet
+FÃ¸rste makro som kjÃ¸res direkte i rateprogrammet
 
 */
 
@@ -89,12 +89,12 @@ Første makro som kjøres direkte i rateprogrammet
 options locale=NB_NO;
 
 /*
-Definere komnr og bydel basert på bohf hvis datasettet mangler komnr og bydel
+Definere komnr og bydel basert pÃ¥ bohf hvis datasettet mangler komnr og bydel
 */
 %if %sysevalf(%superq(manglerKomnr)=,boolean) %then %let manglerKomnr = 0;
 %if &manglerKomnr ne 0 %then %do;
 	data tmp1utvalgX;
-	set &Ratefil; /*HER MÅ DET AGGREGERTE RATEGRUNNLAGSSETTET SETTES INN */
+	set &Ratefil; /*HER MÃ… DET AGGREGERTE RATEGRUNNLAGSSETTET SETTES INN */
     run;
     
     %definere_Komnr(datasett = tmp1utvalgX);
@@ -104,7 +104,7 @@ Definere komnr og bydel basert på bohf hvis datasettet mangler komnr og bydel
 %end;
 %else %do;
 	data tmp1utvalgX;
-	set &Ratefil; /*HER MÅ DET AGGREGERTE RATEGRUNNLAGSSETTET SETTES INN */
+	set &Ratefil; /*HER MÃ… DET AGGREGERTE RATEGRUNNLAGSSETTET SETTES INN */
 %end;
 		RV=&RV_variabelnavn; /* Definerer RV som ratevariabel */
 	keep RV ermann aar alder komnr bydel;
@@ -198,7 +198,7 @@ run;
 	data alderdef;
 	set alderdef;
 	aldernytall=catx('-',put(min,3.),put(max,3.));
-	ar='år';
+	ar='Ã¥r';
 	alderny=catx(' ',aldernytall,ar);
 	run;
 
@@ -232,14 +232,14 @@ run;
    
 	data RV;
 	set RV;
-	/* Definere boområder */
+	/* Definere boomrÃ¥der */
 	%Boomraader(haraldsplass = &haraldsplass, indreOslo = &indreOslo, bydel = &bydel, barn = &barn);
 	if BOHF in (24,99) then BoRHF=.; /*kaster ut Utlandet og Svalbard*/
 	if BoRHF in (1:4) then Norge=1;
 format borhf borhf_kort. bohf bohf_kort. boshhn boshhn_kort. fylke fylke. komnr komnr. bydel bydel. ermann ermann.;
 	run;
 
-	/* beregne hvilken innbyggerandel (av den nasjonale befolkningen) som befinner seg i hver kjønns-og alderskategori*/
+	/* beregne hvilken innbyggerandel (av den nasjonale befolkningen) som befinner seg i hver kjÃ¸nns-og alderskategori*/
 	proc sql;
 	    create table tmpAndel as
 	    select distinct aar, alderny, ErMann, sum(innbyggere) as innbyggere 

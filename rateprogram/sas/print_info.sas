@@ -1,4 +1,4 @@
-%macro print_info();
+Ôªø%macro print_info();
 
 options nodate;
 data _null_;
@@ -11,10 +11,10 @@ title "Utskrift fra rateprogram (&datenow, &timenow)";
 ods text="Filbane:      '&filbane.'";
 ods text="Ratefil:      '&Ratefil.'";
 ods text="Ratevariabel: '&RV_variabelnavn.'";
-ods text="F¯rste del av datasettnavn: '&forbruksmal._'";
+ods text="F√∏rste del av datasettnavn: '&forbruksmal._'";
 ods text=" ";
 ods text=" ";
-ods text="Periode: &Start≈r - &Slutt≈r";
+ods text="Periode: &Start√Ör - &Slutt√Ör";
 ods text="Aldersspenn: '&aldersspenn.'";
 ods text="Alderskategorier: '&Alderskategorier.'";
 

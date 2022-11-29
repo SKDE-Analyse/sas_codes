@@ -1,8 +1,8 @@
-%macro splitt_avtspes(datasett =, utsett = );
+﻿%macro splitt_avtspes(datasett =, utsett = );
 
 /*!
 Ta ut konsultasjoner der kontakt er ulik 4 eller 5 og legg i egen fil,
-siden vi normalt ikke skal analysere p� disse kontaktene
+siden vi normalt ikke skal analysere på disse kontaktene
 */
 
 %if &avtspes ne 0 %then %do;

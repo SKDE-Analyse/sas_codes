@@ -1,5 +1,5 @@
-/*
-Årsvariasjonfigur, ett år
+ï»¿/*
+Ã…rsvariasjonfigur, ett Ã¥r
 */
 
 %let soylebredde = 0.8;
@@ -13,8 +13,8 @@ proc sgplot data=&varnavn._SAMLET noborder noautolegend sganno=anno pad=(Bottom=
 				
 	scatter x=plassering y=bohf /datalabel=Mistext datalabelpos=right markerattrs=(size=0)  datalabelattrs=(color=black size=7);
     Yaxistable &varnavn &kol_to /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst) type=discrete discreteorder=data valueattrs=(size=&fontst);
-	xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 år)"   labelattrs=(color=black size=&fontst ) &xskala offsetmin=0.02 valueattrs=(size=&fontst);
+    yaxis display=(noticks noline) label='OpptaksomrÃ¥de' labelattrs=(size=&fontst) type=discrete discreteorder=data valueattrs=(size=&fontst);
+	xaxis label=" Antall pr. 1 000 innbyggere ((*ESC*){unicode'2265'x}75 Ã¥r)"   labelattrs=(color=black size=&fontst ) &xskala offsetmin=0.02 valueattrs=(size=&fontst);
 run;
 ods listing close; ods graphics off;
 

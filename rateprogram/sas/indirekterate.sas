@@ -1,4 +1,4 @@
-/*
+﻿/*
 This file contains 3 macros: rate_pr_year, rate_all_year, and indirekterate.
 
 rate_pr_year aggregates files to calculate the indirect rates for each year on the file

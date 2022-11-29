@@ -1,4 +1,4 @@
-/* Inkluderer makroer: lagre_dataNorge, lagre_dataN, lagre_dataHN */
+﻿/* Inkluderer makroer: lagre_dataNorge, lagre_dataN, lagre_dataHN */
 
 %macro lagre_dataNorge;
 /*!

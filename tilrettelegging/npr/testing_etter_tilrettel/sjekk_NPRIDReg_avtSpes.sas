@@ -1,4 +1,4 @@
-/*Makroen lager en tabell for å sjekke NPIdReg-variabelen mot personopplysningsdata*/
+ï»¿/*Makroen lager en tabell for Ã¥ sjekke NPIdReg-variabelen mot personopplysningsdata*/
 
 %Macro sjekk_NPRIdReg_avtSpes(mappe=, rot=);
 
@@ -6,17 +6,17 @@ data Test_&aar;
   set &mappe.&rot.&aar;
 run;
 
-%include "&filbane.\makroer\VarFraParvus.sas";
+%include "&filbane/makroer/VarFraParvus.sas";
 %VarFraParvus(dsnMagnus=Test_&aar, var_som=,var_avtspes=kjonn_ident19062018 fodselsaar_ident19062018);
 
 
 proc format;
    value NPRID_REG
-      1 = 'Fødselsnummer/ D-nummer er ok.'  
-      2 = 'Ulikt kjønn i fødselsnummer/ D-nummer og i aktivitetsdata.'  
-      3 = 'Ulikt fødselsår i fødselsnummer/ D-nummer og i aktivitetsdata.'  
-      4 = 'Fødselsnummer/ D-nummer mangler.'  
-      5 = 'Dødsdato i Det sentrale folkeregister er før inndato.' ;
+      1 = 'FÃ¸dselsnummer/ D-nummer er ok.'  
+      2 = 'Ulikt kjÃ¸nn i fÃ¸dselsnummer/ D-nummer og i aktivitetsdata.'  
+      3 = 'Ulikt fÃ¸dselsÃ¥r i fÃ¸dselsnummer/ D-nummer og i aktivitetsdata.'  
+      4 = 'FÃ¸dselsnummer/ D-nummer mangler.'  
+      5 = 'DÃ¸dsdato i Det sentrale folkeregister er fÃ¸r inndato.' ;
 quit;
 
 data Test_&aar;

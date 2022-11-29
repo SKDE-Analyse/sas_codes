@@ -1,4 +1,4 @@
-/************************************************************************************
+﻿/************************************************************************************
 Lage annoteringsdatasett for logo og kildehenvisning
 ************************************************************************************/
 Options locale=NB_no;
@@ -11,7 +11,7 @@ retain function "Image";
 	x1 = 98;
 	y1 = 2;
 	width=12;
-	image = "&filbane\Stiler\logo\skde.png";
+	image = "&filbane/Stiler/logo\skde.png";
 output; /*Logo*/
 retain function "Image"; 
 	x1space="graphpercent"; 
@@ -20,7 +20,7 @@ retain function "Image";
 	x1 = 2;
 	y1 = 2;
 	width=40;
-	image = "&filbane\Stiler\logo\NNK.jpg";
+	image = "&filbane/Stiler/logo\NNK.jpg";
 output; /*Logo NNK*/
 	function = "text";
 	anchor = "bottomleft";

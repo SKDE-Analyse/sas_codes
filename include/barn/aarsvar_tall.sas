@@ -1,4 +1,4 @@
-data frank.B_A_&IA._&forbruksmal_fa;
+﻿data frank.B_A_&IA._&forbruksmal_fa;
 set Bohf_agg_rate;
 length utvalg $32.;
 utvalg="&IA._&forbruksmal_fa";

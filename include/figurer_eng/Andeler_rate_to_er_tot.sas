@@ -1,4 +1,4 @@
-
+﻿
 
 Proc format;
 value type
@@ -26,7 +26,7 @@ run;
 
 
 
-/*Sl� sammen en og to*/
+/*Slå sammen en og to*/
 data &navn_en._andeler;
 set en to;
 format type type.;

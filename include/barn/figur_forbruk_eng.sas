@@ -1,4 +1,4 @@
-Data &bo&fig&RV_fa;
+﻿Data &bo&fig&RV_fa;
 Set &bo&fig&RV_fa;
 Label Innbyggere="Inhabitants" Opphold="Contacts";
 run;

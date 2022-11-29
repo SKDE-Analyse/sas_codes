@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 Janice Shu 02/02/2018
 
 Made the format for the numbers into macro so that tabell_1 can output both number format depending on what "tallformat" specifies. (NLnum or Excel)
@@ -14,7 +14,7 @@ Created new macro, lag_tabeller, to make the appropriate tabeller based on "vis_
 
 /*!
 
-Makro for å lage tabell over rater, kontakter og innbyggere i de ulike boområder, fordelt på år.
+Makro for Ã¥ lage tabell over rater, kontakter og innbyggere i de ulike boomrÃ¥der, fordelt pÃ¥ Ã¥r.
 
 */
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 0;
@@ -55,7 +55,7 @@ PROC TABULATE DATA=&Bo._Agg_Rate out=&bo._Fig;
 %end;
 	/BOX={LABEL="&Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none';
 %if &silent=0 %then %do;
-	Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+	Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder Ã¥r, &Bo";
 run;
 %end;
 %else %do;
@@ -67,7 +67,7 @@ ods select all;
 data HNsnitt;
 set &bo._Fig;
 keep aar &rate_var._sum;
-where aar=9999 /*and BoRHF=1*/;/*MÅ FIXES*/
+where aar=9999 /*and BoRHF=1*/;/*MÃ… FIXES*/
 run;
 %end;
 
@@ -79,7 +79,7 @@ run;
 %macro Tabell_CV;
 /*!
 
-Makro for å lage tabell med
+Makro for Ã¥ lage tabell med
 - variasjonskoeffisient
 - systematisk variasjonskoeffisient
 - OBV
@@ -103,7 +103,7 @@ DATA=&Bo._Agg_CV Format=&talltabformat..3;
 	TABLE aar='',
 	mean=' '*(CV*Format=&talltabformat..3 SCV*Format=&talltabformat..3 OBV*Format=&talltabformat..3 RCV*Format=&talltabformat..3)
 	/BOX={Label="CV - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
-		Title "Variasjonsmål &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+		Title "VariasjonsmÃ¥l &ratevariabel, &Min_alder - &Max_alder Ã¥r, &Bo";
 RUN;
 %end;
 
@@ -118,9 +118,9 @@ Makro som lager en tabell med
 - direkte justert rate
 - indirekte juster rate
 - Standardavvik
-- Nedre og øvre konfidensinterval
+- Nedre og Ã¸vre konfidensinterval
 
-Kjøres hvis 
+KjÃ¸res hvis 
 
 ```
 %Let Vis_Tabeller=3;
@@ -153,9 +153,9 @@ PROC TABULATE DATA=&Bo._Agg_Rate ;
 		RV_just_rate='Dir.just.rate'*Format=&talltabformat..&rateformat 
         RV_ijust_rate='Ind.just.rate'*Format=&talltabformat..&rateformat 
         SDJUSTRate='Std.avvik'*Format=&talltabformat..3
-		KI_N_J='Nedre KI'*Format=&talltabformat..3 KI_O_J='Øvre KI'*Format=&talltabformat..3 )  
+		KI_N_J='Nedre KI'*Format=&talltabformat..3 KI_O_J='Ã˜vre KI'*Format=&talltabformat..3 )  
 		/BOX={LABEL="Rater - &Bo" STYLE={JUST=LEFT VJUST=BOTTOM}} MISSTEXT='none'	;	;
-		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder år, &Bo";
+		Title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &Min_alder - &Max_alder Ã¥r, &Bo";
 RUN;
 %if &silent ne 0 %then %do;
 ods select all;

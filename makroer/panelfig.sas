@@ -1,4 +1,4 @@
-%macro panelfig(aar1=2013, aar2=2014, aar3=2015, aar4=2016, aar5=2017);
+﻿%macro panelfig(aar1=2013, aar2=2014, aar3=2015, aar4=2016, aar5=2017);
 
 data norge;
   set &tema.&teknikk._dp_tot_bohf_t(keep=rate20: bohf);
@@ -56,7 +56,7 @@ series x=aar y=nrate /lineattrs=(color=darkgrey pattern=2) name="norge" legendla
 scatter X = aar Y = RV_just_rate / filledoutlinedmarkers markerfillattrs=(color=black) markeroutlineattrs=(color=black)
    markerattrs=(symbol=circlefilled);
 keylegend "norge" / noborder position=top;
-colaxis label='�r' valueattrs=(size=5) labelattrs=(size=8 weight=bold);
+colaxis label='År' valueattrs=(size=5) labelattrs=(size=8 weight=bold);
 rowaxis label="&aksetekst" valueattrs=(size=6) labelattrs=(size=8 weight=bold);
 RUN; ods listing close;
 

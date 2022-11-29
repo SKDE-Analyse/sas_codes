@@ -1,4 +1,4 @@
-/*
+﻿/*
 Andel indikikator
 */
 
@@ -14,7 +14,7 @@ proc sgplot data=&dsn_var noborder noautolegend sganno=anno pad=(Bottom=7%);
 	  	scatter y=BoHf x=posisjon / datalabel=andel datalabelpos=left markerattrs=(size=0) name="sc" 
           datalabelattrs=(color=black WEIGHT=BOLD size=7);
      	Yaxistable en_ant tot_ant /Label location=inside position=right labelpos=bottom valueattrs=(size=7 family=arial) labelattrs=(size=7);
-    	yaxis display=(noticks noline) label='Opptaksomr�de' labelattrs=(size=&fontst) type=discrete discreteorder=data valueattrs=(size=&fontst);
+    	yaxis display=(noticks noline) label='Opptaksområde' labelattrs=(size=&fontst) type=discrete discreteorder=data valueattrs=(size=&fontst);
   		xaxis label="Andel"   labelattrs=(size=&fontst) offsetmin=0.02 valueattrs=(size=&fontst);
      Format andel percent8.0 en_ant tot_ant nlnum8.0 ;		
 run;

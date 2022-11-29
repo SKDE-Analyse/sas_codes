@@ -1,4 +1,4 @@
-proc sgplot data=Figurgrunnlag noborder noautolegend sganno=annoarsvar pad=(Bottom=5%) ;
+﻿proc sgplot data=Figurgrunnlag noborder noautolegend sganno=annoarsvar pad=(Bottom=5%) ;
      highlow y=&bo low=numlow high=numhigh / /*highlabel=totalrate*/ labelattrs=(Color=Black) group=Type type=bar name="hl";
      Refline NorgeTot / axis=x lineattrs=(Thickness=.5 color=Black pattern=2) name="Ref";
      scatter y=&bo x=labelpos / datalabel=labelValue datalabelpos=center markerattrs=(size=0) name="sc" 
