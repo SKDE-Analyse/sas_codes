@@ -1,10 +1,10 @@
-/* This is a macro to replace the old Episode of Care */
+ï»¿/* This is a macro to replace the old Episode of Care */
 /* It takes the aggrshoppID_Lnr from NPR as a starting point, 
-   and adds on overføring to other sykehus within a specified time (defult 8 hours) */
+   and adds on overfÃ¸ring to other sykehus within a specified time (defult 8 hours) */
    
 %macro sykehusopphold(
   dsn=, 
-  overforing_tid=28800 /*tid mellom opphold sammenslåing*/, 
+  overforing_tid=28800 /*tid mellom opphold sammenslÃ¥ing*/, 
   forste_hastegrad = 1, 
   behold_datotid=0,
   nulle_liggedogn = 0,
@@ -12,8 +12,8 @@
 /*!
 
  ### Beskrivelse
-Makro for å markere opphold som regnes som en sykehusepisode. 
-Inndatasettet må inneholde pid, inndato, utdato, inntid, uttid, aar, alder, aggrshoppid_lnr, aktivitetskategori3, hastegrad, uttilstand, behsh
+Makro for Ã¥ markere opphold som regnes som en sykehusepisode. 
+Inndatasettet mÃ¥ inneholde pid, inndato, utdato, inntid, uttid, aar, alder, aggrshoppid_lnr, aktivitetskategori3, hastegrad, uttilstand, behsh
 
 ```
 %sykehusopphold(dsn=, overforing_tid=28800, forste_hastegrad=1, behold_datotid=0, nulle_liggedogn=0, minaar=0);
@@ -21,35 +21,35 @@ Inndatasettet må inneholde pid, inndato, utdato, inntid, uttid, aar, alder, aggr
 ### Parametre
 
 ### Input
-- `dsn`: datasett man utfører analysen på 
-- `overforing_tid` (=28800): tidskrav i sekunder (default 8 timer) for opphold med tidsdifferanse - må være et tall
-- `forste_hastegrad` (=1): Hastegrad for første kontakt hvis ulik 0. Hvis 0: hastegrad for første døgnopphold
-- `behold_datotid` (=0): Hvis ulik 0, så beholdes disse 
-- `nulle_liggedogn` (=0): Hvis forskjellig fra null, så settes antall SHO_liggedogn til null hvis opphold er <8 timer
-- `minaar` (=0): dersom man ønsker å bruke første opphold for å definere SHO_Aar
+- `dsn`: datasett man utfÃ¸rer analysen pÃ¥ 
+- `overforing_tid` (=28800): tidskrav i sekunder (default 8 timer) for opphold med tidsdifferanse - mÃ¥ vÃ¦re et tall
+- `forste_hastegrad` (=1): Hastegrad for fÃ¸rste kontakt hvis ulik 0. Hvis 0: hastegrad for fÃ¸rste dÃ¸gnopphold
+- `behold_datotid` (=0): Hvis ulik 0, sÃ¥ beholdes disse 
+- `nulle_liggedogn` (=0): Hvis forskjellig fra null, sÃ¥ settes antall SHO_liggedogn til null hvis opphold er <8 timer
+- `minaar` (=0): dersom man Ã¸nsker Ã¥ bruke fÃ¸rste opphold for Ã¥ definere SHO_Aar
   
 Episode of care omfatter da:
-- Dersom inndatotid på nytt opphold er før utdatotid på forrige opphold
-- Dersom nytt opphold er innen *x* sekunder fra utdatotid på forrige opphold
+- Dersom inndatotid pÃ¥ nytt opphold er fÃ¸r utdatotid pÃ¥ forrige opphold
+- Dersom nytt opphold er innen *x* sekunder fra utdatotid pÃ¥ forrige opphold
 
 
  
 ### Output
 Makroen lager 12 (eventuelt 14) nye variabler:
-1.  `SHO_nr_pid`: Nummererte SHO-opphold pr pid, dersom SHO består av flere opphold har disse samme nummer
+1.  `SHO_nr_pid`: Nummererte SHO-opphold pr pid, dersom SHO bestÃ¥r av flere opphold har disse samme nummer
 2.  `SHO_id`: Unik ID per sykehusopphold (pid+SHO_nr_pid)
 3.  `SHO_Intern_nr`: Nummerer oppholdene innenfor hver SHO for hver pid
 4.  `SHO_Antall_i_SHO`: Antall opphold i SHO
-5.  `SHO_inndato`: inndato på første opphold i SHO
-6.  `SHO_utdato`: utdato på siste opphold i SHO
-7.  [eventuelt] `SHO_inndatotid`: inntid (dato og tidspunkt) på første opphold i SHO (hvis behold_datotid ulik 0))
-8.  [eventuelt] `SHO_utdatotid`: uttid (dato og tidspunkt) på siste opphold i SHO (hvis behold_datotid ulik 0))
-9.  `SHO_aar`: år ved utskriving - alternativt minaar=1 (år ved første opphold)
-10. `SHO_liggetid`: tidsdifferanse mellom inndatotid på det første oppholdet og utdatotid på det siste oppholdet i SHO
-11. `SHO_aktivitetskategori3`: 1 hvis ett av oppholdene er døgn, eller 2 hvis ett av oppholdene er dag (og ingen døgn), eller 3 hvis oppholdene er kun poli
+5.  `SHO_inndato`: inndato pÃ¥ fÃ¸rste opphold i SHO
+6.  `SHO_utdato`: utdato pÃ¥ siste opphold i SHO
+7.  [eventuelt] `SHO_inndatotid`: inntid (dato og tidspunkt) pÃ¥ fÃ¸rste opphold i SHO (hvis behold_datotid ulik 0))
+8.  [eventuelt] `SHO_utdatotid`: uttid (dato og tidspunkt) pÃ¥ siste opphold i SHO (hvis behold_datotid ulik 0))
+9.  `SHO_aar`: Ã¥r ved utskriving - alternativt minaar=1 (Ã¥r ved fÃ¸rste opphold)
+10. `SHO_liggetid`: tidsdifferanse mellom inndatotid pÃ¥ det fÃ¸rste oppholdet og utdatotid pÃ¥ det siste oppholdet i SHO
+11. `SHO_aktivitetskategori3`: 1 hvis ett av oppholdene er dÃ¸gn, eller 2 hvis ett av oppholdene er dag (og ingen dÃ¸gn), eller 3 hvis oppholdene er kun poli
 12. `SHO_hastegrad`: 1 hvis ett av oppholdene er akutt, 4 ellers
-13. `SHO_forste_hastegrad`: Hastegrad for første avdelingsopphold. 1 for akutt, 4 for elektiv
-14. `SHO_uttilstand`: max(uttilstand) for oppholdene i en SHO ("som død" hvis ett av oppholdene er "som død")
+13. `SHO_forste_hastegrad`: Hastegrad for fÃ¸rste avdelingsopphold. 1 for akutt, 4 for elektiv
+14. `SHO_uttilstand`: max(uttilstand) for oppholdene i en SHO ("som dÃ¸d" hvis ett av oppholdene er "som dÃ¸d")
 
 
 ### Endringslogg
@@ -114,7 +114,7 @@ proc sort data=&dsn;
   by aktivitetskategori3 pid inndatotid utdatotid;
 run;
 
-/*IDENTIFISERE OVERFØRINGER */
+/*IDENTIFISERE OVERFÃ˜RINGER */
 /* #### improvement for the future.  keep ony necessary variables when making the first tmp dataset */
 
 data Overforinger;
@@ -129,7 +129,7 @@ retain flag;
   lag_aktkat3=lag(aktivitetskategori3);
   lag_hastegrad=lag(hastegrad);
 
-  /*overføring på døgnopphold*/
+  /*overfÃ¸ring pÃ¥ dÃ¸gnopphold*/
   if aktivitetskategori3=1 then do;
 
 	if (PID=LAG_PID) then do;
@@ -138,7 +138,7 @@ retain flag;
 		Dager_mellom=InnDato-LAG_UtDato;
 
 		/* Beregne tidsdifferansen mellom opphold */
-		Sek_mellom=inndatotid-lag_utdatotid; /* Tidsdifferanse (sekunder) mellom inndatotid på dette oppholdet og utdatotid på forrige opphold */
+		Sek_mellom=inndatotid-lag_utdatotid; /* Tidsdifferanse (sekunder) mellom inndatotid pÃ¥ dette oppholdet og utdatotid pÃ¥ forrige opphold */
 
 		/* increase flag value if there is a longer break between opphold */
     	if Dager_mellom>1 then do; 
@@ -156,8 +156,8 @@ retain flag;
   end;
 run;
 
-/* turn the file upside down so that we can flag the opphold that preceeds the overføring*/
-/* look at only døgn  */
+/* turn the file upside down so that we can flag the opphold that preceeds the overfÃ¸ring*/
+/* look at only dÃ¸gn  */
 
 proc sort data=Overforinger;
   by aktivitetskategori3 pid descending Oppholdsnr;
@@ -169,7 +169,7 @@ data Overforinger;
   if lag_overforing > 0       then  overforing = lag_overforing; 
 run; 
 
-/*sort the file differently to flag akuttpol prior to døgn*/
+/*sort the file differently to flag akuttpol prior to dÃ¸gn*/
 proc sort DAta=Overforinger;
 by pid descending Oppholdsnr;
 run;
@@ -205,11 +205,11 @@ QUIT;
 data Overforinger;
   set Overforinger;
 
-/*  assign SHO_id based on aggrshoppid_lnr and overføring*/
+/*  assign SHO_id based on aggrshoppid_lnr and overfÃ¸ring*/
   if max_aggrshopp>1 then SHO_id=max_aggrshopp;
   else SHO_id=pid*1000 + mod(overforing, 1000);
 
-/*  opphold that is not a part of overføring episode*/
+/*  opphold that is not a part of overfÃ¸ring episode*/
   if overforing=. then SHO_id=aggrshoppID_Lnr;
 
   length SHO_id 8;
@@ -317,14 +317,14 @@ QUIT;
 data &dsn;
 set &dsn;
 	SHO_liggetid=SHO_utdato-SHO_inndato;
-%if &nulle_liggedogn ne 0 %then %do; /* Nulle ut liggetid hvis oppholdet er mindre enn åtte timer */
+%if &nulle_liggedogn ne 0 %then %do; /* Nulle ut liggetid hvis oppholdet er mindre enn Ã¥tte timer */
 	if SHO_utdatotid - SHO_inndatotid < 28800 then SHO_liggetid = 0;
 %end;
 run;
 
 
 /*
-Hastegrad for første opphold, hvis forste_hastegrad = 1, eller første døgnopphold
+Hastegrad for fÃ¸rste opphold, hvis forste_hastegrad = 1, eller fÃ¸rste dÃ¸gnopphold
 */
 proc sort data=&dsn;
 %if &forste_hastegrad ne 0 %then %do;
@@ -362,7 +362,7 @@ run;
 data &dsn;
 set &dsn;
 if SHO_hastegrad = 99 then SHO_hastegrad = .;
-/* Nulle liggedøgn hvis poliklinisk kontakt */
+/* Nulle liggedÃ¸gn hvis poliklinisk kontakt */
 if SHO_aktivitetskategori3 = 3 then SHO_liggetid = 0;
 drop lag_pid SHO_diff inndatotid utdatotid forste_hastegrad aktkat tmp_poli;
 format SHO_utdato SHO_inndato date10.;

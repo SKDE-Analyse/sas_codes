@@ -1,7 +1,7 @@
-%macro hyppigste_petter(Ant_i_liste=, VarName=, data_inn=, tillegg_tittel=, Where=);
+ï»¿%macro hyppigste_petter(Ant_i_liste=, VarName=, data_inn=, tillegg_tittel=, Where=);
 
 /*!
-Hva gjør denne annerledes enn `hyppigste`?
+Hva gjÃ¸r denne annerledes enn `hyppigste`?
 
 */
 
@@ -51,7 +51,7 @@ DATA=dsn;
 	WHERE( Rang <= &Ant_i_liste);	
 	VAR antall PCT_tot PCT_rang;
 	CLASS Rang &varName/	ORDER=FORMATTED MISSING;
-	TABLE Rang={LABEL=""}*&varName={LABEL="" STYLE(CLASSLEV)={NOBREAKSPACE=ON}} ALL={LABEL="Totalt &Ant_i_liste hyppigste, Øvrige=&Ovrige "},
+	TABLE Rang={LABEL=""}*&varName={LABEL="" STYLE(CLASSLEV)={NOBREAKSPACE=ON}} ALL={LABEL="Totalt &Ant_i_liste hyppigste, Ã˜vrige=&Ovrige "},
 	antall={LABEL="Antall"}*F=12.0*Sum={LABEL=""} 
 	PCT_tot={LABEL="Andel av total"}*F=PERCENT8.1*Sum={LABEL=""} 
 	PCT_rang={LABEL="Andel &Ant_i_liste hyppigste"}*F=PERCENT8.1*Sum={LABEL=""}

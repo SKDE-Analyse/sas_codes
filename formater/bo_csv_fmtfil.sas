@@ -1,7 +1,7 @@
-/* Endringslogg: Sist endret av Janice 17.06.2021 */
+ï»¿/* Endringslogg: Sist endret av Janice 17.06.2021 */
 
-/* Makro for å lage formater til boområder */
-/* Husk å definere filbane før makro kjøres */
+/* Makro for Ã¥ lage formater til boomrÃ¥der */
+/* Husk Ã¥ definere filbane fÃ¸r makro kjÃ¸res */
 
 /* Input: tre CSV-filer:
             boomr.csv
@@ -9,7 +9,7 @@
             forny_bydel.csv
 */
 /* Output fem formater:
-      Navn på formatene:
+      Navn pÃ¥ formatene:
          boshhn_fmt 
          bohf_fmt
          borhf_fmt
@@ -26,9 +26,9 @@
  */
 
 
-/* hente inn CSV-fil med definerte opptaksområder pr 01.01.2021 */
+/* hente inn CSV-fil med definerte opptaksomrÃ¥der pr 01.01.2021 */
 data bo;
-  infile "&filbane\formater\boomr.csv"
+  infile "&filbane/formater/boomr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
@@ -133,7 +133,7 @@ proc format cntlin=hnref.fmtfil_bydel; run;
 /* --------- */    
 
 data forny_kom;
-  infile "&filbane\formater\forny_komnr.csv"
+  infile "&filbane/formater/forny_komnr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
@@ -155,7 +155,7 @@ data komnr_fmt2(keep=komnr komnr_navn);
 set forny_kom(rename=(gml_komnr=komnr gml_navn=komnr_navn));
 run;
 
-/* Remove duplicate values fra boområde-csv */
+/* Remove duplicate values fra boomrÃ¥de-csv */
 proc sort data=bo nodupkey out=komnr_fmt1(keep=komnr komnr_navn);                                                                                                        
    by komnr;                                                                                                                                
    where komnr is not missing;                                                                                                                              

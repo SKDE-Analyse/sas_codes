@@ -1,7 +1,7 @@
-
+ï»¿
 %macro aarsvar;
 /*!
-#### Formål
+#### FormÃ¥l
 {: .no_toc}
 
 #### "Steg for steg"-beskrivelse
@@ -9,31 +9,31 @@
 
 1. 
 
-#### Avhengig av følgende datasett
+#### Avhengig av fÃ¸lgende datasett
 {: .no_toc}
 
 -
 
-#### Lager følgende datasett
+#### Lager fÃ¸lgende datasett
 {: .no_toc}
 
 -
 
-#### Avhengig av følgende variabler
+#### Avhengig av fÃ¸lgende variabler
 {: .no_toc}
 
 -
 
-#### Definerer følgende variabler
+#### Definerer fÃ¸lgende variabler
 {: .no_toc}
 
 
-#### Kalles opp av følgende makroer
+#### Kalles opp av fÃ¸lgende makroer
 {: .no_toc}
 
 -
 
-#### Bruker følgende makroer
+#### Bruker fÃ¸lgende makroer
 {: .no_toc}
 
 -

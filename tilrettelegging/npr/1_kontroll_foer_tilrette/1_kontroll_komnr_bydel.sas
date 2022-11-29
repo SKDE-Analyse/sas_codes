@@ -1,10 +1,10 @@
-%macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
+ï»¿%macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
 
 /*! 
 ### Beskrivelse
 
-Makro for å kontrollere at mottatte data inneholder gyldige komrn og bydel
-Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
+Makro for Ã¥ kontrollere at mottatte data inneholder gyldige komrn og bydel
+Den sier ikke noe om det er lÃ¸penr ifeks Oslo 0301 som mangler bydel
 
 ```
 %kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=)
@@ -20,16 +20,16 @@ Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
       - Error lister gir oversikt over ugyldige komnr eller bydeler i mottatt data.  De lages som SAS, og printes ut til results vinduet hvis det er noe.
 
 ### Endringslogg:
-    - Opprettet før 2020
+    - Opprettet fÃ¸r 2020
     - september 2021, Janice
           - dokumentasjon markdown
-          - bydel til numerisk før kombineres med komnr
+          - bydel til numerisk fÃ¸r kombineres med komnr
           - error lister printes ut
  */
 
 /* laste inn tre datafiler */
 data komnr;
-  infile "&filbane\formater\forny_komnr.csv"
+  infile "&filbane/formater/forny_komnr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
@@ -53,7 +53,7 @@ data komnr;
   run;
 
 data bydel;
-  infile "&filbane\formater\forny_bydel.csv"
+  infile "&filbane/formater/forny_bydel.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -75,7 +75,7 @@ data bydel;
 run;
 
 data boomr;
-  infile "&filbane\formater\boomr.csv"
+  infile "&filbane/formater/boomr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 
@@ -176,7 +176,7 @@ run;
 /* -------------------------------------------- */
 
 /*sammenligne mottatte komnr med csv-fil*/
-/*Outputfiler 'error' inneholder komnr i mottatte data som ikke er i vår liste med godkjente komnr*/
+/*Outputfiler 'error' inneholder komnr i mottatte data som ikke er i vÃ¥r liste med godkjente komnr*/
 data godkjent_komnr_&aar error_komnr_&aar;
 merge mottatt_komnr (in=a) liste_komnr (in=b);
 by komnr2;
@@ -190,7 +190,7 @@ title "error komnr i &aar. filen";
 proc print data=error_komnr_&aar; run;
 
 /*sammenligne bydel med csv-fil*/
-/*Outputfiler 'error' inneholder bydel i mottatte data som ikke er i vår liste med godkjente bydeler*/
+/*Outputfiler 'error' inneholder bydel i mottatte data som ikke er i vÃ¥r liste med godkjente bydeler*/
 data godkjent_bydel_&aar error_bydel_&aar;
 merge mottatt_bydel (in=a) liste_bydel (in=b);
 by bydel;

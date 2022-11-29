@@ -1,4 +1,4 @@
-%macro definere_format;
+﻿%macro definere_format;
 /*!
 Definere format for tall i tabeller.
 */

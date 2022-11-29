@@ -1,20 +1,20 @@
-%macro ekskluderingstabeller(datasett = );
+ï»¿%macro ekskluderingstabeller(datasett = );
 
 /*!
-Makro for å lage tabeller over antall kontakter i det originale datasettet som blir ekskludert
+Makro for Ã¥ lage tabeller over antall kontakter i det originale datasettet som blir ekskludert
 i rateprogrammet.
 
-Følgende ekskluderinger vises:
+FÃ¸lgende ekskluderinger vises:
 - `komnr=. or komnr not in (0:2031, 5000:5100)`
 - `alder not &aldersspenn`
 - `ermann not in &kjonn`
-- `aar not in (&startår:&sluttår)`
+- `aar not in (&startÃ¥r:&sluttÃ¥r)`
 
-Følgende variabler, som er definert tidligere, brukes:
+FÃ¸lgende variabler, som er definert tidligere, brukes:
 - `&aldersspenn`
 - `&kjonn`
-- `&startår`
-- `&sluttår`
+- `&startÃ¥r`
+- `&sluttÃ¥r`
 
 */
 
@@ -32,7 +32,7 @@ ods text='^{style[font_size=14pt font_weight=bold font_style=italic]
 PROC TABULATE DATA=&datasett FORMAT=&talltabformat..0;	
 VAR RV;
 CLASS aar ErMann/	ORDER=UNFORMATTED MISSING;
-TABLE ErMann={LABEL=""} ALL={LABEL="Total kjønn"} aar={LABEL=""} ALL={LABEL="Total år"} ,
+TABLE ErMann={LABEL=""} ALL={LABEL="Total kjÃ¸nn"} aar={LABEL=""} ALL={LABEL="Total Ã¥r"} ,
 RV={LABEL=""}*Sum={LABEL="Antall"}
 / BOX={LABEL="Fra utvalgsdatasettet" STYLE={JUST=LEFT VJUST=BOTTOM}};
 RUN; title;
@@ -52,22 +52,22 @@ ods text="kjonn = &kjonn";
 PROC SQL;
 CREATE TABLE ikke_med_tot AS
 SELECT * FROM &datasett
-where komnr=. or komnr not in (0:5500) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startår:&sluttår); 
+where komnr=. or komnr not in (0:5500) or alder not &aldersspenn or ermann not in &kjonn or aar not in (&startÃ¥r:&sluttÃ¥r); 
 QUIT;
 
 PROC TABULATE DATA=ikke_med_tot FORMAT=&talltabformat..0;	
 VAR RV;
 CLASS aar ErMann/	ORDER=UNFORMATTED MISSING;
-TABLE ErMann={LABEL=""} ALL={LABEL="Total kjønn"} aar={LABEL=""} ALL={LABEL="Total år"} ,
+TABLE ErMann={LABEL=""} ALL={LABEL="Total kjÃ¸nn"} aar={LABEL=""} ALL={LABEL="Total Ã¥r"} ,
 RV={LABEL=""}*Sum={LABEL="Antall"}
 / BOX={LABEL="Totalt ekskludert" STYLE={JUST=LEFT VJUST=BOTTOM}};
 RUN;
 
 
-/* Kun se på de dataene "bruker" har valgt å se på */
+/* Kun se pÃ¥ de dataene "bruker" har valgt Ã¥ se pÃ¥ */
 data qwerty_data;
 set &datasett;
-where aar in (&startår:&sluttår) and alder &aldersspenn and ermann in &kjonn;
+where aar in (&startÃ¥r:&sluttÃ¥r) and alder &aldersspenn and ermann in &kjonn;
 run;
 
 /*
@@ -89,7 +89,7 @@ VAR RV;
 CLASS komnr/	ORDER=UNFORMATTED MISSING;
 TABLE komnr={LABEL=""} ALL={LABEL="Total komnr"},
 RV={LABEL=""}*Sum={LABEL="Antall"}
-/ BOX={LABEL="Kommunenummer utenfor definert område" STYLE={JUST=LEFT VJUST=BOTTOM}};
+/ BOX={LABEL="Kommunenummer utenfor definert omrÃ¥de" STYLE={JUST=LEFT VJUST=BOTTOM}};
 run;
 
 PROC TABULATE DATA=ikke_kom FORMAT=&talltabformat..0;	
@@ -97,20 +97,20 @@ VAR RV;
 CLASS alder aar ErMann /	ORDER=UNFORMATTED MISSING;
 TABLE 
 alder={LABEL=""} ALL={LABEL="Total alder"} 
-ErMann={LABEL=""} ALL={LABEL="Total kjønn"} 
-aar={LABEL=""} ALL={LABEL="Total år"},
+ErMann={LABEL=""} ALL={LABEL="Total kjÃ¸nn"} 
+aar={LABEL=""} ALL={LABEL="Total Ã¥r"},
 RV={LABEL=""}*Sum={LABEL="Antall"}
-/ BOX={LABEL="Kommunenummer utenfor definert område" STYLE={JUST=LEFT VJUST=BOTTOM}};
+/ BOX={LABEL="Kommunenummer utenfor definert omrÃ¥de" STYLE={JUST=LEFT VJUST=BOTTOM}};
 RUN;
 
 /*
 Ekskludering pga alder ikke i definert aldersspenn
 */
 
-/* Kun se på de dataene "bruker" har valgt å se på */
+/* Kun se pÃ¥ de dataene "bruker" har valgt Ã¥ se pÃ¥ */
 data qwerty_data;
 set &datasett;
-where aar in (&startår:&sluttår) and ermann in &kjonn;
+where aar in (&startÃ¥r:&sluttÃ¥r) and ermann in &kjonn;
 run;
 
 ods text='^{style[font_size=14pt font_weight=bold font_style=italic]
@@ -134,7 +134,7 @@ RUN;
 PROC TABULATE DATA=ikke_alder FORMAT=&talltabformat..0;	
 VAR RV;
 CLASS alder aar ErMann komnr/	ORDER=UNFORMATTED MISSING;
-TABLE ErMann={LABEL=""} ALL={LABEL="Total kjønn"} aar={LABEL=""} ALL={LABEL="Total år"} 
+TABLE ErMann={LABEL=""} ALL={LABEL="Total kjÃ¸nn"} aar={LABEL=""} ALL={LABEL="Total Ã¥r"} 
 komnr={LABEL=""} ALL={LABEL="Total komnr"},
 RV={LABEL=""}*Sum={LABEL="Antall"}
 / BOX={LABEL="Eksluderte pga alder not &aldersspenn" STYLE={JUST=LEFT VJUST=BOTTOM}};
@@ -144,10 +144,10 @@ RUN;
 Ekskludert pga ermann ikke i definert kjonn
 */
 
-/* Kun se på de dataene "bruker" har valgt å se på */
+/* Kun se pÃ¥ de dataene "bruker" har valgt Ã¥ se pÃ¥ */
 data qwerty_data;
 set &datasett;
-where aar in (&startår:&sluttår) and alder &aldersspenn;
+where aar in (&startÃ¥r:&sluttÃ¥r) and alder &aldersspenn;
 run;
 
 ods text='^{style[font_size=14pt font_weight=bold font_style=italic]
@@ -163,18 +163,18 @@ QUIT;
 PROC TABULATE DATA=ikke_kjonn FORMAT=&talltabformat..0;	
 VAR RV;
 CLASS ErMann/	ORDER=UNFORMATTED MISSING;
-TABLE ErMann={LABEL=""} ALL={LABEL="Total kjønn"},
+TABLE ErMann={LABEL=""} ALL={LABEL="Total kjÃ¸nn"},
 RV={LABEL=""}*Sum={LABEL="Antall"}
-/ BOX={LABEL="Eksluderte pga missing kjønn eller komnr" STYLE={JUST=LEFT VJUST=BOTTOM}};
+/ BOX={LABEL="Eksluderte pga missing kjÃ¸nn eller komnr" STYLE={JUST=LEFT VJUST=BOTTOM}};
 run;
 
 PROC TABULATE DATA=ikke_kjonn FORMAT=&talltabformat..0;	
 VAR RV;
 CLASS alder aar komnr/	ORDER=UNFORMATTED MISSING;
-TABLE aar={LABEL=""} ALL={LABEL="Total år"} 
+TABLE aar={LABEL=""} ALL={LABEL="Total Ã¥r"} 
 komnr={LABEL=""} ALL={LABEL="Total komnr"} alder={LABEL=""} ALL={LABEL="Total alder"},
 RV={LABEL=""}*Sum={LABEL="Antall"}
-/ BOX={LABEL="Eksluderte pga missing kjønn eller komnr" STYLE={JUST=LEFT VJUST=BOTTOM}};
+/ BOX={LABEL="Eksluderte pga missing kjÃ¸nn eller komnr" STYLE={JUST=LEFT VJUST=BOTTOM}};
 
 RUN;
 

@@ -1,17 +1,17 @@
-/*!
-Felles makroer for testing av rateprogrammet. Kan også brukes til produksjon av test-datasett.
+ï»¿/*!
+Felles makroer for testing av rateprogrammet. Kan ogsÃ¥ brukes til produksjon av test-datasett.
 */
 
 %macro testAnno(branch=null, lagReferanse = 0, slettDatasett = 1);
 
 /*!
-Makro for å teste kode i ../Stiler/ (logo)
+Makro for Ã¥ teste kode i ../Stiler/ (logo)
 */
 
 ods text="Test Anno";
 
-%include "&filbane\Stiler\stil_figur.sas";
-%include "&filbane\Stiler\Anno_logo_kilde_NPR_SSB.sas";
+%include "&filbane/stiler/stil_figur.sas";
+%include "&filbane/stiler/Anno_logo_kilde_NPR_SSB.sas";
 
 %sammenlignData(fil = anno, lagReferanse = &lagReferanse);
 
@@ -26,26 +26,26 @@ delete anno;
 %macro testUtvalgX(branch=null, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
 
 /*!
-Makro for å teste utvalgx-makroen i rateprogrammet.
+Makro for Ã¥ teste utvalgx-makroen i rateprogrammet.
 */
 
 ods text="Test UtvalgX";
 
 %if %sysevalf(%superq(silent)=,boolean) %then %let silent = 1;
 
-%include "&filbane\makroer\boomraader.sas";
-%include "&filbane\rateprogram\rateberegninger.sas";
+%include "&filbane/makroer/boomraader.sas";
+%include "&filbane/rateprogram/rateberegninger.sas";
 
 %inkluderFormater;
 
 %if &definerVariabler ne 0 %then %do;
-%include "&filbane\rateprogram\sas\definerVariabler.sas";
+%include "&filbane/rateprogram/sas/definerVariabler.sas";
 %definerVariabler;
 %end;
 
 %if (&alene ne 0) %then %do;
-/* Importere datasettet "anno" fra disk, hvis anno-makroen ikke er kjørt først */
-proc import datafile = "&filbane\tests\data\anno.csv" out=anno dbms=csv replace;
+/* Importere datasettet "anno" fra disk, hvis anno-makroen ikke er kjÃ¸rt fÃ¸rst */
+proc import datafile = "&filbane/tests/data/anno.csv" out=anno dbms=csv replace;
 run;
 %end;
 
@@ -59,7 +59,7 @@ proc sort data=andel;
 by alderny ermann;
 run;
 
-/* Filen RV er for stor til å inkluderes i repo, så ligger på server */
+/* Filen RV er for stor til Ã¥ inkluderes i repo, sÃ¥ ligger pÃ¥ server */
 %if &lagReferanse = 0 %then %do;
 proc compare base=test.ref_rate_rv compare=rv BRIEF WARNING LISTVAR;
 %end;
@@ -85,7 +85,7 @@ delete tmp_aldersfig;
 %macro testRateberegninger(branch=null, alene = 1, lagReferanse = 0, definerVariabler = 1, slettDatasett = 1);
 
 /*!
-Makro for å teste rateberegning-makroen (rateprogrammet)
+Makro for Ã¥ teste rateberegning-makroen (rateprogrammet)
 */
 
 ods text="Test Rateberegninger";
@@ -94,30 +94,30 @@ ods text="Test Rateberegninger";
 
 %if (&alene ne 0) %then %do;
 
-%include "&filbane\makroer\boomraader.sas";
-%include "&filbane\rateprogram\rateberegninger.sas";
+%include "&filbane/makroer/boomraader.sas";
+%include "&filbane/rateprogram/rateberegninger.sas";
 
 %inkluderFormater;
 
 %if &definerVariabler ne 0 %then %do;
-%include "&filbane\rateprogram\sas\definerVariabler.sas";
+%include "&filbane/rateprogram/sas/definerVariabler.sas";
 %definerVariabler;
 %end;
 
 /*
 Lese datasett fra disk som brukes videre i rateberegninger-makroen
 
-Det vil da være mulig å kjøre denne makroen uavhengig av om man har kjørt de makroene som kommer tidligere i rateprogrammet
+Det vil da vÃ¦re mulig Ã¥ kjÃ¸re denne makroen uavhengig av om man har kjÃ¸rt de makroene som kommer tidligere i rateprogrammet
 */
 
-proc import datafile = "&filbane\tests\data\anno.csv" out=anno dbms=csv replace;
+proc import datafile = "&filbane/tests/data/anno.csv" out=anno dbms=csv replace;
 run;
 
 data rv;
 set test.ref_rate_rv;
 run;
 
-proc import datafile = "&filbane\tests\data\andel.csv" out=andel dbms=csv replace;
+proc import datafile = "&filbane/tests/data/andel.csv" out=andel dbms=csv replace;
 run;
 
 %end; /* %if (&alene ne 0) */
@@ -134,7 +134,7 @@ run;
 %rateberegninger;
 
 /*
-Må endre navn på datasett for kun HN sine kommuner
+MÃ¥ endre navn pÃ¥ datasett for kun HN sine kommuner
 */
 data komnrHN_agg_rate;
 set komnr_agg_rate;
@@ -145,7 +145,7 @@ set komnr_agg_cv;
 run;
 
 /*
-Kjører makroen for alle kommuner, ikke kun HN
+KjÃ¸rer makroen for alle kommuner, ikke kun HN
 */
 
 %let kommune=1; 
@@ -187,7 +187,7 @@ alder konsultasjoner_norge snudd hnsnitt aldersspenn konsultasjoner:;
 %macro lagreBoDatasett(bolist=);
 
 /*
-Lagre datasettene i repo ved å loope over alle boområdene
+Lagre datasettene i repo ved Ã¥ loope over alle boomrÃ¥dene
 */
 
 %local nwords;
@@ -221,7 +221,7 @@ Lagre datasettene i repo ved å loope over alle boområdene
 %macro sjekkeBoDatasett(bolist=);
 
 /*
-Sjekk alle datasettene mot referanse ved å loope over alle boområdene
+Sjekk alle datasettene mot referanse ved Ã¥ loope over alle boomrÃ¥dene
 */
 
 %local nwords;

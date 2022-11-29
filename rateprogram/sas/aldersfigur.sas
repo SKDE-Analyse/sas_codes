@@ -1,9 +1,9 @@
-
+ï»¿
 %macro aldersfigur(data =, aarstall =);
 /*!
-Makro for å lage aldersstruktur-figur over utvalget.
+Makro for Ã¥ lage aldersstruktur-figur over utvalget.
 
-For å lett kunne se om alderssammensetningen gir mening.
+For Ã¥ lett kunne se om alderssammensetningen gir mening.
 */
 %local data;
 %local fontst;

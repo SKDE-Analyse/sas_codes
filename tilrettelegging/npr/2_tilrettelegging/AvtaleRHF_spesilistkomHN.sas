@@ -1,10 +1,10 @@
-
+ï»¿
 
 %macro AvtaleRHF_spesialistkomHN(innDataSett=, utDataSett=);
 
 /*!
-Makro for å definere `SpesialistKomHN` og `AvtaleRHF` for avtalespesialister,
-basert på `InstitusjonID`.
+Makro for Ã¥ definere `SpesialistKomHN` og `AvtaleRHF` for avtalespesialister,
+basert pÃ¥ `InstitusjonID`.
 */
 
 
@@ -52,7 +52,7 @@ Definerer SpesialistKomHN og vertskommuner (Vertskommuner Helse Nord) for avtale
   else if  InstitusjonID in (113587) then SpesialistKomHN='1804';
   else if  InstitusjonID in (113597) then SpesialistKomHN='1902';
   /* else if  InstitusjonID in (706002) then SpesialistKomHN='2012';*/
-  else if  InstitusjonID in (706002) then SpesialistKomHN='1902';/* Arnfinn 3/4-2018: Marco Filipponi holder til i Tromsø...*/
+  else if  InstitusjonID in (706002) then SpesialistKomHN='1902';/* Arnfinn 3/4-2018: Marco Filipponi holder til i TromsÃ¸...*/
   else if  InstitusjonID in (113653) then SpesialistKomHN='1813';
   else if  InstitusjonID in (113656) then SpesialistKomHN='1902';
   else if  InstitusjonID in (113701) then SpesialistKomHN='1833';
@@ -81,13 +81,13 @@ Definerer SpesialistKomHN og vertskommuner (Vertskommuner Helse Nord) for avtale
   else if  InstitusjonID in (113672) then SpesialistKomHN='1805';
   else if  InstitusjonID in (113834) then SpesialistKomHN='2012';
   /*Supplert av PO 7/7 2017*/
-  else if  InstitusjonID in (4211315) then SpesialistKomHN='1902'; /*Sandvik, Johan*/ /*Det ser ut til at han også jobber fra Bodø*/
+  else if  InstitusjonID in (4211315) then SpesialistKomHN='1902'; /*Sandvik, Johan*/ /*Det ser ut til at han ogsÃ¥ jobber fra BodÃ¸*/
   else if  InstitusjonID in (4211824) then SpesialistKomHN='1833'; /*Stoll, Richard*/
   else if  InstitusjonID in (4212778) then SpesialistKomHN='1902'; /*Stenklev, Niels Christian*/
   else if  InstitusjonID in (4212875) then SpesialistKomHN='1902'; /*Bjarghov, Steinar*/
   /*Supplert av Arnfinn 27/3 2018*/
-  else if  InstitusjonID in (4208245) then SpesialistKomHN='1902'; /* Henrik Tjälve */
-  else if  InstitusjonID in (4210478) then SpesialistKomHN='1805'; /* Trond Børvik (gitt som Trond Børlie fra NPR)*/
+  else if  InstitusjonID in (4208245) then SpesialistKomHN='1902'; /* Henrik TjÃ¤lve */
+  else if  InstitusjonID in (4210478) then SpesialistKomHN='1805'; /* Trond BÃ¸rvik (gitt som Trond BÃ¸rlie fra NPR)*/
   else if  InstitusjonID in (4214082) then SpesialistKomHN='1804'; /* Burican, Juraj */
 
   SpesKomHN = SpesialistKomHN +0;
@@ -108,13 +108,13 @@ Definere spesialistenes avtale-RHF
    3=Helse vest
    4=Helse Midt-Norge
    5=Helse Nord
-   7=Helse Sør-Øst
+   7=Helse SÃ¸r-Ã˜st
 */
 
      if sh_reg=5 then AvtaleRHF=1; /* Helse Nord RHF*/     
 else if sh_reg=4 then AvtaleRHF=2; /*Helse Midt-Norge RHF*/
 else if sh_reg=3 then AvtaleRHF=3; /*Helse Vest RHF*/
-else if sh_reg=7 then AvtaleRHF=4; /*Helse Sør-Øst-RHF*/
+else if sh_reg=7 then AvtaleRHF=4; /*Helse SÃ¸r-Ã˜st-RHF*/
 
 
 
@@ -226,7 +226,7 @@ Definere spesialistenes avtale-RHF
   4212828,4212925,4212985,4210960,4211307,4211803,4211804,4211806,4211826,
    708753,4201392,4204435,4204436,4207828,4209408,4209424,4209426,4210071,4210129,4210553,
   4211964,4212201,4212923,4213011,4213408,4213811,4213833,4213866,4214014,4214017,4214047,
-  4214048,4214100,4214292) then AvtaleRHF_old=4; /*Helse Sør-Øst-RHF*/
+  4214048,4214100,4214292) then AvtaleRHF_old=4; /*Helse SÃ¸r-Ã˜st-RHF*/
 
 run;
 

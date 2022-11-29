@@ -1,9 +1,9 @@
-/* Inkludere makroer:  KI_figur, KI_bilde */
+ï»¿/* Inkludere makroer:  KI_figur, KI_bilde */
 
 
 %Macro KI_figur;
 /*!
-#### Formål
+#### FormÃ¥l
 {: .no_toc}
 
 #### "Steg for steg"-beskrivelse
@@ -11,31 +11,31 @@
 
 1. 
 
-#### Avhengig av følgende datasett
+#### Avhengig av fÃ¸lgende datasett
 {: .no_toc}
 
 -
 
-#### Lager følgende datasett
+#### Lager fÃ¸lgende datasett
 {: .no_toc}
 
 -
 
-#### Avhengig av følgende variabler
+#### Avhengig av fÃ¸lgende variabler
 {: .no_toc}
 
 -
 
-#### Definerer følgende variabler
+#### Definerer fÃ¸lgende variabler
 {: .no_toc}
 
 
-#### Kalles opp av følgende makroer
+#### Kalles opp av fÃ¸lgende makroer
 {: .no_toc}
 
 -
 
-#### Bruker følgende makroer
+#### Bruker fÃ¸lgende makroer
 {: .no_toc}
 
 -
@@ -55,7 +55,7 @@ run;
 proc sort data=&bo._KI_Fig; by descending &rate_var; run;
 
 ods listing style=stil_figur;
-title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, rate med 95% KI, &min_aar - &max_aar";
+title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder Ã¥r, rate med 95% KI, &min_aar - &max_aar";
 proc sgplot data=&bo._KI_Fig noborder noautolegend sganno=anno pad=(Bottom=5%);
 where &Mine_Boomraader;
 hbarparm category=&bo response=&rate_var / limitlower=KI_N_J limitupper=KI_O_J Limitattrs=(Color=black) fillattrs=(color=CX95BDE6); 
@@ -63,7 +63,7 @@ hbarparm category=&bo response=&rate_var / limitlower=KI_N_J limitupper=KI_O_J L
 	 Refline Norge_KI_N / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
 	 Refline Norge_KI_O / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
      Yaxistable Ant_Innbyggere Ant_opphold /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
-     yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+     yaxis display=(noticks noline) label='BoomrÃ¥de/opptaksomrÃ¥de' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset ("(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" KI, rate &SnittOmraade"
 			"(*ESC*){unicode'2014'x}"=" Rate, &SnittOmraade") / position=bottomright textattrs=(size=7);
@@ -90,7 +90,7 @@ hbarparm category=&bo response=&rate_var / limitlower=KI_N_J limitupper=KI_O_J L
 	 Refline Norge_KI_N / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
 	 Refline Norge_KI_O / axis=x lineattrs=(Thickness=.5 color=Black pattern=2);
      Yaxistable Ant_Innbyggere Ant_opphold /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
-     yaxis display=(noticks noline) label='Boområde/opptaksområde' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+     yaxis display=(noticks noline) label='BoomrÃ¥de/opptaksomrÃ¥de' labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset ("(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" KI, rate &SnittOmraade"
 			"(*ESC*){unicode'2014'x}"=" Rate, &SnittOmraade") / position=bottomright textattrs=(size=7);

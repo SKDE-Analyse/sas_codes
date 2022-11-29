@@ -1,20 +1,20 @@
-%macro Episode_of_care_test(branch=null, debug = 0, lagNyRef = 0, lagNyStart = 0);
+ï»¿%macro Episode_of_care_test(branch=null, debug = 0, lagNyRef = 0, lagNyStart = 0);
 
 /*!
-Makro for å teste EoC-makro.
+Makro for Ã¥ teste EoC-makro.
 
-Kjører EoC-makroen på et test-datasett (test.pseudosens_avd_magnus) med ulike parametre.
+KjÃ¸rer EoC-makroen pÃ¥ et test-datasett (test.pseudosens_avd_magnus) med ulike parametre.
 Sammenligner datasettene som spyttes ut med referanse-sett (test.ref_eoc[n]).
 
 ## input
 
 - `branch` (=master) Valg av mappe der makroen ligger.
 - `debug` (=0) Ikke slette midlertidige datasett hvis ulik null.
-- `lagNyRef` (=0) Lagre ny referanse på disk hvis ulik null.
+- `lagNyRef` (=0) Lagre ny referanse pÃ¥ disk hvis ulik null.
 
 */
 
-%include "&filbane\makroer\episode_of_care.sas";
+%include "&filbane/makroer/episode_of_care.sas";
 
 %if &lagNyStart ne 0 %then %do;
 /*
@@ -26,7 +26,7 @@ run;
 %end;
 
 /*
-Sjekk at det er trygt å kjøre EoC makroen flere ganger etter hverandre
+Sjekk at det er trygt Ã¥ kjÃ¸re EoC makroen flere ganger etter hverandre
 */
 
 data eoc1;
@@ -70,7 +70,7 @@ run;
 %sammenlignData(fil = eoc3, lagReferanse = &lagNyRef);
 
 /*
-Teste det å nulle liggedøgn for dag og poliklinikk
+Teste det Ã¥ nulle liggedÃ¸gn for dag og poliklinikk
 */
 
 data eoc4;
@@ -82,7 +82,7 @@ run;
 %sammenlignData(fil = eoc4, lagReferanse = &lagNyRef);
 
 /*
-Teste det å ikke aggregere poliklinikk i EoC (separer_ut_poli ne 0)
+Teste det Ã¥ ikke aggregere poliklinikk i EoC (separer_ut_poli ne 0)
 */
 
 data eoc5;
@@ -95,7 +95,7 @@ run;
 
 
 /*
-Test av bug i "separer_ut_poli = 1". Vil ikke fungere før issue #52 (https://github.com/SKDE-Analyse/sas_codes/issues/52) er fikset.
+Test av bug i "separer_ut_poli = 1". Vil ikke fungere fÃ¸r issue #52 (https://github.com/SKDE-Analyse/sas_codes/issues/52) er fikset.
 */
 
 data eoc6;

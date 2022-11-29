@@ -1,17 +1,17 @@
-%macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode, sektor=som); 
+ï»¿%macro kontroll_behandlingssted(inndata=, aar= , beh=behandlingsstedkode, sektor=som); 
 /*!
 ### Beskrivelse
 
-Makro for å kontrollere om variabel 'behandlingsstedkode' eller 'behandlingssted2' i somatikk-data og 'institusjonid' i avtspes-data har en kjent verdi.
-Kontrollen gjennomføres ved at mottatte verdier sjekkes mot CSV-filer som inneholder organisasjonsnummer for somatikk-data og reshid for avtalespesialist-data. 
+Makro for Ã¥ kontrollere om variabel 'behandlingsstedkode' eller 'behandlingssted2' i somatikk-data og 'institusjonid' i avtspes-data har en kjent verdi.
+Kontrollen gjennomfÃ¸res ved at mottatte verdier sjekkes mot CSV-filer som inneholder organisasjonsnummer for somatikk-data og reshid for avtalespesialist-data. 
 
-Ukjente verdier (fra datasettet error_liste_'aar') kontrolleres mot brønnøysundregisteret eller reshid-registeret.
-Hvis verdien i error_listen er et gyldig organisasjonsnummer eller reshid så skal CSV-fil oppdateres.
+Ukjente verdier (fra datasettet error_liste_'aar') kontrolleres mot brÃ¸nnÃ¸ysundregisteret eller reshid-registeret.
+Hvis verdien i error_listen er et gyldig organisasjonsnummer eller reshid sÃ¥ skal CSV-fil oppdateres.
 Hvis ikke korrigeres ugyldig verdi i tilretteleggingen steg 2.
 
 ### Input 
 - inndata: Filen med behandlingssted-variabel som skal kontrolleres, f.eks hnmot.m20t3_som_2020.
-- aar: Brukes for å gi unike navn til output-errorfiler.
+- aar: Brukes for Ã¥ gi unike navn til output-errorfiler.
 - beh: Organisasjonsnummer eller reshid som skal kontrolleres, default er 'behandlingsstedkode' for RHF-data. Hvis kontroll av SKDE-data endres det til 'behandlingssted2', eller ved kontroll av reshid i avtalespesialist-data endres det til 'institusjonid'.
 - sektor: Default er 'som' for somatikk-data, det velges 'aspes' hvis avtalespesialist-data. 
 
@@ -28,7 +28,7 @@ Hvis ikke korrigeres ugyldig verdi i tilretteleggingen steg 2.
 
 %if &sektor=som %then %do;
 data orgnr;
-  infile "&filbane\formater\behandler.csv"
+  infile "&filbane/formater/behandler.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 
@@ -64,7 +64,7 @@ run;
 
 %if &sektor=aspes or &sektor=avtspes %then %do;
 data orgnr;
-  infile "&filbane\formater\avtalespesialister.csv"
+  infile "&filbane/formater/avtalespesialister.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

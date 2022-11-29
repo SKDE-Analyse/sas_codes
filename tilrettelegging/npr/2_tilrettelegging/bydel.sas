@@ -1,4 +1,4 @@
-/* Input variable  : bydel2 for RHF (specified in the argument, original bydel var from NPR) */
+﻿/* Input variable  : bydel2 for RHF (specified in the argument, original bydel var from NPR) */
 /* Output variable : bydel (komnr and bydel together) */
 
 %macro bydel(inndata=, utdata=, bydel=bydel2);
@@ -23,7 +23,7 @@ data &utdata(drop=bydel_tmp);
 
   /* Create variable 'bydel' for the kommune with bydel */
   if komnr in (301,4601,5001,1103) then do;
-    if bydel_tmp <= 0 then bydel = komnr*100+99; /*hvis f�lgende komnr mangler bydel lage bydel udef, feks 30199*/
+    if bydel_tmp <= 0 then bydel = komnr*100+99; /*hvis følgende komnr mangler bydel lage bydel udef, feks 30199*/
     else bydel=komnr*100+bydel_tmp;
   end;
 

@@ -1,4 +1,4 @@
-%Macro Avledede (innDataSett=, utDataSett=);
+ï»¿%Macro Avledede (innDataSett=, utDataSett=);
 
 
 /*!
@@ -6,7 +6,7 @@
 MACRO FOR AVLEDEDE VARIABLE
 
 ### Innhold i macroen:
-1. Retting av ugyldig fødselsår og avleding av aldersgrupper
+1. Retting av ugyldig fÃ¸dselsÃ¥r og avleding av aldersgrupper
 2. Definisjon av Alder, Ald_gr og Ald_gr5
 3. Omkoding av KJONN til ErMann
 5. DRGTypeHastegrad
@@ -29,7 +29,7 @@ if aar=2019 and liggetid> 800 then inndato=utdato;
 
 
 /*!
-- Retting av ugyldig fødselsår
+- Retting av ugyldig fÃ¸dselsÃ¥r
 */
 
 /* JS 17/07/2019- If year and month from persondata is available and valid, then use it as primary source */
@@ -39,14 +39,14 @@ fodselsar_org=fodselsar;
 if fodtAar_DSF > 1900 and 0 <= tmp_alder <= 110 
 then fodselsar=fodtAar_DSF;
 
-/* if fødselsår is still invalid */
+/* if fÃ¸dselsÃ¥r is still invalid */
 if fodselsar > aar or fodselsar=. then fodselsar=9999;
 if aar-fodselsar > 110 then fodselsar=9999;
 
 doddato=DodDato_DSF;
 emigrertdato=emigrertDato_DSF;
 /*!
-- Definerer Alder basert på Fodselsår
+- Definerer Alder basert pÃ¥ FodselsÃ¥r
 */
 
 Alder=aar-fodselsar;
@@ -60,7 +60,7 @@ drop tmp_alder;
 else if KJONN=2 /*2 ='Kvinne' */ then ErMann=0; /* Kvinne */
 else if KJONN in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ErMann=.;
 
-/* ukjent kjønn i data får fikset til kjonn_DSF hvis det er kjente */
+/* ukjent kjÃ¸nn i data fÃ¥r fikset til kjonn_DSF hvis det er kjente */
 If ErMann=. and kjonn_DSF in (1,2) then do;
 	if kjonn_DSF = 1 then ErMann = 1;
 	else if kjonn_DSF = 2 then ErMann = 0;
@@ -91,7 +91,7 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
     hastegrad=.;
     if innmateHast in (1,2,3)   then hastegrad=1; /*Akutt*/
     if innmateHast=4            then hastegrad=4; /*Planlagt*/
-    if innmateHast=5            then hastegrad=5; /*Tilbakeføring av pasient fra annet sykehus (gjelder fra 2016)*/
+    if innmateHast=5            then hastegrad=5; /*TilbakefÃ¸ring av pasient fra annet sykehus (gjelder fra 2016)*/
 
     %if &sektor = AVD or &sektor = SHO %then %do;                   /* this &sektor is the macro variable set in the SAS-project */
 
@@ -170,8 +170,8 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
     if Fag = 'radiologi'          then Fag_SKDE = 18;
     if index(fag,'evma')>0        then Fag_SKDE = 19; /* revma */
     if Fag = 'urologi'            then Fag_SKDE = 20;
-    if Fag = 'ønh'                then Fag_SKDE = 21;
-    if Fag = 'øye'                then Fag_SKDE = 22;
+    if Fag = 'Ã¸nh'                then Fag_SKDE = 21;
+    if Fag = 'Ã¸ye'                then Fag_SKDE = 22;
     if Fag = 'onkologi'           then Fag_SKDE = 23;
     if Fag = 'psykiatri'          then Fag_SKDE = 30;
     if Fag = 'psykologi'          then Fag_SKDE = 31;
@@ -188,13 +188,13 @@ Definerer `hastegrad = 4` (planlagt) for avtalespesialistkonsultasjoner.
        3=Helse vest
        4=Helse Midt-Norge
        5=Helse Nord
-       7=Helse Sør-Øst
+       7=Helse SÃ¸r-Ã˜st
     */
 
          if sh_reg=5 then AvtaleRHF=1; /* Helse Nord RHF*/     
     else if sh_reg=4 then AvtaleRHF=2; /*Helse Midt-Norge RHF*/
     else if sh_reg=3 then AvtaleRHF=3; /*Helse Vest RHF*/
-    else if sh_reg=7 then AvtaleRHF=4; /*Helse Sør-Øst-RHF*/
+    else if sh_reg=7 then AvtaleRHF=4; /*Helse SÃ¸r-Ã˜st-RHF*/
 
 
 %end;

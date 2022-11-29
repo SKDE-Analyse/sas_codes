@@ -1,4 +1,4 @@
-%macro hyppigste(Ant_i_liste=10, VarName=, data_inn=, tillegg_tittel=, Where=, test = 0, by = 0);
+ï»¿%macro hyppigste(Ant_i_liste=10, VarName=, data_inn=, tillegg_tittel=, Where=, test = 0, by = 0);
 /*!
 
 ### Beskrivelse
@@ -11,16 +11,16 @@
 
 1. `Ant_i_liste`: De *X* hyppigste - sett inn tall for *X* (default = 10)
 2. `VarName`: Variabelen man analyserer
-3. `data_inn`: datasett man utfører analysen på
-4. `Tillegg_tittel`: Dersom man ønsker tilleggsinfo i tittel
+3. `data_inn`: datasett man utfÃ¸rer analysen pÃ¥
+4. `Tillegg_tittel`: Dersom man Ã¸nsker tilleggsinfo i tittel
   - settes i hermetegn dersom mellomrom eller komma brukes
 5. `Where` 
   - dersom man trenger et where-statement:
-  - Må skrives slik: `Where=Where Borhf=1`
+  - MÃ¥ skrives slik: `Where=Where Borhf=1`
 6. `test`:  Hvis ulik null lagres et datasett &test istedenfor tabell.
 
 7.`by` : create the list for subgroups:
-   - Må skrives slik: 'by=bohf'
+   - MÃ¥ skrives slik: 'by=bohf'
    
 ### Forfatter
   
@@ -147,7 +147,7 @@ DATA=dsn;
 	WHERE( Rang <= &Ant_i_liste);	
 	VAR antall PCT_tot PCT_rang;
 	CLASS Rang &varName/	ORDER=FORMATTED MISSING;
-	TABLE Rang={LABEL=""}*&varName={LABEL="" STYLE(CLASSLEV)={NOBREAKSPACE=ON}} ALL={LABEL="Totalt &Ant_i_liste hyppigste, Øvrige=&Ovrige "},
+	TABLE Rang={LABEL=""}*&varName={LABEL="" STYLE(CLASSLEV)={NOBREAKSPACE=ON}} ALL={LABEL="Totalt &Ant_i_liste hyppigste, Ã˜vrige=&Ovrige "},
 	antall={LABEL="Antall"}*F=12.0*Sum={LABEL=""} 
 	PCT_tot={LABEL="Andel av total"}*F=PERCENT8.1*Sum={LABEL=""} 
 	PCT_rang={LABEL="Andel &Ant_i_liste hyppigste"}*F=PERCENT8.1*Sum={LABEL=""}

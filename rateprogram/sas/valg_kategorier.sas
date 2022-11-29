@@ -1,49 +1,49 @@
-
+ï»¿
 
 %macro valg_kategorier;
 
 /*!
 ## **valg_kategorier**
 
-#### Formål
+#### FormÃ¥l
 {: .no_toc}
 
-Dele alder inn i kategorier, basert på verdi av `Alderskategorier`
+Dele alder inn i kategorier, basert pÃ¥ verdi av `Alderskategorier`
 
 #### "Steg for steg"-beskrivelse
 {: .no_toc}
 
-1. Kjører en av alderinndeling-makroene, basert på verdien av Alderskategorier
+1. KjÃ¸rer en av alderinndeling-makroene, basert pÃ¥ verdien av Alderskategorier
    - Der defineres `Startgr1`, `SluttGr1` etc.
 2. Definerer `alder_ny` til 1, 2 etc. ut fra `Startgr1`, `SluttGr1` etc.
 
-#### Avhengig av følgende datasett
+#### Avhengig av fÃ¸lgende datasett
 {: .no_toc}
 
 - utvalgx
 
-#### Lager følgende datasett
+#### Lager fÃ¸lgende datasett
 {: .no_toc}
 
 Ingen (legger til variablen `alder_ny` til datasettet utvalgx)
 
 
-#### Avhengig av følgende variabler
+#### Avhengig av fÃ¸lgende variabler
 {: .no_toc}
 
 - `Alderskategorier`
 
-#### Definerer følgende variabler
+#### Definerer fÃ¸lgende variabler
 {: .no_toc}
 
 Ingen
 
-#### Kalles opp av følgende makroer
+#### Kalles opp av fÃ¸lgende makroer
 {: .no_toc}
 
 - [utvalgX](#utvalgx)
 
-#### Bruker følgende makroer
+#### Bruker fÃ¸lgende makroer
 {: .no_toc}
 
 - [Todeltalder](#todeltalder-tredeltalder-firedeltalder-femdeltalder)

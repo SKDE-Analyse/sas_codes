@@ -1,4 +1,4 @@
-
+﻿
 
 Proc format;
 value type
@@ -34,7 +34,7 @@ run;
 
 
 
-/*Sl� sammen en og to*/
+/*Slå sammen en og to*/
 data &navn_en._andeler;
 set en to tot;
 format type type.;
@@ -85,7 +85,7 @@ by descending andel en_ant;
 run;
 
 %let figfil = fig4_eldre;
-%include "&filbane\include\figurer_eng\lag_figur.sas";
+%include "&filbane/include/figurer_eng/lag_figur.sas";
 
 Proc datasets nolist;
 delete en to tot;

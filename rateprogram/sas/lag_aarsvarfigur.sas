@@ -1,9 +1,9 @@
-/* årsvariasjonsfigur */
+ï»¿/* Ã¥rsvariasjonsfigur */
 
 
 %macro lag_aarsvarfigur;
 /*!
-#### Formål
+#### FormÃ¥l
 {: .no_toc}
 
 #### "Steg for steg"-beskrivelse
@@ -11,31 +11,31 @@
 
 1. 
 
-#### Avhengig av følgende datasett
+#### Avhengig av fÃ¸lgende datasett
 {: .no_toc}
 
 -
 
-#### Lager følgende datasett
+#### Lager fÃ¸lgende datasett
 {: .no_toc}
 
 -
 
-#### Avhengig av følgende variabler
+#### Avhengig av fÃ¸lgende variabler
 {: .no_toc}
 
 -
 
-#### Definerer følgende variabler
+#### Definerer fÃ¸lgende variabler
 {: .no_toc}
 
 
-#### Kalles opp av følgende makroer
+#### Kalles opp av fÃ¸lgende makroer
 {: .no_toc}
 
 -
 
-#### Bruker følgende makroer
+#### Bruker fÃ¸lgende makroer
 {: .no_toc}
 
 -
@@ -134,7 +134,7 @@ run;
 /*ods graphics on;*/
 ods listing style=stil_figur gpath="%sysfunc(getoption(work))";
 %if &sprak = no %then %do;
-title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, &min_aar - &max_aar";
+title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder Ã¥r, &min_aar - &max_aar";
 %end;
 %else %if &sprak = en %then %do;
 title "&standard rates pr &rate_pr inhabitants, &ratevariabel, &bo, &Min_alder - &Max_alder years, &min_aar - &max_aar";
@@ -143,16 +143,16 @@ proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
 where &Mine_Boomraader;
 hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6); 
      Refline &Norge / axis=x lineattrs=(Thickness=.5 color=Black pattern=2) name="Ref1";
-			%if &Antall_aar>1 and &aarsobs=1 %then %do; scatter x=rate&år1 y=&Bo / markerattrs=(symbol=squarefilled color=black);%end;
-			%if &Antall_aar>2 and &aarsobs=1 %then %do; scatter x=rate&år2 y=&Bo / markerattrs=(symbol=circlefilled color=black); %end;
-			%if &Antall_aar>3 and &aarsobs=1 %then %do; scatter x=rate&år3 y=&Bo / markerattrs=(symbol=trianglefilled color=black);%end;
-			%if &Antall_aar>4 and &aarsobs=1 %then %do; scatter x=rate&år4 y=&Bo / markerattrs=(symbol=Diamondfilled color=black);%end;
-			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black);%end;
-			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
+			%if &Antall_aar>1 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r1 y=&Bo / markerattrs=(symbol=squarefilled color=black);%end;
+			%if &Antall_aar>2 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r2 y=&Bo / markerattrs=(symbol=circlefilled color=black); %end;
+			%if &Antall_aar>3 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r3 y=&Bo / markerattrs=(symbol=trianglefilled color=black);%end;
+			%if &Antall_aar>4 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r4 y=&Bo / markerattrs=(symbol=Diamondfilled color=black);%end;
+			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r5 y=&Bo / markerattrs=(symbol=X color=black);%end;
+			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;     
 		 %if &sprak = no %then %do;
 		 Yaxistable &forbruksmal Innbyggere /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
-     yaxis display=(noticks noline) label='Bosatte i opptaksområde' labelpos=top labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+     yaxis display=(noticks noline) label='Bosatte i opptaksomrÃ¥de' labelpos=top labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
 		 %end;
 		  %if &sprak = en %then %do;
 		 Yaxistable &forbruksmal Inhabitants /Label location=inside position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
@@ -160,19 +160,19 @@ hbarparm category=&bo response=rateSnitt / fillattrs=(color=CX95BDE6);
 		 %end;
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
      inset (
-		%if &Antall_aar>1 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &år1" %end;  
-	 	%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cf'x}"="   &år2" %end;
-	 	%if &Antall_aar>3 and &aarsobs=1 %then %do;"(*ESC*){unicode'25b2'x}"="   &år3" %end;
-	 	%if &Antall_aar>4 and &aarsobs=1 %then %do;"(*ESC*){unicode'2666'x}"="   &år4" %end;
-	 	%if &Antall_aar>5 and &aarsobs=1 %then %do;"(*ESC*){unicode'0058'x}"="   &år5" %end;
-		%if &Antall_aar>6 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cb'x}"="   &år6" %end;
+		%if &Antall_aar>1 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &Ã¥r1" %end;  
+	 	%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cf'x}"="   &Ã¥r2" %end;
+	 	%if &Antall_aar>3 and &aarsobs=1 %then %do;"(*ESC*){unicode'25b2'x}"="   &Ã¥r3" %end;
+	 	%if &Antall_aar>4 and &aarsobs=1 %then %do;"(*ESC*){unicode'2666'x}"="   &Ã¥r4" %end;
+	 	%if &Antall_aar>5 and &aarsobs=1 %then %do;"(*ESC*){unicode'0058'x}"="   &Ã¥r5" %end;
+		%if &Antall_aar>6 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cb'x}"="   &Ã¥r6" %end;
         "(*ESC*){unicode'2212'x}(*ESC*){unicode'2212'x}"=" &SnittOmraade, snitt") 
 	 	/ position=bottomright textattrs=(size=7);
 run;Title; ods listing close; /*ods graphics off;*/
 %end;
 %end;
 
-/*Alternativ årsvariasjonsfigur*/
+/*Alternativ Ã¥rsvariasjonsfigur*/
 %if &NorgeSoyle=1 %then %do;
 data &bo._aarsvar;
 set &bo._aarsvar NORGE_AGG_RATE5;
@@ -190,29 +190,29 @@ run;
 
 %if &silent=0 %then %do;
 ods listing style=stil_figur gpath="%sysfunc(getoption(work))";
-title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder år, &min_aar - &max_aar";
+title "&standard rater pr &rate_pr innbyggere, &ratevariabel, &bo, &Min_alder - &Max_alder Ã¥r, &min_aar - &max_aar";
 proc sgplot data=&bo._aarsvar noborder noautolegend sganno=anno pad=(Bottom=5%);
 where &Mine_Boomraader;
 hbarparm category=&bo response=RateSnitt / fillattrs=(color=CX95BDE6); 
 hbarparm category=&bo response=Snittrate / fillattrs=(color=CXC3C3C3);
-			%if &Antall_aar>1 and &aarsobs=1 %then %do; scatter x=rate&år1 y=&Bo / markerattrs=(symbol=squarefilled color=black);%end;
-			%if &Antall_aar>2 and &aarsobs=1 %then %do; scatter x=rate&år2 y=&Bo / markerattrs=(symbol=circlefilled color=black); %end;
-			%if &Antall_aar>3 and &aarsobs=1 %then %do; scatter x=rate&år3 y=&Bo / markerattrs=(symbol=trianglefilled color=black);%end;
-			%if &Antall_aar>4 and &aarsobs=1 %then %do; scatter x=rate&år4 y=&Bo / markerattrs=(symbol=Diamondfilled color=black);%end;
-			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&år5 y=&Bo / markerattrs=(symbol=X color=black);%end;
-			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&år6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
+			%if &Antall_aar>1 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r1 y=&Bo / markerattrs=(symbol=squarefilled color=black);%end;
+			%if &Antall_aar>2 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r2 y=&Bo / markerattrs=(symbol=circlefilled color=black); %end;
+			%if &Antall_aar>3 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r3 y=&Bo / markerattrs=(symbol=trianglefilled color=black);%end;
+			%if &Antall_aar>4 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r4 y=&Bo / markerattrs=(symbol=Diamondfilled color=black);%end;
+			%if &Antall_aar>5 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r5 y=&Bo / markerattrs=(symbol=X color=black);%end;
+			%if &Antall_aar>6 and &aarsobs=1 %then %do; scatter x=rate&Ã¥r6 y=&Bo / markerattrs=(symbol=circle color=black);%end;
 			%if &aarsobs=1 %then %do; Highlow Y=&Bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1); %end;
      Yaxistable &forbruksmal Innbyggere /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
-     yaxis display=(noticks noline) label='Bosatte i opptaksområde' labelpos=top labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
+     yaxis display=(noticks noline) label='Bosatte i opptaksomrÃ¥de' labelpos=top labelattrs=(size=7 weight=bold) type=discrete discreteorder=data valueattrs=(size=7);
      xaxis display=(nolabel) offsetmin=0.02 &skala /*values=(0 to 7 by 1)*/ /*valuesformat=comma8.0*/ valueattrs=(size=7);
 %if &aarsobs=1 %then %do;
 	inset (
-		%if &Antall_aar>1 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &år1" %end;  
-	 	%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cf'x}"="   &år2" %end;
-	 	%if &Antall_aar>3 and &aarsobs=1 %then %do;"(*ESC*){unicode'25b2'x}"="   &år3" %end;
-	 	%if &Antall_aar>4 and &aarsobs=1 %then %do;"(*ESC*){unicode'2666'x}"="   &år4" %end;
-	 	%if &Antall_aar>5 and &aarsobs=1 %then %do;"(*ESC*){unicode'0058'x}"="   &år5" %end;
-		%if &Antall_aar>6 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cb'x}"="   &år6" %end;
+		%if &Antall_aar>1 and &aarsobs=1 %then %do;"(*ESC*){unicode'25a0'x}"="   &Ã¥r1" %end;  
+	 	%if &Antall_aar>2 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cf'x}"="   &Ã¥r2" %end;
+	 	%if &Antall_aar>3 and &aarsobs=1 %then %do;"(*ESC*){unicode'25b2'x}"="   &Ã¥r3" %end;
+	 	%if &Antall_aar>4 and &aarsobs=1 %then %do;"(*ESC*){unicode'2666'x}"="   &Ã¥r4" %end;
+	 	%if &Antall_aar>5 and &aarsobs=1 %then %do;"(*ESC*){unicode'0058'x}"="   &Ã¥r5" %end;
+		%if &Antall_aar>6 and &aarsobs=1 %then %do;"(*ESC*){unicode'25cb'x}"="   &Ã¥r6" %end;
         ) 
           / position=bottomright textattrs=(size=7);
 %end;

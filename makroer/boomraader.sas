@@ -39,7 +39,7 @@ run;
 *********************************************
 */
 data bo;
-  infile "&filbane\formater\boomr.csv"
+  infile "&filbane/formater/boomr.csv"
   delimiter=';'
   missover firstobs=3 DSD;
 

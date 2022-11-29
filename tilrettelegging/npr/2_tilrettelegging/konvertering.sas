@@ -1,4 +1,4 @@
-%Macro Konvertering (Inndatasett=, Utdatasett=, pid=lnr);
+ï»¿%Macro Konvertering (Inndatasett=, Utdatasett=, pid=lnr);
 
 /*!
 
@@ -24,13 +24,13 @@ Set &Inndatasett(rename=(episodefag=episodefag_org));
 */
 
 /*!
-- Lager `pid` fra `LNr` (løpenummer) og sletter `LNr`
+- Lager `pid` fra `LNr` (lÃ¸penummer) og sletter `LNr`
 */
 PID=&pid+0;
 Drop &pid;
 
 /*!
-- Gjør `RehabType` numerisk.
+- GjÃ¸r `RehabType` numerisk.
 */
 %if &somatikk ne 0 %then %do;
 Rehab=RehabType+0;
@@ -40,7 +40,7 @@ rename Rehab=RehabType;
 
 
 /*!
-- Generere `bydel_org` fra `bydel` og `bydel2_org` fra `bydel2`. Dropper så `bydel` slik at den ikke ligger på fila når ny variabel kalt `bydel` skal genereres i neste makro
+- Generere `bydel_org` fra `bydel` og `bydel2_org` fra `bydel2`. Dropper sÃ¥ `bydel` slik at den ikke ligger pÃ¥ fila nÃ¥r ny variabel kalt `bydel` skal genereres i neste makro
 */
 
 %if &datagrunnlag=SKDE %then %do;
@@ -60,7 +60,7 @@ rename Rehab=RehabType;
 ###	Fjerner blanke felt og punktum i stringvariable, samt ny navngiving. For 2014 navnes dup_tilstand til Tdiag.
 */
 		/*
-		- Episodefag manglet ledende null for avtalespesialister enkelte år.
+		- Episodefag manglet ledende null for avtalespesialister enkelte Ã¥r.
 		- convert to character if numeric
 		*/
 %if &somatikk ne 0 %then %do;
@@ -75,7 +75,7 @@ rename Rehab=RehabType;
 	drop cyto:;
 
 /*!
-- Gjør `HDG` numerisk.
+- GjÃ¸r `HDG` numerisk.
 */
 	HDG_num=HDG+0;
 	Drop HDG;

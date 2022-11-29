@@ -1,14 +1,14 @@
-/* Endringslogg: Sist endret av Tove 21.06.2021 */
+ï»¿/* Endringslogg: Sist endret av Tove 21.06.2021 */
 
-/* Makro for å lage formater til boområder */
-/* Husk å definere filbane før makro kjøres */
+/* Makro for Ã¥ lage formater til boomrÃ¥der */
+/* Husk Ã¥ definere filbane fÃ¸r makro kjÃ¸res */
 
 /* Input: CSV-file:
             ICD10.csv
             
 */
 /* Output fem formater:
-      Navn på formatene:
+      Navn pÃ¥ formatene:
          icd10_fmt 
          
 */
@@ -23,7 +23,7 @@
 
  /* Hente inn CSV-fil */
 data icd10_fmt;
-  infile "&filbane\formater\ICD10.csv"
+  infile "&filbane/formater/ICD10.csv"
   delimiter=';'
   missover firstobs=2 DSD;
 

@@ -1,4 +1,4 @@
-
+﻿
 
 
 Proc format;
@@ -27,7 +27,7 @@ to_ant = ant_opphold;
 run;
 
 
-/*Sl� sammen en og to*/
+/*Slå sammen en og to*/
 data smelt;
 set en to;
 format type type.;
@@ -101,7 +101,7 @@ run;
 /*Lager figur og lagrer bildefil*/
 
 %let figfil = fig2_eldre;
-%include "&filbane\include\figurer_eng\lag_figur.sas";
+%include "&filbane/include/figurer_eng/lag_figur.sas";
 
 
 /* Sletter datasett */

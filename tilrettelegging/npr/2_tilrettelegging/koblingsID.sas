@@ -1,16 +1,16 @@
-/*!
-MACROER FOR Å KOBLINGS_ID 
+ï»¿/*!
+MACROER FOR Ã… KOBLINGS_ID 
 */
 
 %macro KoblingsID(innDataSett=, utDataSett=, fil =);
 
 /*!
-Lager en unik id på hvert opphold, som siden brukes når vi splitter datasettet i to.
+Lager en unik id pÃ¥ hvert opphold, som siden brukes nÃ¥r vi splitter datasettet i to.
 
 ### Input
 - `innDataSett` 
 - `utDataSett` 
-- `fil`: kan være `avd`, `sho` eller `avtspes`  eller `rehab`
+- `fil`: kan vÃ¦re `avd`, `sho` eller `avtspes`  eller `rehab`
 */
 
 %if %lowcase(&fil) = avd %then %do;

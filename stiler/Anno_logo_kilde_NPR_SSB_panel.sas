@@ -1,4 +1,4 @@
-data anno1;
+﻿data anno1;
 retain drawspace "graphpercent" widthunit "percent" heightunit "percent"
 linethickness 1 /*textsize 8*/;
 length function $ 9 anchor $ 13;
@@ -16,7 +16,7 @@ retain
      x1space = "graphpercent"; 
      anchor = "bottomright";
      x1 = 97;  y1 = 11;  width=12;
-     image = "&filbane\Stiler\logo\skde.png";
+     image = "&filbane/stiler/logo/skde.png";
 output; /*Logo*/
      function="text";
      anchor = "bottomleft";

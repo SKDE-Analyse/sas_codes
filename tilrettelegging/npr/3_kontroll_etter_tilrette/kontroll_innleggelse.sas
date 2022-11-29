@@ -1,6 +1,6 @@
-/* antall innleggelse, &var, poli, etc , per behandlingssykehus / HF */
+ï»¿/* antall innleggelse, &var, poli, etc , per behandlingssykehus / HF */
 
-/* Se om antall liggedøgn samsvarer med tidligere år  */
+/* Se om antall liggedÃ¸gn samsvarer med tidligere Ã¥r  */
 
 
 %macro liggedogn(beh=behsh, var=liggetid);

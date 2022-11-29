@@ -1,18 +1,18 @@
-%macro UnikeVariableAvdOpphold(variabler=, dsn=, prefix=, extrawhere=);
+ï»¿%macro UnikeVariableAvdOpphold(variabler=, dsn=, prefix=, extrawhere=);
 
 /*!
 ### Beskrivelse
-For å finne unike prosedyrer/diagnoser o.l. pr pasient pr sykehusopphold i avdelingsoppholdsfila
+For Ã¥ finne unike prosedyrer/diagnoser o.l. pr pasient pr sykehusopphold i avdelingsoppholdsfila
 ```
 %UnikeVariableAvdOpphold(variabler=, dsn=, prefix=, extrawhere=);
 ```
 
 ### Parametre
 
-1. `variabler`: variablene man utfører analysen på, feks nc: eller ncsp: eller hdiag:
-2. `dsn`: datasettnavn - datasettet man utfører analysen på
-3. `prefix`: Prefix på variablene som telles/lages
-4. `extrawhere`: dersom man ønsker noe mer i where-statement, feks `alder in (50:60)`, extrawhere må starte med `and`
+1. `variabler`: variablene man utfÃ¸rer analysen pÃ¥, feks nc: eller ncsp: eller hdiag:
+2. `dsn`: datasettnavn - datasettet man utfÃ¸rer analysen pÃ¥
+3. `prefix`: Prefix pÃ¥ variablene som telles/lages
+4. `extrawhere`: dersom man Ã¸nsker noe mer i where-statement, feks `alder in (50:60)`, extrawhere mÃ¥ starte med `and`
 
 ### Eksempel
 

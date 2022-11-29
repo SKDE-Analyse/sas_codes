@@ -1,25 +1,25 @@
-%let makrobane=&filbane\rateprogram\sas;
+ï»¿%let makrobane=&filbane/rateprogram/sas;
 
-%include "&filbane\makroer\boomraader.sas";
+%include "&filbane/makroer/boomraader.sas";
 
-%include "&makrobane\lag_kart.sas";
-%include "&makrobane\omraade.sas";
-%include "&makrobane\utvalgx.sas";
-%include "&makrobane\lag_aarsvarbilde.sas";
-%include "&makrobane\lag_aarsvarfigur.sas";
-%include "&makrobane\aldersgrupper.sas";
-%include "&makrobane\valg_kategorier.sas";
-%include "&makrobane\tabeller.sas";
-%include "&makrobane\KI.sas";
-%include "&makrobane\lagre_data.sas";
-%include "&makrobane\aarsvar.sas";
-%include "&makrobane\definere_aar.sas";
-%include "&makrobane\definere_format.sas";
-%include "&makrobane\aldersfigur.sas";
-%include "&makrobane\print_info.sas";
-%include "&makrobane\definere_komnr.sas";
-%include "&makrobane\ekskluderingstabeller.sas";
-%include "&makrobane\dele_tabell.sas";
+%include "&makrobane/lag_kart.sas";
+%include "&makrobane/omraade.sas";
+%include "&makrobane/utvalgx.sas";
+%include "&makrobane/lag_aarsvarbilde.sas";
+%include "&makrobane/lag_aarsvarfigur.sas";
+%include "&makrobane/aldersgrupper.sas";
+%include "&makrobane/valg_kategorier.sas";
+%include "&makrobane/tabeller.sas";
+%include "&makrobane/KI.sas";
+%include "&makrobane/lagre_data.sas";
+%include "&makrobane/aarsvar.sas";
+%include "&makrobane/definere_aar.sas";
+%include "&makrobane/definere_format.sas";
+%include "&makrobane/aldersfigur.sas";
+%include "&makrobane/print_info.sas";
+%include "&makrobane/definere_komnr.sas";
+%include "&makrobane/ekskluderingstabeller.sas";
+%include "&makrobane/dele_tabell.sas";
 
 
 /*!
@@ -29,7 +29,7 @@ Denne filen inneholder alle makroene til rateprogrammet, bortsett fra
 
 %macro omraadeNorge;
 /*!
-Tom makro, for å unngå feilmeldinger i eldre rateprogram-beregninger.
+Tom makro, for Ã¥ unngÃ¥ feilmeldinger i eldre rateprogram-beregninger.
 */
 
 
@@ -38,7 +38,7 @@ Tom makro, for å unngå feilmeldinger i eldre rateprogram-beregninger.
 
 %macro rateberegninger;
 /*!
-#### Formål
+#### FormÃ¥l
 
 Makro som beregner rater og spytter ut tabeller og figurer.
 
@@ -47,9 +47,9 @@ Makro som beregner rater og spytter ut tabeller og figurer.
 1. Lager datasettet `Norgeaarsspenn` fra `RV` og henter ut variablene min_aar og max_aar
 2. Legger variablen alder til `norge_agg_snitt`
    - `alder=(substr(alder_ny,1,((find(alder_ny,'-','i'))-1)))-0;`
-3. Lager tabell over aldersstruktur, basert på datasett `norge_agg_snitt`
-4. Definere variablene Periode, Antall_aar, År1 etc. (dette gjøres også i utvalgX-makroen)
-5. Kaller opp [omraade](#omraade)-makroen, som beregner ratene etc. ut fra `Bo`. `Bo` kan være
+3. Lager tabell over aldersstruktur, basert pÃ¥ datasett `norge_agg_snitt`
+4. Definere variablene Periode, Antall_aar, Ã…r1 etc. (dette gjÃ¸res ogsÃ¥ i utvalgX-makroen)
+5. Kaller opp [omraade](#omraade)-makroen, som beregner ratene etc. ut fra `Bo`. `Bo` kan vÃ¦re
 
 |`Bo`        |variabel = 1        |makro       |
 | ---------- | -----------        | ---------- |
@@ -63,18 +63,18 @@ Makro som beregner rater og spytter ut tabeller og figurer.
 | VK         | &Vertskommune_HN=1 | [omraadeHN](#omraadehn)|
 | bydel      | &oslo=1            | [omraade](#omraade)    |
    
-6. Kaller opp tabell-rutiner, figur-rutiner etc. basert på valg gjort i rateprogrammet (se variabelliste under)
+6. Kaller opp tabell-rutiner, figur-rutiner etc. basert pÃ¥ valg gjort i rateprogrammet (se variabelliste under)
 
-#### Avhengig av følgende datasett
+#### Avhengig av fÃ¸lgende datasett
 
 - `RV`
 - `norge_agg_snitt`
 
-#### Lager følgende datasett
+#### Lager fÃ¸lgende datasett
 
-- Norgeaarsspenn (kun for å finne min_aar og max_aar?)
+- Norgeaarsspenn (kun for Ã¥ finne min_aar og max_aar?)
 
-#### Avhengig av følgende variabler
+#### Avhengig av fÃ¸lgende variabler
 
 - tallformat
 - ratevariabel
@@ -109,25 +109,25 @@ Makro som beregner rater og spytter ut tabeller og figurer.
 - Fig_KI_Oslo
 
 
-#### Definerer følgende variabler
+#### Definerer fÃ¸lgende variabler
 
 Sjekk hvilke som brukes av andre makroer og hvilke som kun er interne.
 
-- aarsvarfigur (defineres også i [utvalgX](#utvalgx))
-- Periode (defineres også i [utvalgX](#utvalgx))
-- Antall_aar (defineres også i [utvalgX](#utvalgx))
-- År1 etc. (defineres også i [utvalgX](#utvalgx))
+- aarsvarfigur (defineres ogsÃ¥ i [utvalgX](#utvalgx))
+- Periode (defineres ogsÃ¥ i [utvalgX](#utvalgx))
+- Antall_aar (defineres ogsÃ¥ i [utvalgX](#utvalgx))
+- Ã…r1 etc. (defineres ogsÃ¥ i [utvalgX](#utvalgx))
 - Bo (brukes i tabell-rutiner og figur-rutiner som kalles opp)
 
 
-#### Kalles opp av følgende makroer
+#### Kalles opp av fÃ¸lgende makroer
 
 Ingen
 
-#### Bruker følgende makroer
+#### Bruker fÃ¸lgende makroer
 
 - [omraade](#omraade) (selve rateberegningene)
-- [tabell_1](#tabell_1) (hvis Vis_tabeller=1,2,3) Kjøres for Bo=Norge, Bo=BoRHF, , 
+- [tabell_1](#tabell_1) (hvis Vis_tabeller=1,2,3) KjÃ¸res for Bo=Norge, Bo=BoRHF, , 
 - [tabell_CV](#tabell_cv) (hvis Vis_tabeller=2)
 - [tabell_3N](#tabell_3n) (hvis Vis_tabeller=3)
 - [tabell_3](#tabell_3) (hvis Vis_tabeller=3)
@@ -142,7 +142,7 @@ Ingen
 
 #### Annet
 
-Kjøres som andre makro av rateprogrammet (etter [utvalgX](#utvalgX))
+KjÃ¸res som andre makro av rateprogrammet (etter [utvalgX](#utvalgX))
 
 */
 
@@ -193,7 +193,7 @@ Title;
 %if %sysevalf(%superq(aarsvarfigur)=,boolean) %then %let aarsvarfigur = 1;
 %if %sysevalf(%superq(Vertskommune_HN)=,boolean) %then %let Vertskommune_HN = 0;
 
-%let Bo=Norge; /*må lage egen for Norge*/
+%let Bo=Norge; /*mÃ¥ lage egen for Norge*/
 
 %lag_tabeller;
 
