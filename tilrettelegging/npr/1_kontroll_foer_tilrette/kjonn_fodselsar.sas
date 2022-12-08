@@ -1,47 +1,47 @@
-﻿%macro kjonn_fodselsar(inndata=);
+﻿%macro kjonn_fodselsar(inndata=,lnr=, kjonn=, fodselsar=);
 
 /* kjønn */
 data lnr;
-  set &inndata(keep=lopenr kjonn fodselsar);
+  set &inndata(keep=&lnr &kjonn &fodselsar);
 run;
 
-proc sort data=lnr; by lopenr; run;
+proc sort data=lnr; by &lnr; run;
 
 proc sort data=lnr nodupkey out=lnr_dupkjonn;
-  by lopenr kjonn; 
+  by &lnr &kjonn; 
 run;
 
 data dupkjonn;
   set lnr_dupkjonn;
-  by lopenr kjonn;
-  if first.lopenr =0 or last.lopenr=0 then output;
+  by &lnr &kjonn;
+  if first.&lnr =0 or last.&lnr=0 then output;
 run;
 
 title color=darkblue height=5 "2a: antall pasienter med ulike kjønn";
 proc sql;
-  select count(distinct lopenr) as unikid
+  select count(distinct &lnr) as unikid
   from dupkjonn;
 quit;
 
 proc transpose data=dupkjonn out=dupkjonn2;
-  by lopenr;
-  var kjonn;
+  by &lnr;
+  var &kjonn;
 run;
 
 /* Fødselsår */
 proc sort data=lnr nodupkey out=lnr_dupfod;
-  by lopenr fodselsar; 
+  by &lnr &fodselsar; 
 run;
 
 data dupfod;
   set lnr_dupfod;
-  by lopenr fodselsar;
-  if first.lopenr =0 or last.lopenr=0 then output;
+  by &lnr &fodselsar;
+  if first.&lnr =0 or last.&lnr=0 then output;
 run;
 
 proc transpose data=dupfod out=dupfodtrans;
-  by lopenr;
-  var fodselsar;
+  by &lnr;
+  var &fodselsar;
 run;
 
 data dupfodtrans;
@@ -51,14 +51,14 @@ run;
 
 title color=darkblue height=5 "2b: range fødselsår";
 proc sql;
-  select min(fodselsar) as min_fodselsar, 
-         max(fodselsar) as max_fodselsar
+  select min(&fodselsar) as min_fodselsar, 
+         max(&fodselsar) as max_fodselsar
   from lnr;
 quit;
 
 title color=darkblue height=5 "2b: antall pasienter med ulike fodselsår";
 proc sql;
-  select count(distinct lopenr) as unikid
+  select count(distinct &lnr) as unikid
   from dupfodtrans;
 quit;
 

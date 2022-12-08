@@ -16,6 +16,17 @@ run;
 %if &pasientlopenummer ne 0 and &pasient_kjonn ne 0 and &fodt ne 0  %then %do;
 %include "&filbane1/antall_pasienter_rader.sas";
 %antall_pasienter_rader(inndata=&inndata, lnr=pasientlopenummer);
+
+/* ---------------------- */
+/* 2 - kjønn og fødselsår */
+/* ---------------------- */
+%include "&filbane1/kjonn_fodselsar.sas";
+%kjonn_fodselsar(inndata=&inndata, lnr=pasientlopenummer, kjonn=pasient_kjonn, fodselsar=født);
+
 %end;
+
+
+
+
 
 %mend kontroll_lab_radiologi;

@@ -35,7 +35,7 @@ quit;
 /* 2 - kjønn og fødselsår */
 /* ---------------------- */
 %include "&filbane1/kjonn_fodselsar.sas";
-%kjonn_fodselsar(inndata=&inndata);
+%kjonn_fodselsar(inndata=&inndata,lnr=lopenr, kjonn=kjonn, fodselsar=fodselsar);
 %end;
 
 /* -------------------------------------- */
