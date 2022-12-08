@@ -29,7 +29,7 @@ quit;
 /* ----------------------------- */
 %if &lopenr ne 0 and &kjonn ne 0 and &fodselsar ne 0  %then %do;
 %include "&filbane1/antall_pasienter_rader.sas";
-%antall_pasienter_rader(inndata=&inndata);
+%antall_pasienter_rader(inndata=&inndata, lnr=lopenr);
 
 /* ---------------------- */
 /* 2 - kjønn og fødselsår */

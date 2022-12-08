@@ -1,0 +1,21 @@
+﻿/* kontroll av radiologi-data bruker noen av de samme makroene fra kontroll av NPR-data */
+
+%macro kontroll_radiologi(inndata=, mottatt_aar=);
+
+/* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
+data _null_;
+dset=open("&inndata");
+call symput ('pasientlopenummer',varnum(dset,'pasientlopenummer'));
+call symput ('pasient_kjonn',varnum(dset,'pasient_kjonn'));
+call symput ('fodt',varnum(dset,'født'));
+run;
+
+/* ----------------------------- */
+/* 1 - antall pasienter og rader */
+/* ----------------------------- */
+%if &pasientlopenummer ne 0 and &pasient_kjonn ne 0 and &fodt ne 0  %then %do;
+%include "&filbane1/antall_pasienter_rader.sas";
+%antall_pasienter_rader(inndata=&inndata, lnr=pasientlopenummer);
+%end;
+
+%mend kontroll_lab_radiologi;
