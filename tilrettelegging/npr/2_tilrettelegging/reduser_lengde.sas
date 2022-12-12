@@ -52,6 +52,7 @@ length inntilstand /*intern_kons isf_opphold*/  4;
 length  /*pakkeforlop*/ permisjonsdogn aktivitetskategori /*polIndirekteAktivitet*/ polUtforende_1 /*polUtforende_2*/ RehabType 4;
 /* length relatertKontaktID 6; */
 length trimpkt /*utforendeHelseperson*/ utTilstand /* VertskommHN*/ 4;
+length takst_11 takst_12 takst_13 takst_14 takst_15 $4.;
 %end;
 
 %if &sektor = REHAB %then %do;
@@ -60,7 +61,7 @@ length liggetid permisjonsdogn 4;
 %end;
 
 set &innDataSett;
-format koblingsID 32.;
+*format koblingsID 32.;
 run;
 
 %mend reduser_lengde;
