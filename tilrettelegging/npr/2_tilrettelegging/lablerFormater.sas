@@ -56,7 +56,7 @@ label innDato='Innskrivelsesdato (NPR-melding)'; format innDato Eurdfdd10.;
 label utDato='Utskrivelsesdato (NPR-melding), utDato=innDato for avtSpes'; format utDato Eurdfdd10.;
 label InstitusjonID='Org.nr. til rapporteringsenhet (NPR-melding)'; format InstitusjonId org_fmt.;
 label KomNrHjem2='Innrapportert kommunenummer, numerisk (NPR-melding)'; format KomNR komnr_fmt.; 
-label bydel2='Bydel vasket mot Folkeregisteret (NPR)'; format bydel bydel_fmt.;
+/*label bydel2='Bydel vasket mot Folkeregisteret (NPR)'; format bydel bydel_fmt.;*/
 label innTid='Innskrivelsestidspunkt (NPR-melding)'; 
 label kontaktType='Kontakttype (NPR-melding)'; format kontaktType kontaktType.; 
 label omsorgsniva='Omsorgsnivå (NPR-melding)'; format omsorgsniva omsorgsniva.;
@@ -344,9 +344,9 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
        label liggetid    ='Liggetid, utdato minus inndato (SKDE)';
 
        /* somatikk derived variables for RHF datagrunnlag */
-       %if &datagrunnlag = RHF %then %do;
+       /* %if &datagrunnlag = RHF %then %do;
            label behandlingsstedkode2='Behandlingssted (SKDE)'; format behandlingsstedkode2 org_fmt.; 
-       %end;
+       %end; */
    %end;
 %end;
 

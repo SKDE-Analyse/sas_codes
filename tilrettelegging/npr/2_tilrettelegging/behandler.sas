@@ -86,7 +86,7 @@ proc sql;
 	on a.&beh=b.orgnr;
 quit;
 title height=5 "Oversikt behsh, behhf og behrhf i data. NB: ingen skal ha missing!";
-proc freq data=tmp_data;
+proc freq data=&inndata;
   tables behsh behhf behrhf / nocum;
 run;
 title;
