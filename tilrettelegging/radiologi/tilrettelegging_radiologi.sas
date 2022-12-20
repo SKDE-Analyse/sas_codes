@@ -33,7 +33,7 @@ rename pasientlopenummer = pid
 	 drop pasient_kjonn;
 	 format ermann ermann.;
 
-/*dele ncrpkode-variabel slik at en kode per celle*/
+/*dele diagnose-variabel slik at en kode per celle*/
 array diag {*} $ diagnose1-diagnose3;
 	do l=1 to 3;
 		diag{l}=scan(diagnoser,l,","); 
@@ -54,9 +54,9 @@ format inndato eurdfdd10.;
 drop dato;
 run;
 
-/* omkode komnr og bydel */
+/* omkode komnr og bydel -> omkodet komnr heter "komnr_mottatt" */
 %include "&filbane/tilrettelegging/radiologi/omkoding_komnr_bydel.sas";
-%omkoding_komnr_bydel(inndata=radiologi_&aar.);
+%omkoding_komnr_bydel(inndata=radiologi_&aar., pas_komnr=pasient_kommune);
 
 /* fornye komnr/bydel */
 /* bydelsnr er allerede omkodet -> trenger ikke kjøre makro bydeler etter fornying */
