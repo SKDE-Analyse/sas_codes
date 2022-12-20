@@ -1,8 +1,8 @@
-%macro tilrettelegging_radiologi(inndata=, aar=);
+﻿%macro tilrettelegging_radiologi(inndata=, aar=);
 /*! 
 ### Beskrivelse
 
-Makro for � tilrettelegge radiologi-data (NCRP-filer).
+Makro for å tilrettelegge radiologi-data (NCRP-filer).
 
 ```
 %tilrettelegging_radiologi(inndata=,aar=);
@@ -29,7 +29,7 @@ rename pasientlopenummer = pid
 /*omkode pasient_kjonn til ermann*/
      if pasient_kjonn eq 1     			then ermann=1; /* Mann */
      if pasient_kjonn eq 2     			then ermann=0; /* Kvinne */
-     if pasient_kjonn not in  (1:2) 	then ermann=.;
+     if pasient_kjonn not in  (1:2) 	      then ermann=.;
 	 drop pasient_kjonn;
 	 format ermann ermann.;
 
@@ -47,7 +47,7 @@ array ncrp {*} $ ncrpkode1-ncrpkode40;
 	end;
 drop i ncrpkode;
 
-/*�r, m�ned og inndato fra dato variabel*/
+/*år, måned og inndato fra dato variabel*/
 aar = year(dato);
 inndato = dato;
 format inndato eurdfdd10.;
@@ -59,9 +59,24 @@ run;
 %omkoding_komnr_bydel(inndata=radiologi_&aar.);
 
 /* fornye komnr/bydel */
-/* bydelsnr er allerede omkodet -> trenger ikke kj�re makro bydeler etter fornying */
+/* bydelsnr er allerede omkodet -> trenger ikke kjøre makro bydeler etter fornying */
 %include "&filbane/makroer/forny_komnr.sas";
 %forny_komnr(inndata=radiologi_&aar., kommune_nr=komnr_mottatt);
+
+/* for å omkode behandler-komnr må komnr-bosted renames for å ikke overskrives */
+data radiologi_&aar.;
+set radiologi_&aar.;
+rename komnr = komnr_bosted; 
+drop nr komnr_inn komnr_mottatt;
+run;
+
+%forny_komnr(inndata=radiologi_&aar., kommune_nr=behandler_kommunenr);
+
+data radiologi_&aar.;
+set radiologi_&aar.;
+rename komnr = komnr_behandler komnr_bosted=komnr;
+drop nr komnr_inn behandler_kommunenr;
+run;
 
 /* boomraader */
 %include "&filbane/makroer/boomraader.sas";
@@ -80,9 +95,7 @@ bohf
 borhf
 boshhn
 ncrpkode1-ncrpkode40;
-
 set radiologi_&aar.;
-drop nr komnr_inn komnr_mottatt;
 run;
 
 /* sortere */
