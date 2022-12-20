@@ -1,15 +1,16 @@
-﻿%macro omkoding_komnr_bydel(inndata=);
+﻿%macro omkoding_komnr_bydel(inndata=, pas_komnr=);
 /*! 
 ### Beskrivelse
 
 Makro for å omkode mottatte kommunenummer (bruker andre bydelsnummer enn SSB) til kommunenummer og bydel likt SSB.
 
 ```
-%omkoding_komnr_bydel(inndata= ,utdata=)
+%omkoding_komnr_bydel(inndata= , pas_komnr=)
 ```
 
 ### Input 
       - Inndata: 
+      - pas_komnr: 
 
 ### Output 
       - Utdata med variablene: komnr, bydel og bydel_kort (to siffer)
@@ -45,7 +46,7 @@ proc sql;
   select a.*, b.komnr_mapping as komnr_mottatt, b.bydel_mapping as bydel
   from &inndata a 
   left join mapping b
-  on a.pasient_kommune=b.bydel_utlevert;
+  on a.&pas_komnr=b.bydel_utlevert;
 quit;
 
 data &inndata;
@@ -53,7 +54,7 @@ set &inndata;
 
 /*hvis ingen omkoding er gjort -> bruk utlevert pasient_kommune*/
 if komnr_mottatt eq . then do;
-komnr_mottatt=pasient_kommune;
+komnr_mottatt=&pas_komnr;
 end;
 
 /*hent ut to siste siffer for å lage bydel slik vi vanligvis mottar den*/
@@ -65,6 +66,6 @@ end;
   end;
 
 /* drop av variabler */
-drop pasient_kommune;
+drop &pas_komnr.;
 run;
 %mend omkoding_komnr_bydel;
