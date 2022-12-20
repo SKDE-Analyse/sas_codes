@@ -1,8 +1,8 @@
-%macro omkoding_komnr_bydel(inndata=);
+ï»¿%macro omkoding_komnr_bydel(inndata=);
 /*! 
 ### Beskrivelse
 
-Makro for å omkode mottatte kommunenummer (bruker andre bydelsnummer enn SSB) til kommunenummer og bydel likt SSB.
+Makro for Ã¥ omkode mottatte kommunenummer (bruker andre bydelsnummer enn SSB) til kommunenummer og bydel likt SSB.
 
 ```
 %omkoding_komnr_bydel(inndata= ,utdata=)
@@ -19,7 +19,7 @@ Makro for å omkode mottatte kommunenummer (bruker andre bydelsnummer enn SSB) ti
  */
 
 
-/* lese inn fil med nav-bydeler og mapping til "ordinære"-bydeler */
+/* lese inn fil med nav-bydeler og mapping til "ordinÃ¦re"-bydeler */
 data mapping;
   infile "&filbane/tilrettelegging/radiologi/mapping_komnr_bydel.csv"
   delimiter=';'
@@ -56,8 +56,8 @@ if komnr_mottatt eq . then do;
 komnr_mottatt=pasient_kommune;
 end;
 
-/*hent ut to siste siffer for å lage bydel slik vi vanligvis mottar den*/
-/* dette for å kunne bruke makroer som krever bydelsnr som to siffer */
+/*hent ut to siste siffer for Ã¥ lage bydel slik vi vanligvis mottar den*/
+/* dette for Ã¥ kunne bruke makroer som krever bydelsnr som to siffer */
  if komnr_mottatt in (301,4601,5001,1103) then do; 
 	bydel_kort=mod(bydel,10**2);
 	if bydel_kort eq 99 then bydel_kort = .;

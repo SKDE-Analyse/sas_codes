@@ -1,8 +1,8 @@
-%macro tilrettelegging_radiologi(inndata=, aar=);
+Ôªø%macro tilrettelegging_radiologi(inndata=, aar=);
 /*! 
 ### Beskrivelse
 
-Makro for Â tilrettelegge radiologi-data (NCRP-filer).
+Makro for √• tilrettelegge radiologi-data (NCRP-filer).
 
 ```
 %tilrettelegging_radiologi(inndata=,aar=);
@@ -47,7 +47,7 @@ array ncrp {*} $ ncrpkode1-ncrpkode40;
 	end;
 drop i ncrpkode;
 
-/*Âr, mÂned og inndato fra dato variabel*/
+/*√•r, m√•ned og inndato fra dato variabel*/
 aar = year(dato);
 inndato = dato;
 format inndato eurdfdd10.;
@@ -59,11 +59,11 @@ run;
 %omkoding_komnr_bydel(inndata=radiologi_&aar.);
 
 /* fornye komnr/bydel */
-/* bydelsnr er allerede omkodet -> trenger ikke kj¯re makro bydeler etter fornying */
+/* bydelsnr er allerede omkodet -> trenger ikke kj√∏re makro bydeler etter fornying */
 %include "&filbane/makroer/forny_komnr.sas";
 %forny_komnr(inndata=radiologi_&aar., kommune_nr=komnr_mottatt);
 
-/* for Â omkode behandler-komnr mÂ komnr-bosted renames for Â ikke overskrives */
+/* for √• omkode behandler-komnr m√• komnr-bosted renames for √• ikke overskrives */
 data radiologi_&aar.;
 set radiologi_&aar.;
 rename komnr = komnr_bosted; 
