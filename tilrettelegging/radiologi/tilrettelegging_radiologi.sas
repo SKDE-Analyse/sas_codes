@@ -29,7 +29,7 @@ rename pasientlopenummer = pid
 /*omkode pasient_kjonn til ermann*/
      if pasient_kjonn eq 1     			then ermann=1; /* Mann */
      if pasient_kjonn eq 2     			then ermann=0; /* Kvinne */
-     if pasient_kjonn not in  (1:2) 	then ermann=.;
+     if pasient_kjonn not in  (1:2) 	      then ermann=.;
 	 drop pasient_kjonn;
 	 format ermann ermann.;
 
@@ -63,6 +63,21 @@ run;
 %include "&filbane/makroer/forny_komnr.sas";
 %forny_komnr(inndata=radiologi_&aar., kommune_nr=komnr_mottatt);
 
+/* for å omkode behandler-komnr må komnr-bosted renames for å ikke overskrives */
+data radiologi_&aar.;
+set radiologi_&aar.;
+rename komnr = komnr_bosted; 
+drop nr komnr_inn komnr_mottatt;
+run;
+
+%forny_komnr(inndata=radiologi_&aar., kommune_nr=behandler_kommunenr);
+
+data radiologi_&aar.;
+set radiologi_&aar.;
+rename komnr = komnr_behandler komnr_bosted=komnr;
+drop nr komnr_inn behandler_kommunenr;
+run;
+
 /* boomraader */
 %include "&filbane/makroer/boomraader.sas";
 %boomraader(inndata=radiologi_&aar.);
@@ -80,9 +95,7 @@ bohf
 borhf
 boshhn
 ncrpkode1-ncrpkode40;
-
 set radiologi_&aar.;
-drop nr komnr_inn komnr_mottatt;
 run;
 
 /* sortere */
