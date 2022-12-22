@@ -55,10 +55,10 @@
 - [rateprogram/ratefigur_todelt.sas](ratefigur_todelt)
 - Filen kontroll_mottatte_data.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas](kontroll_behandlingssted)
-- [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_type_lengde.sas](kontroll_type_lengde)
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/antall_pasienter_rader.sas](antall_pasienter_rader)
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas](1_kontroll_komnr_bydel)
 - Filen min_maks_dato.sas er ikke dokumentert.
+- [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_type.sas](kontroll_type)
 - Filen kjonn_fodselsar.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/aktivitet_komnr_bydel.sas](aktivitet_komnr_bydel)
 - [tilrettelegging/npr/2_tilrettelegging/icd10.sas](icd10)
@@ -81,6 +81,7 @@
 - [tilrettelegging/npr/2_tilrettelegging/lablerFormater.sas](lablerFormater)
 - [tilrettelegging/npr/3_kontroll_etter_tilrette/kontroll_innleggelse.sas](kontroll_innleggelse)
 - [tilrettelegging/npr/3_kontroll_etter_tilrette/3_kontroll_komnrbydel.sas](3_kontroll_komnrbydel)
+- [tilrettelegging/npr/3_kontroll_etter_tilrette/kontroll_type_lengde.sas](kontroll_type_lengde)
 - Filen beffremskriv.sas er ikke dokumentert.
 - [tilrettelegging/ssb/lesSSBdata.sas](lesSSBdata)
 - [tilrettelegging/ssb/Reisetid.sas](Reisetid)
