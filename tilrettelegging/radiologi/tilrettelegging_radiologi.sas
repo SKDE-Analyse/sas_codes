@@ -29,6 +29,11 @@ rename pasientlopenummer = pid
 if fagomraade_kode eq "PO" then off = 1;
 if fagomraade_kode eq "LR" then priv = 1;
 
+/* rename kontakttype og sette på format*/
+rename kontakttype = kontakttype_rad;
+%include "&filbane/tilrettelegging/radiologi/formater_radiologi.sas";
+format kontakttype_rad kontakttype_rad.;
+
 /*omkode pasient_kjonn til ermann*/
      if pasient_kjonn eq 1     			then ermann=1; /* Mann */
      if pasient_kjonn eq 2     			then ermann=0; /* Kvinne */
