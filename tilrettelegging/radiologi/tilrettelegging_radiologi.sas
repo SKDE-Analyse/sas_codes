@@ -23,8 +23,11 @@ data radiologi_&aar.;
 set &inndata;
 
 rename pasientlopenummer = pid
-       pasient_alder = alder
-       kontakttype = kontakttype_rad;
+       pasient_alder = alder;
+
+/* skille på offentlig og privat */
+if fagomraade_kode eq "PO" then off = 1;
+if fagommrade_kode eq "LR" then priv = 1;
 
 /*omkode pasient_kjonn til ermann*/
      if pasient_kjonn eq 1     			then ermann=1; /* Mann */
