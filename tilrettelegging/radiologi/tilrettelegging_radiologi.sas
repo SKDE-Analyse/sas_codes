@@ -19,20 +19,23 @@ Makro for å tilrettelegge radiologi-data (NCRP-filer).
     - Opprettet desember 2022, Tove J
  */
 
+/* formater til radiologi */
+ %include "&filbane/tilrettelegging/radiologi/formater_radiologi.sas";
+
 data radiologi_&aar.;
 set &inndata;
 
 rename pasientlopenummer = pid
        pasient_alder = alder;
 
+/*endre navn kontakttype, sette på format*/
+kontakttype_rad = kontakttype;
+drop kontakttype;
+format kontakttype_rad kontakttype_rad.;
+
 /* skille på offentlig og privat */
 if fagomraade_kode eq "PO" then off = 1;
 if fagomraade_kode eq "LR" then priv = 1;
-
-/* rename kontakttype og sette på format*/
-rename kontakttype = kontakttype_rad;
-%include "&filbane/tilrettelegging/radiologi/formater_radiologi.sas";
-format kontakttype_rad kontakttype_rad.;
 
 /*omkode pasient_kjonn til ermann*/
      if pasient_kjonn eq 1     			then ermann=1; /* Mann */
@@ -54,6 +57,12 @@ array ncrp {*} $ ncrpkode1-ncrpkode40;
 		ncrp{i}=scan(ncrpkode,i,"/ , ."); 
 	end;
 drop i ncrpkode;
+
+/* radiologi - kodeverk og utvalgskoder */
+%include "&filbane/tilrettelegging/radiologi/radiologi_utvalg.sas";
+%radiologi_utvalg;
+%include "&filbane/tilrettelegging/radiologi/radiologi_kodeverk.sas";
+%radiologi_kodeverk;
 
 /*år, måned og inndato fra dato variabel*/
 aar = year(dato);
@@ -104,6 +113,8 @@ borhf
 boshhn
 ncrpkode1-ncrpkode40;
 set radiologi_&aar.;
+/* sette på bo-formater */
+format bohf bohf_fmt. borhf borhf_fmt. boshhn boshhn_fmt.;
 run;
 
 /* sortere */
@@ -111,6 +122,7 @@ proc sort data=radiologi_&aar.;
 by pid inndato;
 run;
 
+/* lagre tilrettelagt datasett */
 data skde20.ncrp_&aar._T22;
 set radiologi_&aar;
 run;
