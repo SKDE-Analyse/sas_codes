@@ -223,6 +223,6 @@ array nc {*} ncrp: ;
 
 	If substr(nc{i},1,6) in ('TPJ0AN','TPJ0BN','TPJ0CN','TPJ0DN','TPJ0EN','TPJ0FN','TPJ0GN')
 	then N_reg_Z=1;
-		
 	end;
+drop i;
 %mend radiologi_kodeverk;
