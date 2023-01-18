@@ -51,23 +51,20 @@ array nc_utv {*} ncrp: ;
 		if substr(nc_utv{i},1,6) in ('SNC0AG')                                      														then MR_albue=1; 
 
 /* TORAKS, ABDOMEN OG KAR */
-		if substr(nc_utv{i},1,6) in ('SSQ0AD'/*ct toraks, abdomen og bekken*/)         														then CT_toraks_abdom_bekken=1; 
-		if substr(nc_utv{i},1,6) in ('SSC0AD'/*ct toraks*/,'SSD0AD'/*ct abdomen*/,'SSE0AD'/*ct bekken*/)                               		then CT_toraks_abdom_bekken=1; 
-		if substr(nc_utv{i},1,6) in ('SSL0AD'/*ct abdomen og bekken*/,'SSC0AD'/*ct toraks*/)      			                         		then CT_toraks_abdom_bekken=1; 
-		if substr(nc_utv{i},1,6) in ('SSK0AD'/*ct toraks og abdomen*/,'SSE0AD'/*ct bekken*/)      			                         		then CT_toraks_abdom_bekken=1; 
+		if substr(nc_utv{i},1,6) in ('SSC0AD'/*ct toraks*/) 																				then CT_toraks=1;
+		if substr(nc_utv{i},1,6) in ('SSD0AD'/*ct abdomen*/) 																				then CT_abdom=1;
+		if substr(nc_utv{i},1,6) in ('SSE0AD'/*ct bekken*/) 																				then CT_bekken=1;
+		
+		if substr(nc_utv{i},1,6) in ('SSQ0AD'/*ct toraks, abdomen og bekken*/)     															then CT_toraks_abdom_bekken=1;
+		if substr(nc_utv{i},1,6) in ('SSL0AD'/*ct abdomen og bekken*/)             															then CT_abdom_bekken=1;
+		if substr(nc_utv{i},1,6) in ('SSK0AD'/*ct toraks og abdomen*/)   																	then CT_toraks_abdom=1;
 
-		if substr(nc_utv{i},1,6) in ('SSL0AD'/*ct abdomen og bekken*/)  /*hvis toraks -> ekskludering*/               						then CT_abdom_bekken=1; 
-		if substr(nc_utv{i},1,6) in ('SSD0AD'/*ct abdomen*/,'SSE0AD'/*ct bekken*/)        						                       		then CT_abdom_bekken=1; 
+		if substr(nc_utv{i},1,6) in ('SKX0AD'/*ct urinveier*/)   																			then CT_urinveier=1; 
+		if substr(nc_utv{i},1,6) in ('SJF0BD'/*ct tykktarm*/)  																				then CT_tykktarm=1; 
 
-		if substr(nc_utv{i},1,6) in ('SSK0AD'/*ct toraks og abdomen*/)   /*hvis bekken -> ekskludering*/                      				then CT_toraks_abdom=1; 
-		if substr(nc_utv{i},1,6) in ('SSC0AD'/*ct toraks*/,'SSD0AD'/*ct abdomen*/)        						                       		then CT_toraks_abdom=1; 
-
-		if substr(nc_utv{i},1,6) in ('SKX0AD'/*ct urinveier*/)        						                       							then CT_urinveier=1; 
-		if substr(nc_utv{i},1,6) in ('SJF0BD'/*ct tykktarm*/)        						                       							then CT_tykktarm=1; 
-
-		if substr(nc_utv{i},1,6) in ('SKE0AG')                                      														then MR_prostata=1; 
-		if substr(nc_utv{i},1,6) in ('SSB0AD')                                      														then CT_hals=1; 
-		if substr(nc_utv{i},1,6) in ('SST0AD')                                      														then CT_hals_toraks_abdom_bekken=1; 
+		if substr(nc_utv{i},1,6) in ('SKE0AG')  																							then MR_prostata=1; 
+		if substr(nc_utv{i},1,6) in ('SSB0AD')  																							then CT_hals=1; 
+		if substr(nc_utv{i},1,6) in ('SST0AD')  																							then CT_hals_toraks_abdom_bekken=1;
 
 /* DIVERSE */
 		if substr(nc_utv{i},1,6) in ('SDX0AD')                                      														then CT_bihuler=1; 
@@ -107,11 +104,25 @@ array nc_utv {*} ncrp: ;
 		if substr(nc_utv{i},1,6) in ('SDE0AD')                                     	then CT_tinningben=1; 
     end;
 
-/*CT abdomen og  bekken, gitt at det ikke er utført ct toraks*/
-if CT_abdom_bekken eq 1 and (CT_toraks_abdom_bekken eq 1 or CT_toraks_abdom eq 1) then CT_abdom_bekken =.; 
-/* CT toraks og abdomen, gitt at det ikke er utført CT bekken */
-if CT_toraks_abdom eq 1 and (CT_toraks_abdom_bekken eq 1 or CT_abdom_bekken eq 1) then CT_toraks_abdom =.;
+/*CT toraks, abdomen og  bekken*/
+if CT_toraks eq 1 and CT_abdom eq 1 and CT_bekken eq 1 then CT_toraks_abdom_bekken=1;
+if CT_toraks eq 1 and CT_abdom_bekken eq 1 then CT_toraks_abdom_bekken=1;
+if CT_bekken eq 1 and CT_toraks_abdom eq 1 then CT_toraks_abdom_bekken=1;
 
+/*CT abdomen og  bekken, gitt at det ikke er utført ct toraks*/
+if CT_toraks_abdom_bekken ne 1 and CT_toraks ne 1 then do;
+	if CT_abdom eq 1 and CT_bekken eq 1 then CT_abdom_bekken=1;
+end; 
+
+/*CT toraks og abdomen, gitt at det ikke er utført CT bekken */
+if CT_toraks_abdom_bekken ne 1 and CT_bekken ne 1 then do;
+	if CT_abdom eq 1 and CT_toraks eq 1 then CT_toraks_abdom=1; 
+end; 
+
+/* CT toraks */
+if CT_toraks_abdom_bekken eq 1 or CT_abdom_bekken eq 1 or CT_toraks_abdom eq 1 or CT_abdom eq 1 then CT_toraks=.;
+
+/* MR nakke/rygg */
 if MR_cervikalkol eq 1 or MR_torakalkol eq 1 or MR_cervikal_torakal eq 1 or MR_torakal_lumbal eq 1 or 
     MR_lumbosakral eq 1 or MR_cerv_tora_lumbal eq 1 or MR_totalkol eq 1 or MR_tora_lumbosakral eq 1 or
     MR_caput_totalkol eq 1 or MR_totalkol_bekken eq 1 or MR_caput_delkolumna eq 1 or MR_caput_kolumna_overekstr eq 1 or
