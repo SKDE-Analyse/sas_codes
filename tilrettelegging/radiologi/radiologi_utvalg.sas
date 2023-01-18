@@ -51,17 +51,12 @@ array nc_utv {*} ncrp: ;
 		if substr(nc_utv{i},1,6) in ('SNC0AG')                                      														then MR_albue=1; 
 
 /* TORAKS, ABDOMEN OG KAR */
-/* TORAKS, ABDOMEN OG KAR */
 		if substr(nc_utv{i},1,6) in ('SSC0AD'/*ct toraks*/) 																				then CT_toraks=1;
-
 		if substr(nc_utv{i},1,6) in ('SSD0AD'/*ct abdomen*/) 																				then CT_abdom=1;
-
 		if substr(nc_utv{i},1,6) in ('SSE0AD'/*ct bekken*/) 																				then CT_bekken=1;
-
+		
 		if substr(nc_utv{i},1,6) in ('SSQ0AD'/*ct toraks, abdomen og bekken*/)     															then CT_toraks_abdom_bekken=1;
-
 		if substr(nc_utv{i},1,6) in ('SSL0AD'/*ct abdomen og bekken*/)             															then CT_abdom_bekken=1;
-
 		if substr(nc_utv{i},1,6) in ('SSK0AD'/*ct toraks og abdomen*/)   																	then CT_toraks_abdom=1;
 
 		if substr(nc_utv{i},1,6) in ('SKX0AD'/*ct urinveier*/)   																			then CT_urinveier=1; 
