@@ -67,6 +67,7 @@
 - [tilrettelegging/npr/2_tilrettelegging/bydel.sas](bydel)
 - [tilrettelegging/npr/2_tilrettelegging/fix_behandlingssted.sas](fix_behandlingssted)
 - [tilrettelegging/npr/2_tilrettelegging/merge_persondata.sas](merge_persondata)
+- [tilrettelegging/npr/2_tilrettelegging/tilrettelegging.sas](tilrettelegging)
 - [tilrettelegging/npr/2_tilrettelegging/var_rekkefolge.sas](var_rekkefolge)
 - [tilrettelegging/npr/2_tilrettelegging/splitte.sas](splitte)
 - [tilrettelegging/npr/2_tilrettelegging/koblingsID.sas](koblingsID)
