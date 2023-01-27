@@ -28,13 +28,13 @@ quit;
 /* 1 - antall pasienter og rader */
 /* ----------------------------- */
 %if &lopenr ne 0 and &kjonn ne 0 and &fodselsar ne 0  %then %do;
-%include "&filbane1/antall_pasienter_rader.sas";
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/antall_pasienter_rader.sas";
 %antall_pasienter_rader(inndata=&inndata, lnr=lopenr);
 
 /* ---------------------- */
 /* 2 - kjønn og fødselsår */
 /* ---------------------- */
-%include "&filbane1/kjonn_fodselsar.sas";
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kjonn_fodselsar.sas";
 %kjonn_fodselsar(inndata=&inndata,lnr=lopenr, kjonn=kjonn, fodselsar=fodselsar);
 %end;
 
@@ -42,21 +42,21 @@ quit;
 /* 3 - min og maks-verdier for år og dato */
 /* -------------------------------------- */
 %if &aar ne 0 and &inndato ne 0 and &utdato ne 0  %then %do;
-%include "&filbane1/min_maks_dato.sas";
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/min_maks_dato.sas";
 %min_maks_dato(inndata=&inndata);
 %end;
 
 /* ---------------------------------------------------------------- */
 /* 4 - Har mottatte variabler lik type og lengde som referanse satt */
 /* ---------------------------------------------------------------- */
-%include "&filbane1/kontroll_type_lengde.sas";
-%kontroll_type_lengde(inndata=&inndata);
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_type.sas";
+%kontroll_type(inndata=&inndata);
 
 /* -------------------------- */
 /* 5 - kommunenummer og bydel */
 /* -------------------------- */
 %if &komnrhjem2 ne 0 and &bydel2 ne 0 %then %do;
-%include "&filbane1/1_kontroll_komnr_bydel.sas";
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas";
 %kontroll_komnr_bydel(inndata= &inndata., komnr=komnrhjem2, bydel=bydel2, aar=&mottatt_aar);
 %end;
 
@@ -71,7 +71,7 @@ quit;
 	%if &institusjonid ne 0 and (&max_sektor eq SOM or &max_sektor eq PHV) %then %do;
 		%let beh=institusjonid;
 	%end;
-%include "&filbane1/kontroll_behandlingssted.sas";
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas";
 %include "&filbane/formater/beh.sas";
 %kontroll_behandlingssted(inndata=&inndata., aar=&mottatt_aar , beh=&beh.);
 %end;
