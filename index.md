@@ -76,6 +76,7 @@
 - Filen def_aspes_kontakt.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/fix_kjonn.sas](fix_kjonn)
 - [tilrettelegging/npr/2_tilrettelegging/splitt_avtspes.sas](splitt_avtspes)
+- Filen nc_koder.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/icd10.sas](icd10)
 - [tilrettelegging/npr/2_tilrettelegging/reduser_lengde.sas](reduser_lengde)
 - [tilrettelegging/npr/2_tilrettelegging/behandler.sas](behandler)
