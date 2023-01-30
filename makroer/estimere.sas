@@ -1,16 +1,16 @@
-
+ï»¿
 
 
 /*
-Hva gjenstår å gjøre:
+Hva gjenstÃ¥r Ã¥ gjÃ¸re:
 
-2. Ta hensyn til manglende avtspesdata (ved estimat basert på månedsdata)
-NB! Kun relevant ved estimering på boområde.
-Vurdering etter test 25 jan 2023: Forholdet mellom aktivitet på sykehus og hos avalespesialist
-kan svinge mye fra måned til måned så korreksjon basert på f.eks. fjoråret eller 
-første tertial inneværende år kan bli ganske feil. Kanskje bedre å bruke tertialdata?
+2. Ta hensyn til manglende avtspesdata (ved estimat basert pÃ¥ mÃ¥nedsdata)
+NB! Kun relevant ved estimering pÃ¥ boomrÃ¥de.
+Vurdering etter test 25 jan 2023: Forholdet mellom aktivitet pÃ¥ sykehus og hos avalespesialist
+kan svinge mye fra mÃ¥ned til mÃ¥ned sÃ¥ korreksjon basert pÃ¥ f.eks. fjorÃ¥ret eller 
+fÃ¸rste tertial innevÃ¦rende Ã¥r kan bli ganske feil. Kanskje bedre Ã¥ bruke tertialdata?
 
-6. teste på mer data
+6. teste pÃ¥ mer data
 */
 
 
@@ -22,64 +22,64 @@ est_per=8,
 agg_level=bohf,
 utdata=);
 
-/*** HVA GJØR MAKROEN? ******************************************/
+/*** HVA GJÃ˜R MAKROEN? ******************************************/
 /*******************************************************************/
 /*
-Makroen lager et estimat for antall hendelser (eks. operasjoner) forventet ila et helt år
-basert på data for deler av året, og data for ett eller flere hele forutgående år (basisperioden). 
-Eks. Estimat for hele 2022 (estimatår) basert på data for 1 tertial 2022 + hele 2019-2021 (basisperiode).
-Estimatet beregnes for et gitt aggregeringsnivå (eks pr behHF eller boHF).
-Det beregnes ett estimat basert på snittet for basisperioden, samt et maksimums- og minimumsestimat.
-Estimatet kan f.eks. benyttes til å beregne en ujustert rate for estimatåret.
+Makroen lager et estimat for antall hendelser (eks. operasjoner) forventet ila et helt Ã¥r
+basert pÃ¥ data for deler av Ã¥ret, og data for ett eller flere hele forutgÃ¥ende Ã¥r (basisperioden). 
+Eks. Estimat for hele 2022 (estimatÃ¥r) basert pÃ¥ data for 1 tertial 2022 + hele 2019-2021 (basisperiode).
+Estimatet beregnes for et gitt aggregeringsnivÃ¥ (eks pr behHF eller boHF).
+Det beregnes ett estimat basert pÃ¥ snittet for basisperioden, samt et maksimums- og minimumsestimat.
+Estimatet kan f.eks. benyttes til Ã¥ beregne en ujustert rate for estimatÃ¥ret.
 
-Estimat bør være basert på minst 4 måneder med data - feilmelding dersom du forsøker deg på noe mindre...
+Estimat bÃ¸r vÃ¦re basert pÃ¥ minst 4 mÃ¥neder med data - feilmelding dersom du forsÃ¸ker deg pÃ¥ noe mindre...
 
-NB! Skal du kun estimere basert på data fra sykehus kan du sende inn valgfritt antall måneder med 
-data fra estimatåret, skal du estimere basert på data fra sykehus + avtalespesialist må du ha 
-tertialdata (4 eller 8 måneder) fra estimatåret.
+NB! Skal du kun estimere basert pÃ¥ data fra sykehus kan du sende inn valgfritt antall mÃ¥neder med 
+data fra estimatÃ¥ret, skal du estimere basert pÃ¥ data fra sykehus + avtalespesialist mÃ¥ du ha 
+tertialdata (4 eller 8 mÃ¥neder) fra estimatÃ¥ret.
 */
 
 /*** FORKLARING TIL INPUT ******************************************/
 /*******************************************************************/
 
 /*
-basis_data=navn på datasett med hele årganger som danner grunnlag for estimat
-Dersom du kun ønsker å basere estimat på f.eks. årene 2019 og 2022 sender du inn et datasett med
-data fra bare disse to årene.
+basis_data=navn pÃ¥ datasett med hele Ã¥rganger som danner grunnlag for estimat
+Dersom du kun Ã¸nsker Ã¥ basere estimat pÃ¥ f.eks. Ã¥rene 2019 og 2022 sender du inn et datasett med
+data fra bare disse to Ã¥rene.
 
 est_var=variabelen det skal estimeres for (indeksvariabel som indikerer en hendelse)
 
-est_data=navn på datasett med noen måneder med data fra estimatår - året det estimeres for
-est_per=8 antall måneder med data i est_data, 4 for 1 tertial, 8 for andre tertial
+est_data=navn pÃ¥ datasett med noen mÃ¥neder med data fra estimatÃ¥r - Ã¥ret det estimeres for
+est_per=8 antall mÃ¥neder med data i est_data, 4 for 1 tertial, 8 for andre tertial
 NB! Bruk minst ett tertial med data!
 
 sho=1 hvis sykehusoppholdsmakro er brukt, 0 ellers
-NB! sho-variabelen gjelder BÅDE basisperiode OG estimatår, 
-sykehusoppholdsmakro må enten kjøres på begge datasett eller ingen av dem
+NB! sho-variabelen gjelder BÃ…DE basisperiode OG estimatÃ¥r, 
+sykehusoppholdsmakro mÃ¥ enten kjÃ¸res pÃ¥ begge datasett eller ingen av dem
 
-agg_level=aggregeringsnivå for utdata OG nivå for estimering
+agg_level=aggregeringsnivÃ¥ for utdata OG nivÃ¥ for estimering
 (eks: hvis agg_level=bohf vil estimat beregnes separat for hvert bohf)
-NB! agg_level kan ikke være finmasket - da blir estimatet dårlig (lav N i hver celle).
-Bør være borhf/bohf/boshhn eller behrhf/behf/behsh - vurder ifht N!
+NB! agg_level kan ikke vÃ¦re finmasket - da blir estimatet dÃ¥rlig (lav N i hver celle).
+BÃ¸r vÃ¦re borhf/bohf/boshhn eller behrhf/behf/behsh - vurder ifht N!
 
-utdata=navn på utdatasett;
+utdata=navn pÃ¥ utdatasett;
 */
 
-/*Feilmelding hvis antall måneder er for lite*/
+/*Feilmelding hvis antall mÃ¥neder er for lite*/
 %if &est_per lt 4 %then %do;
 data _null_;
-put 'ERROR: Antall måneder er for lite, bruk minst ett fullt tertial.';
+put 'ERROR: Antall mÃ¥neder er for lite, bruk minst ett fullt tertial.';
 run;
 %end;
 
-/*Plukker ut aktuelle måneder fra basisperioden*/
+/*Plukker ut aktuelle mÃ¥neder fra basisperioden*/
 data basis;
 set &basis_data;
 if month(utdato) in (1:&est_per) then est_per=1;
 run;
 
 /*summere opp aktuell variabel for estimatperioden 
-og for hele året og finne andel i estimatperioden pr år*/
+og for hele Ã¥ret og finne andel i estimatperioden pr Ã¥r*/
 %if &sho=1 %then %do;
 proc sql;
 create table basis_andel as
@@ -104,15 +104,15 @@ quit;
 
  
 
-/*Printe datasett for å vise oversikt over andel pr år*/
-title "Andel av årlig aktivitet i estimatperioden (andel_estp), pr år";
+/*Printe datasett for Ã¥ vise oversikt over andel pr Ã¥r*/
+title "Andel av Ã¥rlig aktivitet i estimatperioden (andel_estp), pr Ã¥r";
 proc print data=basis_andel;
 var aar &agg_level andel_estp;
 run;
 title;
 
 
-/*Finn antall år i basisperioden*/
+/*Finn antall Ã¥r i basisperioden*/
 proc sql;
 create table basis_aar as
 select distinct aar
@@ -138,14 +138,14 @@ from basis_andel
 group by &agg_level;
 quit;
 
-/*Printe datasett for å vise oversikt over andel pr år*/
+/*Printe datasett for Ã¥ vise oversikt over andel pr Ã¥r*/
 title "estp_snitt_andel";
 proc print data=estp_snitt_andel;
 var &agg_level snitt_andel_estp max_andel_estp min_andel_estp;
 run;
 title;
 
-/*aggregere estimatdata på ønsket aggregeringsnivå (bo- eller behandler)*/
+/*aggregere estimatdata pÃ¥ Ã¸nsket aggregeringsnivÃ¥ (bo- eller behandler)*/
 
 %if &sho=1 %then %do;
 proc sql;
@@ -175,7 +175,7 @@ from est_agg as a
 	left join estp_snitt_andel as b on a.&agg_level=b.&agg_level;
 quit;
 
-/*beregne estimert aktivitetsnivå vha 
+/*beregne estimert aktivitetsnivÃ¥ vha 
 gjennomsnittlig andel i estimatperioden*/
 data &utdata;
 set est_agg_andel;

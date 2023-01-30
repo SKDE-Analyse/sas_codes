@@ -1,4 +1,4 @@
-%macro fremskrive(
+ï»¿%macro fremskrive(
 inndata=,
 utdata=,
 frem_var=,
@@ -26,28 +26,28 @@ bildenavn=
 /*
 
 Variabler for inndata:
-inndata=navn på inndatasett
-utdata=navn på utdatasett
+inndata=navn pÃ¥ inndatasett
+utdata=navn pÃ¥ utdatasett
 frem_var=variabel i inndatasett som skal fremskrives
-sho=1 hvis sykehusoppholdsmakro kjørt på dataene, ellers 0
+sho=1 hvis sykehusoppholdsmakro kjÃ¸rt pÃ¥ dataene, ellers 0
 
 Variabler for aldersgruppeinndeling:
-int=aldersintervall (eks 5 for 5-årige aldersgrupper), default er 10
+int=aldersintervall (eks 5 for 5-Ã¥rige aldersgrupper), default er 10
 alder_min=laveste alder, default er null
-alder_maks=høyeste alder, default er 105
-overste_agr=laveste alder i øverste aldersgruppe (eks. 90 for å slå sammen alle over 90)
+alder_maks=hÃ¸yeste alder, default er 105
+overste_agr=laveste alder i Ã¸verste aldersgruppe (eks. 90 for Ã¥ slÃ¥ sammen alle over 90)
 
 Variabler for basisperiode for fremskrivningsperiode:
-Basisperioden må angis som periode med min og max år, men du kan ekskludere ETT år i perioden (eks 2020).
-min_aar=første år, settes lik data_start om den ikke angis
-max_aar=siste år, settes lik data_slutt om den ikke angis
-ekskludert_aar= År som skal ekskluderes fra basisperiode - eks lik 2020 hvis 2020 skal ekskluderes
-frem_slutt= sluttår for fremskrivingsperiode (eks. 2030, 2040 eller 2050)
+Basisperioden mÃ¥ angis som periode med min og max Ã¥r, men du kan ekskludere ETT Ã¥r i perioden (eks 2020).
+min_aar=fÃ¸rste Ã¥r, settes lik data_start om den ikke angis
+max_aar=siste Ã¥r, settes lik data_slutt om den ikke angis
+ekskludert_aar= Ã…r som skal ekskluderes fra basisperiode - eks lik 2020 hvis 2020 skal ekskluderes
+frem_slutt= sluttÃ¥r for fremskrivingsperiode (eks. 2030, 2040 eller 2050)
 
 Input for figur:
 where_bohf= Hvilke bohf skal det plottes for? eks: bohf in (1:4);
 bildesti=sti for bildelagring
-ylabel=Tekst på y-akse
+ylabel=Tekst pÃ¥ y-akse
 bildeformat=pdf eller png
 bildenavn=ekstra streng som skal inn i bildefilnavnet
 */
@@ -56,13 +56,13 @@ bildenavn=ekstra streng som skal inn i bildefilnavnet
 %global ant_gr;
 %let ant_gr=%sysevalf(((&overste_agr-&alder_min)/&int)+1);
 
-/*Hvis det ikke er angitt verdi for øverste aldersgruppe 
-beregnes den ut fra max alder og intervallstørrelse*/
+/*Hvis det ikke er angitt verdi for Ã¸verste aldersgruppe 
+beregnes den ut fra max alder og intervallstÃ¸rrelse*/
 %if &overste_agr=0 %then %do;
 %let overste_agr=%sysevalf(&alder_maks-&int);
 %end;
 
-/*Finne startår og sluttår i data*/
+/*Finne startÃ¥r og sluttÃ¥r i data*/
 proc sql;
 create table inndata_aar as
 select distinct min(aar) as min_aar, max(aar) as max_aar
@@ -79,7 +79,7 @@ run;
 %put &=data_slutt;
 
 /*Hvis verdier ikke er angitt for basisperiode 
-settes basisperiode basert på data_start og data_slutt*/
+settes basisperiode basert pÃ¥ data_start og data_slutt*/
 %if &min_aar=0 %then %do;
 %let min_aar=&data_start;
 %end;
@@ -88,7 +88,7 @@ settes basisperiode basert på data_start og data_slutt*/
 %let max_aar=&data_slutt;
 %end;
 
-/*Hvis ett år skal ekskluderes fra 
+/*Hvis ett Ã¥r skal ekskluderes fra 
 basisperioden lages makrovariabelen ant_aar
 som brukes i beregning av snitt for basisperioden*/
 %if ekskludert_aar ne 9999 %then %do;
@@ -116,7 +116,7 @@ where aar in (&data_start:&data_slutt)
 		and alder le &alder_maks;
 
 
-/*Lage aldersinndeling basert på aldersinput*/
+/*Lage aldersinndeling basert pÃ¥ aldersinput*/
 if alder lt &overste_agr then do;
 	do i=1 to &ant_gr-1;
 		if ( alder ge (&alder_min+((i-1)*&int)) 
@@ -153,7 +153,7 @@ drop Komnrnavn;
 where  alder ge &alder_min
 		and alder le &alder_maks;
 
-/*Lage aldersinndeling basert på aldersinput*/
+/*Lage aldersinndeling basert pÃ¥ aldersinput*/
 if alder lt &overste_agr then do;
 	do i=1 to &ant_gr-1;
 		if ( alder ge (&alder_min+((i-1)*&int)) 
@@ -183,7 +183,7 @@ by komnr ermann alder aar alder_grp ;
 var innbyggere; id alt;
 run;
 
-/*Legge på bovar of aggregere på BOHF*/
+/*Legge pÃ¥ bovar of aggregere pÃ¥ BOHF*/
 %boomraader(inndata=Frem_alt, indreOslo = 0, bydel = 0);
 
 proc sql;
@@ -228,7 +228,7 @@ and BoRHF in (1:4)
 and aar ge &data_start 
 and aar le &data_slutt;
 
-/*Lage aldersinndeling basert på aldersinput*/
+/*Lage aldersinndeling basert pÃ¥ aldersinput*/
 %if &sho=1 %then %do;		/*Bruke sho_alder hvis relevant*/
 if sho_alder lt &overste_agr then do;
 	do i=1 to &ant_gr-1;
@@ -257,7 +257,7 @@ drop i;
 run;
 
 
-/*Aggregere på kjønn, alder og bohf*/
+/*Aggregere pÃ¥ kjÃ¸nn, alder og bohf*/
 %if &sho=1 %then %do;	/*Telle kun en gang per sho_id*/
 proc sql;
    create table inndata_agg as 
@@ -280,7 +280,7 @@ quit;
 %end;
 
 
-/*Beregne gjennomsnittlig antall inngrep pr. år*/
+/*Beregne gjennomsnittlig antall inngrep pr. Ã¥r*/
 %if &ekskludere=1 %then %do;
 Proc sql;
 	create table inndata_snitt as 
@@ -288,7 +288,7 @@ Proc sql;
 	SUM(&frem_var) as tot_&frem_var,
 	(calculated tot_&frem_var)/&ant_aar as snitt_&frem_var
       from inndata_agg
-	  /*Ekskludere år hvis aktuelt*/
+	  /*Ekskludere Ã¥r hvis aktuelt*/
 	  where aar ne &ekskludert_aar
    group by ermann, alder_grp, BoHF;
 quit;
@@ -305,7 +305,7 @@ quit;
 %end;
 
 
-/*Beregne gjennomsnittlig antall innbyggere pr. år*/
+/*Beregne gjennomsnittlig antall innbyggere pr. Ã¥r*/
 %if &ekskludere=1 %then %do;
 Proc sql;
 	create table innbygg_snitt as 
@@ -313,7 +313,7 @@ Proc sql;
 	SUM(Innbygg) as tot_Innbygg,
 	(calculated tot_Innbygg)/&ant_aar as snitt_Innbygg
    from Bo_Bef
-   /*Begrense antall år til basisperioden OG ekskludere år hvis aktuelt*/
+   /*Begrense antall Ã¥r til basisperioden OG ekskludere Ã¥r hvis aktuelt*/
 	where aar ge &min_aar and aar le &max_aar and aar ne &ekskludert_aar
    group by ermann, alder_grp, BoHF;
 quit;
@@ -325,7 +325,7 @@ Proc sql;
 	SUM(Innbygg) as tot_Innbygg,
 	(calculated tot_Innbygg)/(&max_aar-&min_aar) as snitt_Innbygg
    from Bo_Bef  
-   /*Begrense antall år til basisperioden*/
+   /*Begrense antall Ã¥r til basisperioden*/
 	where aar ge &min_aar and aar le &max_aar
    group by ermann, alder_grp, BoHF;
 quit;
@@ -340,7 +340,7 @@ on innbygg_snitt.BoHF=inndata_snitt.BoHF and innbygg_snitt.ermann=inndata_snitt.
  innbygg_snitt.alder_grp=inndata_snitt.alder_grp;
 quit; 
 
-/*Lage andeler pr innbygger i boHF, alder_grp og kjønn*/
+/*Lage andeler pr innbygger i boHF, alder_grp og kjÃ¸nn*/
 Data inn_andeler;
 set inn_samle;
 if snitt_&frem_var=. then snitt_&frem_var=0;
@@ -362,8 +362,8 @@ quit;
 
 /***********************************************/
 /*Fremskrive inngrep pr. aar				   */
-/*Antall inngrep pr. kjønn og aldersgruppe	   */
-/*Basert på fremskrevne innbyggertall 			*/
+/*Antall inngrep pr. kjÃ¸nn og aldersgruppe	   */
+/*Basert pÃ¥ fremskrevne innbyggertall 			*/
 /***********************************************/
 Data Fremskriv;
 set Fremskriv_base;
@@ -379,7 +379,7 @@ else if aar not in (&data_start:&data_slutt) then do;
 end;
 run;
 
-/*Aggregere fremskrevne tall på aar og bohf*/
+/*Aggregere fremskrevne tall pÃ¥ aar og bohf*/
 proc sql;
    create table Frem as 
    select distinct aar, BoHF, SUM(FS_Lav) as Lav, 
@@ -390,7 +390,7 @@ proc sql;
 quit;
 
 
-/*Aggregere reelle tall på år og bohf*/
+/*Aggregere reelle tall pÃ¥ Ã¥r og bohf*/
 proc sql;
    create table inndata_agg_bohf as 
    select distinct aar, BoHF, SUM(&frem_var) as &frem_var
@@ -420,7 +420,7 @@ Proc sgplot data=&utdata sganno=Anno pad=(Bottom=10%) noautolegend noborder ;
 where &where_bohf;
 series X=Aar y=&frem_var / name="relle" Group=BoHF  lineattrs=(Pattern=21 thickness=1) break ;
 series X=Aar y=Mid / name="BOHF" Group=BoHF  lineattrs=(Pattern=1 thickness=2);
-Keylegend / title="Opptaksområder:" location=outside position=bottom noborder ;
+Keylegend / title="OpptaksomrÃ¥der:" location=outside position=bottom noborder ;
 band x=Aar lower=Lav UPPER=Hoy /Fill Outline lineattrs=(Pattern=1 thickness=2)
 	group=BoHF transparency=0.6;
 yaxis /*Values=(0 to 2500 by 250)*/ label="&ylabel" ;
