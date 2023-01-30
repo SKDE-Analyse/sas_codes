@@ -1,4 +1,4 @@
-%macro nc_koder(inndata=, xp=);
+﻿%macro nc_koder(inndata=, xp=);
 data &inndata;
 set &inndata;
 /* finne ut hvor mange ncsp-variabler som sendes inn */
@@ -9,10 +9,10 @@ nkode=max(i)-1;
 run;
 /* lage makrovariabel som angir antall ncsp-variabler */
 proc sql noprint;
-	select nkode into: ant_n
+	select nkode into: ant_nc trimmed
 	from &inndata;
 quit;
-%let ant_nc = &ant_n;
+
 /* lage ny ncsp-variabler med store bokstaver og mellomrom fjernes */
 data &inndata;
 set &inndata;
