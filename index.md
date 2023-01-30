@@ -30,6 +30,7 @@
 - [makroer/liste_datasett_aar.sas](liste_datasett_aar)
 - [makroer/alders_oppslag.sas](alders_oppslag)
 - [makroer/andelsfig.sas](andelsfig)
+- Filen fremskrive.sas er ikke dokumentert.
 - [makroer/Multippel_test.sas](Multippel_test)
 - [makroer/sykehusopphold.sas](sykehusopphold)
 - [makroer/definer_behandler.sas](definer_behandler)
@@ -44,6 +45,7 @@
 - [makroer/aggreger.sas](aggreger)
 - [makroer/henteKorrvekt.sas](henteKorrvekt)
 - [makroer/reinnleggelser.sas](reinnleggelser)
+- [makroer/estimere.sas](estimere)
 - [makroer/ratefig.sas](ratefig)
 - [rateprogram/ratefig_todelt.sas](ratefig_todelt)
 - [rateprogram/ratefigur_tredelt.sas](ratefigur_tredelt)
