@@ -15,39 +15,33 @@ run;
 
 data tmp_data;
 set &inndata;
-
-/* ----------------------- */
-/* tilstand -> hdiag/bdiag */
-/* ----------------------- */
-
-%if &tilstand_1_1 ne 0 or &tilstand_1_2 ne 0 or &tilstand_2_1 ne 0 %then %do;
-array tilstand(*) $ tilstand:;
-do i = 1 to dim(tilstand);
-  tilstand(i)=upcase(compress(tilstand(i),"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890","ki")); /*The modifier "ki" means Keep the characters in the list and Ignore the case of the characters */
-end;
+run;
 
 %if &tilstand_1_1 ne 0 %then %do;
-hdiag=tilstand_1_1;
-/* ICCD10 */
+/* hdiag */
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/tilstandskoder.sas";
+%tilstandskoder(inndata=tmp_data, hoved=1);
+/* ICD10 */
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/icd10.sas";
-%icd;
+%ICD(inndata=tmp_data);
 %end;
 
 %if &tilstand_1_2 ne 0 %then %do;
-hdiag2=tilstand_1_2;
+/* hdiag2 */
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/tilstandskoder.sas";
+%tilstandskoder(inndata=tmp_data, hoved=2);
 %end;
 
 %if &tilstand_2_1 ne 0 %then %do;
-array bdiag{*} $ bdiag1-bdiag19 ;
-array bTilstand{*} $ tilstand_2_1 -- tilstand_20_1;
-do i=1 to dim(bTilstand);
-    bdiag{i}=(bTilstand{i});
-end;
+/* bdiag */
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/tilstandskoder.sas";
+%tilstandskoder(inndata=tmp_data, hoved=0);
 %end; 
 
-drop tilstand_: i;
-%end;
-
+/* drop tilstandskoder fra tilrettelagte data */
+data tmp_data;
+set tmp_data;
+drop tilstand_:;
 run;
 
 /* ----------- */
