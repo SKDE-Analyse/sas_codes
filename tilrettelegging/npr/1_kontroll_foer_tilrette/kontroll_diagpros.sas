@@ -1,5 +1,6 @@
+%macro kontroll_diagpros(inndata=);
 data test;
-  set hnmot.som_2022_M22T1(obs=100000 keep=lopenr tilstand: nc: institusjonid sh_reg shfylke);
+  set &inndata(keep=lopenr tilstand: nc:);
 run;
 
 %macro gyldig_kode(kode=);
@@ -20,12 +21,12 @@ run;
 	  do j = 1 to len;
 	    if j in (1,2) then do; *first 2 digits of any nc codes should be character;
 	    	feil&kode=not(anyalpha(substr(&kode(i),j,1)));
-			if feil&kode=1 then leave;
-		end;
-		else do; * the rest can be alphanumeric;
+			  if feil&kode=1 then leave;
+		  end;
+		  else do; * the rest can be alphanumeric;
 	    	feil&kode=not(anyalnum(substr(&kode(i),j,1)));
-			if feil&kode=1 then leave;
-		end;
+			  if feil&kode=1 then leave;
+		  end;
 	  end;
 	end;
   end;
@@ -64,40 +65,54 @@ data test;
   %gyldig_kode(kode=ncrp);
 run;
 
+/* For those with invalid Prosedyrekoder, flag if they are ATC or Særkoder */
+data test;
+  set test;
+  tmp=0;
+  if feilncsp or feilncmp or feilncrp then do; /* if */
 
-title 'Feil ncsp';
-proc freq data=test order=freq;
-  tables institusjonid sh_reg shfylke;
-  where feilncsp=1;
+  array pros (*) $ nc:;
+  do i= 1 to dim(pros); /* do loop */
+
+    * flag ATC - alpha-num-num-alpha;
+    if anyalpha(substr(pros(i),1,1)) and 
+       anydigit(substr(pros(i),2,1)) and
+       anydigit(substr(pros(i),3,1)) and
+       anyalpha(substr(pros(i),4,1)) 
+    then atckode=1;
+
+  * flag særkoder - 5 dig, alphanum; 
+    else if length(pros(i))=5 then do;
+    tmp=0;
+    do j=1 to 5;
+      if anyalnum(substr(pros(i),j,1)) then tmp + 1;
+    end;
+    /* 5 digit alphanum code with at num in 1 and/or 2 position */
+    if tmp=5 and (anydigit(substr(pros(i),1,1)) or anydigit(substr(pros(i),2,1)))
+    then saerkode=1;
+  end;
+
+  end; /* do loop */
+  end; /* if */
+
+  drop i j tmp;
 run;
 
-title 'Feil ncmp';
-proc freq data=test order=freq;
-  tables institusjonid sh_reg shfylke;
-  where feilncmp=1;
-run;
 
-title 'Feil ncrp';
-proc freq data=test order=freq;
-  tables institusjonid sh_reg shfylke;
-  where feilncrp=1;
-run;
-
-
-/* Print out results */
+/* Print out results for diagnosekoder */
 data feildiag;
-  set test(keep=feildiag tilstand:);
+  set test;
   where feildiag=1;
 run;
 
-/* sjekk om det er data i tabell 'feildiag' - output i resultvindu */
-%let dsid2=%sysfunc(open(feildiag));
-%let nobs_feildiag=%sysfunc(attrn(&dsid2,any));
-%let dsid2=%sysfunc(close(&dsid2)); 
+* sjekk om det er data i tabell 'feildiag' - output i resultvindu ;
+%let dsid1=%sysfunc(open(feildiag));
+%let nobs_feildiag=%sysfunc(attrn(&dsid1,nlobs));
+%let dsid1=%sysfunc(close(&dsid1)); 
 
-%if &nobs_feildiag eq 1 %then %do;
-title color= purple height=5 "7a: Diagnosekode: Linjer med ugyldige diagnosekoder";
-proc print data=test(keep=feildiag tilstand:);
+%if &nobs_feildiag ne 0 %then %do;
+title color= purple height=5 "7a: Diagnosekode: &nobs_feildiag linjer med ugyldige diagnosekoder";
+proc print data=test(keep= lopenr feildiag tilstand:);
   where feildiag=1;
  run;
 title;
@@ -115,3 +130,63 @@ proc sql;
 quit;
 title;
 %end;
+
+
+
+/* Results for Prosedyrekoder */
+data feilpros;
+  set test;
+  where feilncmp or feilncsp or feilncrp;
+run;
+
+data atc saer err;
+  set feilpros;
+  if atckode  then output atc;
+  if saerkode then output saer;
+  if atckode=. and saerkode=. then output err;
+run;
+
+
+%let dsid2=%sysfunc(open(feilpros));
+%let nobs_feilpros=%sysfunc(attrn(&dsid2,nlobs));
+%let dsid2=%sysfunc(close(&dsid2)); 
+
+%let dsid_atc=%sysfunc(open(atc));
+%let nobs_atc=%sysfunc(attrn(&dsid_atc,nlobs));
+%let dsid_atc=%sysfunc(close(&dsid_atc)); 
+
+%let dsid_saer=%sysfunc(open(saer));
+%let nobs_saer=%sysfunc(attrn(&dsid_saer,nlobs));
+%let dsid_saer=%sysfunc(close(&dsid_saer)); 
+
+%let dsid_err=%sysfunc(open(err));
+%let nobs_err=%sysfunc(attrn(&dsid_err,nlobs));
+%let dsid_err=%sysfunc(close(&dsid_err)); 
+
+%if &nobs_feilpros ne 0 %then %do;
+title1 color= purple height=5 "7b: Prosedyrekode: &nobs_err linjer med ugyldige prosedyrekoder, &nobs_atc linjer med ATCkoder, &nobs_saer linjer med Saerkoder";
+proc print data=feilpros(keep= lopenr nc: atckode saerkode);
+  where atckode=. and saerkode=. ;
+run;
+proc freq data=feilpros;
+  tables atckode saerkode/missing;
+run;
+title;
+%end;
+
+%if &nobs_feilpros eq 0 %then %do;
+title color= darkblue height=5  "7b: Prosedyrekode: Alle linjer med gyldige prosedyrekoder";
+proc sql;
+   create table m
+       (note char(12));
+   insert into m
+      values('All is good!');
+   select * 
+	from m;
+quit;
+title;
+%end;
+
+proc datasets nolist; delete test m ; run;
+
+%mend;
