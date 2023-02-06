@@ -1,4 +1,4 @@
-%macro kontroll_diagpros(inndata=);
+ï»¿%macro kontroll_diagpros(inndata=);
 data test;
   set &inndata(keep=lopenr tilstand: nc:);
 run;
@@ -65,7 +65,7 @@ data test;
   %gyldig_kode(kode=ncrp);
 run;
 
-/* For those with invalid Prosedyrekoder, flag if they are ATC or Særkoder */
+/* For those with invalid Prosedyrekoder, flag if they are ATC or SÃ¦rkoder */
 data test;
   set test;
   tmp=0;
@@ -81,7 +81,7 @@ data test;
        anyalpha(substr(pros(i),4,1)) 
     then atckode=1;
 
-  * flag særkoder - 5 dig, alphanum; 
+  * flag sÃ¦rkoder - 5 dig, alphanum; 
     else if length(pros(i))=5 then do;
     tmp=0;
     do j=1 to 5;
