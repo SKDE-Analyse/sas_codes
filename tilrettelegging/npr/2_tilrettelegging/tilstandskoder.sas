@@ -21,12 +21,9 @@ end;
 
 if &hoved eq 0 then do;
 /* finne hvor mange bitilstander som er mottatt */
-array tilstand_mottatt{*} $ tilstand_2: ;
-	do i= 1 to dim(tilstand_mottatt) ;
-	end;
-nbikode=max(i)-1;
-end;
-drop i; 
+array tilstand_mottatt{*} $ tilstand_: ;
+array tilstand_hoved{*}   $ tilstand_1_: ;
+nbikode=dim(tilstand_mottatt)-dim(tilstand_hoved);
 run;
 
 %if &hoved eq 0 %then %do;
@@ -36,11 +33,13 @@ proc sql noprint;
 	from &inndata;
 quit;
 
+%let  end_bikode=%sysevalf(&ant_bikode+1);
+
 data &inndata;
 set &inndata;
 
-array bdiag{*} $ bdiag1-bdiag19 ;
-array bTilstand{*} $ tilstand_2_1 -- tilstand_&ant_bikode._1;
+array bdiag{*} $ bdiag1-bdiag&ant_bikode ;
+array bTilstand{*} $ tilstand_2_1 -- tilstand_&end_bikode._1;
 do i=1 to dim(bTilstand);
     bdiag{i}=(bTilstand{i});
 end;
