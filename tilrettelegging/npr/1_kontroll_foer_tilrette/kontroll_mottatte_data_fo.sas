@@ -1,4 +1,4 @@
-﻿%macro kontroll_mottatte_data(inndata=, mottatt_aar=);
+﻿%macro kontroll_mottatte_data_fo(inndata=, mottatt_aar=);
 
 /* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
 data _null_;
@@ -57,7 +57,7 @@ quit;
 /* -------------------------- */
 %if &komnrhjem2 ne 0 and &bydel2 ne 0 %then %do;
 %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel_fo.sas";
-%kontroll_komnr_bydel(inndata= &inndata., komnr=komnrhjem2, bydel=bydel2, aar=&mottatt_aar);
+%kontroll_komnr_bydel_fo(inndata= &inndata., komnr=komnrhjem2, bydel=bydel2, aar=&mottatt_aar);
 %end;
 
 /* ---------------- */
@@ -75,4 +75,4 @@ quit;
 %include "&filbane/formater/beh.sas";
 %kontroll_behandlingssted(inndata=&inndata., aar=&mottatt_aar , beh=&beh.);
 %end;
-%mend kontroll_mottatte_data;
+%mend kontroll_mottatte_data_fo;

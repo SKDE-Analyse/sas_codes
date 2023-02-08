@@ -1,4 +1,4 @@
-﻿%macro kontroll_komnr_bydel(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
+﻿%macro kontroll_komnr_bydel_fo(inndata= ,komnr=komnrhjem2, bydel=bydel2, aar=);  /*kontrollere om mottatte data har gyldig komnr*/
 
 /*! 
 ### Beskrivelse
@@ -225,6 +225,54 @@ title color=red height=5 "5b: det er feil med bydel i &aar.-filen";
 proc print data=error_bydel_&aar; run;
 title;
 
+/* hvis error-fil ikke er tom, print antall obs fra mottatte */
+%if &nobs2 ne 0 %then %do;
+
+proc sql;
+	create table mottatte_komnr as
+	select &komnr, &bydel
+	from &inndata;
+quit;
+
+data mottatte_komnr;
+  set mottatte_komnr;
+  komnr = &komnr + 0;
+run;
+
+/*lage bydel-variabel*/
+data mottatte_bydel(keep=komnr bydel);
+length bydel_num 6 bydel 6; /*sette lengde lik 6*/
+  set mottatte_komnr;
+
+  if komnr in (301,4601,1201,5001,1601,1103) then do; 
+    /* make bydel numeric and create new variable that combines komnr and bydel */
+    bydel_num=&bydel+0;
+    bydel=komnr*100+bydel_num;
+  format bydel best6.;
+  end;
+  run;
+
+proc sql;
+create table bydel_error_&aar as 
+select a.bydel, b.feil
+from mottatte_bydel as a left join error_bydel_&aar as b
+on a.bydel=b.bydel;
+run;
+
+data bydel_error_&aar;
+set bydel_error_&aar;
+where feil=1;
+run;
+
+title color=red height=5 "5c: Antall feil med bydel i &aar.-filen";
+proc sql;
+select bydel, count(*) as antall
+from bydel_error_&aar
+group by bydel;
+run; title;
+
+%end;
+
 /* hvis error-fil er tom, print gyldige obs fra mottatte */
 %if &nobs2 eq 0 %then %do;
 title color= darkblue height=5  "5b: alle mottatte bydeler er gyldige";
@@ -237,6 +285,6 @@ delete komnr bydel boomr gyldig_komnr liste_komnr
       gyldig_bydel liste_bydel mottatt_komnr mottatt_bydel
       godkjent_komnr_&aar godkjent_bydel_&aar;
 run;*/
-%mend kontroll_komnr_bydel;
+%mend kontroll_komnr_bydel_fo;
 
 
