@@ -35,6 +35,7 @@ kortversjon (kjøres med default verdier for resten)
 
 data forste_andre_&dsn;
 set &dsn;
+keep pid aar alder ermann inndato bohf borhf komnr bydel tid &forste &andre;
 where &forste=1 or &andre=1;
 run;
 
@@ -107,5 +108,17 @@ PROC FREQ DATA=forste_andre_&dsn;
 	TABLES dager&d3 /  SCORES=TABLE;
 	%end;
 RUN; title;
+
+Title "Fordeling antall dager for unersøkelser først &forste så &andre ";
+proc univariate data=forste_andre_&dsn;
+var dager ;
+histogram ;
+run; title;
+
+data forste_andre_&dsn;
+set forste_andre_&dsn;
+keep pid aar alder ermann inndato bohf borhf komnr bydel tid &forste &andre
+dager: case;
+run; 
 
 %mend forlop_forste_andre_dager;
