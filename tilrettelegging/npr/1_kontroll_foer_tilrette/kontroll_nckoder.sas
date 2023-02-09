@@ -107,7 +107,7 @@ title color= purple height=5 "7b: &nobs_feil linjer med ugyldige %upcase(&kode.)
 proc freq data=tmpdata;
   tables atckode saerkode/missing;
 run;
-title;
+title color=purple height=5 "feil %upcase(&kode.) koder";
 proc print data=tmpdata(keep= lopenr nc: atckode saerkode feilkode);
   where feilkode and atckode=. and saerkode=. ;
 run;
