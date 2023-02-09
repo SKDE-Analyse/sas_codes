@@ -24,6 +24,8 @@ if &hoved eq 0 then do;
 array tilstand_mottatt{*} $ tilstand_: ;
 array tilstand_hoved{*}   $ tilstand_1_: ;
 nbikode=dim(tilstand_mottatt)-dim(tilstand_hoved);
+end;
+drop i; 
 run;
 
 %if &hoved eq 0 %then %do;
