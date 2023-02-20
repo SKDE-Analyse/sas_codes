@@ -19,11 +19,19 @@ Makro for å tilrettelegge radiologi-data (NCRP-filer).
     - Opprettet desember 2022, Tove J
  */
 
+
+data radiologi_&aar.;
+set &inndata;
+run;
+
+%include "&radiobane/tilrettelegging/radiologi/trans_dup.sas";
+%trans_dup(inndata=radiologi_&aar.);
+
 /* formater til radiologi */
  %include "&filbane/tilrettelegging/radiologi/formater_radiologi.sas";
 
 data radiologi_&aar.;
-set &inndata;
+set radiologi_&aar.;
 
 rename pasientlopenummer = pid
        pasient_alder = alder;
@@ -123,7 +131,7 @@ by pid inndato;
 run;
 
 /* lagre tilrettelagt datasett */
-data skde20.ncrp_&aar._T22;
+data skde20.ncrp_&aar._T23;
 set radiologi_&aar;
 run;
 %mend tilrettelegging_radiologi;
