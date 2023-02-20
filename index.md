@@ -66,7 +66,7 @@
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas](1_kontroll_komnr_bydel)
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/aktivitet_komnr_bydel.sas](aktivitet_komnr_bydel)
 - Filen fag_skde.sas er ikke dokumentert.
-- [tilrettelegging/npr/2_tilrettelegging/tilrettelegging.sas](tilrettelegging)
+- Filen tilrettelegging.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/splitt_avtspes.sas](splitt_avtspes)
 - Filen Formater.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/fix_kjonn.sas](fix_kjonn)
@@ -76,6 +76,7 @@
 - [tilrettelegging/npr/2_tilrettelegging/AvtaleRHF_spesilistkomHN.sas](AvtaleRHF_spesilistkomHN)
 - [tilrettelegging/npr/2_tilrettelegging/splitte.sas](splitte)
 - [tilrettelegging/npr/2_tilrettelegging/fix_behandlingssted.sas](fix_behandlingssted)
+- Filen tilstandskoder.sas er ikke dokumentert.
 - Filen nc_koder.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/var_rekkefolge.sas](var_rekkefolge)
 - [tilrettelegging/npr/2_tilrettelegging/konvertering.sas](konvertering)
