@@ -1,4 +1,4 @@
-%macro tilrettelegging(inndata=);
+﻿%macro tilrettelegging(inndata=);
 
 /* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
 data _null_;
@@ -8,10 +8,40 @@ call symput ('bydel2',varnum(dset,'bydel2'));
 call symput ('ncmp_1',varnum(dset,'ncmp_1'));;
 call symput ('ncsp_1',varnum(dset,'ncsp_1'));;
 call symput ('ncrp_1',varnum(dset,'ncrp_1'));;
+call symput ('tilstand_1_1',varnum(dset,'tilstand_1_1'));
+call symput ('tilstand_1_2',varnum(dset,'tilstand_1_2'));
+call symput ('tilstand_2_1',varnum(dset,'tilstand_2_1'));
 run;
 
 data tmp_data;
 set &inndata;
+run;
+
+%if &tilstand_1_1 ne 0 %then %do;
+/* hdiag */
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/tilstandskoder.sas";
+%tilstandskoder(inndata=tmp_data, hoved=1);
+/* ICD10 */
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/icd10.sas";
+%ICD(inndata=tmp_data);
+%end;
+
+%if &tilstand_1_2 ne 0 %then %do;
+/* hdiag2 */
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/tilstandskoder.sas";
+%tilstandskoder(inndata=tmp_data, hoved=2);
+%end;
+
+%if &tilstand_2_1 ne 0 %then %do;
+/* bdiag */
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/tilstandskoder.sas";
+%tilstandskoder(inndata=tmp_data, hoved=0);
+%end; 
+
+/* drop tilstandskoder fra tilrettelagte data */
+data tmp_data;
+set tmp_data;
+drop tilstand_:;
 run;
 
 /* ----------- */
@@ -53,5 +83,7 @@ run;
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/nc_koder.sas";
 %nc_koder(inndata=tmp_data, xp=rp);
 %end;
+
+
 
 %mend tilrettelegging;
