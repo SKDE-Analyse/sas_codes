@@ -11,20 +11,20 @@ do i = 1 to dim(tilstand);
   tilstand(i)=upcase(compress(tilstand(i),"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890","ki")); /*The modifier "ki" means Keep the characters in the list and Ignore the case of the characters */
 end;
 
-if &hoved eq 1 then do;
+%if &hoved eq 1 %then %do;
 hdiag=tilstand_1_1;
-end;
+%end;
 
-if &hoved eq 2 then do;
+%if &hoved eq 2 %then %do;
 hdiag2=tilstand_1_2;
-end;
+%end;
 
-if &hoved eq 0 then do;
+%if &hoved eq 0 %then %do;
 /* finne hvor mange bitilstander som er mottatt */
 array tilstand_mottatt{*} $ tilstand_: ;
 array tilstand_hoved{*}   $ tilstand_1_: ;
 nbikode=dim(tilstand_mottatt)-dim(tilstand_hoved);
-end;
+%end;
 drop i; 
 run;
 
