@@ -56,9 +56,11 @@
 - [rateprogram/ratefigur_todelt.sas](ratefigur_todelt)
 - [rateprogram/ratefigur_aarsvar.sas](ratefigur_aarsvar)
 - Filen kjonn_fodselsar.sas er ikke dokumentert.
+- Filen kontroll_tilstand.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/antall_pasienter_rader.sas](antall_pasienter_rader)
 - Filen kontroll_mottatte_data.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_type.sas](kontroll_type)
+- Filen kontroll_nckoder.sas er ikke dokumentert.
 - Filen min_maks_dato.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas](kontroll_behandlingssted)
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas](1_kontroll_komnr_bydel)
