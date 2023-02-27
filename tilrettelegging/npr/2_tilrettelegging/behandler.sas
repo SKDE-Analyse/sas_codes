@@ -82,7 +82,9 @@ run;
 /*merge behandler med bruk av orgnr*/
 proc sql;
 	create table &inndata as
-	select * from &inndata a left join beh b
+	select a.*, b.behsh, b.behhf, b.behrhf 
+  from &inndata a 
+  left join beh b
 	on a.&beh=b.orgnr;
 quit;
 title height=5 "Oversikt behsh, behhf og behrhf i data. NB: ingen skal ha missing!";

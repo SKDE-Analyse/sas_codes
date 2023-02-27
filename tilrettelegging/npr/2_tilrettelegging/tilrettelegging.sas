@@ -20,6 +20,8 @@ call symput ('aar',varnum(dset,'aar'));
 call symput ('fodselsar',varnum(dset,'fodselsar'));
 call symput ('kjonn',varnum(dset,'kjonn'));
 call symput ('alderidager',varnum(dset,'alderidager'));
+call symput ('behandlingsstedkode',varnum(dset,'behandlingsstedkode'));
+call symput ('institusjonid',varnum(dset,'institusjonid'));
 run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
@@ -96,7 +98,7 @@ drop tmp_alder fodtAar_DSF;
 %if &kjonn ne 0 %then %do;
     if kjonn eq 1     then ermann=1; /* Mann */
     if kjonn eq 2     then ermann=0; /* Kvinne */
-    if kjonn in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ermann=.
+    if kjonn in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ermann=.;
 
     if kjonn_dsf in (1,2) then do; /*hvis kjonn_dsf bruke den i stedet for kjonn*/
 	if kjonn_dsf = 1 then ermann = 1;
@@ -180,6 +182,11 @@ run;
 %if &ncrp_1 ne 0 %then %do; 
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/nc_koder.sas";
 %nc_koder(inndata=tmp_data, xp=rp);
+%end;
+
+%if &behandlingsstedkode ne 0 and &institusjonid ne 0 %then %do;
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/behandler.sas";
+%behandler(inndata=tmp_data , beh=behandlingsstedkode);
 %end;
 
 %mend tilrettelegging;
