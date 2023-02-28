@@ -1,4 +1,4 @@
-
+﻿
 %macro takst(inndata=);
 data &inndata;
 set &inndata;
