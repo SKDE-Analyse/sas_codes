@@ -22,6 +22,8 @@ call symput ('kjonn',varnum(dset,'kjonn'));
 call symput ('alderidager',varnum(dset,'alderidager'));
 call symput ('behandlingsstedkode',varnum(dset,'behandlingsstedkode'));
 call symput ('institusjonid',varnum(dset,'institusjonid'));
+call symput ('sektor',varnum(dset,'sektor'));
+call symput ('takst_1',varnum(dset,'takst_1'));
 run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
@@ -114,8 +116,31 @@ format ermann ermann.;
 %if &alderidager ne 0 %then %do;
 if alderidager < 0 then alderidager=.;
 %end;
+
+/*-------------*/
+/* SEKTOR      */
+/*-------------*/
+
+%if &sektor ne 0 %then %do;
+rename sektor=inn_sektor;
+if inn_sektor = 4     then sektor = 1; /*Somatiske aktivitetsdata*/    
+if inn_sektor = 5     then sektor = 1; /*Rehab*/
+if inn_sektor = 'SOM' then sektor = 5; /*Avtalespesialister, som*/
+if inn_sektor = 'PHV' then sektor = 4; /*Avtalespesialister, psyk*/
+
+if sektor in (4,5) then do;
+%let aspes=1;
+end;
+
+drop inn_sektor; 
+format sektor sektor.;
+%end;  
+
 run;
 
+/*---------------*/
+/* Tilstandkoder */
+/*---------------*/
 
 %if &tilstand_1_1 ne 0 %then %do;
 /* hdiag */
@@ -144,6 +169,30 @@ set tmp_data;
 drop tilstand_:;
 run;
 
+/* -------- */
+/* NC-koder */
+/* -------- */
+%if &ncsp_1 ne 0 %then %do; 
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/nc_koder.sas";
+%nc_koder(inndata=tmp_data, xp=sp);
+%end;
+%if &ncmp_1 ne 0 %then %do; 
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/nc_koder.sas";
+%nc_koder(inndata=tmp_data, xp=mp);
+%end;
+%if &ncrp_1 ne 0 %then %do; 
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/nc_koder.sas";
+%nc_koder(inndata=tmp_data, xp=rp);
+%end;
+
+/* -------- */
+/* Takst    */
+/* -------- */
+%if &takst_1 ne 0 and &aspes=1 %then %do; 
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/takst.sas";
+%takst(inndata=tmp_data);
+%end;
+
 /* ----------- */
 /* Forny-komnr */
 /* ----------- */
@@ -168,22 +217,9 @@ run;
 %boomraader(inndata=tmp_data, indreOslo = 0, bydel = 1);
 %end;
 
-/* -------- */
-/* NC-koder */
-/* -------- */
-%if &ncsp_1 ne 0 %then %do; 
-%include "&filbane/tilrettelegging/npr/2_tilrettelegging/nc_koder.sas";
-%nc_koder(inndata=tmp_data, xp=sp);
-%end;
-%if &ncmp_1 ne 0 %then %do; 
-%include "&filbane/tilrettelegging/npr/2_tilrettelegging/nc_koder.sas";
-%nc_koder(inndata=tmp_data, xp=mp);
-%end;
-%if &ncrp_1 ne 0 %then %do; 
-%include "&filbane/tilrettelegging/npr/2_tilrettelegging/nc_koder.sas";
-%nc_koder(inndata=tmp_data, xp=rp);
-%end;
-
+/* --------- */
+/* Behandler */
+/* --------- */
 %if &behandlingsstedkode ne 0 and &institusjonid ne 0 %then %do;
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/behandler.sas";
 %behandler(inndata=tmp_data , beh=behandlingsstedkode);
