@@ -1,3 +1,4 @@
+
 %macro takst(inndata=);
 data &inndata;
 set &inndata;
@@ -7,5 +8,5 @@ set &inndata;
 		Normaltariff{i}=propcase(compress(takst_{i}));
 	end;
 	drop takst_: i;
-run;
+run; 
 %mend;
