@@ -79,6 +79,7 @@
 - Filen tilstandskoder.sas er ikke dokumentert.
 - Filen nc_koder.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/var_rekkefolge.sas](var_rekkefolge)
+- [tilrettelegging/npr/2_tilrettelegging/takst.sas](takst)
 - [tilrettelegging/npr/2_tilrettelegging/konvertering.sas](konvertering)
 - [tilrettelegging/npr/2_tilrettelegging/merge_persondata.sas](merge_persondata)
 - [tilrettelegging/npr/2_tilrettelegging/bydel.sas](bydel)
