@@ -9,7 +9,7 @@ retain function "Image";
 	anchor = "bottomright";
 	x1 = 98;
 	y1 = 2;
-	width=12;
+	width=16;
 	image = "&filbane/stiler/logo/hn.png";	
 output; /*Logo*/
 	function = "text";
