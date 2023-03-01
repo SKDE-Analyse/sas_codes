@@ -24,9 +24,12 @@ call symput ('behandlingsstedkode',varnum(dset,'behandlingsstedkode'));
 call symput ('institusjonid',varnum(dset,'institusjonid'));
 call symput ('sektor',varnum(dset,'sektor'));
 call symput ('takst_1',varnum(dset,'takst_1'));
+call symput ('sh_reg',varnum(dset,'sh_reg'));
+call symput ('fag',varnum(dset,'fag'));
 run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
+%include "&filbane/formater/NPR_somatikk.sas";
 
 data tmp_data;
 set &inndata;
@@ -122,20 +125,64 @@ if alderidager < 0 then alderidager=.;
 /*-------------*/
 
 %if &sektor ne 0 %then %do;
-rename sektor=inn_sektor;
-if inn_sektor = 4     then sektor = 1; /*Somatiske aktivitetsdata*/    
-if inn_sektor = 5     then sektor = 1; /*Rehab*/
-if inn_sektor = 'SOM' then sektor = 5; /*Avtalespesialister, som*/
-if inn_sektor = 'PHV' then sektor = 4; /*Avtalespesialister, psyk*/
+inn_sektor = compress(put(sektor,$3.));
+drop sektor;
+if inn_sektor = '4'   then ny_sektor = 1; /*Somatiske aktivitetsdata*/    
+if inn_sektor = '5'   then ny_sektor = 1; /*Rehab*/
+if inn_sektor = 'SOM' then ny_sektor = 5; /*Avtalespesialister, som*/
+if inn_sektor = 'PHV' then ny_sektor = 4; /*Avtalespesialister, psyk*/
+
+rename ny_sektor = sektor;
+drop inn_sektor; 
 
 if sektor in (4,5) then do;
 %let aspes=1;
 end;
-
-drop inn_sektor; 
-format sektor sektor.;
+format ny_sektor sektor.;
 %end;  
+run;
 
+
+/*---------*/
+/* AVTSPES */
+/*---------*/
+data tmp_data;
+set tmp_data;
+
+%if &aspes eq 1 %then %do;
+liggetid = 0;
+hastegrad = 4;
+
+%if &sh_reg ne 0 %then %do;
+     if sh_reg=5 then AvtaleRHF=1; /*Helse Nord RHF*/     
+else if sh_reg=4 then AvtaleRHF=2; /*Helse Midt-Norge RHF*/
+else if sh_reg=3 then AvtaleRHF=3; /*Helse Vest RHF*/
+else if sh_reg=7 then AvtaleRHF=4; /*Helse Sør-Øst-RHF*/
+drop sh_reg;
+%end;
+
+%if &fag ne 0 %then %do;
+    if Fag = 1 then Fag_SKDE = 1;
+    if Fag = 2 then Fag_SKDE = 2;
+    if Fag = 3 then Fag_SKDE = 3;
+    if Fag = 4 then Fag_SKDE = 4;
+    if Fag = 5 then Fag_SKDE = 5;
+    if Fag in (6:10,24,25) then Fag_SKDE = 6;
+    if Fag in (11:14) then Fag_SKDE = 11;
+    if Fag = 15 then Fag_SKDE = 15;
+    if Fag = 16 then Fag_SKDE = 16;
+    if Fag = 17 then Fag_SKDE = 17;
+    if Fag = 18 then Fag_SKDE = 18;
+    if Fag = 19 then Fag_SKDE = 19;
+    if Fag = 20 then Fag_SKDE = 20;
+    if Fag = 21 then Fag_SKDE = 21;
+    if Fag = 22 then Fag_SKDE = 22;
+    if Fag = 23 then Fag_SKDE = 23;
+    if Fag = 30 then Fag_SKDE = 30;
+    if Fag = 31 then Fag_SKDE = 31;
+drop fag;
+%end;
+%end;
 run;
 
 /*---------------*/
@@ -191,7 +238,12 @@ run;
 %if &takst_1 ne 0 and &aspes=1 %then %do; 
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/takst.sas";
 %takst(inndata=tmp_data);
+
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/def_aspes_kontakt.sas";
+%def_aspes_kontakt(inndata=tmp_data, utdata=tmp_data);
+/* hvor skal splitt av avtspesfil skje?? */
 %end;
+
 
 /* ----------- */
 /* Forny-komnr */
