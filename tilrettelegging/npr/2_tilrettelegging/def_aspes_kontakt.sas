@@ -1,6 +1,6 @@
 ﻿%macro def_aspes_kontakt(inndata=, utdata=);
 Data &utdata;
-	Set &inndata;
+	Set &inndata(drop=kontakt);
 
 	/*
  *****************************************************************************************************************
@@ -259,15 +259,6 @@ then kontakt_def= 4;
 	
 		drop i;
 
-	
+rename kontakt_def = kontakt;	
 run;
-
-
-data &utdata;
-  set &utdata /*(rename=(kontakt=kontakt_org)*/ /*keep original variable from NPR)*/; /*Tove 01.04.2022: variabel 'kontakt' i aspes-fil er en tom variabel.*/
-
-  * rewrite kontakt with our value;
-  kontakt=kontakt_def;
-run;
-
 %mend;
