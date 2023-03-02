@@ -26,6 +26,7 @@ call symput ('sektor',varnum(dset,'sektor'));
 call symput ('takst_1',varnum(dset,'takst_1'));
 call symput ('sh_reg',varnum(dset,'sh_reg'));
 call symput ('fag',varnum(dset,'fag'));
+call symput ('kontakt',varnum(dset,'kontakt'));
 run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
@@ -136,16 +137,18 @@ if inn_sektor = '5'   then ny_sektor = 5; /*Rehab*/
 if inn_sektor = 'PHV' then ny_sektor = 6; /*Avtalespesialister, psyk*/
 if inn_sektor = 'SOM' then ny_sektor = 7; /*Avtalespesialister, som*/
 
+format ny_sektor fmt_sektor.;
 rename ny_sektor = sektor;
 drop inn_sektor; 
-
-if sektor in (6,7) then do;
-%let aspes=1;
-end;
-format ny_sektor fmt_sektor.;
 %end;  
 run;
 
+%if &sektor ne 0 %then %do;
+proc sql noprint;
+	select case when sektor in (6:7) then 1 end into: aspes
+	from tmp_data;
+quit;
+%end;
 
 /*---------*/
 /* AVTSPES */
@@ -243,11 +246,11 @@ run;
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/takst.sas";
 %takst(inndata=tmp_data);
 
+%if &kontakt ne 0 %then %do;
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/def_aspes_kontakt.sas";
 %def_aspes_kontakt(inndata=tmp_data, utdata=tmp_data);
-/* hvor skal splitt av avtspesfil skje?? */
 %end;
-
+%end;
 
 /* ----------- */
 /* Forny-komnr */
@@ -285,6 +288,11 @@ run;
 /* Rekkefølge på variabler ut */
 /* -------------------------- */
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/var_rekkefolge.sas";
-%var_rekkefolge (innDataSett=tmp_data, utDataSett=tmp_data);
+%if &aspes eq 1 %then %do;
+%var_rekkefolge (innDataSett=tmp_data, utDataSett=tmp_data2, aspes=1);
+%end;
+%else %do;
+%var_rekkefolge (innDataSett=tmp_data, utDataSett=tmp_data2, aspes=0);
+%end;
 
 %mend tilrettelegging;
