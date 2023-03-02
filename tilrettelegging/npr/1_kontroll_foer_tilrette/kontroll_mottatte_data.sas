@@ -73,7 +73,7 @@ quit;
 	%if &behandlingsstedkode ne 0 and (&max_sektor eq 4 /*somatikk*/ or &max_sektor eq 5 /*rehab*/) %then %do;
 		%let beh=behandlingsstedkode;
 	%end;
-	%if &institusjonid ne 0 and (&max_sektor eq SOM or &max_sektor eq PHV) %then %do;
+	%if &institusjonid ne 0 and (&max_sektor eq 'SOM' or &max_sektor eq 'PHV') %then %do;
 		%let beh=institusjonid;
 	%end;
 %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas";
