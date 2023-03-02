@@ -645,4 +645,14 @@ value SEKTOR
       3 = 'TSB'  
       4 = 'Avtalespesialister, psyk' 
       5 = 'Avtalespesialister, som' ;
+
+value fmt_sektor /*TJ: går over til å beholde variabel sektor slik den utleveres. 
+      Vet ikke hva verdiene 1-3 står for. Avtspes utleveres som string, gjør om til numerisk. */
+      1 = 'To be announced..'  
+      2 = 'To be announced..'  
+      3 = 'To be announced..'  
+      4 = 'Somatikk' 
+      5 = 'Rehab' 
+      6 = 'Avtalespesialister, psyk'
+      7 = 'Avtalespesialister, som';
 run;
