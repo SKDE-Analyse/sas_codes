@@ -18,6 +18,7 @@ call symput ('tilstand_1_1',varnum(dset,'tilstand_1_1'));
 call symput ('ncmp_1',varnum(dset,'ncmp_1'));
 call symput ('ncsp_1',varnum(dset,'ncsp_1'));
 call symput ('ncrp_1',varnum(dset,'ncrp_1'));
+call symput ('liggetid',varnum(dset,'liggetid'));
 run;
 
 /* verdi på sektor brukes til å skille mellom avtspes og somatikk */
@@ -134,6 +135,15 @@ proc sql;
    insert into  m values('WARNING!');
    select * from m;
 quit;
+%end;
+
+
+/* ------------ */
+/* 8 - liggetid */
+/* ------------ */
+%if &liggetid ne 0 %then %do;
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_liggetid.sas";
+%kontroll_liggetid(inndata=&inndata.);
 %end;
 
 %mend kontroll_mottatte_data;
