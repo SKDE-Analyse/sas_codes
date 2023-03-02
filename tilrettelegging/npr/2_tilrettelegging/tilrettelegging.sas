@@ -127,18 +127,22 @@ if alderidager < 0 then alderidager=.;
 %if &sektor ne 0 %then %do;
 inn_sektor = compress(put(sektor,$3.));
 drop sektor;
-if inn_sektor = '4'   then ny_sektor = 1; /*Somatiske aktivitetsdata*/    
-if inn_sektor = '5'   then ny_sektor = 1; /*Rehab*/
-if inn_sektor = 'SOM' then ny_sektor = 5; /*Avtalespesialister, som*/
-if inn_sektor = 'PHV' then ny_sektor = 4; /*Avtalespesialister, psyk*/
+
+if inn_sektor = '1'   then ny_sektor = 1; /*Somatiske aktivitetsdata*/    
+if inn_sektor = '2'   then ny_sektor = 2; /*Somatiske aktivitetsdata*/    
+if inn_sektor = '3'   then ny_sektor = 3; /*Somatiske aktivitetsdata*/    
+if inn_sektor = '4'   then ny_sektor = 4; /*Somatiske aktivitetsdata*/    
+if inn_sektor = '5'   then ny_sektor = 5; /*Rehab*/
+if inn_sektor = 'PHV' then ny_sektor = 6; /*Avtalespesialister, psyk*/
+if inn_sektor = 'SOM' then ny_sektor = 7; /*Avtalespesialister, som*/
 
 rename ny_sektor = sektor;
 drop inn_sektor; 
 
-if sektor in (4,5) then do;
+if sektor in (6,7) then do;
 %let aspes=1;
 end;
-format ny_sektor sektor.;
+format ny_sektor fmt_sektor.;
 %end;  
 run;
 
@@ -276,5 +280,11 @@ run;
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/behandler.sas";
 %behandler(inndata=tmp_data , beh=behandlingsstedkode);
 %end;
+
+/* -------------------------- */
+/* Rekkefølge på variabler ut */
+/* -------------------------- */
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/var_rekkefolge.sas";
+%var_rekkefolge (innDataSett=tmp_data, utDataSett=tmp_data);
 
 %mend tilrettelegging;
