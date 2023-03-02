@@ -3,11 +3,10 @@
 Fordele de tilrettelagte variablene i to datasett
 */
 
-%Macro var_rekkefolge (innDataSett=, utDataSett=);
+%Macro var_rekkefolge (innDataSett=, utDataSett=, aspes=);
 
 /*!
 Splitte datasett i to
-
 */
 
 /*!
@@ -80,10 +79,10 @@ Komplett
 AvtSpes
 ;
 
-%if &somatikk ne 0 %then %do;
+%if &aspes eq 0 %then %do;
 %let magnusvar = &magnusvar_felles &magnusvar_sykehus;
 %end;
-%if &avtspes ne 0 %then %do;
+%if &aspes eq 1 %then %do;
 %let magnusvar = &magnusvar_felles &magnusvar_avtspes;
 %end;
 
@@ -97,6 +96,4 @@ retain aar pid &magnusvar ;
 set &Inndatasett;
 run;
 
-
-%mend;
-
+%mend var_rekkefolge;
