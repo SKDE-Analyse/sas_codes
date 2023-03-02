@@ -138,7 +138,7 @@ drop inn_sektor;
 if sektor in (4,5) then do;
 %let aspes=1;
 end;
-format ny_sektor sektor.;
+format sektor sektor.;
 %end;  
 run;
 
