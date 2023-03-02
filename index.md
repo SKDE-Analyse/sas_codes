@@ -63,6 +63,7 @@
 - Filen kontroll_nckoder.sas er ikke dokumentert.
 - Filen min_maks_dato.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas](kontroll_behandlingssted)
+- Filen kontroll_liggetid.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas](1_kontroll_komnr_bydel)
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/aktivitet_komnr_bydel.sas](aktivitet_komnr_bydel)
 - Filen fag_skde.sas er ikke dokumentert.
