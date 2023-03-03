@@ -78,9 +78,8 @@ quit;
 	%end;
 %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas";
 %include "&filbane/formater/beh.sas";
-%kontroll_behandlingssted(inndata=&inndata., aar=&mottatt_aar , beh=&beh.);
+%kontroll_behandlingssted(inndata=&inndata., beh=&beh.);
 %end;
-
 
 /* ------------------------------- */
 /* 7 - diagnose- og prosedyrekoder */
@@ -136,7 +135,6 @@ proc sql;
    select * from m;
 quit;
 %end;
-
 
 /* ------------ */
 /* 8 - liggetid */
