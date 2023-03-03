@@ -1,4 +1,4 @@
-﻿%macro kontroll_mottatte_data(inndata=, mottatt_aar=);
+﻿%macro kontroll_mottatte_data(inndata=);
 
 /* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
 data _null_;
@@ -78,7 +78,7 @@ quit;
 	%end;
 %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas";
 %include "&filbane/formater/beh.sas";
-%kontroll_behandlingssted(inndata=&inndata., aar=&mottatt_aar , beh=&beh.);
+%kontroll_behandlingssted(inndata=&inndata., beh=&beh.);
 %end;
 
 
