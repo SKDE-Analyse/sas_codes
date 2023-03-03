@@ -1,4 +1,4 @@
-﻿%macro kontroll_mottatte_data(inndata=);
+﻿%macro kontroll_mottatte_data(inndata=, mottatt_aar=);
 
 /* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
 data _null_;
@@ -81,7 +81,6 @@ quit;
 %kontroll_behandlingssted(inndata=&inndata., beh=&beh.);
 %end;
 
-
 /* ------------------------------- */
 /* 7 - diagnose- og prosedyrekoder */
 /* ------------------------------- */
@@ -136,7 +135,6 @@ proc sql;
    select * from m;
 quit;
 %end;
-
 
 /* ------------ */
 /* 8 - liggetid */

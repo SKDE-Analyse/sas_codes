@@ -90,36 +90,32 @@ run;
 /*hente ut behandlingssted/orgnr fra mottatt data*/
 proc sql;
 create table mottatt_beh as
-select distinct &beh 
+select distinct &beh as mottatt_id
 from &inndata;
 quit;
 
 proc sql;
 	create table flagg_ugyldig as 
-	select 	a.behandlingsstedkode as mottatt_orgnr, 
+	select 	a.mottatt_id, 
 			b.orgnr as liste_orgnr,
-			case when a.behandlingsstedkode ne . and a.behandlingsstedkode=b.orgnr then 1 end as gyldig,
-			case when a.behandlingsstedkode not in (select distinct orgnr from beh_liste) then 1 end as ugyldig
+			case when a.mottatt_id ne . and a.mottatt_id=b.orgnr then 1 end as gyldig,
+			case when a.mottatt_id not in (select distinct orgnr from beh_liste) then 1 end as ugyldig
 	from mottatt_beh a
 	left join beh_liste b
-	on a.behandlingsstedkode=b.orgnr;
+	on a.mottatt_id=b.orgnr;
 quit;
-
 
 /*hvor mange linjer har gyldig/ugyldig orgnr*/
 title color= purple height=5 
     "6a: behandler-ID: antall rader med missing eller ugyldig verdi. Hvis nye orgnr mottatt er gyldige skal de legges til i CSV-fil behandler";
 proc sql;
-	select behandlingsstedkode,
-			count(case when behandlingsstedkode eq . then 1 end) as mangler_orgnr, 
-			count(case when behandlingsstedkode in (select mottatt_orgnr from flagg_ugyldig where ugyldig eq 1 and mottatt_orgnr ne .) then 1 end) as ugyldig
+	select &beh.,
+			count(case when &beh. eq . then 1 end) as mangler_orgnr, 
+			count(case when &beh. in (select mottatt_id from flagg_ugyldig where ugyldig eq 1 and mottatt_id ne .) then 1 end) as ugyldig
 			from &inndata.
-	    group by behandlingsstedkode
+	    group by &beh.
       having calculated mangler_orgnr or calculated ugyldig;
 quit;
-/* title color= purple height=5 
-    "6a: behandler-ID: ugyldige verdier. Hvis nye orgnr skal de legges til i CSV-fil behandler";
-proc print data=flagg_ugyldig; var mottatt_orgnr ;where ugyldig = 1; run;*/
 title; 
 
 %if &beh = behandlingsstedkode %then %do;
