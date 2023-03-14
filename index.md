@@ -83,6 +83,7 @@
 - [tilrettelegging/npr/2_tilrettelegging/reduser_lengde.sas](reduser_lengde)
 - Filen Formater.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/behandler.sas](behandler)
+- Filen length_label.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/AvtaleRHF_spesilistkomHN.sas](AvtaleRHF_spesilistkomHN)
 - [tilrettelegging/npr/2_tilrettelegging/bydel.sas](bydel)
 - [tilrettelegging/npr/2_tilrettelegging/fix_kjonn.sas](fix_kjonn)
