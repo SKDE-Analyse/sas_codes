@@ -134,8 +134,8 @@ if inn_sektor = '2'   then ny_sektor = 2; /*Somatiske aktivitetsdata*/
 if inn_sektor = '3'   then ny_sektor = 3; /*Somatiske aktivitetsdata*/    
 if inn_sektor = '4'   then ny_sektor = 4; /*Somatiske aktivitetsdata*/    
 if inn_sektor = '5'   then ny_sektor = 5; /*Rehab*/
-if inn_sektor = 'PHV' then ny_sektor = 6; /*Avtalespesialister, psyk*/
-if inn_sektor = 'SOM' then ny_sektor = 7; /*Avtalespesialister, som*/
+if inn_sektor = 'SOM' then ny_sektor = 6; /*Avtalespesialister, som*/
+if inn_sektor = 'PHV' then ny_sektor = 7; /*Avtalespesialister, psyk*/
 
 format ny_sektor fmt_sektor.;
 rename ny_sektor = sektor;
