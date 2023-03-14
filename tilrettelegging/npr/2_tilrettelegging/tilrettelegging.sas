@@ -284,6 +284,13 @@ run;
 %behandler(inndata=tmp_data , beh=behandlingsstedkode);
 %end;
 
+/* ------------------------ */
+/* Length og label - LOL :D */
+/* ------------------------ */
+
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/length_label.sas";
+%length_label(inndata=tmp_data)
+
 /* -------------------------- */
 /* Rekkefølge på variabler ut */
 /* -------------------------- */
