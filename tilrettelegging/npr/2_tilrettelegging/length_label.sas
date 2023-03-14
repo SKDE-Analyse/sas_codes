@@ -1,4 +1,4 @@
-%macro length_label(inndata=);
+ï»¿%macro length_label(inndata= );
 
 /* Hente inn variable liste fra inndata */
 proc contents data=&inndata out=varlist noprint; run;
@@ -26,7 +26,7 @@ proc sql noprint;
     and a.type=b.type;
 quit;
 
-/* Kjøre length og label på datasett */
+/* KjÃ¸re length og label pÃ¥ datasett */
 data &inndata;
   &length_statement;
   set &inndata;
