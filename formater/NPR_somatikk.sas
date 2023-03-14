@@ -639,20 +639,13 @@ value region /* added 08.04.2021*/
       7 = 'Helse Sør-Øst'
       9 = 'Utlendinger/annet' /* ny 2021 - erstatter #6 */;
 
-value SEKTOR
-      1 = 'Somatiske aktivitetsdata'  
-      2 = 'VOP'  
-      3 = 'TSB'  
-      4 = 'Avtalespesialister, psyk' 
-      5 = 'Avtalespesialister, som' ;
-
 value fmt_sektor /*TJ: går over til å beholde variabel sektor slik den utleveres. 
       Vet ikke hva verdiene 1-3 står for. Avtspes utleveres som string, gjør om til numerisk. */
-      1 = 'To be announced..'  
-      2 = 'To be announced..'  
-      3 = 'To be announced..'  
+      1 = 'TSB'  
+      2 = 'VOP'  
+      3 = 'BUP'  
       4 = 'Somatikk' 
       5 = 'Rehab' 
-      6 = 'Avtalespesialister, psyk'
-      7 = 'Avtalespesialister, som';
+      6 = 'Avtalespesialister, som'
+      7 = 'Avtalespesialister, psyk';
 run;
