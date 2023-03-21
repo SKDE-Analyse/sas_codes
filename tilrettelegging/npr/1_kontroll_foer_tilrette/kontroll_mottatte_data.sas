@@ -14,6 +14,11 @@ call symput ('inndato',varnum(dset,'inndato'));
 call symput ('utdato',varnum(dset,'utdato'));
 call symput ('kjonn',varnum(dset,'kjonn'));
 call symput ('fodselsar',varnum(dset,'fodselsar'));
+call symput ('tilstand_1_1',varnum(dset,'tilstand_1_1'));
+call symput ('ncmp_1',varnum(dset,'ncmp_1'));
+call symput ('ncsp_1',varnum(dset,'ncsp_1'));
+call symput ('ncrp_1',varnum(dset,'ncrp_1'));
+call symput ('liggetid',varnum(dset,'liggetid'));
 run;
 
 /* verdi på sektor brukes til å skille mellom avtspes og somatikk */
@@ -73,6 +78,70 @@ quit;
 	%end;
 %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas";
 %include "&filbane/formater/beh.sas";
-%kontroll_behandlingssted(inndata=&inndata., aar=&mottatt_aar , beh=&beh.);
+%kontroll_behandlingssted(inndata=&inndata., beh=&beh.);
 %end;
+
+/* ------------------------------- */
+/* 7 - diagnose- og prosedyrekoder */
+/* ------------------------------- */
+%if &tilstand_1_1 ne 0 %then %do;
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_tilstand.sas";
+%kontroll_tilstand(inndata=&inndata.);
+%end;
+%else %do;
+title color= purple height=5 "7a: Tilstandkoder finnes ikke i inndata !!!";
+proc sql;
+   create table m (note char(12));
+   insert into  m values('WARNING!');
+   select * from m;
+quit;
+%end;
+
+%if &ncmp_1 ne 0 %then %do;
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_nckoder.sas"; 
+%kontroll_nckoder(inndata=&inndata, kode=ncmp);
+%end;
+%else %do;
+title color= purple height=5 "7b: NCMP finnes ikke i inndata !!!";
+proc sql;
+   create table m (note char(12));
+   insert into  m values('WARNING!');
+   select * from m;
+quit;
+%end;
+
+%if &ncsp_1 ne 0 %then %do;
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_nckoder.sas"; 
+%kontroll_nckoder(inndata=&inndata, kode=ncsp);
+%end;
+%else %do;
+title color= purple height=5 "7b: NCSP finnes ikke i inndata !!!";
+proc sql;
+   create table m (note char(12));
+   insert into  m values('WARNING!');
+   select * from m;
+quit;
+%end;
+
+%if &ncrp_1 ne 0 %then %do;
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_nckoder.sas"; 
+%kontroll_nckoder(inndata=&inndata, kode=ncrp);
+%end;
+%else %do;
+title color= purple height=5 "7b: NCRP finnes ikke i inndata !!!";
+proc sql;
+   create table m (note char(12));
+   insert into  m values('WARNING!');
+   select * from m;
+quit;
+%end;
+
+/* ------------ */
+/* 8 - liggetid */
+/* ------------ */
+%if &liggetid ne 0 %then %do;
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_liggetid.sas";
+%kontroll_liggetid(inndata=&inndata.);
+%end;
+
 %mend kontroll_mottatte_data;

@@ -186,7 +186,7 @@ proc sql;
       values('All is good!');
    select * 
 	from m;
-run;
+quit;
 %end;
 title;
 
