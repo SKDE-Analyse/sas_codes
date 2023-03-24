@@ -26,7 +26,6 @@ call symput ('sektor',varnum(dset,'sektor'));
 call symput ('takst_1',varnum(dset,'takst_1'));
 call symput ('sh_reg',varnum(dset,'sh_reg'));
 call symput ('fag',varnum(dset,'fag'));
-call symput ('kontakt',varnum(dset,'kontakt'));
 run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
@@ -129,9 +128,9 @@ if alderidager < 0 then alderidager=.;
 inn_sektor = compress(put(sektor,$3.));
 drop sektor;
 
-if inn_sektor = '1'   then ny_sektor = 1; /*Somatiske aktivitetsdata*/    
-if inn_sektor = '2'   then ny_sektor = 2; /*Somatiske aktivitetsdata*/    
-if inn_sektor = '3'   then ny_sektor = 3; /*Somatiske aktivitetsdata*/    
+if inn_sektor = '1'   then ny_sektor = 1; /*TSB: Somatiske aktivitetsdata*/    
+if inn_sektor = '2'   then ny_sektor = 2; /*VOP: Somatiske aktivitetsdata*/    
+if inn_sektor = '3'   then ny_sektor = 3; /*BUP: Somatiske aktivitetsdata*/    
 if inn_sektor = '4'   then ny_sektor = 4; /*Somatiske aktivitetsdata*/    
 if inn_sektor = '5'   then ny_sektor = 5; /*Rehab*/
 if inn_sektor = 'SOM' then ny_sektor = 6; /*Avtalespesialister, som*/
@@ -246,10 +245,8 @@ run;
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/takst.sas";
 %takst(inndata=tmp_data);
 
-%if &kontakt ne 0 %then %do;
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/def_aspes_kontakt.sas";
 %def_aspes_kontakt(inndata=tmp_data, utdata=tmp_data);
-%end;
 %end;
 
 /* ----------- */
