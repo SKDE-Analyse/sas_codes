@@ -186,7 +186,6 @@ drop sh_reg;
     if Fag = 23 then Fag_SKDE = 23;
     if Fag = 30 then Fag_SKDE = 30;
     if Fag = 31 then Fag_SKDE = 31;
-drop fag;
 %end;
 %end;
 run;
