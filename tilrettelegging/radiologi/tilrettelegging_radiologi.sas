@@ -24,7 +24,7 @@ data radiologi_&aar.;
 set &inndata;
 run;
 
-%include "&radiobane/tilrettelegging/radiologi/trans_dup.sas";
+%include "&filbane/tilrettelegging/radiologi/trans_dup.sas";
 %trans_dup(inndata=radiologi_&aar.);
 
 /* formater til radiologi */
