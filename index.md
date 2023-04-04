@@ -26,6 +26,7 @@
 - [makroer/slette_datasett_aar.sas](slette_datasett_aar)
 - [makroer/Hyppigste.sas](Hyppigste)
 - Filen merge.sas er ikke dokumentert.
+- [makroer/jenks.sas](jenks)
 - [makroer/definer_behandler.sas](definer_behandler)
 - [makroer/rater_felles.sas](rater_felles)
 - [makroer/aggreger.sas](aggreger)
