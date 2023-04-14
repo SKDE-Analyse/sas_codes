@@ -62,6 +62,7 @@ I denne metadatafilen defineres
 - Natural breaks i kart
 
 Resultatet skal se noe slikt ut:
+```json
 {"test": [
 {
    type: "barchart",
@@ -111,47 +112,50 @@ Resultatet skal se noe slikt ut:
     ]
  },
 ]}
-
+```
 
 Definer variabler slik før makro:
 
-%let rbsti = <sti>\<til>\<csv-filer>;
-%let filnavn = <filnavn uten .csv-endelse>;
+```sas
+%let var = totsnitt;
+%let jsonmappe = /sas_smb/skde_analyse/helseatlas/<sti til mongts-repo>/mongts/apps/skde/public/helseatlas/data/radiologi;
+```
 
-%let barchart_1 = 1;
-%let x_1 = rateSnitt;
-%let y_1 = bohf;
-%let xlabel_1 = "Antall per 1 000 innbyggere";
-%let ylabel_1 = "Opptaksområder";
-%let annualvar_1 = rate2019 rate2020 rate2021;
-%let annualvarlabels_1 = "2019" "2020" "2021";
+Lage tabell-def:
 
-
-%let barchart_2 = 1;
-%let x_2 = "spes_rate" "overlapp_rate" "prim_rate";
-%let xlegend_2 = "Spesialist" "Overlapp" "Primær";
-%let y_2 = bohf;
-%let xlabel_2 = "Antall per 1 000 innbyggere";
-%let ylabel_2 = "Opptaksområder";
-%let annualvar_2 = 0;
-
-%let barchart_3 = 0;
-
-* lage datasett som brukes til å definere hva som skal vises i tabell;
+```sas
 data work.table;
-infile datalines dlm='|' dsd;
-length id $25 label_no $50 label_en $50;
-input id $ label $ typeVar $ format $;
-datalines;
-bohf|Opptaksområder|string|
-rateSnitt|Pasientrate, alle pasienter|number|,.1f
-pas_rate_barn|Pasientrate, barn|number|,.1f
-pas_rate_eldre|Pasientrate, eldre|number|,.1f
-andel3_prim|Andel pasienter kun i primærhelsetj.|number|,.1f
-pasienter|Antall pasienter|number|,.0f
-;
+  infile datalines dlm='|' dsd;
+  length id $25 label_no $50 label_en $50;
+  input id $ label_en $ label_no $ typeVar $ format $;
+  datalines;
+  bohf|Referral areas|Opptaksområder|string|
+  totsnitt|Rate|Rate|number|,.0f
+  tot_pr_pas|Consultations per patient|Konsultasjoner pr. pas.|number|,.2f
+  ;
 run;
+```
 
+Datasettet heter her rater_&flag:
+
+```sas
+%let flag = mr_mod;
+%meta2json(
+  jsonmappe =&jsonmappe,
+  filnavn = &flag,
+  datasett_1 = rater_&flag,
+  map_value = &var,
+  map_label = "Antall per 1 000 innbyggere",
+  annualvar_1 = tot2019 tot2020 tot2021 tot2022,
+  annualvarlabels_1 = "2019" "2020" "2021" "2022",
+  format_1 = ",.0f",
+  format_map = ",.0f",
+  barchart_2 = 1,
+  x_2 = offsnitt privsnitt,
+  xlegend_2 = "Offentlig" "Privat",
+  table = work.table
+);
+```
 */
 
 /*
@@ -294,10 +298,12 @@ run;
   run;
 %end;
 
+/* Skrive til json */
 proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
   write open object;
   write values innhold;
   write open array;
+  /* Barchart 1 */
     %if &barchart_1 = 1 %then %do;
     write open object;
       write values "type" "barchart";
@@ -339,6 +345,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
     %end;
     write close;
 	%end;
+  /* Barchart 2 */
     %if &barchart_2 = 1 %then %do;
     write open object;
       write values "type" "barchart";
@@ -393,6 +400,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
     %end;
     write close;
 	%end;
+  /* Barchart 3 */
     %if &barchart_3 = 1 %then %do;
     write open object;
       write values "type" "barchart";
@@ -434,6 +442,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
     %end;
     write close;
 	%end;
+  /* Tabell */
   %if %length(&table) > 0 %then %do;
     write open object;
       write values "type" "table";
@@ -449,6 +458,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
         write close;
     write close;
   %end;
+  /* Kart */
     write open object;
       write values "type" "map";
   	  write values "data" &map_data;
@@ -466,7 +476,8 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
       write values "format" &format_map;
       %end;
       write close;
-    write open object; /* Selve dataene*/
+    /* Selve dataene*/
+    write open object;
       write values "type" "data";
       write values "label" "datasett_1";
       write values "national" "Norge";
@@ -476,8 +487,9 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
           export work.qwerty;
         write close;
       write close;
+      /* Ekstradata*/
       %if %length(&datasett_2) > 0 %then %do;
-      write open object; /* Ekstradata*/
+      write open object;
         write values "type" "data";
         write values "label" "datasett_2";
         write values "description" "Ekstradatasettet for gitt resultatboks";
