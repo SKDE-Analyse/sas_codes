@@ -2,8 +2,9 @@
   jsonmappe =,
   filnavn =,
   map_value =,
+  map_data = "datasett_1",
   barchart_1 = 0,
-  barchart_1_data = "qwerty",
+  barchart_1_data = "datasett_1",
   x_1 = "tmp",
   xlabel_1 = "tmp",
   xlabel_1_en = "tmp",
@@ -13,7 +14,7 @@
   annualvar_1 =,
   annualvarlabels_1 =,
   barchart_2 = 0,
-  barchart_2_data = "qwerty",
+  barchart_2_data = "datasett_1",
   x_2 =,
   xlabel_2 =,
   xlabel_1_e2 =,
@@ -23,7 +24,7 @@
   annualvar_2 =,
   annualvarlabels_2 =,
   barchart_3 = 0,
-  barchart_3_data = "qwerty",
+  barchart_3_data = "datasett_1",
   x_3 =,
   xlabel_3 =,
   xlabel_1_e3 =,
@@ -33,13 +34,14 @@
   annualvar_3 =,
   annualvarlabels_3 =,
   table =,
+  table_data = "datasett_1",
   table_caption =,
   table_caption_en =,
-  jenks =,
+  /* jenks */
   clusters = 4,
   breaks = 3,
-  datasett =,
-  datasett2 =
+  datasett_1 =,
+  datasett_2 =
 );
 
 /*!
@@ -55,7 +57,7 @@ Resultatet skal se noe slikt ut:
 {"test": [
 {
    type: "barchart",
-   data: "qwerty",
+   data: "datasett_1",
    x: ["rateSnitt"],
    y: "bohf",
    xLabel: "Antall kontaker per pasient",
@@ -66,7 +68,7 @@ Resultatet skal se noe slikt ut:
 },
 {
    type: "barchart",
-   data: "qwerty",
+   data: "datasett_1",
    x: ["rate1", "rate2"],
    xLegend: ["Offentlig", "Privat"],
    y: "bohf",
@@ -76,7 +78,7 @@ Resultatet skal se noe slikt ut:
 },
 {
    type: "barchart",
-   data: "qwerty",
+   data: "datasett_1",
    x: ["rate1a", "rate2a", "rate3a"],
    xLegend: ["Offentlig", "Privat", "Andre"],
    y="bohf",
@@ -85,7 +87,7 @@ Resultatet skal se noe slikt ut:
 },
 {
    type: "table",
-    data: "qwerty",
+    data: "datasett_1",
     headers: [
       {id: "bohf", label: "Opptaksområde", typeVar: "string"},
       {id: "rateSnitt", label: "Rate", format: ".1f"},
@@ -94,7 +96,7 @@ Resultatet skal se noe slikt ut:
  }
  {
     type: "data",
-    label: "qwerty",
+    label: "datasett_1",
     rawdata: [
         {bohf: "Finnmark", rateSnitt: 3.63476, ...},
         {bohf: "UNN", rateSnitt: 3.63476, ...},
@@ -255,15 +257,14 @@ Definere jenks
   
   %mend jenks;
 
-%jenks(dsnin=&datasett, dsnout=qwerty_jenks, clusters=&clusters, breaks=&breaks, var=&map_value);
-
+%jenks(dsnin=&datasett_1, dsnout=qwerty_jenks, clusters=&clusters, breaks=&breaks, var=&map_value);
 
 /*
 Fjerne formatering på datasettet,
 for å ikke få tusenskilletegn etc.
 */
 data qwerty;
-set &datasett;
+set &datasett_1;
 format _all_ ;
 run;
 
@@ -273,9 +274,9 @@ set qwerty;
 format bohf bohf_fmt.;
 run;
 
-%if %length(datasett2) > 0 %then %do;
+%if %length(dataset_2) > 0 %then %do;
   data qwerty2;
-  set &datasett2;
+  set &datasett_2;
   format _all_ ;
   run;
 
@@ -292,7 +293,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
     %if &barchart_1 = 1 %then %do;
     write open object;
       write values "type" "barchart";
-      write values "data" "qwerty";
+      write values "data" &barchart_1_data;
       write values "x";
         write open array;
            write values &x_1;
@@ -333,7 +334,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
     %if &barchart_2 = 1 %then %do;
     write open object;
       write values "type" "barchart";
-      write values "data" "qwerty";
+      write values "data" &barchart_2_data;
       write values "x";
         write open array;
            write values &x_2;
@@ -382,7 +383,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
     %if &barchart_3 = 1 %then %do;
     write open object;
       write values "type" "barchart";
-      write values "data" "qwerty";
+      write values "data" &barchart_3_data;
       write values "x";
         write open array;
            write values &x_3;
@@ -420,7 +421,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
   %if %length(&table) > 0 %then %do;
     write open object;
       write values "type" "table";
-  	  write values "data" "qwerty";
+  	  write values "data" &table_data;
       write values "caption";
       write open object;
         write values "nb" &table_caption;
@@ -434,7 +435,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
   %end;
     write open object;
       write values "type" "map";
-  	  write values "data" "qwerty";
+  	  write values "data" &map_data;
       write values "x" &map_value;
       write values "caption";
         write open object;
@@ -443,12 +444,12 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
         write close;
       write values "jenks";
         write open array;
-          export qwerty_jenks;
+          export work.qwerty_jenks;
         write close;
     write close;
     write open object; /* Selve dataene*/
       write values "type" "data";
-      write values "label" "qwerty";
+      write values "label" "datasett_1";
       write values "national" "Norge";
       write values "description" "Hoveddatasettet for gitt resultatboks";
       write values "data";
@@ -456,10 +457,10 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
           export work.qwerty;
         write close;
       write close;
-      %if %length(datasett2) > 0 %then %do;
+      %if %length(datasett_2) > 0 %then %do;
       write open object; /* Ekstradata*/
         write values "type" "data";
-        write values "label" "qwerty2";
+        write values "label" "datasett_2";
         write values "description" "Ekstradatasettet for gitt resultatboks";
         write values "data";
           write open array;
