@@ -3,41 +3,48 @@
   filnavn =,
   map_value =,
   map_data = "datasett_1",
+  map_label = "tmp",
+  map_label_en = "tmp",
+  format_map = ,
   barchart_1 = 1,
   barchart_1_data = "datasett_1",
   x_1 = &map_value,
-  xlabel_1 = "tmp",
-  xlabel_1_en = "tmp",
+  xlabel_1 = &map_label,
+  xlabel_1_en = &map_label_en,
   y_1 = "bohf",
-  ylabel_1 = "tmp",
-  ylabel_1_en = "tmp",
+  ylabel_1 = "Opptaksområder",
+  ylabel_1_en = "Referral areas",
   annualvar_1 = 0,
   annualvarlabels_1 =,
   format_1 =,
   barchart_2 = 0,
   barchart_2_data = "datasett_1",
   x_2 =,
-  xlabel_2 =,
-  xlabel_1_e2 =,
+  xlabel_2 = &map_label,
+  xlabel_2_en = &map_label_en,
+  xlegend_2 = ,
+  xlegend_2_en = &xlegend_2,
   y_2 = "bohf",
-  ylabel_2 =,
-  ylabel_1_e2 =,
+  ylabel_2 = "Opptaksområder",
+  ylabel_2_en = "Referral areas",
   annualvar_2 = 0,
   annualvarlabels_2 =,
+  format_2 =,
   barchart_3 = 0,
   barchart_3_data = "datasett_1",
   x_3 =,
-  xlabel_3 =,
-  xlabel_1_e3 =,
+  xlabel_3 = &map_label,
+  xlabel_3_en = &map_label_en,
   y_3 = "bohf",
-  ylabel_3 =,
-  ylabel_1_e3 =,
+  ylabel_3 = "Opptaksområder",
+  ylabel_3_en = "Referral areas",
   annualvar_3 = 0,
   annualvarlabels_3 =,
+  format_3 =,
   table =,
   table_data = "datasett_1",
-  table_caption =,
-  table_caption_en =,
+  table_caption = "Årlige gjennomsnittsverdier for perioden 2019–2022. Rate pr. 1 000 innbyggere",
+  table_caption_en = &table_caption,
   /* jenks */
   clusters = 4,
   breaks = 3,
@@ -340,6 +347,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
         write open array;
            write values &x_2;
         write close;
+      %if %length(&xlegend_2) > 0 %then %do;
       write values "xLegend";
         write open object;
           write values "nb";
@@ -351,6 +359,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
               write values &xlegend_2_en;
             write close;
         write close;
+      %end;
       write values "y" &y_2;
       write values "xLabel";
         write open object;
@@ -379,6 +388,9 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
             write close;
         write close;
 	  %end;
+    %if %length(&format_2) > 0 %then %do;
+      write values "format" &format_2;
+    %end;
     write close;
 	%end;
     %if &barchart_3 = 1 %then %do;
@@ -417,6 +429,9 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
             write close;
         write close;
 	  %end;
+    %if %length(&format_3) > 0 %then %do;
+      write values "format" &format_3;
+    %end;
     write close;
 	%end;
   %if %length(&table) > 0 %then %do;
@@ -440,14 +455,17 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
       write values "x" &map_value;
       write values "caption";
         write open object;
-          write values "nb" &xlabel_1;
-          write values "en" &xlabel_1_en;
+          write values "nb" &map_label;
+          write values "en" &map_label_en;
         write close;
       write values "jenks";
         write open array;
           export work.qwerty_jenks;
         write close;
-    write close;
+      %if %length(&format_map) > 0 %then %do;
+      write values "format" &format_map;
+      %end;
+      write close;
     write open object; /* Selve dataene*/
       write values "type" "data";
       write values "label" "datasett_1";
