@@ -456,16 +456,15 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
           export work.qwerty;
         write close;
       write close;
-    write close;
-  %if %length(datasett2) > 0 %then %do;
-    write open object; /* Ekstradata*/
-      write values "type" "data";
-      write values "label" "qwerty2";
-      write values "description" "Ekstradatasettet for gitt resultatboks";
-      write values "data";
-        write open array;
-          export work.qwerty2;
-        write close;
+      %if %length(datasett2) > 0 %then %do;
+      write open object; /* Ekstradata*/
+        write values "type" "data";
+        write values "label" "qwerty2";
+        write values "description" "Ekstradatasettet for gitt resultatboks";
+        write values "data";
+          write open array;
+            export work.qwerty2;
+          write close;
       write close;
       %end;
     write close;
