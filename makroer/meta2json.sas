@@ -3,35 +3,36 @@
   filnavn =,
   map_value =,
   map_data = "datasett_1",
-  barchart_1 = 0,
+  barchart_1 = 1,
   barchart_1_data = "datasett_1",
-  x_1 = "tmp",
+  x_1 = &map_value,
   xlabel_1 = "tmp",
   xlabel_1_en = "tmp",
-  y_1 = "tmp",
+  y_1 = "bohf",
   ylabel_1 = "tmp",
   ylabel_1_en = "tmp",
-  annualvar_1 =,
+  annualvar_1 = 0,
   annualvarlabels_1 =,
+  format_1 =,
   barchart_2 = 0,
   barchart_2_data = "datasett_1",
   x_2 =,
   xlabel_2 =,
   xlabel_1_e2 =,
-  y_2 =,
+  y_2 = "bohf",
   ylabel_2 =,
   ylabel_1_e2 =,
-  annualvar_2 =,
+  annualvar_2 = 0,
   annualvarlabels_2 =,
   barchart_3 = 0,
   barchart_3_data = "datasett_1",
   x_3 =,
   xlabel_3 =,
   xlabel_1_e3 =,
-  y_3 =,
+  y_3 = "bohf",
   ylabel_3 =,
   ylabel_1_e3 =,
-  annualvar_3 =,
+  annualvar_3 = 0,
   annualvarlabels_3 =,
   table =,
   table_data = "datasett_1",
@@ -326,7 +327,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
             write close;
         write close;
 	  %end;
-    %if %length(format_1) > 0 %then %do;
+    %if %length(&format_1) > 0 %then %do;
       write values "format" &format_1;
     %end;
     write close;
@@ -457,7 +458,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
           export work.qwerty;
         write close;
       write close;
-      %if %length(datasett_2) > 0 %then %do;
+      %if %length(&datasett_2) > 0 %then %do;
       write open object; /* Ekstradata*/
         write values "type" "data";
         write values "label" "datasett_2";
