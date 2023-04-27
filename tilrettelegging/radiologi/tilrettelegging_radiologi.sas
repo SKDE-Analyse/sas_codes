@@ -33,12 +33,11 @@ run;
 data radiologi_&aar.;
 set radiologi_&aar.;
 
-rename pasientlopenummer = pid
-       pasient_alder = alder;
+rename pasientlopenummer = pid;
 
 /*endre navn kontakttype, sette på format*/
 kontakttype_rad = kontakttype;
-drop kontakttype;
+drop kontakttype pasient_alder;
 format kontakttype_rad kontakttype_rad.;
 
 /* skille på offentlig og privat */

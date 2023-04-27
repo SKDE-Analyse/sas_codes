@@ -125,4 +125,22 @@ proc sort data=&inndata;
   by PASIENTLOPENUMMER BEHANDLER_IDENTIFIKASJON DATO TID;
 run;
 
+/*-------------*/
+/* FIX ALDER   */
+/*-------------*/
+
+proc sql;
+  create table pid_alder as
+  select PASIENTLOPENUMMER, max(PASIENT_ALDER) as alder
+  from &inndata
+  group by PASIENTLOPENUMMER;
+run;
+
+proc sql;
+  create table &inndata as
+  select a.*, b.alder
+  from &inndata a, pid_alder b
+  where a.PASIENTLOPENUMMER=b.PASIENTLOPENUMMER;
+quit;
+
 %mend trans_dup;
