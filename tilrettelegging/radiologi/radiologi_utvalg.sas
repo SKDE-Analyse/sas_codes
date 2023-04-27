@@ -1,4 +1,5 @@
 ﻿%macro radiologi_utvalg;
+
 /*! 
 ### Beskrivelse
 
@@ -12,10 +13,13 @@ Må kjøres inni et datasteg.
 ### Endringslogg:
     - Opprettet desember 2022, Tove
 	- lagt til riksrevisjonsutvalg + noen andre, januar 2023, Tove
+	- lagt til flere koder fra KlokeValg og liknende, april 2023, Janice
  */
 
 array nc_utv {*} ncrp: ;
 	do i=1 to dim(nc_utv);
+
+		if substr(nc_utv{i},1,6) in ('ZTX0BC') then sekgransk = 1;
 
 /* ---------------------------------------------------------------------------------------------------------------------------------------- */
 /* Riksrevisjon utvalg - side 91 og 92 i rapporten (https://www.riksrevisjonen.no/globalassets/rapporter/no-2016-2017/bildediagnostikk.pdf) */
@@ -40,8 +44,9 @@ array nc_utv {*} ncrp: ;
 		if substr(nc_utv{i},1,6) in ('SNG0AG')                                      														then MR_kne=1; 
 		if substr(nc_utv{i},1,6) in ('SNB0BG')                                      														then MR_skulder=1; 
 		if substr(nc_utv{i},1,6) in ('SSE0AG')                                      														then MR_bekken=1; 
-		if substr(nc_utv{i},1,6) in ('SNF0AG' /*mr hofte*/, 
-                                'SSM0AG' /*mr bekken og underekstremiteter*/)      															then MR_hofte=1; 
+		if substr(nc_utv{i},1,6) in ('SNF0AG' /*mr hofte*/
+								/*, 'SSM0AG' mr bekken og underekstremiteter - riksrevisjon har den, men vi tar den ut*/)      															
+																																			then MR_hofte=1; 
 		if substr(nc_utv{i},1,6) in ('SND0AG' /*mr håndledd og håndrot*/, 
                                 'SND0BG' /*mr hånd og fingre*/)                    															then MR_hand=1; 
 		if substr(nc_utv{i},1,6) in ('SNH0BG')                                      														then MR_ankel=1; 
@@ -82,7 +87,12 @@ array nc_utv {*} ncrp: ;
 		if substr(nc_utv{i},1,6) in ('SST0AG')                                 		then MR_hals_toraks_abdom_bekken=1; 
 		if substr(nc_utv{i},1,6) in ('SDX0AG')                                      then MR_bihuler=1; 
 		if substr(nc_utv{i},1,6) in ('SAF0AG')                                      then MR_ansikt=1; 
+		if substr(nc_utv{i},1,6) in ('SJJ0AG') 										then mr_lever = 1; /* MR lever */
+		if substr(nc_utv{i},1,6) in ('SKX0AG') 										then mr_urin = 1; /* MR urinveier */
 
+		if substr(nc_utv{i},1,6) in ('SNA0AG') 										then mr_ck = 1; /* MR_cervikalkolumna (MR_ck) */
+		if substr(nc_utv{i},1,6) in ('SNA0BG') 										then mr_tk = 1; /* MR_torakalkolumna (MR_tk) */
+		if substr(nc_utv{i},1,6) in ('SNA0EG') 										then mr_ct = 1; /* MR_cervikal_torakalkol (MR_ct) */
 		if substr(nc_utv{i},1,6) in ('SNA0EG')                                      then MR_cervikal_torakal=1; 
 		if substr(nc_utv{i},1,6) in ('SNA0FG')                                      then MR_torakal_lumbal=1; 
 		if substr(nc_utv{i},1,6) in ('SNA0HG')                                      then MR_cerv_tora_lumbal=1; 
@@ -94,6 +104,13 @@ array nc_utv {*} ncrp: ;
 		if substr(nc_utv{i},1,6) in ('SNA0SG'/*ny i 2017, ingen tidl kode*/)        then MR_cervikal_lumbosakral=1; 
 		if substr(nc_utv{i},1,6) in ('SNA0TG'/*ny i 2017, ingen tidl kode*/)        then MR_bekken_delkomuna=1; 
 
+		/* MR TORAKS, ABDOMEN OG KAR */
+		if substr(nc_utv{i},1,6) in ('SSC0AG'/*mr toraks*/) 						then MR_toraks=1;
+		if substr(nc_utv{i},1,6) in ('SSD0AG'/*mr abdomen*/)						then MR_abdom=1;		
+		if substr(nc_utv{i},1,6) in ('SSQ0AG'/*mr toraks, abdomen og bekken*/) 		then MR_toraks_abdom_bekken=1;
+		if substr(nc_utv{i},1,6) in ('SSL0AG'/*mr abdomen og bekken*/) 				then MR_abdom_bekken=1;
+		if substr(nc_utv{i},1,6) in ('SSK0AG'/*mr toraks og abdomen*/) 				then MR_toraks_abdom=1;
+
 /* CT */
 		if substr(nc_utv{i},1,6) in ('SNG0AD')                                     	then CT_kne=1; 
 		if substr(nc_utv{i},1,6) in ('SNH0BD')                                      then CT_ankel=1; 
@@ -102,7 +119,37 @@ array nc_utv {*} ncrp: ;
 		if substr(nc_utv{i},1,6) in ('SNC0AD')                                      then CT_albue=1; 
 		if substr(nc_utv{i},1,6) in ('SJF0AD')        								then CT_tynntarm=1; 
 		if substr(nc_utv{i},1,6) in ('SDE0AD')                                     	then CT_tinningben=1; 
+		if substr(nc_utv{i},1,6) in ('SFY0AD') 										then ct_hjerte = 1;
+		if substr(nc_utv{i},1,6) in ('SFN0AP') 										then ct_ak = 1; /* (angio_koronar) */
+		if substr(nc_utv{i},1,6) in ('SKX0BD') 										then CT_nyre_ou = 1; /* CT_nyre_ovre_urinveier */
+
+/* UL */										
+		if substr(nc_utv{i},1,6) in ('SBA0AK') 										then ul_thyroidea = 1;
+		if substr(nc_utv{i},1,6) in ('SKX0AK') 										then UL_urin = 1; /* UL_urinveier */
+
+/* RG */										
+		if substr(nc_utv{i},1,6) in ('SDX0AA') 										then rg_bihuler = 1; 
+
+/*KlokeValg og liknende*/
+		if substr(nc_utv{i},1,6) in ('SSE0AK', 'SSE0AG', 'SSE0AD') 					then ul_mr_ct_bekken = 1; /*Kloke valg - ovarialcyster*/
+		if substr(nc_utv{i},1,6) in ('SJX0AK') 										then ul_abdom = 1; /* UL/CT abdomen hos barn  */
+		if substr(nc_utv{i},1,6) in ('SAA0AD') 										then ct_hode = 1; 
+		if substr(nc_utv{i},1,6) in ('SNB0BG', 'SNC0AG', 'SND0AG', 'SND0BG') 		then MR_ue = 1; /* MRI upper extremity */
+		if substr(nc_utv{i},1,6) in ('SNF0AG', 'SSM0AG', 'SSE0AG', 'SNJ0AG') 		then MR_hp = 1; /* MRI Hip pain */
+		if substr(nc_utv{i},1,6) in ('SJK0AG') 										then MR_pancreas = 1; /* MR - acute pancreatitis */
+		if substr(nc_utv{i},1,6) in ('SPA0AK') 										then UL_cs = 1; /* UL - carotid screening */
+		if substr(nc_utv{i},1,6) in ('SSC0AA') 										then RG_thorax = 1; 
+		if substr(nc_utv{i},1,6) in ('SNX0XA ')										then Dexa = 1; 	/* DEXA osteoporosis screening */
+		if substr(nc_utv{i},1,6) in ('SDX0AD', 'SDX0AK', 'SDX0AA') 					then Xray_bihule = 1; /* x-ray acute rhino */
+		if substr(nc_utv{i},1,6) in ('TFY0DN ') 									then mpi = 1; 	/* myocardial perfusion imaging (non-invasive / stress test) */
+
+		if substr(nc_utv{i},1,6) in ('SNA0GA ') 									then RG_ls = 1; /* RG lumbosakral */
+
     end;
+
+/* -------------- */
+/* KOMBINASJONER */
+/* -------------- */
 
 /*CT toraks, abdomen og  bekken*/
 if CT_toraks eq 1 and CT_abdom eq 1 and CT_bekken eq 1 then CT_toraks_abdom_bekken=1;
@@ -122,12 +169,23 @@ end;
 /* CT toraks */
 if CT_toraks_abdom_bekken eq 1 or CT_abdom_bekken eq 1 or CT_toraks_abdom eq 1 or CT_abdom eq 1 then CT_toraks=.;
 
+/* CT hjerte og angiokor */
+if ct_hjerte=1 or ct_ak=1 then ct_hak=1; /* (hjerteangiokor) */
+if alder in (68:73) and ct_ak=1 then ct_ak_sjekk=1;
+
 /* MR nakke/rygg */
 if MR_cervikalkol eq 1 or MR_torakalkol eq 1 or MR_cervikal_torakal eq 1 or MR_torakal_lumbal eq 1 or 
     MR_lumbosakral eq 1 or MR_cerv_tora_lumbal eq 1 or MR_totalkol eq 1 or MR_tora_lumbosakral eq 1 or
     MR_caput_totalkol eq 1 or MR_totalkol_bekken eq 1 or MR_caput_delkolumna eq 1 or MR_caput_kolumna_overekstr eq 1 or
     MR_cervikal_lumbosakral eq 1 or MR_bekken_delkomuna eq 1                    
                                                                                 then MR_nakke_rygg = 1;
+
+/* -------------- */
+
+/*kort-navn*/
+if MR_cervikal_lumbosakral=1 then MR_cls=1;
+if CT_cervikalkol=1 then CT_ck=1;
+
 
 /* forløpspasienter */
 if MR_nakke_rygg eq 1 or MR_kne eq 1 or MR_skulder eq 1 or MR_prostata eq 1 	then forlop_pas = 1;

@@ -143,6 +143,28 @@ array nc {*} ncrp: ;
 	If substr(nc{i},1,6) in ('TBA0CT','TJJ0RT','TNB0AT','TNC0AT','TND0AT','TND0BT','TNF0AT','TNG0AT','TNH0AT','TNH0BT','TNH0CT','TNX0XT','TSY0RT','TSX0RT')
 	then RNT=1;
 
+
+/*barn*/
+if ct=1 and alder in (0:17) then ct_barn=1;
+if cta=1 and alder in (0:17) then cta_barn=1;
+if mr=1 and alder in (0:17) then mr_barn=1;
+if mra=1 and alder in (0:17) then mra_barn=1;
+if rg=1 and alder in (0:17) then rg_barn=1;
+if rga=1 and alder in (0:17) then rga_barn=1;
+if rgv=1 and alder in (0:17) then rgv_barn=1;
+if ul=1 and alder in (0:17) then ul_barn=1;
+if pet_ct=1 and alder in (0:17) then pet_ct_barn=1;
+if pet_mr=1 and alder in (0:17) then pet_mr_barn=1;
+if nm=1 and alder in (0:17) then nm_barn=1;
+if rnt=1 and alder in (0:17) then rnt_barn=1;
+
+if mr=1 or mra=1 then MR_mod=1;
+if ct=1 or cta=1 then CT_mod=1;
+if pet_ct=1 or pet_mr=1 or nm=1 then PET_NM=1; /* må se på denne nærmere */
+if mr_mod=1 and alder in (0:17) then mr_barn=1;
+if ct_mod=1 and alder in (0:17) then ct_barn=1;
+if pet_nm=1 and alder in (0:17) then pet_nm_barn=1;
+
 	/*Region*/
 	If substr(nc{i},1,6) in ('SAA0AD','SAA0DP','SAF0AD','SBE0AD','SCA0AD','SDE0AD','SDX0AD','SDX0XD','SEG0AD','SEL0AD','SEX0AD','SAA0AP','SAA0AG','SAF0AG','SAH0AG','SAX0AG','SBE0AG',
 	'SCA0AG','SDE0AG','SDX0AG','SEG0AG','SAA0AQ','SAA0GQ','SCC0AA','SDX0AA','SEG0AA','SEL0AA','SEX0CA','SAA0AA','SAF0AA','SAA0AB','SAA0AC','SAA0DC','SAA0AK','SAA0BK','SAA0CK','SAF0BK','SCX0AK',
