@@ -67,7 +67,7 @@
 974745364;Helse Førde, Nordfjord;92;Nordfjord sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
 974745089;Helse Førde, Lærdal;93;Lærdal sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
 974743914;Helse Førde, Florø;94;Florø sykehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
-922643202;Helse Førde HF Sogndal poliklinikk;95;Sogndal poliklinikk;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;"Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Sogndal poliklinikk under Helse Førde HF. "
+922643202;Helse Førde HF Sogndal poliklinikk;95;Sogndal poliklinikk;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Sogndal poliklinikk under Helse Førde HF. 
 983974724;Helse Bergen HF;100;Helse Bergen HF;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 27.okt 2021: korrigere behsh. Helse Bergen HF = 100, og skadepoliklinikk = 104.
 973923811;Helse Bergen, Habilitering Voksne;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
 974557169;Helse Bergen, Rehabilitering;101;Haukeland universitetssykehus;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;
@@ -389,9 +389,14 @@
 973876457;Mjøs kirurgene lege og spesialistsenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
 990240116;VOLVAT medisinske senter AS Bergen - Ulriksdal;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
 995765691;Rehabilitering Vest AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 07.04.2022: rehab institusjon i RHF 2021 T3 data.
-996723119;Legevakt Vest AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;"Oppdatert 04.07.2022: somatikk 2022 T1. Allmenn legetjeneste, legevakt, bedriftshelsetjeneste og privat legespesialistpraksis. "
-928089428;Volvat medisinske senter as Storo;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;"Oppdatert 04.07.2022: somatikk 2022 T1. "
+996723119;Legevakt Vest AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 04.07.2022: somatikk 2022 T1. Allmenn legetjeneste, legevakt, bedriftshelsetjeneste og privat legespesialistpraksis. 
+928089428;Volvat medisinske senter as Storo;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 04.07.2022: somatikk 2022 T1. 
 922404690;Kardiologi AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 914156661;Parsennklinikken AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 23.03.2023: RHF data somatikk 2022T3.
-930587206;UNICARE COPERIO AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2023: RHF data rehab 2022T3.
-970981071;STIFTELSEN RIBO;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2023: RHF data rehab 2022T3.
+918082379;Clinique bellevue AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
+922383820;Kardiologi AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
+923393528;Privatklinikken i Skien AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
+924547715;Majorstuen spesialistsenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
+927056119;Christiania hjerteklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
+996671038;Legevakt Vest AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
+997716124;Legetjenester Michael Nesland;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
