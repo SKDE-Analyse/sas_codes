@@ -6,10 +6,12 @@
   map_label = "tmp",
   map_label_en = "tmp",
   format_map = ,
+  /**/
   barchart_1 = 1,
   barchart_1_data = "datasett_1",
   x_1 = &map_value,
-  xlabel_1 = &map_label,
+  xlegend_1 = ,
+  xlabel_1 = ,
   xlabel_1_en = &map_label_en,
   y_1 = "bohf",
   ylabel_1 = "Opptaksområder",
@@ -17,10 +19,11 @@
   annualvar_1 = 0,
   annualvarlabels_1 =,
   format_1 =,
+  /**/
   barchart_2 = 0,
   barchart_2_data = "datasett_1",
   x_2 =,
-  xlabel_2 = &map_label,
+  xlabel_2 = ,
   xlabel_2_en = &map_label_en,
   xlegend_2 = ,
   xlegend_2_en = &xlegend_2,
@@ -30,17 +33,33 @@
   annualvar_2 = 0,
   annualvarlabels_2 =,
   format_2 =,
+  /**/
   barchart_3 = 0,
   barchart_3_data = "datasett_1",
   x_3 =,
-  xlabel_3 = &map_label,
+  xlabel_3 = ,
   xlabel_3_en = &map_label_en,
   y_3 = "bohf",
+  xlegend_3 = ,
   ylabel_3 = "Opptaksområder",
   ylabel_3_en = "Referral areas",
   annualvar_3 = 0,
   annualvarlabels_3 =,
   format_3 =,
+    /**/
+  barchart_4 = 0,
+  barchart_4_data = "datasett_1",
+  x_4 =,
+  xlabel_4 = ,
+  xlabel_4_en = &map_label_en,
+  y_4 = "bohf",
+  xlegend_4 = ,
+  ylabel_4 = "Opptaksområder",
+  ylabel_4_en = "Referral areas",
+  annualvar_4 = 0,
+  annualvarlabels_4 =,
+  format_4 =,
+  /**/
   linechart_1 = 0,
   linechart_1_x = ,
   linechart_1_y = ,
@@ -63,7 +82,7 @@
   linechart_2_format = ,
   table =,
   table_data = "datasett_1",
-  table_caption = "Årlige gjennomsnittsverdier for perioden 2019–2022. Rate pr. 1 000 innbyggere",
+  table_caption = "Årlige gjennomsnittsverdier for perioden 2018–2022. Rate pr. 10 000 innbyggere",
   table_caption_en = &table_caption,
   /* jenks */
   clusters = 4,
@@ -332,6 +351,19 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
         write open array;
            write values &x_1;
         write close;
+      %if %length(&xlegend_1) > 0 %then %do;
+      write values "xLegend";
+        write open object;
+          write values "nb";
+            write open array;
+              write values &xlegend_1;
+            write close;
+          write values "en";
+            write open array;
+              write values &xlegend_1;
+            write close;
+        write close;
+      %end;
       write values "y" &y_1;
       write values "xLabel";
         write open object;
@@ -419,7 +451,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
       write values "format" &format_2;
     %end;
     write close;
-	%end;
+	%end;    
   /* Barchart 3 */
     %if &barchart_3 = 1 %then %do;
     write open object;
@@ -430,6 +462,19 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
            write values &x_3;
         write close;
       write values "y" &y_3;
+      %if %length(&xlegend_3) > 0 %then %do;
+      write values "xLegend";
+        write open object;
+          write values "nb";
+            write open array;
+              write values &xlegend_3;
+            write close;
+          write values "en";
+            write open array;
+              write values &xlegend_3;
+            write close;
+        write close;
+      %end;
       write values "xLabel";
         write open object;
           write values "nb" &xlabel_3;
@@ -462,6 +507,61 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
     %end;
     write close;
 	%end;
+  /* Barchart 4 */
+    %if &barchart_4 = 1 %then %do;
+    write open object;
+      write values "type" "barchart";
+      write values "data" &barchart_4_data;
+      write values "x";
+        write open array;
+           write values &x_4;
+        write close;
+      write values "y" &y_4;
+      %if %length(&xlegend_4) > 0 %then %do;
+      write values "xLegend";
+        write open object;
+          write values "nb";
+            write open array;
+              write values &xlegend_4;
+            write close;
+          write values "en";
+            write open array;
+              write values &xlegend_4;
+            write close;
+        write close;
+      %end;
+      write values "xLabel";
+        write open object;
+          write values "nb" &xlabel_4;
+          write values "en" &xlabel_4_en;
+        write close;
+      write values "yLabel";
+        write open object;
+          write values "nb" &ylabel_4;
+          write values "en" &ylabel_4_en;
+        write close;
+	  %if &annualvar_4 ne 0 %then %do;
+      write values "annualVar";
+	    write open array;
+          write values &annualvar_4;
+        write close;
+      write values "annualVarLabels";
+        write open object;
+          write values "nb";
+            write open array;
+              write values &annualvarlabels_4;
+            write close;
+          write values "en";
+            write open array;
+              write values &annualvarlabels_4;
+            write close;
+        write close;
+	  %end;
+    %if %length(&format_4) > 0 %then %do;
+      write values "format" &format_4;
+    %end;
+    write close;
+	%end;
   /* Linechart 1 */
   %if &linechart_1 = 1 %then %do;
   write open object;
@@ -488,7 +588,7 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
     %end;
   write close;
 	%end;
-  /* Linechart 1 */
+  /* Linechart 2 */
   %if &linechart_2 = 1 %then %do;
   write open object;
     write values "type" "linechart";
