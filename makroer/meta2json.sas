@@ -41,6 +41,26 @@
   annualvar_3 = 0,
   annualvarlabels_3 =,
   format_3 =,
+  linechart_1 = 0,
+  linechart_1_x = ,
+  linechart_1_y = ,
+  linechart_1_label = ,
+  linechart_1_data = ,
+  linechart_1_ylabel = ,
+  linechart_1_ylabel_en = ,
+  linechart_1_xlabel = ,
+  linechart_1_xlabel_en = ,
+  linechart_1_format = ,
+  linechart_2 = 0,
+  linechart_2_x = ,
+  linechart_2_y = ,
+  linechart_2_label = ,
+  linechart_2_data = ,
+  linechart_2_ylabel = ,
+  linechart_2_ylabel_en = ,
+  linechart_2_xlabel = ,
+  linechart_2_xlabel_en = ,
+  linechart_2_format = ,
   table =,
   table_data = "datasett_1",
   table_caption = "Årlige gjennomsnittsverdier for perioden 2019–2022. Rate pr. 1 000 innbyggere",
@@ -441,6 +461,58 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
       write values "format" &format_3;
     %end;
     write close;
+	%end;
+  /* Linechart 1 */
+  %if &linechart_1 = 1 %then %do;
+  write open object;
+    write values "type" "linechart";
+    write values "data" &linechart_1_data;
+    write values "label" &linechart_1_label;
+    write values "x";
+      write open array;
+         write values &linechart_1_x;
+      write close;
+    write values "y" &linechart_1_y;
+    write values "xLabel";
+      write open object;
+        write values "nb" &linechart_1_xlabel;
+        write values "en" &linechart_1_xlabel_en;
+      write close;
+    write values "yLabel";
+      write open object;
+        write values "nb" &linechart_1_ylabel;
+        write values "en" &linechart_1_ylabel_en;
+      write close;
+    %if %length(&linechart_1_format) > 0 %then %do;
+      write values "format" &linechart_1_format;
+    %end;
+  write close;
+	%end;
+  /* Linechart 1 */
+  %if &linechart_2 = 1 %then %do;
+  write open object;
+    write values "type" "linechart";
+    write values "data" &linechart_2_data;
+    write values "label" &linechart_2_label;
+    write values "x";
+      write open array;
+         write values &linechart_2_x;
+      write close;
+    write values "y" &linechart_2_y;
+    write values "xLabel";
+      write open object;
+        write values "nb" &linechart_2_xlabel;
+        write values "en" &linechart_2_xlabel_en;
+      write close;
+    write values "yLabel";
+      write open object;
+        write values "nb" &linechart_2_ylabel;
+        write values "en" &linechart_2_ylabel_en;
+      write close;
+    %if %length(&linechart_2_format) > 0 %then %do;
+      write values "format" &linechart_2_format;
+    %end;
+  write close;
 	%end;
   /* Tabell */
   %if %length(&table) > 0 %then %do;
