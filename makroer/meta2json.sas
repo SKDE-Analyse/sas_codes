@@ -69,7 +69,8 @@
   linechart_1_ylabel_en = ,
   linechart_1_xlabel = ,
   linechart_1_xlabel_en = ,
-  linechart_1_format = ,
+  linechart_1_format_x = ,
+  linechart_1_format_y = ,
   linechart_2 = 0,
   linechart_2_x = ,
   linechart_2_y = ,
@@ -79,7 +80,8 @@
   linechart_2_ylabel_en = ,
   linechart_2_xlabel = ,
   linechart_2_xlabel_en = ,
-  linechart_2_format = ,
+  linechart_2_format_x = ,
+  linechart_2_format_y = ,
   table =,
   table_data = "datasett_1",
   table_caption = "Årlige gjennomsnittsverdier for perioden 2018–2022. Rate pr. 10 000 innbyggere",
@@ -333,7 +335,7 @@ run;
 
   data qwerty2;
   set qwerty2;
-  format bohf bohf_fmt.;
+  format bohf bohf_fmt. ermann ermann.;
   run;
 %end;
 
@@ -583,8 +585,11 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
         write values "nb" &linechart_1_ylabel;
         write values "en" &linechart_1_ylabel_en;
       write close;
-    %if %length(&linechart_1_format) > 0 %then %do;
-      write values "format" &linechart_1_format;
+    %if %length(&linechart_1_format_x) > 0 %then %do;
+      write values "format_x" &linechart_1_format_x;
+    %end;
+    %if %length(&linechart_1_format_y) > 0 %then %do;
+      write values "format_y" &linechart_1_format_y;
     %end;
   write close;
 	%end;
@@ -609,8 +614,11 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
         write values "nb" &linechart_2_ylabel;
         write values "en" &linechart_2_ylabel_en;
       write close;
-    %if %length(&linechart_2_format) > 0 %then %do;
-      write values "format" &linechart_2_format;
+    %if %length(&linechart_2_format_x) > 0 %then %do;
+      write values "format_x" &linechart_2_format_x;
+    %end;
+    %if %length(&linechart_2_format_y) > 0 %then %do;
+      write values "format_y" &linechart_2_format_y;
     %end;
   write close;
 	%end;
