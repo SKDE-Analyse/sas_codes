@@ -1,1 +1,1 @@
-/* her kommer sas coden min */
+/* øysten skriver dette */
