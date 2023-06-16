@@ -1,1 +1,0 @@
-/*dette er en fin test */
