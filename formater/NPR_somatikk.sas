@@ -400,13 +400,6 @@ value NPRID_REG
 	  ;
 	  
 
-	
-
-
-
-
-
-
 
 
    value INTERN_KONS
