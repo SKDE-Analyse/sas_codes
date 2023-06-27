@@ -46,7 +46,7 @@ data dupkjonn;
   if first.pasientlopenummer =0 or last.pasientlopenummer=0 then output;
 run;
 
-title color=darkblue height=5 "2a: antall pasienter med ulike kjønn";
+title color=darkblue height=5 "2a: &mottatt_aar - antall pasienter med ulike kjønn";
 proc sql;
   select count(distinct pasientlopenummer) as unikid
   from dupkjonn;
@@ -68,6 +68,17 @@ select 	min(pasient_alder) 				as minalder,
 		max(pasient_alder) 				as maxalder 
 from &inndata;
 quit;
+
+proc sql;
+  create table pid_alder as
+  select PASIENTLOPENUMMER, count(distinct PASIENT_ALDER) as n_alder
+  from &inndata
+  group by PASIENTLOPENUMMER;
+run;
+title color=darkblue height=5 "3: &mottatt_aar - antall unike pasienter med mer enn en alder i samme år";
+proc freq data=pid_alder; 
+  tables n_alder;
+run;
 title;
 %end;
 
