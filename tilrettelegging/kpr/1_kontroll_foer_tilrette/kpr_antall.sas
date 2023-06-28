@@ -1,4 +1,4 @@
-﻿%macro kpr_antall;
+﻿%macro kpr_antall(aar=);
 /* ------------------------ */
 /* REGNINGSFILEN/HOVEDFILEN */
 /* ------------------------ */
@@ -50,4 +50,9 @@ proc sql;
 quit;
 
 proc delete data= regning_&aar. takst_&aar. diag_&aar.; run;
+
+
+title color=darkblue height=5 '1: antall pasienter, rader og regningsnummer: sjekk mot utleveringsinfo';
+proc print data=joined_&aar;run;
+
 %mend;
