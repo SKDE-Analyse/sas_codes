@@ -50,6 +50,7 @@
 995413388;St Olavs hospital, Hysnes helsefort;64;St. Olavs hospital, Hysnes helsefort;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 915621457;St Olavs hospital, Ørland;65;St. Olavs hospital, Ørland;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 920196357;St Olavs Hospital HF rehabilitering Ørlandet;65;St. Olavs hospital, Ørland;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+874748722;St Olavs hospital HF Psykisk helsevern Østmarka;66;St Olavs Hospital, Psyk Østmarka;6;St. Olavs Hospital HF;St. Olavs Hospital;3;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.06.2023 2023T1 Somatikk Hanne Sigrun Byhring
 997005562;Helse Møre og Romsdal HF;70;Helse Møre og Romsdal HF;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 30.03.2022: RHF data somatikk.
 974745569;Helse Møre og Romsdal HF Molde sjukehus;71;Molde sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 984038135;Helse Møre og Romsdal HF, Voksenhabilitering Molde;71;Molde sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
@@ -186,6 +187,8 @@
 974207532;Lovisenberg diakonale sykehus;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 920800041;Lovisenberg Diakonale sykehus hospice sangen avd Hamar;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 965985166;Lovisenberg diakonale sykehus AS;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 20.jan 2021: 2019-data, institusjonid viser til hovedenhet Lovisenberg diakonale sykehus AS.
+930254495;Lovisenberg rehabilitering AS Avd Jessheim;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 29.06.2023 2023T1 Somatikk Hanne Sigrun Byhring
+924212446;Lovisenberg rehabilitering AS;240;Lovisenberg diakonale sykehus;24;Lovisenberg diakonale sykehus;Lovisenberg diakonale sykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 29.06.2023 2023T1 Somatikk Hanne Sigrun Byhring
 985962170;Martina Hansens Hospital;251;Martina Hansens Hospital;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974116588;Martina Hansens hospital sykehuset;251;Martina Hansens Hospital;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 924445114;Martina Hansens hospital avd radiologi;251;Martina Hansens Hospital;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 25.03.2021: somatikk RHF-data jan/feb 2021. Underenhet til Martina Hansens Hospital, legges til behsh 251 sammen med hovedenhet.
@@ -400,3 +403,4 @@
 927056119;Christiania hjerteklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
 996671038;Legevakt Vest AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
 997716124;Legetjenester Michael Nesland;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
+830564632;Dr. Dropin AS Avd Oscars gate;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 29.06.2023: 2023T1 Hanne Sigrun Byhring
