@@ -1,0 +1,102 @@
+﻿bydel_utlevert;komnr_mapping;bydel_mapping;bydel_navn;kommentar
+301;301;30199;Uoppgitt bydel Oslo;
+312;301;30105;Frogner;
+313;301;30104;St. Hanshaugen;
+314;301;30103;Sagene;Sentrum er inkl. Begge hører til OUS.
+315;301;30102;Grünerløkka;
+316;301;30101;Gamle Oslo;
+318;301;30114;Nordstrand;
+319;301;30115;Søndre Nordstrand;
+321;301;30113;Østensjø;
+326;301;30112;Alna;
+327;301;30111;Stovner;
+328;301;30110;Grorud;
+330;301;30109;Bjerke;
+331;301;30108;Nordre Aker;
+334;301;30107;Vestre Aker;
+335;301;30106;Ullern;
+;;30116;Sentrum;Er inkl i Sagene.
+;;30117;Marka;Fordeles på ulike NAV-kontorer som grenser til Marka (OUS). Alna (Akershus), Østensjø, Søndre Nordstrand (OUS).
+1103;1103;110399;Uoppgitt bydel Stavanger;
+1161;1103;110303;Eiganes;Tasta er inkl.
+1162;1103;110301;Hundvåg;Storhaug er inkl.
+1164;1103;110306;Hillevåg;Hinna er inkl.
+1165;1103;110304;Madla;
+;;110302;Tasta;Er inkl i Eiganes.
+;;110305;Storhaug;Er inkl i Hundvåg.
+;;110307;Hinna;Er inkl i Hillevåg.
+1166;1103;110308;Finnøy;
+1167;1103;110309;Rennesøy;
+1201;4601;460199;Uoppgitt bydel Bergen;
+1202;4601;460103;Fana;Inkl Ytrebygda fra 2020.
+1203;4601;460108;Åsane;Inkl Arna fra 2020.
+1204;4601;460101;Arna;Er inkl i Åsane fra 2020.
+1205;4601;460104;Fyllingsdalen;Inkl Laksevåg fra 2020.
+1206;4601;460105;Laksevåg;Er inkl i Fyllingsdalen fra 2020.
+1208;4601;460107;Årstad;
+1209;4601;460102;Bergenhus;
+1210;4601;460106;Ytrebygda;Er inkl i Ytrebygda fra 2020.
+1601;5001;500199;Uoppgitt bydel Trondheim;
+1603;5001;500101;Midtbyen;
+1604;5001;500102;Østbyen;
+1605;5001;500103;Lerkendal;
+1607;5001;500104;Heimdal;
+5081;5001;500101;Midtbyen;
+5082;5001;500102;Østbyen;
+5083;5001;500103;Lerkendal;
+5084;5001;500104;Heimdal;Klæbu fra 2020
+5085;5001;500104;Heimdal;Heimdal fra 2020.
+2101;9999;;;Utenlandskontoret: kontoret behandler personer som ikke bor i Norge
+2103;9999;;;Viken - personer med hemmelig adresse
+2111;9999;;;Spitsbergen (Brukes kun av Posten)
+8888;9999;;;Står for uregistrert - det er ikke kommet fødselsmelding på personen (personen er ikke bosatt i Norge). Dette er barn av utvandrede nordmenn. De bor ikke i Norge, men har krav på norsk fødselsnummer.
+30101;301;30101;;
+30102;301;30102;;
+30103;301;30103;;
+30104;301;30104;;
+30105;301;30105;;
+30106;301;30106;;
+30107;301;30107;;
+30108;301;30108;;
+30109;301;30109;;
+30110;301;30110;;
+30111;301;30111;;
+30112;301;30112;;
+30113;301;30113;;
+30114;301;30114;;
+30115;301;30115;;
+30116;301;30116;;
+30117;301;30117;;
+110301;1103;110301;;
+110302;1103;110302;;
+110303;1103;110303;;
+110304;1103;110304;;
+110305;1103;110305;;
+110306;1103;110306;;
+110307;1103;110307;;
+110308;1103;110308;;
+110309;1103;110309;;
+120101;4601;460101;;
+120102;4601;460102;;
+120103;4601;460103;;
+120104;4601;460104;;
+120105;4601;460105;;
+120106;4601;460106;;
+120107;4601;460107;;
+120108;4601;460108;;
+160101;5001;500101;;
+160102;5001;500102;;
+160103;5001;500103;;
+160104;5001;500104;;
+460101;4601;460101;;
+460102;4601;460102;;
+460103;4601;460103;;
+460104;4601;460104;;
+460105;4601;460105;;
+460106;4601;460106;;
+460107;4601;460107;;
+460108;4601;460108;;
+500101;5001;500101;;
+500102;5001;500102;;
+500103;5001;500103;;
+500104;5001;500104;;
