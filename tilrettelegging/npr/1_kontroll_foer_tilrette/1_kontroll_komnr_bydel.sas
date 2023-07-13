@@ -28,7 +28,9 @@ Den sier ikke noe om det er løpenr ifeks Oslo 0301 som mangler bydel
     - november 2021, Tove
           - inkluderer tidligere bydelskommuner 1201 og 4601 i steg 2 hvor bydel kontrolleres 
           - fjerne rad med missing komnr i steg 1 slik at rader med manglende komnr i kontrollert data kommer i output error-liste
- */
+    - juli 2023, Tove
+          - angi antall rader som har feil med utlevert bydel, og endre melding som gis når det er feil    
+*/
 
 /* laste inn tre datafiler */
 data komnr;
@@ -221,9 +223,16 @@ run;
 %let nobs2=%sysfunc(attrn(&dsid2,any));
 %let dsid2=%sysfunc(close(&dsid2)); 
 
-title color=red height=5 "5b: det er feil med bydel i &aar.-filen";
-proc print data=error_bydel_&aar; run;
+%if &nobs2 ne 0 %then %do;
+title color=purple height=5 "5b: Antall rader med ugyldig verdi for bydel i &aar.-filen - tilretteleggingen gir de bydel = 99";
+proc sql;
+	select  ((&komnr.+0)*100+(&bydel.+0)) as bydel,  count(*) as ant_rader
+	from &inndata.
+	where ((&komnr.+0)*100+(&bydel.+0)) in (select bydel from error_bydel_&aar)
+	group by bydel;
+quit;
 title;
+%end;
 
 /* hvis error-fil er tom, print gyldige obs fra mottatte */
 %if &nobs2 eq 0 %then %do;
