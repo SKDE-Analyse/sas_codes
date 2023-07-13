@@ -122,7 +122,7 @@ data hnref.fmtfil_bydel(rename=(bydel=start) keep=bydel fmtname label);
    retain fmtname 'bydel_fmt';                                                                                                 
    length bydel_navn $60.;                                                                                                                    
    set bydel_fmt; 
-   label = cat(bydel_navn); 
+   label = cat(bydel,"", substr(bydel_navn,4)); 
 run; 
  /* Create the format using the control data set. */                                                                                     
 proc format cntlin=hnref.fmtfil_bydel; run;
