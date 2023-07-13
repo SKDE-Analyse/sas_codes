@@ -94,7 +94,7 @@ run;
     run;
 
     title 'antall komnr som må fornyes';
-    proc sql;
+    proc sql noprint;
     select count( distinct (case when komnr>1 then komnr end)) into :sumkom
     from go&i;
     quit;
