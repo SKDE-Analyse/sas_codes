@@ -21,7 +21,8 @@ Kan også brukes for data uten bydeler.
       - Melding i resultatvindu i SAS EG angir om det er data for alle kommuner og bydeler, hvis ikke printes en liste med hvilke som mangler data.
 
 ### Endringslogg:
-    - Tove: Opprettet desember 20222
+    - Tove: Opprettet desember 2022
+	- Tove: tilpasset til bruk i makro for kontroll av mottatte data
  */
 
 /*--------------------------------------------*/
@@ -59,9 +60,9 @@ data boomr;
 	kommentar $;
   run;
 
-/*---------------------*/
-/* Kommuner og bydeler */
-/*---------------------*/
+/*------------------------------------------*/
+/* Gyldige kommuner og bydeler fra BOOMR.CSV*/
+/*------------------------------------------*/
 
 %if &bydel ne 0 %then %do;
 /*tar kun med kommuner for bohf (1:23) - ekskluderer verdier for utland*/
@@ -72,8 +73,7 @@ proc sql;
 	where komnr ne . and bohf in (1:23);
 quit;
 
-/*ta ut ekstra rader for bydelskommuner, 
-394 rader*/
+/*ta ut overflødige rader for bydelskommuner (brukes vanligvis til formater)*/
 data boomr;
 set boomr;
 if komnr in (1103,4601,5001) and bydel eq . then delete;
@@ -83,13 +83,12 @@ drop komnr bydel;
 run;
 %end;
 
-/*--------------*/
-/* Kun kommuner */
-/*--------------*/
+/*-----------------------------------*/
+/* Hvis kontroll kjøres uten bydeler */
+/*-----------------------------------*/
 
 %if &bydel eq 0 %then %do;
-/*tar kun med kommuner for bohf (1:23) - ekskluderer verdier for utland,
-356 rader*/
+/*tar kun med kommuner for bohf (1:23) - ekskluderer verdier for utland*/
 proc sql;
 	create table boomr as
 	select distinct komnr as ID_bo
@@ -110,7 +109,7 @@ komnr = &komnr_navn.;
 %end;
 run;
 
-/*hvis komnr skal fornyes*/
+/*hvis komnr skal fornyes (default valg)*/
 %if &forny_komnr ne 0 %then %do;
 %include "&filbane/makroer/forny_komnr.sas";
 %forny_komnr(inndata=tmp_data, kommune_nr=&komnr_navn.);
@@ -141,17 +140,27 @@ ID = komnr;
 %end;
 run;
 
+/*slå sammen format for komnr og bydel*/
+data fmtfil_komnr_bydel;
+length fmtname $15.;
+set HNREF.FMTFIL_KOMNR
+	HNREF.FMTFIL_BYDEL;
+fmtname= "komnr_bydel_fmt";
+format start best6.;
+run;
+proc format cntlin = fmtfil_komnr_bydel; run;
+
 /*aggregere opp antall rader per ID (kommune/bydel) etter fornying av komnr og bydel er gjort*/
 proc sql;
 	create table akt_komnr_bydel as
-	select ID, count(*) as ant_rader
+	select ID format komnr_bydel_fmt., count(*) as ant_rader
 	from tmp_data
 	group by ID;
 quit;
 /* left join antall rader per ID med liste av gyldige komnr-verdier */
 proc sql;
 	create table akt_komnr_bydel2 as
-	select a.ID_bo, b.ant_rader
+	select a.ID_bo format komnr_bydel_fmt., b.ant_rader
 	from boomr a
 	left join akt_komnr_bydel b
 	on a.ID_bo=b.ID ;
@@ -159,7 +168,7 @@ quit;
 /*datasett hvor det er ID (kommuner/bydeler) uten data*/
 proc sql;
 	create table komnr_uten_data as 
-	select ID_bo as komnr_bydel, ant_rader
+	select ID_bo as komnr_bydel format komnr_bydel_fmt., ant_rader
 	from akt_komnr_bydel2
 	where ant_rader lt 1;
 quit;
@@ -169,7 +178,7 @@ quit;
 %let dsid2=%sysfunc(close(&dsid2)); 
 
 %if &nobs_komnr eq 1 %then %do;
-title color= purple height=5 "Kommuner/bydeler uten rapportert data ";
+title color= red height=5 "5c: Kommuner/bydeler uten rapportert data ";
 proc sql;
 	select komnr_bydel, ant_rader
 	from komnr_uten_data; 
@@ -178,7 +187,7 @@ title;
 %end;
 
 %if &nobs_komnr eq 0 %then %do;
-title color= darkblue height=5  "Alle kommuner/bydeler har rapporterte data";
+title color= darkblue height=5  "5c: Alle kommuner/bydeler har rapporterte data";
 proc sql;
    create table m
        (note char(12));
