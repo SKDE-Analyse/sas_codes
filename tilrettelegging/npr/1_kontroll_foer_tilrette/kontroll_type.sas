@@ -10,7 +10,8 @@ proc sql;
 	select a.name as mottatt_var, a.type as mottatt_type,
 								 b.type as ref_type,
 			case when a.name ne b.name then 1 end as ikke_i_ref_liste,
-			case when a.type ne b.type and b.type ne . then 1 end as ulik_type
+			case when a.type ne b.type and b.type ne . then 1 end as ulik_type,
+			b.kommentar
 	from varlist a
 	left join hnref.variabler_type_mottatt b
 	on a.name=b.name;
@@ -33,7 +34,7 @@ proc print data=xyz_vars; run;
 %end;
 
 %if &nobs3 ne 0 %then %do;
-title color=purple height=5 "4: variabler, type. Sjekk opp de som ikke er i ref.liste eller som har ulik type.";
+title color=purple height=5 "4: variabler, type. Se kommentarer for variabler med ulik_type = 1. Noen fikses i tilretteleggingen, andre må fikses manuelt. Hvis variabel ikke i referanseliste -> spør en venn!";
 proc print data=xyz_vars; where ikke_i_ref_liste eq 1 or ulik_type eq 1;run;
 %end;
 
