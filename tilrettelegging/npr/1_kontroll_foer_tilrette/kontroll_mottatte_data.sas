@@ -61,8 +61,12 @@ quit;
 /* 5 - kommunenummer og bydel */
 /* -------------------------- */
 %if &komnrhjem2 ne 0 and &bydel2 ne 0 %then %do;
+/* gyldig verdi på mottatte komnr og bydel */
 %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas";
 %kontroll_komnr_bydel(inndata= &inndata., komnr=komnrhjem2, bydel=bydel2, aar=&mottatt_aar);
+/* sjekk om alle komnr og bydel har aktivitet */
+%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/aktivitet_komnr_bydel.sas";
+%aktivitet_komnr_bydel(inndata=&inndata., komnr_navn=komnrhjem2, bydel_navn=bydel2, bydel=1 /*default = 1*/, forny_komnr=1 /*default = 1*/);
 %end;
 
 /* ---------------- */
