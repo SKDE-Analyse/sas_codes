@@ -21,4 +21,5 @@ Kan også brukes for data uten bydeler.
       - Melding i resultatvindu i SAS EG angir om det er data for alle kommuner og bydeler, hvis ikke printes en liste med hvilke som mangler data.
 
 ### Endringslogg:
-    - Tove: Opprettet desember 20222
+    - Tove: Opprettet desember 2022
+	- Tove: tilpasset til bruk i makro for kontroll av mottatte data
