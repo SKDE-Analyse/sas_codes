@@ -19,7 +19,7 @@ data dupkjonn;
   if first.&lnr =0 or last.&lnr=0 then output;
 run;
 
-title color=darkblue height=5 "2a: antall pasienter med ulike kjønn";
+title color=darkblue height=5 "3: antall pasienter med ulike kjønn";
 proc sql;
   select count(distinct &lnr) as unikid
   from dupkjonn;
@@ -42,7 +42,7 @@ data dupalder;
   if first.&lnr =0 or last.&lnr=0 then output;
 run;
 
-title color=darkblue height=5 "2a: antall pasienter med ulike alder på ett år";
+title color=darkblue height=5 "3: antall pasienter med ulike alder på ett år";
 proc sql;
   select count(distinct &lnr) as unikid
   from dupalder;
@@ -76,20 +76,20 @@ data dupfodtrans;
   diff=col2-col1;
 run;
 
-title color=darkblue height=5 "2b: range fødselsår";
+title color=darkblue height=5 "4: range fødselsår";
 proc sql;
   select min(&fodselsar) as min_fodselsar, 
          max(&fodselsar) as max_fodselsar
   from lnr;
 quit;
 
-title color=darkblue height=5 "2b: antall pasienter med ulike fodselsår";
+title color=darkblue height=5 "4: antall pasienter med ulike fodselsår";
 proc sql;
   select count(distinct &lnr) as unikid
   from dupfodtrans;
 quit;
 
-title color=darkblue height=5 "2b: differanse mellom årene";
+title color=darkblue height=5 "4: differanse mellom årene";
 proc freq data=dupfodtrans;
   tables diff;
 run;
