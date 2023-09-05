@@ -237,4 +237,4 @@ if CT_cervikalkol=1 then CT_ck=1;
 /* forløpspasienter */
 if MR_nakke_rygg eq 1 or MR_kne eq 1 or MR_skulder eq 1 or MR_prostata eq 1 	then forlop_pas = 1;
 drop i;
-%mend radiologi_utvalg;
+%mend radiologi_utvalg; 
