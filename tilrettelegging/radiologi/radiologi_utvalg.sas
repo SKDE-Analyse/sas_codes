@@ -1,4 +1,4 @@
-﻿%macro radiologi_utvalg;
+%macro radiologi_utvalg;
 
 /*! 
 ### Beskrivelse
