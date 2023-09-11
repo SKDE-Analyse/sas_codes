@@ -1,4 +1,33 @@
-﻿%macro proc_stdrate_komnr(
+﻿/*! 
+### Beskrivelse
+
+Makro for å beregne rater for kommuner pr hf.
+Kjøres i en makro for å beregne alle hf samtidig.
+
+```
+kortversjon
+%proc_stdrate_komnr(dsn=, rate_var=,figurnavn=, standardaar=, start=, slutt= , rmult=);
+```
+### Input
+- datasett med variabel det skal beregnes rater på, 
+	- kan være 0,1 variabel eller aggregert
+
+### Output
+- &utdata + evt. long_&utdata
+
+### Endringslogg:
+- september 2023 opprettet, Tove
+*/
+%macro proc_stdrate_komnr(dsn=, rate_var=,figurnavn=, standardaar=, start=, slutt= , rmult=);
+	%local u;
+	%do u=1 %to 23;
+		%if &u. eq 5 or &u. eq 9 %then %goto continue; 
+	%proc_stdrate_kommune(dsn=&dsn., rate_var=&rate_var., rmult=&rmult., standardaar=&standardaar., start=&start., slutt=&slutt.,bohf=&u., utdata=ut_&rate_var., figurnavn=&figurnavn.);
+	%continue:
+	%end;
+%mend proc_stdrate_komnr;
+
+%macro proc_stdrate_kommune(
     dsn=, /*Grunnlagsdatsettet det skal beregnes rater fra*/
     rate_var=, /*Ratevariabel, kan være aggregert (verdier større enn en) eller dikotom (0,1)*/
 	alder_min=0, /*Laveste alder i utvalget, 0 er default*/
@@ -12,29 +41,10 @@
     long=, /*if long=1 --> skriv ut "langt" datasett, ikke aktivert er default*/
     innbygg_dsn=innbygg.INNB_SKDE_BYDEL, /*Innbyggerdatasett: innbygg.INNB_SKDE_BYDEL, innbygg.INNB_SKDE_BYDEL er default*/
 	test=0, /*0 (default) er for å slette midlertidige datasett, 1 er for å beholde dem */
-	fig_bo=
+	bohf=,
+	figurnavn=,
+	bildeformat=png
 );
-
-/*! 
-### Beskrivelse
-
-Makro for å beregne rater
-
-```
-kortversjon (kjøres med default verdier for resten)
-%proc_stdrate(dsn=, rate_var=, standardaar=, start=, slutt=, utdata=);
-```
-### Input
-- datasett med variabel det skal beregnes rater på, 
-	- kan være 0,1 variabel eller aggregert
-	- må innheolde bo-nivået det skal kjøres rater på
-
-### Output
-- &utdata + evt. long_&utdata
-
-### Endringslogg:
-- februar 2022 opprettet, Frank
-*/
 
 /***Formatering****/ 
 proc format;
@@ -131,7 +141,7 @@ else if alder in (85:89) then nyalder=18;
 else if alder in (90:94) then nyalder=19;
 else if alder in (95:105) then nyalder=20;
 
-where &rate_var ge 1 and komnr ne . and aar in (&start:&slutt);
+where &rate_var ge 1 and komnr ne . and aar in (&start:&slutt) and bydel not in (30199,460199,500199,110399);
 /* lage boID av komnr og bydel */
 if bydel ne . then boid = bydel;
 else if bydel eq . then boid = komnr;
@@ -195,7 +205,7 @@ run;
 
 data xyz_pop;
 set xyz_pop;
-
+where bydel not in (30199,460199,500199,110399);
 if bydel ne . then boid = bydel;
 else if bydel eq . then boid = komnr;
 format boid boid_fmt.;
@@ -367,7 +377,7 @@ proc sql;
 data xyz_StdRate_&utdata;
 	set xyz_StdRate_&utdata;
 	format aar aar_fmt. boid boid_fmt.;
-	if bohf in &fig_bo or bohf = 8888;
+	if bohf eq &bohf or bohf eq 8888;
 run; 
 
 /***********Lag aldersfigurer***********/
@@ -577,6 +587,14 @@ proc sort data=xyz_tmp_rater;
 by descending ratesnitt;
 run;
 
+proc sql noprint;
+	select distinct bohf format bohf_fmt. into :bo trimmed
+	from xyz_StdRate_&utdata;
+quit;
+
+ODS Graphics ON /reset=All imagename="&figurnavn._bohf_&u." imagefmt=&bildeformat border=off height=500px ;
+ODS Listing style=stil_figur Image_dpi=300 GPATH="&bildesti";
+
 proc sgplot data=xyz_tmp_rater noborder noautolegend sganno=anno pad=(Bottom=5%);
 hbarparm category=boid response=ratesnitt / fillattrs=(color=CX95BDE6); 
 hbarparm category=boid response=nrate / fillattrs=(color=CXC3C3C3);
@@ -592,11 +610,11 @@ Highlow Y=boid low=Min high=Max / type=line name="hl2" lineattrs=(color=black th
 
 Yaxistable antsnitt popsnitt /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
 %if &indirekte ne 1 %then %do;
-yaxis display=(noticks noline) label="&rate_var, &dsn, direkte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
+yaxis display=(noticks noline) label="bohf=&bo, &rate_var, &dsn, direkte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
 discreteorder=data valueattrs=(size=7);
 %end;
 %if &indirekte = 1 %then %do;
-yaxis display=(noticks noline) label="&rate_var, &dsn, indirekte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
+yaxis display=(noticks noline) label="bohf=&bo, &rate_var, &dsn, indirekte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
 discreteorder=data valueattrs=(size=7);
 %end;
 xaxis /*display=(nolabel)*/ offsetmin=0.02 valueattrs=(size=7) label="Rater pr &rmult, FT1=&FT1, FT2=&FT2, FT3=&FT3";
@@ -639,6 +657,8 @@ xaxis /*display=(nolabel)*/ offsetmin=0.02 valueattrs=(size=7) label="Rater pr &
 %end;
 run;
 
+ods listing close; ods graphics off;
+
 data &utdata;
 set xyz_tmp_rater;
 drop _:;
@@ -670,4 +690,4 @@ delete xyz_:;
 run;
 %end;
 
-%mend proc_stdrate;
+%mend proc_stdrate_kommune;
