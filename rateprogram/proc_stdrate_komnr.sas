@@ -11,6 +11,7 @@ kortversjon
 ### Input
 - datasett med variabel det skal beregnes rater på, 
 	- kan være 0,1 variabel eller aggregert
+- let-statement med bildesti for å skrive ut png fra rateprogrammet
 
 ### Output
 - &utdata + evt. long_&utdata
@@ -22,7 +23,7 @@ kortversjon
 	%local u;
 	%do u=1 %to 23;
 		%if &u. eq 5 or &u. eq 9 %then %goto continue; 
-	%proc_stdrate_kommune(dsn=&dsn., rate_var=&rate_var., rmult=&rmult., standardaar=&standardaar., start=&start., slutt=&slutt.,bohf=&u., utdata=ut_&rate_var., figurnavn=&figurnavn.);
+	%proc_stdrate_kommune(dsn=&dsn., rate_var=&rate_var., rmult=&rmult., standardaar=&standardaar., start=&start., slutt=&slutt.,bohf=&u., utdata=ut_&rate_var._&u., figurnavn=&figurnavn.);
 	%continue:
 	%end;
 %mend proc_stdrate_komnr;
