@@ -107,7 +107,7 @@ run;
 /*****Hent inn ratedata*****/
 data xyz_rateutvalg;
 set &dsn;
-keep aar ermann alder boid &rate_var nyalder;
+keep aar ermann alder komnr boid bydel &rate_var nyalder;
 if alder in (&alder_min:&alder_max);
 
 if alder in (0:4) then nyalder=1;
@@ -131,7 +131,10 @@ else if alder in (85:89) then nyalder=18;
 else if alder in (90:94) then nyalder=19;
 else if alder in (95:105) then nyalder=20;
 
-where &rate_var ge 1 and boid ne . and aar in (&start:&slutt);
+where &rate_var ge 1 and komnr ne . and aar in (&start:&slutt);
+/* lage boID av komnr og bydel */
+if bydel ne . then boid = bydel;
+else if bydel eq . then boid = komnr;
 format nyalder nyalder_fmt. boid boid_fmt.;   
 run;
 
@@ -364,7 +367,7 @@ proc sql;
 data xyz_StdRate_&utdata;
 	set xyz_StdRate_&utdata;
 	format aar aar_fmt. boid boid_fmt.;
-	if bohf in &fig_bo or boid = 8888;
+	if bohf in &fig_bo or bohf = 8888;
 run; 
 
 /***********Lag aldersfigurer***********/
