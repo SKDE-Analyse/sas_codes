@@ -1,7 +1,7 @@
 ﻿%macro proc_stdrate(
     dsn=, /*Grunnlagsdatsettet det skal beregnes rater fra*/
     rate_var=, /*Ratevariabel, kan være aggregert (verdier større enn en) eller dikotom (0,1)*/
-    bo=bohf, /*BoHf, BoRHF, BoShHN eller komnr, BoHf er default*/
+    bo=bohf, /*BoHf, BoRHF eller BoShHN, BoHf er default*/
 	alder_min=0, /*Laveste alder i utvalget, 0 er default*/
 	alder_max=105, /*Høyeste alder i utvalget, 105 er default*/
     rmult=1000, /*Ratemultiplikator, dvs rate pr, 1000 er default*/
@@ -15,8 +15,7 @@
     /*Til boområde-makroen: Standard er:(inndata=pop, indreOslo = 0, bydel = 1);*/
     bodef_indreoslo=0, /*0 er standard, 0 er default*/
     bodef_bydel=1, /*1 er standard, 1 er default*/
-	test=0, /*0 (default) er for å slette midlertidige datasett, 1 er for å beholde dem */
-	fig_bo=
+	test=0 /*0 (default) er for å slette midlertidige datasett, 1 er for å beholde dem */
 );
 
 /*! 
@@ -147,10 +146,6 @@ else if alder in (95:105) then nyalder=20;
     where &rate_var ge 1 and boshhn in (1:11) and aar in (&start:&slutt);
     format boshhn boshhn_fmt.;
 %end; 
-%if &bo=komnr %then %do;
-    where &rate_var ge 1 and komnr in (301:1875,3001:5444) and aar in (&start:&slutt);
-    format boshhn komnr_fmt.;
-%end; 
 format nyalder nyalder_fmt.;   
 run;
 
@@ -223,10 +218,6 @@ set xyz_pop;
 %if &bo=boshhn %then %do;
     drop komnr bydel bohf borhf fylke;
     format boshhn boshhn_fmt.;
-%end;
-%if &bo=komnr %then %do;
-    drop bydel bohf borhf fylke;
-    format komnr komnr_fmt.;
 %end;
 
 if alder in (0:4) then nyalder=1;
@@ -315,7 +306,6 @@ run;
 data xyz_ratedata;
 set xyz_ratedata;
 if antall=. then antall=0;
-if pop ne 0;
 run;
 
 /*for indirekte justering - 
@@ -352,7 +342,7 @@ population event=antall total=pop;
 %if &indirekte=1 %then %do;
 	reference event=Nevent total=Npop;
 %end;
-strata ermann nyalder /*stats*/;
+strata ermann nyalder /*/ stats*/;
 ods output stdrate=xyz_StdRate_&utdata;
 run;
 ods exclude none; 
@@ -360,7 +350,6 @@ ods exclude none;
 data xyz_StdRate_&utdata;
 set xyz_StdRate_&utdata;
 format aar aar_fmt. &bo &bo._fmt.;
-if &bo in (&fig_bo) or &bo = 8888;
 run; 
 
 /***********Lag aldersfigurer***********/
