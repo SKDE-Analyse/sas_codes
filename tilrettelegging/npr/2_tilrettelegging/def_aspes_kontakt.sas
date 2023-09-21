@@ -36,7 +36,7 @@ Data &utdata;
 	*initialize variable;
 	kontakt_def=0;
 
-	Array Normaltariff (15) Normaltariff:;
+	Array Normaltariff (15) takst_: ;
 
 	do i=1 to 15;
 	  Normaltariff(i)=lowcase(Normaltariff(i));
