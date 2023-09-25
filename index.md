@@ -50,6 +50,7 @@
 - [makroer/andelsfig.sas](andelsfig)
 - [rateprogram/ratefigur_5aarsvar.sas](ratefigur_5aarsvar)
 - [rateprogram/ratefig_todelt.sas](ratefig_todelt)
+- [rateprogram/proc_stdrate_komnr.sas](proc_stdrate_komnr)
 - [rateprogram/ratefigur_todelt.sas](ratefigur_todelt)
 - [rateprogram/ratefigur_aarsvar_eng.sas](ratefigur_aarsvar_eng)
 - [rateprogram/ratefigur_tredelt.sas](ratefigur_tredelt)
