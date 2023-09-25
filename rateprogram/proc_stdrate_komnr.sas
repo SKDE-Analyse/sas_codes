@@ -19,6 +19,18 @@ kortversjon
 ### Endringslogg:
 - september 2023 opprettet, Tove
 */
+
+/* Format til BoId */
+data hnref.fmtfil_boid;
+	format start 6.;
+	set HNREF.FMTFIL_KOMNR 
+		HNREF.FMTFIL_BYDEL;
+	fmtname = "boid_fmt";
+run;
+	
+proc format cntlin=hnref.fmtfil_boid; run;
+
+/* Makro som looper over HF-enes opptaksområder */
 %macro proc_stdrate_komnr(dsn=, rate_var=,figurnavn=, standardaar=, start=, slutt= , rmult=);
 	%local u;
 	%do u=1 %to 23;
@@ -593,7 +605,7 @@ proc sql noprint;
 	from xyz_StdRate_&utdata;
 quit;
 
-ODS Graphics ON /reset=All imagename="&figurnavn._bohf_&u." imagefmt=&bildeformat border=off height=500px ;
+ODS Graphics ON /reset=All imagename="&figurnavn._bohf_&u." imagefmt=&bildeformat border=off height=700px ;
 ODS Listing style=stil_figur Image_dpi=300 GPATH="&bildesti";
 
 proc sgplot data=xyz_tmp_rater noborder noautolegend sganno=anno pad=(Bottom=5%);
@@ -690,5 +702,4 @@ proc datasets nolist;
 delete xyz_:;
 run;
 %end;
-
 %mend proc_stdrate_kommune;
