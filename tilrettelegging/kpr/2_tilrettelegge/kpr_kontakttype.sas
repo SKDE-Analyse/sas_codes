@@ -1,4 +1,4 @@
-﻿
+
 %macro kpr_kontakttype (takst_fil= /* filen innholder takstkoder som skal brukes til å definere kontakttype */,
                         regning_fil= /* filen på enkeltregning_lnr nivå som kontakttype skal "limes" på */);
 /*assign each takstkode to a kontakttype*/
