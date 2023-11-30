@@ -36,16 +36,16 @@ Data &utdata;
 	*initialize variable;
 	kontakt_def=0;
 
-	Array Normaltariff (15) takst_: ;
+	Array Normaltariff (*) takst_: ;
 
-	do i=1 to 15;
+	do i=1 to dim(Normaltariff);
 	  Normaltariff(i)=lowcase(Normaltariff(i));
 	end;
 
 	/*
 	A - Enkle kontakter, kontakt_def=1
 	*/
-		do i=1 to 15;
+		do i=1 to dim(Normaltariff);
 			if Substr(Normaltariff{i},1,1) in ('1') and Substr(Normaltariff{i},2,2) in 
 			('ad','ak','bd','be','bk','c','d','e','f','g','h','i') then kontakt_def=1;
 		end;
@@ -54,7 +54,7 @@ Data &utdata;
 	/*
 	B - Allm.legekons. og -sykebesøk, kontakt = 2.
 	*/
-		do i=1 to 15;
+		do i=1 to dim(Normaltariff);
 		IF SUBSTR(Normaltariff{i},1,2) in ('11') and SUBSTR(Normaltariff{i},3,2)in 
 		('ad','ak','bd','cd','ck','dd','dk','e','f','gd','hd','id') then kontakt_def=2;
 		ELSE IF SUBSTR(Normaltariff{i},1,1) in ('2') and SUBSTR(Normaltariff{i},2,2) in 
@@ -65,7 +65,7 @@ Data &utdata;
 	/* 
 	B - Spesialisterklæring med undersøkelse, kontakt = 3.
 	*/
-	  do i=1 to 15;
+	  do i=1 to dim(Normaltariff);
 		IF Normaltariff{i} in ('L120','l120') then kontakt_def=3;
 
 	 	/* Legeerklæring for viktig legemidler (H-resept).*/
@@ -78,7 +78,7 @@ Data &utdata;
 		Tillegg for ekstratidsbruk tas ikke med ettersom det forutsetter allerede bruk av en av de to nevnte.
 	*/
 	/* Tove 04.04.2022: lagt til nye kode for e-konsultasjon fra Normaltariffen 2021-2022 */
-		do i=1 to 15;
+		do i=1 to dim(Normaltariff);
 		IF Normaltariff{i} in ('3ad','12ad','3ae'/*,'3bd','3c'*/) /*or SUBSTR(Normaltariff{i},1,1) in ('4') and 
 		SUBSTR(Normaltariff{i},2,2) in ('a1','a2','b1','b2','c1','c2','da','db')*/ then kontakt_def= 4;
 
@@ -252,7 +252,7 @@ then kontakt_def= 4;
 	/*
 	Lysbehandling.
 	*/
-		do i=1 to 15;
+		do i=1 to dim(Normaltariff);
 		IF SUBSTR(Normaltariff{i},1,2) in ('25') and SUBSTR(Normaltariff{i},3,2) in ('4','5a','5b','8') then 
 		kontakt_def= 5;
 		end;

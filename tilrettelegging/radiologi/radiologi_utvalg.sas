@@ -26,8 +26,7 @@ array nc_utv {*} ncrp: ;
 /* ---------------------------------------------------------------------------------------------------------------------------------------- */
 
 /* NEVRORADIOLOGI */
-		if substr(nc_utv{i},1,6) in ('SAA0AH'/*MRA arteriografi av caput*/,'SAA0AQ'/*MRANG angiografi av caput*/,
-								'SAA0AJ' /*MRV venografi av caput*/'SAA0AQ'/*MRANG angiografi av caput*/,
+		if substr(nc_utv{i},1,6) in ('SAA0AQ'/*MRANG angiografi av caput*/,
 								'SAA0AG' /*MR caput*/,
 								'SAA0GH'/*MR caput og MRA arteriografi av caput*/,'SAA0GQ'/*MR caput og MRANG angiografi av caput*/)		then MR_caput=1;
 		if substr(nc_utv{i},1,6) in ('SNA0GG'/*mr korsrygg*/) 																				then MR_lumbosakral=1;

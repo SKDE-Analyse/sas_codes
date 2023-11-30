@@ -90,7 +90,8 @@
   clusters = 4,
   breaks = 3,
   datasett_1 =,
-  datasett_2 =
+  datasett_2 =,
+  datasett_3 =
 );
 
 /*!
@@ -337,6 +338,18 @@ run;
   set qwerty2;
   format bohf bohf_fmt. ermann ermann.;
   run;
+%end;
+
+%if %length(dataset_3) > 0 %then %do;
+  data qwerty3;
+  set &datasett_3;
+  format _all_ ;
+  run;
+
+  /*data qwerty3;
+  set qwerty3;
+  format bohf bohf_fmt. ermann ermann.;
+  run;*/
 %end;
 
 /* Skrive til json */
@@ -676,6 +689,18 @@ proc json out="&jsonmappe/&filnavn..json" pretty nosastags FMTNUMERIC;
         write values "data";
           write open array;
             export work.qwerty2;
+          write close;
+      write close;
+      %end;
+      /* Ekstradata2*/
+      %if %length(&datasett_3) > 0 %then %do;
+      write open object;
+        write values "type" "data";
+        write values "label" "datasett_3";
+        write values "description" "Ekstradatasettet for gitt resultatboks";
+        write values "data";
+          write open array;
+            export work.qwerty3;
           write close;
       write close;
       %end;

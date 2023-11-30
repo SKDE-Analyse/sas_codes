@@ -60,6 +60,7 @@ value $drg
 '39'="DRG 39 Operasjoner på linsen"
 '39P'="DRG 39P Bilaterale operasjoner på linsen, dagkirurgisk behandling"
 '39Q'="DRG 39Q Unilaterale operasjoner på linsen, dagkirurgisk behandling"
+'40'='DRG 40 Op på cornea/sklera/ekstraokulære strukturer'
 '40N'="DRG 40N Op på cornea/sklera/ekstraokulære strukturer  >17 år"
 '41'="DRG 41 Op på cornea/sklera/ekstraokulære strukturer  0-17 år"
 '41O'="DRG 41O Op på cornea/sklera/ekstraokulære strukturer, dagkirurgisk behandling"

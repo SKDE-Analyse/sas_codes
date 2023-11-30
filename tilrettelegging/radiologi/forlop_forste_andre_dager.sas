@@ -1,4 +1,4 @@
-%macro forlop_forste_andre_dager(dsn=,forste=,andre=,sortering=,d1=,d2=,d3=);
+%macro forlop_forste_andre_dager(dsn=,forste=,andre=,sortering=,d1=,d2=,d3=, samtidig=1);
 
 /*! 
 ### Beskrivelse
@@ -10,6 +10,7 @@ Makro for å lage flagg for forløp av undersøkelser
     - må være en "flagg"-variabel, dvs merket som 1
 3. Sortering - by pid inndato tid
 4. Antall dager mellom første og andre - d1, d2, d3 dersom man ønsker å teste ut forskjellige krav
+5. samtidig settes til 1 hvis man vil inkludere når forste og andre er samtidig (i.e. på samme linje i datasett)
 
 ```
 kortversjon (kjøres med default verdier for resten)
@@ -31,6 +32,7 @@ kortversjon (kjøres med default verdier for resten)
 
 ### Endringslogg:
 - februar 2023 opprettet, Frank
+- november 2023 legg til 'samtidig' flagg, Janice
 */
 
 data forste_andre_&dsn;
@@ -38,6 +40,21 @@ set &dsn;
 keep pid aar alder ermann inndato bohf borhf komnr bydel tid &forste &andre;
 where &forste=1 or &andre=1;
 run;
+
+/* Janice - restructure the dataset so that if the two flags are on the same line, they appear as two lines  */
+/*			this makes sure we include "days between = 0" */
+%if &samtidig=1 %then %do;
+data data1;
+	set forste_andre_&dsn (where = (&forste=1));
+run;
+data data2;
+	set forste_andre_&dsn (where = (&andre=1));
+run;
+data forste_andre_&dsn;
+	set data1 data2;
+run;
+%end;
+
 
 proc sql;
 create table forste_andre_&dsn as
