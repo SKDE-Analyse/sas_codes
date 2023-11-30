@@ -28,7 +28,7 @@ set &Inndata;
     label egenandelpasient='Egenandel pasient (KPR)';
     label refusjonutbetalt='Refusjon utbetalt (KPR)';
     label hdiag_kpr='Hoveddiagnose - hentet fra diagnosefil (KPR/SKDE)';
-    label Alder='Alder';
+    label Alder='Alder';format alder best8.;
     label fodselsar='Fødselsår';
     label inndato='Inndato'; format inndato eurdfdd10.;
     label inntid='Tidspunkt for kontakt';format inntid time8.;
