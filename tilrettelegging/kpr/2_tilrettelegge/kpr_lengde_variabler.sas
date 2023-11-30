@@ -15,7 +15,7 @@ data &utdata;
     length fritakskode              $1;
     length egenandelPasient         8;
     length pid_kpr                  8;
-    length hdiag_kpr                $20;
+    length hdiag_kpr                $10;
     length icpc2_hdiag              $5;
     length icpc2_kap                $1;
     length icpc2_type               3;
@@ -25,7 +25,7 @@ data &utdata;
     length refusjonutbetalt         8;
     /* Variabler i tilrettelagte data som er felles med NPR */
     length aar                      4;
-    length alder                    8;
+    length alder                    4;
     length fodselsar                4;
     length ErMann                   3;
     length bohf                     4;
@@ -36,6 +36,7 @@ data &utdata;
     length inndato                  8;
     length inntid                   4;
     length fylke                    4;
+    length doddato                  4;
 %end;
 
 /* diagnose */

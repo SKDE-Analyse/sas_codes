@@ -1,4 +1,4 @@
-﻿%macro radiologi_utvalg;
+%macro radiologi_utvalg;
 
 /*! 
 ### Beskrivelse
@@ -54,6 +54,9 @@ array nc_utv {*} ncrp: ;
 
 		if substr(nc_utv{i},1,6) in ('SNE0BG'/*ledd mellom nederste del av ryggrad og hoftekammene*/)										then MR_iliosakral=1; 
 		if substr(nc_utv{i},1,6) in ('SNC0AG')                                      														then MR_albue=1; 
+
+		if substr(nc_utv{i},1,6) in ('SNB0BA') 																								then RG_skulder = 1;
+		if substr(nc_utv{i},1,6) in ('SNB0BD') 																								then CT_skulder = 1;
 
 /* TORAKS, ABDOMEN OG KAR */
 		if substr(nc_utv{i},1,6) in ('SSC0AD'/*ct toraks*/) 																				then CT_toraks=1;
@@ -145,7 +148,51 @@ array nc_utv {*} ncrp: ;
 
 		if substr(nc_utv{i},1,6) in ('SNA0GA ') 									then RG_ls = 1; /* RG lumbosakral */
 
+/* kolumna */
+		if substr(nc_utv{i},1,6) in ('SNA0AA') 										then RG_c_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0AD') 										then CT_c_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0AG') 										then MR_c_kol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0BA') 										then RG_t_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0BD') 										then CT_t_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0BG') 										then MR_t_kol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0CA') 										then RG_ct_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0ED') 										then CT_ct_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0EG') 										then MR_ct_kol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0FA') 										then RG_tl_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0FG') 										then MR_tl_kol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0GA') 										then RG_ls_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0GD') 										then CT_ls_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0GG') 										then MR_ls_kol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0HA') 										then RG_ctl_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0HG') 										then MR_ctl_kol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0JA') 										then RG_tls_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0JD') 										then CT_tls_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0JG') 										then MR_tls_kol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0KA') 										then RG_tot_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0KD') 										then CT_tot_kol = 1; 
+		if substr(nc_utv{i},1,6) in ('SNA0KG') 										then MR_tot_kol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0LG') 										then MR_cap_tot_kol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0MG') 										then MR_tot_kol_bek = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0NG') 										then MR_cap_dkol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0PG') 										then MR_cap_kol_ov = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0SG') 										then MR_cls_kol = 1; 
+
+		if substr(nc_utv{i},1,6) in ('SNA0TG') 										then MR_bek_dkol = 1; 
+
     end;
+
 
 /* -------------- */
 /* KOMBINASJONER */
@@ -190,4 +237,4 @@ if CT_cervikalkol=1 then CT_ck=1;
 /* forløpspasienter */
 if MR_nakke_rygg eq 1 or MR_kne eq 1 or MR_skulder eq 1 or MR_prostata eq 1 	then forlop_pas = 1;
 drop i;
-%mend radiologi_utvalg;
+%mend radiologi_utvalg; 

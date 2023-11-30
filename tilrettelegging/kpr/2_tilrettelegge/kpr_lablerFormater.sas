@@ -1,7 +1,7 @@
 ﻿%Macro kpr_lablerFormater (innData=, utData=);
 
 Data &Utdata;
-set &Inndata;
+  set &Inndata;
 
 /* Felles for alle lege-datasettene fra KPR */
     label aar='År (KPR)';
@@ -27,12 +27,12 @@ set &Inndata;
     label fritakskode='Fritakskode (KPR)';
     label egenandelpasient='Egenandel pasient (KPR)';
     label refusjonutbetalt='Refusjon utbetalt (KPR)';
-    label hdiag_kpr='Hoveddiagnose - hentet fra diagnosefil (KPR/SKDE)';
-    label Alder='Alder';
+    label hdiag_kpr='Hoveddiagnose - hentet fra diagnosefil (KPR/SKDE)'; 
+    label Alder='Alder'; format alder best8.;
     label fodselsar='Fødselsår';
     label inndato='Inndato'; format inndato eurdfdd10.;
     label inntid='Tidspunkt for kontakt';format inntid time8.;
-    label icpc2_hdiag='ICPC2 hoveddiagnose på regningskort (SKDE)'; format icpc2_hdiag $icpc2_fmt.;
+    label icpc2_hdiag='ICPC2 hoveddiagnose på regningskort (SKDE)'; format icpc2_hdiag $icpc2_fmt.; 
     label icpc2_kap='ICPC2 kapittel, avledet fra diagnose (SKDE)'; format icpc2_kap $icpc2_kap.;
     label icpc2_type='Angir om det er sympt/plager, diagnose/sykdom eller prosesskode (SKDE)'; format icpc2_type icpc2_type.;
     label ant_bdiag_kpr='Antall bidiagnoser på regning (SKDE)'; format ant_bdiag_kpr best2.;
