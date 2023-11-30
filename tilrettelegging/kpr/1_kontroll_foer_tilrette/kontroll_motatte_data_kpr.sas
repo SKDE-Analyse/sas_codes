@@ -45,7 +45,7 @@
 	%kpr_enkeltregning;
         
     /* ---------------------- */
-    /* 3/4 - kj�nn og f�dsels�r */
+    /* 3/4 - kjønn og fødselsår */
     /* ---------------------- */
     %include "&filbane/tilrettelegging/kpr/1_kontroll_foer_tilrette/kpr_kjonn_alder.sas";
     %kpr_kjonn_alder(inndata=&inn,lnr=kpr_lnr, kjonn=kjonn, fodselsar=fodselsar);
