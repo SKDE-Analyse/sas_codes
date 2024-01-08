@@ -96,7 +96,7 @@ data &out;
       set &library..&dataset (rename=(
       %do j=1 %to %sysfunc(countw(&&expanded_varlist_&dataset));
          /*
-             All the variables are here renamed so that in the output dataset (&out),
+            All the variables are here renamed so that in the output dataset (&out),
             the have their own number (&num), which starts at 1 and goes up as more
             variables are added. This number increases chronologically, regardless
             of which dataset the variable originates from. The resulting variable name
@@ -113,11 +113,11 @@ data &out;
       %do j=1 %to %sysfunc(countw(&&expanded_varlist_&dataset));
          %let num = %eval(&total_num + %eval(&j + ((&i -1) * %sysfunc(countw(&&expanded_varlist_&dataset)))));
          label &prefix._&num = %scan(&&expanded_varlist_&dataset, &j);
-          /* 
+         /* 
             The logic of this loop is identical to the renaming loop above. This loop
             sets the label of each variable to the original variable name (otherwise the
             name would be lost).
-          */
+         */
          %if %length(%scan(&formatlist, &num, %str( ))) > 2 %then
             format &prefix._&num %scan(&formatlist, &num, %str( ));;
      %end;
@@ -164,32 +164,13 @@ data &out;
 
    set deleteme_result_&num_specifiers end=eof;
 
-   %do i=1 %to &total_num;
-      summed_&prefix._&i = sum(of &prefix._1-&prefix._&i);
-   %end;
-
    max_&prefix = max(of &prefix._1-&prefix._&total_num);
    min_&prefix = min(of &prefix._1-&prefix._&total_num);
 
    %do i=1 %to %sysfunc(countw(&specifiers, #)) - 1;
       %if %scan(&specifiers, &i+1, #) ^= . %then
-         label        &prefix._&i = %scan(&specifiers, &i+1, #)
-	           summed_&prefix._&i = %scan(&specifiers, &i+1, #);;
+         label &prefix._&i = %scan(&specifiers, &i+1, #);;
    %end;
-
-   if eof then do;
-      call execute('data &out; set &out;');
-	  %do i=1 %to &total_num;
-		 call execute(cats("label  summed_&prefix._&i.=", '"',  vlabel(&prefix._&i), '";'));
-		 call execute("     format summed_&prefix._&i " || vformat(&prefix._&i) || ';');
-      %end;
-	  /* 
-         Here I use call execute() to transfer labels and formats from one variable to another, because
-	     there is no straightforward way to do this in SAS. This method is explained here:
-	     https://support.sas.com/resources/papers/proceedings10/047-2010.pdf
-	  */
-	  call execute('run;');
-   end;
 run;
 %mend parse_dataspecifiers;
 
@@ -288,7 +269,11 @@ data deleteme_output;
    format &category &category_format;
    input_order = -_N_;
 
-   total_sum = max(of summed_bars:, -9999);
+   total_sum = 0;
+   array allbars [*] bars: ;
+   do i=1 to dim(allbars);
+      total_sum = total_sum + allbars[i];
+   end;
 
    if _n_ = 1 then do;
       %if "&variation" ^= "" %then %do;
