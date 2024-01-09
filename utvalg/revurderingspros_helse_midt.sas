@@ -99,6 +99,12 @@ array takst {*} normaltariff:;
 
 /*Kombinere flagg for pros/diag/takst*/
 if abrasio_pros=1 and ekskl_diag_abrasio ne 1 then abrasio=1;
+/*NB! Enkelte avtalespesialister sørpå har mange kontakter med LCA10 (abrasio) og LCA13 (fraksjonert abrasio). 
+Dette er feilkoding og ble fjernet da vi gjorde analyser av abrasio i gynatlaset. 
+Dersom man har med avtalespesialistdata i datagrunnlaget når man kjører denne makroen vil det gi 
+mange kontakter med abrasio som ikke er reelle. Disse må derfor fjernes igjen.*/
+abrasio2=abrasio;
+if avtspes=1 then abrasio2=.;  
 
 if akromion_takst=1 then akromion=1;
 if akromion_pros=1 and akromion_diag=1 then akromion=1;
