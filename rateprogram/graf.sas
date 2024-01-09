@@ -1,33 +1,33 @@
-%macro graf(
-    bars=,      /* <dataspecifier>. En eller flere variabler det skal lages et søylediagram av */
+ï»¿%macro graf(
+    bars=,      /* <dataspecifier>. En eller flere variabler det skal lages et sÃ¸ylediagram av */
 	lines=,     /* <dataspecifier>. En eller flere variabler det skal lages et linjediagram av */
 	table=,     /* <dataspecifier>. En eller flere variabler det skal lages en tabell av */
-	variation=, /* <dataspecifier>. En eller flere variabler det skal lages en variasjon av (brukt for å lage årsvariasjon) */
+	variation=, /* <dataspecifier>. En eller flere variabler det skal lages en variasjon av (brukt for Ã¥ lage Ã¥rsvariasjon) */
 	category=,  /* Kategorivariabelen + valgri formatering av denne etter en "/", Eksempel: bohf/bohf_fmt. */
-	description="test", /* En beskrivelse av hva grafen representerer, med eller uten anførselstegn. */
-	reverse=false, /* Hvis denne er true reverseres rekkefølgen på kategoriene i grafen. 
+	description="test", /* En beskrivelse av hva grafen representerer, med eller uten anfÃ¸rselstegn. */
+	reverse=false, /* Hvis denne er true reverseres rekkefÃ¸lgen pÃ¥ kategoriene i grafen. 
 	                  Mulige valg: (true, false). Default: false. */
-	direction=horizontal, /* Denne variabelen styrer hvilken retning grafen går. Mulige valg: (horizontal, vertical).
-	                         Endrer man på denne er det som å vri grafen 90 grader. %graf sørger for at alle dataene
+	direction=horizontal, /* Denne variabelen styrer hvilken retning grafen gÃ¥r. Mulige valg: (horizontal, vertical).
+	                         Endrer man pÃ¥ denne er det som Ã¥ vri grafen 90 grader. %graf sÃ¸rger for at alle dataene
 	                         beholder sine relative plasseringer, inklusive tabellen. Default: horizontal. */
-	bar_grouping=stack, /* Denne variabelen styrer hvoran %graf() kombinerer dataene når man har flere variabler for
-	                       et søylediagram. Dette er valgene: (stack, cluster). Stack stabler variablene oppå hverandre
-	                       for å lage et n-delt søylediagram. Cluster på sin side lager en liten søyle for hver variabel 
+	bar_grouping=stack, /* Denne variabelen styrer hvoran %graf() kombinerer dataene nÃ¥r man har flere variabler for
+	                       et sÃ¸ylediagram. Dette er valgene: (stack, cluster). Stack stabler variablene oppÃ¥ hverandre
+	                       for Ã¥ lage et n-delt sÃ¸ylediagram. Cluster pÃ¥ sin side lager en liten sÃ¸yle for hver variabel 
 	                       og plasserer de ved siden av hverandre for hver valgte kategori. I begge tilfeller er det totalsummen
-	                       av alle søyle-variablene som definerer rekkefølgen på kategoriene i resultat-grafen. Default: stack. */
+	                       av alle sÃ¸yle-variablene som definerer rekkefÃ¸lgen pÃ¥ kategoriene i resultat-grafen. Default: stack. */
 	special_categories=8888 7777, /* En liste med nummer som definerer "special categories", dvs kategorier som
-	                                 får en grå farge i søylediagrammet - vanlighis er dette norgesgjennomsnittet.
+	                                 fÃ¥r en grÃ¥ farge i sÃ¸ylediagrammet - vanlighis er dette norgesgjennomsnittet.
 	                                 Default: 8888 7777. */
-	save="", /* Hvis man vil lagre filen, setter man her inn fullt navn på den nye filen i anførselstegn.
-	            Dette må inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf).
-	            Hvis filetternavnet er .png, lagres bildet som en png fil, også videre. Default: "". */
+	save="", /* Hvis man vil lagre filen, setter man her inn fullt navn pÃ¥ den nye filen i anfÃ¸rselstegn.
+	            Dette mÃ¥ inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf).
+	            Hvis filetternavnet er .png, lagres bildet som en png fil, ogsÃ¥ videre. Default: "". */
 	source="" /* Kildehenvisning nederst til venstre. Default: "". */,
-	logo=none, /* Velg mellom følgende logoer: (skde, hn, none). Default: none. */
-	panelby=,  /* Settes til navnet på variablen som brukes med sgpanel for å lage flere små grafer i en og samme graf. Hver
-	              lille graf må ha en unik verdi for panelby i datasettet som sendes inn. Hvis man bruker panelby må
-	              input-datasettet være ferdig sortert i den rekkefølgen man vil vise dataene. */
-	height=500 /* Høyde på grafen, i pixels. Default: 500. */,
-	width=700  /* Bredde på grafen, i pixels. Default: 700. */
+	logo=none, /* Velg mellom fÃ¸lgende logoer: (skde, hn, none). Default: none. */
+	panelby=,  /* Settes til navnet pÃ¥ variablen som brukes med sgpanel for Ã¥ lage flere smÃ¥ grafer i en og samme graf. Hver
+	              lille graf mÃ¥ ha en unik verdi for panelby i datasettet som sendes inn. Hvis man bruker panelby mÃ¥
+	              input-datasettet vÃ¦re ferdig sortert i den rekkefÃ¸lgen man vil vise dataene. */
+	height=500 /* HÃ¸yde pÃ¥ grafen, i pixels. Default: 500. */,
+	width=700  /* Bredde pÃ¥ grafen, i pixels. Default: 700. */
 ) / minoperator;
 
 /*!
@@ -35,55 +35,55 @@
 
    Den viktigste delen av %graf() er de fire variablene bars, lines, table og variation. For alle disse variablene kan
    man sende inn en eller flere variabler, fra ett eller flere datasett/tabeller, fra ett eller flere bibliotek/library.
-   %graf() vil da legge sammen disse variablene en etter en, i kronologisk rekkefølge, og lage et n-delt søylediagram
+   %graf() vil da legge sammen disse variablene en etter en, i kronologisk rekkefÃ¸lge, og lage et n-delt sÃ¸ylediagram
    (hvis man bruker bars=), en tabell med n kolonner (hvis man bruker table=), et linjediagram med n linjer (hvis man
-   bruker lines=), eller prikker og linjer for årsvariasjon (hvis man bruker variation=).
+   bruker lines=), eller prikker og linjer for Ã¥rsvariasjon (hvis man bruker variation=).
 
-   Man kan bruke alle disse 4 graf-typene samtidig, slik at man kan lage et 3-delt søylediagram med en tabell med 2
-   kolonner, samt et linjediagram på toppen av alt det, for eksempel. Man kan også spesifisere hvilket format disse variablene
-   skal ha, og en label for variablene slik at de får en beskrivelse i output-grafen.
+   Man kan bruke alle disse 4 graf-typene samtidig, slik at man kan lage et 3-delt sÃ¸ylediagram med en tabell med 2
+   kolonner, samt et linjediagram pÃ¥ toppen av alt det, for eksempel. Man kan ogsÃ¥ spesifisere hvilket format disse variablene
+   skal ha, og en label for variablene slik at de fÃ¥r en beskrivelse i output-grafen.
 
    Bars, lines, table og variation tar alle en <dataspecifier> som input, som defineres slik:
 
       <dataspecifier>: (<library>.)<datasets>/<variables>(/<format-1> ... <format-n>) (#<label-1> ... #<label-n>) (+ <dataspecifier>)
 
-   Det som er i parentes er valgfritt, så man trenger egentlig bare <datasets>/<variables>. Både <datasets> og <variables> er hva
-   SAS kaller for Variable Lists, og er derfor veldig fleksible. Hvis man bare bruker et datasett og en variabel med bars, får man
-   et helt enkelt søylediagram:
+   Det som er i parentes er valgfritt, sÃ¥ man trenger egentlig bare <datasets>/<variables>. BÃ¥de <datasets> og <variables> er hva
+   SAS kaller for Variable Lists, og er derfor veldig fleksible. Hvis man bare bruker et datasett og en variabel med bars, fÃ¥r man
+   et helt enkelt sÃ¸ylediagram:
 
       %graf(bars=datasett/rate,
             category=bohf/bohf_fmt.
       )
 
-   Hva gjør man hvis man vil lage et todelt søylediagram med to variabler (rate1 og rate2) i datasettet? Det gjør man slik:
+   Hva gjÃ¸r man hvis man vil lage et todelt sÃ¸ylediagram med to variabler (rate1 og rate2) i datasettet? Det gjÃ¸r man slik:
 
       %graf(bars=datasett/rate1 rate2,
             category=bohf/bohf_fmt.
       )
 
-   Man må alltid spesifisere en kategorivariabel (category=) når man bruker %graf(), og denne variabelen må være den samme
-   for alle datasett man sender inn i makroen. Man kan også velge å formatere kategorivariabelen; i eksempelet ovenfor er
+   Man mÃ¥ alltid spesifisere en kategorivariabel (category=) nÃ¥r man bruker %graf(), og denne variabelen mÃ¥ vÃ¦re den samme
+   for alle datasett man sender inn i makroen. Man kan ogsÃ¥ velge Ã¥ formatere kategorivariabelen; i eksempelet ovenfor er
    kategorivariabelen bohf, og formatet til bohf er "bohf_fmt.".
 
    Hva hvis man har to forskjellige datasett (datasett1 og datasett2) med samme variabel (rate), og man vil lage et todelt
-   søylediagram med de? Det er bare en liten forandring i koden som må til:
+   sÃ¸ylediagram med de? Det er bare en liten forandring i koden som mÃ¥ til:
 
       %graf(bars=datasett1 datasett2/rate,
             category=bohf/bohf_fmt.
       )
 
-   I eksempelet ovenfor vil datasett1/rate bli den første søyla, og datasett2 bli den andre. Hvis man har både mer en ett datasett
-   og mer enn en variabel, vil alle mulige kombinasjoner av de to listene bli sin egen søyle (i den mest logiske rekkefølgen).
+   I eksempelet ovenfor vil datasett1/rate bli den fÃ¸rste sÃ¸yla, og datasett2 bli den andre. Hvis man har bÃ¥de mer en ett datasett
+   og mer enn en variabel, vil alle mulige kombinasjoner av de to listene bli sin egen sÃ¸yle (i den mest logiske rekkefÃ¸lgen).
 
-   Hva gjør man hvis man har lyst til å legge til en tabell med 3 kolonner på høyre side? Det er en lett sak:
+   Hva gjÃ¸r man hvis man har lyst til Ã¥ legge til en tabell med 3 kolonner pÃ¥ hÃ¸yre side? Det er en lett sak:
 
       %graf(bars=datasett1 datasett2/rate,
             table=datasett3/tabvar1-tabvar3
             category=bohf/bohf_fmt.
       )
 
-   "tabvar1-tabvar3" er en Variable List, så %graf() forstår at man vil ma med de tre variablene tabvar1, tabvar2 og tabvar3. Hva
-   hvis vil bruke et format på disse tabellvariablene? Det gjør man slik:
+   "tabvar1-tabvar3" er en Variable List, sÃ¥ %graf() forstÃ¥r at man vil ma med de tre variablene tabvar1, tabvar2 og tabvar3. Hva
+   hvis vil bruke et format pÃ¥ disse tabellvariablene? Det gjÃ¸r man slik:
 
       %graf(bars=datasett1 datasett2/rate,
             table=datasett3/tabvar1-tabvar3/comma10.1 . dollar10.2
@@ -91,32 +91,32 @@
       )
 
    I eksempelet ovenfor blir tabvar1 formatert med comma10.1, tabvar2 blir uendret siden det bare var et punktum, og tabvar3
-   blir formatert med dollar10.2. %graf() leser alle formatene fra venstre til høyre og bruker de på de respektive variablene.
-   Det er derfor tabvar2 bare får et punktum i eksempelet; vi er egentlig bare interessert i å formatere tabvar3, så vi bruker
-   et punktum for å "hoppe over" tabvar2 uten å endre formatet. Hva hvis vi også har lyst til å gi tabvar2 og tabvar3 (ikke
-   tabvar1) en label, altså en kort beskrivelse av kolonnen i tabellen? Det gjør man helt på slutten med å bruke emneknagg (#).
-   La oss i samme slengen gi en kort beskrivelse av de to søylene i den todelte grafen:
+   blir formatert med dollar10.2. %graf() leser alle formatene fra venstre til hÃ¸yre og bruker de pÃ¥ de respektive variablene.
+   Det er derfor tabvar2 bare fÃ¥r et punktum i eksempelet; vi er egentlig bare interessert i Ã¥ formatere tabvar3, sÃ¥ vi bruker
+   et punktum for Ã¥ "hoppe over" tabvar2 uten Ã¥ endre formatet. Hva hvis vi ogsÃ¥ har lyst til Ã¥ gi tabvar2 og tabvar3 (ikke
+   tabvar1) en label, altsÃ¥ en kort beskrivelse av kolonnen i tabellen? Det gjÃ¸r man helt pÃ¥ slutten med Ã¥ bruke emneknagg (#).
+   La oss i samme slengen gi en kort beskrivelse av de to sÃ¸ylene i den todelte grafen:
 
       %graf(bars=datasett1 datasett2/rate #Offentlig #Privat,
             table=datasett3/tabvar1-tabvar3/comma10.1 . dollar10.2 #. #Uformatert tabellvariabel #"Dette, er tekst"
             category=bohf/bohf_fmt.
       )
    
-   Det er to ting som er verdt å notere seg med eksempelet ovenfor:
-      1) På samme måte som vi "hoppet over" formatet til tabvar2 med et punktum, "hopper vi over" tabvar1 med å bruke "#.".
-         Dette er fordi vi bare har lyst til å gi en label til tabvar2 og tabvar3.
-      2) Teksten til tabvar3 inneholder et komma, og må derfor være i anførselstegn.
+   Det er to ting som er verdt Ã¥ notere seg med eksempelet ovenfor:
+      1) PÃ¥ samme mÃ¥te som vi "hoppet over" formatet til tabvar2 med et punktum, "hopper vi over" tabvar1 med Ã¥ bruke "#.".
+         Dette er fordi vi bare har lyst til Ã¥ gi en label til tabvar2 og tabvar3.
+      2) Teksten til tabvar3 inneholder et komma, og mÃ¥ derfor vÃ¦re i anfÃ¸rselstegn.
 
-   Av og til vil det ikke være mulig å bruke en enkelt <dataspecifier> slik som ovenfor. Det man kan gjøre da er simpelten
-   å "plusse" sammen flere <dataspecifier>s slik som dette:
+   Av og til vil det ikke vÃ¦re mulig Ã¥ bruke en enkelt <dataspecifier> slik som ovenfor. Det man kan gjÃ¸re da er simpelten
+   Ã¥ "plusse" sammen flere <dataspecifier>s slik som dette:
 
       %graf(bars=bib1.datasett1 datasett2/rate1 + bib2.datasett/rate2,
             category=bohf/bohf_fmt.
       )
 
-   Resultatet av det vil være en tredelt graf; den første søyla vil være bib1.datasett1/rate1, den andre søyla bib1.ratesett2/rate1,
-   og den tredje søyla bib2.datasett/rate2. Det var nødvendig å "plusse" i dette tilfellet både fordi datasettene kommer fra to ulike
-   bibliotek (man kan bare ha ett bibliotek per <dataspecifier>), men også fordi navnene på variablene (rate1 og rate2) er ulike i
+   Resultatet av det vil vÃ¦re en tredelt graf; den fÃ¸rste sÃ¸yla vil vÃ¦re bib1.datasett1/rate1, den andre sÃ¸yla bib1.ratesett2/rate1,
+   og den tredje sÃ¸yla bib2.datasett/rate2. Det var nÃ¸dvendig Ã¥ "plusse" i dette tilfellet bÃ¥de fordi datasettene kommer fra to ulike
+   bibliotek (man kan bare ha ett bibliotek per <dataspecifier>), men ogsÃ¥ fordi navnene pÃ¥ variablene (rate1 og rate2) er ulike i
    de forskjellige datasettene.
 */
 
@@ -127,9 +127,9 @@
     makrovariabel med det navnet som er spesifisert i &macrovar. Eksempel:
 
        rate2020-rate2023 -> rate2020 rate2021 rate2022 rate2023
-       abc23 abc1 abc4   -> abc23 abc1 abc4 (rekkefølgen beholdes, selv om den ikke er kronologisk)
+       abc23 abc1 abc4   -> abc23 abc1 abc4 (rekkefÃ¸lgen beholdes, selv om den ikke er kronologisk)
 
-    Etter at variabellisten er konvertert er det lettere å jobbe med den i %sdiagram.
+    Etter at variabellisten er konvertert er det lettere Ã¥ jobbe med den i %sdiagram.
 */
 %global &macrovar;
 data DELETEME_FILTER(keep=&varlist); retain &varlist; set &library..&ds; run;
