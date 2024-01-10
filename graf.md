@@ -200,7 +200,7 @@ gjøre det slik:
 ![img](/sas_codes/bilder/graf_example10.png)
 
 I dette eksempelet er grafen snudd i vertikal retning (fordi det ser litt bedre ut), og kategorien er i dette tilfellet
-rorhf (istedenfor bohf). Hvis man ikke hadde satt bar_grouping=cluster ville grafen sett slik ut:
+borhf (istedenfor bohf). Hvis man ikke hadde satt bar_grouping=cluster ville grafen sett slik ut:
 
 ![img](/sas_codes/bilder/graf_example11.png)
 
