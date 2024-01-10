@@ -38,7 +38,7 @@ Hvis man vil laget et helt enkelt søylediagram uten noe visvas, spesifiserer ma
 )
 ```
 
-![img](/docs/bilder/graf_example1.png)
+![img](/sas_codes/bilder/graf_example1.png)
 
 Man må alltid spesifisere en kategorivariabel (category=) når man bruker %graf(), og denne variabelen må være den samme
 for alle datasett man sender inn i makroen. Man kan også velge å formatere kategorivariabelen; i eksempelet ovenfor er
@@ -53,7 +53,7 @@ Hva gjør man hvis man vil lage et todelt søylediagram med to variabler (Ratesn
       category=bohf/bohf_fmt.
 )
 ```
-![img](/docs/bilder/graf_example2.png)
+![img](/sas_codes/bilder/graf_example2.png)
 
 Den totale verdien av den sammensatte søyla er summen av alle variablene (i dette tilfellet Ratesnitt1 + Ratesnitt2).
 
@@ -68,7 +68,7 @@ søylediagram med de? Det er bare en liten forandring i koden som må til:
 )
 ```
 
-![img](/docs/bilder/graf_example3.png)
+![img](/sas_codes/bilder/graf_example3.png)
 
 I eksempelet ovenfor vil datasett1/Ratesnitt bli den første søyla, og datasett2/Ratesnitt vil bli den andre. Hvis man har
 både mer en ett datasett og mer enn en variabel, vil alle mulige kombinasjoner av de to listene bli sin egen søyle
@@ -85,7 +85,7 @@ Hva gjør man hvis man har lyst til å legge til en tabell med 3 kolonner på h�
 )
 ```
 
-![img](/docs/bilder/graf_example4.png)
+![img](/sas_codes/bilder/graf_example4.png)
 
 "tabvar1-tabvar3" er en Variable List, så %graf() forstår at man vil ma med de tre variablene tabvar1, tabvar2 og tabvar3. Hva
 hvis vil bruke et format på disse tabellvariablene? Det gjør man slik:
@@ -97,7 +97,7 @@ hvis vil bruke et format på disse tabellvariablene? Det gjør man slik:
 )
 ```
 
-![img](/docs/bilder/graf_example5.png)
+![img](/sas_codes/bilder/graf_example5.png)
 
 I eksempelet ovenfor blir tabvar1 formatert med comma10.1, tabvar2 blir uendret siden det bare var et punktum, og tabvar3
 blir formatert med dollar10.2. %graf() leser alle formatene fra venstre til høyre og bruker de på de respektive variablene.
@@ -117,7 +117,7 @@ to søylene i den todelte grafen:
 )
 ```
 
-![img](/docs/bilder/graf_example6.png)
+![img](/sas_codes/bilder/graf_example6.png)
    
 Det er to ting som er verdt å notere seg med eksempelet ovenfor:
    1) På samme måte som vi "hoppet over" formatet til tabvar2 med et punktum, "hopper vi over" tabvar1 med å bruke "#.".
@@ -136,7 +136,7 @@ Av og til vil det ikke være mulig å bruke en enkelt <dataspecifier> slik som o
 )
 ```
 
-![img](/docs/bilder/graf_example7.png)
+![img](/sas_codes/bilder/graf_example7.png)
 
 Resultatet av det vil være en todeltelt graf; den første søyla vil være datasett1/Ratesnitt1, den andre søyla datasett2/Ratensnitt2.
 Det var nødvendig å "plusse" i dette tilfellet både fordi variablene (Ratesnitt1 og Ratesnitt2) er ulike i de to datasettene. Det
@@ -166,7 +166,7 @@ bli grå, i stedet for Norge. På toppen av alt det gjør vi grafen mye større 
 )
 ```
 
-![img](/docs/bilder/graf_example8.png)
+![img](/sas_codes/bilder/graf_example8.png)
 
 ### Årsvariasjon
 
@@ -179,7 +179,7 @@ En graf med årsvariasjon lager man enkelt med å legge til en <dataspecifier> f
 )
 ```
 
-![img](/docs/bilder/graf_example9.png)
+![img](/sas_codes/bilder/graf_example9.png)
 
 Når variabel-navnene har format rate<yyyy> slik som i dette eksempelet forstår %graf at vi vil bruke årstallet i varabelnavnet
 som en label. Man kan overstyre dette med å sende inn sin egen label med #<label>.
@@ -196,12 +196,12 @@ gjøre det slik:
 )
 ```
 
-![img](/docs/bilder/graf_example10.png)
+![img](/sas_codes/bilder/graf_example10.png)
 
 I dette eksempelet er grafen snudd i vertikal retning (fordi det ser litt bedre ut), og kategorien er i dette tilfellet
 rorhf (istedenfor bohf). Hvis man ikke hadde satt bar_grouping=cluster ville grafen sett slik ut:
 
-![img](/docs/bilder/graf_example11.png)
+![img](/sas_codes/bilder/graf_example11.png)
 
 ### panelby
 
@@ -218,7 +218,7 @@ som skiller den fra de andre grafene, kan man bruke denne variabelen med panelby
 )
 ```
 
-![img](/docs/bilder/graf_example12.png)
+![img](/sas_codes/bilder/graf_example12.png)
 
 I dette tilfellet vil ikke %graf() blande seg inn i rekkefølgen på dataene, så input-datasettet må være ferdig sortert
 i den rekkefølgen man vil ha det. Man kan bruke panelby= i kombinasjon med bars=, lines=, table= og variation=.
@@ -235,7 +235,7 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
 )
 ```
 
-![img](/docs/bilder/graf_example13.png)
+![img](/sas_codes/bilder/graf_example13.png)
 
 
 ## Makro `assert`
