@@ -52,6 +52,7 @@
 - [rateprogram/ratefigur_5aarsvar.sas](ratefigur_5aarsvar)
 - [rateprogram/ratefig_todelt.sas](ratefig_todelt)
 - [rateprogram/ratefigur_aarsvar_eng.sas](ratefigur_aarsvar_eng)
+- [rateprogram/graf.sas](graf)
 - [rateprogram/proc_stdrate.sas](proc_stdrate)
 - [rateprogram/ratefigur_aarsvar.sas](ratefigur_aarsvar)
 - [rateprogram/ratefig_tredelt_andelkolonne.sas](ratefig_tredelt_andelkolonne)
