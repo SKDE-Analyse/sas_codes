@@ -17,7 +17,9 @@ skal ha, og en label for variablene slik at de får en beskrivelse i output-graf
 
 Bars, lines, table og variation tar alle en <dataspecifier> som input, som defineres slik:
 
-   <dataspecifier>: (<library>.)<datasets>/<variables>(/<format-1> ... <format-n>) (+ <dataspecifier>) (#<label-1> ... #<label-n>)
+```
+<dataspecifier>: (<library>.)<datasets>/<variables>(/<format-1> ... <format-n>) (+ <dataspecifier>) (#<label-1> ... #<label-n>)
+```
 
 Det som er i parentes er valgfritt, så man trenger egentlig bare <datasets>/<variables>. Både <datasets> og <variables> er hva
 SAS kaller for Variable Lists, og er derfor veldig fleksible.
