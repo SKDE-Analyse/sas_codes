@@ -13,15 +13,15 @@ Man kan bruke alle disse 4 graf-typene samtidig, slik at man kan lage et 3-delt 
 kolonner, samt et linjediagram på toppen av alt det, for eksempel. Man kan også spesifisere hvilket format disse variablene
 skal ha, og en label for variablene slik at de får en beskrivelse i output-grafen.
 
-## Definisjon av <dataspecifier>
+## Definisjon av `<dataspecifier>`
 
-Bars, lines, table og variation tar alle en <dataspecifier> som input, som defineres slik:
+Bars, lines, table og variation tar alle en `<dataspecifier>` som input, som defineres slik:
 
 ```
 <dataspecifier>: (<library>.)<datasets>/<variables>(/<format-1> ... <format-n>) (+ <dataspecifier>) (#<label-1> ... #<label-n>)
 ```
 
-Det som er i parentes er valgfritt, så man trenger egentlig bare <datasets>/<variables>. Både <datasets> og <variables> er hva
+Det som er i parentes er valgfritt, så man trenger egentlig bare `<datasets>/<variables>`. Både `<datasets>` og `<variables>` er hva
 SAS kaller for Variable Lists, og er derfor veldig fleksible.
 
 ## Eksempler
@@ -124,10 +124,10 @@ Det er to ting som er verdt å notere seg med eksempelet ovenfor:
       Dette er fordi vi bare har lyst til å gi en label til tabvar2 og tabvar3.
    2) Teksten til tabvar3 inneholder et komma, og må derfor være i anførselstegn.
 
-### Plusse sammen <dataspecifier>s
+### Plusse sammen `<dataspecifier>`s
 
-Av og til vil det ikke være mulig å bruke en enkelt <dataspecifier> slik som ovenfor. Det man kan gjøre da er simpelten
-å "plusse" sammen flere <dataspecifier>s slik som dette:
+Av og til vil det ikke være mulig å bruke en enkelt `<dataspecifier>` slik som ovenfor. Det man kan gjøre da er simpelten
+å "plusse" sammen flere `<dataspecifier>`s slik som dette:
 
 ```sas
 %graf(bars=datasett1/Ratesnitt1 + datasett2/Ratesnitt2 #Offentlig #Privat,
@@ -170,7 +170,7 @@ bli grå, i stedet for Norge. På toppen av alt det gjør vi grafen mye større 
 
 ### Årsvariasjon
 
-En graf med årsvariasjon lager man enkelt med å legge til en <dataspecifier> for variation=, slik som dette:
+En graf med årsvariasjon lager man enkelt med å legge til en `<dataspecifier>` for variation=, slik som dette:
 
 ```sas
 %graf(bars=datasett/Ratesnitt,
@@ -181,8 +181,8 @@ En graf med årsvariasjon lager man enkelt med å legge til en <dataspecifier> f
 
 ![img](/sas_codes/bilder/graf_example9.png)
 
-Når variabel-navnene har format rate<yyyy> slik som i dette eksempelet forstår %graf at vi vil bruke årstallet i varabelnavnet
-som en label. Man kan overstyre dette med å sende inn sin egen label med #<label>.
+Når variabel-navnene har format `rate<yyyy>` slik som i dette eksempelet forstår %graf at vi vil bruke årstallet i varabelnavnet
+som en label. Man kan overstyre dette med å sende inn sin egen label med `#<label>`.
 
 ### bar_grouping=cluster (of forskjellen med det og bar_grouping=stack)
 
