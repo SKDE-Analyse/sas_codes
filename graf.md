@@ -99,7 +99,7 @@ hvis vil bruke et format på disse tabellvariablene? Det gjør man slik:
 
 ![img](/sas_codes/bilder/graf_example5.png)
 
-I eksempelet ovenfor blir tabvar1 formatert med comma10.1, tabvar2 blir uendret siden det bare var et punktum, og tabvar3
+I eksempelet ovenfor blir tabvar1 formatert med binary6., tabvar2 blir uendret siden det bare var et punktum, og tabvar3
 blir formatert med dollar10.2. %graf() leser alle formatene fra venstre til høyre og bruker de på de respektive variablene.
 Det er derfor tabvar2 bare får et punktum i eksempelet; vi er egentlig bare interessert i å formatere tabvar3, så vi bruker
 et punktum for å "hoppe over" tabvar2 uten å endre formatet.
