@@ -1,35 +1,42 @@
 ﻿%macro graf(
-   bars=,      /* <dataspecifier>. En eller flere variabler det skal lages et søylediagram av */
-	lines=,     /* <dataspecifier>. En eller flere variabler det skal lages et linjediagram av */
-	table=,     /* <dataspecifier>. En eller flere variabler det skal lages en tabell av */
-	variation=, /* <dataspecifier>. En eller flere variabler det skal lages en variasjon av (brukt for å lage årsvariasjon) */
-	category=,  /* Kategorivariabelen + valgri formatering av denne etter en "/", Eksempel: bohf/bohf_fmt. */
-   category_label=Bosatte i opptaksområde, /* Beskrivelse av kategorivariabelen */
-	description=" ", /* En beskrivelse av hva grafen representerer, med eller uten anførselstegn. */
-	reverse=false,   /* Hvis denne er true reverseres rekkefølgen på kategoriene i grafen.
-	                    Mulige valg: (true, false). Default: false. */
-	direction=horizontal, /* Denne variabelen styrer hvilken retning grafen går. Mulige valg: (horizontal, vertical).
-	                         Endrer man på denne er det som å vri grafen 90 grader. %graf sørger for at alle dataene
-	                         beholder sine relative plasseringer, inklusive tabellen. Default: horizontal. */
-	bar_grouping=stack, /* Denne variabelen styrer hvoran %graf() kombinerer dataene når man har flere variabler for et
-	                       søylediagram. Dette er valgene: (stack, cluster). Stack stabler variablene oppå hverandre for
-	                       å lage et n-delt søylediagram. Cluster på sin side lager en liten søyle for hver variabel og
-	                       plasserer de ved siden av hverandre for hver valgte kategori. I begge tilfeller er det 
-	                       totalsummen av alle søyle-variablene som definerer rekkefølgen på kategoriene i resultat-grafen.
-	                       Default: stack. */
-	special_categories=8888 7777, /* En liste med nummer som definerer "special categories", dvs kategorier som
-	                                 får en grå farge i søylediagrammet - vanlighis er dette norgesgjennomsnittet.
-	                                 Default: 8888 7777. */
-	save="",   /* Hvis man vil lagre filen, setter man her inn fullt navn på den nye filen i anførselstegn.
-	              Dette må inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf).
-	              Hvis filetternavnet er .png, lagres bildet som en png fil, også videre. Default: "". */
-	source=""  /* Kildehenvisning nederst til venstre. Default: "". */,
-	logo=none, /* Velg mellom følgende logoer: (skde, hn, none). Default: none. */
-	panelby=,  /* Settes til navnet på variablen som brukes med sgpanel for å lage flere små grafer i en og samme graf.
-	              Hver lille graf må ha en unik verdi for panelby i datasettet som sendes inn. Hvis man bruker panelby
-	              må input-datasettet være ferdig sortert i den rekkefølgen man vil vise dataene. */
-	height=500 /* Høyde på grafen, i pixels. Default: 500. */,
-	width=700  /* Bredde på grafen, i pixels. Default: 700. */
+   bars=      /* <dataspecifier>. En eller flere variabler det skal lages et søylediagram av */,
+   lines=     /* <dataspecifier>. En eller flere variabler det skal lages et linjediagram av */,
+   table=     /* <dataspecifier>. En eller flere variabler det skal lages en tabell av */,
+   variation= /* <dataspecifier>. En eller flere variabler det skal lages en variasjon av (brukt for å lage årsvariasjon) */,
+   category=  /* Kategorivariabelen + valgri formatering av denne etter en "/", Eksempel: bohf/bohf_fmt. */,
+   category_label=Bosatte i opptaksområde /* Beskrivelse av kategorivariabelen */,
+   description=" " /* En beskrivelse av hva grafen representerer, med eller uten anførselstegn. */,
+   reverse=false   /* Hvis denne er true reverseres rekkefølgen på kategoriene i grafen.
+                      Mulige valg: (true, false). Default: false. */,
+   direction=horizontal /* Denne variabelen styrer hvilken retning grafen går. Mulige valg: (horizontal, vertical).
+                           Endrer man på denne er det som å vri grafen 90 grader. %graf sørger for at alle dataene
+                           beholder sine relative plasseringer, inklusive tabellen. Default: horizontal. */,
+   bar_grouping=stack /* Denne variabelen styrer hvoran %graf() kombinerer dataene når man har flere variabler for et
+                         søylediagram. Dette er valgene: (stack, cluster). Stack stabler variablene oppå hverandre for
+                         å lage et n-delt søylediagram. Cluster på sin side lager en liten søyle for hver variabel og
+                         plasserer de ved siden av hverandre for hver valgte kategori. I begge tilfeller er det 
+                         totalsummen av alle søyle-variablene som definerer rekkefølgen på kategoriene i resultat-grafen.
+                         Default: stack. */,
+   special_categories=8888 7777 /* En liste med nummer som definerer "special categories", dvs kategorier som
+                                   får en grå farge i søylediagrammet - vanlighis er dette norgesgjennomsnittet.
+                                   Default: 8888 7777. */,
+   save=""   /* Hvis man vil lagre filen, setter man her inn fullt navn på den nye filen i anførselstegn.
+                Dette må inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf).
+                Hvis filetternavnet er .png, lagres bildet som en png fil, også videre. Default: "". */,
+   source=""  /* Kildehenvisning nederst til venstre. Default: "". */,
+   logo=none /* Velg mellom følgende logoer: (skde, hn, none). Default: none. */,
+   panelby=  /* Settes til navnet på variablen som brukes med sgpanel for å lage flere små grafer i en og samme graf.
+                Hver lille graf må ha en unik verdi for panelby i datasettet som sendes inn. Hvis man bruker panelby
+                må input-datasettet være ferdig sortert i den rekkefølgen man vil vise dataene. */,
+   height=500 /* Høyde på grafen, i pixels. Default: 500. */,
+   width=700  /* Bredde på grafen, i pixels. Default: 700. */,
+   bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFED4F CX00FFFF CXFFFF00,
+   special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CX0F0F0F CXEEEEEE,
+   circle_symbols = circlefilled circlefilled circle circle circle,
+   circle_colors = black grey black charcoal black,
+   circle_sizes = 4pt 6pt 8pt 9pt 10pt,
+   line_patterns = solid shortdash mediumdash longdash mediumdashshortdash,
+   line_colors = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F
 ) / minoperator;
 
 /*!
@@ -82,6 +89,8 @@ Hva gjør man hvis man vil lage et todelt søylediagram med to variabler (Ratesn
     )
 
 ![img](/docs/bilder/graf_example2.png)
+
+Den totale verdien av den sammensatte søyla er summen av alle variablene (i dette tilfellet Ratesnitt1 + Ratesnitt2).
 
 ### Todelt søylediagram med data fra to forskjellige datasett
 
@@ -160,7 +169,7 @@ vil også være nødvendig å "plusse" hvis man kombinerer datasett fra forskjel
 til en linje på toppen av søylediagrammet med en egen label, noe som er veldig enkelt, og jeg la i tillegg til en beskrivelse av
 grafen (description=).
 
-### Avansert eksempel
+### Avansert eksempel (lagring av bilde, logo og kilde, etc.)
 
 La oss se på et mer avansert eksempel hvor vi vrir grafen 90 grader (direction=vertical), legger til logo og kildehenvisning,
 og lagrer bildet som en .png fil. La oss i tillegg endre på special_categories for å si at helseforetakene i Helse Nord skal
@@ -184,7 +193,7 @@ bli grå, i stedet for Norge. På toppen av alt det gjør vi grafen mye større 
 
 ### Årsvariasjon
 
-En graf med årsvariasjon lager man enkelt med å legge til en <dataspecifier> for variation=, slik som dette:
+En graf med årsvariRasjon lager man enkelt med å legge til en <dataspecifier> for variation=, slik som dette:
 
    %graf(bars=datasett/Ratesnitt,
          variation=datasett/rate2020-rate2022,
@@ -196,8 +205,88 @@ En graf med årsvariasjon lager man enkelt med å legge til en <dataspecifier> f
 Man kan sette en label for variasjons-variablene, men når variabel-navnene har format rate<yyyy> slik som i dette
 eksempelet forstår %graf at vi vil bruke årstallet i varabelnavnet som en label.
 
+### bar_grouping=cluster (of forskjellen med det og bar_grouping=stack)
+
+Hvis man istedenfor å lage et n-delt søylediagram vil lage en liten søyle for hver variabel man sender inn, kan man
+gjøre det slik:
+
+    %graf(bars=test_shorter/Ratesnitt1-Ratesnitt3 #Offentlig #Privat #Noe annet?,
+          direction=vertical, bar_grouping=cluster,
+          category=borhf/borhf_fmt.
+    )
+
+![img](/docs/bilder/graf_example10.png)
+
+I dette eksempelet er grafen snudd i vertikal retning (fordi det ser litt bedre ut), og kategorien er i dette tilfellet
+rorhf (istedenfor bohf). Hvis man ikke hadde satt bar_grouping=cluster ville grafen sett slik ut:
+
+![img](/docs/bilder/graf_example11.png)
+
+### panelby
+
+Hvis man har data for mange små minigrafer i et datasett, og hver av disse minigrafene har sin egen verdi av en variabel
+som skiller den fra de andre grafene, kan man bruke denne variabelen med panelby= slik som dette:
+
+    %graf(bars=panel_test/ratesnitt1-ratesnitt2 #Offentlig #Privat,
+          lines=panel_test/ratesnitt1 #"En linje, hvorfor ikke",
+          table=panel_test/tabvar1/10. #Info,
+          category=borhf/borhf_fmt.,
+          panelby=panel,
+          logo=skde
+    )
+
+![img](/docs/bilder/graf_example12.png)
+
+I dette tilfellet vil ikke %graf() blande seg inn i rekkefølgen på dataene, så input-datasettet må være ferdig sortert
+i den rekkefølgen man vil ha det. Man kan bruke panelby= i kombinasjon med bars=, lines=, table= og variation=.
+
+### Endre utseendet
+
+Det er ganske mange variabler for å endre på utseendet til grafen. For eksempel kan man bruke variablene bar_colors
+og special_bar_colors for å endre utseendet til søylediagrammet:
+
+    %graf(bars=datasett/Ratesnitt1-Ratesnitt2,
+          category=bohf/bohf_fmt.,
+          bar_colors=darkred pink, special_bar_colors=green CXC0FF81 
+    )
+
+![img](/docs/bilder/graf_example13.png)
+
 */
 
+
+/*  Når man lager et enkelt søylediagram velges by default farge nummer 2 i bar_colors og special_bar_colors.
+    For at dette ikke skal bli noen man trenger å tenke på når man bruker %graf() og endrer disse variablene må jeg gjøre dette: */
+%if %sysfunc(countw(&bar_colors)) = 1 %then
+   %let bar_colors = &bar_colors &bar_colors;
+%if %sysfunc(countw(&special_bar_colors)) = 1 %then
+   %let special_bar_colors = &special_bar_colors &special_bar_colors;
+
+%macro assert(assertion, message=Assertion is false);
+data _null_;
+   if not (&assertion) then do;
+      putlog "ERROR: &message.. Aborting program excecution!";
+      abort cancel;
+   end;
+run;
+%mend assert;
+
+
+%macro assert_member(value, list, varname);
+%assert(&value in (&list),
+   message=%sysfunc(dequote(&value)) is not a valid argument value for &varname. in the graf macro. These are the options: %sysfunc(prxchange(s/%str(%")//, -1, &list))
+)
+%mend assert_member;
+
+/* Hvis det er noe feil med variablene er det bedre å stoppe hele programmet enn å bare kjøre på, som SAS liker å gjøre. */
+%let reverse = %lowcase(&reverse);
+%assert_member("&reverse", "true" "false", reverse)
+%let direction = %lowcase(&direction);
+%assert_member("&direction", "horizontal" "vertical", direction)
+%let bar_grouping = %lowcase(&bar_grouping);
+%assert_member("&bar_grouping", "stack" "cluster", bar_grouping)
+%let logo = %lowcase(&logo);
+%assert_member("&logo", "none" "skde" "hn", logo)
 
 %macro expand_varlist(library, ds, varlist, macrovar);
 /*  Denne makroen tar en SAS variabelliste av ukjent form (f. eks. rate: eller rate2020-rate2023),
@@ -207,7 +296,7 @@ eksempelet forstår %graf at vi vil bruke årstallet i varabelnavnet som en labe
        rate2020-rate2023 -> rate2020 rate2021 rate2022 rate2023
        abc23 abc1 abc4   -> abc23 abc1 abc4 (rekkefølgen beholdes, selv om den ikke er kronologisk)
 
-    Etter at variabellisten er konvertert er det lettere å jobbe med den i %sdiagram.
+    Etter at variabellisten er konvertert er det lettere å jobbe med den videre.
 */
 %global &macrovar;
 data DELETEME_FILTER(keep=&varlist); retain &varlist; set &library..&ds; run;
@@ -355,17 +444,6 @@ run;
 %mend parse_dataspecifiers;
 
 
-
-
-
-%let bar_colors         = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFED4F CX00FFFF CXFFFF00;
-%let special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CX0F0F0F CXEEEEEE;
-%let circle_symbols     = circlefilled circlefilled circle circle circle;
-%let circle_colors      = black grey black charcoal black;
-%let circle_sizes       = 4pt 6pt 8pt 9pt 10pt;
-
-%let line_patterns      = solid shortdash mediumdash longdash mediumdashshortdash;
-%let line_colors        = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F;
 
 %let category_regex = (\w+)(\/([\w.\$]+))?;
 %let category_format = %sysfunc(prxchange(s/&category_regex/$3/, 1, &category));
@@ -549,7 +627,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
       %let position=%scan(bottomright topright topleft, 1 + (&direction=vertical) + (&reverse=true));
 
       keylegend %do i=1 %to &total_variationvars; "varlegend&i" %end;
-              / across=1 position=&position %if &panelby= %then location=inside; noborder valueattrs=(size=8pt);
+              / across=1 %if &panelby= %then position=&position; %if &panelby= %then location=inside; noborder valueattrs=(size=8pt);
    %end;
 
    %if "&table" ^= "" %then %do;
