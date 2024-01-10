@@ -40,7 +40,6 @@
 ) / minoperator;
 
 /*!
-
 # One %graf() to rule them all!
 
 Den viktigste delen av %graf() er de fire variablene bars, lines, table og variation. For alle disse variablene kan
@@ -70,9 +69,11 @@ Den beste måten å lære hvordan man bruker %graf() på er med eksempler; jeg h
 
 Hvis man vil laget et helt enkelt søylediagram uten noe visvas, spesifiserer man helt enkelt et datasett og en variabel slik som dette:
 
-    %graf(bars=datasett/Ratesnitt,
-          category=bohf/bohf_fmt.
-    )
+```sas
+%graf(bars=datasett/Ratesnitt,
+      category=bohf/bohf_fmt.
+)
+```
 
 ![img](/docs/bilder/graf_example1.png)
 
@@ -84,10 +85,11 @@ kategorivariabelen bohf, og formatet til bohf er "bohf_fmt.".
 
 Hva gjør man hvis man vil lage et todelt søylediagram med to variabler (Ratesnitt1 og Ratesnitt2) i datasettet? Det gjør man slik:
 
-    %graf(bars=datasett/Ratesnitt1 Ratesnitt2,
-          category=bohf/bohf_fmt.
-    )
-
+```sas
+%graf(bars=datasett/Ratesnitt1 Ratesnitt2,
+      category=bohf/bohf_fmt.
+)
+```
 ![img](/docs/bilder/graf_example2.png)
 
 Den totale verdien av den sammensatte søyla er summen av alle variablene (i dette tilfellet Ratesnitt1 + Ratesnitt2).
@@ -97,9 +99,11 @@ Den totale verdien av den sammensatte søyla er summen av alle variablene (i det
 Hva hvis man har to forskjellige datasett (datasett1 og datasett2) med samme variabel (Ratesnitt), og man vil lage et todelt
 søylediagram med de? Det er bare en liten forandring i koden som må til:
 
-    %graf(bars=datasett1 datasett2/Ratesnitt,
-          category=bohf/bohf_fmt.
-    )
+```sas
+%graf(bars=datasett1 datasett2/Ratesnitt,
+      category=bohf/bohf_fmt.
+)
+```
 
 ![img](/docs/bilder/graf_example3.png)
 
@@ -111,20 +115,24 @@ både mer en ett datasett og mer enn en variabel, vil alle mulige kombinasjoner 
 
 Hva gjør man hvis man har lyst til å legge til en tabell med 3 kolonner på høyre side? Det er en lett sak:
 
-    %graf(bars=datasett1 datasett2/Ratesnitt,
-          table=datasett3/tabvar1-tabvar3,
-          category=bohf/bohf_fmt.
-    )
+```sas
+%graf(bars=datasett1 datasett2/Ratesnitt,
+      table=datasett3/tabvar1-tabvar3,
+      category=bohf/bohf_fmt.
+)
+```
 
 ![img](/docs/bilder/graf_example4.png)
 
 "tabvar1-tabvar3" er en Variable List, så %graf() forstår at man vil ma med de tre variablene tabvar1, tabvar2 og tabvar3. Hva
 hvis vil bruke et format på disse tabellvariablene? Det gjør man slik:
 
-    %graf(bars=datasett1 datasett2/Ratesnitt,
-          table=datasett3/tabvar1-tabvar3/comma10.1 . dollar10.,
-          category=bohf/bohf_fmt.
-    )
+```sas
+%graf(bars=datasett1 datasett2/Ratesnitt,
+      table=datasett3/tabvar1-tabvar3/comma10.1 . dollar10.,
+      category=bohf/bohf_fmt.
+)
+```
 
 ![img](/docs/bilder/graf_example5.png)
 
@@ -139,10 +147,12 @@ Hva hvis vi også har lyst til å gi tabvar2 og tabvar3 (ikke tabvar1) en label,
 tabellen? Det gjør man helt på slutten med å bruke emneknagg (#). La oss i samme slengen gi en kort beskrivelse av de
 to søylene i den todelte grafen:
 
-    %graf(bars=datasett1 datasett2/Ratesnitt #Offentlig #Privat,
-          table=datasett3/tabvar1-tabvar3/comma10.1 . dollar10.2 #. #Uformatert tabellvariabel #"Dette, er tekst",
-          category=bohf/bohf_fmt.
-    )
+```sas
+%graf(bars=datasett1 datasett2/Ratesnitt #Offentlig #Privat,
+      table=datasett3/tabvar1-tabvar3/comma10.1 . dollar10.2 #. #Uformatert tabellvariabel #"Dette, er tekst",
+      category=bohf/bohf_fmt.
+)
+```
 
 ![img](/docs/bilder/graf_example6.png)
    
@@ -156,10 +166,12 @@ Det er to ting som er verdt å notere seg med eksempelet ovenfor:
 Av og til vil det ikke være mulig å bruke en enkelt <dataspecifier> slik som ovenfor. Det man kan gjøre da er simpelten
 å "plusse" sammen flere <dataspecifier>s slik som dette:
 
-    %graf(bars=datasett1/Ratesnitt1 + datasett2/Ratesnitt2 #Offentlig #Privat,
-          lines=datasett1/Ratesnitt4 #En linje på toppen av søylediagrammet,
-          category=bohf/bohf_fmt.
-    )
+```sas
+%graf(bars=datasett1/Ratesnitt1 + datasett2/Ratesnitt2 #Offentlig #Privat,
+      lines=datasett1/Ratesnitt4 #En linje på toppen av søylediagrammet,
+      category=bohf/bohf_fmt.
+)
+```
 
 ![img](/docs/bilder/graf_example7.png)
 
@@ -175,45 +187,51 @@ La oss se på et mer avansert eksempel hvor vi vrir grafen 90 grader (direction=
 og lagrer bildet som en .png fil. La oss i tillegg endre på special_categories for å si at helseforetakene i Helse Nord skal
 bli grå, i stedet for Norge. På toppen av alt det gjør vi grafen mye større med width= og height=:
 
-    %let lagreplass=/sas_smb/skde_analyse/Brukere/Skybert/bilder;
-    
-    %graf(bars=datasett1/Ratesnitt1 + datasett2/Ratesnitt2 #Offentlig #Privat,
-          lines=datasett1/Ratesnitt4 #En linje på toppen av søylediagrammet,
-          table=datasett3/tabvar1/10. #Tall:,
-          direction=vertical,
-          category=bohf/bohf_fmt.,
-          special_categories=1 2 3 4,
-          width=1500, height=800,
-          logo=skde,
-          source=Kilde: HELFO,
-          save="&lagreplass/bildenavn.png"
-    )
+```sas
+%let lagreplass=/sas_smb/skde_analyse/Brukere/Skybert/bilder;
+
+%graf(bars=datasett1/Ratesnitt1 + datasett2/Ratesnitt2 #Offentlig #Privat,
+      lines=datasett1/Ratesnitt4 #En linje på toppen av søylediagrammet,
+      table=datasett3/tabvar1/10. #Tall:,
+      direction=vertical,
+      category=bohf/bohf_fmt.,
+      special_categories=1 2 3 4,
+      width=1500, height=800,
+      logo=skde,
+      source=Kilde: HELFO,
+      save="&lagreplass/bildenavn.png"
+)
+```
 
 ![img](/docs/bilder/graf_example8.png)
 
 ### Årsvariasjon
 
-En graf med årsvariRasjon lager man enkelt med å legge til en <dataspecifier> for variation=, slik som dette:
+En graf med årsvariasjon lager man enkelt med å legge til en <dataspecifier> for variation=, slik som dette:
 
-   %graf(bars=datasett/Ratesnitt,
-         variation=datasett/rate2020-rate2022,
-         category=bohf/bohf_fmt.
-   )
+```sas
+%graf(bars=datasett/Ratesnitt,
+      variation=datasett/rate2020-rate2022,
+      category=bohf/bohf_fmt.
+)
+```
 
 ![img](/docs/bilder/graf_example9.png)
 
-Man kan sette en label for variasjons-variablene, men når variabel-navnene har format rate<yyyy> slik som i dette
-eksempelet forstår %graf at vi vil bruke årstallet i varabelnavnet som en label.
+Når variabel-navnene har format rate<yyyy> slik som i dette eksempelet forstår %graf at vi vil bruke årstallet i varabelnavnet
+som en label. Man kan overstyre dette med å sende inn sin egen label med #<label>.
 
 ### bar_grouping=cluster (of forskjellen med det og bar_grouping=stack)
 
 Hvis man istedenfor å lage et n-delt søylediagram vil lage en liten søyle for hver variabel man sender inn, kan man
 gjøre det slik:
 
-    %graf(bars=test_shorter/Ratesnitt1-Ratesnitt3 #Offentlig #Privat #Noe annet?,
-          direction=vertical, bar_grouping=cluster,
-          category=borhf/borhf_fmt.
-    )
+```sas
+%graf(bars=test_shorter/Ratesnitt1-Ratesnitt3 #Offentlig #Privat #Noe annet?,
+      direction=vertical, bar_grouping=cluster,
+      category=borhf/borhf_fmt.
+)
+```
 
 ![img](/docs/bilder/graf_example10.png)
 
@@ -227,13 +245,15 @@ rorhf (istedenfor bohf). Hvis man ikke hadde satt bar_grouping=cluster ville gra
 Hvis man har data for mange små minigrafer i et datasett, og hver av disse minigrafene har sin egen verdi av en variabel
 som skiller den fra de andre grafene, kan man bruke denne variabelen med panelby= slik som dette:
 
-    %graf(bars=panel_test/ratesnitt1-ratesnitt2 #Offentlig #Privat,
-          lines=panel_test/ratesnitt1 #"En linje, hvorfor ikke",
-          table=panel_test/tabvar1/10. #Info,
-          category=borhf/borhf_fmt.,
-          panelby=panel,
-          logo=skde
-    )
+```sas
+%graf(bars=panel_test/ratesnitt1-ratesnitt2 #Offentlig #Privat,
+      lines=panel_test/ratesnitt1 #"En linje, hvorfor ikke",
+      table=panel_test/tabvar1/10. #Info,
+      category=borhf/borhf_fmt.,
+      panelby=panel,
+      logo=skde
+)
+```
 
 ![img](/docs/bilder/graf_example12.png)
 
@@ -245,10 +265,12 @@ i den rekkefølgen man vil ha det. Man kan bruke panelby= i kombinasjon med bars
 Det er ganske mange variabler for å endre på utseendet til grafen. For eksempel kan man bruke variablene bar_colors
 og special_bar_colors for å endre utseendet til søylediagrammet:
 
-    %graf(bars=datasett/Ratesnitt1-Ratesnitt2,
-          category=bohf/bohf_fmt.,
-          bar_colors=darkred pink, special_bar_colors=green CXC0FF81 
-    )
+```sas
+%graf(bars=datasett/Ratesnitt1-Ratesnitt2,
+      category=bohf/bohf_fmt.,
+      bar_colors=darkred pink, special_bar_colors=green CXC0FF81 
+)
+```
 
 ![img](/docs/bilder/graf_example13.png)
 
@@ -515,7 +537,7 @@ data graf_data_attributes;
       %do i=1 %to %sysfunc(countw(&bar_colors));
          %let color_index= &i + 0;
          %if &total_barsvars=1 %then
-	        %let color_index= &i + 1; /* Color number 2 looks better when there's only one bar */
+            %let color_index= &i + 1; /* Color number 2 looks better when there's only one bar */
          ID = "BarAttr"; value =  "&i"; fillcolor = "%scan(&bar_colors, &color_index)"; linecolor = "%scan(&bar_colors, 1)"; output;
          ID = "BarAttr"; value = "n&i"; fillcolor = "%scan(&special_bar_colors, &color_index)"; output;
       %end;
@@ -536,20 +558,20 @@ data deleteme_output;
    if _n_ = 1 then do;
       %if "&variation" ^= "" %then %do;
          %do i=1 %to &total_variationvars;
-		    if prxmatch("/^rate\d{4}$/i", vlabel(variation_&i)) then
-			     call symput("variation_&i._label", prxchange("s/^rate(\d{4})$/$1/i", 1, vlabel(variation_&i)));
-			else call symput("variation_&i._label", vlabel(variation_&i));
-		 %end;
+            if prxmatch("/^rate\d{4}$/i", vlabel(variation_&i)) then
+               call symput("variation_&i._label", prxchange("s/^rate(\d{4})$/$1/i", 1, vlabel(variation_&i)));
+            else call symput("variation_&i._label", vlabel(variation_&i));
+         %end;
       %end;
-	  %if "&bars" ^= "" %then %do;
+      %if "&bars" ^= "" %then %do;
          %do i=1 %to &total_barsvars;
-		    call symput("bars_&i._label", vlabel(bars_&i));
-		 %end;
+            call symput("bars_&i._label", vlabel(bars_&i));
+         %end;
       %end;
-	  %if "&lines" ^= "" %then %do;
+      %if "&lines" ^= "" %then %do;
          %do i=1 %to &total_linesvars;
-		    call symput("lines_&i._label", vlabel(lines_&i));
-		 %end;
+            call symput("lines_&i._label", vlabel(lines_&i));
+         %end;
       %end;
    end;
 run;
