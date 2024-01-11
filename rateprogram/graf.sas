@@ -180,7 +180,7 @@ Av og til vil det ikke være mulig å bruke en enkelt `<dataspecifier>` slik som
 ![img](/sas_codes/bilder/graf_example7.png)
 
 Resultatet av det vil være en todeltelt graf; den første søyla vil være datasett1/Ratesnitt1, den andre søyla datasett2/Ratensnitt2.
-Det var nødvendig å "plusse" i dette tilfellet både fordi variablene (Ratesnitt1 og Ratesnitt2) er ulike i de to datasettene. Det
+Det var nødvendig å "plusse" i dette tilfellet fordi variablene (Ratesnitt1 og Ratesnitt2) er ulike i de to datasettene. Det
 vil også være nødvendig å "plusse" hvis man kombinerer datasett fra forskjellige SAS-bibliotek. I eksempelet ovenfor la jeg også
 til en linje på toppen av søylediagrammet med en egen label, noe som er veldig enkelt, og jeg la i tillegg til en beskrivelse av
 grafen (description=).
