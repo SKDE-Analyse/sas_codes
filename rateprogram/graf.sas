@@ -314,8 +314,6 @@ run;
 %let logo = %lowcase(&logo);
 %assert_member("&logo", "none" "skde" "hn", logo)
 
-%put &=sort;
-%put &sort=yes;
 
 %macro expand_varlist(library, ds, varlist, macrovar);
 /*  Denne makroen tar en SAS variabelliste av ukjent form (f. eks. rate: eller rate2020-rate2023),
