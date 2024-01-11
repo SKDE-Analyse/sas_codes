@@ -30,7 +30,7 @@ Den beste måten å lære hvordan man bruker %graf() på er med eksempler; jeg h
 
 ### Enkelt søylediagram
 
-Hvis man vil laget et helt enkelt søylediagram uten noe visvas, spesifiserer man helt enkelt et datasett og en variabel slik som dette:
+Hvis man vil lage et helt enkelt søylediagram uten noe visvas, spesifiserer man helt enkelt et datasett og en variabel slik som dette:
 
 ```
 %graf(bars=datasett/Ratesnitt,
@@ -133,7 +133,8 @@ Av og til vil det ikke være mulig å bruke en enkelt `<dataspecifier>` slik som
 ```
 %graf(bars=datasett1/Ratesnitt1 + datasett2/Ratesnitt2 #Offentlig #Privat,
       lines=datasett1/Ratesnitt4 #En linje på toppen av søylediagrammet,
-      category=bohf/bohf_fmt.
+      category=bohf/bohf_fmt.,
+      description=Be the change
 )
 ```
 
