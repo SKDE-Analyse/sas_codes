@@ -6,8 +6,8 @@
    category=  /* Kategorivariabelen + valgri formatering av denne etter en "/", Eksempel: bohf/bohf_fmt. */,
    category_label=Bosatte i opptaksområde /* Beskrivelse av kategorivariabelen */,
    description=" " /* En beskrivelse av hva grafen representerer, med eller uten anførselstegn. */,
-   reverse=false   /* Hvis denne er true reverseres rekkefølgen på kategoriene i grafen.
-                      Mulige valg: (true, false). Default: false. */,
+   sort=yes   /* Her velger man om dataene skal sorteres, og i hvilken rekkefølge det skal sorteres.
+                 Mulige valg: (yes, no, reverse). Default: yes. */,
    direction=horizontal /* Denne variabelen styrer hvilken retning grafen går. Mulige valg: (horizontal, vertical).
                            Endrer man på denne er det som å vri grafen 90 grader. %graf sørger for at alle dataene
                            beholder sine relative plasseringer, inklusive tabellen. Default: horizontal. */,
@@ -69,7 +69,7 @@ Den beste måten å lære hvordan man bruker %graf() på er med eksempler; jeg h
 
 ### Enkelt søylediagram
 
-Hvis man vil lage et helt enkelt søylediagram uten noe visvas, spesifiserer man helt enkelt et datasett og en variabel slik som dette:
+Hvis man vil lage et helt enkelt søylediagram uten noe visvas, spesifiserer man bare et datasett og en variabel slik som dette:
 
 ```
 %graf(bars=datasett/Ratesnitt,
@@ -139,7 +139,7 @@ hvis vil bruke et format på disse tabellvariablene? Det gjør man slik:
 ![img](/sas_codes/bilder/graf_example5.png)
 
 I eksempelet ovenfor blir tabvar1 formatert med binary6., tabvar2 blir uendret siden det bare var et punktum, og tabvar3
-blir formatert med dollar10.2. %graf() leser alle formatene fra venstre til høyre og bruker de på de respektive variablene.
+blir formatert med "dollar10.". %graf() leser alle formatene fra venstre til høyre og bruker de på de respektive variablene.
 Det er derfor tabvar2 bare får et punktum i eksempelet; vi er egentlig bare interessert i å formatere tabvar3, så vi bruker
 et punktum for å "hoppe over" tabvar2 uten å endre formatet.
 
@@ -305,14 +305,17 @@ run;
 %mend assert_member;
 
 /* Hvis det er noe feil med variablene er det bedre å stoppe hele programmet enn å bare kjøre på, som SAS liker å gjøre. */
-%let reverse = %lowcase(&reverse);
-%assert_member("&reverse", "true" "false", reverse)
+%let sort = %lowcase(&sort);
+%assert_member("&sort", "yes" "no" "reverse", sort)
 %let direction = %lowcase(&direction);
 %assert_member("&direction", "horizontal" "vertical", direction)
 %let bar_grouping = %lowcase(&bar_grouping);
 %assert_member("&bar_grouping", "stack" "cluster", bar_grouping)
 %let logo = %lowcase(&logo);
 %assert_member("&logo", "none" "skde" "hn", logo)
+
+%put &=sort;
+%put &sort=yes;
 
 %macro expand_varlist(library, ds, varlist, macrovar);
 /*  Denne makroen tar en SAS variabelliste av ukjent form (f. eks. rate: eller rate2020-rate2023),
@@ -580,9 +583,9 @@ data deleteme_output;
    end;
 run;
 
-%if &panelby= %then %do;
+%if &panelby= and &sort ^= no %then %do;
    proc sort data=deleteme_output;
-      by %if &reverse=false %then descending; %if "&bars" ^= "" %then total_sum; %else input_order; ;
+      by %if &sort=yes %then descending; %if "&bars" ^= "" %then total_sum; %else input_order; ;
    run;
 %end;
 
@@ -650,7 +653,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
          scatter &main_axis=&category &second_axis=variation_&i / markerattrs=&markerattrs;
      %end;
 
-      %let position=%scan(bottomright topright topleft, 1 + (&direction=vertical) + (&reverse=true));
+      %let position=%scan(bottomright topright topleft, 1 + (&direction=vertical) + (&sort=reverse));
 
       keylegend %do i=1 %to &total_variationvars; "varlegend&i" %end;
               / across=1 %if &panelby= %then position=&position; %if &panelby= %then location=inside; noborder valueattrs=(size=8pt);
