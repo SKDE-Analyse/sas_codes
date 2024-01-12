@@ -596,6 +596,10 @@ ods graphics on / height=&height.px width=&width.px;
    %let image_name   = %sysfunc(prxchange(s/&image_regex/$2/, 1, &save));
    %let image_format = %sysfunc(prxchange(s/&image_regex/$3/, 1, &save));
 
+   %assert(%sysfunc(prxmatch(/&image_regex/, &save)), message=Unrecognized image path sent to the graf macro: %remove_quotes(&save))
+   %assert(not %sysfunc(prxmatch(/&.+/, &save)), message=Unresolved macro variable in the save= variable to the graf macro: %remove_quotes(&save))
+   /* ^ Given the design choice for save=, the errors above are likely to happen */
+
    ods graphics on /reset=All imagename="&image_name" imagefmt=&image_format border=off height=&height.px width=&width.px;
    ods listing Image_dpi=300 GPATH="&image_path";
 %end;
