@@ -1,35 +1,41 @@
-﻿%macro graf(
-   bars=      /* <dataspecifier>. En eller flere variabler det skal lages et søylediagram av */,
-   lines=     /* <dataspecifier>. En eller flere variabler det skal lages et linjediagram av */,
-   table=     /* <dataspecifier>. En eller flere variabler det skal lages en tabell av */,
-   variation= /* <dataspecifier>. En eller flere variabler det skal lages en variasjon av (brukt for å lage årsvariasjon) */,
-   category=  /* Kategorivariabelen + valgri formatering av denne etter en "/", Eksempel: bohf/bohf_fmt. */,
-   category_label=Bosatte i opptaksområde /* Beskrivelse av kategorivariabelen */,
-   description=" " /* En beskrivelse av hva grafen representerer, med eller uten anførselstegn. */,
-   sort=yes   /* Her velger man om dataene skal sorteres, og i hvilken rekkefølge det skal sorteres.
+﻿/*!
+# One %graf() to rule them all!
+
+##Argumenter:
+*/
+
+%macro graf(
+   bars=      /*! - bars= <dataspecifier>. En eller flere variabler det skal lages et søylediagram av */,
+   lines=     /*! - lines= <dataspecifier>. En eller flere variabler det skal lages et linjediagram av */,
+   table=     /*! - table= <dataspecifier>. En eller flere variabler det skal lages en tabell av */,
+   variation= /*! - variation= <dataspecifier>. En eller flere variabler det skal lages en variasjon av (brukt for å lage årsvariasjon) */,
+   category=  /*! - category= Kategorivariabelen + valgri formatering av denne etter en "/", Eksempel: bohf/bohf_fmt. */,
+   category_label=Bosatte i opptaksområde /*! - category_label= Beskrivelse av kategorivariabelen */,
+   description=" " /*! - description= En beskrivelse av hva grafen representerer, med eller uten anførselstegn. */,
+   sort=yes   /*! - sort= Her velger man om dataene skal sorteres, og i hvilken rekkefølge det skal sorteres.
                  Mulige valg: (yes, no, reverse). Default: yes. */,
-   direction=horizontal /* Denne variabelen styrer hvilken retning grafen går. Mulige valg: (horizontal, vertical).
+   direction=horizontal /*! - direction= Denne variabelen styrer hvilken retning grafen går. Mulige valg: (horizontal, vertical).
                            Endrer man på denne er det som å vri grafen 90 grader. %graf sørger for at alle dataene
                            beholder sine relative plasseringer, inklusive tabellen. Default: horizontal. */,
-   bar_grouping=stack /* Denne variabelen styrer hvoran %graf() kombinerer dataene når man har flere variabler for et
+   bar_grouping=stack /*! - bar_grouping= Denne variabelen styrer hvoran %graf() kombinerer dataene når man har flere variabler for et
                          søylediagram. Dette er valgene: (stack, cluster). Stack stabler variablene oppå hverandre for
                          å lage et n-delt søylediagram. Cluster på sin side lager en liten søyle for hver variabel og
                          plasserer de ved siden av hverandre for hver valgte kategori. I begge tilfeller er det 
                          totalsummen av alle søyle-variablene som definerer rekkefølgen på kategoriene i resultat-grafen.
                          Default: stack. */,
-   special_categories=8888 7777 /* En liste med nummer som definerer "special categories", dvs kategorier som
+   special_categories=8888 7777 /*! - special_categories= En liste med nummer som definerer "special categories", dvs kategorier som
                                    får en grå farge i søylediagrammet - vanlighis er dette norgesgjennomsnittet.
                                    Default: 8888 7777. */,
-   save=""   /* Hvis man vil lagre filen, setter man her inn fullt navn på den nye filen i anførselstegn.
+   save=""   /*! - save= Hvis man vil lagre filen, setter man her inn fullt navn på den nye filen i anførselstegn.
                 Dette må inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf).
                 Hvis filetternavnet er .png, lagres bildet som en png fil, også videre. Default: "". */,
-   source=""  /* Kildehenvisning nederst til venstre. Default: "". */,
-   logo=none /* Velg mellom følgende logoer: (skde, hn, none). Default: none. */,
-   panelby=  /* Settes til navnet på variablen som brukes med sgpanel for å lage flere små grafer i en og samme graf.
+   source=""  /*! - source= Kildehenvisning nederst til venstre. Default: "". */,
+   logo=none /*! - logo= Velg mellom følgende logoer: (skde, hn, none). Default: none. */,
+   panelby=  /*! - panelby= Settes til navnet på variablen som brukes med sgpanel for å lage flere små grafer i en og samme graf.
                 Hver lille graf må ha en unik verdi for panelby i datasettet som sendes inn. Hvis man bruker panelby
                 må input-datasettet være ferdig sortert i den rekkefølgen man vil vise dataene. */,
-   height=500 /* Høyde på grafen, i pixels. Default: 500. */,
-   width=700  /* Bredde på grafen, i pixels. Default: 700. */,
+   height=500 /*! - height= Høyde på grafen, i pixels. Default: 500. */,
+   width=700  /*! - width= Bredde på grafen, i pixels. Default: 700. */,
    bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFED4F CX00FFFF CXFFFF00,
    special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CX0F0F0F CXEEEEEE,
    circle_symbols = circlefilled circlefilled circle circle circle,
@@ -40,7 +46,7 @@
 ) / minoperator;
 
 /*!
-# One %graf() to rule them all!
+
 
 Den viktigste delen av %graf() er de fire variablene bars, lines, table og variation. For alle disse variablene kan
 man sende inn en eller flere variabler, fra ett eller flere datasett/tabeller, fra ett eller flere bibliotek/library.
@@ -264,6 +270,27 @@ som skiller den fra de andre grafene, kan man bruke denne variabelen med panelby
 I dette tilfellet vil ikke %graf() blande seg inn i rekkefølgen på dataene, så input-datasettet må være ferdig sortert
 i den rekkefølgen man vil ha det. Man kan bruke panelby= i kombinasjon med bars=, lines=, table= og variation=.
 
+### Sortering med sort=
+
+%graf() sorterer normalt dataene i synkende rekkefølge før de vises. Hvis man ikke vil sortere dataene kan man sette sort=no.
+
+Hvis man bruker bars= vil dataene sorteres basert på summen av alle variablene man bruker for bars=. Hvis man ikke bruker
+bars= vil %graf prøve å sortere på samme måte basert på de andre graf-typene (først lines=, deretter variation=). Man kan
+reversere rekkefølgen med å sette sort=reverse.
+
+Hvis man for eksempel lager et linjediagram og kategorivariabelen er årstall, vil det være nødvendig å sette sort=no slik at
+dataene kommer i kronologisk rekkefølge:
+
+```
+%graf(lines=datasett/Ratesnitt1-Ratesnitt5,
+      category=year,
+      category_label=Årstall,
+      direction=vertical,
+      sort=no
+)
+```
+![img](/sas_codes/bilder/graf_example14.png)
+
 ### Endre utseendet
 
 Det er ganske mange variabler for å endre på utseendet til grafen. For eksempel kan man bruke variablene bar_colors
@@ -277,6 +304,8 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
 ```
 
 ![img](/sas_codes/bilder/graf_example13.png)
+
+
 
 */
 
@@ -552,10 +581,12 @@ run;
 data deleteme_output;
    set deleteme_output;
    format &category &category_format;
-   input_order = -_N_;
+   input_order = _N_;
 
    total_sum = 0;
-   array allbars [*] bars: ;
+   array allbars [*] %if "&bars" ^= "" %then bars:;
+               %else %if "&lines" ^= "" %then lines:;
+			   %else %if "&variation" ^= "" %then variation:;;
    do i=1 to dim(allbars);
       total_sum = total_sum + allbars[i];
    end;
@@ -581,9 +612,16 @@ data deleteme_output;
    end;
 run;
 
-%if &panelby= and &sort ^= no %then %do;
+%if &panelby= %then %do;
    proc sort data=deleteme_output;
-      by %if &sort=yes %then descending; %if "&bars" ^= "" %then total_sum; %else input_order; ;
+      /*
+         When &direction=horizontal, then hbarparm displays the category data in the opposite order from the other sgplot
+         statements... The code below makes sure the data is visualized in the same order no matter what kind of plot it is.
+      */
+      by %if &direction=vertical and &sort=yes %then descending;
+         %else %if &direction=horizontal and "&bars" = "" and &sort in (no reverse) %then descending;
+		 %else %if &direction=horizontal and "&bars" ^= "" and &sort=yes %then descending;
+      %if &sort=no %then input_order; %else total_sum;;
    run;
 %end;
 
