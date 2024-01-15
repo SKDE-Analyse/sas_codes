@@ -3,6 +3,32 @@
 
 # One %graf() to rule them all!
 
+##Argumenter:
+
+## Makro `graf`
+
+   sort=yes   /*! - sort= Her velger man om dataene skal sorteres, og i hvilken rekkefølge det skal sorteres.
+                           Endrer man på denne er det som å vri grafen 90 grader. %graf sørger for at alle dataene
+                         søylediagram. Dette er valgene: (stack, cluster). Stack stabler variablene oppå hverandre for
+                         å lage et n-delt søylediagram. Cluster på sin side lager en liten søyle for hver variabel og
+                         plasserer de ved siden av hverandre for hver valgte kategori. I begge tilfeller er det 
+                         totalsummen av alle søyle-variablene som definerer rekkefølgen på kategoriene i resultat-grafen.
+                                   får en grå farge i søylediagrammet - vanlighis er dette norgesgjennomsnittet.
+                Dette må inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf).
+   panelby=  /*! - panelby= Settes til navnet på variablen som brukes med sgpanel for å lage flere små grafer i en og samme graf.
+                Hver lille graf må ha en unik verdi for panelby i datasettet som sendes inn. Hvis man bruker panelby
+   bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFED4F CX00FFFF CXFFFF00,
+   special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CX0F0F0F CXEEEEEE,
+   circle_symbols = circlefilled circlefilled circle circle circle,
+   circle_colors = black grey black charcoal black,
+   circle_sizes = 4pt 6pt 8pt 9pt 10pt,
+   line_patterns = solid shortdash mediumdash longdash mediumdashshortdash,
+   line_colors = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F
+) / minoperator;
+
+/*!
+
+
 Den viktigste delen av %graf() er de fire variablene bars, lines, table og variation. For alle disse variablene kan
 man sende inn en eller flere variabler, fra ett eller flere datasett/tabeller, fra ett eller flere bibliotek/library.
 %graf() vil da legge sammen disse variablene en etter en, i kronologisk rekkefølge, og lage et n-delt søylediagram
@@ -225,6 +251,27 @@ som skiller den fra de andre grafene, kan man bruke denne variabelen med panelby
 I dette tilfellet vil ikke %graf() blande seg inn i rekkefølgen på dataene, så input-datasettet må være ferdig sortert
 i den rekkefølgen man vil ha det. Man kan bruke panelby= i kombinasjon med bars=, lines=, table= og variation=.
 
+### Sortering med sort=
+
+%graf() sorterer normalt dataene i synkende rekkefølge før de vises. Hvis man ikke vil sortere dataene kan man sette sort=no.
+
+Hvis man bruker bars= vil dataene sorteres basert på summen av alle variablene man bruker for bars=. Hvis man ikke bruker
+bars= vil %graf prøve å sortere på samme måte basert på de andre graf-typene (først lines=, deretter variation=). Man kan
+reversere rekkefølgen med å sette sort=reverse.
+
+Hvis man for eksempel lager et linjediagram og kategorivariabelen er årstall, vil det være nødvendig å sette sort=no slik at
+dataene kommer i kronologisk rekkefølge:
+
+```
+%graf(lines=datasett/Ratesnitt1-Ratesnitt5,
+      category=year,
+      category_label=Årstall,
+      direction=vertical,
+      sort=no
+)
+```
+![img](/sas_codes/bilder/graf_example14.png)
+
 ### Endre utseendet
 
 Det er ganske mange variabler for å endre på utseendet til grafen. For eksempel kan man bruke variablene bar_colors
@@ -240,20 +287,4 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
 ![img](/sas_codes/bilder/graf_example13.png)
 
 
-## Makro `assert`
-
-
-## Makro `assert_member`
-
-
-## Makro `expand_varlist`
-
-
-## Makro `remove_quotes`
-
-
-## Makro `parse_dataspecifier`
-
-
-## Makro `parse_dataspecifiers`
 
