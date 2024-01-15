@@ -5,27 +5,26 @@
 
 ## Makro `graf`
 
-   sort=yes   /*! - sort= Her velger man om dataene skal sorteres, og i hvilken rekkefølge det skal sorteres.
-                           Endrer man på denne er det som å vri grafen 90 grader. %graf sørger for at alle dataene
-                         søylediagram. Dette er valgene: (stack, cluster). Stack stabler variablene oppå hverandre for
-                         å lage et n-delt søylediagram. Cluster på sin side lager en liten søyle for hver variabel og
-                         plasserer de ved siden av hverandre for hver valgte kategori. I begge tilfeller er det 
-                         totalsummen av alle søyle-variablene som definerer rekkefølgen på kategoriene i resultat-grafen.
-                                   får en grå farge i søylediagrammet - vanlighis er dette norgesgjennomsnittet.
-                Dette må inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf).
-   panelby=  /*! - panelby= Settes til navnet på variablen som brukes med sgpanel for å lage flere små grafer i en og samme graf.
-                Hver lille graf må ha en unik verdi for panelby i datasettet som sendes inn. Hvis man bruker panelby
-   bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFED4F CX00FFFF CXFFFF00,
-   special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CX0F0F0F CXEEEEEE,
-   circle_symbols = circlefilled circlefilled circle circle circle,
-   circle_colors = black grey black charcoal black,
-   circle_sizes = 4pt 6pt 8pt 9pt 10pt,
-   line_patterns = solid shortdash mediumdash longdash mediumdashshortdash,
-   line_colors = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F
-) / minoperator;
 
-/*!
+- bars= `<dataspecifier>`. En eller flere variabler det skal lages et søylediagram av
+- lines= `<dataspecifier>`. En eller flere variabler det skal lages et linjediagram av
+- table= `<dataspecifier>`. En eller flere variabler det skal lages en tabell av
+- variation= `<dataspecifier>`. En eller flere variabler det skal lages en variasjon av (brukt for å lage årsvariasjon)
+- category= Kategorivariabelen + valgri formatering av denne etter en "/", Eksempel: bohf/bohf_fmt.
+- category_label= Beskrivelse av kategorivariabelen
+- description= En beskrivelse av hva grafen representerer, med eller uten anførselstegn.
+- sort= Her velger man om dataene skal sorteres, og i hvilken rekkefølge det skal sorteres. Mulige valg: (yes, no, reverse). Default: yes.
+- direction= Denne variabelen styrer hvilken retning grafen går. Mulige valg: (horizontal, vertical). Endrer man på denne er det som å vri grafen 90 grader. %graf sørger for at alle dataene beholder sine relative plasseringer, inklusive tabellen. Default: horizontal.
+- bar_grouping= Denne variabelen styrer hvoran %graf() kombinerer dataene når man har flere variabler for et søylediagram. Dette er valgene: (stack, cluster). Stack stabler variablene oppå hverandre for å lage et n-delt søylediagram. Cluster på sin side lager en liten søyle for hver variabel og plasserer de ved siden av hverandre for hver valgte kategori. I begge tilfeller er det totalsummen av alle søyle-variablene som definerer rekkefølgen på kategoriene i resultat-grafen. Default: stack.
+- special_categories= En liste med nummer som definerer "special categories", dvs kategorier som får en grå farge i søylediagrammet - vanlighis er dette norgesgjennomsnittet. Default: 8888 7777.
+- save= Hvis man vil lagre filen, setter man her inn fullt navn på den nye filen i anførselstegn. Dette må inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf). Hvis filetternavnet er .png, lagres bildet som en png fil, også videre. Default: "".
+- source= Kildehenvisning nederst til venstre. Default: "".
+- logo= Velg mellom følgende logoer: (skde, hn, none). Default: none.
+- panelby= Settes til navnet på variablen som brukes med sgpanel for å lage flere små grafer i en og samme graf. Hver lille graf må ha en unik verdi for panelby i datasettet som sendes inn. Hvis man bruker panelby må input-datasettet være ferdig sortert i den rekkefølgen man vil vise dataene.
+- height= Høyde på grafen, i pixels. Default: 500.
+- width= Bredde på grafen, i pixels. Default: 700. 
 
+# Introduksjon
 
 Den viktigste delen av %graf() er de fire variablene bars, lines, table og variation. For alle disse variablene kan
 man sende inn en eller flere variabler, fra ett eller flere datasett/tabeller, fra ett eller flere bibliotek/library.
