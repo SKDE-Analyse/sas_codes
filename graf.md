@@ -11,7 +11,7 @@
 - **lines** = `<dataspecifier>`. En eller flere variabler det skal lages et linjediagram av.
 - **table** = `<dataspecifier>`. En eller flere variabler det skal lages en tabell av.
 - **variation** = `<dataspecifier>`. En eller flere variabler det skal lages en variasjon av (brukt for å lage årsvariasjon).
-- **category** = `<category>(/<category format>)` Kategorivariabelen + valgri formatering av denne etter en "/". Eksempel: `bohf/bohf_fmt.`.
+- **category** = `<category>(/<category format>)`. Kategorivariabelen + valgri formatering av denne etter en "/". Eksempel: `bohf/bohf_fmt.`.
 - **category_label** = `<text>`. Beskrivelse av kategorivariabelen.
 - **description** = `<text>`. En beskrivelse av hva grafen representerer, med eller uten anførselstegn.
 - **sort** = `[yes, no, reverse]`. Her velger man om dataene skal sorteres, og i hvilken rekkefølge det skal sorteres. Default: yes.
@@ -19,7 +19,7 @@
 - **bar_grouping** =  `[stack, cluster]`. Denne variabelen styrer hvoran %graf() kombinerer dataene når man har flere variabler for et søylediagram. Stack stabler variablene oppå hverandre for å lage et n-delt søylediagram. Cluster på sin side lager en liten søyle for hver variabel og plasserer de ved siden av hverandre for hver valgte kategori. I begge tilfeller er det totalsummen av alle søyle-variablene som definerer rekkefølgen på kategoriene i resultat-grafen. Default: stack.
 - **special_categories** = `<list>`. En liste med nummer som definerer "special categories", dvs kategorier som får en grå farge i søylediagrammet - vanlighis er dette norgesgjennomsnittet. Default: 8888 7777.
 - **save** = `<text>`. Hvis man vil lagre filen, setter man her inn fullt navn på den nye filen i anførselstegn. Dette må inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf). Hvis filetternavnet er .png, lagres bildet som en png fil, også videre. Default: "".
-- **source** = `<text>` Kildehenvisning nederst til venstre. Default: "".
+- **source** = `<text>`. Kildehenvisning nederst til venstre. Default: "".
 - **logo** = `[skde, hn, none]`. Logo nederst til høyre på grafen:  Default: none.
 - **panelby** = `<panelby variable>`. Settes til navnet på variablen som brukes med sgpanel for å lage flere små grafer i en og samme graf. Hver lille graf må ha en unik verdi for panelby i datasettet som sendes inn. Hvis man bruker panelby må input-datasettet være ferdig sortert i den rekkefølgen man vil vise dataene.
 - **height** = `<number>`. Høyde på grafen, i pixels. Default: 500.
