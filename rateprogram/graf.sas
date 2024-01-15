@@ -1,7 +1,5 @@
 ﻿/*!
 # One %graf() to rule them all!
-
-##Argumenter:
 */
 
 %macro graf(
