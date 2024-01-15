@@ -3,8 +3,6 @@
 
 # One %graf() to rule them all!
 
-##Argumenter:
-
 ## Makro `graf`
 
    sort=yes   /*! - sort= Her velger man om dataene skal sorteres, og i hvilken rekkefølge det skal sorteres.
