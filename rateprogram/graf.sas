@@ -423,7 +423,7 @@ quit;
 
 %do i=1 %to %sysfunc(countw(&expanded_dsnames));
    %expand_varlist(&library, %scan(&expanded_dsnames, &i), &varlist,
-                   expanded_varlist_%scan(&expanded_dsnames, &i))
+                   expanded_varlist_&i)
 %end;
 
 data &out;
@@ -431,10 +431,8 @@ data &out;
       set &add_old;;
 
    %do i=1 %to %sysfunc(countw(&expanded_dsnames));
-      %let dataset = %scan(&expanded_dsnames, &i);
-
-      set &library..&dataset (rename=(
-      %do j=1 %to %sysfunc(countw(&&expanded_varlist_&dataset));
+      set &library..%scan(&expanded_dsnames, &i) (rename=(
+      %do j=1 %to %sysfunc(countw(&&expanded_varlist_&i));
          /*
             All the variables are here renamed so that in the output dataset (&out),
             the have their own number (&num), which starts at 1 and goes up as more
@@ -442,17 +440,16 @@ data &out;
             of which dataset the variable originates from. The resulting variable name
             is &prefix._&num.
          */
-         %let num = %eval(&total_num + %eval(&j + ((&i -1) * %sysfunc(countw(&&expanded_varlist_&dataset)))));
-         %scan(&&expanded_varlist_&dataset, &j) =
+         %let num = %eval(&total_num + %eval(&j + ((&i -1) * %sysfunc(countw(&&expanded_varlist_&i)))));
+         %scan(&&expanded_varlist_&i, &j) =
                &prefix._&num.
       %end; ));
    %end;
 
-      %do i=1 %to %sysfunc(countw(&expanded_dsnames));
-      %let dataset = %scan(&expanded_dsnames, &i);
-      %do j=1 %to %sysfunc(countw(&&expanded_varlist_&dataset));
-         %let num = %eval(&total_num + %eval(&j + ((&i -1) * %sysfunc(countw(&&expanded_varlist_&dataset)))));
-         label &prefix._&num = %scan(&&expanded_varlist_&dataset, &j);
+   %do i=1 %to %sysfunc(countw(&expanded_dsnames));
+      %do j=1 %to %sysfunc(countw(&&expanded_varlist_&i));
+         %let num = %eval(&total_num + %eval(&j + ((&i -1) * %sysfunc(countw(&&expanded_varlist_&i)))));
+         label &prefix._&num = %scan(&&expanded_varlist_&i, &j);
          /* 
             The logic of this loop is identical to the renaming loop above. This loop
             sets the label of each variable to the original variable name (otherwise the
