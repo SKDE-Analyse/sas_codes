@@ -40,6 +40,7 @@
 - [makroer/panelfig.sas](panelfig)
 - [makroer/sykehusopphold.sas](sykehusopphold)
 - [makroer/slette_datasett_aar.sas](slette_datasett_aar)
+- [makroer/resolve_dataspecifiers.sas](resolve_dataspecifiers)
 - [makroer/test_makroer.sas](test_makroer)
 - Filen forholdstall.sas er ikke dokumentert.
 - [makroer/CoMorbIndex.sas](CoMorbIndex)

@@ -1,10 +1,8 @@
 
 # Dokumentasjon for filen *rateprogram/graf.sas*
 
+
 # One %graf() to rule them all!
-
-## Makro `graf`
-
 
 ## Argumenter til %graf()
 - **bars** = `<dataspecifier>`. En eller flere variabler det skal lages et søylediagram av.
@@ -293,4 +291,11 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
 ![img](/sas_codes/bilder/graf_example13.png)
 
 
+## Makro `remove_quotes`
+
+
+## Makro `assert`
+
+
+## Makro `assert_member`
 
