@@ -26,7 +26,7 @@
     Etter at variabellisten er konvertert er det lettere å jobbe med den videre.
 */
 %global &macrovar;
-data DELETEME_FILTER(keep=&varlist); retain &varlist; set &library..&ds; run;
+data DELETEME_FILTER(keep=&varlist); retain &varlist; set &library..&ds (obs=1); run;
 
 proc sql noprint;
    select name
@@ -41,10 +41,10 @@ quit;
 
 %let regex = ^((\w+)\.)?([\w: -]*[\w:])\/([\w: -]*[\w:])(\/([\w\d\$. ]+))?$;
 
-%let library     = %sysfunc(prxchange(s/&regex/$2/, 1, &specifier));
-%let datasets    = %sysfunc(prxchange(s/&regex/$3/, 1, &specifier));
-%let varlist     = %sysfunc(prxchange(s/&regex/$4/, 1, &specifier));
-%let formatlist  = %sysfunc(prxchange(s/&regex/$6/, 1, &specifier));
+%let library    = %sysfunc(prxchange(s/&regex/$2/, 1, &specifier));
+%let datasets   = %sysfunc(prxchange(s/&regex/$3/, 1, &specifier));
+%let varlist    = %sysfunc(prxchange(s/&regex/$4/, 1, &specifier));
+%let formatlist = %sysfunc(prxchange(s/&regex/$6/, 1, &specifier));
 
 %if not %length(&library) %then %do;
    %let library = work;
