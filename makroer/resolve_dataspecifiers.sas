@@ -15,27 +15,7 @@
    More detailed information on how dataspecifiers work, with many examples, can be found in the dokumentation for [`%graf()`](./graf).
 */
 
-%macro expand_varlist(library, ds, varlist, macrovar);
-/*  Denne makroen tar en SAS variabelliste av ukjent form (f. eks. rate: eller rate2020-rate2023),
-    og konverteren den til en liste av variabler atskilt med mellomrom. Resultatet lagres i en
-    makrovariabel med det navnet som er spesifisert i &macrovar. Eksempel:
-
-       rate2020-rate2023 -> rate2020 rate2021 rate2022 rate2023
-       abc23 abc1 abc4   -> abc23 abc1 abc4 (rekkefølgen beholdes, selv om den ikke er kronologisk)
-
-    Etter at variabellisten er konvertert er det lettere å jobbe med den videre.
-*/
-%global &macrovar;
-data DELETEME_FILTER(keep=&varlist); retain &varlist; set &library..&ds (obs=1); run;
-
-proc sql noprint;
-   select name
-          into :&macrovar separated by ' '
-          from dictionary.columns
-          where libname="WORK" and memname='DELETEME_FILTER';
-quit;
-%mend expand_varlist;
-
+%include "&filbane/makroer/expand_varlist.sas";
 
 %macro parse_dataspecifier(specifier, prefix=, out=, keep=, add_old=);
 
@@ -125,7 +105,7 @@ run;
 %do specifier=1 %to &num_specifiers;
    %parse_dataspecifier(%scan(&specifiers_without_labels, &specifier, +), prefix=&prefix, keep=&keep,
       out=deleteme_result_&specifier,
-	  add_old=%if &specifier > 1 %then deleteme_result_%eval(&specifier - 1);
+      add_old=%if &specifier > 1 %then deleteme_result_%eval(&specifier - 1);
    )
 %end;
 

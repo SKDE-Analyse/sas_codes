@@ -30,6 +30,8 @@
 */
 
 %include "&filbane/makroer/resolve_dataspecifiers.sas";
+%include "&filbane/makroer/assert.sas";
+%include "&filbane/makroer/assert_member.sas";
 
 /*!
 
@@ -338,34 +340,11 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
 %mend remove_quotes;
 
 
-%macro assert(assertion, message=Assertion is false);
-data _null_;
-   if not (&assertion) then do;
-      putlog "ERROR: &message.. Aborting program excecution!";
-      abort cancel;
-   end;
-run;
-%mend assert;
-
-
-
-%macro assert_member(value, list, varname);
-%assert(&value in (&list),
-   message=%sysfunc(dequote(&value)) is not a valid argument value for &varname. in the graf macro. These are the options: %sysfunc(prxchange(s/%str(%")//, -1, &list))
-)
-%mend assert_member;
-
 /* Hvis det er noe feil med variablene er det bedre å stoppe hele programmet enn å bare kjøre på, som SAS liker å gjøre. */
-%let sort = %lowcase(&sort);
-%assert_member("&sort", "yes" "no" "reverse", sort)
-%let direction = %lowcase(&direction);
-%assert_member("&direction", "horizontal" "vertical", direction)
-%let bar_grouping = %lowcase(&bar_grouping);
-%assert_member("&bar_grouping", "stack" "cluster", bar_grouping)
-%let logo = %lowcase(&logo);
-%assert_member("&logo", "none" "skde" "hn", logo)
-
-
+%let sort = %lowcase(&sort);                 %assert_member(sort, yes no reverse)
+%let direction = %lowcase(&direction);       %assert_member(direction, horizontal vertical)
+%let bar_grouping = %lowcase(&bar_grouping); %assert_member(bar_grouping, stack cluster)
+%let logo = %lowcase(&logo);                 %assert_member(logo, none skde hn)
 
 
 
