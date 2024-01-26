@@ -293,9 +293,3 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
 
 ## Makro `remove_quotes`
 
-
-## Makro `assert`
-
-
-## Makro `assert_member`
-
