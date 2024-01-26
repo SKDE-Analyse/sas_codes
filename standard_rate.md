@@ -4,12 +4,9 @@
 
 Dette er en makro for å beregne standardiserte rater.
 
-Dette er en test: $`\sqrt{3x-1}+(1+x)^2`$
-Dette er også en test:
+Justeringen gjøres basert på følgende formel (Adaptert fra forklaringen i [Eldrehelseatlaset fra 2017](https://www.skde.no/helseatlas/files/eldrehelseatlas_rapport.pdf#page=25)):
 
-```math
-\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
-```
+![img](/sas_codes/bilder/standard_rate_formel.png)
 
 
 ## Makro `parse_simple_dataspecifier`
