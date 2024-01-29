@@ -43,6 +43,8 @@ Man kan bruke alle disse 4 graf-typene samtidig, slik at man kan lage et 3-delt 
 kolonner, samt et linjediagram på toppen av alt det, for eksempel. Man kan også spesifisere hvilket format disse variablene
 skal ha, og en label for variablene slik at de får en beskrivelse i output-grafen.
 
+Input-datasettene til %graf() vil ofte være ut-datasettet fra [`%standard_rate()`](./standard_rate).
+
 ## Definisjon av `<dataspecifier>`
 
 Bars, lines, table og variation tar alle en `<dataspecifier>` som input, som defineres slik:
@@ -213,7 +215,7 @@ En graf med årsvariasjon lager man enkelt med å legge til en `<dataspecifier>`
 
 ![img](/sas_codes/bilder/graf_example9.png)
 
-Når variabel-navnene har format `rate<yyyy>` slik som i dette eksempelet forstår %graf at vi vil bruke årstallet i varabelnavnet
+Når variabel-navnene slutter med `rate<yyyy>` slik som i dette eksempelet forstår %graf at vi vil bruke årstallet i variabelnavnet
 som en label. Man kan overstyre dette med å sende inn sin egen label med `#<label>`.
 
 ### bar_grouping=cluster (of forskjellen med det og bar_grouping=stack)
