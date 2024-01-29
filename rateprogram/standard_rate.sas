@@ -38,6 +38,8 @@ og så justeres verdiene slik at summen av hver av variablene for hvert boområd
 
 For at makroen skal fungere må input-datasettet ha variablene `aar`, `alder`, `ermann`, og en av disse: (`bohf`, `borhf`, `boshhn`).
 
+Utdatasettet er strukturert slik at det er kompatibelt med [`%graf()`](./graf), slik at det er enkelt å representere resultatet visuelt.
+
 # Eksempel
 
 La oss si at vi har et datasett (med navnet `datasett`) som inneholder en rad for hver konsultasjon i spesialisthelsetjenesten, og at dette datasettet
