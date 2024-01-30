@@ -22,7 +22,8 @@
    circle_colors = black grey black charcoal black,
    circle_sizes = 4pt 6pt 8pt 9pt 10pt,
    line_patterns = solid shortdash mediumdash longdash mediumdashshortdash,
-   line_colors = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F
+   line_colors = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F,
+   debug = no
 ) / minoperator;
 
 /*
@@ -347,7 +348,7 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
 %let direction = %lowcase(&direction);       %assert_member(direction, horizontal vertical)
 %let bar_grouping = %lowcase(&bar_grouping); %assert_member(bar_grouping, stack cluster)
 %let logo = %lowcase(&logo);                 %assert_member(logo, none skde hn)
-
+%let debug = %lowcase(&debug);               %assert_member(debug, yes no)
 
 
 %let category_regex = (\w+)(\/([\w.\$]+))?;
@@ -394,11 +395,11 @@ proc datasets nolist; delete deleteme_output; run;
    %end;
 %end;
 
-data deleteme_output;
+data deleteme_output (drop=j);
    length group $8;
-   drop i;
    set deleteme_output;
 
+   array other_vars [*] variation_: table_: lines_: max_: min_: ;
    array all_barsvars [*] bars_: ;
    do i=1 to dim(all_barsvars);
 	   group = strip(put(i, 8.));
@@ -407,7 +408,11 @@ data deleteme_output;
       if &category in (&special_categories) then do;
          group = "n" || group;
       end;
-	  output;
+
+      if i > 1 then do j=1 to dim(other_vars);
+         other_vars[j] = .; /* Setting these values to null to avoid bugs (otherwise the table_: variables would be summed up for each group) */
+      end;
+	   output;
    end;
    if dim(all_barsvars) = 0 then
       output;
@@ -427,7 +432,7 @@ data graf_data_attributes;
    %end;
 run;
 
-data deleteme_output;
+data deleteme_output (drop=i);
    set deleteme_output;
    format &category &category_format;
    input_order = _N_;
@@ -435,7 +440,7 @@ data deleteme_output;
    total_sum = 0;
    array allbars [*] %if "&bars" ^= "" %then bars:;
                %else %if "&lines" ^= "" %then lines:;
-			   %else %if "&variation" ^= "" %then variation:;;
+               %else %if "&variation" ^= "" %then variation:;;
    do i=1 to dim(allbars);
       total_sum = total_sum + allbars[i];
    end;
@@ -574,6 +579,8 @@ run;
 %end;
 ods graphics off;
 
-proc datasets nolist; delete deleteme_: graf_annotation graf_data_attributes; run;
+%if &debug=no %then %do;
+   proc datasets nolist; delete deleteme_: graf_annotation graf_data_attributes; run;
+%end;
 
 %mend graf;

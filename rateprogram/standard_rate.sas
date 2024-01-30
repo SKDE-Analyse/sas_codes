@@ -9,7 +9,8 @@
    min_year=auto,
    max_year=auto,
    standardize_by=ka,
-   population_data=innbygg.INNB_SKDE_BYDEL
+   population_data=innbygg.INNB_SKDE_BYDEL,
+   debug = no
 );
 
 /*!
@@ -88,6 +89,7 @@ options minoperator;
 
 %let region = %lowcase(&region);                 %assert_member(region, bohf borhf boshhn)
 %let standardize_by = %lowcase(&standardize_by); %assert_member(standardize_by, a ak k ka)
+%let debug = %lowcase(&debug);                   %assert_member(debug, yes no)
 %assert("&out" ^= "", message=No output dataset specified for %nrstr(%%)standard_rate())
 
 %macro parse_simple_dataspecifier(specifier, ds_var=, varlist_var=);
@@ -319,5 +321,9 @@ data &out;
 
    %end;
 run;
+
+%if &debug=no %then %do;
+   proc datasets nolist; delete deleteme_: ; run;
+%end;
 
 %mend standard_rate;
