@@ -412,7 +412,7 @@ data deleteme_output (drop=j);
       if i > 1 then do j=1 to dim(other_vars);
          other_vars[j] = .; /* Setting these values to null to avoid bugs (otherwise the table_: variables would be summed up for each group) */
       end;
-	   output;
+      output;
    end;
    if dim(all_barsvars) = 0 then
       output;
@@ -561,7 +561,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
    %end;
 
    %if &panelby= %then %do;
-      &main_axis.axis label="%remove_quotes(%quote(&category_label))" %if &direction=horizontal %then labelpos=top;
+      &main_axis.axis %if "&bars" ^= "" %then display=(noticks noline); label="%remove_quotes(%quote(&category_label))" %if &direction=horizontal %then labelpos=top;
          labelattrs=(size=8 weight=bold) valueattrs=(size=8)
          type=discrete discreteorder=data;
       &second_axis.axis label="%remove_quotes(%quote(&description))"
@@ -569,7 +569,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
    %end;
    %else %do;
       &main_panel_axis.axis type=discrete discreteorder=data label="%remove_quotes(%quote(&category_label))";
-	  &second_panel_axis.axis label="%remove_quotes(%quote(&description))";
+      &second_panel_axis.axis label="%remove_quotes(%quote(&description))";
    %end;
 run;
 
