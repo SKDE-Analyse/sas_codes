@@ -18,9 +18,9 @@
    width=700,
    bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFED4F CX00FFFF CXFFFF00,
    special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CX0F0F0F CXEEEEEE,
-   circle_symbols = circlefilled circlefilled circle circle circle,
-   circle_colors = black grey black charcoal black,
-   circle_sizes = 4pt 6pt 8pt 9pt 10pt,
+   variation_symbols = circlefilled circlefilled circle circle circle,
+   variation_colors = black grey black charcoal black,
+   variation_sizes = 4pt 6pt 8pt 9pt 10pt,
    line_patterns = solid shortdash mediumdash longdash mediumdashshortdash,
    line_colors = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F,
    debug = no
@@ -58,9 +58,9 @@
 - **width** = `<number>`. Bredde på grafen, i pixels. Default: 700.
 - **bar_colors** = `<list>`. Liste med farger for søylene. Default: `CX00509E CX95BDE6` ...
 - **special_bar_colors** = `<list>`. Liste med farger for søyler som er i `special_categories`. Default: `CX333333 CXBDBDBD` ...
-- **circle_symbols** = `<list>`. Liste med symboler brukt for variation=. Default: `circlefilled circlefilled` ...
-- **circle_colors** = `<list>`. Liste med farger brukt for variation=. Default: `black grey` ...
-- **circle_sizes** = `<list>`. Liste med størrelser brukt for variation=. Default: `4pt 6pt 8pt 9pt 10pt`.
+- **variation_symbols** = `<list>`. Liste med symboler brukt for variation=. Default: `circlefilled circlefilled` ...
+- **variation_colors** = `<list>`. Liste med farger brukt for variation=. Default: `black grey` ...
+- **variation_sizes** = `<list>`. Liste med størrelser brukt for variation=. Default: `4pt 6pt 8pt 9pt 10pt`.
 - **line_patterns** = `<list>`. Liste med linjetyper brukt for lines=. Default: `solid shortdash` ...
 - **line_colors** = `<list>`. Liste med farger brukt for lines=. Default: `CX30F07E CX55BDA6` ...
 
@@ -378,8 +378,8 @@ run;
 proc datasets nolist; delete deleteme_output; run;
 
 %let graf_types = bars variation table lines;
-%do index=1 %to %sysfunc(countw(&graf_types));
-   %let type = %scan(&graf_types, &index);
+%do graf_index=1 %to %sysfunc(countw(&graf_types));
+   %let type = %scan(&graf_types, &graf_index);
    %if "&&&type" ^= "" %then %do;
       %resolve_dataspecifiers(&&&type, prefix=&type, out=deleteme_output, keep=&category &panelby
          %if %sysfunc(exist(deleteme_output)) %then ,join_with=deleteme_output;)
@@ -388,15 +388,20 @@ proc datasets nolist; delete deleteme_output; run;
          set deleteme_output;
 
          array all_&type.vars [*] &type._: ;
-        if _n_ = 1 then do;
+         if _n_ = 1 then do;
             call symput("total_&type.vars", dim(all_&type.vars));
-	     end;
+            %if &type=bars %then
+               call symput("bars_format", vformat(bars_1));;
+         end;
       run;
    %end;
 %end;
 
+
 data deleteme_output (drop=j);
    length group $8;
+   %if "&bars" ^= "" %then
+      format bar &bars_format;;
    set deleteme_output;
 
    array other_vars [*] variation_: table_: lines_: max_: min_: ;
@@ -422,12 +427,12 @@ data graf_data_attributes;
    length ID $10 value $6 linecolor $ 9 fillcolor $ 9;
 
    %if "&bars" ^= "" %then %do;
-      %do i=1 %to %sysfunc(countw(&bar_colors));
-         %let color_index= &i + 0;
+      %do graf_i=1 %to %sysfunc(countw(&bar_colors));
+         %let color_index= &graf_i + 0;
          %if &total_barsvars=1 %then
-            %let color_index= &i + 1; /* Color number 2 looks better when there's only one bar */
-         ID = "BarAttr"; value =  "&i"; fillcolor = "%scan(&bar_colors, &color_index)"; linecolor = "%scan(&bar_colors, 1)"; output;
-         ID = "BarAttr"; value = "n&i"; fillcolor = "%scan(&special_bar_colors, &color_index)"; output;
+            %let color_index= &graf_i + 1; /* Color number 2 looks better when there's only one bar */
+         ID = "BarAttr"; value =  "&graf_i"; fillcolor = "%scan(&bar_colors, &color_index)"; linecolor = "%scan(&bar_colors, 1)"; output;
+         ID = "BarAttr"; value = "n&graf_i"; fillcolor = "%scan(&special_bar_colors, &color_index)"; output;
       %end;
    %end;
 run;
@@ -447,20 +452,20 @@ data deleteme_output (drop=i);
 
    if _n_ = 1 then do;
       %if "&variation" ^= "" %then %do;
-         %do i=1 %to &total_variationvars;
-            if prxmatch("/.*rate\d{4}$/i", vlabel(variation_&i)) then
-               call symput("variation_&i._label", prxchange("s/.*rate(\d{4})$/$1/i", 1, vlabel(variation_&i)));
-            else call symput("variation_&i._label", vlabel(variation_&i));
+         %do graf_i=1 %to &total_variationvars;
+            if prxmatch("/.*rate\d{4}$/i", vlabel(variation_&graf_i)) then
+               call symput("variation_&graf_i._label", prxchange("s/.*rate(\d{4})$/$1/i", 1, vlabel(variation_&graf_i)));
+            else call symput("variation_&graf_i._label", vlabel(variation_&graf_i));
          %end;
       %end;
       %if "&bars" ^= "" %then %do;
-         %do i=1 %to &total_barsvars;
-            call symput("bars_&i._label", vlabel(bars_&i));
+         %do graf_i=1 %to &total_barsvars;
+            call symput("bars_&graf_i._label", vlabel(bars_&graf_i));
          %end;
       %end;
       %if "&lines" ^= "" %then %do;
-         %do i=1 %to &total_linesvars;
-            call symput("lines_&i._label", vlabel(lines_&i));
+         %do graf_i=1 %to &total_linesvars;
+            call symput("lines_&graf_i._label", vlabel(lines_&graf_i));
          %end;
       %end;
    end;
@@ -510,27 +515,27 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
          / group=group groupdisplay=&bar_grouping attrid=BarAttr barwidth=0.75;
 
       %if &total_barsvars > 1 %then %do;
-         %do i=1 %to &total_barsvars;
-            legenditem type=fill name="legend&i" / label="&&bars_&i._label"
-               fillattrs   =(color=%scan(&bar_colors, &i))
+         %do graf_i=1 %to &total_barsvars;
+            legenditem type=fill name="legend&graf_i" / label="&&bars_&graf_i._label"
+               fillattrs   =(color=%scan(&bar_colors, &graf_i))
                outlineattrs=(color=%scan(&bar_colors, 1));
          %end;
-         keylegend %do i=1 %to &total_barsvars; "legend&i" %end;
+         keylegend %do graf_i=1 %to &total_barsvars; "legend&graf_i" %end;
             / across=4 %if &panelby= %then location=outside; position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
       %end;
    %end;
 
    %if "&lines" ^= "" %then %do;
-      %do i=1 %to &total_linesvars;
-         %let lineattrs=(pattern=%scan(&line_patterns, &i)
-                         color=  %scan(&line_colors,   &i)
+      %do graf_i=1 %to &total_linesvars;
+         %let lineattrs=(pattern=%scan(&line_patterns, &graf_i)
+                         color=  %scan(&line_colors,   &graf_i)
                          thickness=3);
-         series &main_axis=&category &second_axis=lines_&i / lineattrs=&lineattrs;
+         series &main_axis=&category &second_axis=lines_&graf_i / lineattrs=&lineattrs;
 
 
-         legenditem type=line name="linelegend&i" / label="&&lines_&i._label" lineattrs=&lineattrs;
+         legenditem type=line name="linelegend&graf_i" / label="&&lines_&graf_i._label" lineattrs=&lineattrs;
      %end;
-      keylegend %do i=1 %to &total_linesvars; "linelegend&i" %end;
+      keylegend %do graf_i=1 %to &total_linesvars; "linelegend&graf_i" %end;
          / across=4 %if &panelby= %then location=outside; position=bottom linelength=35 down=1 noborder titleattrs=(size=7 weight=bold);
    %end;
 
@@ -538,24 +543,24 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
       Highlow &main_axis=&category low=min_variation high=max_variation
          / type=line lineattrs=(color=black thickness=1 pattern=1);
 
-      %do i=1 %to &total_variationvars;
-        %let markerattrs=(symbol=%scan(&circle_symbols, &i)
-                           color= %scan(&circle_colors,  &i)
-                           size=  %scan(&circle_sizes,   &i));
-         legenditem type=marker name="varlegend&i" / label="&&variation_&i._label" markerattrs=&markerattrs;
+      %do graf_i=1 %to &total_variationvars;
+        %let markerattrs=(symbol=%scan(&variation_symbols, &graf_i)
+                          color= %scan(&variation_colors,  &graf_i)
+                          size=  %scan(&variation_sizes,   &graf_i));
+         legenditem type=marker name="varlegend&graf_i" / label="&&variation_&graf_i._label" markerattrs=&markerattrs;
 
-         scatter &main_axis=&category &second_axis=variation_&i / markerattrs=&markerattrs;
+         scatter &main_axis=&category &second_axis=variation_&graf_i / markerattrs=&markerattrs;
      %end;
 
       %let position=%scan(bottomright topright topleft, 1 + (&direction=vertical) + (&sort=reverse));
 
-      keylegend %do i=1 %to &total_variationvars; "varlegend&i" %end;
+      keylegend %do graf_i=1 %to &total_variationvars; "varlegend&graf_i" %end;
               / across=1 %if &panelby= %then position=&position; %if &panelby= %then location=inside; noborder valueattrs=(size=8pt);
    %end;
 
    %if "&table" ^= "" %then %do;
-      %if &panelby= %then &main_axis.axistable; %else &main_panel_axis.axistable; %do i=1 %to &total_tablevars;
-            table_%eval(%if &direction=vertical %then &total_tablevars+1 -;  &i)
+      %if &panelby= %then &main_axis.axistable; %else &main_panel_axis.axistable; %do graf_i=1 %to &total_tablevars;
+            table_%eval(%if &direction=vertical %then &total_tablevars+1 -;  &graf_i)
          %end; / label %if &panelby= %then location=inside; valueattrs=(size=8 family=arial) labelattrs=(size=8)
             %if &direction=vertical %then %do; labelpos=left position=top %end;;
    %end;

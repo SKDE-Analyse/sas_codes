@@ -13,9 +13,13 @@
    debug = no
 );
 
+/*
+      Dokumentasjonen til %standard_rate() kan leses her: https://skde-analyse.github.io/sas_codes/standard_rate
+*/
+
 /*!
 
-# %standard_rate; makro for kjønns- og/eller aldersstandardisering.
+# Makro for kjønns- og/eller aldersstandardisering.
 
 ## Argumenter til %standard_rate()
 - _første argument_ = `<simple dataspecifier>`. En simplifisert dataspecifier med formen `<dataset>/<variables>`. `<variables>` er her en SAS Variable List, og %standard_rate vil kalkulere en standardisert rate for alle variablene.
@@ -86,6 +90,7 @@ options minoperator;
 %include "&filbane/makroer/assert_member.sas";
 %include "&filbane/makroer/expand_varlist.sas";
 %include "&filbane/makroer/boomraader.sas";
+%include "&filbane/rateprogram/graf.sas";
 
 %let region = %lowcase(&region);                 %assert_member(region, bohf borhf boshhn)
 %let standardize_by = %lowcase(&standardize_by); %assert_member(standardize_by, a ak k ka)
@@ -144,8 +149,8 @@ data _null_; call symput("&ds_var", "&library..&dataset"); run;
 %put &=min_year &=max_year &=std_year &=min_age &=max_age;
 
 proc format;
-  value age_group_fmt %do i=0 %to 105/&age_group_size;
-     %eval(&i+1) = "%eval(&i*&age_group_size)-%eval(&i*&age_group_size + &age_group_size - 1) år"
+  value age_group_fmt %do std_i=0 %to 105/&age_group_size;
+     %eval(&std_i+1) = "%eval(&std_i*&age_group_size)-%eval(&std_i*&age_group_size + &age_group_size - 1) år"
   %end;;
 run;
 
@@ -154,7 +159,7 @@ run;
 
 data deleteme_rateutvalg;
    set &std_dataset;
-   where (%scan(&std_varlist, 1) %do i=2 %to %sysfunc(countw(&std_varlist)); or %scan(&std_varlist, &i) %end;) and
+   where (%scan(&std_varlist, 1) %do std_i=2 %to %sysfunc(countw(&std_varlist)); or %scan(&std_varlist, &std_i) %end;) and
          aar in (&min_year:&max_year) and
          alder in (&min_age:&max_age) and             
          &region in (1:%if &region=bohf   %then 31;
@@ -173,14 +178,14 @@ run;
    all the years (aar=9999), and also for the whole country (&region=8888) */
 proc sql;
 create table deleteme_summed_vars_ as
-	select aar, &region, &sql_grouping %do i=1 %to %sysfunc(countw(&std_varlist));
-      , sum(%scan(&std_varlist, &i)) as %scan(&std_varlist, &i)
+	select aar, &region, &sql_grouping %do std_i=1 %to %sysfunc(countw(&std_varlist));
+      , sum(%scan(&std_varlist, &std_i)) as %scan(&std_varlist, &std_i)
    %end;
 	from deleteme_rateutvalg
 	group by aar, &region, &sql_grouping
    union all
-   select 9999 as aar, &region, &sql_grouping %do i=1 %to %sysfunc(countw(&std_varlist));
-      , sum(%scan(&std_varlist, &i)) / (&max_year-&min_year+1) as %scan(&std_varlist, &i)
+   select 9999 as aar, &region, &sql_grouping %do std_i=1 %to %sysfunc(countw(&std_varlist));
+      , sum(%scan(&std_varlist, &std_i)) / (&max_year-&min_year+1) as %scan(&std_varlist, &std_i)
    %end;
    from deleteme_rateutvalg
    group by &region, &sql_grouping;
@@ -188,8 +193,8 @@ create table deleteme_summed_vars_ as
 create table deleteme_summed_vars as
    select * from deleteme_summed_vars_
    union all
-   select aar, 8888 as &region, &sql_grouping %do i=1 %to %sysfunc(countw(&std_varlist));
-      , sum(%scan(&std_varlist, &i)) as %scan(&std_varlist, &i)
+   select aar, 8888 as &region, &sql_grouping %do std_i=1 %to %sysfunc(countw(&std_varlist));
+      , sum(%scan(&std_varlist, &std_i)) as %scan(&std_varlist, &std_i)
    %end;
    from deleteme_summed_vars_
 	group by aar, &sql_grouping;
@@ -248,8 +253,8 @@ quit;
 proc sql;
 create table deleteme_ratedata as
    select a.aar, a.&region, sum(a.population) as innbyggere
-   %do i=1 %to %sysfunc(countw(&std_varlist));
-      %let var = %scan(&std_varlist, &i);
+   %do std_i=1 %to %sysfunc(countw(&std_varlist));
+      %let var = %scan(&std_varlist, &std_i);
       , sum(&var) as &var._antall
       , sum(&var) / sum(a.population) * &ratemult as &var._crude
       , sum(&var / a.population * c.andel_av_innbyggere) * &ratemult as &var._rate format=16.2
@@ -274,8 +279,8 @@ data &out;
       in an elegant way.
    */
    %let snitt_vars = ;
-   %do i=1 %to %sysfunc(countw(&std_varlist));
-      %let var = %scan(&std_varlist, &i);
+   %do std_i=1 %to %sysfunc(countw(&std_varlist));
+      %let var = %scan(&std_varlist, &std_i);
       %let snitt_vars = &snitt_vars
              &var._ratesnitt &var._rate&min_year-&var._rate&max_year
              &var._antsnitt &var._ant&min_year-&var._ant&max_year
@@ -295,8 +300,8 @@ data &out;
    else do;
       popsnitt = innbyggere;
 
-      %do i=1 %to %sysfunc(countw(&std_varlist));
-         %let var = %scan(&std_varlist, &i);
+      %do std_i=1 %to %sysfunc(countw(&std_varlist));
+         %let var = %scan(&std_varlist, &std_i);
          &var._antsnitt = &var._antall;
          &var._ratesnitt = &var._rate;
          &var._crudesnitt = &var._crude;
@@ -307,8 +312,8 @@ data &out;
                  Program Data Vector when aar=9999. That's why we use the output statment at this point. */
    end;
 
-   %do i=1 %to %sysfunc(countw(&std_varlist));
-      %let var = %scan(&std_varlist, &i);
+   %do std_i=1 %to %sysfunc(countw(&std_varlist));
+      %let var = %scan(&std_varlist, &std_i);
       array antall_&var{&min_year:&max_year} &var._ant&min_year-&var._ant&max_year;
       array rate_&var{&min_year:&max_year} &var._rate&min_year-&var._rate&max_year;
       array crude_&var{&min_year:&max_year} &var._crude&min_year-&var._crude&max_year;
@@ -321,6 +326,22 @@ data &out;
 
    %end;
 run;
+
+
+%do std_i=1 %to %sysfunc(countw(&std_varlist));
+   %let var = %scan(&std_varlist, &std_i);
+   title "%nrstr(%%)standard_rate(): Justering av variabelen &var i &std_dataset:";
+   %graf(bars=&out/&var._ratesnitt,
+         variation=&out/&var._ratesnitt &var._crudesnitt,
+         table=&out/&var._ratesnitt &var._crudesnitt,
+         category=&region/&region._fmt.,
+         variation_sizes = 6pt 8pt,
+         variation_colors = green red,
+         variation_symbols = circlefilled diamondfilled,
+         description="Justeringen av variabelen &var, hvor standardize_by=&standardize_by.. Den røde diamanten er hvor &var ville vært hvis man ikke &standardize_by-justerte (crude rate)."
+   )
+%end;
+title;
 
 %if &debug=no %then %do;
    proc datasets nolist; delete deleteme_: ; run;
