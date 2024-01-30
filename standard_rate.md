@@ -2,7 +2,7 @@
 # Dokumentasjon for filen *rateprogram/standard_rate.sas*
 
 
-# %standard_rate; makro for kjønns- og/eller aldersstandardisering.
+# Makro for kjønns- og/eller aldersstandardisering.
 
 ## Argumenter til %standard_rate()
 - _første argument_ = `<simple dataspecifier>`. En simplifisert dataspecifier med formen `<dataset>/<variables>`. `<variables>` er her en SAS Variable List, og %standard_rate vil kalkulere en standardisert rate for alle variablene.
