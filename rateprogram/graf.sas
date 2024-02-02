@@ -342,6 +342,14 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
    %sysfunc(prxchange(s/^[%str(%'%")](.*)[%str(%'%")]$/$1/, -1, %quote(&string)))
 %mend remove_quotes;
 
+%macro remove_all_quotes(string);
+   /* Removes all double and single quotation marks in string */
+   %sysfunc(prxchange(s/[%str(%'%")]//, -1, %quote(&string)))
+%mend remove_all_quotes; /* ' */
+
+%macro not_missing(variable);
+   "%remove_all_quotes(%quote(&variable))" ^= "" 
+%mend not_missing;
 
 /* Hvis det er noe feil med variablene er det bedre å stoppe hele programmet enn å bare kjøre på, som SAS liker å gjøre. */
 %let sort = %lowcase(&sort);                 %assert_member(sort, yes no reverse)
@@ -384,7 +392,7 @@ proc datasets nolist; delete deleteme_output; run;
 %let graf_types = bars variation table lines;
 %do graf_index=1 %to %sysfunc(countw(&graf_types));
    %let type = %scan(&graf_types, &graf_index);
-   %if "&&&type" ^= "" %then %do;
+   %if %not_missing(&&&type) %then %do;
       %resolve_dataspecifiers(&&&type, prefix=&type, out=deleteme_output, keep=&category &panelby
          %if %sysfunc(exist(deleteme_output)) %then ,join_with=deleteme_output;)
 
@@ -404,7 +412,7 @@ proc datasets nolist; delete deleteme_output; run;
 
 data deleteme_output (drop=j);
    length group $8;
-   %if "&bars" ^= "" %then
+   %if %not_missing(&bars) %then
       format bar &bars_format;;
    set deleteme_output;
 
@@ -431,7 +439,7 @@ run;
 data graf_data_attributes;
    length ID $10 value $6 linecolor $ 9 fillcolor $ 9;
 
-   %if "&bars" ^= "" %then %do;
+   %if %not_missing(&bars) %then %do;
       %do graf_i=1 %to %sysfunc(countw(&bar_colors));
          %let color_index= &graf_i + 0;
          %if &total_barsvars=1 %then
@@ -448,27 +456,27 @@ data deleteme_output (drop=i);
    input_order = _N_;
 
    total_sum = 0;
-   array allbars [*] %if "&bars" ^= "" %then bars:;
-               %else %if "&lines" ^= "" %then lines:;
-               %else %if "&variation" ^= "" %then variation:;;
+   array allbars [*] %if %not_missing(&bars) %then bars:;
+               %else %if %not_missing(&lines) %then lines:;
+               %else %if %not_missing(&variation) %then variation:;;
    do i=1 to dim(allbars);
       total_sum = total_sum + allbars[i];
    end;
 
    if _n_ = 1 then do;
-      %if "&variation" ^= "" %then %do;
+      %if %not_missing(&variation) %then %do;
          %do graf_i=1 %to &total_variationvars;
             if prxmatch("/.*rate\d{4}$/i", vlabel(variation_&graf_i)) then
                call symput("variation_&graf_i._label", prxchange("s/.*rate(\d{4})$/$1/i", 1, vlabel(variation_&graf_i)));
             else call symput("variation_&graf_i._label", vlabel(variation_&graf_i));
          %end;
       %end;
-      %if "&bars" ^= "" %then %do;
+      %if %not_missing(&bars) %then %do;
          %do graf_i=1 %to &total_barsvars;
             call symput("bars_&graf_i._label", vlabel(bars_&graf_i));
          %end;
       %end;
-      %if "&lines" ^= "" %then %do;
+      %if %not_missing(&lines) %then %do;
          %do graf_i=1 %to &total_linesvars;
             call symput("lines_&graf_i._label", vlabel(lines_&graf_i));
          %end;
@@ -484,7 +492,7 @@ run;
       */
       by %if &direction=vertical and &sort=yes %then descending;
          %else %if &direction=horizontal and "&bars" = "" and &sort in (no reverse) %then descending;
-		 %else %if &direction=horizontal and "&bars" ^= "" and &sort=yes %then descending;
+		 %else %if &direction=horizontal and %not_missing(&bars) and &sort=yes %then descending;
       %if &sort=no %then input_order; %else total_sum;;
    run;
 %end;
@@ -515,7 +523,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
    %if &panelby^= %then
          panelby &panelby;;
 
-   %if "&bars" ^= "" %then %do;
+   %if %not_missing(&bars) %then %do;
       %substr(&direction, 1, 1)barparm category=&category response=bar
          / group=group groupdisplay=&bar_grouping attrid=BarAttr barwidth=0.75;
 
@@ -530,7 +538,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
       %end;
    %end;
 
-   %if "&lines" ^= "" %then %do;
+   %if %not_missing(&lines) %then %do;
       %do graf_i=1 %to &total_linesvars;
          %let lineattrs=(pattern=%scan(&line_patterns, &graf_i)
                          color=  %scan(&line_colors,   &graf_i)
@@ -544,7 +552,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
          / across=4 %if &panelby= %then location=outside; position=bottom linelength=35 down=1 noborder titleattrs=(size=7 weight=bold);
    %end;
 
-   %if "&variation" ^= "" %then %do;
+   %if %not_missing(&variation) %then %do;
       Highlow &main_axis=&category low=min_variation high=max_variation
          / type=line lineattrs=(color=black thickness=1 pattern=1);
 
@@ -563,7 +571,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
               / across=1 %if &panelby= %then position=&position; %if &panelby= %then location=inside; noborder valueattrs=(size=8pt);
    %end;
 
-   %if "&table" ^= "" %then %do;
+   %if %not_missing(&table) %then %do;
       %if &panelby= %then &main_axis.axistable; %else &main_panel_axis.axistable; %do graf_i=1 %to &total_tablevars;
             table_%eval(%if &direction=vertical %then &total_tablevars+1 -;  &graf_i)
          %end; / label %if &panelby= %then location=inside; valueattrs=(size=8 family=arial) labelattrs=(size=8)
@@ -571,7 +579,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
    %end;
 
    %if &panelby= %then %do;
-      &main_axis.axis %if "&bars" ^= "" %then display=(noticks noline); label="%remove_quotes(%quote(&category_label))" %if &direction=horizontal %then labelpos=top;
+      &main_axis.axis %if %not_missing(&bars) %then display=(noticks noline); label="%remove_quotes(%quote(&category_label))" %if &direction=horizontal %then labelpos=top;
          labelattrs=(size=8 weight=bold) valueattrs=(size=8)
          type=discrete discreteorder=data;
       &second_axis.axis label="%remove_quotes(%quote(&description))"
