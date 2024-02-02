@@ -52,18 +52,18 @@ proc sql noprint;
           from deleteme_ds_names_final;
 quit;
 
-%do i=1 %to %sysfunc(countw(&expanded_dsnames));
-   %expand_varlist(&library, %scan(&expanded_dsnames, &i), &varlist,
-                   expanded_varlist_&i)
+%do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames));
+   %expand_varlist(&library, %scan(&expanded_dsnames, &dataspec_i), &varlist,
+                   expanded_varlist_&dataspec_i)
 %end;
 
 data &out;
    %if &add_old^= %then
       set &add_old;;
 
-   %do i=1 %to %sysfunc(countw(&expanded_dsnames));
-      set &library..%scan(&expanded_dsnames, &i) (rename=(
-      %do j=1 %to %sysfunc(countw(&&expanded_varlist_&i));
+   %do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames));
+      set &library..%scan(&expanded_dsnames, &dataspec_i) (rename=(
+      %do dataspec_j=1 %to %sysfunc(countw(&&expanded_varlist_&dataspec_i));
          /*
             All the variables are here renamed so that in the output dataset (&out),
             the have their own number (&num), which starts at 1 and goes up as more
@@ -71,16 +71,16 @@ data &out;
             of which dataset the variable originates from. The resulting variable name
             is &prefix._&num.
          */
-         %let num = %eval(&total_num + %eval(&j + ((&i -1) * %sysfunc(countw(&&expanded_varlist_&i)))));
-         %scan(&&expanded_varlist_&i, &j) =
+         %let num = %eval(&total_num + %eval(&dataspec_j + ((&dataspec_i -1) * %sysfunc(countw(&&expanded_varlist_&dataspec_i)))));
+         %scan(&&expanded_varlist_&dataspec_i, &dataspec_j) =
                &prefix._&num.
       %end; ));
    %end;
 
-   %do i=1 %to %sysfunc(countw(&expanded_dsnames));
-      %do j=1 %to %sysfunc(countw(&&expanded_varlist_&i));
-         %let num = %eval(&total_num + %eval(&j + ((&i -1) * %sysfunc(countw(&&expanded_varlist_&i)))));
-         label &prefix._&num = %scan(&&expanded_varlist_&i, &j);
+   %do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames));
+      %do dataspec_j=1 %to %sysfunc(countw(&&expanded_varlist_&dataspec_i));
+         %let num = %eval(&total_num + %eval(&dataspec_j + ((&dataspec_i -1) * %sysfunc(countw(&&expanded_varlist_&dataspec_i)))));
+         label &prefix._&num = %scan(&&expanded_varlist_&dataspec_i, &dataspec_j);
          /* 
             The logic of this loop is identical to the renaming loop above. This loop
             sets the label of each variable to the original variable name (otherwise the
@@ -95,6 +95,11 @@ data &out;
 
    keep &keep &prefix._1-&prefix._&num;
 run;
+
+data &out; /* The retain statement below makes sure the variables are placed in ascending order from left to right */
+   retain &keep &prefix._1-&prefix._&total_num; set &out;
+run;
+
 %mend parse_dataspecifier;
 
 %let specifiers_without_labels = %scan(&specifiers, 1, #);
@@ -118,9 +123,9 @@ data &out;
    max_&prefix = max(of &prefix._1-&prefix._&total_num);
    min_&prefix = min(of &prefix._1-&prefix._&total_num);
 
-   %do i=1 %to %sysfunc(countw(&specifiers, #)) - 1;
-      %if %scan(&specifiers, &i+1, #) ^= . %then
-         label &prefix._&i = %scan(&specifiers, &i+1, #);;
+   %do dataspec_i=1 %to %sysfunc(countw(&specifiers, #)) - 1;
+      %if %scan(&specifiers, &dataspec_i+1, #) ^= . %then
+         label &prefix._&dataspec_i = %scan(&specifiers, &dataspec_i+1, #);;
    %end;
 run;
 %mend resolve_dataspecifiers;
