@@ -349,11 +349,15 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
 %let bar_grouping = %lowcase(&bar_grouping); %assert_member(bar_grouping, stack cluster)
 %let logo = %lowcase(&logo);                 %assert_member(logo, none skde hn)
 %let debug = %lowcase(&debug);               %assert_member(debug, yes no)
+%assert("&category" ^= "", message=No category= specified for the graf makro. This is a required argument)
 
 
 %let category_regex = (\w+)(\/([\w.\$]+))?;
 %let category_format = %sysfunc(prxchange(s/&category_regex/$3/, 1, &category));
 %let category = %sysfunc(prxchange(s/&category_regex/$1/, 1, &category));
+
+%if &category_format= and "&category" in ("bohf" "borhf" "boshhn") %then
+   %let category_format = &category._fmt.;;
 
 data graf_annotation;
    length x1space $ 13 y1space $ 13 anchor $ 11 Label $ 25;
@@ -389,9 +393,9 @@ proc datasets nolist; delete deleteme_output; run;
 
          array all_&type.vars [*] &type._: ;
          if _n_ = 1 then do;
-            call symput("total_&type.vars", dim(all_&type.vars));
+            call symputx("total_&type.vars", dim(all_&type.vars));
             %if &type=bars %then
-               call symput("bars_format", vformat(bars_1));;
+               call symputx("bars_format", vformat(bars_1));;
          end;
       run;
    %end;
@@ -403,6 +407,7 @@ data deleteme_output (drop=j);
    %if "&bars" ^= "" %then
       format bar &bars_format;;
    set deleteme_output;
+
 
    array other_vars [*] variation_: table_: lines_: max_: min_: ;
    array all_barsvars [*] bars_: ;
