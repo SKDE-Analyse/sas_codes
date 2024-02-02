@@ -295,3 +295,9 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
 
 ## Makro `remove_quotes`
 
+
+## Makro `remove_all_quotes`
+
+
+## Makro `not_missing`
+
