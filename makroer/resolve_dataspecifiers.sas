@@ -86,8 +86,8 @@ data &out;
             sets the label of each variable to the original variable name (otherwise the
             name would be lost).
          */
-         %if %length(%scan(&formatlist, &num, %str( ))) > 2 %then
-            format &prefix._&num %scan(&formatlist, &num, %str( ));;
+         %if %length(%scan(&formatlist,  %eval(&num - &total_num), %str( ))) > 2 %then
+            format &prefix._&num %scan(&formatlist, %eval(&num - &total_num), %str( ));;
      %end;
    %end;
 
