@@ -346,10 +346,10 @@ run;
   format _all_ ;
   run;
 
-  /*data qwerty3;
+  data qwerty3;
   set qwerty3;
-  format bohf bohf_fmt. ermann ermann.;
-  run;*/
+  format bohf bohf_fmt. ;
+  run;
 %end;
 
 /* Skrive til json */
