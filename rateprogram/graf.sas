@@ -455,13 +455,11 @@ data deleteme_output (drop=i);
    format &category &category_format;
    input_order = _N_;
 
-   total_sum = 0;
    array allbars [*] %if %not_missing(&bars) %then bars:;
                %else %if %not_missing(&lines) %then lines:;
                %else %if %not_missing(&variation) %then variation:;;
-   do i=1 to dim(allbars);
-      total_sum = total_sum + allbars[i];
-   end;
+
+   total_sum = sum(of allbars[*]);
 
    if _n_ = 1 then do;
       %if %not_missing(&variation) %then %do;
