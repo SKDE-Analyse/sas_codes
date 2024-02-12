@@ -16,8 +16,8 @@
    panelby=,
    height=500,
    width=700,
-   bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFED4F CX00FFFF CXFFFF00,
-   special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CX0F0F0F CXEEEEEE,
+   bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFDD4F CXC0FF81 CXFFFF00 CXBCD9C5 CX4DBF81 CXBBBFAC CX593B18,
+   special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CXB5AFAF CXEEEEEE CX8C8385 CXB3B2B4 CX8C8883 CXC0C0C0,
    variation_symbols = circlefilled circlefilled circle circle circle,
    variation_colors = black grey black charcoal black,
    variation_sizes = 4pt 6pt 8pt 9pt 10pt,
@@ -441,7 +441,7 @@ data graf_data_attributes;
 
    %if %not_missing(&bars) %then %do;
       %do graf_i=1 %to %sysfunc(countw(&bar_colors));
-         %let color_index= &graf_i + 0;
+         %let color_index= &graf_i;
          %if &total_barsvars=1 %then
             %let color_index= &graf_i + 1; /* Color number 2 looks better when there's only one bar */
          ID = "BarAttr"; value =  "&graf_i"; fillcolor = "%scan(&bar_colors, &color_index)"; linecolor = "%scan(&bar_colors, 1)"; output;
@@ -489,7 +489,7 @@ run;
          statements... The code below makes sure the data is visualized in the same order no matter what kind of plot it is.
       */
       by %if &direction=vertical and &sort=yes %then descending;
-         %else %if &direction=horizontal and "&bars" = "" and &sort in (no reverse) %then descending;
+         %else %if &direction=horizontal and "%remove_all_quotes(%quote(&bars))" = "" and &sort in (no reverse) %then descending;
 		 %else %if &direction=horizontal and %not_missing(&bars) and &sort=yes %then descending;
       %if &sort=no %then input_order; %else total_sum;;
    run;
