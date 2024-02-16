@@ -1,5 +1,5 @@
 
-%macro resolve_dataspecifiers(specifiers, prefix=, out=, keep=, join_with=);
+%macro resolve_dataspecifiers(specifiers, prefix=, out=, categories=, join_with=);
 /*!
    This helper macro parses +-delimited dataspecifiers of the form
    `(<library>.)<datasets>/<variables>(/<format-1> ... <format-n>) (+ <dataspecifier>) (#<label-1> ... #<label-n>)`.
@@ -17,7 +17,12 @@
 
 %include "&filbane/makroer/expand_varlist.sas";
 
-%macro parse_dataspecifier(specifier, prefix=, out=, keep=, add_old=);
+%macro remove_all_quotes(string);
+   /* Removes all double and single quotation marks in string */
+   %sysfunc(prxchange(s/[%str(%'%")]//, -1, %quote(&string)))
+%mend remove_all_quotes; /* ' */
+
+%macro parse_dataspecifier(specifier, prefix=, out=, add_old=);
 
 %let regex = ^((\w+)\.)?([\w: -]*[\w:])\/([\w: -]*[\w:])(\/([\w\d\$. ]+))?$;
 
@@ -56,76 +61,80 @@ quit;
    %expand_varlist(&library, %scan(&expanded_dsnames, &dataspec_i), &varlist,
                    expanded_varlist_&dataspec_i)
 %end;
+%let dataspec_numvars = %sysfunc(countw(&&expanded_varlist_1));
 
-data &out;
-   %if &add_old^= %then
-      set &add_old;;
-
-   %do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames));
-      set &library..%scan(&expanded_dsnames, &dataspec_i) (rename=(
-      %do dataspec_j=1 %to %sysfunc(countw(&&expanded_varlist_&dataspec_i));
-         /*
-            All the variables are here renamed so that in the output dataset (&out),
-            the have their own number (&num), which starts at 1 and goes up as more
-            variables are added. This number increases chronologically, regardless
-            of which dataset the variable originates from. The resulting variable name
-            is &prefix._&num.
-         */
-         %let num = %eval(&total_num + %eval(&dataspec_j + ((&dataspec_i -1) * %sysfunc(countw(&&expanded_varlist_&dataspec_i)))));
-         %scan(&&expanded_varlist_&dataspec_i, &dataspec_j) =
-               &prefix._&num.
-      %end; ));
+%macro inner_join_on_categories(datasets_joined, out=);
+proc sql noprint;
+create table &out as
+   select *
+   from %scan(&datasets_joined, 1)
+   %do dataspec_ds=2 %to %sysfunc(countw(&datasets_joined));
+      %let current_ds = %scan(&datasets_joined, &dataspec_ds);
+      inner join &current_ds on %do dataspec_catvar=1 %to %sysfunc(countw(&categories));
+         %let current_catvar = %scan(&categories, &dataspec_catvar);
+         %if &dataspec_catvar > 1 %then and;
+            &current_ds..&current_catvar = %scan(&datasets_joined, 1).&current_catvar
+      %end;
    %end;
+   ;
+quit;
+%mend inner_join_on_categories;
 
-   %do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames));
-      %do dataspec_j=1 %to %sysfunc(countw(&&expanded_varlist_&dataspec_i));
-         %let num = %eval(&total_num + %eval(&dataspec_j + ((&dataspec_i -1) * %sysfunc(countw(&&expanded_varlist_&dataspec_i)))));
-         label &prefix._&num = %scan(&&expanded_varlist_&dataspec_i, &dataspec_j);
-         /* 
-            The logic of this loop is identical to the renaming loop above. This loop
-            sets the label of each variable to the original variable name (otherwise the
-            name would be lost).
-         */
+%do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames));
+   /* Every dataset in the dataspecifier is copied below, and the variables from each dataset are given the corrent number that they
+      should have in the output dataset from %resolve_dataspecifiers, as well as the format specified in the dataspecifier. All
+      these datasets will afterwords be joined using SQL INNER JOIN to ensure that the category variable is given the correct value from
+      each dataset, even if these datasets are ordered differently, or have different lengths, etc.
+   */
+   data deleteme_dsvars_&dataspec_i ;
+      set &library..%scan(&expanded_dsnames, &dataspec_i);
+
+      %do dataspec_j=1 %to &dataspec_numvars;
+         %let num = %eval(&total_num + %eval(&dataspec_j + ((&dataspec_i -1) * &dataspec_numvars)));
+         %let current_var = %scan(&&expanded_varlist_&dataspec_i, &dataspec_j);
+
+         rename &current_var = &prefix._&num;
+         label &current_var  = &current_var;
          %if %length(%scan(&formatlist,  %eval(&num - &total_num), %str( ))) > 2 %then
-            format &prefix._&num %scan(&formatlist, %eval(&num - &total_num), %str( ));;
+            format &current_var %scan(&formatlist, %eval(&num - &total_num), %str( ));;
      %end;
-   %end;
+     keep &categories &&expanded_varlist_&dataspec_i;
+   run;
+%end;
 
-   %let total_num = &num;
+%inner_join_on_categories(&add_old %do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames)); deleteme_dsvars_&dataspec_i %end;,
+   out=&out)
 
-   keep &keep &prefix._1-&prefix._&num;
-run;
-
-data &out; /* The retain statement below makes sure the variables are placed in ascending order from left to right */
-   retain &keep &prefix._1-&prefix._&total_num; set &out;
-run;
+%let total_num = &num;
 
 %mend parse_dataspecifier;
 
 %let specifiers_without_labels = %scan(&specifiers, 1, #);
 
 %let num_specifiers = %sysfunc(countw(&specifiers_without_labels, +));
-%let total_num = 0;
+%let total_num = 0; /* This variable keeps track of how many variables have currently been processed for earlier datasets in the dataspecifier,
+                       so that the number in the variable names &prefix_<number> is correct, and all the intermediate datasets can be joined together
+                       to the &out dataset with no conflict in variable naming.  */
 
 %do specifier=1 %to &num_specifiers;
-   %parse_dataspecifier(%scan(&specifiers_without_labels, &specifier, +), prefix=&prefix, keep=&keep,
+   %parse_dataspecifier(%scan(&specifiers_without_labels, &specifier, +), prefix=&prefix,
       out=deleteme_result_&specifier,
       add_old=%if &specifier > 1 %then deleteme_result_%eval(&specifier - 1);
    )
 %end;
 
-data &out;
-   %if &join_with^= %then
-      set &join_with;;
+%inner_join_on_categories(&join_with deleteme_result_&num_specifiers, out=&out)
 
-   set deleteme_result_&num_specifiers end=eof;
+data &out;
+   set &out;
 
    max_&prefix = max(of &prefix._1-&prefix._&total_num);
    min_&prefix = min(of &prefix._1-&prefix._&total_num);
 
    %do dataspec_i=1 %to %sysfunc(countw(&specifiers, #)) - 1;
-      %if %scan(&specifiers, &dataspec_i+1, #) ^= . %then
-         label &prefix._&dataspec_i = %scan(&specifiers, &dataspec_i+1, #);;
+      %let var_label = "%remove_all_quotes(%quote(%scan(%quote(&specifiers), &dataspec_i+1, #)))";
+      %if &var_label ^= "" %then
+         label &prefix._&dataspec_i = &var_label;;
    %end;
 run;
 %mend resolve_dataspecifiers;

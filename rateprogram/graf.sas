@@ -393,7 +393,7 @@ proc datasets nolist; delete deleteme_output; run;
 %do graf_index=1 %to %sysfunc(countw(&graf_types));
    %let type = %scan(&graf_types, &graf_index);
    %if %not_missing(&&&type) %then %do;
-      %resolve_dataspecifiers(&&&type, prefix=&type, out=deleteme_output, keep=&category &panelby
+      %resolve_dataspecifiers(&&&type, prefix=&type, out=deleteme_output, categories=&category &panelby
          %if %sysfunc(exist(deleteme_output)) %then ,join_with=deleteme_output;)
 
       data deleteme_output;
@@ -532,7 +532,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
                outlineattrs=(color=%scan(&bar_colors, 1));
          %end;
          keylegend %do graf_i=1 %to &total_barsvars; "legend&graf_i" %end;
-            / across=4 %if &panelby= %then location=outside; position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
+            / across=3 %if &panelby= %then location=outside; position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
       %end;
    %end;
 
@@ -547,7 +547,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
          legenditem type=line name="linelegend&graf_i" / label="&&lines_&graf_i._label" lineattrs=&lineattrs;
      %end;
       keylegend %do graf_i=1 %to &total_linesvars; "linelegend&graf_i" %end;
-         / across=4 %if &panelby= %then location=outside; position=bottom linelength=35 down=1 noborder titleattrs=(size=7 weight=bold);
+         / across=3 %if &panelby= %then location=outside; position=bottom linelength=35 down=1 noborder titleattrs=(size=7 weight=bold);
    %end;
 
    %if %not_missing(&variation) %then %do;
