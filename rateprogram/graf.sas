@@ -16,13 +16,13 @@
    panelby=,
    height=500,
    width=700,
-   bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFDD4F CXC0FF81 CXFFFF00 CXBCD9C5 CX4DBF81 CXBBBFAC CX593B18,
-   special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CXB5AFAF CXEEEEEE CX8C8385 CXB3B2B4 CX8C8883 CXC0C0C0,
+   bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFDD4F CXC0FF81 CXFFFF00 CXBCD9C5 CX4DBF81 CXBBBFAC CX593B18 CX02cccc CXc1d2e3 CXff8f82 CXa854e8 CX044d82 CX5c6e40 CX9a88e3 CXfcb335 CX212120 CXd1d1d1 CX6907f2 CX306675,
+   special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CXB5AFAF CXEEEEEE CX8C8385 CXB3B2B4 CX8C8883 CXC0C0C0 CX002333 CXBD0DBD CXe0A0e0 CXA0C0A0 CX805080 CXEEFEEE CXB2AFAF CXEEEFEF CX8D8385 CXB3B2C4 CX7C8883 CXC2C0C0,
    variation_symbols = circlefilled circlefilled circle circle circle,
    variation_colors = black grey black charcoal black,
    variation_sizes = 4pt 6pt 8pt 9pt 10pt,
-   line_patterns = solid shortdash mediumdash longdash mediumdashshortdash,
-   line_colors = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F,
+   line_patterns = solid shortdash mediumdash longdash mediumdashshortdash solid shortdash mediumdash longdash mediumdashshortdash solid shortdash mediumdash longdash mediumdashshortdash solid shortdash mediumdash longdash mediumdashshortdash solid shortdash mediumdash longdash mediumdashshortdash,
+   line_colors = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F CXc96d5d CXbdc95d CX5d9cc9 CXb03f87 CXd9742b CXc9bd16 CX0da62e CX02cccc CXc1d2e3 CXff8f82 CXa854e8 CX044d82 CX5c6e40 CX9a88e3 CXfcb335 CX212120 CXd1d1d1 CX6907f2 CX306675,
    debug = no
 ) / minoperator;
 
@@ -580,7 +580,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
       &main_axis.axis %if %not_missing(&bars) %then display=(noticks noline); label="%remove_quotes(%quote(&category_label))" %if &direction=horizontal %then labelpos=top;
          labelattrs=(size=8 weight=bold) valueattrs=(size=8)
          type=discrete discreteorder=data;
-      &second_axis.axis label="%remove_quotes(%quote(&description))"
+      &second_axis.axis label="%remove_quotes(%quote(&description))" min=0
          display=(noticks noline) %if &direction=vertical %then labelpos=top;;
    %end;
    %else %do;
