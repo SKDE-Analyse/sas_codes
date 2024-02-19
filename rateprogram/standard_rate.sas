@@ -159,7 +159,7 @@ run;
 
 data deleteme_rateutvalg;
    set &std_dataset;
-   where (%scan(&std_varlist, 1) %do std_i=2 %to %sysfunc(countw(&std_varlist)); or %scan(&std_varlist, &std_i) %end;) and
+   where (%scan(&std_varlist, 1) %do std_i=2 %to &std_numvars; or %scan(&std_varlist, &std_i) %end;) and
          aar in (&min_year:&max_year) and
          alder in (&min_age:&max_age) and             
          &region in (1:%if &region=bohf   %then 31;
@@ -178,13 +178,13 @@ run;
    all the years (aar=9999), and also for the whole country (&region=8888) */
 proc sql;
 create table deleteme_summed_vars_ as
-	select aar, &region, &sql_grouping %do std_i=1 %to %sysfunc(countw(&std_varlist));
+	select aar, &region, &sql_grouping %do std_i=1 %to &std_numvars;
       , sum(%scan(&std_varlist, &std_i)) as %scan(&std_varlist, &std_i)
    %end;
 	from deleteme_rateutvalg
 	group by aar, &region, &sql_grouping
    union all
-   select 9999 as aar, &region, &sql_grouping %do std_i=1 %to %sysfunc(countw(&std_varlist));
+   select 9999 as aar, &region, &sql_grouping %do std_i=1 %to &std_numvars;
       , sum(%scan(&std_varlist, &std_i)) / (&max_year-&min_year+1) as %scan(&std_varlist, &std_i)
    %end;
    from deleteme_rateutvalg
@@ -193,7 +193,7 @@ create table deleteme_summed_vars_ as
 create table deleteme_summed_vars as
    select * from deleteme_summed_vars_
    union all
-   select aar, 8888 as &region, &sql_grouping %do std_i=1 %to %sysfunc(countw(&std_varlist));
+   select aar, 8888 as &region, &sql_grouping %do std_i=1 %to &std_numvars;
       , sum(%scan(&std_varlist, &std_i)) as %scan(&std_varlist, &std_i)
    %end;
    from deleteme_summed_vars_
@@ -253,7 +253,7 @@ quit;
 proc sql;
 create table deleteme_ratedata as
    select a.aar, a.&region, sum(a.population) as innbyggere
-   %do std_i=1 %to %sysfunc(countw(&std_varlist));
+   %do std_i=1 %to &std_numvars;
       %let var = %scan(&std_varlist, &std_i);
       , sum(&var) as &var._antall
       , sum(&var) / sum(a.population) * &ratemult as &var._crude
@@ -279,7 +279,7 @@ data &out;
       in an elegant way.
    */
    %let snitt_vars = ;
-   %do std_i=1 %to %sysfunc(countw(&std_varlist));
+   %do std_i=1 %to &std_numvars;
       %let var = %scan(&std_varlist, &std_i);
       %let snitt_vars = &snitt_vars
              &var._ratesnitt &var._rate&min_year-&var._rate&max_year
@@ -300,7 +300,7 @@ data &out;
    else do;
       popsnitt = innbyggere;
 
-      %do std_i=1 %to %sysfunc(countw(&std_varlist));
+      %do std_i=1 %to &std_numvars;
          %let var = %scan(&std_varlist, &std_i);
          &var._antsnitt = &var._antall;
          &var._ratesnitt = &var._rate;
@@ -312,7 +312,7 @@ data &out;
                  Program Data Vector when aar=9999. That's why we use the output statment at this point. */
    end;
 
-   %do std_i=1 %to %sysfunc(countw(&std_varlist));
+   %do std_i=1 %to &std_numvars;
       %let var = %scan(&std_varlist, &std_i);
       array antall_&var{&min_year:&max_year} &var._ant&min_year-&var._ant&max_year;
       array rate_&var{&min_year:&max_year} &var._rate&min_year-&var._rate&max_year;
@@ -328,7 +328,7 @@ data &out;
 run;
 
 
-%do std_i=1 %to %sysfunc(countw(&std_varlist));
+%do std_i=1 %to &std_numvars;
    %let var = %scan(&std_varlist, &std_i);
    title "%nrstr(%%)standard_rate(): Justering av variabelen &var i &std_dataset:";
    %graf(bars=&out/&var._ratesnitt,
@@ -342,6 +342,33 @@ run;
    )
 %end;
 title;
+
+data deleteme_yearly_prep;
+   set &out;
+   category_label = put(&region, &region._fmt.);
+   format bohf 16.;
+run;
+
+%do std_i=1 %to &std_numvars;
+   %let var = %scan(&std_varlist, &std_i);
+
+   proc transpose data=deleteme_yearly_prep out=deleteme_yearly_&std_i prefix=&var._ name=year;
+      id &region;
+      idlabel category_label;
+      var &var._rate&min_year-&var._rate&max_year;
+   run;
+
+   data deleteme_yearly_&std_i;
+      set deleteme_yearly_&std_i;
+      year = prxchange("s/.*(\d{4})$/$1/", -1, year);
+   run;
+%end;
+
+data &out._yearly;
+   %do std_i=1 %to &std_numvars;
+      set deleteme_yearly_&std_i;
+   %end;
+run;
 
 %if &debug=no %then %do;
    proc datasets nolist; delete deleteme_: ; run;
