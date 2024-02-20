@@ -90,7 +90,7 @@ quit;
       set &library..%scan(&expanded_dsnames, &dataspec_i);
       %do dataspec_j=1 %to &dataspec_numvars;
          %let current_var = %scan(&&expanded_varlist_&dataspec_i, &dataspec_j);
-         call symput("&current_var._label_", vlabel(&current_var));
+         call symput("&current_var._L", vlabel(&current_var));
          /* This data step is used to preserve any labels a variable might have. If there is no label, the variable name is used as the label,
             which is what vlabel returns in that case. */
      %end;
@@ -104,7 +104,7 @@ quit;
          %let current_var = %scan(&&expanded_varlist_&dataspec_i, &dataspec_j);
 
          rename &current_var = &prefix._&num;
-         label &current_var  = &&&current_var._label_;
+         label &current_var  = &&&current_var._L;
          %if %length(%scan(&formatlist,  %eval(&num - &total_num), %str( ))) > 2 %then
             /* This if statement rules out "." as a format; the format is only applied if the length of the format specified by the user is > 2 */
             format &current_var %scan(&formatlist, %eval(&num - &total_num), %str( ));;
