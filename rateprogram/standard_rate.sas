@@ -333,11 +333,12 @@ run;
    title "%nrstr(%%)standard_rate(): Justering av variabelen &var i &std_dataset:";
    %graf(bars=&out/&var._ratesnitt,
          variation=&out/&var._ratesnitt &var._crudesnitt,
-         table=&out/&var._ratesnitt &var._crudesnitt,
+         table=&out/&var._ratesnitt &var._crudesnitt #Ratesnitt #Crudesnitt,
          category=&region/&region._fmt.,
          variation_sizes = 6pt 8pt,
          variation_colors = green red,
          variation_symbols = circlefilled diamondfilled,
+         width = 750,
          description="Justeringen av variabelen &var, hvor standardize_by=&standardize_by.. Den røde diamanten er hvor &var ville vært hvis man ikke &standardize_by-justerte (crude rate)."
    )
 %end;
