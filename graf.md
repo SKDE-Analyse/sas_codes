@@ -7,6 +7,7 @@
 ## Argumenter til %graf()
 - **bars** = `<dataspecifier>`. En eller flere variabler det skal lages et søylediagram av.
 - **lines** = `<dataspecifier>`. En eller flere variabler det skal lages et linjediagram av.
+- **band** = `<dataspecifier>`. En eller flere variabler det skal lages et "stacked band plot" av.
 - **table** = `<dataspecifier>`. En eller flere variabler det skal lages en tabell av.
 - **variation** = `<dataspecifier>`. En eller flere variabler det skal lages en variasjon av (brukt for å lage årsvariasjon).
 - **category** = `<category>(/<category format>)`. Kategorivariabelen + valgri formatering av denne etter en "/". Eksempel: `bohf/bohf_fmt.`.
