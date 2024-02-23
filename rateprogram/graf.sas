@@ -1,6 +1,7 @@
 ﻿%macro graf(
    bars=,
    lines=,
+   band=,
    table=,
    variation=,
    category=,
@@ -41,6 +42,7 @@
 ## Argumenter til %graf()
 - **bars** = `<dataspecifier>`. En eller flere variabler det skal lages et søylediagram av.
 - **lines** = `<dataspecifier>`. En eller flere variabler det skal lages et linjediagram av.
+- **band** = `<dataspecifier>`. En eller flere variabler det skal lages et "stacked band plot" av.
 - **table** = `<dataspecifier>`. En eller flere variabler det skal lages en tabell av.
 - **variation** = `<dataspecifier>`. En eller flere variabler det skal lages en variasjon av (brukt for å lage årsvariasjon).
 - **category** = `<category>(/<category format>)`. Kategorivariabelen + valgri formatering av denne etter en "/". Eksempel: `bohf/bohf_fmt.`.
@@ -389,7 +391,7 @@ run;
 
 proc datasets nolist; delete deleteme_output; run;
 
-%let graf_types = bars variation table lines;
+%let graf_types = bars variation table lines band;
 %do graf_index=1 %to %sysfunc(countw(&graf_types));
    %let type = %scan(&graf_types, &graf_index);
    %if %not_missing(&&&type) %then %do;
@@ -416,8 +418,13 @@ data deleteme_output (drop=j);
       format bar &bars_format;;
    set deleteme_output;
 
+   %if %not_missing(&band) %then %do;
+      %do graf_i=1 %to &total_bandvars;
+         band_upper_&graf_i = sum(of band_1-band_&graf_i);
+      %end;
+   %end;
 
-   array other_vars [*] variation_: table_: lines_: max_: min_: ;
+   array other_vars [*] variation_: table_: lines_: band_: max_: min_: ;
    array all_barsvars [*] bars_: ;
    do i=1 to dim(all_barsvars);
 	   group = strip(put(i, 8.));
@@ -457,6 +464,7 @@ data deleteme_output (drop=i);
 
    array allbars [*] %if %not_missing(&bars) %then bars:;
                %else %if %not_missing(&lines) %then lines:;
+               %else %if %not_missing(&band) %then band:;
                %else %if %not_missing(&variation) %then variation:;;
 
    total_sum = sum(of allbars[*]);
@@ -477,6 +485,11 @@ data deleteme_output (drop=i);
       %if %not_missing(&lines) %then %do;
          %do graf_i=1 %to &total_linesvars;
             call symput("lines_&graf_i._label", vlabel(lines_&graf_i));
+         %end;
+      %end;
+      %if %not_missing(&band) %then %do;
+         %do graf_i=1 %to &total_bandvars;
+            call symput("band_&graf_i._label", vlabel(band_&graf_i));
          %end;
       %end;
    end;
@@ -520,6 +533,19 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
 
    %if &panelby^= %then
          panelby &panelby;;
+
+   %if %not_missing(&band) %then %do;
+      %do graf_i=&total_bandvars %to 1 %by -1;
+         band &main_axis=&category lower=0 upper=band_upper_&graf_i /
+            fillattrs=(color=%scan(&bar_colors, &graf_i));
+
+         legenditem type=fill name="bandlegend&graf_i" / label="&&band_&graf_i._label"
+            fillattrs=(color=%scan(&bar_colors, &graf_i)) outlineattrs=(color=%scan(&bar_colors, 1));
+     %end;
+      keylegend %do graf_i=1 %to &total_bandvars; "bandlegend&graf_i" %end;
+         / across=3 %if &panelby= %then location=outside; position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
+   %end;
+   
 
    %if %not_missing(&bars) %then %do;
       %substr(&direction, 1, 1)barparm category=&category response=bar
