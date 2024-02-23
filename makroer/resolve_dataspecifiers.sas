@@ -24,7 +24,7 @@
 
 %macro parse_dataspecifier(specifier, prefix=, out=, add_old=);
 
-%let regex = ^((\w+)\.)?([\w: -]+)\/([\w: -]*[\w:])(\/([\w\d\$. ]+))?$;
+%let regex = ^((\w+)\.)?([\w: -]+)\/([\w: -]+)(\/([\w\d\$. ]+))?$;
 
 %let library    = %sysfunc(prxchange(s/&regex/$2/, 1, &specifier));
 %let datasets   = %sysfunc(prxchange(s/&regex/$3/, 1, &specifier));
