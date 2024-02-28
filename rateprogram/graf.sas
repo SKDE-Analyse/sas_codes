@@ -11,6 +11,7 @@
    direction=horizontal,
    bar_grouping=stack,
    special_categories=8888 7777,
+   max_value=none,
    save="",
    source="",
    logo=none,
@@ -52,6 +53,7 @@
 - **direction** = `[horizontal, vertical]`. Denne variabelen styrer hvilken retning grafen går. Endrer man på denne er det som å vri grafen 90 grader. %graf sørger for at alle dataene beholder sine relative plasseringer, inklusive tabellen. Default: horizontal.
 - **bar_grouping** =  `[stack, cluster]`. Denne variabelen styrer hvoran %graf() kombinerer dataene når man har flere variabler for et søylediagram. Stack stabler variablene oppå hverandre for å lage et n-delt søylediagram. Cluster på sin side lager en liten søyle for hver variabel og plasserer de ved siden av hverandre for hver valgte kategori. I begge tilfeller er det totalsummen av alle søyle-variablene som definerer rekkefølgen på kategoriene i resultat-grafen. Default: stack.
 - **special_categories** = `<list>`. En liste med nummer som definerer "special categories", dvs kategorier som får en grå farge i søylediagrammet - vanlighis er dette norgesgjennomsnittet. Default: 8888 7777.
+- **max_value** = `[none, <number>]`. Brukt for å sette en øvre grense på verdiene i grafen. Denne variabelen er nyttig hvis man skal lage mange lignende grafer og man vil at alle grafene skal ha samme størrelsesorden. Default: none.
 - **save** = `<text>`. Hvis man vil lagre filen, setter man her inn fullt navn på den nye filen i anførselstegn. Dette må inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf). Hvis filetternavnet er .png, lagres bildet som en png fil, også videre. Default: "".
 - **source** = `<text>`. Kildehenvisning nederst til venstre. Default: "".
 - **logo** = `[skde, hn, none]`. Logo nederst til høyre på grafen:  Default: none.
@@ -606,7 +608,7 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
       &main_axis.axis %if %not_missing(&bars) %then display=(noticks noline); label="%remove_quotes(%quote(&category_label))" %if &direction=horizontal %then labelpos=top;
          labelattrs=(size=8 weight=bold) valueattrs=(size=8)
          type=discrete discreteorder=data;
-      &second_axis.axis label="%remove_quotes(%quote(&description))" min=0
+      &second_axis.axis label="%remove_quotes(%quote(&description))" min=0 %if &max_value^=none %then max=&max_value;
          display=(noticks noline) %if &direction=vertical %then labelpos=top;;
    %end;
    %else %do;
