@@ -63,22 +63,18 @@ quit;
 %end;
 %let dataspec_numvars = %sysfunc(countw(&&expanded_varlist_1));
 
-%macro inner_join_on_categories(datasets_joined, out=);
+%macro join_on_categories(datasets_joined, out=);
 proc sql noprint;
 create table &out as
    select *
    from %scan(&datasets_joined, 1)
    %do dataspec_ds=2 %to %sysfunc(countw(&datasets_joined));
-      %let current_ds = %scan(&datasets_joined, &dataspec_ds);
-      inner join &current_ds on %do dataspec_catvar=1 %to %sysfunc(countw(&categories));
-         %let current_catvar = %scan(&categories, &dataspec_catvar);
-         %if &dataspec_catvar > 1 %then and;
-            &current_ds..&current_catvar = %scan(&datasets_joined, 1).&current_catvar
-      %end;
+      natural join %scan(&datasets_joined, &dataspec_ds)
+      /* natural join is an inner join on the variable names contained in &categories */
    %end;
    ;
 quit;
-%mend inner_join_on_categories;
+%mend join_on_categories;
 
 %do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames));
    /* Every dataset in the dataspecifier is copied below, and the variables from each dataset are given the corrent number that they
@@ -113,7 +109,7 @@ quit;
    run;
 %end;
 
-%inner_join_on_categories(&add_old %do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames)); deleteme_dsvars_&dataspec_i %end;,
+%join_on_categories(&add_old %do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames)); deleteme_dsvars_&dataspec_i %end;,
    out=&out)
 
 %let total_num = &num;
@@ -134,10 +130,10 @@ quit;
    )
 %end;
 
-%inner_join_on_categories(&join_with deleteme_result_&num_specifiers, out=&out)
+%join_on_categories(&join_with deleteme_result_&num_specifiers, out=deleteme__&out)
 
 data &out;
-   set &out;
+   set deleteme__&out;
 
    max_&prefix = max(of &prefix._1-&prefix._&total_num);
    min_&prefix = min(of &prefix._1-&prefix._&total_num);
