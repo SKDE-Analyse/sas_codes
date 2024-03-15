@@ -79,7 +79,7 @@ quit;
 %do dataspec_i=1 %to %sysfunc(countw(&expanded_dsnames));
    /* Every dataset in the dataspecifier is copied below, and the variables from each dataset are given the corrent number that they
       should have in the output dataset from %resolve_dataspecifiers, as well as the format specified in the dataspecifier. All
-      these datasets will afterwords be joined using SQL INNER JOIN to ensure that the category variable is given the correct value from
+      these datasets will afterwords be joined using SQL NATURAL JOIN to ensure that the category variable is given the correct value from
       each dataset, even if these datasets are ordered differently, or have different lengths, etc.
    */
    data _null_ ;
@@ -93,6 +93,9 @@ quit;
    run;
 
    data deleteme_dsvars_&dataspec_i ;
+      retain &categories &&expanded_varlist_&dataspec_i; /* For correct ordering of the variables */
+      keep   &categories &&expanded_varlist_&dataspec_i;
+
       set &library..%scan(&expanded_dsnames, &dataspec_i);
 
       %do dataspec_j=1 %to &dataspec_numvars;
@@ -105,7 +108,6 @@ quit;
             /* This if statement rules out "." as a format; the format is only applied if the length of the format specified by the user is > 2 */
             format &current_var %scan(&formatlist, %eval(&num - &total_num), %str( ));;
      %end;
-     keep &categories &&expanded_varlist_&dataspec_i;
    run;
 %end;
 
