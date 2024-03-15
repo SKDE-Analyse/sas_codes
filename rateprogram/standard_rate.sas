@@ -339,7 +339,8 @@ run;
          variation_colors = green red,
          variation_symbols = circlefilled diamondfilled,
          width = 750,
-         description="Justeringen av variabelen &var, hvor standardize_by=&standardize_by.. Den røde diamanten er hvor &var ville vært hvis man ikke &standardize_by-justerte (crude rate)."
+         description="Justeringen av variabelen &var, hvor standardize_by=&standardize_by.. Den røde diamanten er hvor &var ville vært hvis man ikke &standardize_by-justerte (crude rate).",
+         debug=&debug
    )
 %end;
 title;
