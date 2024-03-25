@@ -50,7 +50,9 @@
 995413388;St Olavs hospital, Hysnes helsefort;64;St. Olavs hospital, Hysnes helsefort;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 915621457;St Olavs hospital, Ørland;65;St. Olavs hospital, Ørland;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 920196357;St Olavs Hospital HF rehabilitering Ørlandet;65;St. Olavs hospital, Ørland;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-874748722;St Olavs hospital HF Psykisk helsevern Østmarka;66;St Olavs Hospital, Psyk Østmarka;6;St. Olavs Hospital HF;St. Olavs Hospital;3;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.06.2023 2023T1 Somatikk Hanne Sigrun Byhring
+874748722;St Olavs hospital HF Psykisk helsevern Østmarka;66;St. Olavs Hospital, psykisk helsevern;6;St. Olavs Hospital HF;St. Olavs Hospital;3;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.06.2023 2023T1 Somatikk Hanne Sigrun Byhring
+890980392;St Olavs hospital HF Psykisk helsevern regionalt traumesenter;66;St. Olavs Hospital, psykisk helsevern;6;St. Olavs Hospital HF;St. Olavs Hospital;3;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 25.03.2024: nye orgnr i somatikk 2024 jan/feb
+974748908;St Olavs hospital HF Psykisk helsevern Nidaros DPS;66;St. Olavs Hospital, psykisk helsevern;6;St. Olavs Hospital HF;St. Olavs Hospital;3;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 25.03.2024: nye orgnr i somatikk 2024 jan/feb
 997005562;Helse Møre og Romsdal HF;70;Helse Møre og Romsdal HF;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 30.03.2022: RHF data somatikk.
 974745569;Helse Møre og Romsdal HF Molde sjukehus;71;Molde sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 984038135;Helse Møre og Romsdal HF, Voksenhabilitering Molde;71;Molde sjukehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
@@ -145,6 +147,7 @@
 974588951;OUS, Aker;182;OUS, Aker;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974589087;OUS, Oslo legevakt;183;OUS, Oslo legevakt;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974589095;OUS, Ullevål;184;OUS, Ullevål;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
+932522314;OUS, Ullevål stadion somatikk;184;OUS, Ullevål;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 25.03.2024: nye orgnr i somatikk 2024 jan/feb
 9745890950;OUS HF, Ullevål - stråleterapi;184;OUS, Ullevål;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Ekstra null i orgnr, stråleenhet.
 974705761;OUS, Spesialsykehuset for epilepsi;185;OUS, Spesialsykehuset for epilepsi;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 974707152;OUS, Radiumhospitalet;186;OUS, Radiumhospitalet;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
@@ -392,8 +395,8 @@
 973876457;Mjøs kirurgene lege og spesialistsenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
 990240116;VOLVAT medisinske senter AS Bergen - Ulriksdal;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
 995765691;Rehabilitering Vest AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 07.04.2022: rehab institusjon i RHF 2021 T3 data.
-996723119;Legevakt Vest AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 04.07.2022: somatikk 2022 T1. Allmenn legetjeneste, legevakt, bedriftshelsetjeneste og privat legespesialistpraksis. 
-928089428;Volvat medisinske senter as Storo;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 04.07.2022: somatikk 2022 T1. 
+996723119;Legevakt Vest AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 04.07.2022: somatikk 2022 T1. Allmenn legetjeneste, legevakt, bedriftshelsetjeneste og privat legespesialistpraksis.
+928089428;Volvat medisinske senter as Storo;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 04.07.2022: somatikk 2022 T1.
 922404690;Kardiologi AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 914156661;Parsennklinikken AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 23.03.2023: RHF data somatikk 2022T3.
 918082379;Clinique bellevue AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 05.05.2023: oversendt fra Johan R.
@@ -423,3 +426,11 @@
 974175576;Evidia Lillestrøm;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;oppdatert 15.11.2023: privat røntgeninstitut Janice S.
 986671897;Evidia Sandvika;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;oppdatert 15.11.2023: privat røntgeninstitut Janice S.
 999047963;Evidia Sarpsborg;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;oppdatert 15.11.2023: privat røntgeninstitut Janice S.
+922537712;Retscreen AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2024: nye orgnr i somatikk 2024 jan/feb
+974213400;Oslo smerteklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 25.03.2024: nye orgnr i somatikk 2024 jan/feb
+921713800;FALCK NORGE AS AVD OSLO WERGELANDSVEIEN 1;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;2023_M11 Vidar Nygaard
+973254839;Godthaab Helse Og Rehabilitering;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;2023_M11 Vidar Nygaard
+973254847;Unicare Fram;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;2023_M11 Vidar Nygaard
+974830191;Skogli Helse og Rehabiliteringssenter;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;2023_M11 Vidar Nygaard
+980732509;Helsepartner Rehabilitering As Avd Alta;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;2023_M11 Vidar Nygaard
+986964827;Namdal Rehabilitering Iks;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;2023_M11 Vidar Nygaard
