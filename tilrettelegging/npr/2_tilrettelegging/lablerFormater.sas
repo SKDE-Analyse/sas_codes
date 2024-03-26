@@ -107,7 +107,7 @@ label henvTilTjeneste='Henvist til tjeneste (NPR-melding)'; format HENVTILTJENES
 
     label ICD10Kap='ICD-10 kapittel for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10Kap ICD10Kap.;
     label ICD10KatBlokk='ICD-10 kategoriblokk for første kode hovedtilstand (ICD-10/SKDE)'; format ICD10KatBlokk ICD10KatBlokk.; 
-    label KomNR='Kommunenummer fornyet til gyldig komnr-struktur pr 01.01.2021, numerisk (SKDE)'; format KomNR komnr_fmt.; 
+    label KomNR='Kommunenummer fornyet til gyldig komnr-struktur pr 01.01.2024, numerisk (SKDE)'; format KomNR komnr_fmt.; 
     label bydel='Bydel i Oslo, Bergen, Stavanger og Trondhem vasket mot Folkeregisteret (SKDE)'; format bydel bydel_fmt.;
     *label bydel2_org='Bydel vasket mot Folkeregisteret (NPR)'; format bydel bydel_fmt.;
 

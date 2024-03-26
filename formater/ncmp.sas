@@ -1,6 +1,31 @@
 ﻿proc format;
 value $ncmp
 
+/*Lagt til des 2023*/
+'B0044'='B0044 Teambasert oppfølging som bidrar til helhetlige og sammenhengende pasientforløp'
+'B0045'='B0045 Strukturert oppfølging fra tverrfaglige integrerte team'
+'B0050'='B0050 Intensivpasient etter nærmere kriterier'
+'B0051'='B0051 Konsentrerte tverrfaglige heldags behandlingstilbud'
+'JCFX15'='JCFX15 pH-måling i øsofagus med sonde'
+'OBCA10'='OBCA10 Individuell råd og veiledning vedrørende bomiljø og andre miljøfaktorer'
+'OBCD00'='OBCD00 Utprøving, tilpasning, opplæring og veiledning i bruk av hjelpemidler'
+'WABA10'='WABA10 Kontaktsmitteisolering'
+'WABA15'='WABA15 Dråpesmitteisolering'
+'WABA20'='WABA20 Luftsmitteisolering'
+'WABA25'='WABA25 Beskyttende isolering ved immunsvikt'
+'WABA30'='WABA30 Isolering på grunn av strålevernhensyn'
+'WJAT25'='WJAT25 Kombinert ernæringsbehandling, individuelt tilpasset'
+'WJAT50'='WJAT50 Kartlegging av kosthold og ernæringstilstand'
+'WJAT55'='WJAT55 Veiledning om ernæring, kost og måltid'
+'WMFG10'='WMFG10 Kartlegging av pasientens behov for oppfølging ut over tjenester i spesialisthelsetjenesten (bistandsvurdering)'
+'WPBA25'='WPBA25 Konsultasjon med pårørende eller andre nærstående personer, uten pasienten tilstede'
+'WRBA20'='WRBA20 Døgnbehandling i palliativ enhet'
+'WRBA21'='WRBA21 Palliativ behandling av innlagt pasient, i regi av palliativt senter'
+'WRBA22'='WRBA22 Ambulant dagbehandling i regi av palliativt senter'
+'WRBA23'='WRBA23 Poliklinisk palliativ behandling i regi av palliativt senter'
+'WRBA24'='WRBA24 Rådgivning og samarbeid mellom palliativt senter og kommunal helse- og omsorgstjeneste'
+'WRBA30'='WRBA30 Annen palliativ behandling'
+
 /* Formater fra fil Prosedyrekoder/NCMP_2016_medKode.sas lagt til 10/11/2017 */
 'AAAA00'="AAAA00 EEG overvåking med ekstrakranielle elektroder"
 'AAAA05'="AAAA05 EEG overvåking med intrakranielle elektroder"

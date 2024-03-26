@@ -1,6 +1,7 @@
 ﻿%macro graf(
    bars=,
    lines=,
+   band=,
    table=,
    variation=,
    category=,
@@ -10,19 +11,21 @@
    direction=horizontal,
    bar_grouping=stack,
    special_categories=8888 7777,
+   max_value=none,
    save="",
    source="",
    logo=none,
    panelby=,
    height=500,
    width=700,
-   bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFED4F CX00FFFF CXFFFF00,
-   special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CX0F0F0F CXEEEEEE,
-   circle_symbols = circlefilled circlefilled circle circle circle,
-   circle_colors = black grey black charcoal black,
-   circle_sizes = 4pt 6pt 8pt 9pt 10pt,
-   line_patterns = solid shortdash mediumdash longdash mediumdashshortdash,
-   line_colors = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F
+   bar_colors = CX00509E CX95BDE6 CXe0e0f0 CXA0EDE0 CX80cD3F CXFFDD4F CXC0FF81 CXFFFF00 CXBCD9C5 CX4DBF81 CXBBBFAC CX593B18 CX02cccc CXc1d2e3 CXff8f82 CXa854e8 CX044d82 CX5c6e40 CX9a88e3 CXfcb335 CX212120 CXd1d1d1 CX6907f2 CX306675,
+   special_bar_colors = CX333333 CXBDBDBD CXe0e0e0 CXA0A0A0 CX808080 CXFEFEFE CXB5AFAF CXEEEEEE CX8C8385 CXB3B2B4 CX8C8883 CXC0C0C0 CX002333 CXBD0DBD CXe0A0e0 CXA0C0A0 CX805080 CXEEFEEE CXB2AFAF CXEEEFEF CX8D8385 CXB3B2C4 CX7C8883 CXC2C0C0,
+   variation_symbols = circlefilled circlefilled circle circle circle,
+   variation_colors = black grey black charcoal black,
+   variation_sizes = 4pt 6pt 8pt 9pt 10pt,
+   line_patterns = solid shortdash mediumdash longdash mediumdashshortdash solid shortdash mediumdash longdash mediumdashshortdash solid shortdash mediumdash longdash mediumdashshortdash solid shortdash mediumdash longdash mediumdashshortdash solid shortdash mediumdash longdash mediumdashshortdash,
+   line_colors = CX30F07E CX55BDA6 CX30e010 CXA0EDE0 CX80cD3F CXc96d5d CXbdc95d CX5d9cc9 CXb03f87 CXd9742b CXc9bd16 CX0da62e CX02cccc CXc1d2e3 CXff8f82 CXa854e8 CX044d82 CX5c6e40 CX9a88e3 CXfcb335 CX212120 CXd1d1d1 CX6907f2 CX306675,
+   debug = no
 ) / minoperator;
 
 /*
@@ -30,6 +33,8 @@
 */
 
 %include "&filbane/makroer/resolve_dataspecifiers.sas";
+%include "&filbane/makroer/assert.sas";
+%include "&filbane/makroer/assert_member.sas";
 
 /*!
 
@@ -38,6 +43,7 @@
 ## Argumenter til %graf()
 - **bars** = `<dataspecifier>`. En eller flere variabler det skal lages et søylediagram av.
 - **lines** = `<dataspecifier>`. En eller flere variabler det skal lages et linjediagram av.
+- **band** = `<dataspecifier>`. En eller flere variabler det skal lages et "stacked band plot" av.
 - **table** = `<dataspecifier>`. En eller flere variabler det skal lages en tabell av.
 - **variation** = `<dataspecifier>`. En eller flere variabler det skal lages en variasjon av (brukt for å lage årsvariasjon).
 - **category** = `<category>(/<category format>)`. Kategorivariabelen + valgri formatering av denne etter en "/". Eksempel: `bohf/bohf_fmt.`.
@@ -47,6 +53,7 @@
 - **direction** = `[horizontal, vertical]`. Denne variabelen styrer hvilken retning grafen går. Endrer man på denne er det som å vri grafen 90 grader. %graf sørger for at alle dataene beholder sine relative plasseringer, inklusive tabellen. Default: horizontal.
 - **bar_grouping** =  `[stack, cluster]`. Denne variabelen styrer hvoran %graf() kombinerer dataene når man har flere variabler for et søylediagram. Stack stabler variablene oppå hverandre for å lage et n-delt søylediagram. Cluster på sin side lager en liten søyle for hver variabel og plasserer de ved siden av hverandre for hver valgte kategori. I begge tilfeller er det totalsummen av alle søyle-variablene som definerer rekkefølgen på kategoriene i resultat-grafen. Default: stack.
 - **special_categories** = `<list>`. En liste med nummer som definerer "special categories", dvs kategorier som får en grå farge i søylediagrammet - vanlighis er dette norgesgjennomsnittet. Default: 8888 7777.
+- **max_value** = `[none, <number>]`. Brukt for å sette en øvre grense på verdiene i grafen. Denne variabelen er nyttig hvis man skal lage mange lignende grafer og man vil at alle grafene skal ha samme størrelsesorden. Default: none.
 - **save** = `<text>`. Hvis man vil lagre filen, setter man her inn fullt navn på den nye filen i anførselstegn. Dette må inkludere hele filbanen, pluss filetternavn (f. eks.: .png eller .pdf). Hvis filetternavnet er .png, lagres bildet som en png fil, også videre. Default: "".
 - **source** = `<text>`. Kildehenvisning nederst til venstre. Default: "".
 - **logo** = `[skde, hn, none]`. Logo nederst til høyre på grafen:  Default: none.
@@ -55,9 +62,9 @@
 - **width** = `<number>`. Bredde på grafen, i pixels. Default: 700.
 - **bar_colors** = `<list>`. Liste med farger for søylene. Default: `CX00509E CX95BDE6` ...
 - **special_bar_colors** = `<list>`. Liste med farger for søyler som er i `special_categories`. Default: `CX333333 CXBDBDBD` ...
-- **circle_symbols** = `<list>`. Liste med symboler brukt for variation=. Default: `circlefilled circlefilled` ...
-- **circle_colors** = `<list>`. Liste med farger brukt for variation=. Default: `black grey` ...
-- **circle_sizes** = `<list>`. Liste med størrelser brukt for variation=. Default: `4pt 6pt 8pt 9pt 10pt`.
+- **variation_symbols** = `<list>`. Liste med symboler brukt for variation=. Default: `circlefilled circlefilled` ...
+- **variation_colors** = `<list>`. Liste med farger brukt for variation=. Default: `black grey` ...
+- **variation_sizes** = `<list>`. Liste med størrelser brukt for variation=. Default: `4pt 6pt 8pt 9pt 10pt`.
 - **line_patterns** = `<list>`. Liste med linjetyper brukt for lines=. Default: `solid shortdash` ...
 - **line_colors** = `<list>`. Liste med farger brukt for lines=. Default: `CX30F07E CX55BDA6` ...
 
@@ -73,6 +80,8 @@ bruker lines=), eller prikker og linjer for årsvariasjon (hvis man bruker varia
 Man kan bruke alle disse 4 graf-typene samtidig, slik at man kan lage et 3-delt søylediagram med en tabell med 2
 kolonner, samt et linjediagram på toppen av alt det, for eksempel. Man kan også spesifisere hvilket format disse variablene
 skal ha, og en label for variablene slik at de får en beskrivelse i output-grafen.
+
+Input-datasettene til %graf() vil ofte være ut-datasettet fra [`%standard_rate()`](./standard_rate).
 
 ## Definisjon av `<dataspecifier>`
 
@@ -244,7 +253,7 @@ En graf med årsvariasjon lager man enkelt med å legge til en `<dataspecifier>`
 
 ![img](/sas_codes/bilder/graf_example9.png)
 
-Når variabel-navnene har format `rate<yyyy>` slik som i dette eksempelet forstår %graf at vi vil bruke årstallet i varabelnavnet
+Når variabel-navnene slutter med `rate<yyyy>` slik som i dette eksempelet forstår %graf at vi vil bruke årstallet i variabelnavnet
 som en label. Man kan overstyre dette med å sende inn sin egen label med `#<label>`.
 
 ### bar_grouping=cluster (of forskjellen med det og bar_grouping=stack)
@@ -337,41 +346,30 @@ og special_bar_colors for å endre utseendet til søylediagrammet:
    %sysfunc(prxchange(s/^[%str(%'%")](.*)[%str(%'%")]$/$1/, -1, %quote(&string)))
 %mend remove_quotes;
 
+%macro remove_all_quotes(string);
+   /* Removes all double and single quotation marks in string */
+   %sysfunc(prxchange(s/[%str(%'%")]//, -1, %quote(&string)))
+%mend remove_all_quotes; /* ' */
 
-%macro assert(assertion, message=Assertion is false);
-data _null_;
-   if not (&assertion) then do;
-      putlog "ERROR: &message.. Aborting program excecution!";
-      abort cancel;
-   end;
-run;
-%mend assert;
-
-
-
-%macro assert_member(value, list, varname);
-%assert(&value in (&list),
-   message=%sysfunc(dequote(&value)) is not a valid argument value for &varname. in the graf macro. These are the options: %sysfunc(prxchange(s/%str(%")//, -1, &list))
-)
-%mend assert_member;
+%macro not_missing(variable);
+   "%remove_all_quotes(%quote(&variable))" ^= "" 
+%mend not_missing;
 
 /* Hvis det er noe feil med variablene er det bedre å stoppe hele programmet enn å bare kjøre på, som SAS liker å gjøre. */
-%let sort = %lowcase(&sort);
-%assert_member("&sort", "yes" "no" "reverse", sort)
-%let direction = %lowcase(&direction);
-%assert_member("&direction", "horizontal" "vertical", direction)
-%let bar_grouping = %lowcase(&bar_grouping);
-%assert_member("&bar_grouping", "stack" "cluster", bar_grouping)
-%let logo = %lowcase(&logo);
-%assert_member("&logo", "none" "skde" "hn", logo)
-
-
-
+%let sort = %lowcase(&sort);                 %assert_member(sort, yes no reverse)
+%let direction = %lowcase(&direction);       %assert_member(direction, horizontal vertical)
+%let bar_grouping = %lowcase(&bar_grouping); %assert_member(bar_grouping, stack cluster)
+%let logo = %lowcase(&logo);                 %assert_member(logo, none skde hn)
+%let debug = %lowcase(&debug);               %assert_member(debug, yes no)
+%assert("&category" ^= "", message=No category= specified for the graf makro. This is a required argument)
 
 
 %let category_regex = (\w+)(\/([\w.\$]+))?;
 %let category_format = %sysfunc(prxchange(s/&category_regex/$3/, 1, &category));
 %let category = %sysfunc(prxchange(s/&category_regex/$1/, 1, &category));
+
+%if &category_format= and "&category" in ("bohf" "borhf" "boshhn") %then
+   %let category_format = &category._fmt.;;
 
 data graf_annotation;
    length x1space $ 13 y1space $ 13 anchor $ 11 Label $ 25;
@@ -395,29 +393,40 @@ run;
 
 proc datasets nolist; delete deleteme_output; run;
 
-%let graf_types = bars variation table lines;
-%do index=1 %to %sysfunc(countw(&graf_types));
-   %let type = %scan(&graf_types, &index);
-   %if "&&&type" ^= "" %then %do;
-      %resolve_dataspecifiers(&&&type, prefix=&type, out=deleteme_output, keep=&category &panelby
+%let graf_types = bars variation table lines band;
+%do graf_index=1 %to %sysfunc(countw(&graf_types));
+   %let type = %scan(&graf_types, &graf_index);
+   %if %not_missing(&&&type) %then %do;
+      %resolve_dataspecifiers(&&&type, prefix=&type, out=deleteme_output, categories=&category &panelby
          %if %sysfunc(exist(deleteme_output)) %then ,join_with=deleteme_output;)
 
       data deleteme_output;
          set deleteme_output;
 
          array all_&type.vars [*] &type._: ;
-        if _n_ = 1 then do;
-            call symput("total_&type.vars", dim(all_&type.vars));
-	     end;
+         if _n_ = 1 then do;
+            call symputx("total_&type.vars", dim(all_&type.vars));
+            %if &type=bars %then
+               call symputx("bars_format", vformat(bars_1));;
+         end;
       run;
    %end;
 %end;
 
-data deleteme_output;
+
+data deleteme_output (drop=j);
    length group $8;
-   drop i;
+   %if %not_missing(&bars) %then
+      format bar &bars_format;;
    set deleteme_output;
 
+   %if %not_missing(&band) %then %do;
+      %do graf_i=1 %to &total_bandvars;
+         band_upper_&graf_i = sum(of band_1-band_&graf_i);
+      %end;
+   %end;
+
+   array other_vars [*] variation_: table_: lines_: band_: max_: min_: ;
    array all_barsvars [*] bars_: ;
    do i=1 to dim(all_barsvars);
 	   group = strip(put(i, 8.));
@@ -426,7 +435,11 @@ data deleteme_output;
       if &category in (&special_categories) then do;
          group = "n" || group;
       end;
-	  output;
+
+      if i > 1 then do j=1 to dim(other_vars);
+         other_vars[j] = .; /* Setting these values to null to avoid bugs (otherwise the table_: variables would be summed up for each group) */
+      end;
+      output;
    end;
    if dim(all_barsvars) = 0 then
       output;
@@ -435,46 +448,50 @@ run;
 data graf_data_attributes;
    length ID $10 value $6 linecolor $ 9 fillcolor $ 9;
 
-   %if "&bars" ^= "" %then %do;
-      %do i=1 %to %sysfunc(countw(&bar_colors));
-         %let color_index= &i + 0;
+   %if %not_missing(&bars) %then %do;
+      %do graf_i=1 %to %sysfunc(countw(&bar_colors));
+         %let color_index= &graf_i;
          %if &total_barsvars=1 %then
-            %let color_index= &i + 1; /* Color number 2 looks better when there's only one bar */
-         ID = "BarAttr"; value =  "&i"; fillcolor = "%scan(&bar_colors, &color_index)"; linecolor = "%scan(&bar_colors, 1)"; output;
-         ID = "BarAttr"; value = "n&i"; fillcolor = "%scan(&special_bar_colors, &color_index)"; output;
+            %let color_index= &graf_i + 1; /* Color number 2 looks better when there's only one bar */
+         ID = "BarAttr"; value =  "&graf_i"; fillcolor = "%scan(&bar_colors, &color_index)"; linecolor = "%scan(&bar_colors, 1)"; output;
+         ID = "BarAttr"; value = "n&graf_i"; fillcolor = "%scan(&special_bar_colors, &color_index)"; output;
       %end;
    %end;
 run;
 
-data deleteme_output;
+data deleteme_output (drop=i);
    set deleteme_output;
    format &category &category_format;
    input_order = _N_;
 
-   total_sum = 0;
-   array allbars [*] %if "&bars" ^= "" %then bars:;
-               %else %if "&lines" ^= "" %then lines:;
-			   %else %if "&variation" ^= "" %then variation:;;
-   do i=1 to dim(allbars);
-      total_sum = total_sum + allbars[i];
-   end;
+   array allbars [*] %if %not_missing(&bars) %then bars:;
+               %else %if %not_missing(&lines) %then lines:;
+               %else %if %not_missing(&band) %then band:;
+               %else %if %not_missing(&variation) %then variation:;;
+
+   total_sum = sum(of allbars[*]);
 
    if _n_ = 1 then do;
-      %if "&variation" ^= "" %then %do;
-         %do i=1 %to &total_variationvars;
-            if prxmatch("/^rate\d{4}$/i", vlabel(variation_&i)) then
-               call symput("variation_&i._label", prxchange("s/^rate(\d{4})$/$1/i", 1, vlabel(variation_&i)));
-            else call symput("variation_&i._label", vlabel(variation_&i));
+      %if %not_missing(&variation) %then %do;
+         %do graf_i=1 %to &total_variationvars;
+            if prxmatch("/.*rate\d{4}$/i", vlabel(variation_&graf_i)) then
+               call symput("variation_&graf_i._label", prxchange("s/.*rate(\d{4})$/$1/i", 1, vlabel(variation_&graf_i)));
+            else call symput("variation_&graf_i._label", vlabel(variation_&graf_i));
          %end;
       %end;
-      %if "&bars" ^= "" %then %do;
-         %do i=1 %to &total_barsvars;
-            call symput("bars_&i._label", vlabel(bars_&i));
+      %if %not_missing(&bars) %then %do;
+         %do graf_i=1 %to &total_barsvars;
+            call symput("bars_&graf_i._label", vlabel(bars_&graf_i));
          %end;
       %end;
-      %if "&lines" ^= "" %then %do;
-         %do i=1 %to &total_linesvars;
-            call symput("lines_&i._label", vlabel(lines_&i));
+      %if %not_missing(&lines) %then %do;
+         %do graf_i=1 %to &total_linesvars;
+            call symput("lines_&graf_i._label", vlabel(lines_&graf_i));
+         %end;
+      %end;
+      %if %not_missing(&band) %then %do;
+         %do graf_i=1 %to &total_bandvars;
+            call symput("band_&graf_i._label", vlabel(band_&graf_i));
          %end;
       %end;
    end;
@@ -487,8 +504,8 @@ run;
          statements... The code below makes sure the data is visualized in the same order no matter what kind of plot it is.
       */
       by %if &direction=vertical and &sort=yes %then descending;
-         %else %if &direction=horizontal and "&bars" = "" and &sort in (no reverse) %then descending;
-		 %else %if &direction=horizontal and "&bars" ^= "" and &sort=yes %then descending;
+         %else %if &direction=horizontal and "%remove_all_quotes(%quote(&bars))" = "" and &sort in (no reverse) %then descending;
+		 %else %if &direction=horizontal and %not_missing(&bars) and &sort=yes %then descending;
       %if &sort=no %then input_order; %else total_sum;;
    run;
 %end;
@@ -519,71 +536,84 @@ proc %if &panelby= %then sgplot; %else sgpanel; data=deleteme_output sganno=graf
    %if &panelby^= %then
          panelby &panelby;;
 
-   %if "&bars" ^= "" %then %do;
+   %if %not_missing(&band) %then %do;
+      %do graf_i=&total_bandvars %to 1 %by -1;
+         band &main_axis=&category lower=0 upper=band_upper_&graf_i /
+            fillattrs=(color=%scan(&bar_colors, &graf_i));
+
+         legenditem type=fill name="bandlegend&graf_i" / label="&&band_&graf_i._label"
+            fillattrs=(color=%scan(&bar_colors, &graf_i)) outlineattrs=(color=%scan(&bar_colors, 1));
+     %end;
+      keylegend %do graf_i=1 %to &total_bandvars; "bandlegend&graf_i" %end;
+         / across=3 %if &panelby= %then location=outside; position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
+   %end;
+   
+
+   %if %not_missing(&bars) %then %do;
       %substr(&direction, 1, 1)barparm category=&category response=bar
          / group=group groupdisplay=&bar_grouping attrid=BarAttr barwidth=0.75;
 
       %if &total_barsvars > 1 %then %do;
-         %do i=1 %to &total_barsvars;
-            legenditem type=fill name="legend&i" / label="&&bars_&i._label"
-               fillattrs   =(color=%scan(&bar_colors, &i))
+         %do graf_i=1 %to &total_barsvars;
+            legenditem type=fill name="legend&graf_i" / label="&&bars_&graf_i._label"
+               fillattrs   =(color=%scan(&bar_colors, &graf_i))
                outlineattrs=(color=%scan(&bar_colors, 1));
          %end;
-         keylegend %do i=1 %to &total_barsvars; "legend&i" %end;
-            / across=4 %if &panelby= %then location=outside; position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
+         keylegend %do graf_i=1 %to &total_barsvars; "legend&graf_i" %end;
+            / across=3 %if &panelby= %then location=outside; position=bottom down=1 noborder titleattrs=(size=7 weight=bold);
       %end;
    %end;
 
-   %if "&lines" ^= "" %then %do;
-      %do i=1 %to &total_linesvars;
-         %let lineattrs=(pattern=%scan(&line_patterns, &i)
-                         color=  %scan(&line_colors,   &i)
+   %if %not_missing(&lines) %then %do;
+      %do graf_i=1 %to &total_linesvars;
+         %let lineattrs=(pattern=%scan(&line_patterns, &graf_i)
+                         color=  %scan(&line_colors,   &graf_i)
                          thickness=3);
-         series &main_axis=&category &second_axis=lines_&i / lineattrs=&lineattrs;
+         series &main_axis=&category &second_axis=lines_&graf_i / lineattrs=&lineattrs;
 
 
-         legenditem type=line name="linelegend&i" / label="&&lines_&i._label" lineattrs=&lineattrs;
+         legenditem type=line name="linelegend&graf_i" / label="&&lines_&graf_i._label" lineattrs=&lineattrs;
      %end;
-      keylegend %do i=1 %to &total_linesvars; "linelegend&i" %end;
-         / across=4 %if &panelby= %then location=outside; position=bottom linelength=35 down=1 noborder titleattrs=(size=7 weight=bold);
+      keylegend %do graf_i=1 %to &total_linesvars; "linelegend&graf_i" %end;
+         / across=3 %if &panelby= %then location=outside; position=bottom linelength=35 down=1 noborder titleattrs=(size=7 weight=bold);
    %end;
 
-   %if "&variation" ^= "" %then %do;
+   %if %not_missing(&variation) %then %do;
       Highlow &main_axis=&category low=min_variation high=max_variation
          / type=line lineattrs=(color=black thickness=1 pattern=1);
 
-      %do i=1 %to &total_variationvars;
-        %let markerattrs=(symbol=%scan(&circle_symbols, &i)
-                           color= %scan(&circle_colors,  &i)
-                           size=  %scan(&circle_sizes,   &i));
-         legenditem type=marker name="varlegend&i" / label="&&variation_&i._label" markerattrs=&markerattrs;
+      %do graf_i=1 %to &total_variationvars;
+        %let markerattrs=(symbol=%scan(&variation_symbols, &graf_i)
+                          color= %scan(&variation_colors,  &graf_i)
+                          size=  %scan(&variation_sizes,   &graf_i));
+         legenditem type=marker name="varlegend&graf_i" / label="&&variation_&graf_i._label" markerattrs=&markerattrs;
 
-         scatter &main_axis=&category &second_axis=variation_&i / markerattrs=&markerattrs;
+         scatter &main_axis=&category &second_axis=variation_&graf_i / markerattrs=&markerattrs;
      %end;
 
       %let position=%scan(bottomright topright topleft, 1 + (&direction=vertical) + (&sort=reverse));
 
-      keylegend %do i=1 %to &total_variationvars; "varlegend&i" %end;
+      keylegend %do graf_i=1 %to &total_variationvars; "varlegend&graf_i" %end;
               / across=1 %if &panelby= %then position=&position; %if &panelby= %then location=inside; noborder valueattrs=(size=8pt);
    %end;
 
-   %if "&table" ^= "" %then %do;
-      %if &panelby= %then &main_axis.axistable; %else &main_panel_axis.axistable; %do i=1 %to &total_tablevars;
-            table_%eval(%if &direction=vertical %then &total_tablevars+1 -;  &i)
+   %if %not_missing(&table) %then %do;
+      %if &panelby= %then &main_axis.axistable; %else &main_panel_axis.axistable; %do graf_i=1 %to &total_tablevars;
+            table_%eval(%if &direction=vertical %then &total_tablevars+1 -;  &graf_i)
          %end; / label %if &panelby= %then location=inside; valueattrs=(size=8 family=arial) labelattrs=(size=8)
             %if &direction=vertical %then %do; labelpos=left position=top %end;;
    %end;
 
    %if &panelby= %then %do;
-      &main_axis.axis label="%remove_quotes(%quote(&category_label))" %if &direction=horizontal %then labelpos=top;
+      &main_axis.axis %if %not_missing(&bars) %then display=(noticks noline); label="%remove_quotes(%quote(&category_label))" %if &direction=horizontal %then labelpos=top;
          labelattrs=(size=8 weight=bold) valueattrs=(size=8)
          type=discrete discreteorder=data;
-      &second_axis.axis label="%remove_quotes(%quote(&description))"
+      &second_axis.axis label="%remove_quotes(%quote(&description))" min=0 %if &max_value^=none %then max=&max_value;
          display=(noticks noline) %if &direction=vertical %then labelpos=top;;
    %end;
    %else %do;
       &main_panel_axis.axis type=discrete discreteorder=data label="%remove_quotes(%quote(&category_label))";
-	  &second_panel_axis.axis label="%remove_quotes(%quote(&description))";
+      &second_panel_axis.axis label="%remove_quotes(%quote(&description))";
    %end;
 run;
 
@@ -593,6 +623,8 @@ run;
 %end;
 ods graphics off;
 
-proc datasets nolist; delete deleteme_: graf_annotation graf_data_attributes; run;
+%if &debug=no %then %do;
+   proc datasets nolist; delete deleteme_: graf_annotation graf_data_attributes; run;
+%end;
 
 %mend graf;
