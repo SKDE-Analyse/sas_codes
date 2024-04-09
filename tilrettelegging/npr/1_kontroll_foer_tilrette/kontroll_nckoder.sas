@@ -107,10 +107,22 @@ title color= purple height=5 "7b: &nobs_feil linjer med ugyldige %upcase(&kode.)
 proc freq data=tmpdata;
   tables atckode saerkode/missing;
 run;
-title color=purple height=5 "feil %upcase(&kode.) koder";
-proc print data=tmpdata(keep= lopenr nc: atckode saerkode feilkode);
-  where feilkode and atckode=. and saerkode=. ;
+%end;
+
+%if &nobs_err ne 0 %then %do;
+title color=red height=5 "Feil %upcase(&kode.) koder - Se datasett %upcase(<ugyldige_&kode.>)";
+data ugyldige_&kode.;
+  set tmpdata(keep= lopenr nc: atckode saerkode feilkode);
+  where feilkode=1 and atckode=. and saerkode=. ;
 run;
+proc sql;
+  create table m
+      (note char(16));
+  insert into m
+     values("SJEKK DATASETT!!");
+  select * 
+ from m;
+quit;
 title;
 %end;
 
