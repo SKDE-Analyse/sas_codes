@@ -11,7 +11,7 @@
     slutt=, /*Sluttår*/
     utdata=, /*Navn på utdatasett, utdatasettet er på "wide" form*/
     long=, /*if long=1 --> skriv ut "langt" datasett, ikke aktivert er default*/
-    innbygg_dsn=innbygg.INNB_SKDE_BYDEL_2024, /*Innbyggerdatasett: innbygg.INNB_SKDE_BYDEL, innbygg.INNB_SKDE_BYDEL er default*/
+    innbygg_dsn=innbygg.INNB_SKDE_BYDEL, /*Innbyggerdatasett: innbygg.INNB_SKDE_BYDEL, innbygg.INNB_SKDE_BYDEL er default*/
     /*Til boområde-makroen: Standard er:(inndata=pop, indreOslo = 0, bydel = 1);*/
     bodef_indreoslo=0, /*0 er standard, 0 er default*/
     bodef_bydel=1, /*1 er standard, 1 er default*/
