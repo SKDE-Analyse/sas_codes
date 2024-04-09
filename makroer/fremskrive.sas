@@ -6,7 +6,7 @@ sho=0,
 int=10,
 alder_min=0,
 alder_maks=105,
-overste_agr=0,
+overste_agr=90,
 min_aar=0,
 max_aar=0,	
 ekskludert_aar=9999,
@@ -15,7 +15,8 @@ where_bohf= bohf in (1:4),
 bildesti=,
 ylabel=Antall,
 bildeformat=pdf,
-bildenavn=
+bildenavn=,
+debug=0
 );
 
 
@@ -50,7 +51,15 @@ bildesti=sti for bildelagring
 ylabel=Tekst på y-akse
 bildeformat=pdf eller png
 bildenavn=ekstra streng som skal inn i bildefilnavnet
+
+debug=sett lik en for å unngå sletting av midlertidige datasett, default=0
 */
+
+
+%let filbane=/sas_smb/skde_analyse/Data/SAS/felleskoder/main;
+%include "&filbane/makroer/boomraader.sas";
+%include "&filbane/makroer/forny_komnr.sas";
+
 
 /*Regner ut antall aldersgrupper*/
 %global ant_gr;
@@ -88,20 +97,27 @@ settes basisperiode basert på data_start og data_slutt*/
 %let max_aar=&data_slutt;
 %end;
 
+/*Startår for fremskrivning er lik sluttår for basisperiode + 1*/
+%let startaar_fremskr=%sysevalf(&max_aar+1);
+%put &=startaar_fremskr;
+
 /*Hvis ett år skal ekskluderes fra 
 basisperioden lages makrovariabelen ant_aar
 som brukes i beregning av snitt for basisperioden*/
-%if ekskludert_aar ne 9999 %then %do;
-%let ekskludere=1;
-data _null_;
-set &inndata;
-where aar ge &min_aar and aar le &max_aar and aar ne &ekskludert_aar;
-nobs+1;
-call symputx("ant_aar",nobs);
-run;
+%let ekskludere=0;		/*Nullstiller variabelene før if-statement*/
+%let ant_aar=.;
 
-%put &=n_aar;
+%put &=ekskludere;
+%put &=ant_aar;
+%put &=ekskludert_aar;
+
+%if &ekskludert_aar ne 9999 %then %do;
+	%let ekskludere=1;
+	%let ant_aar=%sysevalf(&startaar_fremskr-&min_aar-1);
 %end;
+
+%put &=ant_aar;
+%put &=ekskludere;
 
 
 
@@ -147,8 +163,16 @@ quit;
 /* legge til bovar og aggregere         */
 /****************************************/
 
-Data innb_frem_xyz;
+/*Fornyer kommunenummer i fil med fremskrevne innbyggertall*/
+data innb_frem_abc;
 set innbygg.beffremskriv_2022;
+run;
+
+%forny_komnr(inndata=innb_frem_abc, kommune_nr=komnr);
+
+/*Lager aldersinndeling*/
+Data innb_frem_xyz;
+set innb_frem_abc;
 drop Komnrnavn;
 where  alder ge &alder_min
 		and alder le &alder_maks;
@@ -191,7 +215,7 @@ proc sql;
    select distinct aar, ermann, BoHF, alder_grp, sum(AltLav) as Lav_vekst,sum(AltMid) as Mid_vekst, 
    sum(AltHoy) as Hoy_vekst
    from Frem_alt
-   where aar in (2022:&frem_slutt)
+   where aar in (&startaar_fremskr:&frem_slutt)
    group by aar, ermann, BoHF, alder_grp;
 quit;
 
@@ -298,7 +322,7 @@ Proc sql;
 	create table inndata_snitt as 
    select distinct ermann, alder_grp, BoHF, 
 	SUM(&frem_var) as tot_&frem_var,
-	(calculated tot_&frem_var)/(&max_aar-&min_aar) as snitt_&frem_var
+	(calculated tot_&frem_var)/(&startaar_fremskr-&min_aar) as snitt_&frem_var
       from inndata_agg
    group by ermann, alder_grp, BoHF;
 quit;
@@ -323,7 +347,7 @@ Proc sql;
 	create table innbygg_snitt as 
    select distinct ermann, alder_grp, BoHF, 
 	SUM(Innbygg) as tot_Innbygg,
-	(calculated tot_Innbygg)/(&max_aar-&min_aar) as snitt_Innbygg
+	(calculated tot_Innbygg)/(&startaar_fremskr-&min_aar) as snitt_Innbygg
    from Bo_Bef  
    /*Begrense antall år til basisperioden*/
 	where aar ge &min_aar and aar le &max_aar
@@ -402,6 +426,13 @@ quit;
 data &utdata;
 merge Frem inndata_agg_bohf;
 by bohf aar;
+%if &ekskludere eq 1 %then %do;	
+/*To nye variabler for plotting*/
+&frem_var._ekskl=.;
+&frem_var._inkl=.;
+if aar eq &ekskludert_aar then &frem_var._ekskl=&frem_var;
+if aar ne &ekskludert_aar then &frem_var._inkl=&frem_var;
+%end;
 run;
 
 
@@ -418,9 +449,20 @@ Proc sgplot data=&utdata sganno=Anno pad=(Bottom=10%) noautolegend noborder ;
 /*styleattrs datacontrastcolors=(CX00509E CX568BBF CX95BDE6 CX969696) */
 /*datacolors=(CX00509E CX568BBF CX95BDE6 CX969696);*/
 where &where_bohf;
-series X=Aar y=&frem_var / name="relle" Group=BoHF  lineattrs=(Pattern=21 thickness=1) break ;
-series X=Aar y=Mid / name="BOHF" Group=BoHF  lineattrs=(Pattern=1 thickness=2);
-Keylegend / title="Opptaksområder:" location=outside position=bottom noborder ;
+
+series X=Aar y=&frem_var / legendlabel="Observert antall" name="relle" Group=BoHF  lineattrs=(Pattern=21 thickness=1) break ;
+series X=Aar y=Mid / legendlabel="Fremskrevet antall" name="BOHF" Group=BoHF  lineattrs=(Pattern=1 thickness=2);
+
+%if &ekskludere ne 1 %then %do; 
+scatter x=aar y=&frem_var / markerattrs=(symbol=circlefilled);
+%end;
+
+%if &ekskludere eq 1 %then %do; 
+scatter x=aar y=&frem_var._inkl / legendlabel="Inkluderte år"  name="inkluderte" markerattrs=(symbol=circlefilled);
+scatter x=aar y=&frem_var._ekskl / legendlabel="Ekskluderte år"  name="ekskluderte" markerattrs=(symbol=circle);
+%end;
+
+Keylegend "reelle" "BOHF" "inkluderte" "ekskluderte" / title="Opptaksområder:" location=outside position=bottom noborder ;
 band x=Aar lower=Lav UPPER=Hoy /Fill Outline lineattrs=(Pattern=1 thickness=2)
 	group=BoHF transparency=0.6;
 yaxis /*Values=(0 to 2500 by 250)*/ label="&ylabel" ;
@@ -428,9 +470,11 @@ xaxis label=' ' values=(&min_aar to &frem_slutt by 1);
 run;
 ODS Graphics Off;
 
+%if &debug ne 0 %then %do;
 proc datasets nolist;
 delete inn: frem: bo_fs anno;
 quit;
+%end;
+
 
 %mend;
-
