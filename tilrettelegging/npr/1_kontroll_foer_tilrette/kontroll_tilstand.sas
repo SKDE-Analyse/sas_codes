@@ -78,10 +78,19 @@ title;
 %let dsid1=%sysfunc(close(&dsid1)); 
 
 %if &nobs_feildiag ne 0 %then %do;
-title color= purple height=5 "7a: Diagnosekode: &nobs_feildiag linjer med ugyldige diagnosekoder";
-proc print data=tmpdata(keep= lopenr feildiag tilstand:);
-  where feildiag=1;
- run;
+title color= red height=5 "7a: Diagnosekode: &nobs_feildiag linjer med ugyldige diagnosekoder - Se datasett %upcase(<ugyldige_diag>) ";
+data ugyldige_diag;
+  set tmpdata(keep= lopenr feildiag tilstand:);
+    where feildiag=1;
+run;
+proc sql;
+  create table m
+      (note char(16));
+  insert into m
+     values('SJEKK DATASETT!!');
+  select * 
+ from m;
+quit;
 title;
 %end;
 
