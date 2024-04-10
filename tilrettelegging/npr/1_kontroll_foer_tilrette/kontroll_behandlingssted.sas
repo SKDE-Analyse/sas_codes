@@ -25,7 +25,12 @@ Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, aa
 - 2020 Opprettet av Janice og Tove
 - September 2021, Tove, dokumentasjon markdown
 - Mars 2023, Tove, endret output
+- Apr 2024, Janice, endret for avtalespesialist
 */
+
+/* -------- */
+/* SOMATIKK */
+/* -------- */
 
 %if &beh eq behandlingsstedkode %then %do;
 
@@ -62,25 +67,6 @@ data orgnr;
 	kommentar $
 	;
 run;
-%end;
-
-%if &beh eq institusjonid %then %do;
-data orgnr;
-  infile "&filbane/formater/avtalespesialister.csv"
-  delimiter=';'
-  missover firstobs=2 DSD;
-
-  format orgnr 10.;
-  format org_navn $100.;
-  format kommentar $300.;
-
-  input	
-  orgnr
-  org_navn $
-	kommentar $
-	;
-run;
-%end;
 
 /*til kontroll av orgnr i mottatte data trenger en kun kolonnen orgnr*/
 data beh_liste(keep=orgnr);
@@ -117,7 +103,6 @@ proc sql;
 quit;
 title; 
 
-%if &beh = behandlingsstedkode %then %do;
 /*data som har missing behandlingssted*/
 data tmp_data2;
 set &inndata(keep=behandlingsstedkode institusjonid);
@@ -128,9 +113,86 @@ title color= purple height=5 "6b: Hvis missing &beh. så brukes institusjonid so
 proc freq data=tmp_data2;
 tables institusjonid  /nocol nopercent norow;
 run;
-%end;
 
 proc datasets nolist;
 delete flagg_ugyldig tmp_data tmp_data2 orgnr beh_liste mottatt_beh;
 run;
+%end;
+
+/* ---------------- */
+/* AVTALESPESIALIST */
+/* ---------------- */
+
+%if &beh eq institusjonID %then %do;
+
+/* check that there are no missing */
+data missing_instID;
+  set &inndata(keep=&beh);
+    where &beh=.;
+run;
+
+%let dsid_missing=%sysfunc(open(missing_instID));
+%let nobs_missing=%sysfunc(attrn(&dsid_missing,nlobs));
+%let dsid_missing=%sysfunc(close(&dsid_missing)); 
+
+%if &nobs_missing ne 0 %then %do;
+title color= red height=5 "6a: &nobs_missing linjer uten &beh";
+proc freq data=missing_instID;
+  tables fag sh_reg/missing;
+run;
+%end;
+%else %do;
+title color= darkblue height=5 "6a: Alle linjer har &beh";
+proc sql;
+  create table m
+      (note char(12));
+  insert into m
+     values("All is good!");
+  select * 
+ from m;
+quit;
+title;
+%end;
+
+/* make a list with new or removed institusjonID */
+
+%let head=%substr(&inndata, 1,12);
+%let lastyear=%sysevalf(%substr(&inndata, 13,4)-1);
+%let tail=%substr(&inndata, 17,3);
+%put &lastyear;
+%let olddata=&head.&lastyear.&tail.;
+%put &olddata;
+
+proc sort data=&inndata(keep=&beh) nodupkey out=thisyear;
+  by &beh;
+run;
+
+proc sort data=&olddata(keep=&beh) nodupkey out=lastyear;
+  by &beh;
+run;
+
+proc format;
+  value status
+  1='ny'
+  2='borte'
+  3='begge';
+run;
+
+data institusjonID;
+  merge thisyear(in=a) lastyear(in=b);
+  by &beh;
+  if a and not b then status=1;
+  if b and not a then status=2;
+  if a and     b then status=3;
+  format status status.;
+run;
+
+title color= darkblue height=5 "6b: sammenligne &beh. med tidligere år - se datasett <institusjonID>";
+proc freq data=institusjonID;
+  tables status;
+run;
+
+%end;
+
+
 %mend kontroll_behandlingssted;
