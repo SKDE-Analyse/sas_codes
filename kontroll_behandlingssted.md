@@ -26,3 +26,4 @@ Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, aa
 - 2020 Opprettet av Janice og Tove
 - September 2021, Tove, dokumentasjon markdown
 - Mars 2023, Tove, endret output
+- Apr 2024, Janice, endret for avtalespesialist

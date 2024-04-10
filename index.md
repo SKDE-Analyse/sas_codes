@@ -89,7 +89,6 @@
 - Filen length_label.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/fix_behandlingssted.sas](fix_behandlingssted)
 - Filen Formater.sas er ikke dokumentert.
-- [tilrettelegging/npr/2_tilrettelegging/AvtaleRHF_spesilistkomHN.sas](AvtaleRHF_spesilistkomHN)
 - [tilrettelegging/npr/2_tilrettelegging/lablerFormater.sas](lablerFormater)
 - Filen fag_skde.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/avledede.sas](avledede)
