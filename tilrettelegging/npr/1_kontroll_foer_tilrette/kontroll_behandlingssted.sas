@@ -159,7 +159,7 @@ proc datasets nolist;
 run;
 %end;
 
-/* make a list with new or removed institusjonID */
+/* if T3 data, then make a list with new or removed institusjonID */
 
 %let head=%substr(&inndata, 1,12);
 %let lastyear=%sysevalf(%substr(&inndata, 13,4)-1);
