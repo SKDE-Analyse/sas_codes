@@ -115,7 +115,7 @@ tables institusjonid  /nocol nopercent norow;
 run;
 
 proc datasets nolist;
-delete flagg_ugyldig tmp_data tmp_data2 orgnr beh_liste mottatt_beh;
+delete flagg_ugyldig tmp_data tmp_data2 orgnr beh_liste mottatt_beh m;
 run;
 %end;
 
@@ -123,7 +123,7 @@ run;
 /* AVTALESPESIALIST */
 /* ---------------- */
 
-%if &beh eq institusjonID %then %do;
+%if &beh eq institusjonid %then %do;
 
 /* check that there are no missing */
 data missing_instID;
@@ -141,6 +141,7 @@ proc freq data=missing_instID;
   tables fag sh_reg/missing;
 run;
 %end;
+
 %else %do;
 title color= darkblue height=5 "6a: Alle linjer har &beh";
 proc sql;
@@ -152,6 +153,10 @@ proc sql;
  from m;
 quit;
 title;
+
+proc datasets nolist;
+  delete  missing_instID m;
+run;
 %end;
 
 /* make a list with new or removed institusjonID */
@@ -163,6 +168,7 @@ title;
 %let olddata=&head.&lastyear.&tail.;
 %put &olddata;
 
+%if &tail=_T3 %then %do;
 proc sort data=&inndata(keep=&beh) nodupkey out=thisyear;
   by &beh;
 run;
@@ -192,6 +198,13 @@ proc freq data=institusjonID;
   tables status;
 run;
 
+proc datasets nolist;
+  delete thisyear lastyear;
+run;
+
+%end;
+
+  
 %end;
 
 
