@@ -21,10 +21,10 @@ call symput ('ncrp_1',varnum(dset,'ncrp_1'));
 call symput ('liggetid',varnum(dset,'liggetid'));
 run;
 
-/* verdi på sektor brukes til å skille mellom avtspes og somatikk */
+/* verdi på sektor brukes til å skille mellom de ulike filene vi sender inn */
 %if &sektor ne 0 %then %do;
 proc sql noprint;
-	select max(sektor) into: max_sektor
+	select max(sektor) into: max_sektor 
 	from &inndata;
 quit;
 %end;
@@ -72,12 +72,12 @@ quit;
 /* ---------------- */
 /* 6 - behandler-id */
 /* ---------------- */
-/* må bruke variabel sektor i kombinasjon med behandlingsstedkode og institusjonid for å skille mellom somatikk, rehab og avtspes */
+/* må bruke variabel sektor i kombinasjon med behandlingsstedkode og institusjonid for å skille mellom filene */
 %if (&behandlingsstedkode ne 0 or &institusjonid ne 0) and &sektor ne 0 %then %do;
-	%if &behandlingsstedkode ne 0 and (&max_sektor eq 4 /*somatikk*/ or &max_sektor eq 5 /*rehab*/) %then %do;
+	%if &behandlingsstedkode ne 0 and (&max_sektor eq 2 /*phv_rus*/ or &max_sektor eq 3 /*phbu*/ or &max_sektor eq 4 /*somatikk*/ or &max_sektor eq 5 /*rehab*/) %then %do;
 		%let beh=behandlingsstedkode;
 	%end;
-	%if &institusjonid ne 0 and (&max_sektor eq SOM or &max_sektor eq PHV) %then %do;
+	%if &institusjonid ne 0 and (&max_sektor eq SOM /*aspes*/ or &max_sektor eq PHV/*aspes*/) %then %do;
 		%let beh=institusjonid;
 	%end;
 %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas";
@@ -118,7 +118,7 @@ quit;
 %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_nckoder.sas"; 
 %kontroll_nckoder(inndata=&inndata, kode=ncsp);
 %end;
-%else %do;
+%else %if &max_sektor ne 3 %then %do;
 title color= purple height=5 "7b: NCSP finnes ikke i inndata !!!";
 proc sql;
    create table m (note char(12));
@@ -131,7 +131,7 @@ quit;
 %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_nckoder.sas"; 
 %kontroll_nckoder(inndata=&inndata, kode=ncrp);
 %end;
-%else %do;
+%else %if &max_sektor ne 3 %then %do;
 title color= purple height=5 "7b: NCRP finnes ikke i inndata !!!";
 proc sql;
    create table m (note char(12));

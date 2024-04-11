@@ -27,7 +27,7 @@ Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, aa
 - Mars 2023, Tove, endret output
 */
 
-%if &beh eq behandlingsstedkode %then %do;
+%if &beh eq behandlingsstedkode and &max_sektor ne 3 and &max_sektor ne 2 %then %do; /*bruke annen fil for psykiatridata*/
 
 data orgnr;
   infile "&filbane/formater/behandler.csv"
@@ -64,7 +64,7 @@ data orgnr;
 run;
 %end;
 
-%if &beh eq institusjonid %then %do;
+%if &beh eq institusjonid %then %do; /*avtalespesialister*/
 data orgnr;
   infile "&filbane/formater/avtalespesialister.csv"
   delimiter=';'
@@ -79,6 +79,13 @@ data orgnr;
   org_navn $
 	kommentar $
 	;
+run;
+%end;
+
+/* psykiatridata */
+%if &max_sektor eq 2 or &max_sektor eq 3 %then %do;
+data orgnr;
+  set hnref.ref_behandler_midlertidig2;
 run;
 %end;
 
