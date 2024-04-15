@@ -6,3 +6,4 @@ proc format cntlin=hnref.fmtfil_bohf;   run;
 proc format cntlin=hnref.fmtfil_borhf;  run;
 proc format cntlin=hnref.fmtfil_bydel;  run;
 proc format cntlin=hnref.fmtfil_komnr;  run;
+proc format cntlin=hnref.fmtfil_bodps;  run;
