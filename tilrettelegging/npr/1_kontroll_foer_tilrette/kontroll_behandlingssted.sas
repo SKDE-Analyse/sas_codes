@@ -128,7 +128,7 @@ run;
 
 /* check that there are no missing */
 data missing_instID;
-  set &inndata(keep=&beh);
+  set &inndata(keep=&beh fag sh_reg);
     where &beh=.;
 run;
 

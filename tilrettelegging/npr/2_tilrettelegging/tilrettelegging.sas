@@ -312,14 +312,9 @@ run;
 /* --------- */
 /* Behandler */
 /* --------- */
-%if &behandlingsstedkode ne 0 and &institusjonid ne 0 and &max_sektor ne 2 and &max_sektor ne 3 %then %do;
+%if &behandlingsstedkode ne 0 and &institusjonid ne 0 %then %do;
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/behandler.sas";
 %behandler(inndata=tmp_data , beh=behandlingsstedkode);
-%end;
-
-%if &behandlingsstedkode ne 0 and &institusjonid ne 0 and (&max_sektor eq 2 or &max_sektor eq 3) %then %do;
-%include "&filbane/tilrettelegging/npr/2_tilrettelegging/behandler_psyk.sas";
-%behandler_psyk(inndata=tmp_data, beh=behandlingsstedkode);
 %end;
 
 /* ------------------------ */
@@ -328,6 +323,18 @@ run;
 
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/length_label.sas";
 %length_label(inndata=tmp_data)
+
+/* ---------------------- */
+/* Drop i phbu og phv_rus */
+/* ---------------------- */
+
+%if &max_sektor eq 2 or &max_sektor eq 3 %then %do;
+data tmp_data;
+    set tmp_data;
+keep aar pid inndato utdato ermann alder komnr bydel bo: fylke fodselsar institusjonid hastegrad hf nc: inntid uttid beh:
+        episode_lnr fag: sektor tilst: hdiag: bdiag: produksjonid utskrivningsklar utskrklardato psykinstID akse1: ;
+run;
+%end;
 
 /* -------------------------- */
 /* Rekkefølge på variabler ut */

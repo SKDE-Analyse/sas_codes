@@ -24,6 +24,7 @@ bydel
 bohf
 borhf
 boshhn
+bodps
 Fylke
 NPRId_reg
 fodselsar
