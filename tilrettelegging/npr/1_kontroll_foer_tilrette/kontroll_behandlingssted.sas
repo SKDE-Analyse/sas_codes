@@ -7,11 +7,11 @@ Kontrollen gjennomføres ved at mottatte verdier sjekkes mot CSV-filer som inneh
 
 Ugyldige/ukjente verdier printes ut kontrolleres mot brønnøysundregisteret eller reshid-registeret.
 Hvis verdien i error_listen er et gyldig organisasjonsnummer eller reshid så skal CSV-fil oppdateres.
-Hvis ugyldig verdi gjør evnt manuell korrigering før tilrettelegging kjøres, f.eks erstatte ugyldig behandlingsstedkode med institusjonid.
+Hvis ugyldig verdi gjør evnt manuell korrigering før tilrettelegging kjøres, f.eks sette behandlingsstedkode til missing, da brukes institusjonid i tilretteleggingen.
 
 Eksempel på bruk:
-Somatikk:           %kontroll_behandlingssted(inndata=hnmot.SOM_2022_M22T1, aar=2022);
-Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, aar=2022,beh=institusjonid , sektor=avtspes);
+Somatikk:           %kontroll_behandlingssted(inndata=hnmot.SOM_2022_M22T1);
+Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, beh=institusjonid);
 
 
 ### Input 
@@ -27,7 +27,7 @@ Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, aa
 - Mars 2023, Tove, endret output
 */
 
-%if &beh eq behandlingsstedkode and &max_sektor ne 3 and &max_sektor ne 2 %then %do; /*bruke annen fil for psykiatridata*/
+%if &beh eq behandlingsstedkode %then %do; 
 
 data orgnr;
   infile "&filbane/formater/behandler.csv"
@@ -79,13 +79,6 @@ data orgnr;
   org_navn $
 	kommentar $
 	;
-run;
-%end;
-
-/* psykiatridata */
-%if &max_sektor eq 2 or &max_sektor eq 3 %then %do;
-data orgnr;
-  set hnref.ref_behandler_midlertidig2;
 run;
 %end;
 

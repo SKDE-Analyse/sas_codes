@@ -95,6 +95,8 @@ data boomr;
   format borhf 4.;
   format borhf_navn $60.;
   format kommentar $400.;
+  format bodps 4.;
+  format bodps_navn $60.;
  
   input	
   	komnr
@@ -108,6 +110,8 @@ data boomr;
     borhf
 	  borhf_navn $
 	  kommentar $
+    bodps 
+    bodps_navn $
 	  ;
   run;
 

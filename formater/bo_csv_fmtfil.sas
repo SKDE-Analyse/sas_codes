@@ -43,14 +43,15 @@ data bo;
   format borhf 4.;
   format borhf_navn $60.;
   format kommentar $400.;
+  format dps 4.;
+  format dps_navn $60.;
  
   input	
-  	komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $
+  	komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ dps dps_navn $
 	  ;
   run;
 
 
-    
 /* -------- */
 /*  BOSHHN  */  
 /* -------- */                                                                           
@@ -175,7 +176,26 @@ run;
  /* Create the format using the control data set. */                                                                                     
 proc format cntlin=hnref.fmtfil_komnr; run;
 
-proc datasets nolist;
-delete bo: bydel_fmt forny_kom komnr: fmtfil_bydel ; 
-run;
 
+/* ------- */
+/*   DPS   */  
+/* ------- */                                                                           
+/* Remove duplicate values */
+proc sort data=bo nodupkey out=dps_fmt(keep=dps dps_navn);                                                                                                        
+   by dps;   
+   where dps is not missing;                                                                                                                              
+run; 
+/* Build format data set */                                                                                                            
+data hnref.fmtfil_dps(rename=(dps=start) keep=dps fmtname label);                                                                                    
+   retain fmtname 'dps_fmt';                                                                                                 
+   length dps_navn $60.;                                                                                                                    
+   set dps_fmt; 
+   label = cat(dps_navn); 
+run; 
+ /* Create the format using the control data set. */                                                                                     
+proc format cntlin=hnref.fmtfil_dps; run;
+
+
+proc datasets nolist;
+delete bo: bydel_fmt forny_kom komnr: dps_fmt; 
+run;

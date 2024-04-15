@@ -22,17 +22,18 @@ Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 - september 2021, Tove, fjernet argument 'utdata='
 - januar 2022, Tove, fjerne argument 'barn=' og 'haraldsplass='
 - februar 2022, Tove, ta ut radene som kun brukes til formater
+- april 2024, Tove, oppdatert med BODPS
  */
 
 /*
-*****************************************
-1. Drop variablene BOHF, BORHF og BOSHHN
-*****************************************
+***********************************************
+1. Drop variablene BOHF, BORHF, BOSHHN og BODPS
+***********************************************
 */
 /* Pga sql-merge i makroen må datasettet en sender inn ikke ha variablene bohf, borhf eller boshhn med */
 data &inndata;
 set &inndata;
-drop bohf borhf boshhn;
+drop bohf borhf boshhn bodps;
 run;
 /*
 *********************************************
@@ -55,9 +56,11 @@ data bo;
   format borhf 4.;
   format borhf_navn $60.;
   format kommentar $400.;
+  format bodps 4.;
+  format bodps_navn $60.;
  
   input	
-  komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ ;
+  komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ bodps bodps_navn $;
   if komnr eq . then delete; /*ta vekk rader som kun brukes til å lage formater*/
   run;
 /*
@@ -68,7 +71,7 @@ data bo;
 %if &bydel = 1 %then %do;
 proc sql;
   create table &inndata as
-  select a.*, b.bohf, b.boshhn, b.borhf
+  select a.*, b.bohf, b.boshhn, b.borhf, b.bodps
   from &inndata a left join bo b
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
@@ -92,7 +95,7 @@ run;
 
 proc sql;
   create table &inndata as
-  select a.*, b.bohf, b.boshhn, b.borhf 
+  select a.*, b.bohf, b.boshhn, b.borhf, b.bodps 
   from &inndata a left join bo_utenbydel b
   on a.komnr=b.komnr;
 quit;
