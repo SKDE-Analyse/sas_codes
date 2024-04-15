@@ -23,7 +23,7 @@ Value BoHF
 	20='Vestre Viken Hospital Trust - residence'
 	21='Vestfold Hospital Trust - residence'
 	22='Telemark Hospital Trust - residence'
-	23='Sørlandet Hospital Trust - residence'
+	23='Sandet Hospital Trust - residence'
 	24='Abroad/Svalbard - residence'
 	30='Oslo - residence'
 	31='Inner Oslo - residence'
