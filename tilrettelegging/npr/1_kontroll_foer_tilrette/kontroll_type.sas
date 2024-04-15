@@ -13,7 +13,7 @@ proc sql;
 			case when a.type ne b.type and b.type ne . then 1 end as ulik_type,
 			b.kommentar
 	from varlist a
-	left join hnref.variabler_type_mottatt2 b
+	left join hnref.variabler_type_mottatt b
 	on a.name=b.name;
 quit;
 
