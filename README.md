@@ -22,5 +22,3 @@ De fleste av kodene bruker makrovariablen `&filbane`, som sier i hvilken mappe d
 ```sas
 %let filbane=/sas_smb/skde_analyse/Data/SAS/felleskoder/main;
 ```
-
-Dette er en ednring
