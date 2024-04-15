@@ -85,6 +85,7 @@
 - [tilrettelegging/npr/2_tilrettelegging/konvertering.sas](konvertering)
 - [tilrettelegging/npr/2_tilrettelegging/icd10.sas](icd10)
 - [tilrettelegging/npr/2_tilrettelegging/splitte.sas](splitte)
+- Filen tilstandskoder_akse.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/reduser_lengde.sas](reduser_lengde)
 - Filen length_label.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/fix_behandlingssted.sas](fix_behandlingssted)

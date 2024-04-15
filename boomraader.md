@@ -23,3 +23,4 @@ Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 - september 2021, Tove, fjernet argument 'utdata='
 - januar 2022, Tove, fjerne argument 'barn=' og 'haraldsplass='
 - februar 2022, Tove, ta ut radene som kun brukes til formater
+- april 2024, Tove, oppdatert med BODPS

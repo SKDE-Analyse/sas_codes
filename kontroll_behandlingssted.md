@@ -8,11 +8,11 @@ Kontrollen gjennomføres ved at mottatte verdier sjekkes mot CSV-filer som inneh
 
 Ugyldige/ukjente verdier printes ut kontrolleres mot brønnøysundregisteret eller reshid-registeret.
 Hvis verdien i error_listen er et gyldig organisasjonsnummer eller reshid så skal CSV-fil oppdateres.
-Hvis ugyldig verdi gjør evnt manuell korrigering før tilrettelegging kjøres, f.eks erstatte ugyldig behandlingsstedkode med institusjonid.
+Hvis ugyldig verdi gjør evnt manuell korrigering før tilrettelegging kjøres, f.eks sette behandlingsstedkode til missing, da brukes institusjonid i tilretteleggingen.
 
 Eksempel på bruk:
-Somatikk:           %kontroll_behandlingssted(inndata=hnmot.SOM_2022_M22T1, aar=2022);
-Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, aar=2022,beh=institusjonid , sektor=avtspes);
+Somatikk:           %kontroll_behandlingssted(inndata=hnmot.SOM_2022_M22T1);
+Avtalespesialist:   %kontroll_behandlingssted(inndata=HNMOT.ASPES_2022_M22T1, beh=institusjonid);
 
 
 ### Input 
