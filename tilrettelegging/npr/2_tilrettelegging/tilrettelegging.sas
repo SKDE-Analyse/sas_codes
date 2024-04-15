@@ -26,10 +26,21 @@ call symput ('sektor',varnum(dset,'sektor'));
 call symput ('takst_1',varnum(dset,'takst_1'));
 call symput ('sh_reg',varnum(dset,'sh_reg'));
 call symput ('fag',varnum(dset,'fag'));
+call symput ('fagenhetkode',varnum(dset,'fagenhetkode'));
+call symput ('fagomrade',varnum(dset,'fagomrade'));
+call symput ('tilst1akse1',varnum(dset,'tilst1akse1'));
 run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
 %include "&filbane/formater/NPR_somatikk.sas";
+
+/* verdi på sektor brukes til å skille mellom avtspes og somatikk */
+%if &sektor ne 0 %then %do;
+proc sql noprint;
+	select max(sektor) into: max_sektor
+	from &inndata;
+quit;
+%end;
 
 data tmp_data;
 set &inndata;
@@ -79,6 +90,26 @@ drop lopenr;
 		if episodefag_ny in ("0","950") then episodefag_ny="999";
 	drop episodefag;
     rename episodefag_ny=episodefag;
+%end;
+
+/*--------------*/
+/* FAGENHETKODE */
+/*--------------*/
+%if &fagenhetkode ne 0 %then %do;
+    fagenhetkode_ny=put(fagenhetkode,5.);
+		if lengthn(compress(fagenhetkode)) = 2 then fagenhetkode_ny = compress("0"||fagenhetkode);
+		drop fagenhetkode;
+   rename fagenhetkode_ny=fagenhetkode;
+%end;
+
+/*-----------*/
+/* FAGOMRADE */
+/*-----------*/
+%if &fagomrade ne 0 %then %do;
+    fagomrade_ny=put(fagomrade,3.);
+		if lengthn(compress(fagomrade)) = 2 then fagomrade_ny = compress("0"||fagomrade);
+		drop fagomrade;
+   rename fagomrade_ny=fagomrade;
 %end;
 
 /*--------------------*/
@@ -215,6 +246,12 @@ run;
 %tilstandskoder(inndata=tmp_data, hoved=0);
 %end; 
 
+%if &tilst1akse1 ne 0 %then %do;
+/* akse 1 */
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/tilstandskoder_akse.sas";
+%tilstandskoder_akse(inndata=tmp_data);
+%end;
+
 /* drop tilstandskoder fra tilrettelagte data */
 data tmp_data;
 set tmp_data;
@@ -275,9 +312,14 @@ run;
 /* --------- */
 /* Behandler */
 /* --------- */
-%if &behandlingsstedkode ne 0 and &institusjonid ne 0 %then %do;
+%if &behandlingsstedkode ne 0 and &institusjonid ne 0 and &max_sektor ne 2 and &max_sektor ne 3 %then %do;
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/behandler.sas";
 %behandler(inndata=tmp_data , beh=behandlingsstedkode);
+%end;
+
+%if &behandlingsstedkode ne 0 and &institusjonid ne 0 and (&max_sektor eq 2 or &max_sektor eq 3) %then %do;
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/behandler_psyk.sas";
+%behandler_psyk(inndata=tmp_data, beh=behandlingsstedkode);
 %end;
 
 /* ------------------------ */

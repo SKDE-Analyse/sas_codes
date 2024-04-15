@@ -87,7 +87,9 @@ proc sql;
   left join beh b
 	on a.&beh=b.orgnr;
 quit;
-title height=5 "Oversikt behsh, behhf og behrhf i data. NB: ingen skal ha missing!";
+title height=5 "Oversikt behsh, behhf og behrhf i data.
+              NB: I somatikkdata, avtspes og rehab skal det ikke være noen rader med missing!
+              I psykiatridata vil det være rader som ikke er tilordnet behsh.";
 proc freq data=&inndata;
   tables behsh behhf behrhf / nocum;
 run;
