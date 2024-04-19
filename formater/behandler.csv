@@ -1,5 +1,4 @@
-﻿orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_navn;behrhf_navnkort;behrhf_navnkortest;kommentar
-913356837;FINNMARKSSYKEHUSET HF BARNE OG UNGDOMSPSYK SANKS KARASJOK;;;1;Finnmarkssykehuset HF;Finnmarkssykehuset;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 29.08.2023 av Johan R
+﻿913356837;FINNMARKSSYKEHUSET HF BARNE OG UNGDOMSPSYK SANKS KARASJOK;;;1;Finnmarkssykehuset HF;Finnmarkssykehuset;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 29.08.2023 av Johan R
 914983991;FINNMARKSSYKEHUSET HF TVERRFAGLIG SPES RUSBEHANDLING ALTA;;;1;Finnmarkssykehuset HF;Finnmarkssykehuset;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 29.08.2023 av Johan R
 914984033;FINNMARKSSYKEHUSET HF TVERRFAG SPES RUSBEH HAMMERFES T;;;1;Finnmarkssykehuset HF;Finnmarkssykehuset;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 29.08.2023 av Johan R
 923679448;FINNMARKSSYKEHUSET HF TVERRFAG SPES RUSBEH SANKS KARASJOK;;;1;Finnmarkssykehuset HF;Finnmarkssykehuset;1;Helse Nord RHF;Helse Nord;Nord;Oppdatert 29.08.2023 av Johan R
@@ -82,7 +81,6 @@
 974795485;Helgelandssykehuset HF Mosjøen;42;Helgelandssykehuset Mosjøen;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 874044342;Helgelandssykehuset HF Brønnøysund fødestue;43;Helgelandssykehuset Sandnessjøen;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
 974795477;Helgelandssykehuset HF Sandnessjøen;43;Helgelandssykehuset Sandnessjøen;4;Helgelandssykehuset HF;Helgelandssykehuset;1;Helse Nord RHF;Helse Nord;Nord;
-875034022;BETANIA MALVIK BO- OG BEHANDLINGSSENTER;;;;;;2;Helse Midt-Norge RHF;;Midt;Oppdatert 29.08.2023 av Johan R
 874753912;HELSE NORD-TRØNDELAG HF PSYKIATRISK KLINIKK - NAMSOS;;;5;Helse Nord-Trøndelag HF;Helse Nord-Trøndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 884038162;HELSE NORD-TRØNDELAG HF DPS STJØRDAL;;;5;Helse Nord-Trøndelag HF;Helse Nord-Trøndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 912834573;HELSE NORD-TRØNDELAG HF DPS NAMSOS;;;5;Helse Nord-Trøndelag HF;Helse Nord-Trøndelag;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
@@ -131,6 +129,8 @@
 995413388;St Olavs hospital, Hysnes helsefort;64;St. Olavs hospital, Hysnes helsefort;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 915621457;St Olavs hospital, Ørland;65;St. Olavs hospital, Ørland;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 920196357;St Olavs Hospital HF rehabilitering Ørlandet;65;St. Olavs hospital, Ørland;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
+874748722;St Olavs hospital HF Psykisk helsevern Østmarka;66;St Olavs Hospital, Psyk Østmarka;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.06.2023 2023T1 Somatikk Hanne Sigrun Byhring
+890980392;St Olavs hospital HF Psykisk helsevern regionalt traumesenter;66;St. Olavs Hospital, psykisk helsevern;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 25.03.2024: nye orgnr i somatikk 2024 jan/feb
 874745642;HELSE MØRE OG ROMSDAL HF VOP NORDMØRE/ROMSDAL DØGNSEKSJON HJELSET;;;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 912776948;HELSE MØRE OG ROMSDAL HF VOP NORDMØRE/ ROMSDAL DØGNSEKSJONEN LUNDAVANG;;;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 912777219;HELSE MØRE OG ROMSDAL HF POLIKLINIKK MOLDE BUP;;;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
@@ -160,8 +160,6 @@
 974577216;Helse Møre og Romsdal HF Klinikk for Rehabilitering (Mork);75;Mork Rehabiliteringssenter;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974576929;Helse Møre og Romsdal HF, Nevrohjemmet;76;Nevrohjemmet rehabiliteringssenter;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
 974577054;Helse Møre og Romsdal HF, Aure rehabiliteringssenter;77;Aure rehabiliteringssenter;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;
-874748722;St Olavs hospital HF Psykisk helsevern Østmarka;66;St Olavs Hospital, Psyk Østmarka;6;St. Olavs Hospital HF;St. Olavs Hospital;3;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.06.2023 2023T1 Somatikk Hanne Sigrun Byhring
-890980392;St Olavs hospital HF Psykisk helsevern regionalt traumesenter;66;St. Olavs Hospital, psykisk helsevern;6;St. Olavs Hospital HF;St. Olavs Hospital;3;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 25.03.2024: nye orgnr i somatikk 2024 jan/feb
 927003457;HELSE FØRDE HF UNGDOMSPOST PSYKISK HELSEVERN;;;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 29.08.2023 av Johan R
 974570998;HELSE FØRDE HF INDRE SOGN PSYKIATRISENTER;;;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 29.08.2023 av Johan R
 974571005;HELSE FØRDE HF SOGNDAL BUP;;;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 29.08.2023 av Johan R
@@ -282,8 +280,6 @@
 974737779;Betanien spesialistpoliklinikk;131;Betanien spesialistpoliklinikk Bergen;13;Resterende Helse Vest RHF;Resterende Helse Vest;3;Helse Vest RHF;Helse Vest;Vest;
 973156829;Haugesund sanitetsforenings revmatismesykehus;132;Haugesund sanitetsforenings revm.sykehus;13;Resterende Helse Vest RHF;Resterende Helse Vest;3;Helse Vest RHF;Helse Vest;Vest;
 986106839;Haugesund sanitetsforenings revmatismesykehus;132;Haugesund sanitetsforenings revm.sykehus;13;Resterende Helse Vest RHF;Resterende Helse Vest;3;Helse Vest RHF;Helse Vest;Vest;
-974316285;Haraldsplass diakonale sykehus AS;260;Haraldsplass diakonale sykehus;26;Haraldsplass diakonale sykehus;Haraldsplass diakonale sykehus;3;Helse Vest RHF;Helse Vest;Vest;
-984027737;Haraldsplass diakonale sykehus AS;260;Haraldsplass diakonale sykehus;26;Haraldsplass diakonale sykehus;Haraldsplass diakonale sykehus;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 30.03.2022: RHF data somatikk.
 813961962;VESTRE VIKEN HF DRAMMEN DPS RUSPOLIKLINIKK;;;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 29.08.2023 av Johan R
 823462352;VESTRE VIKEN HF BUPA POLIKNIKK HSS;;;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 29.08.2023 av Johan R
 873601612;VESTRE VIKEN HF BARNE- OG UNGDOMSPSYKIATRISK AVD BÆRUM BUP;;;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 29.08.2023 av Johan R
@@ -556,6 +552,8 @@
 985773238;Revmatismesykehuset AS;253;Revmatismesykehuset Lillehammer;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;
 984630492;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader.
 997506499;Oslo kommunale legevakt;254;Oslo kommunale legevakt, Observasjonsposten;25;Resterende Helse Sør-Øst RHF;Resterende Helse Sør-Øst;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oslo legevakt ligger under OUS HF siden den delen av Oslo legevakt som rapporterer data til NPR er spesialisthelsetjeneste. Dette er Oslo skadelegevakt som er en avdeling ved OUS som mottar pasienter med akutte skader.
+974316285;Haraldsplass diakonale sykehus AS;260;Haraldsplass diakonale sykehus;26;Haraldsplass diakonale sykehus;Haraldsplass diakonale sykehus;3;Helse Vest RHF;Helse Vest;Vest;
+984027737;Haraldsplass diakonale sykehus AS;260;Haraldsplass diakonale sykehus;26;Haraldsplass diakonale sykehus;Haraldsplass diakonale sykehus;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 30.03.2022: RHF data somatikk.
 812794922;Colosseum Mann AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 813381192;Aleris Helse AS Stavanger;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 817178782;Medi 3 Ringvoll Klinikken AS, avd Kirurgi Hobøl;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
@@ -953,3 +951,5 @@
 999230008;Ifocus øyeklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 999238351;NIMI AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 999458610;Ibsensykehuset Gjøvik AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+orgnr;org_navn;behsh;behsh_navn;behhf;behhf_navn;behhf_navnkort;behrhf;behrhf_navn;behrhf_navnkort;behrhf_navnkortest;kommentar
+875034022;BETANIA MALVIK BO- OG BEHANDLINGSSENTER;;;;;;2;Helse Midt-Norge RHF;;Midt;Oppdatert 29.08.2023 av Johan R
