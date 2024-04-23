@@ -4,43 +4,25 @@ data tmpdata;
 run;
 
 
-data tmpdata;
+data ugyldige_diag misshdiag;
   set tmpdata;
+  length feildiag $10;
+  
+  * flag lines with no hdiag;
+  if tilstand_1_1 =' ' then output misshdiag;
 
-/*  Diagnosekoder */
-  array diag(*) $ tilstand:;
-  feildiag=0;
-  do i= 1 to dim(diag);
-
-    * codes that start with these combination of alpha in position 1 and 3 are valid;
-    if substr(diag(i),1,1) in ('T','Y','W','X','V') and substr(diag(i),3,1) in ('n','s','t') then leave;
-
-	else do;
-
-      * flag lines with no hdiag;
-  	  if tilstand_1_1 =' ' then misshdiag=1;
-
-      * most diag are alpha-num-num format in the first 3 position;
-      * if not, then flag and leave the loop, no need to check further;
-      if diag(i) not in (' ') then feildiag=not(anyalpha(substr(diag(i),1,1)));
-	    if feildiag=1 then leave;
-
-      if diag(i) not in (' ') then feildiag=not(anydigit(substr(diag(i),2,1)));
-	    if feildiag=1 then leave;
-
-      if diag(i) not in (' ') then feildiag=not(anydigit(substr(diag(i),3,1)));
-	    if feildiag=1 then leave;
+  /*  Diagnosekoder */
+  array diag[*] $ tilstand: ;
+  feildiag=" ";
+  do i=1 to dim(diag);
+    if diag[i] ^= " " then do;
+      if not prxmatch("/^([TYWXV]\d[nst])|([A-Z]\d\d)/", diag[i]) then do;
+         /* Matching against a regular expression for ICD-10 codes */
+         feildiag = diag[i];
+         output ugyldige_diag;
+      end;
+    end;
 	end;
-  end;
-
-run;
-
-
-/* Print out results for diagnosekoder */
-data feildiag misshdiag;
-  set tmpdata;
-  if feildiag=1 then output feildiag;
-  if misshdiag=1 then output misshdiag;
 run;
 
 * sjekk antall linjer med missing Hdiag - output i resultvindu ;
@@ -65,32 +47,22 @@ proc sql;
        (note char(12));
    insert into m
       values('All is good!');
-   select * 
-	from m;
+   select * from m;
 quit;
 title;
 %end;
 
 
-* sjekk om det er data i tabell 'feildiag' - output i resultvindu ;
-%let dsid1=%sysfunc(open(feildiag));
+* sjekk om det er data i tabell 'ugyldige_diag' - output i resultvindu ;
+%let dsid1=%sysfunc(open(ugyldige_diag));
 %let nobs_feildiag=%sysfunc(attrn(&dsid1,nlobs));
 %let dsid1=%sysfunc(close(&dsid1)); 
 
 %if &nobs_feildiag ne 0 %then %do;
-title color= red height=5 "7a: Diagnosekode: &nobs_feildiag linjer med ugyldige diagnosekoder - Se datasett %upcase(<ugyldige_diag>) ";
-data ugyldige_diag;
-  set tmpdata(keep= lopenr feildiag tilstand:);
-    where feildiag=1;
+title color= red height=5 "7a: Diagnosekode: &nobs_feildiag ugyldige diagnosekoder - Se datasett <ugyldige_diag> ";
+proc freq data=ugyldige_diag order=freq;
+  table feildiag / nocum;
 run;
-proc sql;
-  create table m
-      (note char(16));
-  insert into m
-     values('SJEKK DATASETT!!');
-  select * 
- from m;
-quit;
 title;
 %end;
 
@@ -107,6 +79,6 @@ quit;
 title;
 %end;
 
-proc datasets nolist; delete tmpdata feildiag m ; run;
+proc datasets nolist; delete tmpdata m ; run;
 
 %mend;
