@@ -189,6 +189,7 @@ set tmp_data;
 %if &aspes eq 1 %then %do;
 liggetid = 0;
 hastegrad = 4;
+utdato=inndato;
 
 %if &sh_reg ne 0 %then %do;
      if sh_reg=5 then AvtaleRHF=1; /*Helse Nord RHF*/     
