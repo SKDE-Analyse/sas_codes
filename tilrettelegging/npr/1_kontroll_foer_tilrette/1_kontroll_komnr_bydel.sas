@@ -207,8 +207,13 @@ proc print data=error_komnr_&aar; run;
 /* hvis error-fil er tom, print gyldige obs fra mottatt */
 %if &nobs eq 0 %then %do;
 title color= darkblue height=5  "5a: alle mottatte kommunenummer er gyldige";
-proc freq data=mottatt_komnr;
-tables komnr2 / missing nopercent; run;
+proc sql;
+   create table m
+       (note char(12));
+   insert into m
+      values('All is good!');
+   select * from m;
+quit;
 %end;
 
 /*sammenligne bydel med csv-fil*/

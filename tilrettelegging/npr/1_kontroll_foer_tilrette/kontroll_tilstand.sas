@@ -1,12 +1,13 @@
 ﻿%macro kontroll_tilstand(inndata=);
 data tmpdata;
-  set &inndata(keep=lopenr tilstand:);
+  set &inndata(keep=lopenr institusjonid tilstand:);
 run;
 
 
 data ugyldige_diag misshdiag;
   set tmpdata;
   length feildiag $10;
+  format institusjonid org_fmt.;
   
   * flag lines with no hdiag;
   if tilstand_1_1 =' ' then output misshdiag;
@@ -32,11 +33,9 @@ run;
 
 %if &nobs_misshdiag ne 0 %then %do;
 title color= purple height=5 "7a: Diagnosekode: &nobs_misshdiag linjer med missing hoveddiagnosekoder";
-proc sql;
-   create table m (note char(12));
-   insert into  m values('WARNING!');
-   select * from m;
-quit;
+proc freq data=misshdiag order=freq;
+  table institusjonid / nocum missing;
+run;
 title;
 %end;
 
@@ -73,8 +72,7 @@ proc sql;
        (note char(12));
    insert into m
       values('All is good!');
-   select * 
-	from m;
+   select * from m;
 quit;
 title;
 %end;
