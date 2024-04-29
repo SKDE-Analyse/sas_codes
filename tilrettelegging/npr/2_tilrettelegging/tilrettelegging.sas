@@ -29,6 +29,7 @@ call symput ('fag',varnum(dset,'fag'));
 call symput ('fagenhetkode',varnum(dset,'fagenhetkode'));
 call symput ('fagomrade',varnum(dset,'fagomrade'));
 call symput ('tilst1akse1',varnum(dset,'tilst1akse1'));
+call symput ('doddato',varnum(dset,'doddato'));
 run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
@@ -324,6 +325,17 @@ run;
 
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/length_label.sas";
 %length_label(inndata=tmp_data)
+
+/* --------------------- */
+/* Drop variabel døddato */
+/* --------------------- */
+/* variabel utleveres årlig som egen fil sammen med T3-utlevering */
+%if &doddato ne 0 %then %do;
+data tmp_data;
+set tmp_data;
+drop doddato;
+run;
+%end;
 
 /* ---------------------- */
 /* Drop i phbu og phv_rus */
