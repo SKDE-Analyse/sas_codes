@@ -80,7 +80,7 @@ Justeringen gjøres basert på følgende formel (adaptert fra forklaringen i [El
 
 I formelen ovenfor refererer b til et geografisk område; b står for boområde. g står for en spesifikk kjønn og/eller aldersgruppe, og G er antall grupper.
 sum(V<sub>gb</sub>) er summen av variabelen vi vil finne raten for i gruppen g i boområdet b; b<sub>g</sub> refererer til antall innbyggere
-i gruppen g i boområdet b. Med andre ord,sum(V<sub>gb</sub>)/b<sub>g</sub> er en rate som sier noe om hvor mange hendelser det er per person i boområdet b, i
+i gruppen g i boområdet b. Med andre ord, sum(V<sub>gb</sub>)/b<sub>g</sub> er en rate som sier noe om hvor mange hendelser det er per person i boområdet b, i
 gruppen g. Hvis vi med hendelser mener konsultasjoner, og det er omtrent like mange konsultasjoner som det er innbyggere, vil denne raten bli rundt 1. A<sub>g</sub>
 refererer til hvor mange prosent gruppen g utgjør av den nasjonale populasjonen.
 
@@ -94,7 +94,7 @@ på de forskjellige KA-gruppene i input-datasettet (i standardiseringsåret) som
 
 ![img](/sas_codes/bilder/std_avg.png)
 
-avg(V<sub>gb</sub>) er den gjennomsnittlige verdien av variabelen for hver KA-gruppe. A<sub>gN</sub> er hvor stor andel av alle observasjonene i input-datasettet som hører til KA-gruppen g.
+avg(V<sub>gb</sub>) er den gjennomsnittlige verdien av variabelen for hver KA-gruppe. A<sub>gN</sub> er hvor stor andel av alle observasjonene i input-datasettet som tilhører KA-gruppen g.
 
 KA-justert gjennomsnitt er normalt ikke inkludert i utdatasettet til %standard_rate. For å få den med må man legge til avg i variabelen &out_vars, slik som dette
 
@@ -111,7 +111,7 @@ Ovenfor har vi også lagt til cravg, som er det ujusterte gjennomsnittet. Ved å
 ```
 %graf(bars=prosedyrer/prosedyre_avgsnitt,
       variation=prosedyrer/prosedyre_avgsnitt prosedyre_cravgsnitt, variation_colors=gray red,
-      category=bohf,
+      category=bohf
 )
 ```
 
