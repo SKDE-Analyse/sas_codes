@@ -3,12 +3,14 @@
    min_age=auto,
    max_age=auto,
    out=,
+   out_vars=rate ant,
    age_group_size=5,
    ratemult=1000,
    std_year=auto,
    min_year=auto,
    max_year=auto,
    standardize_by=ka,
+   yearly=rate,
    population_data=innbygg.INNB_SKDE_BYDEL,
    debug = no
 );
@@ -27,12 +29,14 @@
 - **min_age** = `[<number>, auto]`. Laveste alder man skal ha med i standardiseringen. Default: auto.
 - **max_age** = `[<number>, auto]`. Høyeste alder man skal ha med i standardiseringen. Default: auto.
 - **out** = `<text>`. Navn på utdatasett.
+- **out_vars** = `<list>`. Liste over hvilke type variabler som skal med i ut-datasettet. Mulige verdier er rate (justert rate), crude (ujustert rate), ant (sum av variabelen), avg (justert gjennomsnittlig verdi av variabelen), cravg (ujustert gjennomsnitt). Default: rate ant.
 - **age_group_size** = `<number>`. Størrelsen på algersgruppene brukt i standariseringen. Default: 5.
 - **ratemult** = `<number>`. Ratemultiplikator, dvs. rate pr. Default: 1000.
 - **std_year** = `<number>`. Standardiseringsår. Default: auto. (auto betyr at std_year = max_year).
 - **min_year** = `<number>`. Første år man skal ha med i standardiseringen. Default: auto.
 - **max_year** = `<number>`. Siste år man skal ha med i standardiseringen. Default: auto.
-- **standardize_by** = `[ka, a, k]`, Denne variabelen bestemmer hvilken type standardisering som skal utføres. `ka` betyr kjønns- og aldersstandardisering; `a` betyr aldersstandardisering (uten kjønnsjustering); og `k` betyr kjønnsjustering (uten aldersjustering). Default: ka.
+- **standardize_by** = `[ka, a, k]`. Denne variabelen bestemmer hvilken type standardisering som skal utføres. `ka` betyr kjønns- og aldersstandardisering; `a` betyr aldersstandardisering (uten kjønnsjustering); og `k` betyr kjønnsjustering (uten aldersjustering). Default: ka.
+- **yearly** = `[no, rate, crude, cravg, avg, ant]`. Hvis denne er satt til noe annet enn `no` vil det lages et transponert datasett (med navnet &out._yearly) hvor kolonnene er opptaksområder, og hver rad viser tall for et år. Dette gjør det lett å lage en tidstrend med %graf(). Default: rate.
 - **population_data** = `<text>`. Datasett med informasjon om befolkningstall brukt i standardiseringen. Default: innbygg.INNB_SKDE_BYDEL.
 
 # Introduksjon
@@ -72,16 +76,44 @@ og `std_year`. Det å finne ut hvilke år og hvilken aldersgruppe som er med i d
 
 Justeringen gjøres basert på følgende formel (adaptert fra forklaringen i [Eldrehelseatlaset fra 2017](https://www.skde.no/helseatlas/files/eldrehelseatlas_rapport.pdf#page=25)):
 
-![img](/sas_codes/bilder/standard_rate_formel.png)
+![img](/sas_codes/bilder/std_rate.png)
 
 I formelen ovenfor refererer b til et geografisk område; b står for boområde. g står for en spesifikk kjønn og/eller aldersgruppe, og G er antall grupper.
-b<sub>hg</sub> referer til anntall hendelser i gruppen g i boområde b (h for hendelser); b<sub>pg</sub> refererer til antall innbyggere (p for populasjon)
-i gruppen g i boområdet b. Med andre ord, b<sub>hg</sub>/b<sub>pg</sub> er en rate som sier noe om hvor mange hendelser det er per person i boområdet b, i
-gruppen g. Hvis vi med hendelser mener konsultasjoner, og det er omtrent like mange konsultasjoner som det er innbyggere, vil denne raten bli rundt 1. a<sub>g</sub>
+sum(V<sub>gb</sub>) er summen av variabelen vi vil finne raten for i gruppen g i boområdet b; b<sub>g</sub> refererer til antall innbyggere
+i gruppen g i boområdet b. Med andre ord,sum(V<sub>gb</sub>)/b<sub>g</sub> er en rate som sier noe om hvor mange hendelser det er per person i boområdet b, i
+gruppen g. Hvis vi med hendelser mener konsultasjoner, og det er omtrent like mange konsultasjoner som det er innbyggere, vil denne raten bli rundt 1. A<sub>g</sub>
 refererer til hvor mange prosent gruppen g utgjør av den nasjonale populasjonen.
 
-En ting som er verdt å notere seg er at a<sub>g</sub> refererer til populasjonen i standardiseringsåret (std_year=); b<sub>pg</sub> på sin side refererer til
+En ting som er verdt å notere seg er at A<sub>g</sub> refererer til populasjonen i standardiseringsåret (std_year=); b<sub>g</sub> på sin side refererer til
 populasjonen i boområdet i det året hendelsene skjedde. Intensjonen med å gjøre det slikt er at man skal kunne sammenligne over tid.
+
+# KA-justert gjennomsnitt (inklusive KA-justerte andeler)
+
+For å lage en KA-justert andel, og mer generelt en KA-justert gjennomsnittlig verdi, brukes ikke populasjonen i boområdene, men heller fordelingen av observasjonene
+på de forskjellige KA-gruppene i input-datasettet (i standardiseringsåret) som basis for standardiseringen. Formelen ser slik ut:
+
+![img](/sas_codes/bilder/std_avg.png)
+
+avg(V<sub>gb</sub>) er den gjennomsnittlige verdien av variabelen for hver KA-gruppe. A<sub>gN</sub> er hvor stor andel av alle observasjonene i input-datasettet som hører til KA-gruppen g.
+
+KA-justert gjennomsnitt er normalt ikke inkludert i utdatasettet til %standard_rate. For å få den med må man legge til avg i variabelen &out_vars, slik som dette
+
+```
+%standard_rate(datasett/prosedyre,
+               region=bohf,
+               out_vars=rate ant avg cravg,
+               out=prosedyrer
+)
+```
+
+Ovenfor har vi også lagt til cravg, som er det ujusterte gjennomsnittet. Ved å sammenligne avg med cravg kan man se effekten av KA-justeringen, for eksempel slik som dette:
+
+```
+%graf(bars=prosedyrer/prosedyre_avgsnitt,
+      variation=prosedyrer/prosedyre_avgsnitt prosedyre_cravgsnitt, variation_colors=gray red,
+      category=bohf,
+)
+```
 
 */
 options minoperator;
@@ -95,6 +127,7 @@ options minoperator;
 %let region = %lowcase(&region);                 %assert_member(region, bohf borhf boshhn)
 %let standardize_by = %lowcase(&standardize_by); %assert_member(standardize_by, a ak k ka)
 %let debug = %lowcase(&debug);                   %assert_member(debug, yes no)
+%let yearly = %lowcase(&yearly);                 %assert_member(yearly, no rate crude cravg avg ant)
 %assert("&out" ^= "", message=No output dataset specified for %nrstr(%%)standard_rate())
 
 %macro parse_simple_dataspecifier(specifier, ds_var=, varlist_var=);
@@ -159,14 +192,13 @@ run;
 
 data deleteme_rateutvalg;
    set &std_dataset;
-   where (%scan(&std_varlist, 1) %do std_i=2 %to &std_numvars; or %scan(&std_varlist, &std_i) %end;) and
-         aar in (&min_year:&max_year) and
+   where aar in (&min_year:&max_year) and
          alder in (&min_age:&max_age) and             
          &region in (1:%if &region=bohf   %then 31;
                  %else %if &region=borhf  %then 4;
                  %else %if &region=boshhn %then 11;);
    /* This data step filters out all the rows we are not interested in. This often means a considerable reduction in
-      the quantity of data, so that the rest of the code runs fast. age*/
+      the quantity of data, so that the rest of the code runs fast. */
 
    keep alder ermann age_group aar &region &std_varlist;
    format &region &region._fmt. age_group age_group_fmt.;
@@ -178,13 +210,13 @@ run;
    all the years (aar=9999), and also for the whole country (&region=8888) */
 proc sql;
 create table deleteme_summed_vars_ as
-	select aar, &region, &sql_grouping %do std_i=1 %to &std_numvars;
+	select aar, &region, &sql_grouping, count(*) as n_obs %do std_i=1 %to &std_numvars;
       , sum(%scan(&std_varlist, &std_i)) as %scan(&std_varlist, &std_i)
    %end;
 	from deleteme_rateutvalg
 	group by aar, &region, &sql_grouping
    union all
-   select 9999 as aar, &region, &sql_grouping %do std_i=1 %to &std_numvars;
+   select 9999 as aar, &region, &sql_grouping, count(*) / (&max_year-&min_year+1) as n_obs %do std_i=1 %to &std_numvars;
       , sum(%scan(&std_varlist, &std_i)) / (&max_year-&min_year+1) as %scan(&std_varlist, &std_i)
    %end;
    from deleteme_rateutvalg
@@ -193,11 +225,21 @@ create table deleteme_summed_vars_ as
 create table deleteme_summed_vars as
    select * from deleteme_summed_vars_
    union all
-   select aar, 8888 as &region, &sql_grouping %do std_i=1 %to &std_numvars;
+   select aar, 8888 as &region, &sql_grouping, sum(n_obs) as n_obs %do std_i=1 %to &std_numvars;
       , sum(%scan(&std_varlist, &std_i)) as %scan(&std_varlist, &std_i)
    %end;
    from deleteme_summed_vars_
 	group by aar, &sql_grouping;
+
+create table deleteme_std_avg_sums_ as
+   select &sql_grouping, sum(n_obs) as n_obs
+   from deleteme_summed_vars_
+   where aar = &std_year
+   group by &sql_grouping
+   %if ermann in (&sql_grouping) %then having ermann is not missing; ;
+create table deleteme_std_avg_sums as
+   select *, n_obs / sum(n_obs) as avg_av_obs
+   from deleteme_std_avg_sums_;
 quit;
 
 data deleteme_population;
@@ -255,6 +297,8 @@ create table deleteme_ratedata as
    select a.aar, a.&region, sum(a.population) as innbyggere
    %do std_i=1 %to &std_numvars;
       %let var = %scan(&std_varlist, &std_i);
+      , sum(&var) / sum(b.n_obs) as &var._cravg
+      , sum(&var / b.n_obs * d.avg_av_obs) as &var._avg
       , sum(&var) as &var._antall
       , sum(&var) / sum(a.population) * &ratemult as &var._crude
       , sum(&var / a.population * c.andel_av_innbyggere) * &ratemult as &var._rate format=16.2
@@ -264,7 +308,10 @@ create table deleteme_ratedata as
       on a.&region=b.&region and a.aar=b.aar and %join_on(a, b)
    left join deleteme_pop_in_norway as c
       on %join_on(a, c)
-   group by a.aar, a.&region;
+   left join deleteme_std_avg_sums as d
+       on %join_on(a, d)
+   group by a.aar, a.&region
+   /*order by a.aar, a.&region, d.avg_av_obs desc*/;
 run;
 
 proc sort data=deleteme_ratedata out=deleteme_sorted;
@@ -284,13 +331,15 @@ data &out;
       %let snitt_vars = &snitt_vars
              &var._ratesnitt &var._rate&min_year-&var._rate&max_year
              &var._antsnitt &var._ant&min_year-&var._ant&max_year
+             &var._cravgsnitt &var._cravg&min_year-&var._cravg&max_year
+             &var._avgsnitt &var._avg&min_year-&var._avg&max_year
              &var._crudesnitt &var._crude&min_year-&var._crude&max_year;
    %end;
    retain &region popsnitt pop&min_year-pop&max_year &snitt_vars;
+
    format &snitt_vars 16.2;
 
    set deleteme_sorted;
-   drop innbyggere aar;
    format &region &region._fmt.;
 
    array pop{&min_year:&max_year} pop&min_year-pop&max_year;
@@ -304,8 +353,9 @@ data &out;
          %let var = %scan(&std_varlist, &std_i);
          &var._antsnitt = &var._antall;
          &var._ratesnitt = &var._rate;
+         &var._cravgsnitt = &var._cravg;
+         &var._avgsnitt = &var._avg;
          &var._crudesnitt = &var._crude;
-         drop &var._antall &var._rate &var._crude;
       %end;
 
       output; /* Since the data is sorted by region and year, we know that all the data for a region has been loaded into the
@@ -316,11 +366,15 @@ data &out;
       %let var = %scan(&std_varlist, &std_i);
       array antall_&var{&min_year:&max_year} &var._ant&min_year-&var._ant&max_year;
       array rate_&var{&min_year:&max_year} &var._rate&min_year-&var._rate&max_year;
+      array cravg_&var{&min_year:&max_year} &var._cravg&min_year-&var._cravg&max_year;
+      array avg_&var{&min_year:&max_year} &var._avg&min_year-&var._avg&max_year;
       array crude_&var{&min_year:&max_year} &var._crude&min_year-&var._crude&max_year;
 
       if aar ^= 9999 then do;
          antall_&var{aar} = &var._antall;
          rate_&var{aar}   = &var._rate;
+         cravg_&var{aar}    = &var._cravg;
+         avg_&var{aar}  = &var._avg;
          crude_&var{aar}  = &var._crude;
       end;
 
@@ -345,32 +399,49 @@ run;
 %end;
 title;
 
-data deleteme_yearly_prep;
+data &out;
+   /* This data step is here to remove variables the user is not interested in (i.e., not in &out_vars) */
    set &out;
-   category_label = put(&region, &region._fmt.);
-   format bohf 16.;
+   keep &region;
+   %do std_i=1 %to &std_numvars;
+      %let var = %scan(&std_varlist, &std_i);
+      %do std_j=1 %to %sysfunc(countw(&out_vars));
+         %let out_var = %scan(&out_vars, &std_j);
+         keep &var._&out_var.snitt &var._&out_var.&min_year-&var._&out_var.&max_year;;
+      %end;
+   %end;
+   keep popsnitt pop&min_year-pop&max_year;
 run;
 
-%do std_i=1 %to &std_numvars;
-   %let var = %scan(&std_varlist, &std_i);
 
-   proc transpose data=deleteme_yearly_prep out=deleteme_yearly_&std_i prefix=&var._ name=year;
-      id &region;
-      idlabel category_label;
-      var &var._rate&min_year-&var._rate&max_year;
+%if &yearly ^= no %then %do;
+   data deleteme_yearly_prep;
+      set &out;
+      category_label = put(&region, &region._fmt.);
+      format bohf 16.;
    run;
 
-   data deleteme_yearly_&std_i;
-      set deleteme_yearly_&std_i;
-      year = prxchange("s/.*(\d{4})$/$1/", -1, year);
+   %do std_i=1 %to &std_numvars;
+      %let var = %scan(&std_varlist, &std_i);
+
+      proc transpose data=deleteme_yearly_prep out=deleteme_yearly_&std_i prefix=&var._ name=year;
+         id &region;
+         idlabel category_label;
+         var &var._&yearly&min_year-&var._&yearly&max_year;
+      run;
+
+      data deleteme_yearly_&std_i;
+         set deleteme_yearly_&std_i;
+         year = prxchange("s/.*(\d{4})$/$1/", -1, year);
+      run;
+   %end;
+
+   data &out._yearly;
+      %do std_i=1 %to &std_numvars;
+         set deleteme_yearly_&std_i;
+      %end;
    run;
 %end;
-
-data &out._yearly;
-   %do std_i=1 %to &std_numvars;
-      set deleteme_yearly_&std_i;
-   %end;
-run;
 
 %if &debug=no %then %do;
    proc datasets nolist; delete deleteme_: ; run;
