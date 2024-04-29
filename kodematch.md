@@ -18,18 +18,19 @@ Den letteste måten å forklare hvordan %kodematch fungerer er med et eksempel:
 
 ```
 data mage_tarm;
-set <utvalg>;
+   set <utvalg>;
 
-length all_diag $200;
-all_diag = catx(" ", of Hdiag Hdiag2 bdiag:);
+   length all_diag $200;
+   all_diag = catx(" ", of Hdiag Hdiag2 bdiag:);
 
-magetarm = %kodematch(all_diag,
-  coeliac := K900
-   smerte := R10
-             K21[09]
-             K5[01]
-             K59
-);
+   magetarm = %kodematch(all_diag,
+     coeliac := K900
+      smerte := R10
+                K21[09]
+                K5[01]
+                K59
+   );
+run;
 ```
 
 Variabelen `all_diag` er i dette tilfellet en lang tekst som inneholder alle diagnosekodene for hver rad i utvalget, med et mellomrom
