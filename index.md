@@ -42,6 +42,7 @@
 - [makroer/andelsfig.sas](andelsfig)
 - [makroer/test_makroer.sas](test_makroer)
 - [makroer/ratefig.sas](ratefig)
+- [makroer/kodematch.sas](kodematch)
 - [makroer/oversiktstabell_helseatlas.sas](oversiktstabell_helseatlas)
 - [makroer/ratefig_todeltSoyle.sas](ratefig_todeltSoyle)
 - [makroer/henteKorrvekt.sas](henteKorrvekt)

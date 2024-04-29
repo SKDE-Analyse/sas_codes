@@ -10,12 +10,14 @@
 - **min_age** = `[<number>, auto]`. Laveste alder man skal ha med i standardiseringen. Default: auto.
 - **max_age** = `[<number>, auto]`. Høyeste alder man skal ha med i standardiseringen. Default: auto.
 - **out** = `<text>`. Navn på utdatasett.
+- **out_vars** = `<list>`. Liste over hvilke type variabler som skal med i ut-datasettet. Mulige verdier er rate (justert rate), crude (ujustert rate), ant (sum av variabelen), avg (justert gjennomsnittlig verdi av variabelen), cravg (ujustert gjennomsnitt). Default: rate ant.
 - **age_group_size** = `<number>`. Størrelsen på algersgruppene brukt i standariseringen. Default: 5.
 - **ratemult** = `<number>`. Ratemultiplikator, dvs. rate pr. Default: 1000.
 - **std_year** = `<number>`. Standardiseringsår. Default: auto. (auto betyr at std_year = max_year).
 - **min_year** = `<number>`. Første år man skal ha med i standardiseringen. Default: auto.
 - **max_year** = `<number>`. Siste år man skal ha med i standardiseringen. Default: auto.
-- **standardize_by** = `[ka, a, k]`, Denne variabelen bestemmer hvilken type standardisering som skal utføres. `ka` betyr kjønns- og aldersstandardisering; `a` betyr aldersstandardisering (uten kjønnsjustering); og `k` betyr kjønnsjustering (uten aldersjustering). Default: ka.
+- **standardize_by** = `[ka, a, k]`. Denne variabelen bestemmer hvilken type standardisering som skal utføres. `ka` betyr kjønns- og aldersstandardisering; `a` betyr aldersstandardisering (uten kjønnsjustering); og `k` betyr kjønnsjustering (uten aldersjustering). Default: ka.
+- **yearly** = `[no, rate, crude, cravg, avg, ant]`. Hvis denne er satt til noe annet enn `no` vil det lages et transponert datasett (med navnet &out._yearly) hvor kolonnene er opptaksområder, og hver rad viser tall for et år. Dette gjør det lett å lage en tidstrend med %graf(). Default: rate.
 - **population_data** = `<text>`. Datasett med informasjon om befolkningstall brukt i standardiseringen. Default: innbygg.INNB_SKDE_BYDEL.
 
 # Introduksjon
@@ -55,16 +57,44 @@ og `std_year`. Det å finne ut hvilke år og hvilken aldersgruppe som er med i d
 
 Justeringen gjøres basert på følgende formel (adaptert fra forklaringen i [Eldrehelseatlaset fra 2017](https://www.skde.no/helseatlas/files/eldrehelseatlas_rapport.pdf#page=25)):
 
-![img](/sas_codes/bilder/standard_rate_formel.png)
+![img](/sas_codes/bilder/std_rate.png)
 
 I formelen ovenfor refererer b til et geografisk område; b står for boområde. g står for en spesifikk kjønn og/eller aldersgruppe, og G er antall grupper.
-b<sub>hg</sub> referer til anntall hendelser i gruppen g i boområde b (h for hendelser); b<sub>pg</sub> refererer til antall innbyggere (p for populasjon)
-i gruppen g i boområdet b. Med andre ord, b<sub>hg</sub>/b<sub>pg</sub> er en rate som sier noe om hvor mange hendelser det er per person i boområdet b, i
-gruppen g. Hvis vi med hendelser mener konsultasjoner, og det er omtrent like mange konsultasjoner som det er innbyggere, vil denne raten bli rundt 1. a<sub>g</sub>
+sum(V<sub>gb</sub>) er summen av variabelen vi vil finne raten for i gruppen g i boområdet b; b<sub>g</sub> refererer til antall innbyggere
+i gruppen g i boområdet b. Med andre ord,sum(V<sub>gb</sub>)/b<sub>g</sub> er en rate som sier noe om hvor mange hendelser det er per person i boområdet b, i
+gruppen g. Hvis vi med hendelser mener konsultasjoner, og det er omtrent like mange konsultasjoner som det er innbyggere, vil denne raten bli rundt 1. A<sub>g</sub>
 refererer til hvor mange prosent gruppen g utgjør av den nasjonale populasjonen.
 
-En ting som er verdt å notere seg er at a<sub>g</sub> refererer til populasjonen i standardiseringsåret (std_year=); b<sub>pg</sub> på sin side refererer til
+En ting som er verdt å notere seg er at A<sub>g</sub> refererer til populasjonen i standardiseringsåret (std_year=); b<sub>g</sub> på sin side refererer til
 populasjonen i boområdet i det året hendelsene skjedde. Intensjonen med å gjøre det slikt er at man skal kunne sammenligne over tid.
+
+# KA-justert gjennomsnitt (inklusive KA-justerte andeler)
+
+For å lage en KA-justert andel, og mer generelt en KA-justert gjennomsnittlig verdi, brukes ikke populasjonen i boområdene, men heller fordelingen av observasjonene
+på de forskjellige KA-gruppene i input-datasettet (i standardiseringsåret) som basis for standardiseringen. Formelen ser slik ut:
+
+![img](/sas_codes/bilder/std_avg.png)
+
+avg(V<sub>gb</sub>) er den gjennomsnittlige verdien av variabelen for hver KA-gruppe. A<sub>gN</sub> er hvor stor andel av alle observasjonene i input-datasettet som hører til KA-gruppen g.
+
+KA-justert gjennomsnitt er normalt ikke inkludert i utdatasettet til %standard_rate. For å få den med må man legge til avg i variabelen &out_vars, slik som dette
+
+```
+%standard_rate(datasett/prosedyre,
+               region=bohf,
+               out_vars=rate ant avg cravg,
+               out=prosedyrer
+)
+```
+
+Ovenfor har vi også lagt til cravg, som er det ujusterte gjennomsnittet. Ved å sammenligne avg med cravg kan man se effekten av KA-justeringen, for eksempel slik som dette:
+
+```
+%graf(bars=prosedyrer/prosedyre_avgsnitt,
+      variation=prosedyrer/prosedyre_avgsnitt prosedyre_cravgsnitt, variation_colors=gray red,
+      category=bohf,
+)
+```
 
 
 ## Makro `parse_simple_dataspecifier`
