@@ -333,7 +333,7 @@ run;
 data tmp_data;
     set tmp_data;
 keep aar pid inndato utdato ermann alder komnr bydel bo: fylke fodselsar institusjonid hastegrad hf nc: inntid uttid beh:
-        episode_lnr fag: sektor tilst: hdiag: bdiag: produksjonid utskrivningsklar utskrklardato psykinstID akse1: ;
+        episode_lnr fag: sektor tilst: hdiag: bdiag: produksjonid utskrivningsklar utskrklardato psykinstID akse1: debitor ;
 run;
 %end;
 
