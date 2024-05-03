@@ -25,14 +25,16 @@
 
      /* PLAN FOR TILRETTELEGGING 
      
-     1) OMKODE KOMNR/BYDEL -> Lage bo-variabler
-     2) omkode behandler komnr
-     3) lage variabel prove_id
-     4) splitte nlk-koder
+     1) lage variabel prove_id
+     2) splitte nlk-koder
       a) lage langt datasett
       b) kun behold MB-nlkkoder
-     5) demografi pr prove_id
-     6) off/priv pr nlk, evnt refusjon pr nlk
+     3) demografi pr prove_id
+      a) omkode komnr/bydel -> Lage bo-variabler
+      b) off/priv pr nlk, evnt refusjon pr nlk
+
+     4) omkode behandler komnr?
+
      */
 
 %include "&filbane/formater/SKDE_somatikk.sas";
