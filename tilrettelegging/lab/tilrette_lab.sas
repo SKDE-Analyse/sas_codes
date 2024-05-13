@@ -178,9 +178,9 @@ quit;
 /* kontrolltelling - hva ble ekskludert */
 title"&aar. - antall rader totalt, inkl og ekskl";
 proc sql;
-select distinct (select count(*) from Z_TMP5_LONG) AS totalNLK,
-		(select count(*) from  SKDE20.lab_nlkkoder_inkl_&aar.) as inkl,
-    (select count(*) from  SKDE20.LAB_nlkkoder_ekskl_&aar.) as ekskl,
+select distinct (select count(*) from Z_TMP5_LONG) AS totalNLK format nlnum10.,
+		(select count(*) from  SKDE20.lab_nlkkoder_inkl_&aar.) as inkl format nlnum10.,
+    (select count(*) from  SKDE20.LAB_nlkkoder_ekskl_&aar.) as ekskl format nlnum10.,
 		calculated ekskl / calculated totalNLK as andel_ekskl format nlpct8.0
 from Z_TMP5_LONG;
 quit;
@@ -312,10 +312,10 @@ proc sql;
 quit;
 
 /*slette datasettene i work*/
-/* proc datasets nolist;
+proc datasets nolist;
 delete 
 Z_tmp1-Z_tmp6 Z_tmp5_long pid_alder pid_kjonn: pid_bosted: start_demografi demografi: ;
-run; */
+run;
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 %mend tilrette_lab;
