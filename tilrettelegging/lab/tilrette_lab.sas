@@ -159,7 +159,7 @@ run;
 
 /* lagre langt datasett som inneholder medisinsk biokjemi NLKKODER med refusjonsrett */
 proc sql;
-	create table SKDE20.lab_nlkkkoder_inkl_&aar.(drop=inndato nr_id) as
+	create table SKDE20.lab_nlkkoder_inkl_&aar.(drop=inndato nr_id) as
 	select a.*
 	from Z_tmp5_long a
 	left join SKDE20.LAB_KODEVERK_2018_2023 b
@@ -169,18 +169,18 @@ quit;
 
 /* lagre ekskluderte nlkkoder, som ikke er gyldig MB i angitt tidsrom */
 proc sql;
-create table SKDE20.LAB_nlkkkoder_ekskl_&aar.(drop=inndato nr_id) as
-select * from Z_tmp5_long
+create table SKDE20.LAB_nlkkoder_ekskl_&aar. as
+select * from Z_tmp5_long(drop=inndato nr_id)
 EXCEPT ALL
-select * from SKDE20.lab_nlkkkoder_inkl_&aar.;
+select * from SKDE20.lab_nlkkoder_inkl_&aar.;
 quit;
 
 /* kontrolltelling - hva ble ekskludert */
 title"&aar. - antall rader totalt, inkl og ekskl";
 proc sql;
 select distinct (select count(*) from Z_TMP5_LONG) AS totalNLK,
-		(select count(*) from  SKDE20.lab_nlkkkoder_inkl_&aar.) as inkl,
-    (select count(*) from  SKDE20.LAB_nlkkkoder_ekskl_&aar.) as ekskl,
+		(select count(*) from  SKDE20.lab_nlkkoder_inkl_&aar.) as inkl,
+    (select count(*) from  SKDE20.LAB_nlkkoder_ekskl_&aar.) as ekskl,
 		calculated ekskl / calculated totalNLK as andel_ekskl format nlpct8.0
 from Z_TMP5_LONG;
 quit;
@@ -315,7 +315,7 @@ quit;
 /*slette datasettene i work*/
 proc datasets nolist;
 delete 
-Z_tmp1-Z_tmp6 Z_tmp5_long pid_alder pid_kjonn: start_demografi demografi: ;
+Z_tmp1-Z_tmp6 Z_tmp5_long pid_alder pid_kjonn: pid_bosted: start_demografi demografi: ;
 run;
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
