@@ -160,7 +160,7 @@ run;
 /* lagre langt datasett som inneholder medisinsk biokjemi NLKKODER med refusjonsrett */
 proc sql;
 	create table SKDE20.lab_nlkkoder_inkl_&aar.(drop=inndato nr_id) as
-	select a.*
+	select a.*, b.refusjon
 	from Z_tmp5_long a
 	left join SKDE20.LAB_KODEVERK_2018_2023 b
 	on a.nlk=b.kode
@@ -172,7 +172,7 @@ proc sql;
 create table SKDE20.LAB_nlkkoder_ekskl_&aar. as
 select * from Z_tmp5_long(drop=inndato nr_id)
 EXCEPT ALL
-select * from SKDE20.lab_nlkkoder_inkl_&aar.;
+select * from SKDE20.lab_nlkkoder_inkl_&aar.(drop=refusjon);
 quit;
 
 /* kontrolltelling - hva ble ekskludert */
@@ -207,8 +207,7 @@ quit;
 proc sql;
 	create table pid_bosted as
 	select distinct prove_id, pid, pasient_kommune, inndato
-	from Z_tmp5
-	group by prove_id;
+	from Z_tmp5;
 quit;
 /* omkode komnr og bydel -> omkodet komnr heter "komnr_mottatt" */
 /* mottatte data har eget kodeverk for bydelskommuner, se mapping i csv-fil*/
@@ -292,7 +291,7 @@ by pid inndato;
 if last.pid and last.inndato then kjonn = pasient_kjonn;
 run;
 proc sql;
-	create table pid_kjonn3(drop=pasient_kjonn kjonn) as
+	create table pid_kjonn3 as
 	select distinct pid, 
 				case when kjonn eq 1 then 1 
 					when kjonn eq 2 then 0
@@ -313,10 +312,10 @@ proc sql;
 quit;
 
 /*slette datasettene i work*/
-proc datasets nolist;
+/* proc datasets nolist;
 delete 
 Z_tmp1-Z_tmp6 Z_tmp5_long pid_alder pid_kjonn: pid_bosted: start_demografi demografi: ;
-run;
+run; */
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 %mend tilrette_lab;
