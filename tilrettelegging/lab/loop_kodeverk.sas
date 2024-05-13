@@ -21,7 +21,6 @@
         
      */
 
-
 /*angi mappe hvor filene skal leses inn*/
 %let path=/sas_smb/skde_analyse/Helseatlas/Lab/Laboratoriekodeverk/laboratoriekodeverk_2018_2023;
 filename folder "&path" ;       
@@ -187,6 +186,3 @@ delete
 lab: kodeverk: temp: filesinfolder ;
 run;
 %mend loop_kodeverk;
- 
-
-

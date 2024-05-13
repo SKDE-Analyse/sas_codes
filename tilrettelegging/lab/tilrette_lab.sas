@@ -14,13 +14,13 @@
     ### Output 
           - LAB_nlkkoder_long_&aar. (nlkkoder som er medisinsk biokjemi)
           - LAB_nlkkoder_ekskl_&aar. (ekskluderte nlkkoder)
+          - LAB_demografi_&aar. (ermann, alder, komnr, bydel, komnr_aar, bydel_aar)
     
     ### Endringslogg:
         - Opprettet juli 2023, Tove J
         - Skrevet om, mai 2024, Tove J
         
      */
-
 
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
@@ -167,7 +167,7 @@ proc sql;
 	where dato_id <= inndato< dato_slutt and MB eq "MB" and off_priv eq ref_kat;
 quit;
 
-/* ekskluderte nlkkoder, som ikke er gyldig MB i angitt tidsrom */
+/* lagre ekskluderte nlkkoder, som ikke er gyldig MB i angitt tidsrom */
 proc sql;
 create table SKDE20.LAB_nlkkkoder_ekskl_&aar.(drop=inndato nr_id) as
 select * from Z_tmp5_long
@@ -179,20 +179,144 @@ quit;
 title"&aar. - antall rader totalt, inkl og ekskl";
 proc sql;
 select distinct (select count(*) from Z_TMP5_LONG) AS totalNLK,
-		(select count(*) from  SKDE20.lab_nlkkkoder_inkl_&aar.) as inklNLK,
-    (select count(*) from  SKDE20.LAB_nlkkkoder_ekskl_&aar.) as eksklNLK,
-		calculated eksklNLK / calculated totalNLK as andel_eksklNLK format nlpct8.0
+		(select count(*) from  SKDE20.lab_nlkkkoder_inkl_&aar.) as inkl,
+    (select count(*) from  SKDE20.LAB_nlkkkoder_ekskl_&aar.) as ekskl,
+		calculated ekskl / calculated totalNLK as andel_ekskl format nlpct8.0
 from Z_TMP5_LONG;
 quit;
 title;
 
+/*--------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------*/
+/* startpunkt med unike PROVE_ID 
+  - lage fil som angir ratevariabler (alder, kjønn, bosted) */
+/*----------------------------------------------------------*/
+proc sql;
+	create table start_demografi as
+	select distinct prove_id, pid
+	from Z_tmp5;
+quit;
+
+/*-------------------------------------------------------------*/
+/* fikse komnr/bydel 
+	- kan ikke skifte bosted i en prove_id 
+	- lage komnr_aar og bydel_aar som er unik bosted innad i år*/
+/*-------------------------------------------------------------*/
+proc sql;
+	create table pid_bosted as
+	select distinct prove_id, pid, pasient_kommune, inndato
+	from Z_tmp5
+	group by prove_id;
+quit;
+/* omkode komnr og bydel -> omkodet komnr heter "komnr_mottatt" */
+/* mottatte data har eget kodeverk for bydelskommuner, se mapping i csv-fil*/
+%include "&filbane/tilrettelegging/lab/omkoding_komnr_bydel.sas";
+%omkoding_komnr_bydel(inndata=pid_bosted, pas_komnr=pasient_kommune);
+/* fornye komnr/bydel */
+/* bydelsnr er allerede omkodet -> trenger ikke kjøre makro bydeler etter fornying */
+%include "&filbane/makroer/forny_komnr.sas";
+%forny_komnr(inndata=pid_bosted, kommune_nr=komnr_mottatt);
+
+/******************************************************/
+/* sette siste bosted i året som unikt bosted det året*/
+/******************************************************/
+proc sort data=pid_bosted out=pid_bosted2(keep=pid komnr bydel inndato); by pid inndato; run;
+data pid_bosted3;
+set pid_bosted2;
+by pid inndato;
+if last.pid and last.inndato then do;
+	komnr_unik = komnr;
+	bydel_unik = bydel;
+	end;
+run;
+proc sql;
+	create table pid_bosted4 as
+	select distinct pid, 
+				max(komnr_unik) as komnr_aar,
+				max(bydel_unik) as bydel_aar
+	from pid_bosted3
+	group by pid;
+quit;
+proc sql;
+	create table demografi2 as
+	select a.*, b.komnr_aar, b.bydel_aar
+	from start_demografi a
+	left join pid_bosted4 b
+	on a.pid=b.pid;
+quit;
+
+/**************************/
+/* unik bosted pr prove_id*/
+/**************************/
+proc sql;
+	create table pid_bosted5 as
+	select prove_id, min(komnr) as komnr_min,
+				min(bydel) as bydel_min
+	from pid_bosted
+	group by prove_id;
+quit;
+proc sql;
+	create table demografi3 as
+	select a.*, b.komnr_min as komnr, b.bydel_min as bydel
+	from demografi2 a
+	left join pid_bosted5 b
+	on a.prove_id=b.prove_id;
+quit;
+
+/*--------------------------------------------*/
+/* fikse alder - settes til maks gjeldende år */
+/*--------------------------------------------*/
+proc sql;
+    create table pid_alder as
+    select pid, max(PASIENT_ALDER) as alder
+    from Z_tmp5
+    group by pid;
+run;   
+proc sql;
+    create table demografi4 as
+    select a.*, b.alder
+    from demografi3 a
+	left join pid_alder b
+    on a.pid=b.pid;
+quit;
+
+/*-------------------------------------------------*/
+/* fikse kjønn - settes til siste registrerte kjønn*/
+/*-------------------------------------------------*/
+proc sort data=Z_tmp5 out=pid_kjonn(keep=pid pasient_kjonn inndato); by pid inndato; run;
+data pid_kjonn2;
+set pid_kjonn;
+by pid inndato;
+if last.pid and last.inndato then kjonn = pasient_kjonn;
+run;
+proc sql;
+	create table pid_kjonn3(drop=pasient_kjonn kjonn) as
+	select distinct pid, 
+				case when kjonn eq 1 then 1 
+					when kjonn eq 2 then 0
+					when kjonn not in (1,2) then . end as ermann
+	from pid_kjonn2
+	where kjonn ne .;
+quit;
+
+/* ------------------------------ */
+/* lagre ferdig fil med demografi */
+/* ------------------------------ */
+proc sql;
+	create table skde20.lab_demografi_&aar. as
+	select a.*, b.ermann
+	from demografi4 a
+	left join pid_kjonn3 b
+	on a.pid=b.pid;
+quit;
+
 /*slette datasettene i work*/
 proc datasets nolist;
 delete 
-Z_tmp1-Z_tmp6 Z_tmp5_long  ;
+Z_tmp1-Z_tmp6 Z_tmp5_long pid_alder pid_kjonn: start_demografi demografi: ;
 run;
-
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
-
 %mend tilrette_lab;
