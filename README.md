@@ -10,6 +10,7 @@ Dette *repository* inneholder felles SAS-koder brukt ved SKDE. Det er de samme k
 
 - [Makroer](https://skde-analyse.github.io/sas_codes/makroer_doc)
 - [Formater](https://skde-analyse.github.io/sas_codes/formater_doc)
+- Dokumentasjon for makroene [%graf()](https://skde-analyse.github.io/sas_codes/graf) og [%standard_rate()](https://skde-analyse.github.io/sas_codes/standard_rate)
 - [Rateprogram](https://skde-analyse.github.io/sas_codes/rateprogram_doc)
 - [Kode for tilrettelegging av data fra NPR](https://skde-analyse.github.io/sas_codes/tilrettelegging_doc)
 - [Eksempler](https://skde-analyse.github.io/sas_codes/eksempler_doc)
