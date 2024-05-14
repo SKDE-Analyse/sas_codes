@@ -189,10 +189,10 @@ title;
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-/*----------------------------------------------------------*/
+/*--------------------------------------------------------------------------*/
 /* startpunkt med unike PROVE_ID 
-  - lage fil som angir ratevariabler (alder, kjønn, bosted) */
-/*----------------------------------------------------------*/
+  - lage fil som angir ratevariabler (alder, kjønn, bosted, aar og inndato) */
+/*---------------------------------------------------------------------------*/
 proc sql;
 	create table start_demografi as
 	select distinct prove_id, pid
@@ -299,22 +299,34 @@ proc sql;
 	from pid_kjonn2
 	where kjonn ne .;
 quit;
-
-/* ------------------------------ */
-/* lagre ferdig fil med demografi */
-/* ------------------------------ */
 proc sql;
-	create table skde20.lab_demografi_&aar. as
+	create table demografi5 as
 	select a.*, b.ermann
 	from demografi4 a
 	left join pid_kjonn3 b
 	on a.pid=b.pid;
 quit;
 
+/*---------------*/
+/* aar og inndato*/
+/*---------------*/
+proc sort data=Z_tmp5 nodupkey out=aar_dato(keep=prove_id inndato aar); by prove_id inndato; run;
+
+/* ------------------------------ */
+/* lagre ferdig fil med demografi */
+/* ------------------------------ */
+proc sql;
+	create table skde20.lab_demografi_&aar. as
+	select a.*, b.inndato, b.aar
+	from demografi5 a
+	left join aar_dato b
+	on a.prove_id=b.prove_id;
+quit;
+
 /*slette datasettene i work*/
 proc datasets nolist;
 delete 
-Z_tmp1-Z_tmp6 Z_tmp5_long pid_alder pid_kjonn: pid_bosted: start_demografi demografi: ;
+Z_tmp1-Z_tmp6 Z_tmp5_long pid_alder pid_kjonn: pid_bosted: start_demografi demografi: aar_dato;
 run;
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
