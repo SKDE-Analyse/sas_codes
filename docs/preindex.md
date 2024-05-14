@@ -2,4 +2,3 @@
 
 - [Makroer](makroer_doc)
 - [Rateprogrammet](rateprogram_doc)
-- [Tilrettelegging](tilrettelegging_doc)
