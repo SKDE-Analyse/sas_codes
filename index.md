@@ -1,8 +1,9 @@
 # Dokumentasjon for felles SAS-koder SKDE
 
+- [%graf()](graf)
+- [%standard_rate()](standard_rate) (nytt rateprogram)
 - [Makroer](makroer_doc)
-- [Rateprogrammet](rateprogram_doc)
-- [Tilrettelegging](tilrettelegging_doc)
+- [%proc_stdrate()](rateprogram_doc)
 
 
 ## Linker til dokumentasjon av de ulike filene
