@@ -5,7 +5,7 @@
 /* 1) Unike enkeltregning_lnr på tvers av år*/
 /* 2) Sjekk om enkeltregning_lnr fra hovedfil også gjenfinnes i satelitter*/
 
-%macro kpr_enkeltregning;
+%macro kpr_enkeltregning(aar=);
 
 /***************************************************************/
 /* a) Finnes det duplikate enkeltregning_lnr på tvers av årene?*/
@@ -13,11 +13,8 @@
 
 data regninglnr;
 set 
-HNMOT.KPR_L_ENKELTREGNING_2019_M21T3(keep=enkeltregning_lnr)
-HNMOT.KPR_L_ENKELTREGNING_2020_M21T3(keep=enkeltregning_lnr)
-HNMOT.KPR_L_ENKELTREGNING_2021_M21T3(keep=enkeltregning_lnr)
-HNMOT.KPR_L_ENKELTREGNING_2022_M22T3(keep=enkeltregning_lnr)
-&inn(keep=enkeltregning_lnr)
+&eldre.(keep=enkeltregning_lnr)
+&inn.(keep=enkeltregning_lnr)
 ;
 run;
 /* dup_regning skal være tom - DVS INGEN DUPLIKATER*/

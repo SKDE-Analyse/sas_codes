@@ -12,7 +12,7 @@
 	Årsfilene kontrolleres individuelt 
 */
 
-%macro kpr_aktivitet_lopenr(aar=&mottatt_aar);
+%macro kpr_aktivitet_lopenr(aar=);
 proc sql;
 	create table pr_lopenr_&aar. as
 	select *, 
