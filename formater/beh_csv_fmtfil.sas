@@ -85,6 +85,12 @@ proc delete data=behandler;
 run;
 %end;
 
+/* ---------------------- */
+/*  Lagre filen på HNREF  */  
+/* ---------------------- */ 
+data hnref.behandler;
+   set behandler;
+run;
 
 /* ------- */
 /*  BEHSH  */  
