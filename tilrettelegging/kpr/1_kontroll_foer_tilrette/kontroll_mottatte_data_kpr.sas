@@ -66,7 +66,7 @@ run;
     /* dette steget bruker makro fra "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas */
     %include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas";
 	%include "&filbane/tilrettelegging/kpr/1_kontroll_foer_tilrette/kpr_komnr_ukjent.sas";
-	%kontroll_komnr_bydel(inndata=&inn, aar=&aar_e, komnr=kommuneNr, bydel=bydel);
+	%kontroll_komnr_bydel(inndata=&inn, aar=&aar, komnr=kommuneNr, bydel=bydel);
     %kpr_komnr_ukjent(inndata=&inn, aar=&aar.);
 
 	/* --------------------------------------------------- */

@@ -234,11 +234,17 @@ run;
 
 %if &nobs2 ne 0 %then %do;
 title color=purple height=5 "5b: Antall rader med ugyldig verdi for bydel i &aar.-filen - tilretteleggingen gir de bydel = 99";
-proc sql;
+/* proc sql;
 	select  ((&komnr.+0)*100+(&bydel.+0)) as bydel,  count(*) as ant_rader
 	from &inndata.
 	where ((&komnr.+0)*100+(&bydel.+0)) in (select bydel from error_bydel_&aar)
 	group by bydel;
+quit; */
+proc sql;
+	select &komnr., &bydel.,  count(*) as ant_rader
+	from &inndata.
+	where &bydel. in (select bydel from error_bydel_&aar.)
+	group by &komnr., &bydel.;
 quit;
 title;
 %end;
