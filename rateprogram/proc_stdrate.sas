@@ -1,4 +1,4 @@
-﻿%macro proc_stdrate_radiologi(
+﻿%macro proc_stdrate(
     dsn=, /*Grunnlagsdatsettet det skal beregnes rater fra*/
     rate_var=, /*Ratevariabel, kan være aggregert (verdier større enn en) eller dikotom (0,1)*/
 	unik=0,  /* 1 er pasientrate, 0 er default (kontaktrate)*/
@@ -15,7 +15,7 @@
     long=, /*if long=1 --> skriv ut "langt" datasett, ikke aktivert er default*/
 	utfig=, /*if utfig=1 --> skriv ut aldersfigur og ratefigur ved å bruke utdata navn*/
 	bildeformat=png, /*Format, png som default*/
-    innbygg_dsn=innbygg.INNB_SKDE_BYDEL, /*Innbyggerdatasett: innbygg.INNB_SKDE_BYDEL, innbygg.INNB_SKDE_BYDEL er default*/
+    innbygg_dsn=innbygg.INNB_SKDE_BYDEL, /*Innbyggerdatasett: innbygg.INNB_SKDE_BYDEL er default*/
     /*Til boområde-makroen: Standard er:(inndata=pop, indreOslo = 0, bydel = 1);*/
     bodef_indreoslo=0, /*0 er standard, 0 er default*/
     bodef_bydel=1, /*1 er standard, 1 er default*/
@@ -448,10 +448,11 @@ PROC SQL;
       GROUP BY aar, nyAlder, ErMann;	  
 QUIT;
 
-/*%if &utfig=1 %then %do;*/
-/*ODS Graphics ON /reset=All imagename="&utdata._alder5" imagefmt=&bildeformat border=off height=500px ;*/
-/*ODS Listing style=stil_figur Image_dpi=300 GPATH="&bildesti";*/
-/*%end;*/
+%if &utfig=1 %then %do;
+ODS Graphics ON /reset=All imagename="&utdata._alder5" imagefmt=&bildeformat border=off height=500px ;
+ODS Listing style=stil_figur Image_dpi=300 GPATH="&bildesti";
+%end;
+
 proc sgplot data=xyz_aldersfigkat dattrmap=xyz_ermanncolor  noautolegend noborder sganno=anno pad=(Bottom=4% );
 styleattrs /*datacolors=(CX00509E CX95BDE6)*/ DATACONTRASTCOLORS=(CX00509E);
 	vbar nyalder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar" grouporder=ascending attrid=ermann;
@@ -459,9 +460,10 @@ styleattrs /*datacolors=(CX00509E CX95BDE6)*/ DATACONTRASTCOLORS=(CX00509E);
     yaxis label="Antall";
 	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, 5-årige alderskategorier';
 run;
-/*%if &utfig=1 %then %do;*/
-/*ods listing close; ods graphics off;*/
-/*%end;*/
+
+%if &utfig=1 %then %do;
+ods listing close; ods graphics off;
+%end;
 
 /**************Lag tabeller***********/
 data xyz_tmp_rate;
@@ -634,8 +636,8 @@ set xyz_tmp_rater;
 if &bo=8888 then nrate=ratesnitt;
 label antsnitt="Events";
 label uniksnitt="Pasient";
-%if &pid=prove_id %then %do;
-label uniksnitt="Prøve";
+%if &pid ne pid %then %do;
+label uniksnitt="&pid";
 %end;
 label popsnitt="Populasjon";
 format uniksnitt antsnitt popsnitt nlnum8.0;
