@@ -42,6 +42,7 @@ title color=red height=5 '2a: duplicater av enkeltregning_lnr - skal ikke være!
 proc sql;
   select count(*) as ndup_enkeltregning_lnr from dup_regning;
 quit;
+title;
 %end;
 
 
@@ -56,10 +57,6 @@ proc sql;
 		case when enkeltregning_lnr in (select enkeltregning_lnr from &inn_takst ) then 1 end as ok_takst
 	from &inn;
 quit;
-
-proc freq data=regninglnr_&aar.;
-  tables ok_diag* ok_takst / norow nocol nopercent missing;
-run;
 
 proc sql noprint;
   select count(*) into :regning from regninglnr_&aar.;
