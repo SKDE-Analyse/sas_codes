@@ -51,6 +51,12 @@ data bo;
 	  ;
   run;
 
+/* ---------------------- */
+/*  Lagre filen på HNREF  */  
+/* ---------------------- */ 
+data hnref.boomr;
+   set bo;
+run;
 
 /* -------- */
 /*  BOSHHN  */  
