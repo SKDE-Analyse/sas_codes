@@ -161,7 +161,8 @@
 980564002;HELSE MØRE OG ROMSDAL HF DPS SUNNMØRE POLIKLINIKK ÅLESUND;;;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 989124544;HELSE MØRE OG ROMSDAL HF DPS NORDMØRE/ROMSDAL POLIKLINIKK MOLDE;;;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 993521248;HELSE MØRE OG ROMSDAL HF DPS NORDMØRE/ROMSDAL DØGNSEKSJON MOLDE;;;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
-875034022;BETANIA MALVIK BO- OG BEHANDLINGSSENTER;;;;;;2;Helse Midt-Norge RHF;;Midt;Oppdatert 29.08.2023 av Johan R
+875034022;BETANIA MALVIK BO- OG BEHANDLINGSSENTER;;;;;;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
+974116464;Betania Malvik;;;;;;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 24.05.2024 av Tove J
 983974732;Helse Førde HF;90;Helse Førde HF;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
 974744570;Helse Førde, Førde;91;Førde sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
 974745364;Helse Førde, Nordfjord;92;Nordfjord sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
@@ -799,7 +800,6 @@
 973876457;Mjøs kirurgene lege og spesialistsenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 30.03.2022: RHF data somatikk.
 974116170;BLÅ KORS KLINIKK LADE SA;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 29.08.2023 av Johan R
 974116367;FURUKOLLEN PSYKIATRISKE SENTER AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Lagt til 11.04.2024 av Johan R
-974116464;Betania Malvik;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 974116561;LHL-klinikkene Glittre;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 974116669;Vikersund bad rehabiliteringssenter AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 974116693;INCOGNITO KLINIKK;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 29.08.2023 av Johan R
@@ -953,3 +953,7 @@
 999230008;Ifocus øyeklinikk AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
 999238351;NIMI AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 10.feb 2021: rehab institusjon i  2014-2018 rehab fila.
 999458610;Ibsensykehuset Gjøvik AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;
+928882063;REHABILITERINGSKLINIKKENE AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 24.05.2024 av Tove J
+980524493;CAPIO ANOREKSI SENTER AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 24.05.2024 av Tove J
+892237832;BLÅ KORS KLINIKK LADE SA;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 24.05.2024 av Tove J
+995705753;REHABILITERING VEST AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 24.05.2024 av Tove J
