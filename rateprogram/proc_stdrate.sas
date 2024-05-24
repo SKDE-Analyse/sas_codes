@@ -1,6 +1,8 @@
-﻿%macro proc_stdrate(
+﻿%macro proc_stdrate_radiologi(
     dsn=, /*Grunnlagsdatsettet det skal beregnes rater fra*/
     rate_var=, /*Ratevariabel, kan være aggregert (verdier større enn en) eller dikotom (0,1)*/
+	unik=0,  /* 1 er pasientrate, 0 er default (kontaktrate)*/
+	pid=pid, /* navnet på id, f.eks. pid, lnr, lopenummer, osv. */
     bo=bohf, /*BoHf, BoRHF eller BoShHN, BoHf er default*/
 	alder_min=0, /*Laveste alder i utvalget, 0 er default*/
 	alder_max=105, /*Høyeste alder i utvalget, 105 er default*/
@@ -11,6 +13,8 @@
     slutt=, /*Sluttår*/
     utdata=, /*Navn på utdatasett, utdatasettet er på "wide" form*/
     long=, /*if long=1 --> skriv ut "langt" datasett, ikke aktivert er default*/
+	utfig=, /*if utfig=1 --> skriv ut aldersfigur og ratefigur ved å bruke utdata navn*/
+	bildeformat=png, /*Format, png som default*/
     innbygg_dsn=innbygg.INNB_SKDE_BYDEL, /*Innbyggerdatasett: innbygg.INNB_SKDE_BYDEL, innbygg.INNB_SKDE_BYDEL er default*/
     /*Til boområde-makroen: Standard er:(inndata=pop, indreOslo = 0, bydel = 1);*/
     bodef_indreoslo=0, /*0 er standard, 0 er default*/
@@ -29,14 +33,24 @@ kortversjon (kjøres med default verdier for resten)
 ```
 ### Input
 - datasett med variabel det skal beregnes rater på, 
-	- kan være 0,1 variabel eller aggregert
-	- må innheolde bo-nivået det skal kjøres rater på
+	- må være 0,1 variabel
+	- må inneholde bo-nivået det skal kjøres rater på
+	- må inneholde unik-id det skal beregnes på
+	- må inneholde aar, ermann, alder
 
 ### Output
-- &utdata + evt. long_&utdata
+- datasett: &utdata + evt. long_&utdata
+- figurer:  (hvis utfig=1) &utdata_alder1 (ett-årig aldersfigur) og &utdata_rate
 
 ### Endringslogg:
 - februar 2022 opprettet, Frank
+- januar 2023, Janice
+	- inkludert aggregering i koden, derfor inndata må være på linjenivå, ikke aggregert
+	- nytt argumenter "unik": 0 (default) = lage kontaktrate og vise antall unike pasienter i tabeller og figurer.
+							  1           = lage pasientrate
+	- nytt argument "pid" er variable å telle som unik
+	- nytt argumenter "utfig" og "bildeformat" for å indikere om skrive ut aldersfigur og ratefigur
+	  (OGS!! Må ha <%let bildestil= ...> før kjøring av makroen.)
 */
 
 /***Formatering****/ 
@@ -107,10 +121,22 @@ value nyalder_fmt
 20="95-105 år";
 run;
 
+/* Aggregere */
+proc sql;
+	create table agg as
+	select aar, &bo, ermann, alder, 
+			count(case when &rate_var eq 1 then 1 end) as &rate_var, 
+		    count(distinct(case when &rate_var then &pid end)) as unik
+
+	from &dsn
+	where &bo ne .
+	group by aar, &bo, ermann, alder;
+quit;
+
 /*****Hent inn ratedata*****/
 data xyz_rateutvalg;
-set &dsn;
-keep aar ermann alder &bo &rate_var nyalder;
+set agg;
+keep aar ermann alder &bo &rate_var unik nyalder;
 if alder in (&alder_min:&alder_max);
 
 if alder in (0:4) then nyalder=1;
@@ -160,7 +186,8 @@ run;
 proc sql;
 	create table xyz_ratedsn0 as
 	select aar, &bo, nyalder, ermann,
-		sum(&rate_var) as antall
+		sum(&rate_var) as antall,
+		sum(unik)      as unik
 	from xyz_rateutvalg
 	group by aar, &bo, nyalder, ermann;
 quit;
@@ -168,7 +195,8 @@ quit;
 proc sql;
 	create table xyz_ratedsnN as
 	select aar, nyalder, ermann,
-		sum(&rate_var) as antall
+		sum(&rate_var) as antall,
+		sum(unik)      as unik
 	from xyz_rateutvalg
 	group by aar, nyalder, ermann;
 quit;
@@ -184,7 +212,8 @@ run;
 proc sql;
 	create table xyz_ratedsnsnitt as
 	select &bo, nyalder, ermann,
-		sum(antall) as antall
+		sum(antall) as antall,
+		sum(unik)   as unik
 	from xyz_ratedsn
 	group by &bo, nyalder, ermann;
 quit;
@@ -192,6 +221,7 @@ data xyz_ratedsnsnitt;
 set xyz_ratedsnsnitt;
 aar=9999;
 antall=antall/(&slutt-&start+1);
+unik  =unik  /(&slutt-&start+1);
 run;
 /*Slår sammen enkeltår og gjennomsnitt*/
 data xyz_ratedsn;
@@ -298,7 +328,7 @@ quit;
 /*******slå sammen ratedata og populasjonsdata, og beregn rate****************/
 proc sql;
 create table xyz_ratedata as
-select a.*,antall
+select a.*,antall,unik
 from xyz_pop_area as a left join xyz_ratedsn as b
 on a.&bo=b.&bo and a.aar=b.aar and a.nyalder=b.nyalder and a.ermann=b.ermann;
 run;
@@ -306,6 +336,7 @@ run;
 data xyz_ratedata;
 set xyz_ratedata;
 if antall=. then antall=0;
+if unik  =. then unik  =0;
 run;
 
 /*for indirekte justering - 
@@ -314,34 +345,48 @@ ii) merge inn i popN datasettet (referansepopulasjonen)*/
 proc sql;
 	create table xyz_eventN as
 	select nyalder, ermann,
-		sum(antall) as Nevent
+		sum(antall) as Nevent,
+		sum(unik)   as Nunik
 	from xyz_ratedata
 	where aar=&standardaar and &bo=8888
 	group by nyalder, ermann;
 quit;
 proc sql;
 create table xyz_popN as
-select a.*,b.Nevent
+select a.*,b.Nevent, b.Nunik
 from xyz_popN as a left join xyz_eventN as b
 on a.nyalder=b.nyalder and a.ermann=b.ermann;
 run;
 
 /**Selve standardiseringa skjer her**/
 ods exclude all;
+
 %if &indirekte ne 1 %then %do;
 proc stdrate data=xyz_ratedata refdata=xyz_popN method=direct stat=rate(mult=&rmult);
 %end;
 %if &indirekte=1 %then %do;
 proc stdrate data=xyz_ratedata refdata=xyz_popN method=indirect stat=rate(mult=&rmult);
 %end;
+
 by &bo aar;
+
+%if &unik=0 %then %do;
 population event=antall total=pop;
+%end;
+%if &unik=1 %then %do;
+population event=unik total=pop;
+%end;
+
 %if &indirekte ne 1 %then %do;
 	reference total=Npop;
 %end;
-%if &indirekte=1 %then %do;
+%if &indirekte=1 and &unik=0 %then %do;
 	reference event=Nevent total=Npop;
 %end;
+%if &indirekte=1 and &unik=1 %then %do;
+	reference event=Nunik total=Npop;
+%end;
+
 strata ermann nyalder /*/ stats*/;
 ods output stdrate=xyz_StdRate_&utdata;
 run;
@@ -381,6 +426,10 @@ value='Menn';
 end;
 run;
 
+%if &utfig=1 %then %do;
+ODS Graphics ON /reset=All imagename="&utdata._alder" imagefmt=&bildeformat border=off height=500px /*HEIGHT=&hoyde width=&bredde*/;
+ODS Listing style=stil_figur Image_dpi=300 GPATH="&bildesti";
+%end;
 proc sgplot data=xyz_aldersfig dattrmap=xyz_ermanncolor noautolegend noborder sganno=anno pad=(Bottom=4% );
 styleattrs /*datacolors=(CX00509E CX95BDE6)*/ DATACONTRASTCOLORS=(CX00509E);
 	vbar alder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar" grouporder=ascending attrid=ermann;
@@ -388,6 +437,9 @@ styleattrs /*datacolors=(CX00509E CX95BDE6)*/ DATACONTRASTCOLORS=(CX00509E);
     yaxis label="Antall";
 	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, ett-årig';
 run;
+%if &utfig=1 %then %do;
+ods listing close; ods graphics off;
+%end;
 
 PROC SQL;
    CREATE TABLE xyz_aldersfigkat AS
@@ -396,7 +448,10 @@ PROC SQL;
       GROUP BY aar, nyAlder, ErMann;	  
 QUIT;
 
-
+/*%if &utfig=1 %then %do;*/
+/*ODS Graphics ON /reset=All imagename="&utdata._alder5" imagefmt=&bildeformat border=off height=500px ;*/
+/*ODS Listing style=stil_figur Image_dpi=300 GPATH="&bildesti";*/
+/*%end;*/
 proc sgplot data=xyz_aldersfigkat dattrmap=xyz_ermanncolor  noautolegend noborder sganno=anno pad=(Bottom=4% );
 styleattrs /*datacolors=(CX00509E CX95BDE6)*/ DATACONTRASTCOLORS=(CX00509E);
 	vbar nyalder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar" grouporder=ascending attrid=ermann;
@@ -404,6 +459,9 @@ styleattrs /*datacolors=(CX00509E CX95BDE6)*/ DATACONTRASTCOLORS=(CX00509E);
     yaxis label="Antall";
 	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, 5-årige alderskategorier';
 run;
+/*%if &utfig=1 %then %do;*/
+/*ods listing close; ods graphics off;*/
+/*%end;*/
 
 /**************Lag tabeller***********/
 data xyz_tmp_rate;
@@ -412,13 +470,31 @@ drop Method RateMult ExpectedEvents RefPopTime StdErr Type;
 rename ObservedEvents=Antall PopTime=Populasjon Stdrate=Rate LowerCL=LCL UpperCL=UCL;
 run;
 
+proc sql;
+  create table xyz_unik as
+  select &bo, aar, sum(unik) as unik
+  from xyz_ratedata
+  group by &bo, aar;
+quit;
+
+proc sql;
+  create table xyz_tmp_rate as
+  select a.*, b.unik
+  from xyz_tmp_rate a, xyz_unik b
+  where a.&bo=b.&bo 
+    and a.aar=b.aar;
+quit;
+
 proc tabulate data=xyz_tmp_rate;
-	VAR Rate Antall populasjon;
+	VAR Rate Antall unik populasjon;
 	CLASS aar &bo/	ORDER=UNFORMATTED MISSING;
 	TABLE 
 &bo={LABEL="" STYLE={NOBREAKSPACE=ON} STYLE(CLASSLEV)={NOBREAKSPACE=ON}},
 aar={LABEL="Justert rate"}*Rate={LABEL=""}*F=8.2*Sum={LABEL=""} 
 aar={LABEL="Antall"}*Antall={LABEL=""}*F=8.0*Sum={LABEL=""}
+%if &unik ne 1 %then %do;
+aar={LABEL="Unik"}*unik={LABEL=""}*F=8.0*Sum={LABEL=""}
+%end;
 aar={LABEL="Innbyggere"}*populasjon={LABEL=""}*F=8.0*Sum={LABEL=""};
 RUN;
 
@@ -455,6 +531,12 @@ id aar;
 by &bo;
 run;
 
+proc transpose data=xyz_tmp_rate out=xyz_tmp_unik prefix=unik;
+var unik;
+id aar;
+by &bo;
+run;
+
 proc transpose data=xyz_tmp_rate out=xyz_tmp_pop prefix=pop;
 var populasjon;
 id aar;
@@ -480,7 +562,7 @@ by &bo;
 run;
 /*slå sammen transponerte datasett*/
 data xyz_tmp_rater;
-merge xyz_tmp_rater xyz_tmp_antall xyz_tmp_pop xyz_tmp_crude xyz_tmp_lcl xyz_tmp_ucl;
+merge xyz_tmp_rater xyz_tmp_antall xyz_tmp_unik xyz_tmp_pop xyz_tmp_crude xyz_tmp_lcl xyz_tmp_ucl;
 run;
 
 data xyz_tmp_rater;
@@ -551,13 +633,22 @@ data xyz_tmp_rater;
 set xyz_tmp_rater;
 if &bo=8888 then nrate=ratesnitt;
 label antsnitt="Events";
+label uniksnitt="Pasient";
+%if &pid=prove_id %then %do;
+label uniksnitt="Prøve";
+%end;
 label popsnitt="Populasjon";
-format antsnitt popsnitt nlnum8.0;
+format uniksnitt antsnitt popsnitt nlnum8.0;
 run;
 
 proc sort data=xyz_tmp_rater;
 by descending ratesnitt;
 run;
+
+%if &utfig=1 %then %do;
+ODS Graphics ON /reset=All imagename="&utdata._rate" imagefmt=&bildeformat border=off height=500px /*HEIGHT=&hoyde width=&bredde*/;
+ODS Listing style=stil_figur Image_dpi=300 GPATH="&bildesti";
+%end;
 
 proc sgplot data=xyz_tmp_rater noborder noautolegend sganno=anno pad=(Bottom=5%);
 hbarparm category=&bo response=ratesnitt / fillattrs=(color=CX95BDE6); 
@@ -572,13 +663,19 @@ hbarparm category=&bo response=nrate / fillattrs=(color=CXC3C3C3);
 
 Highlow Y=&bo low=Min high=Max / type=line name="hl2" lineattrs=(color=black thickness=1 pattern=1);
 
-Yaxistable antsnitt popsnitt /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+%if &unik=0 %then %do;
+Yaxistable uniksnitt antsnitt popsnitt /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+%end;
+%if &unik=1 %then %do;
+Yaxistable uniksnitt          popsnitt /Label location=inside labelpos=bottom position=right valueattrs=(size=7 family=arial) labelattrs=(size=7);
+%end;
+
 %if &indirekte ne 1 %then %do;
-yaxis display=(noticks noline) label="&rate_var, &dsn, direkte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
+yaxis display=(noticks noline) label="&rate_var, unik=&unik, &dsn, direkte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
 discreteorder=data valueattrs=(size=7);
 %end;
 %if &indirekte = 1 %then %do;
-yaxis display=(noticks noline) label="&rate_var, &dsn, indirekte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
+yaxis display=(noticks noline) label="&rate_var, unik=&unik, &dsn, indirekte metode, &alder_min - &alder_max år" labelpos=top labelattrs=(size=7 weight=bold) type=discrete 
 discreteorder=data valueattrs=(size=7);
 %end;
 xaxis /*display=(nolabel)*/ offsetmin=0.02 valueattrs=(size=7) label="Rater pr &rmult, FT1=&FT1, FT2=&FT2, FT3=&FT3";
@@ -620,6 +717,9 @@ xaxis /*display=(nolabel)*/ offsetmin=0.02 valueattrs=(size=7) label="Rater pr &
 
 %end;
 run;
+%if &utfig=1 %then %do;
+ods listing close; ods graphics off;
+%end;
 
 data &utdata;
 set xyz_tmp_rater;
@@ -652,4 +752,4 @@ delete xyz_:;
 run;
 %end;
 
-%mend proc_stdrate;
+%mend;
