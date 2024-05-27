@@ -388,12 +388,12 @@ population event=unik total=pop;
 %end;
 
 strata ermann nyalder /*/ stats*/;
-ods output stdrate=xyz_StdRate_&utdata;
+ods output stdrate=StdRate_&utdata;
 run;
 ods exclude none; 
 
-data xyz_StdRate_&utdata;
-set xyz_StdRate_&utdata;
+data StdRate_&utdata;
+set StdRate_&utdata;
 format aar aar_fmt. &bo &bo._fmt.;
 run; 
 
@@ -467,7 +467,7 @@ ods listing close; ods graphics off;
 
 /**************Lag tabeller***********/
 data xyz_tmp_rate;
-set xyz_StdRate_&utdata;
+set StdRate_&utdata;
 drop Method RateMult ExpectedEvents RefPopTime StdErr Type;
 rename ObservedEvents=Antall PopTime=Populasjon Stdrate=Rate LowerCL=LCL UpperCL=UCL;
 run;
