@@ -93,4 +93,6 @@ hbarparm category=&bo. response=ratesnittN_1 / fillattrs=(color=CX4C4C4C) outlin
 	Label &tabellvariable="&labeltab";
 	Format  &tabellvariable &format_percent ;
 run;
+ods listing close; ods graphics off;
+
 %mend ratefig_tredelt_andelkolonne;
