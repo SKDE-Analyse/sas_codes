@@ -125,6 +125,8 @@ keylegend "hp3" "hp2" "hp1"/ location=outside position=bottom down=1 noborder ti
 	xaxis offsetmin=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 run;
 
+ods listing close; ods graphics off;
+
 proc datasets nolist;
 delete xyz_:;
 run;
