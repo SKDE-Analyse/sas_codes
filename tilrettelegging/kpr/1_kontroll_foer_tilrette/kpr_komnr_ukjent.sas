@@ -1,7 +1,4 @@
-﻿/* Bruke makro fra NPR-tilrettelegging */
-%include "&filbane/tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas";
-
-%macro komnr_ukjent(inndata=, aar=);
+﻿%macro kpr_komnr_ukjent(inndata=, aar=);
 /*! 
 ### Beskrivelse
 
