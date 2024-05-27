@@ -23,10 +23,12 @@ data &utdata;
     length tjenestetype_kpr         3;
     length kontakttype_kpr          3;
     length refusjonutbetalt         8;
+    length praksisNavn              $100;
+    length praksisKommune           4;
     /* Variabler i tilrettelagte data som er felles med NPR */
     length aar                      4;
     length alder                    4;
-    length fodselsar                4;
+    length fodselsaar               4;
     length ErMann                   3;
     length bohf                     4;
     length borhf                    4;
@@ -36,7 +38,6 @@ data &utdata;
     length inndato                  8;
     length inntid                   4;
     length fylke                    4;
-    length doddato                  4;
 %end;
 
 /* diagnose */

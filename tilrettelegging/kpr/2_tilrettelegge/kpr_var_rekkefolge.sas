@@ -9,7 +9,7 @@ retain    aar
           inntid
           ErMann
           alder
-          fodselsar
+          fodselsaar
           komnr
           bydel
           bohf

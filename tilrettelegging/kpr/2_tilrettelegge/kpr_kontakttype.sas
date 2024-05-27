@@ -3,7 +3,7 @@
                         regning_fil= /* filen på enkeltregning_lnr nivå som kontakttype skal "limes" på */);
 /*assign each takstkode to a kontakttype*/
 /*<< kontakttypen defineres ut i fra den taksten på regningskortet som er ansett som den mest ressurskrevende taksten>>*/
-/*rekkefølge: sykebesøk (5), tverrfaglig (4), konsultasjon (3), enkelt kontakt (2), annet (1), ukjent (0)*/
+/*rekkefølge: sykebesøk (4), tverrfaglig (5), konsultasjon (3), enkel kontakt (2), annet (1), ukjent (0)*/
 
 /* Tove J 24.05.2024: lagt til takster brukt av primærhelseteam med driftstilskuddsmodell */
 

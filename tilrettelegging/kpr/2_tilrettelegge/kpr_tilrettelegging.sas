@@ -8,7 +8,7 @@
     call symput ('enkeltregning_lnr',varnum(dset,'enkeltregning_lnr'));
     call symput ('dato',varnum(dset,'dato'));
     call symput ('kjonn',varnum(dset,'kjonn'));
-    call symput ('fodselsar',varnum(dset,'fodselsar'));
+    call symput ('fodselsaar',varnum(dset,'fodselsaar'));
     call symput ('kommuneNr',varnum(dset,'kommuneNr'));
     call symput ('bydel',varnum(dset,'bydel'));
     call symput ('tjenestetype',varnum(dset,'tjenestetype'));
@@ -27,6 +27,15 @@
     run;
 
 
+/*lager makrovariabel som angir årstall - brukes til navning av data senere*/
+data _null_;
+  set &inn.;
+  call symputx("aar",aar);
+run;
+
+%include "&filbane/formater/SKDE_somatikk.sas";
+%include "&filbane/formater/KPR_Lege.sas";
+
 /*************************************/
 /* 1. Tilrettelegge hoved/regningsfil*/
 /*************************************/
@@ -34,6 +43,7 @@
 %let sektor = enkeltregning; /*hvilken fil skal tilrettelegges*/
 data &sektor._copy;
   set 	&inn; 
+drop doddato; /*tas ut - oppdatert døddato kobles på av den enkelte ved behov*/
 run;
 
 /* --------------------------*/
@@ -65,10 +75,10 @@ data &sektor;
 
   pid_kpr=KPR_lnr+0;
   bydel_kpr = bydel + 0;
-  kontakttype_kpr = kontakttypeId +0;
-  if kontakttype_kpr eq -1 then kontakttype_kpr = 0;
+  kontakttype_kpr = kontakttypeId;
+  if kontakttype_kpr eq -1 then kontakttype_kpr = 0; 
   refusjonutbetalt = 'refusjonutbetaltbeløp'n + 0;
-  drop KPR_lnr bydel kontakttypenavn kontakttypeId 'refusjonutbetaltbeløp'n;
+  drop KPR_lnr bydel /*kontakttypenavn*/ kontakttypeId 'refusjonutbetaltbeløp'n;
 run;
 
 /*-----------------------*/
@@ -87,10 +97,15 @@ quit;
 %forny_komnr     	(inndata=&sektor, kommune_nr=kommunenr2); 
 
 /* bydel*/
-data &sektor(drop=bydel_tmp);
+data &sektor;
   set &sektor;
 
   bydel_tmp=bydel_kpr;
+
+if komnr = 5001 and bydel_tmp not in (01:04) then bydel_tmp = 0;
+if komnr = 4601 and bydel_tmp not in (01:08) then bydel_tmp = 0;
+if komnr = 1103 and bydel_tmp not in (01:09) then bydel_tmp = 0;
+if komnr = 301  and bydel_tmp not in (01:17) then bydel_tmp = 0;
 
   /* Create variable 'bydel' for the kommune with bydel */
   if komnr in (301,4601,5001,1103) then do;
@@ -102,7 +117,7 @@ data &sektor(drop=bydel_tmp);
   else bydel=.;
 
   /*drop variabler fra tilretteleggingen som ikke skal være med videre*/
-  drop kommuneNr kommuneNr2 komnr_inn nr bydel_kpr;
+  drop kommuneNr kommuneNr2 komnr_inn nr bydel_kpr bydel_tmp;
 run;
 
 
@@ -202,16 +217,6 @@ run;
 %include "&filbane/tilrettelegging/kpr/2_tilrettelegge/kpr_icpc2.sas";
 %kpr_icpc2			(inndata=&sektor, 	utdata=&sektor);
 
-/* ------- */
-/* DØDDATO */
-/* ------- */
-
-proc sql;
-  create table &sektor as
-  select a.*, b.dodDato
-  from &sektor a left join &doddata b
-  on a.pid_kpr=b.lopeNr;
-quit;
 
 /* --------------------------------- */
 /* Length, Label, Format, rekkefølge */
