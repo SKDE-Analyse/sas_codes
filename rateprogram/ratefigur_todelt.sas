@@ -115,6 +115,7 @@ hbarparm category=&bo. response=rateN1 / fillattrs=(color=CX4C4C4C) outlineattrs
     yaxis display=(noticks noline) label=&opptak_txt labelpos=top labelattrs=(size=8 weight=bold) type=discrete discreteorder=data valueattrs=(size=9);
 	xaxis offsetmin=0.02 &skala valueattrs=(size=8) label="&xlabel" labelattrs=(size=8 weight=bold);
 run;
+ods listing close; ods graphics off;
 
 proc datasets nolist;
 delete xyz_:;
