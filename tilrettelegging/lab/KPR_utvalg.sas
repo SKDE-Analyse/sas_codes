@@ -28,7 +28,7 @@ else if lowcase(takstkode eq '708c') 			then do;
                 kol = 1;
                 ref = 25; end;
 
-if hbA1c or CRP or gammaGT_alat or Glukose or INR or Kalium or Kreatinin or kol then utvalg = 1;
+if HbA1c or CRP or gammaGT_alat or Glukose or INR or Kalium or Kreatinin or kol then utvalg = 1;
 if utvalg eq 1 then output;
 run;
 
