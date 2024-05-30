@@ -108,7 +108,7 @@ else if NLK in ('NPU01435',
 if ALAT or Albumin or ASAT or CA125 or CEA or CRP or D_dimer or Ferritin or T4 or Fosfat or 
     GammaGT or Glukose or HbA1c or HDL or Homocystein or INR or Kalium or Kalsium or Karbamid or
     Kreatinin or LaktatD or Laktose or LDL or MMA or Magnesium or Natrium or NIPT or NT_pro or 
-    proteinelektro or PSA or TSH or kolesterol_tot or B12 or B9 or Dvit then utvalg = 1;
+    pro_el or PSA or TSH or kol or B12 or B9 or Dvit then utvalg = 1;
 /* kun skrive ut datasett som inkluderer treff på analyser */
 if utvalg eq 1 then output;
 run;
