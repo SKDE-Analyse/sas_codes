@@ -54,7 +54,10 @@ else if NLK = 'NPU04998'        then Kreatinin=1;
 /*Laktatdehydrogenerase	*/
 else if NLK = 'NPU19658'        then LaktatD=1;
 /*Laktoseintoleranse*/
-else if NLK = 'NPU36378'        then Laktose=1;
+else if NLK in ('NPU36378',
+                'NPU58626',
+                'NPU58627',
+                'NPU58628')     then Laktose=1;
 /*LDL-kolesterol*/
 else if NLK = 'NPU01568'        then LDL=1;
 /*MMA	*/
@@ -79,7 +82,7 @@ else if NLK in ('NPU03300',
                 'NPU02642',
                 'NPU19844',
                 'NOR35249',
-                'NPU28875')     then proteinelektro=1;
+                'NPU28875')     then pro_el=1;
 /*PSA	*/
 else if NLK in ('NPU08669',
                 'NPU12534',
@@ -88,7 +91,7 @@ else if NLK in ('NPU08669',
 else if NLK in ('NPU03577',
                 'NPU27547')     then TSH=1;
 /*Totalkolesterol	*/
-else if NLK = 'NPU01566'        then kolesterol_tot=1;
+else if NLK = 'NPU01566'        then kol=1;
 /*Vitamin B12	*/
 else if NLK in ('NPU01700',
                 'NPU03605',
