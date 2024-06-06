@@ -147,12 +147,12 @@ else x + 1;
 run;
 
 proc sort data = temp;
-by kode descending x;
+by kode refkat descending x;
 run;
 
 data temp2;
 set temp;
-by kode descending x;
+by kode refkat descending x;
 l = lag(x); /*Til kontroll*/
 Dato_slutt = lag(Dato_id);
 if first.kode then do;
