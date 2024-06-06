@@ -160,7 +160,7 @@ run;
 /* lagre langt datasett som inneholder medisinsk biokjemi NLKKODER med refusjonsrett */
 proc sql;
 	create table SKDE20.lab_nlkkoder_inkl_&aar.(drop=inndato nr_id) as
-	select a.*, b.refusjon
+	select a.*, b.refusjon, b.stjernekode
 	from Z_tmp5_long a
 	left join SKDE20.LAB_KODEVERK_2018_2023 b
 	on a.nlk=b.kode
