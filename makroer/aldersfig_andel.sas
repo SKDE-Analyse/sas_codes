@@ -17,7 +17,8 @@ bodef_indreoslo=0,
 bodef_bydel=1,
 utfig=,
 json=0 /*skriv ut til helseatl mappe for å lage json fil*/,
-pos=topright
+pos=topright,
+test=0
 );
 
 proc sql;
@@ -180,8 +181,10 @@ set xyz_alder_fig;
 run;	
 %end;
 
+%if &test ne 1 %then %do;
 proc datasets nolist;
 delete xyz_:;
 run;
+%end;
 
 %mend;
