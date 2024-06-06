@@ -155,7 +155,7 @@ set temp;
 by kode refkat descending x;
 l = lag(x); /*Til kontroll*/
 Dato_slutt = lag(Dato_id);
-if first.kode then do;
+if first.refkat then do;
 l = .;
 dato_slutt= "31dec2023"d;
 end;
