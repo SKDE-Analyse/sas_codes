@@ -172,7 +172,7 @@ proc sql;
 create table SKDE20.LAB_nlkkoder_ekskl_&aar. as
 select * from Z_tmp5_long(drop=inndato nr_id)
 EXCEPT ALL
-select * from SKDE20.lab_nlkkoder_inkl_&aar.(drop=refusjon);
+select * from SKDE20.lab_nlkkoder_inkl_&aar.(drop=refusjon stjernekode);
 quit;
 
 /* kontrolltelling - hva ble ekskludert */
