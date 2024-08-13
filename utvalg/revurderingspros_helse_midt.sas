@@ -28,7 +28,7 @@ array prosedyre {*} NC:;
     if prosedyre{i} in ('NDM39','NDR09') then ganglion_pros=1;
     if prosedyre{i} in ('JHA00','JHA20','JHB00') then hemoroide_pros=1;
     if prosedyre{i} in ('LCC10','LCD00','LCD30','LCD96','LCC20',
-    'LCD10','LCD40','LCC11','LCD01','LCD04','LCD11','LCD31','LCD97'/*,'ZXC96'*/) then hysterektomi_pros=1;
+    'LCD10','LCD40','LCC11','LCD01','LCD04','LCD11','LCD31','LCD97'/*,'ZXC96'*/) then hysterektomi_pros=1;      /*NB! Har ikke med LCD96*/
     if prosedyre{i} in ('ACC51','NDE11','NDE12','NDL50','NDM19','NDM49') then karpaltunnel_pros=1;
     if prosedyre{i} in ('NGA11','NXGX23') then kneartroskopi_pros=1;
     if substr(prosedyre{i},1,3) = 'NGD' then menisk_pros=1;
@@ -54,7 +54,7 @@ array diagnose {*} Hdiag: Bdiag:;
     if substr(diagnose{i},1,1) = 'C' then ekskl_diag_allkreft=1;
     if diagnose{i} = 'H001' then chalazion_diag=1;
     if diagnose{i} = 'M720' then dupuytren_diag=1;
-    if diagnose{i} = 'M674' then ganglion_diag=1;
+    if substr(diagnose{i},1,4) eq 'M674' then ganglion_diag=1;      /*13.08.2024 NB! Må bruke substr her fordi en del kodes med et femtetegn (lokalisasjon). Gjelder kun ganglion (har sjekket for de andre)*/
     if substr(diagnose{i},1,3) = 'K64' then hemoroide_diag=1;
     if substr(diagnose{i},1,3) = 'N92' then hysterektomi_diag=1;
     if substr(diagnose{i},1,3) in ('D06','D07') then ekskl_diag_hyst=1;
@@ -85,7 +85,7 @@ array takst {*} normaltariff:;
 	do i=1 to dim(takst);
 	if takst{i} = 'k05c' then akromion_takst=1;
     if takst{i} = '140c' then dupuytren_takst=1;
-    if takst{i} = '140c' then ganglion_takst=1;
+    if takst{i} = '140a' then ganglion_takst=1;
     if takst{i} = '140l' then hemoroide_takst=1;
     if takst{i} = '140i' then karpaltunnel_takst=1;
     if takst{i} = 'k05b' then menisk_takst=1;
