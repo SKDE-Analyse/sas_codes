@@ -294,7 +294,7 @@ quit;
 
 proc sql;
 create table deleteme_ratedata as
-   select a.aar, a.&region, sum(a.population) as innbyggere
+   select a.&region, a.aar, sum(a.population) as innbyggere
    %do std_i=1 %to &std_numvars;
       %let var = %scan(&std_varlist, &std_i);
       , sum(&var) / sum(b.n_obs) as &var._cravg
@@ -310,12 +310,12 @@ create table deleteme_ratedata as
       on %join_on(a, c)
    left join deleteme_std_avg_sums as d
        on %join_on(a, d)
-   group by a.aar, a.&region
-   /*order by a.aar, a.&region, d.avg_av_obs desc*/;
+   group by a.aar, a.&region;
 run;
 
-proc sort data=deleteme_ratedata out=deleteme_sorted;
+proc sort data=deleteme_ratedata out=&out._long;
   by &region aar;
+  format &region &region._fmt.;
 run;
 
 data &out;
@@ -339,8 +339,7 @@ data &out;
 
    format &snitt_vars 16.2;
 
-   set deleteme_sorted;
-   format &region &region._fmt.;
+   set &out._long;
 
    array pop{&min_year:&max_year} pop&min_year-pop&max_year;
 
