@@ -294,12 +294,12 @@ quit;
 
 proc sql;
 create table deleteme_ratedata as
-   select a.&region, a.aar, sum(a.population) as innbyggere
+   select a.&region, a.aar, sum(a.population) as pop
    %do std_i=1 %to &std_numvars;
       %let var = %scan(&std_varlist, &std_i);
       , sum(&var) / sum(b.n_obs) as &var._cravg
       , sum(&var / b.n_obs * d.avg_av_obs) as &var._avg
-      , sum(&var) as &var._antall
+      , sum(&var) as &var._ant
       , sum(&var) / sum(a.population) * &ratemult as &var._crude
       , sum(&var / a.population * c.andel_av_innbyggere) * &ratemult as &var._rate format=16.2
    %end;
@@ -313,10 +313,21 @@ create table deleteme_ratedata as
    group by a.aar, a.&region;
 run;
 
-proc sort data=deleteme_ratedata out=&out._long;
+proc sort data=deleteme_ratedata out=deleteme_sorted;
   by &region aar;
   format &region &region._fmt.;
 run;
+
+data &out._long;
+   /* Keeping only variables in &out_vars */
+   set deleteme_sorted;
+   keep &region aar pop %do std_i=1 %to &std_numvars;
+      %do std_j=1 %to %sysfunc(countw(&out_vars));
+         %scan(&std_varlist, &std_i)_%scan(&out_vars, &std_j)
+      %end;
+   %end;;
+run;
+
 
 data &out;
    /*
@@ -339,18 +350,18 @@ data &out;
 
    format &snitt_vars 16.2;
 
-   set &out._long;
+   set deleteme_sorted;
 
-   array pop{&min_year:&max_year} pop&min_year-pop&max_year;
+   array pop_array{&min_year:&max_year} pop&min_year-pop&max_year;
 
    if aar ^= 9999 then
-      pop{aar} = innbyggere;
+      pop_array{aar} = pop;
    else do;
-      popsnitt = innbyggere;
+      popsnitt = pop;
 
       %do std_i=1 %to &std_numvars;
          %let var = %scan(&std_varlist, &std_i);
-         &var._antsnitt = &var._antall;
+         &var._antsnitt = &var._ant;
          &var._ratesnitt = &var._rate;
          &var._cravgsnitt = &var._cravg;
          &var._avgsnitt = &var._avg;
@@ -363,14 +374,14 @@ data &out;
 
    %do std_i=1 %to &std_numvars;
       %let var = %scan(&std_varlist, &std_i);
-      array antall_&var{&min_year:&max_year} &var._ant&min_year-&var._ant&max_year;
+      array ant_&var{&min_year:&max_year} &var._ant&min_year-&var._ant&max_year;
       array rate_&var{&min_year:&max_year} &var._rate&min_year-&var._rate&max_year;
       array cravg_&var{&min_year:&max_year} &var._cravg&min_year-&var._cravg&max_year;
       array avg_&var{&min_year:&max_year} &var._avg&min_year-&var._avg&max_year;
       array crude_&var{&min_year:&max_year} &var._crude&min_year-&var._crude&max_year;
 
       if aar ^= 9999 then do;
-         antall_&var{aar} = &var._antall;
+         ant_&var{aar} = &var._ant;
          rate_&var{aar}   = &var._rate;
          cravg_&var{aar}    = &var._cravg;
          avg_&var{aar}  = &var._avg;
