@@ -43,6 +43,16 @@ Makroen lager variabelen beh_kat med veridene 1 (eget HF), 2 (annet off) , 3 (pr
             left join hnref.bo_beh_kat3 as b 
             on (a.boHF=b.boHF and a.BehHF=b.BehHF);
     quit;
+
+    data &utdata;
+    set &utdata;
+    eget=0;
+    annet=0;
+    privat=0;
+    if beh_kat=1 then eget=1;
+    if beh_kat=2 then annet=1;
+    if beh_kat=3 then privat=1;
+    run;
     
     proc datasets nolist;
         delete &inndata._1;
