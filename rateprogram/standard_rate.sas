@@ -1,5 +1,4 @@
-﻿%put NEW STANDARD RATE!!;
-%macro standard_rate(dataspecifier,
+﻿%macro standard_rate(dataspecifier,
    region=bohf,
    min_age=auto,
    max_age=auto,
