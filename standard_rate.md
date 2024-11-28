@@ -2,9 +2,6 @@
 # Dokumentasjon for filen *rateprogram/standard_rate.sas*
 
 
-## Makro `standard_rate`
-
-
 # Makro for kjønns- og/eller aldersstandardisering.
 
 ## Argumenter til %standard_rate()
@@ -99,4 +96,10 @@ Ovenfor har vi også lagt til cravg, som er det ujusterte gjennomsnittet. Ved å
       category=bohf
 )
 ```
+
+
+## Makro `parse_simple_dataspecifier`
+
+
+## Makro `join_on`
 
