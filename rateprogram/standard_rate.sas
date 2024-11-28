@@ -1,4 +1,5 @@
-﻿%macro standard_rate(dataspecifier,
+﻿%put NEW STANDARD RATE!!;
+%macro standard_rate(dataspecifier,
    region=bohf,
    min_age=auto,
    max_age=auto,
@@ -12,7 +13,8 @@
    standardize_by=ka,
    yearly=rate,
    population_data=innbygg.INNB_SKDE_BYDEL,
-   debug = no
+   kjonn=begge,
+   debug=no
 );
 
 /*
@@ -36,6 +38,7 @@
 - **min_year** = `<number>`. Første år man skal ha med i standardiseringen. Default: auto.
 - **max_year** = `<number>`. Siste år man skal ha med i standardiseringen. Default: auto.
 - **standardize_by** = `[ka, a, k]`. Denne variabelen bestemmer hvilken type standardisering som skal utføres. `ka` betyr kjønns- og aldersstandardisering; `a` betyr aldersstandardisering (uten kjønnsjustering); og `k` betyr kjønnsjustering (uten aldersjustering). Default: ka.
+- **kjonn** = `[begge, kvinner, menn]`. Denne variabelen avgjør om raten er på kvinnepopulasjonen, mannspopulasjonen, eller begge. Hvis kjonn=kvinner vil menn bli filtrert ut av både datafilen og populasjonsfilen, og den endelige raten vil bli "pr 1 000 kvinner", for eksempel. Default: begge.
 - **yearly** = `[no, rate, crude, cravg, avg, ant]`. Hvis denne er satt til noe annet enn `no` vil det lages et transponert datasett (med navnet &out._yearly) hvor kolonnene er opptaksområder, og hver rad viser tall for et år. Dette gjør det lett å lage en tidstrend med %graf(). Default: rate.
 - **population_data** = `<text>`. Datasett med informasjon om befolkningstall brukt i standardiseringen. Default: innbygg.INNB_SKDE_BYDEL.
 
@@ -126,6 +129,7 @@ options minoperator;
 
 %let region = %lowcase(&region);                 %assert_member(region, bohf borhf boshhn)
 %let standardize_by = %lowcase(&standardize_by); %assert_member(standardize_by, a ak k ka)
+%let kjonn = %lowcase(&kjonn); %assert_member(kjonn, menn kvinner begge)
 %let debug = %lowcase(&debug);                   %assert_member(debug, yes no)
 %let yearly = %lowcase(&yearly);                 %assert_member(yearly, no rate crude cravg avg ant)
 %assert("&out" ^= "", message=No output dataset specified for %nrstr(%%)standard_rate())
@@ -196,7 +200,10 @@ data deleteme_rateutvalg;
          alder in (&min_age:&max_age) and             
          &region in (1:%if &region=bohf   %then 31;
                  %else %if &region=borhf  %then 4;
-                 %else %if &region=boshhn %then 11;);
+                 %else %if &region=boshhn %then 11;) and
+         ermann in %if &kjonn=menn    %then (1);
+             %else %if &kjonn=kvinner %then (0);
+             %else %if &kjonn=begge   %then (1 0); ;
    /* This data step filters out all the rows we are not interested in. This often means a considerable reduction in
       the quantity of data, so that the rest of the code runs fast. */
 
@@ -245,7 +252,11 @@ quit;
 data deleteme_population;
    /* Here we load in the population data for Norway, and structure it so that it can be joined to deleteme_rateutvalg */
    set &population_data;
-   where aar in (&min_year:&max_year) and alder in (&min_age:&max_age);
+   where aar in (&min_year:&max_year) and
+         alder in (&min_age:&max_age) and
+         ermann in %if &kjonn=menn    %then (1);
+             %else %if &kjonn=kvinner %then (0);
+             %else %if &kjonn=begge   %then (1 0); ;
    format &region &region._fmt. age_group age_group_fmt.;  
 
    age_group = floor(alder/&age_group_size) +1;
