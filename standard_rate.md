@@ -2,6 +2,9 @@
 # Dokumentasjon for filen *rateprogram/standard_rate.sas*
 
 
+## Makro `standard_rate`
+
+
 # Makro for kjønns- og/eller aldersstandardisering.
 
 ## Argumenter til %standard_rate()
@@ -17,6 +20,7 @@
 - **min_year** = `<number>`. Første år man skal ha med i standardiseringen. Default: auto.
 - **max_year** = `<number>`. Siste år man skal ha med i standardiseringen. Default: auto.
 - **standardize_by** = `[ka, a, k]`. Denne variabelen bestemmer hvilken type standardisering som skal utføres. `ka` betyr kjønns- og aldersstandardisering; `a` betyr aldersstandardisering (uten kjønnsjustering); og `k` betyr kjønnsjustering (uten aldersjustering). Default: ka.
+- **kjonn** = `[begge, kvinner, menn]`. Denne variabelen avgjør om raten er på kvinnepopulasjonen, mannspopulasjonen, eller begge. Hvis kjonn=kvinner vil menn bli filtrert ut av både datafilen og populasjonsfilen, og den endelige raten vil bli "pr 1 000 kvinner", for eksempel. Default: begge.
 - **yearly** = `[no, rate, crude, cravg, avg, ant]`. Hvis denne er satt til noe annet enn `no` vil det lages et transponert datasett (med navnet &out._yearly) hvor kolonnene er opptaksområder, og hver rad viser tall for et år. Dette gjør det lett å lage en tidstrend med %graf(). Default: rate.
 - **population_data** = `<text>`. Datasett med informasjon om befolkningstall brukt i standardiseringen. Default: innbygg.INNB_SKDE_BYDEL.
 
@@ -95,10 +99,4 @@ Ovenfor har vi også lagt til cravg, som er det ujusterte gjennomsnittet. Ved å
       category=bohf
 )
 ```
-
-
-## Makro `parse_simple_dataspecifier`
-
-
-## Makro `join_on`
 
