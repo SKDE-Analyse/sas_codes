@@ -37,6 +37,7 @@ kortversjon (kjøres med default verdier for resten)
 
 ### Endringslogg:
 - februar 2022 opprettet, Frank
+- desember 2024 lag til variasjonstabell som output: &utdata._variasjon, Frank
 */
 
 /***Formatering****/ 
@@ -642,6 +643,149 @@ data long_&utdata;
 set xyz_tmp_rate;
 run;
 %end;
+
+/*Utdata med variasjonsmål*/
+/*CV*/
+data xyz_cvN;
+set xyz_StdRate_&utdata;
+where &bo = 8888;
+run;
+
+proc sql;
+create table xyz_tmp_cv as
+select *,
+count(&bo) as ant_i,
+stdrate-(sum(stdrate)/count(&bo)) as teller,
+sum(stdrate) as ratesum
+from xyz_StdRate_&utdata
+where &bo ne 8888
+group by aar;
+quit;
+
+proc sql;
+create table xyz_cv as
+select distinct
+aar,ant_i,
+100*(sqrt(sum(teller**2)/(ant_i-1)) / (ratesum/ant_i)) as CV
+from xyz_tmp_cv
+group by aar;
+quit;
+
+/*Forholdstall*/
+/* Step 1: Rank the rates within each year */
+proc rank data=xyz_tmp_cv out=xyz_ranked_test ties=low descending;
+    by aar;
+    var stdrate;
+    ranks rank_rate;
+run;
+
+/* Step 2: Rank the rates within each year in ascending order */
+proc rank data=xyz_tmp_cv out=xyz_ranked_asc_test ties=low;
+    by aar;
+    var stdrate;
+    ranks rank_rate_asc;
+run;
+
+/* Step 3: Combine the ranked datasets and calculate the required values */
+proc sql;
+create table xyz_test_ft as
+select 
+    a.aar,
+	max(a.stdrate)/min(a.stdrate) as FT1,
+	b.stdrate / c.stdrate as FT2,
+	d.stdrate / e.stdrate as FT3,
+    max(a.stdrate) as maksrate,
+    min(a.stdrate) as minrate,
+    put((select &bo from xyz_tmp_cv as b where b.aar = a.aar and b.stdrate = (select max(stdrate) from xyz_tmp_cv where aar = a.aar)), &bo._fmt.) as maxbo,
+    put((select &bo from xyz_tmp_cv as c where c.aar = a.aar and c.stdrate = (select min(stdrate) from xyz_tmp_cv where aar = a.aar)), &bo._fmt.) as minbo,
+    b.stdrate as max2rate,
+    c.stdrate as min2rate,
+	put(b.&bo, &bo._fmt.) as max2bo,
+    put(c.&bo, &bo._fmt.) as min2bo,	
+	d.stdrate as max3rate,
+    e.stdrate as min3rate,    
+	put(d.&bo, &bo._fmt.) as max3bo,
+    put(e.&bo, &bo._fmt.) as min3bo  
+from xyz_tmp_cv as a
+left join xyz_ranked_test as b on a.aar = b.aar and b.rank_rate = 2
+left join xyz_ranked_asc_test as c on a.aar = c.aar and c.rank_rate_asc = 2
+left join xyz_ranked_test as d on a.aar = d.aar and d.rank_rate = 3
+left join xyz_ranked_asc_test as e on a.aar = e.aar and e.rank_rate_asc = 3
+group by a.aar;
+quit;
+
+proc sql;
+create table xyz_test_ft as
+select distinct *
+from xyz_test_ft;
+quit;
+
+/*SCV*/
+proc sql;
+create table xyz_tmp_scv0 as 
+select nyalder, ermann,
+sum(antall)/sum(pop) as rjk
+from xyz_ratedata
+where &bo ne 8888 and aar=&standardaar
+group by nyalder, ermann;
+quit;
+
+proc sql;
+create table xyz_tmp_scv1 as 
+select aar, &bo, nyalder, ermann,
+sum(pop) as pop,
+sum(antall) as antall
+from xyz_ratedata 
+where &bo ne 8888
+group by aar, &bo, nyalder, ermann;
+quit;
+
+proc sql;
+create table xyz_tmp_scv as
+select a.*, b.rjk
+from xyz_tmp_scv1 as a
+left join xyz_tmp_scv0 as b
+on a.nyalder=b.nyalder and a.ermann=b.ermann;
+quit;
+
+proc sql;
+create table xyz_scv as 
+select aar, &bo,
+sum(antall) as y_i,
+sum(pop*rjk) as e_i
+from xyz_tmp_scv
+group by aar, &bo;
+quit;
+
+proc sql;
+create table xyz_scv as 
+select *,
+count(&bo) as ant_i
+from xyz_scv
+group by aar;
+quit;
+
+proc sql;
+create table xyz_scv_aar as 
+select distinct
+aar,
+(1/ant_i) * ( sum(((y_i-e_i)**2)/(e_i**2)) - (sum(1/e_i)))*100 as SCV,
+sum(e_i) as expected
+from xyz_scv
+group by aar;
+quit;
+
+/****/
+
+data &utdata._variasjon;
+merge xyz_cvN xyz_cv xyz_scv_aar xyz_test_ft;
+by aar;
+drop _type_ _freq_ mean std 
+stderr type lowercl uppercl &bo
+expectedevents;
+run;
+
+/**/
 
 /* Hvis ikke test=1 */
 /*Skru av denne for å se midlertidige datasett*/
