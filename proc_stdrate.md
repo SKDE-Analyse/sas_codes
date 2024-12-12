@@ -19,3 +19,4 @@ kortversjon (kjøres med default verdier for resten)
 
 ### Endringslogg:
 - februar 2022 opprettet, Frank
+- desember 2024 lag til variasjonstabell som output: &utdata._variasjon, Frank
