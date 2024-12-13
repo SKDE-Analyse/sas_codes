@@ -66,6 +66,7 @@
 - [rateprogram/proc_stdrate_komnr.sas](proc_stdrate_komnr)
 - [rateprogram/proc_stdrate.sas](proc_stdrate)
 - [rateprogram/ratefig_tredelt_andelkolonne.sas](ratefig_tredelt_andelkolonne)
+- [rateprogram/variasjon.sas](variasjon)
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/antall_pasienter_rader.sas](antall_pasienter_rader)
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/aktivitet_komnr_bydel.sas](aktivitet_komnr_bydel)
 - Filen kontroll_mottatte_data.sas er ikke dokumentert.
