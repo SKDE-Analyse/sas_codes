@@ -340,6 +340,13 @@ run;
 
 /*To make a dataset decribing variation*/
 %include "&filbane/rateprogram/variasjon.sas";
+%variasjon(
+   ratedata=deleteme_ratedata,
+   pop_in_region=deleteme_pop_in_region,
+   summed_vars=deleteme_summed_vars,
+   varlist=&std_varlist,
+   region=&region
+);
 
 data &out;
    /*
