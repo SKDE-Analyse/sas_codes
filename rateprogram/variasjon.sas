@@ -1,6 +1,7 @@
 
 /*Utdata med variasjonsmål*/
-/* 
+/*
+Opprettet 13/12-24, Frank Olsen
 Bruker følgende datasett fra standard_rate-programmet:
 deleteme_ratedata
 deleteme_pop_in_region 

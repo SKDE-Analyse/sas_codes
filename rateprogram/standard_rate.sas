@@ -338,6 +338,8 @@ data &out._long;
    %end;;
 run;
 
+/*To make a dataset decribing variation*/
+%include "&filbane/rateprogram/variasjon.sas";
 
 data &out;
    /*
