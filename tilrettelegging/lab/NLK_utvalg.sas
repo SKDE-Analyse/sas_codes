@@ -104,11 +104,15 @@ else if NLK = 'NPU02070'        then B9=1;
 else if NLK in ('NPU01435',
                 'NPU10267',
                 'NPU26810')     then Dvit=1;
+
+/*Bilirubin*/
+else if NLK = 'NPU01370'        then p_bil=1;
+                
 /* 35 stk analyser */
 if ALAT or Albumin or ASAT or CA125 or CEA or CRP or D_dimer or Ferritin or T4 or Fosfat or 
     GammaGT or Glukose or HbA1c or HDL or Homocystein or INR or Kalium or Kalsium or Karbamid or
     Kreatinin or LaktatD or Laktose or LDL or MMA or Magnesium or Natrium or NIPT or NT_pro or 
-    pro_el or PSA or TSH or kol or B12 or B9 or Dvit then utvalg = 1;
+    pro_el or PSA or TSH or kol or B12 or B9 or Dvit or p_bil then utvalg = 1;
 /* kun skrive ut datasett som inkluderer treff på analyser */
 if utvalg eq 1 then output;
 run;
