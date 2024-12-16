@@ -11,6 +11,8 @@ deleteme_summed_vars
 
 %macro variasjon_tabell(ratevar=, std_year=, variable=);  
 
+%let ratevar = &variable._rate;
+
 /*CV*/
 data xyz_cvN;
     set &ratedata;
@@ -39,17 +41,25 @@ proc sql;
 quit;
 
 /*Forholdstall*/
+proc sort data=xyz_tmp_cv;
+by aar &ratevar &region;
+run;
+
+data xyz_tmp_cv;
+set xyz_tmp_cv;
+rank_id = _N_;
+run;
 /* Step 1: Rank the rates within each year */
 proc rank data=xyz_tmp_cv out=xyz_ranked_test ties=low descending;
     by aar;
-    var &ratevar;
+    var rank_id;
     ranks rank_rate;
 run;
 
 /* Step 2: Rank the rates within each year in ascending order */
 proc rank data=xyz_tmp_cv out=xyz_ranked_asc_test ties=low;
     by aar;
-    var &ratevar;
+    var rank_id;
     ranks rank_rate_asc;
 run;
 
@@ -58,26 +68,28 @@ proc sql;
 create table xyz_test_ft as
 select 
     a.aar,
-	max(a.&ratevar)/min(a.&ratevar) as FT1,
-	b.&ratevar / c.&ratevar as FT2,
-	d.&ratevar / e.&ratevar as FT3,
-    max(a.&ratevar) as maksrate,
-    min(a.&ratevar) as minrate,
-    put((select &region from xyz_tmp_cv as b where b.aar = a.aar and b.&ratevar = (select max(&ratevar) from xyz_tmp_cv where aar = a.aar)), &region._fmt.) as maxbo,
-    put((select &region from xyz_tmp_cv as c where c.aar = a.aar and c.&ratevar = (select min(&ratevar) from xyz_tmp_cv where aar = a.aar)), &region._fmt.) as minbo,
-    b.&ratevar as max2rate,
-    c.&ratevar as min2rate,
-	put(b.&region, &region._fmt.) as max2bo,
-    put(c.&region, &region._fmt.) as min2bo,	
-	d.&ratevar as max3rate,
-    e.&ratevar as min3rate,    
-	put(d.&region, &region._fmt.) as max3bo,
-    put(e.&region, &region._fmt.) as min3bo  
+    b1.&ratevar / c1.&ratevar as FT1,
+    b2.&ratevar / c2.&ratevar as FT2,
+    d1.&ratevar / d2.&ratevar as FT3,
+    b1.&ratevar as maksrate,
+    c1.&ratevar as minrate,
+    put(b1.&region, &region._fmt.) as maxbo,
+    put(c1.&region, &region._fmt.) as minbo,
+    b2.&ratevar as max2rate,
+    c2.&ratevar as min2rate,
+    put(b2.&region, &region._fmt.) as max2bo,
+    put(c2.&region, &region._fmt.) as min2bo,
+    d1.&ratevar as max3rate,
+    d2.&ratevar as min3rate,
+    put(d1.&region, &region._fmt.) as max3bo,
+    put(d2.&region, &region._fmt.) as min3bo
 from xyz_tmp_cv as a
-left join xyz_ranked_test as b on a.aar = b.aar and b.rank_rate = 2
-left join xyz_ranked_asc_test as c on a.aar = c.aar and c.rank_rate_asc = 2
-left join xyz_ranked_test as d on a.aar = d.aar and d.rank_rate = 3
-left join xyz_ranked_asc_test as e on a.aar = e.aar and e.rank_rate_asc = 3
+left join xyz_ranked_test as b1 on a.aar = b1.aar and b1.rank_rate = 1
+left join xyz_ranked_asc_test as c1 on a.aar = c1.aar and c1.rank_rate_asc = 1
+left join xyz_ranked_test as b2 on a.aar = b2.aar and b2.rank_rate = 2
+left join xyz_ranked_asc_test as c2 on a.aar = c2.aar and c2.rank_rate_asc = 2
+left join xyz_ranked_test as d1 on a.aar = d1.aar and d1.rank_rate = 3
+left join xyz_ranked_asc_test as d2 on a.aar = d2.aar and d2.rank_rate_asc = 3
 group by a.aar;
 quit;
 
@@ -89,7 +101,7 @@ quit;
 
 /*SCV*/
 proc sort data=&pop_in_region;
-    by aar bohf age_group ermann;
+    by aar &region age_group ermann;
 run;
 proc sort data=&summed_vars;
     by aar bohf age_group ermann;
@@ -97,7 +109,7 @@ run;
 
 data xyz_ratedata;
     merge &pop_in_region &summed_vars;
-    by aar bohf age_group ermann;
+    by aar &region age_group ermann;
 run; 
 
 proc sql;
@@ -179,7 +191,6 @@ proc datasets nolist; delete xyz_:; run;
 
 %do variasjon_i=1 %to %sysfunc(countw(&varlist));
     %variasjon_tabell(
-        ratevar=&var._rate,
         std_year=&std_year,
         variable=%scan(&varlist, &variasjon_i)
     );
