@@ -104,7 +104,7 @@ proc sort data=&pop_in_region;
     by aar &region age_group ermann;
 run;
 proc sort data=&summed_vars;
-    by aar bohf age_group ermann;
+    by aar &region age_group ermann;
 run;
 
 data xyz_ratedata;
@@ -197,7 +197,7 @@ proc datasets nolist; delete xyz_:; run;
 %end;
 
 /*stable tabellene*/
-data variasjon;
+data variasjon_&region;
     set tmp_variasjon:;
 run;    
 
