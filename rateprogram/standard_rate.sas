@@ -339,7 +339,7 @@ data &out._long;
 run;
 
 /*To make a dataset decribing variation*/
-%include "/sas_smb/skde_analyse/Data/SAS/felleskoder/frank/rateprogram/variasjon.sas";
+%include "&filbane/rateprogram/variasjon.sas";
 %variasjon(
    ratedata=deleteme_ratedata,
    pop_in_region=deleteme_pop_in_region,
