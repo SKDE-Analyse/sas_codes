@@ -21,7 +21,7 @@ Makroen lager variabelen beh_kat med veridene 1 (eget HF), 2 (annet off) , 3 (pr
     data &inndata._1;
     set &inndata;
         /*Setter behhf lik private for avtalespesialister */
-        if avtspes=1 then behHF=27;
+        if avtspes=1 or AvtaleRHF ne . then behHF=27;
     run;
 
     %end;
