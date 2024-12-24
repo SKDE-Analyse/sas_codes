@@ -53,7 +53,7 @@ hvis regexen in %kodematch inkluderer koder som ikke får en egen under-variabel
 %let without_equals = %sysfunc(prxchange(s/&re/$3/, -1, &regexes));
 %let joined = %sysfunc(prxchange(s/\s+/|/, -1, &without_equals));
 %let names = ;
-   (prxmatch("/\b(&joined)/", &koder) > 0)
+   (prxmatch("/\b(&joined)/i", &koder) > 0)
 
 %do %while(%sysfunc(prxmatch(/&re/, &regexes)));
    %let first_name  = %sysfunc(prxchange(s/.*?&re..*/$2/, 1, &regexes));
@@ -62,7 +62,7 @@ hvis regexen in %kodematch inkluderer koder som ikke får en egen under-variabel
 
    %put &=first_name;
 
-   ; &first_name = (prxmatch("/\b(&first_regex)/", &koder) > 0)
+   ; &first_name = (prxmatch("/\b(&first_regex)/i", &koder) > 0)
 
    %let regexes = %sysfunc(prxchange(s/&re/$3/, 1, &regexes));
 %end;
