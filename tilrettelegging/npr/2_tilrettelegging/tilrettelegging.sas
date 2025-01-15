@@ -345,7 +345,8 @@ run;
 data tmp_data;
     set tmp_data;
 keep aar pid inndato utdato ermann alder komnr bydel bo: fylke fodselsar institusjonid hastegrad hf nc: inntid uttid beh:
-        episode_lnr fag: sektor tilst: hdiag: bdiag: produksjonid utskrivningsklar utskrklardato psykinstID akse1: debitor ;
+        episode_lnr fag: sektor tilst: hdiag: bdiag: produksjonid utskrivningsklar utskrklardato psykinstID akse1: debitor 
+        omsorgsnivaa PolUtforende: Ventetidsluttdato polIndir kontaktType polkonAktivitet stedAktivitet mottak: ansien: ;
 run;
 %end;
 
