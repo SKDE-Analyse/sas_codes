@@ -1,4 +1,4 @@
-%macro kodematch(koder, regexes, adjust=yes);
+%macro kodematch(koder, regexes);
 /*!
 Dette er en makro for å søke etter grupper av diagnose/prosedyre-koder i et data step med regular expressions,
 og gi en variabelen en verdi av 1 (hvis det matcher) eller 0 (hvis det ikke matcher). Makroen er skrevet på en
@@ -19,6 +19,25 @@ data mage_tarm;
    length all_diag $200;
    all_diag = catx(" ", of Hdiag Hdiag2 bdiag:);
 
+   magetarm = %kodematch(all_diag, K900 R10 K21[09] K5[01] K59);
+run;
+```
+
+Variabelen `all_diag` er i dette tilfellet en lang tekst som inneholder alle diagnosekodene for hver rad i utvalget, med et mellomrom
+mellom hver diagnosekode. Denne variabelen er det første argumentet til %kodematch.
+
+Det andre variabelen er en rekke små regular expressions som matcher forskjellige kodegrupper, I eksempelet ovenfor vil variabelen `magetarm`
+bli 1 hvis denne regexen matcher all_diag: `/\b(K900|R10|K21[09]|K5[01]|K59)/`.
+
+Dette er et mer avansert eksempel med "undervariabler":
+
+```
+data mage_tarm;
+   set <utvalg>;
+
+   length all_diag $200;
+   all_diag = catx(" ", of Hdiag Hdiag2 bdiag:);
+
    magetarm = %kodematch(all_diag,
      coeliac := K900
       smerte := R10
@@ -29,13 +48,8 @@ data mage_tarm;
 run;
 ```
 
-Variabelen `all_diag` er i dette tilfellet en lang tekst som inneholder alle diagnosekodene for hver rad i utvalget, med et mellomrom
-mellom hver diagnosekode. Denne variabelen er det første argumentet til %kodematch.
-
-Det andre variabelen er en rekke små regular expressions som matcher forskjellige kodegrupper; noen av disse har `<navn> :=` foran seg,
-noe som betyr at vi vil lage en under-variabel som matcher den kodegruppen som følger etter. I eksempelet ovenfor vil variabelen `magetarm`
-bli 1 hvis denne regexen matcher all_diag: `/\b(K900|R10|K21[09]|K5[01]|K59)/`. Makroen vil i tillegg lage to under-variabler, `coeliac` og
-`smerte`, og disse variablene vil bare bli 1 hvis deres respektive regex matcher (`R900` for coeliac og `R10` for smerte).
+ Forskjellen er at denne i tillegg vil lage to variabler, `coeliac` og `smerte`, og disse variablene vil bare bli 1 hvis deres respektive
+ regex matcher (`R900` for coeliac og `R10` for smerte).
 
 Det er vikig å poengtere at %kodematch matcher i alle tilfeller begynnelsen av en kode; koden i all_diag kan være en lengre, mer detaljert
 kode. For eksempel så vil under-variabelen `smerte` ovenfor matche ikke bare R10 (Smerte i buk og bekken), men også R101 (Smerte lokalisert til øvre abdomen).
@@ -43,10 +57,6 @@ kode. For eksempel så vil under-variabelen `smerte` ovenfor matche ikke bare R1
 Når man lager en under-variabel må man sørge for at regexen som etterfulger `:=` ikke har noen mellomrom i seg. Hvis man vil lage en
 under-variabel som matcher en litt mer komplisert regex kan man bruke `|` for å skille fra hverandre deler av regexen.
 
-Makroen vil også lage en ekstra variabel for hver under-variabel som unngår dobbelt-telling ved å distribuere verdien 1
-på hver av de kodene som matchet. For eksempel, hvis både under-variablene `diagnose_1` og `diagnose_2` matcher, vil %kodematch
-lage variablene `diagnose_1_adj` og `diagnose_2_adj` som hver blir lik 0.5. %kodematch vil bare fordele verdien 1 på under-variablene;
-hvis regexen in %kodematch inkluderer koder som ikke får en egen under-variabel så vil ikke dette bli tatt med i beregningen.
 */
 
 %let re = ((\S+\s*):=\s*)(\S+);
@@ -68,19 +78,5 @@ hvis regexen in %kodematch inkluderer koder som ikke får en egen under-variabel
 %end;
 
 %put &=names;
-
-%let num_names = 0;
-%if &names ^= %then %do;
-  %let num_names = %sysfunc(countw(&names));
-%end;
-
-%if &adjust=yes %then %do;
-   %do dist_i=1 %to &num_names;
-      %let dist_var = %scan(&names, &dist_i);
-      ;  &dist_var._adj = 0;
-         if &dist_var > 0 then
-           &dist_var._adj = &dist_var / sum(of &names)
-   %end;
-%end;
 
 %mend kodematch;
