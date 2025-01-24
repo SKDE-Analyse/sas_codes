@@ -447,7 +447,7 @@ run;
    data deleteme_yearly_prep;
       set &out;
       category_label = put(&region, &region._fmt.);
-      format bohf 16.;
+      format &region 16.;
    run;
 
    %do std_i=1 %to &std_numvars;
