@@ -332,7 +332,7 @@ create table deleteme_check_missing as
    from deleteme_summed_vars as a
    left join deleteme_pop_in_region as b
       on a.&region=b.&region and a.aar=b.aar and %join_on(a, b)
-   where b.&region is null
+   where b.&region is null and a.aar ^= 9999
    group by a.aar, a.&region;
 run;
 
