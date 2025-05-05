@@ -323,6 +323,29 @@ create table deleteme_ratedata as
    group by a.aar, a.&region;
 run;
 
+
+proc sql noprint;
+create table deleteme_check_missing as
+   select a.&region, a.aar %do std_i=1 %to &std_numvars;
+      , sum(%scan(&std_varlist, &std_i)) as %scan(&std_varlist, &std_i)
+   %end;
+   from deleteme_summed_vars as a
+   left join deleteme_pop_in_region as b
+      on a.&region=b.&region and a.aar=b.aar and %join_on(a, b)
+   where b.&region is null
+   group by a.aar, a.&region;
+run;
+
+proc sql noprint;
+   select count(*) into :missing from deleteme_check_missing;
+quit;
+
+%if &missing > 0 %then %do;
+   title "The following data will NOT be included, because the &region does not exist in the population data";
+   proc print data=deleteme_check_missing; run;
+%end;
+
+
 proc sort data=deleteme_ratedata out=deleteme_sorted;
   by &region aar;
   format &region &region._fmt.;
