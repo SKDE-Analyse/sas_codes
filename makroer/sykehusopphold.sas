@@ -137,7 +137,7 @@ retain pasient_flag;
 		Sek_mellom=inndatotid-lag_utdatotid; /* Tidsdifferanse (sekunder) mellom inndatotid på dette oppholdet og utdatotid på forrige opphold */
 		/* increase flag value if there is a longer break between opphold */
     	if Dager_mellom>1 then do; 
-      pasient_flag + 1;
+      pasient_flag = pasient_flag + 1;
     	end;
     end;
 
