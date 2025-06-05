@@ -1,5 +1,5 @@
 ﻿%macro kontroll_mottatte_data_kpr;
-
+/*test git for meg*/
     /* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
     data _null_;
     dset=open("&inn");
