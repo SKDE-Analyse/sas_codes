@@ -8,88 +8,88 @@
 
 ## Linker til dokumentasjon av de ulike filene
 
-- [makroer/resolve_dataspecifiers.sas](resolve_dataspecifiers)
-- [makroer/telle_pr_PID.sas](telle_pr_PID)
-- [makroer/Multippel_test.sas](Multippel_test)
-- [makroer/ratefig.sas](ratefig)
-- [makroer/boomraader.sas](boomraader)
 - [makroer/aggreger.sas](aggreger)
-- [makroer/Hyppigste_petter.sas](Hyppigste_petter)
-- [makroer/deleteAll.sas](deleteAll)
-- [makroer/Unik_pasient.sas](Unik_pasient)
-- [makroer/assert.sas](assert)
-- [makroer/henteKorrvekt.sas](henteKorrvekt)
-- [makroer/flerniva_fixed_2niva.sas](flerniva_fixed_2niva)
-- [makroer/aggreger_sho.sas](aggreger_sho)
-- [makroer/VarFraParvus1.sas](VarFraParvus1)
-- [makroer/assert_member.sas](assert_member)
 - [makroer/type1_type2_bohf.sas](type1_type2_bohf)
-- [makroer/Episode_of_care.sas](Episode_of_care)
-- [makroer/kodematch.sas](kodematch)
-- [makroer/reinnleggelser.sas](reinnleggelser)
-- [makroer/tabell_missing.sas](tabell_missing)
-- [makroer/liste_datasett_aar.sas](liste_datasett_aar)
-- [makroer/lag_figur.sas](lag_figur)
-- [makroer/rater_felles.sas](rater_felles)
-- [makroer/forny_komnr.sas](forny_komnr)
-- [makroer/alders_oppslag.sas](alders_oppslag)
-- [makroer/test_makroer.sas](test_makroer)
-- Filen merge.sas er ikke dokumentert.
-- [makroer/estimere.sas](estimere)
-- [makroer/panelfig.sas](panelfig)
-- [makroer/oversiktstabell_helseatlas.sas](oversiktstabell_helseatlas)
-- [makroer/UnikeVariableAvdOpphold.sas](UnikeVariableAvdOpphold)
-- [makroer/sykehusopphold.sas](sykehusopphold)
 - [makroer/andelsfig.sas](andelsfig)
-- [makroer/definer_behandler.sas](definer_behandler)
+- [makroer/assert_member.sas](assert_member)
 - Filen fremskrive.sas er ikke dokumentert.
-- [makroer/Label_m_info.sas](Label_m_info)
-- [makroer/ratefig_todeltSoyle.sas](ratefig_todeltSoyle)
+- [makroer/aggreger_sho.sas](aggreger_sho)
+- [makroer/definer_behandler.sas](definer_behandler)
+- [makroer/estimere.sas](estimere)
+- [makroer/forny_komnr.sas](forny_komnr)
+- [makroer/UnikeVariableAvdOpphold.sas](UnikeVariableAvdOpphold)
 - [makroer/ratefig_tredeltSoyle.sas](ratefig_tredeltSoyle)
-- [makroer/slette_datasett_aar.sas](slette_datasett_aar)
 - Filen forholdstall.sas er ikke dokumentert.
-- [makroer/CoMorbIndex.sas](CoMorbIndex)
-- [makroer/Hyppigste.sas](Hyppigste)
-- [makroer/meta2json.sas](meta2json)
-- [makroer/beh_eget_annet_priv.sas](beh_eget_annet_priv)
-- Filen andelsfig_0_100.sas er ikke dokumentert.
-- [makroer/VarFraParvus.sas](VarFraParvus)
+- [makroer/lag_figur.sas](lag_figur)
+- [makroer/panelfig.sas](panelfig)
+- Filen merge.sas er ikke dokumentert.
+- [makroer/Unik_pasient.sas](Unik_pasient)
+- [makroer/boomraader.sas](boomraader)
+- [makroer/reinnleggelser.sas](reinnleggelser)
+- [makroer/ratefig_todeltSoyle.sas](ratefig_todeltSoyle)
+- [makroer/alders_oppslag.sas](alders_oppslag)
+- [makroer/Multippel_test.sas](Multippel_test)
 - [makroer/expand_varlist.sas](expand_varlist)
+- [makroer/sykehusopphold.sas](sykehusopphold)
+- [makroer/Hyppigste.sas](Hyppigste)
+- [makroer/telle_pr_PID.sas](telle_pr_PID)
+- [makroer/assert.sas](assert)
+- [makroer/rater_felles.sas](rater_felles)
+- [makroer/resolve_dataspecifiers.sas](resolve_dataspecifiers)
+- [makroer/VarFraParvus1.sas](VarFraParvus1)
+- [makroer/Episode_of_care.sas](Episode_of_care)
+- [makroer/flerniva_fixed_2niva.sas](flerniva_fixed_2niva)
+- [makroer/ratefig.sas](ratefig)
+- [makroer/VarFraParvus.sas](VarFraParvus)
+- [makroer/henteKorrvekt.sas](henteKorrvekt)
+- [makroer/slette_datasett_aar.sas](slette_datasett_aar)
+- [makroer/Label_m_info.sas](Label_m_info)
+- [makroer/liste_datasett_aar.sas](liste_datasett_aar)
+- [makroer/meta2json.sas](meta2json)
+- [makroer/deleteAll.sas](deleteAll)
+- [makroer/Hyppigste_petter.sas](Hyppigste_petter)
+- [makroer/test_makroer.sas](test_makroer)
+- [makroer/tabell_missing.sas](tabell_missing)
+- Filen andelsfig_0_100.sas er ikke dokumentert.
+- [makroer/CoMorbIndex.sas](CoMorbIndex)
+- [makroer/kodematch.sas](kodematch)
+- [makroer/beh_eget_annet_priv.sas](beh_eget_annet_priv)
+- [makroer/oversiktstabell_helseatlas.sas](oversiktstabell_helseatlas)
+- [rateprogram/ratefigur_tredelt.sas](ratefigur_tredelt)
+- [rateprogram/ratefigur_aarsvar_eng.sas](ratefigur_aarsvar_eng)
+- [rateprogram/ratefig_tredelt_andelkolonne.sas](ratefig_tredelt_andelkolonne)
+- [rateprogram/ratefigur_5aarsvar.sas](ratefigur_5aarsvar)
+- [rateprogram/ratefigur_aarsvar.sas](ratefigur_aarsvar)
+- [rateprogram/ratefig_todelt.sas](ratefig_todelt)
+- [rateprogram/proc_stdrate.sas](proc_stdrate)
+- [rateprogram/graf.sas](graf)
 - [rateprogram/ratefigur_todelt.sas](ratefigur_todelt)
 - [rateprogram/proc_stdrate_komnr.sas](proc_stdrate_komnr)
 - [rateprogram/standard_rate.sas](standard_rate)
-- [rateprogram/proc_stdrate.sas](proc_stdrate)
-- [rateprogram/ratefig_todelt.sas](ratefig_todelt)
-- [rateprogram/ratefigur_aarsvar.sas](ratefigur_aarsvar)
-- [rateprogram/ratefigur_tredelt.sas](ratefigur_tredelt)
-- [rateprogram/ratefig_tredelt_andelkolonne.sas](ratefig_tredelt_andelkolonne)
-- [rateprogram/ratefigur_5aarsvar.sas](ratefigur_5aarsvar)
 - [rateprogram/variasjon.sas](variasjon)
-- [rateprogram/ratefigur_aarsvar_eng.sas](ratefigur_aarsvar_eng)
-- [rateprogram/graf.sas](graf)
-- Filen kontroll_tilstand.sas er ikke dokumentert.
-- Filen kontroll_mottatte_data.sas er ikke dokumentert.
-- Filen kjonn_fodselsar.sas er ikke dokumentert.
+- Filen kontroll_liggetid.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/aktivitet_komnr_bydel.sas](aktivitet_komnr_bydel)
-- Filen min_maks_dato.sas er ikke dokumentert.
-- Filen kontroll_nckoder.sas er ikke dokumentert.
-- [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_type.sas](kontroll_type)
+- Filen kjonn_fodselsar.sas er ikke dokumentert.
+- Filen kontroll_tilstand.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/antall_pasienter_rader.sas](antall_pasienter_rader)
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/1_kontroll_komnr_bydel.sas](1_kontroll_komnr_bydel)
+- [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_type.sas](kontroll_type)
+- Filen kontroll_nckoder.sas er ikke dokumentert.
+- Filen kontroll_mottatte_data.sas er ikke dokumentert.
 - [tilrettelegging/npr/1_kontroll_foer_tilrette/kontroll_behandlingssted.sas](kontroll_behandlingssted)
-- Filen kontroll_liggetid.sas er ikke dokumentert.
-- Filen tilstandskoder.sas er ikke dokumentert.
+- Filen min_maks_dato.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/bydel.sas](bydel)
-- Filen tilstandskoder_akse.sas er ikke dokumentert.
-- [tilrettelegging/npr/2_tilrettelegging/splitte.sas](splitte)
-- [tilrettelegging/npr/2_tilrettelegging/takst.sas](takst)
 - Filen def_aspes_kontakt.sas er ikke dokumentert.
+- [tilrettelegging/npr/2_tilrettelegging/splitte.sas](splitte)
+- Filen tilstandskoder_akse.sas er ikke dokumentert.
 - Filen length_label.sas er ikke dokumentert.
+- [tilrettelegging/npr/2_tilrettelegging/takst.sas](takst)
+- [tilrettelegging/npr/2_tilrettelegging/var_rekkefolge.sas](var_rekkefolge)
+- Filen tilrettelegging.sas er ikke dokumentert.
 - Filen nc_koder.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/icd10.sas](icd10)
-- Filen tilrettelegging.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/behandler.sas](behandler)
-- [tilrettelegging/npr/2_tilrettelegging/var_rekkefolge.sas](var_rekkefolge)
+- Filen tilstandskoder.sas er ikke dokumentert.
 - [tilrettelegging/ssb/lesSSBdata.sas](lesSSBdata)
 - [tilrettelegging/ssb/Reisetid.sas](Reisetid)
 - Filen beffremskriv.sas er ikke dokumentert.
