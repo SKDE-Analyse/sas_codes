@@ -10,7 +10,8 @@
     bildeformat=png, /*Bildeformat, default satt til png*/
     skala=, /*Bestemmes av data når ikke angitt*/
     figurnavn = , /*Første del av figurnavn*/
-    xlabel =  /*Tekst under x-aksen*/
+    xlabel =  ,/*Tekst under x-aksen*/
+	sorter = /*Sorterer etter ratesnitt_1 hvis 1*/
 );
 /*! 
 ### Beskrivelse
@@ -52,6 +53,12 @@ proc sql;
 
 order by calculated ratesnitt_tot desc;
 quit;
+
+%if &sorter=1 %then %do;
+ Proc sort data=&figurnavn._&bo;
+ by ratesnitt_1;
+ run;
+%end;
 
 %let skala=/*values=(0 to 1.5 by 0.5)*/;
 

@@ -20,7 +20,8 @@
     bildeformat=png, /*Bildeformat, default satt til png*/
     skala=, /*Bestemmes av data når ikke angitt*/
     figurnavn = , /*Første del av figurnavn*/
-    xlabel =  /*Tekst under x-aksen*/
+    xlabel = , /*Tekst under x-aksen*/
+    sorter =  /*Sorterer etter ratesnitt_1 hvis 1*/ 
 );
 /*! 
 ### Beskrivelse
@@ -72,6 +73,12 @@ run;
 proc sort data=xyz_&dsn;
 by descending ratetot;
 run;
+
+%if &sorter=1 %then %do;
+proc sort data=xyz_&dsn;
+by descending &var1;
+run;
+%end
 
 %let skala=/*values=(0 to 1.5 by 0.5)*/;
 
