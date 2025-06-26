@@ -97,7 +97,8 @@ run;
 /* ------- */                                                                           
 /* Remove duplicate values */
 proc sort data=behandler nodupkey out=behsh_fmt(keep=behsh behsh_navn);                                                                                                        
-   by behsh;                                                                                                                                
+   by behsh;    
+   where behsh ne .;
 run; 
 /* Build format data set */                                                                                                            
 data hnref.fmtfil_behsh(rename=(behsh=start) keep=behsh fmtname label);                                                                                    
@@ -114,7 +115,8 @@ proc format cntlin=hnref.fmtfil_behsh; run;
 /* ------- */
 /* Remove duplicate values */
 proc sort data=behandler nodupkey out=behhf_fmt(keep=behhf behhf_navn);                                                                                                        
-   by behhf;                                                                                                                                
+   by behhf;  
+   where behhf ne .;
 run; 
 /* Build format data set */                                                                                                            
 data hnref.fmtfil_behhf(rename=(behhf=start) keep=behhf fmtname label);                                                                                    
@@ -132,7 +134,8 @@ proc format cntlin=hnref.fmtfil_behhf; run;
 /* ---------------- */ 
 /* Remove duplicate values */
 proc sort data=behandler nodupkey out=behhfkort_fmt(keep=behhf behhf_navnkort);                                                                                                        
-   by behhf;                                                                                                                                
+   by behhf; 
+   where behhf ne .;
 run; 
 /* Build format data set */                                                                                                            
 data hnref.fmtfil_behhfkort(rename=(behhf=start) keep=behhf fmtname label);                                                                                    
@@ -151,7 +154,8 @@ proc format cntlin=hnref.fmtfil_behhfkort; run;
 /* -------- */
 /* Remove duplicate values */
 proc sort data=behandler nodupkey out=behrhf_fmt(keep=behrhf behrhf_navn);                                                                                                        
-   by behrhf;                                                                                                                                
+   by behrhf;    
+   where behrhf ne .;
 run; 
 /* Build format data set */                                                                                                            
 data hnref.fmtfil_behrhf(rename=(behrhf=start) keep=behrhf fmtname label);                                                                                    
@@ -169,7 +173,8 @@ proc format cntlin=hnref.fmtfil_behrhf; run;
 /* ----------------- */
 /* Remove duplicate values */
 proc sort data=behandler nodupkey out=behrhfnavnkort_fmt(keep=behrhf behrhf_navnkort);                                                                                                        
-   by behrhf;                                                                                                                                
+   by behrhf;    
+   where behrhf ne .;
 run; 
 /* Build format data set */                                                                                                            
 data hnref.fmtfil_rhfkort(rename=(behrhf=start) keep=behrhf fmtname label);                                                                                    
@@ -187,7 +192,8 @@ proc format cntlin=hnref.fmtfil_rhfkort; run;
 /* -------------------- */
 /* Remove duplicate values */
 proc sort data=behandler nodupkey out=behrhfnavnkortest_fmt(keep=behrhf behrhf_navnkortest);                                                                                                        
-   by behrhf;                                                                                                                                
+   by behrhf;  
+   where behrhf ne .;
 run; 
 /* Build format data set */                                                                                                            
 data hnref.fmtfil_rhfkortest(rename=(behrhf=start) keep=behrhf fmtname label);                                                                                    
@@ -207,7 +213,8 @@ proc format cntlin=hnref.fmtfil_rhfkortest; run;
 
 /* Remove duplicate values */
 proc sort data=behandler nodupkey out=orgnr_fmt(keep=orgnr org_navn);                                                                                                        
-   by orgnr;                                                                                                                                
+   by orgnr;   
+   where orgnr ne .;
 run; 
 /* Build format data set */                                                                                                            
 data hnref.fmtfil_orgnr(rename=(orgnr=start) keep=orgnr fmtname label);                                                                                    
