@@ -2,7 +2,7 @@
 /*! 
 ### Beskrivelse
 
-Makro for å lage bo-variablene: boshhn, bohf, borhf og fylke.
+Makro for å lage bo-variablene: boshhn, bosh, bohf, borhf og fylke.
 Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 
 ```
@@ -15,7 +15,7 @@ Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 - bydel = 0: Uten bydel får hele kommune 301 Oslo bohf=30 (Oslo), ved bruk av 'bydel=1' deles kommune 301 Oslo til bohf: 15 (akershus), 17 (lovisenberg), 18 (diakonhjemmet) og 15 (ahus), default er 'bydel=1'. 
 
 ### Output 
-- bo-variablene: boshhn, bohf, borhf og fylke.
+- bo-variablene: boshhn, bosh, bohf, borhf og fylke.
 
 ### Endringslogg:
 - 2020 Opprettet av Tove og Janice
@@ -23,6 +23,7 @@ Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 - januar 2022, Tove, fjerne argument 'barn=' og 'haraldsplass='
 - februar 2022, Tove, ta ut radene som kun brukes til formater
 - april 2024, Tove, oppdatert med BODPS
+- 10. juli 2025, Janice og Gunnar oppdatert med BOSH
  */
 
 /*
@@ -33,7 +34,7 @@ Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 /* Pga sql-merge i makroen må datasettet en sender inn ikke ha variablene bohf, borhf eller boshhn med */
 data &inndata;
 set &inndata;
-drop bohf borhf boshhn bodps;
+drop bohf borhf bosh boshhn bodps;
 run;
 /*
 *********************************************
@@ -49,18 +50,21 @@ data bo;
   format komnr_navn $60.;
   format bydel 6.;
   format bydel_navn $60.;
-  format bohf 4.;
-  format bohf_navn $60.;
-  format boshhn 2.;
-  format boshhn_navn $15.;
   format borhf 4.;
   format borhf_navn $60.;
-  format kommentar $400.;
+  format bohf 4.;
+  format bohf_navn $60.;
+  format bosh 4.;
+  format bosh_navn $30.;
+  format boshhn 4.;
+  format boshhn_navn $15.;
   format bodps 4.;
   format bodps_navn $60.;
+  format kommentar $400.;
  
   input	
-  komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ bodps bodps_navn $;
+  	komnr komnr_navn $ bydel bydel_navn $ borhf borhf_navn $ bohf bohf_navn $ bosh bosh_navn $ boshhn boshhn_navn $ bodps bodps_navn $ kommentar $
+	  ;
   if komnr eq . then delete; /*ta vekk rader som kun brukes til å lage formater*/
   run;
 /*
@@ -71,7 +75,7 @@ data bo;
 %if &bydel = 1 %then %do;
 proc sql;
   create table &inndata as
-  select a.*, b.bohf, b.boshhn, b.borhf, b.bodps
+  select a.*, b.bohf, b.boshhn, b.bosh, b.borhf, b.bodps
   from &inndata a left join bo b
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
@@ -95,7 +99,7 @@ run;
 
 proc sql;
   create table &inndata as
-  select a.*, b.bohf, b.boshhn, b.borhf, b.bodps 
+  select a.*, b.bohf, b.boshhn, b.bosh, b.borhf, b.bodps 
   from &inndata a left join bo_utenbydel b
   on a.komnr=b.komnr;
 quit;
