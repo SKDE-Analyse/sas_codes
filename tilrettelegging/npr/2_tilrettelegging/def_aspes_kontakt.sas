@@ -1,6 +1,4 @@
 ﻿%macro def_aspes_kontakt(inndata=, utdata=);
-Data &utdata;
-	Set &inndata(drop=kontakt);
 
 	/*
  *****************************************************************************************************************
@@ -23,15 +21,31 @@ Data &utdata;
 	******************************************************************************************************************
 	 */
 
-	/*
-	Lage variabelen kontakt med verdiene:
-	 0 'Rapporterte kontakter uten konsultasjonstakst'
-	 1 'Enkle kontakter' 
- 	 2 'Allm.legekonsult./-sykebesøk'
- 	 3 'Kun spesialisterklæring med undersøkelse'
-	 4 'Spesialistkonsultasjoner'
-	 5 'Lysbehandling'.
-	*/
+/* Check if the variable exists */
+data _null_;
+	dset=open("&inndata");
+	call symput ('kontakt',varnum(dset,'kontakt'));
+run;
+
+*drop the variable if it exists;
+%if &kontakt ne 0 %then %do;
+data &inndata;
+	set &inndata(drop=kontakt);
+run;
+%end;
+
+/*
+Lage variabelen kontakt med verdiene:
+ 0 'Rapporterte kontakter uten konsultasjonstakst'
+ 1 'Enkle kontakter' 
+ 2 'Allm.legekonsult./-sykebesøk'
+ 3 'Kun spesialisterklæring med undersøkelse'
+ 4 'Spesialistkonsultasjoner'
+ 5 'Lysbehandling'.
+*/
+
+Data &utdata;
+	Set &inndata;
 
 	*initialize variable;
 	kontakt_def=0;
