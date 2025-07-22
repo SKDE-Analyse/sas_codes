@@ -251,7 +251,7 @@ quit;
 data deleteme_population;
    /* Here we load in the population data for Norway, and structure it so that it can be joined to deleteme_rateutvalg */
    set &population_data;
-   where aar in (&min_year:&max_year) and
+   where aar in (&min_year:&max_year, &std_year) and
          alder in (&min_age:&max_age) and
          ermann in %if &kjonn=menn    %then (1);
              %else %if &kjonn=kvinner %then (0);
@@ -260,7 +260,6 @@ data deleteme_population;
 
    age_group = floor(alder/&age_group_size) +1;
 run;
-data deleteme_population_copy; set deleteme_population; run;
 
 /* The problem with &population_data is that it only has population data on the commune level; the %boomraader macro tacks
    on the regional information as new variables at the end of the population dataset (without aggregating the data) */
@@ -271,10 +270,12 @@ proc sql;
 create table deleteme_pop_in_region_ as
 	select aar, &region, &sql_grouping, sum(innbyggere) as population
 	from deleteme_population
+   where aar in (&min_year:&max_year)
 	group by aar, &region, &sql_grouping
    union all
    select 9999 as aar, &region, &sql_grouping, sum(innbyggere) / (&max_year-&min_year+1) as population
    from deleteme_population
+   where aar in (&min_year:&max_year)
    group by &region, &sql_grouping;
 
 create table deleteme_pop_in_region as
