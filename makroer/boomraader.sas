@@ -50,20 +50,20 @@ data bo;
   format komnr_navn $60.;
   format bydel 6.;
   format bydel_navn $60.;
-  format borhf 4.;
-  format borhf_navn $60.;
   format bohf 4.;
   format bohf_navn $60.;
-  format bosh 4.;
-  format bosh_navn $30.;
   format boshhn 4.;
   format boshhn_navn $15.;
+  format borhf 4.;
+  format borhf_navn $60.;
+  format kommentar $400.;
   format bodps 4.;
   format bodps_navn $60.;
-  format kommentar $400.;
+  format bosh 4.;
+  format bosh_navn $30.;
  
   input	
-  	komnr komnr_navn $ bydel bydel_navn $ borhf borhf_navn $ bohf bohf_navn $ bosh bosh_navn $ boshhn boshhn_navn $ bodps bodps_navn $ kommentar $
+  	komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ bodps bodps_navn $ bosh bosh_navn $
 	  ;
   if komnr eq . then delete; /*ta vekk rader som kun brukes til å lage formater*/
   run;
