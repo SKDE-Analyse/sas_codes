@@ -163,7 +163,7 @@
 989124544;HELSE MØRE OG ROMSDAL HF DPS NORDMØRE/ROMSDAL POLIKLINIKK MOLDE;;;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 993521248;HELSE MØRE OG ROMSDAL HF DPS NORDMØRE/ROMSDAL DØGNSEKSJON MOLDE;;;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 875034022;BETANIA MALVIK BO- OG BEHANDLINGSSENTER;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 01.07.2025 av Olena
-974116464;Betania Malvik;;;;;;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 24.05.2024 av Tove J
+974116464;BETANIA MALVIK REHABILITERING;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 22.08.2025 av Olena
 983974732;Helse Førde HF;90;Helse Førde HF;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
 974744570;Helse Førde, Førde;91;Førde sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
 974745364;Helse Førde, Nordfjord;92;Nordfjord sjukehus;9;Helse Førde HF;Helse Førde;3;Helse Vest RHF;Helse Vest;Vest;
@@ -1010,3 +1010,11 @@
 975097544;KASTVOLLEN REHABILITERINGSSENTER AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.07.2025 av Olena
 980064921;IBSENSYKEHUSENE AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.07.2025 av Olena
 987576375;EVJEKLINIKKEN AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 14.07.2025 av Olena
+917853185;St. Olavs Hospital HF KLINIKK FOR BILDEDIAGNOSTIKK;60;St. Olavs Hospital HF;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 22.08.2025 av Olena: venteliste data
+888819622;St. Olavs Hospital HF AVDELING FOR KLINISK FARMAKOLOGI;60;St. Olavs Hospital HF;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 22.08.2025 av Olena: venteliste data
+917853398;St. Olavs Hospital HF RØNTGEN/LAB RØROS;60;St. Olavs Hospital HF;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 22.08.2025 av Olena: venteliste data
+920619193;St. Olavs Hospital HF RØNTGEN ORKDAL;60;St. Olavs Hospital HF;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 22.08.2025 av Olena: venteliste data
+974631318;Vestre Viken HF PSYKIATRISK AVDELING LIER DØGNAVDELING LIER;140;Vestre Viken HF;14;Vestre Viken HF;Vestre Viken;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 22.08.2025 av Olena: venteliste data
+975324745;OSLO UNIVERSITETSSYKEHUS HF SØNDRE OSLO DPS POLIKLINIKK MORTENSRUD;180;Oslo universitetssykehus HF;18;Oslo universitetssykehus HF;Oslo universitetssykehus;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst; Oppdatert 22.08.2025 av Olena: venteliste data
+975326373;Helse Bergen HF VOSS DPS POLIKLINIKK/DAGAVDELING;100;Helse Bergen HF;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 22.08.2025 av Olena: venteliste data
+993520314;Helse Møre og Romsdal HF KLINIKK FOR DIAGNOSTIKK LAB/RADIOLOGI - KRISTIANSUND;72;Kristiansund sykehus;7;Helse Møre og Romsdal HF;Helse Møre og Romsdal;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 22.08.2025 av Olena: venteliste data
