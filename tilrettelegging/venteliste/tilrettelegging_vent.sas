@@ -18,21 +18,7 @@ run;
 
 %macro tilrettelegging_vent(inndata=, utdata=,periode=);
 
-/* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
-data _null_;
-dset=open("&inndata");
-call symput ('komnrhjem2',varnum(dset,'komnrhjem2'));
-call symput ('bydel2',varnum(dset,'bydel2'));
-call symput ('lopenr',varnum(dset,'lopenr'));
-call symput ('aar',varnum(dset,'aar'));
-call symput ('fodselsAar_ident',varnum(dset,'fodselsAar_ident'));
-call symput ('kjonn_kode',varnum(dset,'kjonn_kode'));
-call symput ('behandlingsstedkode',varnum(dset,'behandlingsstedkode'));
-call symput ('institusjonid',varnum(dset,'institusjonid'));
-call symput ('fagenhetkode',varnum(dset,'fagenhetkode'));
-call symput ('fagomr_kode',varnum(dset,'fagomr_kode'));
 
-run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
 %include "&filbane/formater/NPR_somatikk.sas";
@@ -57,17 +43,32 @@ format behandlingsstedkode_n best9.;
 drop behandlingsstedkode;
 rename behandlingsstedkode_n = behandlingsstedkode;
 
-format komnrhjem2 best9.;
-komnrhjem2=komNrHjem_DSF;
+
+komnrhjem2=komm_nr;
 
 format bydel2 best9.;
 bydel2 = bydel_DSF;
+if bydel2 = . then bydel2=0;
 
 drop  komnr komm_nr komNrHjem_DSF bydel_DSF bydel ;
 
 run;
 
+/* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
+data _null_;
+dset=open("&inndata");
+call symput ('komnrhjem2',varnum(dset,'komnrhjem2'));
+call symput ('bydel2',varnum(dset,'bydel2'));
+call symput ('lopenr',varnum(dset,'lopenr'));
+call symput ('aar',varnum(dset,'aar'));
+call symput ('fodselsAar_ident',varnum(dset,'fodselsAar_ident'));
+call symput ('kjonn_kode',varnum(dset,'kjonn_kode'));
+call symput ('behandlingsstedkode',varnum(dset,'behandlingsstedkode'));
+call symput ('institusjonid',varnum(dset,'institusjonid'));
+call symput ('fagenhetkode',varnum(dset,'fagenhetkode'));
+call symput ('fagomr_kode',varnum(dset,'fagomr_kode'));
 
+run;
 
 %let length_list_4 =
   ANS_DATO AVVIKL_DATO DATOEPISODE1 DATOEPISODE2 DATOEPISODE3 DATOEPISODE4
@@ -304,7 +305,7 @@ label Intern_ventetid = 'Antall dager mellom mottaksdato (nyhenv_dato) og ventet
 label SLETTE_KODE = 'Slette kode - ulike grunn for hvorfor person bør ikke tas i beregninger. Må være missing eller 0';
 
 rename OMSNIVAA_KODE = OMSORGSNIVA;
-rename henv_type = henvtype; /*rename because there are formates available*/
+
 periode=&periode;
 format periode YYMMDD10.;
 
