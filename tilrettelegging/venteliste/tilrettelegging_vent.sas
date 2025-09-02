@@ -56,7 +56,7 @@ run;
 
 /* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
 data _null_;
-dset=open("&inndata");
+dset=open("temp2");
 call symput ('komnrhjem2',varnum(dset,'komnrhjem2'));
 call symput ('bydel2',varnum(dset,'bydel2'));
 call symput ('lopenr',varnum(dset,'lopenr'));
@@ -80,7 +80,7 @@ run;
  ALDER AVD_KODE AVVIKL_KODE AV_IKKE_ORD AV_KODE AV_KODE_UTSATT BEHANDLINGSSTEDKODE BYDEL
 FORTSATT_KODE FORTSATT_KODE_UTSATT FRISTBRUDD HENVFRAHPR
 HENVFRAINSTITUSJONID HENVFRATJENESTE HENVTILHPR HENVTILINSTITUSJONID HENVTILTJENESTE
-HENV_DATO HENV_TYPE INST_NR Intern_ventetid KJONN_KODE
+HENV_TYPE INST_NR Intern_ventetid KJONN_KODE
 KOMM_NR NY_HENVIST NY_KODE OMSNIVAA_KODE PASIENT_NR RAPPORTERTRETTTILHELSEHJELP RHF
 SLETTE_KODE TERTIAL UTSETTKODE1 UTSETTKODE3 UTSETTKODE4 UTSETTKODE5 UTSETTKODE6 UTSETTKODE21
 UTSETTKODE22 VENTETID Ventetid_median avdelingReshID bydel_DSF debitor debitorHenvisning
@@ -217,8 +217,8 @@ drop tmp_alder fodselsAar_ident;
     if kjonn_kode eq 2     then ermann=0; /* Kvinne */
     if kjonn_kode in (0, 9) /* 0='Ikke kjent', 9='Ikke spesifisert'*/ then ermann=.;
 
-    if kjonn_ident in ('1','2') then do; /*hvis kjonn_dsf bruke den i stedet for kjonn*/
-	if kjonn_ident = '1' then ermann = 1;
+    if kjonn_ident in (1,2) then do; /*hvis kjonn_dsf bruke den i stedet for kjonn*/
+	if kjonn_ident = 1 then ermann = 1;
 	if kjonn_ident = 2 then ermann = 0;
     end;
 drop kjonn_kode kjonn_ident;
@@ -277,7 +277,7 @@ label fagenhetkode = 'Fagenhet har det faglige ansvaret for pasientbehandlingen'
 label RAPPORTERTRETTTILHELSEHJELP = 'Angir om pasienten har rett til nødvendig helsehjelp eller ikke';
 label debitor = 'Klassifikasjon/identifikasjon av finansieringsordninger med videre';
 label nyhenv_dato ='Dato for mottak av henvisning/søknad ved helseforetaket - mottaksdato';
-label Vurderingsdato = 'Den dato vurderingsinstansen vurderte henvisningen';
+label Vurd_dato = 'Den dato vurderingsinstansen vurderte henvisningen';
 label UTSETTDATO1 = 'Dato. Institusjonen/sykehuset har bestemt utsettelsen av kapasitetsgrunner';
 label UTSETTDATO3 = 'Dato. Pasienten har ikke møtt opp';
 label UTSETTDATO4 = 'Dato. Pasienten har selv bestemt utsettelsen av velferdsgrunner';
@@ -301,7 +301,7 @@ label AV_KODE = 'Henvisninger som er ordinært avviklet fra ventelisten i rappor
 label fortsatt_kode = 'Henvisninger som venter på helsehjelp på ett gitt tidspunkt';
 label ny_henvist = 'Henvisningen er vurdert i perioden';
 label VENTETID = 'Antall kalenderdager mellom ventetid startdato (henv_dato) og ventetid sluttdato (avvikl_dato) eller rapporteringsperiodens sluttdato'; 
-label Intern_ventetid = 'Antall dager mellom mottaksdato (nyhenv_dato) og ventetid sluttdato (avvikl_dato)eller rapporteringsperiodens sluttdato'
+label Intern_ventetid = 'Antall dager mellom mottaksdato (nyhenv_dato) og ventetid sluttdato (avvikl_dato)eller rapporteringsperiodens sluttdato';
 label SLETTE_KODE = 'Slette kode - ulike grunn for hvorfor person bør ikke tas i beregninger. Må være missing eller 0';
 
 rename OMSNIVAA_KODE = OMSORGSNIVA;
