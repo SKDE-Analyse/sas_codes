@@ -2,62 +2,30 @@
 /*HVA KONTROLLERES*/
 /******************/
 
-/* 1) Unike enkeltregning_lnr på tvers av år*/
-/* 2) Sjekk om enkeltregning_lnr fra hovedfil også gjenfinnes i satelitter*/
+/* 1) Sjekk om enkeltregning_lnr fra hovedfil også gjenfinnes i satelitter*/
 
-%macro kpr_enkeltregning(aar=);
+%macro kpr_kobling_takst_diagnose(aar=);
 
-/***************************************************************/
-/* a) Finnes det duplikate enkeltregning_lnr på tvers av årene?*/
-/***************************************************************/
+/***********************************************************/
+/* Gjenfinnes enkeltregning_lnr fra hovedfil i satelittene?*/
+/***********************************************************/
 
-data regninglnr;
-set 
-&eldre.(keep=enkeltregning_lnr)
-&inn.(keep=enkeltregning_lnr)
-;
+data regninglnr_&aar.;
+    if _N_ = 1 then do;
+        declare hash h_diag(dataset:"&inn_diag(keep=enkeltregning_lnr)");
+        h_diag.defineKey('enkeltregning_lnr');
+        h_diag.defineDone();
+
+        declare hash h_takst(dataset:"&inn_takst(keep=enkeltregning_lnr)");
+        h_takst.defineKey('enkeltregning_lnr');
+        h_takst.defineDone();
+    end;
+    set &inn(keep=enkeltregning_lnr tjenestetype);
+    ok_diag = (h_diag.find() = 0);
+    ok_takst = (h_takst.find() = 0);
 run;
-/* dup_regning skal være tom - DVS INGEN DUPLIKATER*/
-proc sort data=regninglnr nodupkey out=unique dupout=dup_regning;
-by enkeltregning_lnr;
-run;
 
-proc sql noprint;
-  select count(*) into :ndup from dup_regning;
-quit;
-
-%put &ndup;
-
-%if &ndup=0 %then %do;
-title color=darkblue height=5 '2a: ingen duplicater av enkeltregning_lnr på tvers årene';
-proc sql;
-  create table m (note char(12));
-  insert into m values ('All is good!');
-  select *
-  from m;
-quit;
-%end;
-%else %do;
-title color=red height=5 '2a: duplicater av enkeltregning_lnr - skal ikke være!!';
-proc sql;
-  select count(*) as ndup_enkeltregning_lnr from dup_regning;
-quit;
-title;
-%end;
-
-
-/**************************************************************/
-/* b) Gjenfinnes enkeltregning_lnr fra hovedfil i satelittene?*/
-/**************************************************************/
-
-proc sql;
-	create table regninglnr_&aar. as
-	select distinct enkeltregning_lnr, tjenestetype,
-		case when enkeltregning_lnr in (select enkeltregning_lnr from &inn_diag ) then 1 end as ok_diag,
-		case when enkeltregning_lnr in (select enkeltregning_lnr from &inn_takst ) then 1 end as ok_takst
-	from &inn;
-quit;
-
+/* Count total regninger */
 proc sql noprint;
   select count(*) into :regning from regninglnr_&aar.;
 quit;
@@ -78,8 +46,7 @@ CREATE TABLE diag_&aar. AS
   FROM &inn_diag;
 QUIT;
 
-
-title color=darkblue height=5 '2b: Diagnosefilen: sjekk mot utleveringsinfo';
+title color=darkblue height=5 '2a: Diagnosefilen: sjekk mot utleveringsinfo';
 proc print data=diag_&aar;run;
 
 proc sql noprint;
@@ -108,7 +75,7 @@ quit;
 %end;
 
 %if &miss_diag ne 0 %then %do;
-title color=red height=5 "2b: Diagnosefilen: &miss_diag linjer uten diagnosekode";
+title color=red height=5 "2c: Diagnosefilen: &miss_diag linjer uten diagnosekode";
 proc sql;
   create table m (note char(25));
   insert into m values ('WARNING! MÅ SE NÆRMERE');
@@ -118,16 +85,12 @@ quit;
 %end;
 
 %if &kodeverk ne 3 %then %do;
-title color=red height=5 "2b: Diagnosefilen: kun &kodeverk kodeverk - skulle være 3 (ICD-10, ICPC-2, ICPC-2B)";
+title color=red height=5 "2d: Diagnosefilen: kun &kodeverk kodeverk - skulle være 3 (ICD-10, ICPC-2, ICPC-2B)";
 proc sql;
   select distinct diagnoseTabell
   from &inn_diag;
 quit;
 %end;
-
-
-
-
 
 /* -------- */
 /* TAKSTFIL */
@@ -146,7 +109,7 @@ CREATE TABLE takst_&aar. AS
   FROM &inn_takst;
 QUIT;
 
-title color=darkblue height=5 '2c: Takstfilen: sjekk mot utleveringsinfo';
+title color=darkblue height=5 '3a: Takstfilen: sjekk mot utleveringsinfo';
 proc print data=takst_&aar;run;
 
 proc sql noprint;
@@ -156,7 +119,7 @@ proc sql noprint;
 quit;
 
 %if &diff_takst ne 0 %then %do;
-title color=red height=5 "2c: Mangler &diff_takst enkeltregning_lnr fra hovedfilen i takst-filen!!";
+title color=red height=5 "3b: Mangler &diff_takst enkeltregning_lnr fra hovedfilen i takst-filen!!";
 proc sql;
 	select tjenestetype, count(*) as rad_takst
 	from regninglnr_&aar.
@@ -165,7 +128,7 @@ proc sql;
 quit;
 %end;
 %else %do;
-title color=darkblue height=5 '2c: All enkeltregning_lnr fra hovedfilen er ikke i takst-filen :-)';
+title color=darkblue height=5 '3c: All enkeltregning_lnr fra hovedfilen er ikke i takst-filen :-)';
 proc sql;
   create table m (note char(12));
   insert into m values ('All is good!');
@@ -175,7 +138,7 @@ quit;
 %end;
 
 %if &miss_takst ne 0 %then %do;
-title color=red height=5 "2c: Takstfilen: &miss_takst linjer uten takstkode";
+title color=red height=5 "3d: Takstfilen: &miss_takst linjer uten takstkode";
 proc sql;
   create table m (note char(25));
   insert into m values ('WARNING! MÅ SE NÆRMERE');
@@ -184,10 +147,8 @@ proc sql;
 quit;
 %end;
 
-
-
 proc datasets nolist;
-delete regninglnr regninglnr_&aar.  diag_&aar. takst_&aar. unique dup_regning;
+delete regninglnr_&aar.  diag_&aar. takst_&aar.;
 run;
 
-%mend kpr_enkeltregning;
+%mend;
