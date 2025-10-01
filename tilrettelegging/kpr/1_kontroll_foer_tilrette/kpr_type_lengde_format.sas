@@ -40,6 +40,7 @@ title color=purple height=5 "8: variabler, type. Sjekk opp de som ikke er i ref.
 proc print data=xyz_vars; 
   where ikke_i_ref_liste eq 1 or ulik_type eq 1 or ulik_lengde eq 1 or ulik_format eq 1;
 run;
+title;
 %end;
 
 proc datasets nolist; delete varlist xyz_vars xyz_vars_ulik ; run; 
