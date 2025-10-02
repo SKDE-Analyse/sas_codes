@@ -36,7 +36,7 @@ proc print data=xyz_vars; run;
 %end;
 
 %if &nobs3 ne 0 %then %do;
-title color=purple height=5 "8: variabler, type. Sjekk opp de som ikke er i ref.liste eller som har ulik type.";
+title color=purple height=5 "8: variabler, type. Sjekk opp de som ikke er i ref.liste eller som har ulik type. Lengde og format fikses i tilrettelegging.";
 proc print data=xyz_vars; 
   where ikke_i_ref_liste eq 1 or ulik_type eq 1 or ulik_lengde eq 1 or ulik_format eq 1;
 run;

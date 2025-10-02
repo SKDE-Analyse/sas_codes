@@ -27,7 +27,7 @@ run;
 
 /* Count total regninger */
 proc sql noprint;
-  select count(*) into :regning from regninglnr_&aar.;
+  select count(distinct enkeltregning_lnr) into :regning from regninglnr_&aar.;
 quit;
 
 /* ----------- */
@@ -56,7 +56,7 @@ proc sql noprint;
 quit;
 
 %if &diff_diag ne 0 %then %do;
-title color=red height=5 "2b: Mangler &diff_diag enkeltregning_lnr fra hovedfilen i diagnose-filen!!";
+title color=red height=5 "2b: Finner ikke &diff_diag enkeltregning_lnr i diagnose-filen!!";
 proc sql;
 	select tjenestetype, count(*) as rad_diag
 	from regninglnr_&aar.
@@ -119,7 +119,7 @@ proc sql noprint;
 quit;
 
 %if &diff_takst ne 0 %then %do;
-title color=red height=5 "3b: Mangler &diff_takst enkeltregning_lnr fra hovedfilen i takst-filen!!";
+title color=red height=5 "3b: Finner ikke &diff_takst enkeltregning_lnr i takst-filen!!";
 proc sql;
 	select tjenestetype, count(*) as rad_takst
 	from regninglnr_&aar.

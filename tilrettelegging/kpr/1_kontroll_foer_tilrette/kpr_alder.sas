@@ -19,7 +19,7 @@
     if last.aar and last.&lnr. and count_alder>1 then output;
   run;
 
-  title color=darkblue height=5 "4a: antall pasienter med ulike alder på ett år. Utlevering av alder varierer, noen ganger er det alder på konsultasjonstidspunkt som er angitt (unikid=flere millioner), andre ganger beregnet til aar - fodselsar (unikid=under 1000).";
+  title color=darkblue height=5 "4a: antall pasienter med ulik rapportert alder på ett år. Utlevering av alder varierer, noen ganger er det alder på konsultasjonstidspunkt som er angitt (unikid=flere millioner), andre ganger beregnet til aar - fodselsar (unikid=under 100).";
   proc sql;
     select count(*) as unikid from dupalder;
   quit;

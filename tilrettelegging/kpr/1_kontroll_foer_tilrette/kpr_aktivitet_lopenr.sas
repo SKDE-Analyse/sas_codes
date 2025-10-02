@@ -23,14 +23,14 @@ proc sql;
 	group by kpr_lnr;
 quit;
 
-title color=purple height=5 "7a: Antall pasienter som har X antall bosted (KommuneNr)";
+title color=darkblue height=5 "7a: Antall pasienter som har X antall bosted (KommuneNr)";
 proc sql;
 	select ant_bosted, count(distinct kpr_lnr) as ant_pas
 	from pr_lopenr_&aar.
 	group by ant_bosted;
 quit;
 
-title color=purple height=5 "7b: Antall pasienter som har X antall regninger";
+title color=darkblue height=5 "7b: Antall pasienter som har X antall regninger";
 proc sql;
 	select ant_regninger, count(distinct kpr_lnr) as ant_pas
 	from pr_lopenr_&aar.

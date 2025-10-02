@@ -132,7 +132,8 @@ proc sql;
 	from &inndata 
 	where kommuneNr in (select komnr2 from error_komnr_&aar.);
 quit;
-title color=red height=5 "Antall pasienter og regninger med ukjent komnr i &aar";
+title color=purple height=5 "6a: Ytterligere info om rader med ugyldig bosted/kommuneNr." ;
+title color=purple height=5 "Antall pasienter og regninger med ukjent komnr i &aar.";
 proc sql;
 select	&aar as aar, 
 			count(distinct kpr_lnr) as unik_pas,
@@ -140,6 +141,38 @@ select	&aar as aar,
 			sum(missing(kpr_lnr)) as uten_kpr_lnr
 from ukjent_bosted_&aar.;
 quit;
+/* lage datasett med pasienter som har kommuneNr missing eller -1 */
+proc sql;
+	create table missbosted as
+	select *
+	from &inndata.
+	where kpr_lnr in (select kpr_lnr 
+						from &inndata.
+						where kommuneNr eq -1 or kommuneNr eq .) ;
+quit;
+title color=purple height=5 "Pasienter som har gyldig bosted på noen av radene. Hvis det er mange -> vurder å fikse før tilrettelegging kjøres.";
+proc sql;
+	select 	count(distinct kpr_lnr) as pas_miss_bosted,
+			count(distinct(case when kommuneNr ne -1 then kpr_lnr end)) as pas_m_bosted_noen_rader,
+			calculated pas_m_bosted_noen_rader/ calculated pas_miss_bosted as andel_m_Bosted format nlpct8.0
+	from missbosted
+	where kpr_lnr ne .;
+quit;
+title color=purple height=5 "Rader med manglende bosted, fordelt på tjenestetype";
+proc sql;
+	select tjenestetype, count(distinct enkeltregning_lnr) as antall_regninger
+	from missbosted
+	where kpr_lnr ne . and kommuneNr eq -1
+	group by 1;
+quit;
+title color=purple height=5 "Rader med manglende bosted, fordelt på praksiskommune";
+proc sql;
+	select praksiskommune, count(distinct enkeltregning_lnr) as antall_regninger
+	from missbosted
+	where kpr_lnr ne . and kommuneNr eq -1
+	group by 1;
+quit;
+title;
 %end;
 
 /* hvis error-fil er tom, print All is good! */
@@ -173,7 +206,7 @@ run;
 %if &nobs2 ne 0 %then %do;
     /* Count number of rows in original data with invalid bydel */
     data inndata_with_bydel;
-    set &inndata(keep=&komnr &bydel);
+    set &inndata(keep=&komnr &bydel tjenestetype enkeltregning_lnr);
     if &komnr in (301,4601,1201,5001,1601,1103) then bydel_combined = &komnr*100 + &bydel;
     else bydel_combined = .;
 run;
@@ -183,18 +216,26 @@ run;
     where bydel_combined in (select bydel from error_bydel_&aar);
 quit;
 
-title color=red height=5 "6b: det er &n_invalid_bydel rader med ugyldig verdi for bydel i &aar.-filen - tilretteleggingen gir de bydel = 99";
+title color=red height=5 "6b: det er &n_invalid_bydel rader med ugyldig verdi for bydel i &aar.-filen - tilretteleggingen gir de bydel = 99. Dette er viktigst for komnr 301, bør være under 10 000. For de andre kommunene har det ingen betydning ifht opptaksområder. ";
 proc sql;
     select &komnr, &bydel, bydel_combined, count(*) as ant_rader
     from inndata_with_bydel
     where bydel_combined in (select bydel from error_bydel_&aar)
     group by &komnr, &bydel, bydel_combined;
 quit;
+title color=purple height=5 "Rader med ugyldig bydel, fordelt på tjenestetype";
+proc sql;
+	select tjenestetype, count(distinct enkeltregning_lnr) as antall_regninger
+	from inndata_with_bydel
+	where bydel_combined in (select bydel from error_bydel_&aar.)
+	group by 1;
+quit;
+title;
 %end;
 
 proc datasets nolist;
-delete komnr bydel boomr gyldig_komnr liste_komnr 
-      gyldig_bydel liste_bydel mottatt_komnr mottatt_bydel
-      godkjent_komnr_&aar godkjent_bydel_&aar;
+delete komnr bydel boomr liste_komnr liste_bydel gyldig_bydel gyldig_komnr
+      godkjent_komnr_&aar godkjent_bydel_&aar missbosted mottatt_komnr mottatt_bydel
+      inndata_with_bydel ukjent_bosted_&aar ;
 run;
 %mend kpr_komnr_bydel;

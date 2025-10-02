@@ -6,7 +6,7 @@
 /* Kontroll takstfilen */
 data _null_;
         dset_t = open("&inn_takst");
-        vars_t = 'aar enkeltregning_lnr';
+        vars_t = 'aar enkeltregning_lnr'; /*variabler som må være tilstede i filen*/ 
         length missing_t $200;
         do i = 1 to countw(vars_t, ' ');
             varname_t = scan(vars_t, i, ' ');
@@ -20,7 +20,7 @@ data _null_;
     /* Kontroll diagnosefilen */
     data _null_;
         dset_d = open("&inn_diag");
-        vars_d = 'aar enkeltregning_lnr';
+        vars_d = 'aar enkeltregning_lnr'; /*variabler som må være tilstede i filen*/ 
         length missing_d $200;
         do i = 1 to countw(vars_d, ' ');
             varname_d = scan(vars_d, i, ' ');
@@ -34,7 +34,7 @@ data _null_;
     /* Kontroll regningsfilen/hovedfilen */
     data _null_;
         dset = open("&inn");
-        vars = 'aar kpr_lnr enkeltregning_lnr dato kjonn alder fodselsaar kommuneNr bydel tjenestetype';
+        vars = 'aar kpr_lnr enkeltregning_lnr dato kjonn alder fodselsaar kommuneNr bydel tjenestetype praksiskommune'; /*variabler som må være tilstede i filen*/ 
         length missing $200;
         do i = 1 to countw(vars, ' ');
             varname = scan(vars, i, ' ');
@@ -115,7 +115,7 @@ run;
     /* --------------------------------------------------- */
 	%include "&filbane/tilrettelegging/kpr/1_kontroll_foer_tilrette/kpr_aktivitet_lopenr.sas";
 	%kpr_aktivitet_lopenr(aar=&aar.);
-   %end;
+   %end; 
 
     /* ---------------------------------------------------------------- */
     /* 8 - Har mottatte variabler lik type og lengde som referanse satt */
