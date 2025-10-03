@@ -215,19 +215,6 @@ else alder=alder_mot;
 drop kjonn kjonnK kjonnNavn tjenestetype;
 run;
 
-/* output som gir forskjell på rapportert og beregnet alder */
-data alder_diff_data;
-  set &sektor;
-  if alder ne . and alder_mot ne . then do;
-    alder_diff = alder - alder_mot;
-  end;
-  else alder_diff = .;
-run;
-title color=purple height=5 "Forskjell mellom beregnet og rapportert alder (alder_diff)";
-proc freq data=alder_diff_data;
-  tables alder_diff / missing;
-run;
-
 /*----------*/
 /* diagnose */
 /*----------*/
