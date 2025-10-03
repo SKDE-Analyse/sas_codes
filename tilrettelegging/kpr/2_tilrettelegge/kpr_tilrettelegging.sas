@@ -185,7 +185,7 @@ run;
 data &sektor;
   set &sektor;
 
-rename dato=inndato klokkeslett=inntid alder=alder_mot;
+rename dato=inndato klokkeslett=inntid;
 
 if kjonn eq 1 then ermann = 1; /*menn*/
 if kjonn eq 2 then ermann = 0; /*kvinner*/
@@ -206,13 +206,20 @@ if tjenestetype eq "Audiopedagog"                   then tjenestetype_kpr = 12;
 if tjenestetype eq "Ortoptist"                      then tjenestetype_kpr = 13; 
 if tjenestetype eq "Ukjent" 
     or tjenestetype eq " "                          then tjenestetype_kpr = 14; 
+
+/*ta vare på rapportert alder*/
+alder_mot = alder;
+/*null ut alder*/
+alder = .;
 /* hvis oppgitt fødselsår beregnes alder ut fra det */
 if fodselsaar ne . then do;
-alder = aar - fodselsaar;
+alder_ny = aar - fodselsaar;
 end;
-/* hvis fødselsår mangler så brukes den rapporterte alderen */
-else alder=alder_mot;
-drop kjonn kjonnK kjonnNavn tjenestetype;
+/* hvis fødselsår mangler så brukes den rapporterte alderen hvis gyldig verdi */
+else if fodselsaar eq . and alder_mot ge 0 then alder_ny = alder_mot;
+/*alder_ny gjøres om til alder*/
+alder = alder_ny;
+drop kjonn kjonnK kjonnNavn tjenestetype alder_ny;
 run;
 
 /*----------*/
