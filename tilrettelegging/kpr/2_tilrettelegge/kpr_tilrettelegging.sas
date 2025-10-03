@@ -208,7 +208,7 @@ if tjenestetype eq "Ukjent"
     or tjenestetype eq " "                          then tjenestetype_kpr = 14; 
 /* hvis oppgitt fødselsår beregnes alder ut fra det */
 if fodselsaar ne . then do;
-alder = fodselsaar - aar;
+alder = aar - fodselsaar;
 end;
 /* hvis fødselsår mangler så brukes den rapporterte alderen */
 else alder=alder_mot;
