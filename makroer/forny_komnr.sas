@@ -31,6 +31,7 @@ data &inndata(drop=rc prev_komnr nykom);
   end;
   set data_forny_input;
   length prev_komnr 8;
+  nykom = .; /* Initialize nykom */
   do until (prev_komnr = komnr or komnr = .);
     prev_komnr = komnr;
     rc = h.find();
