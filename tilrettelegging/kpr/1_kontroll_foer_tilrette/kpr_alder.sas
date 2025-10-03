@@ -16,7 +16,7 @@
     retain count_alder 0;
     if first.aar and first.&lnr. then count_alder=0;
     count_alder+1;
-    if last.aar and last.&lnr. and count_alder>1 then output;
+    if last.aar and count_alder>1 then output;
   run;
 
   title color=darkblue height=5 "4a: antall pasienter med ulik rapportert alder på ett år. Utlevering av alder varierer, noen ganger er det alder på konsultasjonstidspunkt som er angitt (unikid=flere millioner), andre ganger beregnet til aar - fodselsar (unikid=under 100).";
