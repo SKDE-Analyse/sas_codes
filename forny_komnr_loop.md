@@ -1,5 +1,5 @@
 
-# Dokumentasjon for filen *makroer/forny_komnr.sas*
+# Dokumentasjon for filen *makroer/forny_komnr_loop.sas*
 
 ### Beskrivelse
 
