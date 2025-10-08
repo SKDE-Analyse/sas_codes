@@ -2,47 +2,58 @@
 	/* ------------------------ */
 	/* REGNINGSFILEN/HOVEDFILEN */
 	/* ------------------------ */
-	
-	PROC SQL;
-	CREATE TABLE regning_&aar. AS
-	SELECT 	&aar as aar, 
-			count(distinct kpr_lnr)  			as pasienter, /*unike løpenummer*/
-			sum(missing (kpr_lnr))				as uten_kpr_lnr, /*regninger uten løpenummer*/
-			count(*) 							as rader, /*antall regninger*/
-			count(distinct enkeltregning_lnr) 	as unik_enkeltregning, /*kontroll antall unike regninger*/
-			min(dato) 							as mininn format YYMMDD10., /*min dato*/
-			max(dato) 							as maxinn format YYMMDD10., /*max dato*/
-			min(aar) 							as minaar, 
-			max(aar) 							as maxaar
-	FROM &inn ;
-	QUIT;
-	
-	proc sql noprint;
-	  select unik_enkeltregning, uten_kpr_lnr
-		into :regning, :missing_kprid
-		from regning_&aar.;
-	quit;
-	
-	title color=darkblue height=5 '1a: Regningsfilen: sjekk mot utleveringsinfo';
-	proc print data=regning_&aar;run;
-	
-	%if &missing_kprid ne 0 %then %do;
-	/*se nærmere på radene som ikke har kpr_lnr*/
-	/*de blir slettet i tilretteleggingen*/
-	
-	data missing;
-	set &inn.;
-	where kpr_lnr eq .;
-	run;
-	
-	title color=red height=5 '1b: antall linjer uten kpr_lnr - blir slettet!!';
-	
-	proc freq data=missing;
-	  tables kommuneNr alder kjonn tjenestetype; 
-	run;
-	%end;
-	
-	
-	 proc datasets nolist; delete regning_&aar. ; run; 
-	
+	/* Get summary statistics directly into macro variables */
+    proc sql noprint;
+        select 
+            count(distinct kpr_lnr),
+            sum(missing(kpr_lnr)),
+            count(*),
+            count(distinct enkeltregning_lnr),
+            min(dato),
+            max(dato),
+            min(aar),
+            max(aar)
+        into 
+            :pasienter,
+            :uten_kpr_lnr,
+            :rader,
+            :unik_enkeltregning,
+            :mininn,
+            :maxinn,
+            :minaar,
+            :maxaar
+        from &inn;
+    quit;
+
+    title color=darkblue height=5 '1a: Regningsfilen: sjekk mot utleveringsinfo';
+
+    /* Print a summary table */
+    data regning_summary_&aar.;
+        aar = &aar;
+        pasienter = &pasienter;
+        rader = &rader;
+        unik_enkeltregning = &unik_enkeltregning;
+        uten_kpr_lnr = &uten_kpr_lnr;
+        mininn = &mininn;
+        maxinn = &maxinn;
+        minaar = &minaar;
+        maxaar = &maxaar;
+        format mininn maxinn yymmdd10.;
+    run;
+
+    proc print data=regning_summary_&aar.; run;
+
+    %if &uten_kpr_lnr ne 0 %then %do;
+        data missing_&aar.;
+            set &inn;
+            where kpr_lnr eq .;
+        run;
+
+        title color=red height=5 '1b: antall linjer uten kpr_lnr - blir slettet i tilrettelegging!!';
+        proc freq data=missing_&aar.;
+            tables kommuneNr alder kjonn tjenestetype;
+        run;
+    %end;
+
+    proc datasets nolist; delete regning_summary_&aar. missing_&aar.; run;
 	%mend;

@@ -1,31 +1,81 @@
 ﻿%macro kpr_tilrettelegging;
 
-    /* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
+/**********************************************************************************/
+/* Kontroller at alle nødvendige variabler er tilstede før tilrettelegging gjøres */
+/**********************************************************************************/
+
+/* Kontroll takstfilen */
+data _null_;
+        dset_t = open("&inn_takst");
+        vars_t = 'aar enkeltregning_lnr takstkode'; /*variabler som må være tilstede i filen*/ 
+        length missing_t $200;
+        do i = 1 to countw(vars_t, ' ');
+            varname_t = scan(vars_t, i, ' ');
+            vnum_t = varnum(dset_t, varname_t);
+            call symputx(cats(varname_t, '_t'), vnum_t);
+            if vnum_t = 0 then missing_t = catx(' ', missing_t, varname_t);
+        end;
+        call symputx('missing_vars_t', missing_t);
+    run;
+
+    /* Kontroll diagnosefilen */
     data _null_;
-    dset=open("&inn");
-    call symput ('aar_e',varnum(dset,'aar'));
-    call symput ('kpr_lnr',varnum(dset,'kpr_lnr'));
-    call symput ('enkeltregning_lnr',varnum(dset,'enkeltregning_lnr'));
-    call symput ('dato',varnum(dset,'dato'));
-    call symput ('kjonn',varnum(dset,'kjonn'));
-    call symput ('fodselsaar',varnum(dset,'fodselsaar'));
-    call symput ('kommuneNr',varnum(dset,'kommuneNr'));
-    call symput ('bydel',varnum(dset,'bydel'));
-    call symput ('tjenestetype',varnum(dset,'tjenestetype'));
+        dset_d = open("&inn_diag");
+        vars_d = 'aar enkeltregning_lnr diagnoseKode diagnoseTabell erHoveddiagnose'; /*variabler som må være tilstede i filen*/ 
+        length missing_d $200;
+        do i = 1 to countw(vars_d, ' ');
+            varname_d = scan(vars_d, i, ' ');
+            vnum_d = varnum(dset_d, varname_d);
+            call symputx(cats(varname_d, '_d'), vnum_d);
+            if vnum_d = 0 then missing_d = catx(' ', missing_d, varname_d);
+        end;
+        call symputx('missing_vars_d', missing_d);
     run;
 
-	data _null_;
-    dset_t=open("&inn_takst");
-    call symput ('aar_t',varnum(dset_t,'aar'));
-    call symput ('enkeltregning_lnr_t',varnum(dset_t,'enkeltregning_lnr'));
-    run;
-
+    /* Kontroll regningsfilen/hovedfilen */
     data _null_;
-    dset_d=open("&inn_diag");
-    call symput ('aar_d',varnum(dset_d,'aar'));
-    call symput ('enkeltregning_lnr_d',varnum(dset_d,'enkeltregning_lnr'));
+        dset = open("&inn");
+        vars = 'aar kpr_lnr enkeltregning_lnr dato kjonn alder fodselsaar kommuneNr bydel tjenestetype praksiskommune'; /*variabler som må være tilstede i filen*/ 
+        length missing $200;
+        do i = 1 to countw(vars, ' ');
+            varname = scan(vars, i, ' ');
+            vnum = varnum(dset, varname);
+            call symputx(varname, vnum);
+            if vnum = 0 then missing = catx(' ', missing, varname);
+        end;
+        call symputx('missing_vars', missing);
     run;
 
+/* Print warnings if any variables are missing */
+    %if "&missing_vars" ne "" %then %do;
+        title color=purple height=5 "MANGLER VARIABLE(R) I HOVEDFILEN: &missing_vars";
+        proc sql;
+            create table m (note char(50));
+            insert into m values ("Mangler variabler i hovedfilen: &missing_vars");
+            select * from m;
+        quit;
+    %end;
+
+    %if "&missing_vars_t" ne "" %then %do;
+        title color=purple height=5 "MANGLER VARIABLE(R) I TAKSTFILEN: &missing_vars_t";
+        proc sql;
+            create table m_t (note char(50));
+            insert into m_t values ("Mangler variabler i takstfilen: &missing_vars_t");
+            select * from m_t;
+        quit;
+    %end;
+
+    %if "&missing_vars_d" ne "" %then %do;
+        title color=purple height=5 "MANGLER VARIABLE(R) I DIAGNOSEFILEN: &missing_vars_d";
+        proc sql;
+            create table m_d (note char(50));
+            insert into m_d values ("Mangler variabler i diagnosefilen: &missing_vars_d");
+            select * from m_d;
+        quit;
+    %end;
+
+    /* Only continue if all required variables are present */
+    %if "&missing_vars" = "" and "&missing_vars_t" = "" and "&missing_vars_d" = "" %then %do;
 
 /*lager makrovariabel som angir årstall - brukes til navning av data senere*/
 data _null_;
@@ -60,10 +110,9 @@ run;
 /* ----------- */
 /* Kontakttype */
 /* ----------- */
-/* We used to receive kontakttype in the file up to 2021, now have to create this variable ourselves */
-%include "&filbane/tilrettelegging/kpr/2_tilrettelegge/kpr_kontakttype.sas";
-%kpr_kontakttype	(takst_fil=&inn_takst, 	regning_fil=&sektor);
-
+/* TJ 3. oktober 2025: Kontakttype utleveres i data, derfor ikke behov for å lage variabel selv. */
+/* %include "&filbane/tilrettelegging/kpr/2_tilrettelegge/kpr_kontakttype.sas";
+%kpr_kontakttype	(takst_fil=&inn_takst, 	regning_fil=&sektor); */
 
 /*--------------*/
 /* konvertering */
@@ -74,11 +123,12 @@ data &sektor;
   set &sektor;
 
   pid_kpr=KPR_lnr+0;
-  bydel_kpr = bydel + 0;
-  kontakttype_kpr = kontakttypeId;
+  bydel_kpr = bydel+0;
+  kontakttype_kpr = kontakttype+0;
+
   if kontakttype_kpr eq -1 then kontakttype_kpr = 0; 
   refusjonutbetalt = 'refusjonutbetaltbeløp'n + 0;
-  drop KPR_lnr bydel /*kontakttypenavn*/ kontakttypeId 'refusjonutbetaltbeløp'n;
+  drop KPR_lnr bydel kontakttype 'refusjonutbetaltbeløp'n;
 run;
 
 /*-----------------------*/
@@ -117,7 +167,7 @@ if komnr = 301  and bydel_tmp not in (01:17) then bydel_tmp = 0;
   else bydel=.;
 
   /*drop variabler fra tilretteleggingen som ikke skal være med videre*/
-  drop kommuneNr kommuneNr2 komnr_inn nr bydel_kpr bydel_tmp;
+  drop kommuneNr kommuneNr2 kommunenrPB bydel_kpr bydel_tmp;
 run;
 
 
@@ -135,7 +185,7 @@ run;
 data &sektor;
   set &sektor;
 
-rename dato = inndato klokkeslett=inntid;
+rename dato=inndato klokkeslett=inntid;
 
 if kjonn eq 1 then ermann = 1; /*menn*/
 if kjonn eq 2 then ermann = 0; /*kvinner*/
@@ -143,25 +193,33 @@ if kjonn eq . then ermann = .; /*missing*/
 
 if tjenestetype eq "Fastlege"                       then tjenestetype_kpr = 1; 
 if tjenestetype eq "Legevakt"                       then tjenestetype_kpr = 2; 
-
 if tjenestetype eq "Fysioterapeut privat"           then tjenestetype_kpr = 3; 
 if tjenestetype eq "Fysioterapeut kommunal"         then tjenestetype_kpr = 4; 
 if tjenestetype eq "Kiropraktor"                    then tjenestetype_kpr = 5; 
-
 if tjenestetype eq "Tannlege"                       then tjenestetype_kpr = 6; 
 if tjenestetype eq "Kjeveortoped"                   then tjenestetype_kpr = 7; 
 if tjenestetype eq "Tannpleier"                     then tjenestetype_kpr = 8; 
-
 if tjenestetype eq "Helsestasjon"                   then tjenestetype_kpr = 9; 
 if tjenestetype eq "Logoped"                        then tjenestetype_kpr = 10; 
 if tjenestetype eq "Ridefysioterapi"                then tjenestetype_kpr = 11; 
 if tjenestetype eq "Audiopedagog"                   then tjenestetype_kpr = 12; 
 if tjenestetype eq "Ortoptist"                      then tjenestetype_kpr = 13; 
-
 if tjenestetype eq "Ukjent" 
     or tjenestetype eq " "                          then tjenestetype_kpr = 14; 
 
-drop kjonn kjonn_navn kjonnNavn kjonn_mot alder_mot kommuneNr_mot bydel_mot tjenestetype;
+/*ta vare på rapportert alder*/
+alder_mot = alder;
+/*null ut alder*/
+alder = .;
+/* hvis oppgitt fødselsår beregnes alder ut fra det */
+if fodselsaar ne . then do;
+alder_ny = aar - fodselsaar;
+end;
+/* hvis fødselsår mangler så brukes den rapporterte alderen hvis gyldig verdi */
+else if fodselsaar eq . and alder_mot ge 0 then alder_ny = alder_mot;
+/*alder_ny gjøres om til alder*/
+alder = alder_ny;
+drop kjonn kjonnK kjonnNavn tjenestetype alder_ny;
 run;
 
 /*----------*/
@@ -169,30 +227,37 @@ run;
 /*----------*/
 /*hente hoveddiagnose fra diagnose-fil, + angi ant bidiagnoser*/
 
-/* hente inn hoveddiagnose fra diagnosefilen */
+/* splitte filen i hoved- og bidiagnoser */
+data hoveddiag bidiag;
+  set &inn_diag.;
+  if erHoveddiagnose eq 1 then output hoveddiag;
+  else output bidiag;
+run;
+
+/* Step 2: Join and create kodeverk_kpr */
 proc sql;
-	create table tmp_utdata as
-	select a.*, b.diagnosekode as hdiag_kpr, 
-					case 	when b.diagnosetabell eq "ICPC-2" 						then 1 
-							when b.diagnosetabell eq "ICPC-2B" 						then 2 
-					 		when b.diagnosetabell eq "ICD-10" 						then 3
-							when b.diagnosetabell eq "ICD-DA-3"  					then 4
-					 		when b.diagnosetabell eq "Akser i BUP-klassifikasjon"  	then 5
-							when b.diagnosetabell eq " "                            then .					
-					end as kodeverk_kpr
-	from &sektor a
-	left join &inn_diag b
-	on a.enkeltregning_lnr=b.enkeltregning_lnr 
-		and b.erhoveddiagnose eq 1; /*kun ta med hoveddiagnose*/
+    create table tmp_utdata as
+    select a.*,
+           b.diagnosekode as hdiag_kpr,
+           case
+               when strip(upcase(b.diagnosetabell)) = "ICPC-2" then 1
+               when strip(upcase(b.diagnosetabell)) = "ICPC-2B" then 2
+               when strip(upcase(b.diagnosetabell)) = "ICD-10" then 3
+               when strip(upcase(b.diagnosetabell)) = "ICD-DA-3" then 4
+               when strip(upcase(b.diagnosetabell)) = "AKSER I BUP-KLASSIFIKASJON" then 5
+               when strip(b.diagnosetabell) = "" then .
+           end as kodeverk_kpr
+    from &sektor a
+    left join hoveddiag b
+      on a.enkeltregning_lnr = b.enkeltregning_lnr;
 quit;
 
 /* Telle antall rader med bidiagnose til det enkelte enkeltregning_lnr */
 proc sql;
 	create table ant_bdiag as
 	select enkeltregning_lnr, count(*) as ant_b
-	from &inn_diag 
-	where erhoveddiagnose ne 1 /*ikke telle raden som er hoveddiagnose*/
-	group by enkeltregning_lnr;
+	from bidiag 
+	group by 1;
 quit;
 
 /* koble på antall bidiagnoser på fil som tilrettelegges */
@@ -206,14 +271,13 @@ quit;
 
 /* slette tmp-data */
 proc datasets nolist;
-delete tmp_utdata ant_bdiag;
+delete tmp_utdata ant_bdiag hoveddiag bidiag alder_diff_data;
 run;
 
 /*-------*/
 /* ICPC2 */
 /*-------*/
 /* Lage egen variabel som heter icpc2_hdiag, icpc2_kap, icpc2_type*/
-
 %include "&filbane/tilrettelegging/kpr/2_tilrettelegge/kpr_icpc2.sas";
 %kpr_icpc2			(inndata=&sektor, 	utdata=&sektor);
 
@@ -280,7 +344,7 @@ data &sektor;
 	if diagnosetabell eq "ICD-10"                          then kodeverk_kpr = 3;
 	if diagnosetabell eq "ICD-DA-3"                        then kodeverk_kpr = 4;
 	if diagnosetabell eq "Akser i BUP-klassifikasjon"      then kodeverk_kpr = 5;
-	if diagnosetabell eq " "                               then kodeverk_kpr = .;
+	if diagnosetabell eq "ICD-DA-2"                        then kodeverk_kpr = 6;
 	drop diagnosetabell;
 run;
 
@@ -311,7 +375,6 @@ run;
 proc datasets nolist;
 	delete &sektor &sektor._copy;
 run;
-
 
 
 
@@ -360,6 +423,8 @@ run;
 proc datasets nolist;
 	delete &sektor &sektor._copy slette_&aar.;
 run;
+
+%end;
 
 %mend kpr_tilrettelegging;
 
