@@ -14,6 +14,7 @@
 - [makroer/Hyppigste_petter.sas](Hyppigste_petter)
 - [makroer/CoMorbIndex.sas](CoMorbIndex)
 - Filen andelsfig_0_100.sas er ikke dokumentert.
+- [makroer/data_type_variable.sas](data_type_variable)
 - [makroer/ratefig_tredeltSoyle.sas](ratefig_tredeltSoyle)
 - [makroer/assert.sas](assert)
 - [makroer/Multippel_test.sas](Multippel_test)
