@@ -84,6 +84,7 @@
 - Filen tilrettelegging.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/splitte.sas](splitte)
 - Filen tilstandskoder.sas er ikke dokumentert.
+- [tilrettelegging/npr/2_tilrettelegging/type_variable.sas](type_variable)
 - Filen nc_koder.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/icd10.sas](icd10)
 - [tilrettelegging/npr/2_tilrettelegging/behandler.sas](behandler)
