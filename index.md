@@ -32,6 +32,7 @@
 - [makroer/flerniva_fixed_2niva.sas](flerniva_fixed_2niva)
 - [makroer/Hyppigste.sas](Hyppigste)
 - [makroer/VarFraParvus.sas](VarFraParvus)
+- [makroer/antall_med_diagnose.sas](antall_med_diagnose)
 - [makroer/assert_member.sas](assert_member)
 - [makroer/kodematch.sas](kodematch)
 - [makroer/alders_oppslag.sas](alders_oppslag)
