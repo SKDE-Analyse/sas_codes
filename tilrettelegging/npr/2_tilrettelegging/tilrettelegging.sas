@@ -326,6 +326,13 @@ run;
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/length_label.sas";
 %length_label(inndata=tmp_data)
 
+/*----------------------------------*/
+/*Endre type og lengde av variablene*/
+/*----------------------------------*/
+%include "&filbane/tilrettelegging/npr/2_tilrettelegging/type_variable.sas";
+%data_type(data=tmp_data,out=tmp_data)
+
+
 /* --------------------- */
 /* Drop variabel døddato */
 /* --------------------- */
