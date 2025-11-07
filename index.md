@@ -37,7 +37,6 @@
 - [makroer/assert_member.sas](assert_member)
 - [makroer/kodematch.sas](kodematch)
 - [makroer/alders_oppslag.sas](alders_oppslag)
-- Filen fremskrive.sas er ikke dokumentert.
 - [makroer/fremskrive_boomr.sas](fremskrive_boomr)
 - [makroer/rater_felles.sas](rater_felles)
 - [makroer/reinnleggelser.sas](reinnleggelser)
