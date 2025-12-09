@@ -110,25 +110,21 @@ run;
 /* ----------- */
 /* Kontakttype */
 /* ----------- */
-/* TJ 3. oktober 2025: Kontakttype utleveres i data, derfor ikke behov for å lage variabel selv. */
-/* %include "&filbane/tilrettelegging/kpr/2_tilrettelegge/kpr_kontakttype.sas";
-%kpr_kontakttype	(takst_fil=&inn_takst, 	regning_fil=&sektor); */
+%include "&filbane/tilrettelegging/kpr/2_tilrettelegge/kpr_kontakttype.sas";
+%kpr_kontakttype	(takst_fil=&inn_takst, 	regning_fil=&sektor);
 
 /*--------------*/
 /* konvertering */
 /*--------------*/
 
-/* lager nye numeriske variabler til kpr_lnr, bydel, kontakttype, refusjonutbetalt */
+/* lager nye numeriske variabler til kpr_lnr, bydel, refusjonutbetalt */
 data &sektor;
   set &sektor;
 
   pid_kpr=KPR_lnr+0;
   bydel_kpr = bydel+0;
-  kontakttype_kpr = kontakttype+0;
-
-  if kontakttype_kpr eq -1 then kontakttype_kpr = 0; 
   refusjonutbetalt = 'refusjonutbetaltbeløp'n + 0;
-  drop KPR_lnr bydel kontakttype 'refusjonutbetaltbeløp'n;
+  drop KPR_lnr bydel 'refusjonutbetaltbeløp'n;
 run;
 
 /*-----------------------*/
