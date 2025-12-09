@@ -35,7 +35,7 @@ data _null_;
     /* Kontroll regningsfilen/hovedfilen */
     data _null_;
         dset = open("&inn");
-        vars = 'aar kpr_lnr enkeltregning_lnr dato kjonn alder fodselsaar kommuneNr bydel tjenestetype praksiskommune'; /*variabler som må være tilstede i filen*/ 
+        vars = 'aar kpr_lnr enkeltregning_lnr dato kjonn alder fodselsaar kommuneNr bydel kommunenrPB tjenestetype praksiskommune'; /*variabler som må være tilstede i filen*/ 
         length missing $200;
         do i = 1 to countw(vars, ' ');
             varname = scan(vars, i, ' ');
@@ -132,6 +132,24 @@ run;
 /*-----------------------*/
 
 /* lager 'kommunenr2', og hvor ugyldige komnr får missing*/
+/* TJ 09/12-2025:
+ny variabel (kommunenrPB) utleveres som i noen tilfeller har informasjon om kommunenr når kommuneNr mangler info.
+*/
+
+data &sektor.;
+  set &sektor.;
+*lag ny variabel;
+komnr_fix=.;
+*behold mottatt kommuneNR;
+kommuneNr_mot=kommuneNR;
+*fix;
+if kommuneNr eq -1 then komnr_fix=kommunenrPB;
+else komnr_fix=kommuneNr;
+*overskrive kommuneNr med komnr_fix;
+kommuneNr=komnr_fix;
+drop komnr_fix;
+run;
+
 proc sql;
       create table &sektor as
       select *, case when kommuneNr in (select start from HNREF.fmtfil_komnr) then kommuneNr end as kommuneNr2
@@ -163,7 +181,7 @@ if komnr = 301  and bydel_tmp not in (01:17) then bydel_tmp = 0;
   else bydel=.;
 
   /*drop variabler fra tilretteleggingen som ikke skal være med videre*/
-  drop kommuneNr kommuneNr2 kommunenrPB bydel_kpr bydel_tmp;
+  drop kommuneNr kommuneNr2 bydel_kpr bydel_tmp;
 run;
 
 
