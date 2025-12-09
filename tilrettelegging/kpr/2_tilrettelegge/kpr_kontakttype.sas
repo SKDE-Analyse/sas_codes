@@ -21,7 +21,7 @@ if lowcase(takstKode) in ('2ad','2ae','2ak','2aek','2ed','2fk','2af',
 else if lowcase(takstKode) in ('11ad','11ak',
                       '086a','086b') then nykontakttype=4;/*sykebesøk, beløp 500-3000*/
 
-else if lowcase(takstKode) in ('1ad', '1ak', '1bd', '1be', '1bk', '1e', '1g', '1h', '1i', '701a', '612a', '612b', '618', 'v1'
+else if lowcase(takstKode) in ('1ad', '1ak', '1bd', '1be', '1bk', '1e', '1g', '1h', '1i', '701a', '612a', '612b', '618', 'v1',
                       '070','071a') then nykontakttype=2;/*enkel kontakt, beløp <100-300*/
 
 *else if lowcase(takstKode) in ('1bd','1bk','1be','1g') then kontakttype=2; /* telefonkontakt */
