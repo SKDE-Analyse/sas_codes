@@ -202,7 +202,10 @@ data &sektor;
 rename dato=inndato klokkeslett=inntid;
 
 /* TJ 10/12-2025: FHI utleverer variabel kjonnK som er en fix av rader som utleveres med kjonn=-1 */
-if kjonn eq -1 and kjonnK in (1,2) then kjonn = kjonnK;
+if kjonn eq -1 then do;
+  if kjonnK in (1,2) then kjonn = kjonnK;
+  else kjonn = .;
+end;
 /* lag variabel ermann */
 if kjonn eq 1 then ermann = 1; /*menn*/
 if kjonn eq 2 then ermann = 0; /*kvinner*/
