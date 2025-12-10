@@ -35,7 +35,7 @@ data _null_;
     /* Kontroll regningsfilen/hovedfilen */
     data _null_;
         dset = open("&inn");
-        vars = 'aar kpr_lnr enkeltregning_lnr dato kjonn alder fodselsaar kommuneNr bydel kommunenrPB tjenestetype praksiskommune'; /*variabler som må være tilstede i filen*/ 
+        vars = 'aar kpr_lnr enkeltregning_lnr dato kjonn kjonnK alder fodselsaar kommuneNr bydel kommunenrPB tjenestetype praksiskommune'; /*variabler som må være tilstede i filen*/ 
         length missing $200;
         do i = 1 to countw(vars, ' ');
             varname = scan(vars, i, ' ');
@@ -201,6 +201,12 @@ data &sektor;
 
 rename dato=inndato klokkeslett=inntid;
 
+/* TJ 10/12-2025: FHI utleverer variabel kjonnK som er en fix av rader som utleveres med kjonn=-1 */
+if kjonn eq -1 then do;
+  if kjonnK in (1,2) then kjonn = kjonnK;
+  else kjonn = .;
+end;
+/* lag variabel ermann */
 if kjonn eq 1 then ermann = 1; /*menn*/
 if kjonn eq 2 then ermann = 0; /*kvinner*/
 if kjonn eq . then ermann = .; /*missing*/
