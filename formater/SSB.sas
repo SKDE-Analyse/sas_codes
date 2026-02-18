@@ -46,6 +46,9 @@ value nus2_9fag_fmt
 7='Primærnæringsfag'
 8='Samferdsels- og sikkerhetsfag og andre servicefag'
 9='Uoppgitt fagfelt';
+/* TJ: NB: sivilstatus og sivilstand er to ulike definisjoner.
+SSB sin nettside: https://www.ssb.no/a/metadata/codelist/datadok/1702309/no 
+Sivilstand_fmt (lenger ned) har annen inndeling.*/
 value sivilstatus_fmt
 1='Ugift'	
 2='Gift'	
@@ -281,11 +284,11 @@ Value KOSTRA_gruppe
 15='15 Oslo kommune'
 16='16 De ti kommunene med høyest frie disponible inntekter per innbygger';
 /*Type flytting (rec_type)*/
-value flytting
-1 = 'flytting mellom kommuner'
-2 = 'utvandring'
-3 = 'innvandring'
-4 = 'flytting innen kommunen';
+value flytting_fmt
+1 = 'Flytting mellom kommuner'
+2 = 'Utvandring'
+3 = 'Innvandring'
+4 = 'Flytting innen kommunen';
 
 /* Egenprodusert for befolkningsfremskrivingsdata */
 value alternativ
@@ -293,4 +296,63 @@ value alternativ
 0 = "Hovedalternativet (MMMM)"
 1 = "Høy nasjonal vekst (HHMH)";
 
+value famtype_fmt
+0='Uoppgitt'
+1='Enpersonfamilie'
+2='Ektepar uten barn'
+3='Ektepar med barn'
+4='Mor med barn'
+5='Far med barn'
+6='Samboerpar med felles barn'
+7='Partnerskap uten/med barn';
+value parstatus_fmt
+0='Ikke i familie med par (enslig/barn i familie med enslig)'	
+1='Ektefelle ulikekjønnet par'
+2='Ektefelle likekjønnet par/registrert partner'	
+3='Samboer med felles barn'	
+5='Samboer uten felles barn, motsatt kjønn - uendret siden forrige årgang/(FOB2001)'	
+6='Samboer uten felles barn, motsatt kjønn - ny siden forrige årgang - samme flyttedato'	
+7='Samboer uten felles barn, motsatt kjønn - ny siden forrige årgang - ulik flyttedato'	
+8='Barn i familie med par';
+value arbeidsyrke_fmt
+0='Militære yrker (ikke sivile stillinger i forsvaret)'
+1='Administrative ledere og politikere'
+2='Akademiske yrker'
+3='Høyskoleyrker'
+4='Kontor- og serviceyrker'
+5='Salgs-, service- og omsorgsyker'
+6='Jordbruk, skogbruk og fiske'
+7='Håndverkere og lignende'
+8='Prosess- og maskinoperatører, transportarbeidere mv.'
+9='Yrker uten krav til utdanning'
+;
+/*Det første sifferet i yrkeskoden sier også noe om kompetansenivå: 
+2: Kompetanse tilsvarende minst 4-års utdanning fra universitet eller høyskole.
+3: Kompetanse tilsvarende 1-3 års utdanning fra universitet eller høyskole.
+4 - 8: Kompetanse tilsvarende videregående skole, altså 11-14 års skolegang.
+0, 1 og 9: Har ikke bestemte kompetansenivå*/
+value arbeidsmarkedstatus_fmt
+0='Utenfor arbeidsstyrken'	
+1='Lønnstaker'
+2='Selvstendig'	
+3='Helt ledig'	
+4='På arbeidsmarkedstiltak';
+value sivilstand_fmt
+1='Ugift'
+2='Gift'
+3='Enke/enkemann'
+4='Skilt'
+5='Separert'
+6='Registrert partner'
+7='Separert partner'
+8='Skilt partner'
+9='Gjenlevende partner';
+value $innvandringskat_fmt
+/*Variabelen viser ulike kombinasjoner av eget eller foreldres fødeland.*/
+'A'='Født i Norge med to norskfødte foreldre'
+'B'='Innvandrere'
+'C'='Norskfødee med innvandrerforeldre'
+'E'='Utenlandsfødte med en norskfødt forelder'
+'F'='Norskfødte med en utenlandsfødt forelder'
+'G'='Utenlandsfødte med to norskfødte foreldre';
 run;
