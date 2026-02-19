@@ -491,6 +491,19 @@ value NPRID_REG
      28 = 'Helsesykepleier'  /* ny 2020 */
      29 = 'Stråleterapeut'  /* ny 2020 */ 
      30 = 'Tannpleier' /* fra 2020 */
+     31 = 'Medisinstudent med lisens' /*GCL 06.02.2026: Gjelder fra 2023 */
+     32 = 'Ambulansearbeider'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     33 = 'Paramedisiner'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     34 = 'Helsefagarbeider'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     35 = 'Hjelpepleier'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     36 = 'Omsorgsarbeider'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     37 = 'Tanntekniker'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     38 = 'Tannhelsesekretær'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     39 = 'Helsesekretær'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     40 = 'Apotektekniker'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     41 = 'Manuellterapeut'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     42 = 'Naprapat'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     43 = 'Osteopat'  /*GCL 06.02.2026: Gjelder fra 2024 */
      ;
    
    value GYLDIG /* Ikke oppgitt i utlevering 2018 */

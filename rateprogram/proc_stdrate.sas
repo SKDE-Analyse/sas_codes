@@ -1,7 +1,7 @@
 ﻿%macro proc_stdrate(
     dsn=, /*Grunnlagsdatsettet det skal beregnes rater fra*/
     rate_var=, /*Ratevariabel, kan være aggregert (verdier større enn en) eller dikotom (0,1)*/
-    bo=bohf, /*BoHf, BoRHF eller BoShHN, BoHf er default*/
+    bo=bohf, /*BoHf, BoRHF eller BoSh, BoHf er default*/
 	alder_min=0, /*Laveste alder i utvalget, 0 er default*/
 	alder_max=105, /*Høyeste alder i utvalget, 105 er default*/
     rmult=1000, /*Ratemultiplikator, dvs rate pr, 1000 er default*/
@@ -143,9 +143,9 @@ else if alder in (95:105) then nyalder=20;
     where &rate_var ge 1 and borhf in (1:4) and aar in (&start:&slutt);
     format borhf borhf_fmt.;
 %end;
-%if &bo=boshhn %then %do;
-    where &rate_var ge 1 and boshhn in (1:11) and aar in (&start:&slutt);
-    format boshhn boshhn_fmt.;
+%if &bo=bosh %then %do;
+    where &rate_var ge 1 and bosh in (11:233) and aar in (&start:&slutt);
+    format bosh bosh_fmt.;
 %end; 
 format nyalder nyalder_fmt.;   
 run;
@@ -209,16 +209,16 @@ run;
 data xyz_pop;
 set xyz_pop;
 %if &bo=bohf %then %do;
-    drop komnr bydel boshhn borhf fylke;
+    drop komnr bydel bosh borhf fylke;
     format bohf bohf_fmt.;
 %end;
 %if &bo=borhf %then %do;
-    drop komnr bydel boshhn bohf fylke;
+    drop komnr bydel bosh bohf fylke;
     format borhf borhf_fmt.;
 %end;
-%if &bo=boshhn %then %do;
+%if &bo=bosh %then %do;
     drop komnr bydel bohf borhf fylke;
-    format boshhn boshhn_fmt.;
+    format bosh bosh_fmt.;
 %end;
 
 if alder in (0:4) then nyalder=1;
