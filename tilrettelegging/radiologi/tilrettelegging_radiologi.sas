@@ -130,7 +130,7 @@ by pid inndato;
 run;
 
 /* lagre tilrettelagt datasett */
-data skde20.ncrp_&aar._T23;
+data skde20.ncrp_&aar._v2;
 set radiologi_&aar;
 run;
 %mend tilrettelegging_radiologi;
