@@ -504,6 +504,7 @@ value NPRID_REG
      41 = 'Manuellterapeut'  /*GCL 06.02.2026: Gjelder fra 2024 */
      42 = 'Naprapat'  /*GCL 06.02.2026: Gjelder fra 2024 */
      43 = 'Osteopat'  /*GCL 06.02.2026: Gjelder fra 2024 */
+     99 = 'Uoppgitt'  /*GCL 23.02.2026 */
      ;
    
    value GYLDIG /* Ikke oppgitt i utlevering 2018 */
