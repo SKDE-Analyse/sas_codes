@@ -1,5 +1,7 @@
 ﻿/* kontroll av radiologi-data bruker noen av de samme makroene fra kontroll av NPR-data */
-
+/* This one is a bit older.  It was used for the radiologi data we got for the atlas in 2023/2024
+   For the newer data we got after 2024 (LAB_RAD_PAT) use kontroll_ncrp.sas*/
+   
 %macro kontroll_radiologi(inndata=, mottatt_aar=);
 
 /* Lage makrovariabler som angir om variabel er tilstede i data som sendes inn */
