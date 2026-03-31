@@ -21,6 +21,8 @@ Makro for å tilrettelegge lab-data (LAB_PAT_RAD_OFF* og LAB_PAT_RAD_PRIV*).
 
 %macro tilrettelegging_lab(inndata=, aar=);
 
+%include "&filbane/tilrettelegging/radiologi/bydel_NAV_til_HDir.sas";
+
 data &inndata.;
   set &inndata.;
 
@@ -39,25 +41,35 @@ data &inndata.;
   inndato = dato;
   format inndato eurdfdd10.;
 
- /*hent ut to siste siffer for å lage bydel slik vi vanligvis mottar den*/
- /* dette for å kunne bruke makroer som krever bydelsnr som to siffer */
+	 /* use tknr for bydel, six digits
+	    use tknr for komnr also, but backfill with pasient_kommune_nr if missing info in tknr
+	 */
+	
+	 %bydel_NAV_til_HDir; /* omkode kommunenr fra NAV til HDdir - likende kode som omkoding_komnr_bydel.sas */
+
  if tknr>10000 /*dvs: har bydel; dvs: kommuner (301,4601,5001,1103)*/ then do; 
+	komnr=floor(tknr/10**2);
 	bydel=tknr;
 	if mod(tknr,10**2) eq 99 then bydel = .;
-	komnr2=floor(tknr/10**2);
-	format komnr komnr2 bydel best6.;
-  end;
-  else komnr2=tknr;
+ end;
+ else komnr=tknr;
 
-  if komnr=. or komnr=0 or komnr ge 9000 then komnr=komnr2;
-  if komnr ne komnr2 then bydel=.;
+	if komnr=. or komnr=0 or komnr ge 9000 
+  then komnr=pasient_kommune_nr;
+
+	format komnr  bydel best6.;
 
 run;
 
-/* fornye komnr/bydel */
-/* bydelsnr er allerede omkodet -> trenger ikke kjøre makro bydeler etter fornying */
+/* fornye komnr */
 %include "&filbane/makroer/forny_komnr.sas";
 %forny_komnr(inndata=&inndata., kommune_nr=komnr);
+
+/* forny bydel : for those that have gotten new komnr, the komnr part of the bydel should also be changed */
+data &inndata.;
+set &inndata.;
+  if floor(bydel/10**2) ne komnr then bydel=komnr*100+mod(bydel,10**2);
+run;
 
 /* boomraader */
 %include "&filbane/makroer/boomraader.sas";
@@ -86,7 +98,9 @@ data &inndata. (drop=r);
    r=flags.find(); 
 run;
 
+title "&aar.";
 proc freq data=&inndata.;
+  format _numeric_ best20.;
   tables lab_fag / missing;
 run;
 
