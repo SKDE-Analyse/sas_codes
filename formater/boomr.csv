@@ -1,4 +1,5 @@
 komnr;komnr_navn;bydel;bydel_navn;borhf;borhf_navn;bohf;bohf_navn;bosh;bosh_navn;bodps;bodps_navn;kommentar
+;;;;;;;;;;;;10. april 2026: oppdatert lokalsykehus Helgeland og bohf for OUS/AHUS.
 5605;5605 Sør-Varanger;;;1;Helse Nord RHF;1;Finnmark;11;Kirkenes;1;Øst-Finnmark;
 5607;5607 Vadsø;;;1;Helse Nord RHF;1;Finnmark;11;Kirkenes;1;Øst-Finnmark;
 5628;5628 Tana;;;1;Helse Nord RHF;1;Finnmark;11;Kirkenes;1;Øst-Finnmark;
@@ -61,13 +62,11 @@ komnr;komnr_navn;bydel;bydel_navn;borhf;borhf_navn;bohf;bohf_navn;bosh;bosh_navn
 1868;1868 Øksnes;;;1;Helse Nord RHF;3;Nordland;33;Vesterålen;9;Vesterålen;
 1870;1870 Sortland;;;1;Helse Nord RHF;3;Nordland;33;Vesterålen;9;Vesterålen;
 1871;1871 Andøy;;;1;Helse Nord RHF;3;Nordland;33;Vesterålen;9;Vesterålen;
+1824;1824 Vefsn;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;12;Mo i Rana;1824 Vefsn flyttes fra Mosjøen til Mo i Rana lokalsykehusområde.
 1828;1828 Nesna;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;12;Mo i Rana;
 1832;1832 Hemnes;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;12;Mo i Rana;
 1833;1833 Rana;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;12;Mo i Rana;
 1836;1836 Rødøy;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;12;Mo i Rana;
-1824;1824 Vefsn;;;1;Helse Nord RHF;4;Helgeland;42;Mosjøen;13;Mosjøen;
-1825;1825 Grane;;;1;Helse Nord RHF;4;Helgeland;42;Mosjøen;13;Mosjøen;
-1826;1826 Hattfjelldal;;;1;Helse Nord RHF;4;Helgeland;42;Mosjøen;13;Mosjøen;
 1811;1811 Bindal;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
 1812;1812 Sømna;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
 1813;1813 Brønnøy;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
@@ -76,6 +75,8 @@ komnr;komnr_navn;bydel;bydel_navn;borhf;borhf_navn;bohf;bohf_navn;bosh;bosh_navn
 1818;1818 Herøy (Nordland);;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
 1820;1820 Alstahaug;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
 1822;1822 Leirfjord;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
+1825;1825 Grane;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;1825 Grane flyttes fra Mosjøen til Sandnessjøen lokalsykehusområde.
+1826;1826 Hattfjelldal;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;1826 Hattfjelldal flyttes fra Mosjøen til Sandnessjøen lokalsykehusområde.
 1827;1827 Dønna;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
 1834;1834 Lurøy;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;GCL 9/7-2025. Tidligere koblet til Rana av SKDE. Lurøy er todelt. Flest bosatte sogner til Sandnessjøen. SSB deler basert på grunnkretser.
 1835;1835 Træna;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
@@ -249,7 +250,6 @@ komnr;komnr_navn;bydel;bydel_navn;borhf;borhf_navn;bohf;bohf_navn;bosh;bosh_navn
 3216;3216 Vestby;;;4;Helse Sør-Øst RHF;14;Østfold;141;Østfold;;;1.jan.2021: Sykehuset Østfold ble i 2018 lokalsykehus for 211/3019 Vestby. Vestby med ca 17800 innbyggere var tidligere i opptaksområdet til Akershus (bohf=15).
 301;0301 Oslo kommune;30110;10 Grorud;4;Helse Sør-Øst RHF;15;Akershus;151;Akershus;;;
 301;0301 Oslo kommune;30111;11 Stovner;4;Helse Sør-Øst RHF;15;Akershus;151;Akershus;;;
-301;0301 Oslo kommune;30112;12 Alna;4;Helse Sør-Øst RHF;15;Akershus;151;Akershus;;;
 3205;3205 Lillestrøm;;;4;Helse Sør-Øst RHF;15;Akershus;151;Akershus;;;
 3207;3207 Nordre Follo;;;4;Helse Sør-Øst RHF;15;Akershus;151;Akershus;;;
 3209;3209 Ullensaker;;;4;Helse Sør-Øst RHF;15;Akershus;151;Akershus;;;
@@ -274,6 +274,7 @@ komnr;komnr_navn;bydel;bydel_navn;borhf;borhf_navn;bohf;bohf_navn;bosh;bosh_navn
 301;0301 Oslo kommune;30103;03 Sagene;4;Helse Sør-Øst RHF;16;OUS;161;Oslo universitetssykehus;;;
 301;0301 Oslo kommune;30108;08 Nordre Aker;4;Helse Sør-Øst RHF;16;OUS;161;Oslo universitetssykehus;;;
 301;0301 Oslo kommune;30109;09 Bjerke;4;Helse Sør-Øst RHF;16;OUS;161;Oslo universitetssykehus;;;
+301;0301 Oslo kommune;30112;12 Alna;4;Helse Sør-Øst RHF;16;OUS;161;Oslo universitetssykehus;;;Fra januar 2026 flyttes bydel 30112 Alna til opptaksområdet OUS
 301;0301 Oslo kommune;30113;13 Østensjø;4;Helse Sør-Øst RHF;16;OUS;161;Oslo universitetssykehus;;;
 301;0301 Oslo kommune;30114;14 Nordstrand;4;Helse Sør-Øst RHF;16;OUS;161;Oslo universitetssykehus;;;
 301;0301 Oslo kommune;30115;15 Søndre Nordstrand;4;Helse Sør-Øst RHF;16;OUS;161;Oslo universitetssykehus;;;
