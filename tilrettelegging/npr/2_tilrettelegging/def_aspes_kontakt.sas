@@ -98,11 +98,11 @@ Data &utdata;
 
 		else do;
 /* new code added 10.04.2021 , based on normaltariffen 2020-2021 */
-IF Normaltariff{i} in ('3bd','3c','12bd','12cd','107c','157','207c','217d','254','255a','255b','258','510a','720','722','731a','734a','741','743b','744') or
+IF Normaltariff{i} in ('3bd','3c','3sf','3ss','12bd','12cd','107c','157','207c','217d','254','255a','255b','258','510a','720','722','731a','734a','741','743b','744') or
    SUBSTR(Normaltariff{i},1,3) in ('4a1','4b1','4c1','4c2','4da','4db') or 
    SUBSTR(Normaltariff{i},1,2) in ('4e') 
 then kontakt_def= 4;
-
+/* GCL 26.03.2026 Lagt til 3sf og 3ss. */ 
 
 
 	/*
@@ -144,41 +144,43 @@ then kontakt_def= 4;
 	E - Gastroenterologi.
 	*/
 		IF SUBSTR(Normaltariff{i},1,2) in ('11') and SUBSTR(Normaltariff{i},3,2) in 
-		('2a','2b','4a','4c','5a','5b','6') then kontakt_def= 4;
+		('2a','2b','4a','4c','5a','5b','5c','5d','6') then kontakt_def= 4;
 		ELSE IF Normaltariff{i} in ('120'/*,'121a'*/) then kontakt_def= 4;
-	 /*Utgår: 121a Karbohydratbelastning. En takst som også kan tas av alle fastleger. */
+	 /* Utgår: 121a Karbohydratbelastning. En takst som også kan tas av alle fastleger. */
+	 /* GCL 26.03.2026 Lagt til 115c og 115d. */ 
 
 	/*
 	E -  Indremedisin.
 	*/
 		IF SUBSTR(Normaltariff{i},1,2) in ('12') and SUBSTR(Normaltariff{i},3,2) in 
-		('4','5a','5b','6','7a','7b','7c','7d',/*'8a',*/'8c','9a','9c','9d','9e'/*,'9f','9g'*/,'9h','9i') then kontakt_def= 4;
-	/*Tillegg av :126 Intravenøs cytostatika, 129h Pacemakerkontroll, 129i EKKO/Doppler*/
-	/*Utgår: 128a, 129f og 129g,- takster som også kan tas av alle fastleger. */
-
+		('4','5a','5b','6','7a','7b','7c','7d',/*'8a',*/'8c','9a','9c','9d','9e'/*,'9f','9g'*/,'9h','9i','9j') then kontakt_def= 4;
+	/* Tillegg av :126 Intravenøs cytostatika, 129h Pacemakerkontroll, 129i EKKO/Doppler*/
+	/* Utgår: 128a, 129f og 129g,- takster som også kan tas av alle fastleger. */
+    /* GCL 26.03.2026 Lagt til 129j. */ 
 	/*
 	E - Kirurgi
 	*/
 		IF SUBSTR(Normaltariff{i},1,2) in ('13') and SUBSTR(Normaltariff{i},3,2) in 
-		('0g','4a','4b','4e','4f','7e','9a','9b') then kontakt_def= 4;
+		('0g','4a','4b','4e','4f','7e','9a','9b','9c','9d') then kontakt_def= 4;
+		IF SUBSTR(Normaltariff{i},1,3) in ('138') then kontakt_def= 4;
 		ELSE IF SUBSTR(Normaltariff{i},1,2) in ('14') and SUBSTR(Normaltariff{i},3,2) in 
 		('0a','0b','0c','0d','0e','0f','0g','0h','0i','0j','0k','0l','1a',/*'1b',*/'1c',
-		'1d','2c','3a','3c','3e','3f','3g',/*'4c',*/'5b'/*,'6b','7c','8'*/) then kontakt_def= 4;
+		'1d','2c','3a','3c','3d','3e','3f','3g',/*'4c',*/'5b'/*,'6b','7c','8'*/) then kontakt_def= 4;
 	/*Utgår: 141b, 144c, 146B, 147c er alle takster som ikke finnes i Normaltariff e. 2014.
 		Taksten 148 Nødvendig kollegial assistanse utført av lege ved operasjon per time, utgår. 
 		En takst som kan tas av alle lege, er dessuten en tilleggstakst til annen kirurgisk prosedyre*/
-
+     /* GCL 26.03.2026 Lagt til 138, 139c, 139d og 143d. */ 
 	/* 
 	E - Anestesiologi.
 	*/
 		IF SUBSTR(Normaltariff{i},1,2) in ('14') and SUBSTR(Normaltariff{i},3,2) in (/*'9a',*/'9b'/*,'9g','9h'*/) 
 		then kontakt_def= 4;
 		ELSE IF SUBSTR(Normaltariff{i},1,2) in ('15') and SUBSTR(Normaltariff{i},3,2) in 
-		('0','1a','1b','1c','2','3b','3d','3e','4a','4b','4c','5','6') then kontakt_def= 4; 	
+		('0','1a','1b','1c','2','3b','3d','3e','4a','4b','4c','5','6','7') then kontakt_def= 4; 	
 	/*Tillegg av takst: 150 Tillegg til konsultasjon hos anestesilege tilknyttet multidisiplinær smerteklinikk og 
 	                  	156 Vurdering og oppfølging av opioidbehandling ved smertebehandlig.*/
 	/*Utgår: 149a,g,h Lokalbedøvelse og blokk-ledningsanestesi, takstene kan også tas av fastleger og i legevakt*/
-
+    /* GCL 26.03.2026 Lagt til 157. */ 
 	/* 
 	E -  Allergologi.
 	*/
@@ -192,13 +194,13 @@ then kontakt_def= 4;
 	*/
 	/* Tove 04.04.2022: takst 206 er ny av 2021 */
 		IF SUBSTR(Normaltariff{i},1,2) in ('20') and SUBSTR(Normaltariff{i},3,2) in 
-		('5a','5b','6','7a','7b','8','9') then kontakt_def= 4;
+		('5a','5b','6','7a','7b','7c','8','9') then kontakt_def= 4;
 		ELSE IF SUBSTR(Normaltariff{i},1,2) in ('21') and SUBSTR(Normaltariff{i},3,2) in 
 		('0','1a','1b','1c','1d','1e','2a','2b','3'/*'4a','4b','4c','5',*/'6',/*'7a','7b','7c',*/'8'/*,'9'*/) 
 		then kontakt_def= 4; /*Tillegg av takst: 213 Behandling av spontan abort. */
 	/*Utgår: 214a,b,c Spiral, pessar, endometriebiopsi/cytologi, 215 Sterilisering-abortsaker, 217a,b,c gravidekontroll, kan også tas av fastleger.
 		     206 og 219 finnes ikke i Normaltariffen e. 2014*/
-
+    /* GCL 26.03.2026 Lagt til 207c. */ 
 	/* 
 	E -  Hud- og veneriske sykdommer.
 	-> HER ER LYSBEHANDLING, 254, 255a,b, DEFINERT TIL kontakt_def = 5 **.
@@ -240,9 +242,9 @@ then kontakt_def= 4;
 		IF SUBSTR(Normaltariff{i},1,2) in ('50') and SUBSTR(Normaltariff{i},3,2) in 
 		(/*'1',*/'2a','2b',/*'4','6','7c','7d',*/'8','9') then kontakt_def= 4;
 		ELSE IF SUBSTR(Normaltariff{i},1,2) in ('51') and SUBSTR(Normaltariff{i},3,2) in 
-		('0b',/*'0c','0d',*/'0e','0f') then kontakt_def= 4;
+		('0a','0b',/*'0c','0d',*/'0e','0f','1') then kontakt_def= 4;
 	/*Utgår: 501, 506, 507c,d, 510c,d, diagnostiske us av lungene, kan også (el. kun) tas av fastleger og i legevakt. Takst 504 finnes ikke i Normaltariff e. 2014*/
-
+    /* GCL 26.03.2026 Lagt til 510a og 511. */ 
 	/*
 	E - Nervesykdommer og sinnslidelser.
 	*/
@@ -259,6 +261,18 @@ then kontakt_def= 4;
 	*/
 	/* Tove 04.04.2022: takst fra 2017 */
 		IF Normaltariff{i} in ('651a','651b','652') then kontakt_def= 4;
+	/*
+	GCL 26.03.2026:
+	F. Laboratorieundersøkelser og prøver
+	
+		Her er det 7 takster under overskriften Spesielle undersøkelser som er stjernemerket. Ingen av disse tas med.
+	Eksempel:
+	*720	Taking og tyding av standard EEG.
+	*722	Neurografiundersøkelse og undersøkelse av senresponser og dekrementasjon. 
+	        Elektromyografiundersøkelse (standard EMG, fibertetthet, singlefibre EMG, kvantitativ EMG, makro EMG).
+	*731a	Grampreparat eller KOH-preparat som egen undersøkelse.
+	Pluss *734a, *741, *743b og *744.		
+	*/
 
 	  end; 
 	end; 
