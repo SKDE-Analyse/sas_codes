@@ -62,11 +62,13 @@ komnr;komnr_navn;bydel;bydel_navn;borhf;borhf_navn;bohf;bohf_navn;bosh;bosh_navn
 1868;1868 Øksnes;;;1;Helse Nord RHF;3;Nordland;33;Vesterålen;9;Vesterålen;
 1870;1870 Sortland;;;1;Helse Nord RHF;3;Nordland;33;Vesterålen;9;Vesterålen;
 1871;1871 Andøy;;;1;Helse Nord RHF;3;Nordland;33;Vesterålen;9;Vesterålen;
-1824;1824 Vefsn;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;12;Mo i Rana;1824 Vefsn flyttes fra Mosjøen til Mo i Rana lokalsykehusområde.
 1828;1828 Nesna;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;12;Mo i Rana;
 1832;1832 Hemnes;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;12;Mo i Rana;
 1833;1833 Rana;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;12;Mo i Rana;
 1836;1836 Rødøy;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;12;Mo i Rana;
+1824;1824 Vefsn;;;1;Helse Nord RHF;4;Helgeland;41;Mo i Rana;13;Mosjøen;1824 Vefsn flyttes fra Mosjøen til Mo i Rana lokalsykehusområde.
+1825;1825 Grane;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;13;Mosjøen;1825 Grane flyttes fra Mosjøen til Sandnessjøen lokalsykehusområde.
+1826;1826 Hattfjelldal;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;13;Mosjøen;1826 Hattfjelldal flyttes fra Mosjøen til Sandnessjøen lokalsykehusområde.
 1811;1811 Bindal;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
 1812;1812 Sømna;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
 1813;1813 Brønnøy;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
@@ -75,8 +77,6 @@ komnr;komnr_navn;bydel;bydel_navn;borhf;borhf_navn;bohf;bohf_navn;bosh;bosh_navn
 1818;1818 Herøy (Nordland);;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
 1820;1820 Alstahaug;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
 1822;1822 Leirfjord;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
-1825;1825 Grane;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;1825 Grane flyttes fra Mosjøen til Sandnessjøen lokalsykehusområde.
-1826;1826 Hattfjelldal;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;1826 Hattfjelldal flyttes fra Mosjøen til Sandnessjøen lokalsykehusområde.
 1827;1827 Dønna;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
 1834;1834 Lurøy;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;GCL 9/7-2025. Tidligere koblet til Rana av SKDE. Lurøy er todelt. Flest bosatte sogner til Sandnessjøen. SSB deler basert på grunnkretser.
 1835;1835 Træna;;;1;Helse Nord RHF;4;Helgeland;43;Sandnessjøen;14;Ytre Helgeland;
