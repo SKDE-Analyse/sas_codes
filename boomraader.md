@@ -25,3 +25,4 @@ Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 - februar 2022, Tove, ta ut radene som kun brukes til formater
 - april 2024, Tove, oppdatert med BODPS
 - 10. juli 2025, Janice og Gunnar oppdatert med BOSH
+- 15. april 2026, Tove endrer hvordan CSV-filen leses inn, og tar ut 'boshhn'
