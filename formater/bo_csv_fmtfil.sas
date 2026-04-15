@@ -1,4 +1,7 @@
-﻿/* Endringslogg: Sist endret av Janice 17.06.2021 */
+﻿/* Endringslogg: 
+-Janice 17.06.2021 
+-Tove 15.04.2026, endrer hvordan CSV-filen leses inn, og tar ut 'boshhn'
+*/
 
 /* Makro for å lage formater til boområder */
 /* Husk å definere filbane før makro kjøres */
@@ -6,13 +9,13 @@
 /* Input: tre CSV-filer:
             boomr.csv
             forny_komnr.csv
-            forny_bydel.csv
 */
-/* Output fem formater:
+/* Output formater:
       Navn på formatene:
-         boshhn_fmt 
+         bosh_fmt
          bohf_fmt
          borhf_fmt
+         bodps_fmt
          bydel_fmt
          komnr_fmt
 */
@@ -26,32 +29,17 @@
  */
 
 
-/* hente inn CSV-fil med definerte opptaksområder pr 01.01.2021 */
-data bo;
-  infile "&filbane/formater/boomr.csv"
-  delimiter=';'
-  missover firstobs=3 DSD;
-
-  format komnr 4.;
-  format komnr_navn $60.;
-  format bydel 6.;
-  format bydel_navn $60.;
-  format bohf 4.;
-  format bohf_navn $60.;
-  format boshhn 4.;
-  format boshhn_navn $15.;
-  format borhf 4.;
-  format borhf_navn $60.;
-  format kommentar $400.;
-  format bodps 4.;
-  format bodps_navn $60.;
-  format bosh 4.;
-  format bosh_navn $30.;
- 
-  input	
-  	komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ bodps bodps_navn $ bosh bosh_navn $
-	  ;
-  run;
+/* hente inn CSV-fil med definerte opptaksområder */
+proc import 
+	datafile="&filbane/formater/boomr.csv"
+    out=bo
+    dbms=csv
+    replace;
+    delimiter=';';
+    getnames=yes;      /* Use first row as variable names */
+    datarow=3;         /* Data starts on line 3 */
+    guessingrows=1000;
+run;
 
 /* ---------------------- */
 /*  Lagre filen på HNREF  */  
@@ -78,25 +66,6 @@ data hnref.fmtfil_bosh_2025(rename=(bosh=start) keep=bosh fmtname label);
 run; 
  /* Create the format using the control data set. */                                                                                     
 proc format cntlin=hnref.fmtfil_bosh_2025; run;
-
-/* -------- */
-/*  BOSHHN  */  
-/* -------- */                                                                           
-/* Remove duplicate values */
-proc sort data=bo nodupkey out=boshhn_fmt(keep=boshhn boshhn_navn);                                                                                                        
-   by boshhn;  
-   where boshhn is not missing;                                                                                                                              
-run; 
-/* Build format data set */                                                                                                            
-data hnref.fmtfil_boshhn(rename=(boshhn=start) keep=boshhn fmtname label);                                                                                    
-   retain fmtname 'boshhn_fmt';                                                                                                 
-   length boshhn_navn $60.;                                                                                                                    
-   set boshhn_fmt; 
-   label = cat(boshhn_navn); 
-run; 
- /* Create the format using the control data set. */                                                                                     
-proc format cntlin=hnref.fmtfil_boshhn; run;
-
 
  
 /* -------- */
@@ -158,24 +127,17 @@ proc format cntlin=hnref.fmtfil_bydel; run;
 
 /* --------- */
 /*   KOMNR   */  
-/* --------- */    
+/* --------- */  
 
-data forny_kom;
-  infile "&filbane/formater/forny_komnr.csv"
-  delimiter=';'
-  missover firstobs=3 DSD;
-
-  format aar 4.;
-  format gml_komnr 4.;
-  format gml_navn $30.;
-  format ny_komnr 4.;
-  format ny_navn $30.;
-  format kommentar $350.;
-  format kommentar2 $350.;
-
-  input	
-  	aar gml_komnr gml_navn $ ny_komnr ny_navn $ kommentar $ kommentar2 $
-	;
+proc import 
+	datafile="&filbane/formater/forny_komnr.csv"
+    out=forny_kom
+    dbms=csv
+    replace;
+    delimiter=';';
+    getnames=yes;      /* Use first row as variable names */
+    datarow=3;         /* Data starts on line 3 */
+    guessingrows=1000;
 run;
 
 /* kun beholde gml komnr og navn fra forny_komnr-csv */
@@ -221,7 +183,6 @@ data hnref.fmtfil_bodps(rename=(bodps=start) keep=bodps fmtname label);
 run; 
  /* Create the format using the control data set. */                                                                                     
 proc format cntlin=hnref.fmtfil_bodps; run;
-
 
 proc datasets nolist;
 delete bo: bydel_fmt forny_kom komnr: bodps_fmt; 
