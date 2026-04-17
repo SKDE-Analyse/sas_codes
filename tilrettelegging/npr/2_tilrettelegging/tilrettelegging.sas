@@ -188,7 +188,6 @@ data tmp_data;
 set tmp_data;
 
 %if &aspes eq 1 %then %do;
-liggetid = 0;
 hastegrad = 4;
 utdato=inndato;
 
