@@ -83,7 +83,6 @@
 - Filen kontroll_mottatte_data.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/icd10.sas](icd10)
 - [tilrettelegging/npr/2_tilrettelegging/bydel.sas](bydel)
-- Filen def_aspes_kontakt.sas er ikke dokumentert.
 - [tilrettelegging/npr/2_tilrettelegging/var_rekkefolge.sas](var_rekkefolge)
 - [tilrettelegging/npr/2_tilrettelegging/splitte.sas](splitte)
 - Filen tilstandskoder_akse.sas er ikke dokumentert.
