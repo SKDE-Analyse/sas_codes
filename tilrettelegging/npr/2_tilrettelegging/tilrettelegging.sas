@@ -188,7 +188,6 @@ data tmp_data;
 set tmp_data;
 
 %if &aspes eq 1 %then %do;
-liggetid = 0;
 hastegrad = 4;
 utdato=inndato;
 
@@ -280,9 +279,6 @@ run;
 /* Takst    */
 /* -------- */
 %if &takst_1 ne 0 and &aspes=1 %then %do; 
-%include "&filbane/tilrettelegging/npr/2_tilrettelegging/def_aspes_kontakt.sas";
-%def_aspes_kontakt(inndata=tmp_data, utdata=tmp_data);
-
 %include "&filbane/tilrettelegging/npr/2_tilrettelegging/takst.sas";
 %takst(inndata=tmp_data);
 %end;
