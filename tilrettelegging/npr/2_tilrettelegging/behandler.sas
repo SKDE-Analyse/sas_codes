@@ -74,8 +74,10 @@ set beh;
 run;
 
 /* hvis behandlingsstedkode mangler i datasettet så brukes institusjonid */
+/* gjør en drop av variablene som skal legges til. Left join vil ikke fungere hvis variablene allerede eksisterer. */
 data &inndata;
 set &inndata;
+drop=behsh behhf behrhf;
 if &beh = . then &beh = institusjonid;
 run;
 
