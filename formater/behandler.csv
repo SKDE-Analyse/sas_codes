@@ -123,6 +123,7 @@
 974748924;ST OLAVS HOSPITAL HF PSYKISK HELSEVERN BUP LIAN;;;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 974748967;ST OLAVS HOSPITAL HF PSYKISK HELSEVERN NIDELV DPS ORKDAL POLIKLINIKKER;;;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 974748983;ST OLAVS HOSPITAL HF PSYKISK HELSEVERN NIDAROS DPS POLIKLINIKK PUT;;;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
+913461401;ST OLAVS HOSPITAL HF PSYKISK HELSEVERN NIDAROS DPS POLIKLINIKK;;;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 21.04.2026 av Mattias U
 976245695;ST OLAVS HOSPITAL HF PSYKISK HELSEVERN BUP POLIKLINIKK ØYA;;;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 977288053;ST OLAVS HOSPITAL HF PSYKISK HELSEVERN BUP POLIKLINIKK ORKANGER;;;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
 981243315;ST OLAVS HOSPITAL HF PSYKISK HELSEVERN BUP POLIKLINIKK FOSEN;;;6;St. Olavs Hospital HF;St. Olavs Hospital;2;Helse Midt-Norge RHF;Helse Midt-Norge;Midt;Oppdatert 29.08.2023 av Johan R
@@ -226,6 +227,7 @@
 976246829;HELSE BERGEN HF ØYANE DPS POLIKLINIKKAR FJELL;;;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 29.08.2023 av Johan R
 980677117;HELSE BERGEN HF BJØRGVIN DPS KNARVIK POLIKLINIKK;;;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 29.08.2023 av Johan R
 980678741;HELSE BERGEN HF KRONSTAD DPS BERGENHUS POLKLINIKK;;;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 29.08.2023 av Johan R
+997114906;KRONSTAD DPS POLIKLINIKKAR ÅRSTAD;;;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 21.04.2026
 980841561;HELSE BERGEN HF BUP SENTRUM;;;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 29.08.2023 av Johan R
 980841731;HELSE BERGEN HF BUP NORDHORDLAND;;;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 29.08.2023 av Johan R
 980841804;HELSE BERGEN HF BUP FANA;;;10;Helse Bergen HF;Helse Bergen;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 29.08.2023 av Johan R
@@ -1042,3 +1044,13 @@
 935714311;SYKEHUSET I VESTFOLD HF, DPS VESTFOLD, SANDEFJORD - STOKKE;;;22;SYKEHUSET I VESTFOLD HF;SYKEHUSET I VESTFOLD;4;Helse Sør-Øst RHF;Helse Sør-Øst;Sør-Øst;Oppdatert 18.03.2026 av Olena
 933384489;SPEARE AS AVD VEST;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 18.03.2026 av Olena
 972530352;VIGØR REHABILITERINGSSYKEHUS AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 18.03.2026 av Olena
+986319492;UNICARE PSYKOLOG AS;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 21.04.2026 av Mattias U
+975387011;STIFTELSEN CRUX;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 21.04.2026 av Mattias U
+988771082;BLÅ KORS BORGESTADKLINIKKEN SA AVD BRAGENES;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 21.04.2026 av Mattias U
+971815450;BLÅ KORS BORGESTADKLINIKKEN SA AVD LOLAND;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 21.04.2026 av Mattias U
+974557193;HELSE FONNA HF FOLGEFONN DPS DØGNAVDELING - ODDA;;;11;Helse Fonna HF;Helse Fonna;3;Helse Vest RHF;Helse Vest;Vest;Oppdatert 21.04.2026 av Mattias U
+999025722;HAMAR PSYKOLOGKONTOR;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 21.04.2026 av Mattias U
+916315007;HUMAN CARE BO AS AVD TANGEN;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 21.04.2026 av Mattias U
+917888973;KOA PSYKISK HELSE AS AVD KRAKKEN;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 21.04.2026 av Mattias U
+917765332;KOA PSYKISK HELSE AS AVD BJØRNANG BEHANDLINGSSENTER;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 21.04.2026 av Mattias U
+916315295;HUMAN CARE BO AS AVD SALANGEN;300;Private sykehus;27;Private sykehus;Private sykehus;5;Private sykehus;Private sykehus;Privat;Oppdatert 21.04.2026 av Mattias U
