@@ -77,7 +77,7 @@ run;
 /* gjør en drop av variablene som skal legges til. Left join vil ikke fungere hvis variablene allerede eksisterer. */
 data &inndata;
 set &inndata;
-drop=behsh behhf behrhf;
+drop behsh behhf behrhf;
 if &beh = . then &beh = institusjonid;
 run;
 
