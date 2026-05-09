@@ -1,0 +1,8 @@
+{
+  "bundle": "t006_format_ncrp",
+  "source_file": "formater/ncrp.sas",
+  "source_blob_sha": "cd46d3a5e3eed9d21311669dcbe9b10a40c99eb5",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies the $ncrp radiology-procedure character format to 3 sample codes"
+}

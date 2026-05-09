@@ -1,0 +1,8 @@
+{
+  "bundle": "t011_format_hdiag3tegn",
+  "source_file": "formater/hdiag3tegn.sas",
+  "source_blob_sha": "b036cd6a659893927481adeff4c805eec9a9e82c",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies the $hdiag3tegn ICD-10 3-letter character format to 3 sample codes"
+}
