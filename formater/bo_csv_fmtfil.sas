@@ -58,14 +58,14 @@ proc sort data=bo nodupkey out=bosh_fmt(keep=bosh bosh_navn);
    where bosh is not missing;                                                                                                                              
 run; 
 /* Build format data set */                                                                                                            
-data hnref.fmtfil_bosh_2025(rename=(bosh=start) keep=bosh fmtname label);                                                                                    
+data hnref.fmtfil_bosh(rename=(bosh=start) keep=bosh fmtname label);                                                                                    
    retain fmtname 'bosh_fmt';                                                                                                 
    length bosh_navn $60.;                                                                                                                    
    set bosh_fmt; 
    label = cat(bosh_navn); 
 run; 
  /* Create the format using the control data set. */                                                                                     
-proc format cntlin=hnref.fmtfil_bosh_2025; run;
+proc format cntlin=hnref.fmtfil_bosh; run;
 
  
 /* -------- */
