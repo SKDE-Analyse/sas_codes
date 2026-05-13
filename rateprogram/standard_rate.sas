@@ -1,7 +1,7 @@
 ﻿%macro standard_rate(dataspecifier,
    region=bohf,
-   min_age=auto,
-   max_age=auto,
+   min_age=0,
+   max_age=105,
    out=,
    out_vars=rate ant,
    age_group_size=5,
@@ -27,8 +27,8 @@
 ## Argumenter til %standard_rate()
 - _første argument_ = `<simple dataspecifier>`. En simplifisert dataspecifier med formen `<dataset>/<variables>`. `<variables>` er her en SAS Variable List, og %standard_rate vil kalkulere en standardisert rate for alle variablene.
 - **region** = `[bohf, borhf, bosh]`. Denne variabelen styrer på hvilket regionalt nivå standardiseringen skal gjøres. Default: bohf.
-- **min_age** = `[<number>, auto]`. Laveste alder man skal ha med i standardiseringen. Default: auto.
-- **max_age** = `[<number>, auto]`. Høyeste alder man skal ha med i standardiseringen. Default: auto.
+- **min_age** = `<number>`. Laveste alder man skal ha med i standardiseringen. Default: 0.
+- **max_age** = `<number>`. Høyeste alder man skal ha med i standardiseringen. Default: 105.
 - **out** = `<text>`. Navn på utdatasett.
 - **out_vars** = `<list>`. Liste over hvilke type variabler som skal med i ut-datasettet. Mulige verdier er rate (justert rate), crude (ujustert rate), ant (sum av variabelen), avg (justert gjennomsnittlig verdi av variabelen), cravg (ujustert gjennomsnitt). Default: rate ant.
 - **age_group_size** = `<number>`. Størrelsen på algersgruppene brukt i standariseringen. Default: 5.
@@ -166,17 +166,15 @@ data _null_; call symput("&ds_var", "&library..&dataset"); run;
 %put &=std_dataset;
 %put &=std_varlist;
 
-%if auto in (&min_age &max_age &min_year &max_year) %then %do;
+%if auto in (&min_year &max_year) %then %do;
    /* Finding the values of the &min_ &max_ variables automatically is inefficient for large datasets.
       We therefore do it only if we have to. */
    proc sql noprint;
-   select min(aar), max(aar), min(alder), max(alder)
-      into :auto_min_year, :auto_max_year, :auto_min_age, :auto_max_age
+   select min(aar), max(aar)
+      into :auto_min_year, :auto_max_year
       from &std_dataset;
    quit;
    
-   %if &min_age  = auto %then %let min_age  = &auto_min_age;
-   %if &max_age  = auto %then %let max_age  = &auto_max_age;
    %if &min_year = auto %then %let min_year = &auto_min_year;
    %if &max_year = auto %then %let max_year = &auto_max_year;
 %end;
