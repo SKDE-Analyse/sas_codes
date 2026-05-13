@@ -6,7 +6,7 @@
 
 ## Argumenter til %standard_rate()
 - _første argument_ = `<simple dataspecifier>`. En simplifisert dataspecifier med formen `<dataset>/<variables>`. `<variables>` er her en SAS Variable List, og %standard_rate vil kalkulere en standardisert rate for alle variablene.
-- **region** = `[bohf, borhf, boshhn]`. Denne variabelen styrer på hvilket regionalt nivå standardiseringen skal gjøres. Default: bohf.
+- **region** = `[bohf, borhf, bosh]`. Denne variabelen styrer på hvilket regionalt nivå standardiseringen skal gjøres. Default: bohf.
 - **min_age** = `[<number>, auto]`. Laveste alder man skal ha med i standardiseringen. Default: auto.
 - **max_age** = `[<number>, auto]`. Høyeste alder man skal ha med i standardiseringen. Default: auto.
 - **out** = `<text>`. Navn på utdatasett.
@@ -27,7 +27,7 @@ Dette er en makro for å beregne standardiserte rater for en eller flere variabl
 og så justeres verdiene slik at summen av hver av variablene for hvert boområde blir slik de ville vært om demografien (altså kjønnsratioen og alderspyramiden) for boområdet hadde vært identisk med norgespopulasjonen i standardiseringsåret
 (std_year=).
 
-For at makroen skal fungere må input-datasettet ha variablene `aar`, `alder`, `ermann`, og en av disse: (`bohf`, `borhf`, `boshhn`).
+For at makroen skal fungere må input-datasettet ha variablene `aar`, `alder`, `ermann`, og en av disse: (`bohf`, `borhf`, `bosh`).
 
 Utdatasettet er strukturert slik at det er kompatibelt med [`%graf()`](./graf), slik at det er enkelt å representere resultatet visuelt.
 
