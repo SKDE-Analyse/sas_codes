@@ -26,7 +26,7 @@
 
 ## Argumenter til %standard_rate()
 - _første argument_ = `<simple dataspecifier>`. En simplifisert dataspecifier med formen `<dataset>/<variables>`. `<variables>` er her en SAS Variable List, og %standard_rate vil kalkulere en standardisert rate for alle variablene.
-- **region** = `[bohf, borhf, boshhn]`. Denne variabelen styrer på hvilket regionalt nivå standardiseringen skal gjøres. Default: bohf.
+- **region** = `[bohf, borhf, bosh]`. Denne variabelen styrer på hvilket regionalt nivå standardiseringen skal gjøres. Default: bohf.
 - **min_age** = `[<number>, auto]`. Laveste alder man skal ha med i standardiseringen. Default: auto.
 - **max_age** = `[<number>, auto]`. Høyeste alder man skal ha med i standardiseringen. Default: auto.
 - **out** = `<text>`. Navn på utdatasett.
@@ -47,7 +47,7 @@ Dette er en makro for å beregne standardiserte rater for en eller flere variabl
 og så justeres verdiene slik at summen av hver av variablene for hvert boområde blir slik de ville vært om demografien (altså kjønnsratioen og alderspyramiden) for boområdet hadde vært identisk med norgespopulasjonen i standardiseringsåret
 (std_year=).
 
-For at makroen skal fungere må input-datasettet ha variablene `aar`, `alder`, `ermann`, og en av disse: (`bohf`, `borhf`, `boshhn`).
+For at makroen skal fungere må input-datasettet ha variablene `aar`, `alder`, `ermann`, og en av disse: (`bohf`, `borhf`, `bosh`).
 
 Utdatasettet er strukturert slik at det er kompatibelt med [`%graf()`](./graf), slik at det er enkelt å representere resultatet visuelt.
 
@@ -126,7 +126,7 @@ options minoperator;
 %include "&filbane/makroer/boomraader.sas";
 %include "&filbane/rateprogram/graf.sas";
 
-%let region = %lowcase(&region);                 %assert_member(region, bohf borhf boshhn)
+%let region = %lowcase(&region);                 %assert_member(region, bohf borhf bosh)
 %let standardize_by = %lowcase(&standardize_by); %assert_member(standardize_by, a ak k ka)
 %let kjonn = %lowcase(&kjonn); %assert_member(kjonn, menn kvinner begge)
 %let debug = %lowcase(&debug);                   %assert_member(debug, yes no)
@@ -197,9 +197,9 @@ data deleteme_rateutvalg;
    set &std_dataset;
    where aar in (&min_year:&max_year) and
          alder in (&min_age:&max_age) and             
-         &region in (1:%if &region=bohf   %then 31;
-                 %else %if &region=borhf  %then 4;
-                 %else %if &region=boshhn %then 11;) and
+         &region in (%if &region=bohf   %then 1:31;
+                 %else %if &region=borhf  %then 1:4;
+                 %else %if &region=bosh %then 11:301;) and
          ermann in %if &kjonn=menn    %then (1);
              %else %if &kjonn=kvinner %then (0);
              %else %if &kjonn=begge   %then (1 0); ;
