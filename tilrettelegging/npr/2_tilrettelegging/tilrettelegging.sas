@@ -30,6 +30,7 @@ call symput ('fagenhetkode',varnum(dset,'fagenhetkode'));
 call symput ('fagomrade',varnum(dset,'fagomrade'));
 call symput ('tilst1akse1',varnum(dset,'tilst1akse1'));
 call symput ('doddato',varnum(dset,'doddato'));
+call symput ('aggrshoppID_Lnr',varnum(dset,'aggrshoppID_Lnr'));
 run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
@@ -43,8 +44,8 @@ proc sql noprint;
 quit;
 %end;
 
-data tmp_data;
-set &inndata;
+data tmp_data(drop=aggrshoppID_Lnr_orig);
+set &inndata(rename=(aggrshoppID_Lnr=aggrshoppID_Lnr_orig));
 
 /*-----*/
 /* PID */
@@ -52,6 +53,25 @@ set &inndata;
 %if &lopenr ne 0 %then %do;
 pid=lopenr;
 drop lopenr;
+%end;
+
+/*---------------  */
+/* AGGRSHOPPID_LNR */
+/*---------------  */
+
+%if &aggrshoppID_Lnr ne 0 %then %do;
+if aggrshoppID_Lnr_orig in (.,1) then aggrshoppID_Lnr=1;
+
+if aggrshoppID_Lnr_orig ne 1 then do;
+
+  /* Calculate the length of aggrshoppID_Lnr dynamically */
+  length_aggrshopp = ceil(log10(aggrshoppID_Lnr_orig + 1)); /* Add 1 to handle cases where aggrshoppID_Lnr is 0 or . */
+  
+  /* Combine the two numbers into a single numeric value */
+  aggrshoppID_Lnr = pid * (10**length_aggrshopp) + aggrshoppID_Lnr_orig;
+
+end;
+format aggrshoppID_Lnr 20.;
 %end;
 
 /*-----*/
