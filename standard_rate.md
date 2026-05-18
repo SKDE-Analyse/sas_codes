@@ -6,7 +6,7 @@
 
 ## Argumenter til %standard_rate()
 - _første argument_ = `<simple dataspecifier>`. En simplifisert dataspecifier med formen `<dataset>/<variables>`. `<variables>` er her en SAS Variable List, og %standard_rate vil kalkulere en standardisert rate for alle variablene.
-- **region** = `[bohf, borhf, bosh]`. Denne variabelen styrer på hvilket regionalt nivå standardiseringen skal gjøres. Default: bohf.
+- **region** = `[bohf, borhf, bosh, komnr]`. Denne variabelen styrer på hvilket regionalt nivå standardiseringen skal gjøres. Default: bohf.
 - **min_age** = `<number>`. Laveste alder man skal ha med i standardiseringen. Default: 0.
 - **max_age** = `<number>`. Høyeste alder man skal ha med i standardiseringen. Default: 105.
 - **out** = `<text>`. Navn på utdatasett.
@@ -17,9 +17,11 @@
 - **min_year** = `<number>`. Første år man skal ha med i standardiseringen. Default: auto.
 - **max_year** = `<number>`. Siste år man skal ha med i standardiseringen. Default: auto.
 - **standardize_by** = `[ka, a, k]`. Denne variabelen bestemmer hvilken type standardisering som skal utføres. `ka` betyr kjønns- og aldersstandardisering; `a` betyr aldersstandardisering (uten kjønnsjustering); og `k` betyr kjønnsjustering (uten aldersjustering). Default: ka.
-- **kjonn** = `[begge, kvinner, menn]`. Denne variabelen avgjør om raten er på kvinnepopulasjonen, mannspopulasjonen, eller begge. Hvis kjonn=kvinner vil menn bli filtrert ut av både datafilen og populasjonsfilen, og den endelige raten vil bli "pr 1 000 kvinner", for eksempel. Default: begge.
 - **yearly** = `[no, rate, crude, cravg, avg, ant]`. Hvis denne er satt til noe annet enn `no` vil det lages et transponert datasett (med navnet &out._yearly) hvor kolonnene er opptaksområder, og hver rad viser tall for et år. Dette gjør det lett å lage en tidstrend med %graf(). Default: rate.
 - **population_data** = `<text>`. Datasett med informasjon om befolkningstall brukt i standardiseringen. Default: innbygg.INNB_SKDE_BYDEL.
+- **kjonn** = `[begge, kvinner, menn]`. Denne variabelen avgjør om raten er på kvinnepopulasjonen, mannspopulasjonen, eller begge. Hvis kjonn=kvinner vil menn bli filtrert ut av både datafilen og populasjonsfilen, og den endelige raten vil bli "pr 1 000 kvinner", for eksempel. Default: begge.
+- **oslo** = `[no, yes]`. Hvis `yes` så blir Oslo samlet under bohf "Oslo" (30). Default: no.
+- **only_obs** = `[no, yes]`. Hvis `yes` så fjernes områder som ikke har noen observasjoner. Nyttig hvis man lager rater for kommuner i en spesifikk region, for eksempel. Default: no.
 
 # Introduksjon
 
@@ -39,8 +41,8 @@ hvor populær denne prosedyren er i de forskjellige opptaksområdene kan man bru
 
 ```
 %standard_rate(datasett/prosedyre_1 prosedyre_2,
-               region=bohf,
-               out=prosedyrer
+   region=bohf,
+   out=prosedyrer
 )
 ```
 
@@ -51,8 +53,8 @@ rate for alle årene), `prosedyre_1_rate2019` (kjønns- og aldersjustert rate fo
 Utdatasettet `prosedyrer` vil også inneholde variabler slik som `popsnitt`, som sier hvor mange personer som bor i opptaksområdene som er i samme aldersgruppe som utvalget. Med andre ord, hvis datasettet bare inneholder data
 for personer fra 75 til 105 år, vil variabelen `pop2022` være antallet i denne aldersgruppen som bor i et opptaksområde i 2022.
 
-%standard_rate() finner automatisk ut av hvilken aldersgruppe som er med i utvalget, og hvilke år som er med. Standard-året blir automatisk satt til det siste året. Alt dette kan overstyres med å bruke variablene `min_age`, `max_age`, `min_year`, `max_year`,
-og `std_year`. Det å finne ut hvilke år og hvilken aldersgruppe som er med i datasettet er tidskrevende, og man kan derfor få %standard_rate til å kjøre nesten dobbelt så raskt ved å spesifisere alle disse variablene.
+%standard_rate() finner automatisk ut hvilke år som er med. Standard-året blir automatisk satt til det siste året. Dette kan overstyres med å bruke variablene `min_year`, `max_year`,
+og `std_year`. Det å finne ut hvilke år som er med i datasettet er tidskrevende, og man kan derfor få %standard_rate til å kjøre nesten dobbelt så raskt ved å spesifisere `min_year` og `max_year`.
 
 # Kjønns- og/eller aldersstandardisering
 
@@ -82,9 +84,9 @@ KA-justert gjennomsnitt er normalt ikke inkludert i utdatasettet til %standard_r
 
 ```
 %standard_rate(datasett/prosedyre,
-               region=bohf,
-               out_vars=rate ant avg cravg,
-               out=prosedyrer
+   region=bohf,
+   out_vars=rate ant avg cravg,
+   out=prosedyrer
 )
 ```
 
@@ -92,8 +94,8 @@ Ovenfor har vi også lagt til cravg, som er det ujusterte gjennomsnittet. Ved å
 
 ```
 %graf(bars=prosedyrer/prosedyre_avgsnitt,
-      variation=prosedyrer/prosedyre_avgsnitt prosedyre_cravgsnitt, variation_colors=gray red,
-      category=bohf
+   variation=prosedyrer/prosedyre_avgsnitt prosedyre_cravgsnitt, variation_colors=gray red,
+   category=bohf
 )
 ```
 
