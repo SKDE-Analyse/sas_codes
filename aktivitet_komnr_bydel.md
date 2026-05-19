@@ -23,3 +23,4 @@ Kan også brukes for data uten bydeler.
 ### Endringslogg:
     - Tove: Opprettet desember 2022
 	- Tove: tilpasset til bruk i makro for kontroll av mottatte data
+	- Tove: endret innlesing av csv-filen
