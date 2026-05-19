@@ -23,42 +23,24 @@ Kan også brukes for data uten bydeler.
 ### Endringslogg:
     - Tove: Opprettet desember 2022
 	- Tove: tilpasset til bruk i makro for kontroll av mottatte data
- */
+	- Tove: endret innlesing av csv-filen
+*/
 
 /*--------------------------------------------*/
 /* les inn CSV-fil med gyldige komnr og bydel */
 /*--------------------------------------------*/
 
-data boomr;
-  infile "&filbane/formater/boomr.csv"
-  delimiter=';'
-  missover firstobs=3 DSD;
-
-  format komnr 4.;
-  format komnr_navn $60.;
-  format bydel 6.;
-  format bydel_navn $60.;
-  format bohf 4.;
-  format bohf_navn $60.;
-  format boshhn 2.;
-  format boshhn_navn $15.;
-  format borhf 4.;
-  format borhf_navn $60.;
-  format kommentar $400.;
- 
-  input	
-  	komnr
-  	komnr_navn $
-	bydel 
-	bydel_navn $
-	bohf
-	bohf_navn $
-    boshhn
-	boshhn_navn $
-    borhf
-	borhf_navn $
-	kommentar $;
-  run;
+/* hente inn CSV-fil med definerte opptaksområder */
+proc import 
+	datafile="&filbane/formater/boomr.csv"
+    out=boomr
+    dbms=csv
+    replace;
+    delimiter=';';
+    getnames=yes;      /* Use first row as variable names */
+    datarow=3;         /* Data starts on line 3 */
+    guessingrows=1000;
+run;
 
 /*------------------------------------------*/
 /* Gyldige kommuner og bydeler fra BOOMR.CSV*/
@@ -76,7 +58,7 @@ quit;
 /*ta ut overflødige rader for bydelskommuner (brukes vanligvis til formater)*/
 data boomr;
 set boomr;
-if komnr in (1103,4601,5001) and bydel eq . then delete;
+if komnr in (301,1103,4601,5001) and bydel eq . then delete;
 ID_bo = bydel;
 if bydel eq . then ID_bo = komnr;
 drop komnr bydel;
@@ -180,7 +162,7 @@ quit;
 %if &nobs_komnr eq 1 %then %do;
 title color= red height=5 "5c: Kommuner/bydeler uten rapportert data ";
 proc sql;
-	select komnr_bydel, ant_rader
+	select komnr_bydel
 	from komnr_uten_data; 
 quit;
 title;
