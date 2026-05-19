@@ -1,0 +1,8 @@
+{
+  "bundle": "t009_format_npr_henv",
+  "source_file": "formater/NPR_henvFra_henvTil.sas",
+  "source_blob_sha": "2c3d92604061df0422f2876f4c24ccc183adc976",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "loads HENVFRAINSTITUSJONID/HENVTILINSTITUSJONID formats and runs PROC MEANS on a 3-row demo"
+}

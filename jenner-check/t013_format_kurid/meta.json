@@ -1,0 +1,8 @@
+{
+  "bundle": "t013_format_kurid",
+  "source_file": "formater/kurid.sas",
+  "source_blob_sha": "e846940115440f6aa5365250827f6f44e7022110",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies the $kurid chemotherapy-protocol character format to 3 sample codes"
+}

@@ -1,0 +1,8 @@
+{
+  "bundle": "t005_format_ncmp",
+  "source_file": "formater/ncmp.sas",
+  "source_blob_sha": "6ed29520e591b788f4d161badf96b464c4d5762d",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies the $ncmp medical-procedure character format to 3 sample codes"
+}
