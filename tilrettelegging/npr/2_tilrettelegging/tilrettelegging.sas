@@ -44,8 +44,8 @@ proc sql noprint;
 quit;
 %end;
 
-data tmp_data(drop=aggrshoppID_Lnr_orig);
-set &inndata(rename=(aggrshoppID_Lnr=aggrshoppID_Lnr_orig));
+data tmp_data;
+set &inndata;
 
 /*-----*/
 /* PID */
@@ -53,25 +53,6 @@ set &inndata(rename=(aggrshoppID_Lnr=aggrshoppID_Lnr_orig));
 %if &lopenr ne 0 %then %do;
 pid=lopenr;
 drop lopenr;
-%end;
-
-/*---------------  */
-/* AGGRSHOPPID_LNR */
-/*---------------  */
-
-%if &aggrshoppID_Lnr ne 0 %then %do;
-if aggrshoppID_Lnr_orig in (.,1) then aggrshoppID_Lnr=1;
-
-if aggrshoppID_Lnr_orig ne 1 then do;
-
-  /* Calculate the length of aggrshoppID_Lnr dynamically */
-  length_aggrshopp = ceil(log10(aggrshoppID_Lnr_orig + 1)); /* Add 1 to handle cases where aggrshoppID_Lnr is 0 or . */
-  
-  /* Combine the two numbers into a single numeric value */
-  aggrshoppID_Lnr = pid * (10**length_aggrshopp) + aggrshoppID_Lnr_orig;
-
-end;
-format aggrshoppID_Lnr 20.;
 %end;
 
 /*-----*/
@@ -192,6 +173,27 @@ format ny_sektor fmt_sektor.;
 rename ny_sektor = sektor;
 drop inn_sektor; 
 %end;  
+run;
+
+/*-----------------*/
+/* AGGRSHOPPID_LNR */
+/*-----------------*/
+
+proc sort data=tmp_data;
+    by pid aggrshoppID_Lnr;
+run;
+
+data tmp_data(drop=tmp aggrshoppID_Lnr rename=(aggrshoppID_Lnr2=aggrshoppID_Lnr));
+    set tmp_data;
+    
+    by pid aggrshoppID_Lnr;
+    retain tmp 0;
+
+    if aggrshoppID_Lnr = 1 then aggrshoppID_Lnr2=1;
+    else if first.aggrshoppID_Lnr then do;
+	    tmp+1;
+  	    aggrshoppID_Lnr2=aar*1000000+tmp;
+    end;
 run;
 
 %if &sektor ne 0 %then %do;
