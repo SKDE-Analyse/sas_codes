@@ -179,6 +179,14 @@ run;
 /* AGGRSHOPPID_LNR */
 /*-----------------*/
 
+title 'number of unique aggrshopp BEFORE';
+proc sql;
+  select count(distinct aggrshoppID_Lnr) as n_aggr format nlnum8.0,
+         count(distinct catx('-', pid, aggrshoppID_Lnr)) as n_pid_aggr format nlnum8.0
+  from tmp_data
+  where aggrshoppID_Lnr ne 1;
+quit;
+
 proc sort data=tmp_data;
     by pid aggrshoppID_Lnr;
 run;
@@ -189,12 +197,27 @@ data tmp_data(drop=tmp aggrshoppID_Lnr rename=(aggrshoppID_Lnr2=aggrshoppID_Lnr)
     by pid aggrshoppID_Lnr;
     retain tmp 0;
 
-    if aggrshoppID_Lnr = 1 then aggrshoppID_Lnr2=1;
-    else if first.aggrshoppID_Lnr then do;
+	/* assign a tmp number to each time there is a new aggrshopp that is not 1 */
+    if first.aggrshoppID_Lnr and aggrshoppID_Lnr ne 1 then do;
 	    tmp+1;
-  	    aggrshoppID_Lnr2=aar*1000000+tmp;
     end;
+
+	/* combine aar and tmp to create the new aggrshopp, default 1s back to 1 */
+  	aggrshoppID_Lnr2=aar*1000000+tmp;
+    if aggrshoppID_Lnr = 1 then aggrshoppID_Lnr2=1;
 run;
+
+title 'number of unique aggrshopp AFTER';
+proc sql;
+  select count(distinct aggrshoppID_Lnr) as n_aggr format nlnum8.0,
+         count(distinct catx('-', pid, aggrshoppID_Lnr)) as n_pid_aggr format nlnum8.0
+  from tmp_data
+  where aggrshoppID_Lnr ne 1;
+quit;
+
+/*---------*/
+/* AVTSPES */
+/*---------*/
 
 %if &sektor ne 0 %then %do;
 proc sql noprint;
@@ -203,9 +226,6 @@ proc sql noprint;
 quit;
 %end;
 
-/*---------*/
-/* AVTSPES */
-/*---------*/
 data tmp_data;
 set tmp_data;
 
