@@ -179,6 +179,8 @@ run;
 /* AGGRSHOPPID_LNR */
 /*-----------------*/
 
+%if &aggrshoppID_Lnr ne 0 %then %do;
+
 title 'number of unique aggrshopp BEFORE';
 proc sql;
   select count(distinct aggrshoppID_Lnr) as n_aggr format nlnum8.0,
@@ -214,6 +216,7 @@ proc sql;
   from tmp_data
   where aggrshoppID_Lnr ne 1;
 quit;
+%end;
 
 /*---------*/
 /* AVTSPES */
