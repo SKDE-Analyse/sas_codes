@@ -229,10 +229,11 @@ proc sql noprint;
 quit;
 %end;
 
+%if &aspes eq 1 %then %do;
+
 data tmp_data;
 set tmp_data;
 
-%if &aspes eq 1 %then %do;
 hastegrad = 4;
 utdato=inndato;
 
@@ -264,8 +265,8 @@ drop sh_reg;
     if Fag = 30 then Fag_SKDE = 30;
     if Fag = 31 then Fag_SKDE = 31;
 %end;
-%end;
 run;
+%end;
 
 /*---------------*/
 /* Tilstandkoder */
