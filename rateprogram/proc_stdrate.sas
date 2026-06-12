@@ -4,6 +4,9 @@
     bo=bohf, /*BoHf, BoRHF eller BoSh, BoHf er default*/
 	alder_min=0, /*Laveste alder i utvalget, 0 er default*/
 	alder_max=105, /*Høyeste alder i utvalget, 105 er default*/
+	aldergr_bredde=5, /*size of the age buckets */
+	aldergr_siste=95, /*starting age of the last bucket */
+	kjonn_just=Y, /*Sex adjusted, Y or N */
     rmult=1000, /*Ratemultiplikator, dvs rate pr, 1000 er default*/
 	indirekte=, /*Settes lik 1 dersom indirekte, ellers direkte metode, direkte er default*/
     standardaar=, /*Standardiseringsår*/
@@ -38,102 +41,37 @@ kortversjon (kjøres med default verdier for resten)
 ### Endringslogg:
 - februar 2022 opprettet, Frank
 - desember 2024 lag til variasjonstabell som output: &utdata._variasjon, Frank
+- april 2026 lag til muligheten til å justere på størelsen på aldersgrupper, og å slå av kjønnsjustering, Janice
 */
 
 /***Formatering****/ 
 proc format;
 value aar_fmt
-2000="2000"
-2001="2001"
-2002="2002"
-2003="2003"
-2004="2004"
-2005="2005"
-2006="2006"
-2007="2007"
-2008="2008"
-2009="2009"
-2010="2010"
-2011="2011"
-2012="2012"
-2013="2013"
-2014="2014"
-2015="2015"
-2016="2016"
-2017="2017"
-2018="2018"
-2019="2019"
-2020="2020"
-2021="2021"
-2022="2022"
-2023="2023"
-2024="2024"
-2025="2025"
-2026="2026"
-2027="2027"
-2028="2028"
-2029="2029"
-2030="2030"
-2031="2031"
-2032="2032"
-2033="2033"
-2034="2034"
-2035="2035"
-2036="2036"
-2037="2037"
-2038="2038"
-2039="2039"
-9999="Snitt";
+    2000-2039 = [best32.]
+    9999 = "Snitt";
 
 value nyalder_fmt
-1="0-4 år"
-2="5-9 år"
-3="10-14 år"
-4="15-19 år"
-5="20-24 år"
-6="25-29 år"
-7="30-34 år"
-8="35-39 år"
-9="40-44 år"
-10="45-49 år"
-11="50-54 år"
-12="55-59 år"
-13="60-64 år"
-14="65-69 år"
-15="70-74 år"
-16="75-79 år"
-17="80-84 år"
-18="85-89 år"
-19="90-94 år"
-20="95-105 år";
+    %do i = 0 %to %eval((&aldergr_siste - 1) / &aldergr_bredde);
+        %let low  = %eval(&i * &aldergr_bredde);
+        %let high = %eval(&low + &aldergr_bredde - 1);
+        %eval(&i + 1) = "&low.-&high. år"
+    %end;
+        999 = "&aldergr_siste.+ år";
+
 run;
 
 /*****Hent inn ratedata*****/
 data xyz_rateutvalg;
 set &dsn;
-keep aar ermann alder &bo &rate_var nyalder;
+keep aar alder &bo &rate_var nyalder
+	%if &kjonn_just=Y %then ermann;
+	;
 if alder in (&alder_min:&alder_max);
 
-if alder in (0:4) then nyalder=1;
-else if alder in (5:9) then nyalder=2;
-else if alder in (10:14) then nyalder=3;
-else if alder in (15:19) then nyalder=4;
-else if alder in (20:24) then nyalder=5;
-else if alder in (25:29) then nyalder=6;
-else if alder in (30:34) then nyalder=7;
-else if alder in (35:39) then nyalder=8;
-else if alder in (40:44) then nyalder=9;
-else if alder in (45:49) then nyalder=10;
-else if alder in (50:54) then nyalder=11;
-else if alder in (55:59) then nyalder=12;
-else if alder in (60:64) then nyalder=13;
-else if alder in (65:69) then nyalder=14;
-else if alder in (70:74) then nyalder=15;
-else if alder in (75:79) then nyalder=16;
-else if alder in (80:84) then nyalder=17;
-else if alder in (85:89) then nyalder=18;
-else if alder in (90:94) then nyalder=19;
-else if alder in (95:105) then nyalder=20;
+
+if alder >= &aldergr_siste then nyalder = 999;
+else nyalder = floor(alder / &aldergr_bredde) + 1;
+
 
 %if &bo=bohf %then %do;
     where &rate_var ge 1 and bohf in (1:31) and aar in (&start:&slutt);
@@ -160,18 +98,24 @@ run;
 /*Over år, bo, alder og kjønn*/
 proc sql;
 	create table xyz_ratedsn0 as
-	select aar, &bo, nyalder, ermann,
-		sum(&rate_var) as antall
+	select aar, &bo, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		, sum(&rate_var) as antall
 	from xyz_rateutvalg
-	group by aar, &bo, nyalder, ermann;
+	group by aar, &bo, nyalder 
+		%if &kjonn_just=Y %then, ermann;
+		;
 quit;
 /*Norge: Over år, alder og kjønn. Norge=8888*/
 proc sql;
 	create table xyz_ratedsnN as
-	select aar, nyalder, ermann,
-		sum(&rate_var) as antall
+	select aar, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		, sum(&rate_var) as antall
 	from xyz_rateutvalg
-	group by aar, nyalder, ermann;
+	group by aar, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		;
 quit;
 data xyz_ratedsnN;
 set xyz_ratedsnN;
@@ -184,10 +128,13 @@ run;
 /*For gjennomsnitt i perioden - over bo, alder og kjønn. Aar=9999*/
 proc sql;
 	create table xyz_ratedsnsnitt as
-	select &bo, nyalder, ermann,
-		sum(antall) as antall
+	select &bo, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		,sum(antall) as antall
 	from xyz_ratedsn
-	group by &bo, nyalder, ermann;
+	group by &bo, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		;
 quit;
 data xyz_ratedsnsnitt;
 set xyz_ratedsnsnitt;
@@ -221,26 +168,9 @@ set xyz_pop;
     format bosh bosh_fmt.;
 %end;
 
-if alder in (0:4) then nyalder=1;
-else if alder in (5:9) then nyalder=2;
-else if alder in (10:14) then nyalder=3;
-else if alder in (15:19) then nyalder=4;
-else if alder in (20:24) then nyalder=5;
-else if alder in (25:29) then nyalder=6;
-else if alder in (30:34) then nyalder=7;
-else if alder in (35:39) then nyalder=8;
-else if alder in (40:44) then nyalder=9;
-else if alder in (45:49) then nyalder=10;
-else if alder in (50:54) then nyalder=11;
-else if alder in (55:59) then nyalder=12;
-else if alder in (60:64) then nyalder=13;
-else if alder in (65:69) then nyalder=14;
-else if alder in (70:74) then nyalder=15;
-else if alder in (75:79) then nyalder=16;
-else if alder in (80:84) then nyalder=17;
-else if alder in (85:89) then nyalder=18;
-else if alder in (90:94) then nyalder=19;
-else if alder in (95:105) then nyalder=20;
+
+if alder >= &aldergr_siste then nyalder = 999;
+else nyalder = floor(alder / &aldergr_bredde) + 1;
 format nyalder nyalder_fmt.;  
 run;
 
@@ -248,18 +178,24 @@ run;
 /*Over år, bo, alder og kjønn*/
 proc sql;
 	create table xyz_pop_area0 as
-	select aar, &bo, nyalder, ermann,
-		sum(innbyggere) as pop
+	select aar, &bo, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		, sum(innbyggere) as pop
 	from xyz_pop
-	group by aar, &bo, nyalder, ermann;
+	group by aar, &bo, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		;
 quit;
 /*Norge: Over år, alder og kjønn. Norge=8888*/
 proc sql;
 	create table xyz_pop_areaN as
-	select aar, nyalder, ermann,
-		sum(innbyggere) as pop
+	select aar, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		, sum(innbyggere) as pop
 	from xyz_pop
-	group by aar, nyalder, ermann;
+	group by aar, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		;
 quit;
 data xyz_pop_areaN;
 set xyz_pop_areaN;
@@ -272,10 +208,13 @@ run;
 /*For gjennomsnitt i perioden - over bo, alder og kjønn. Aar=9999*/
 proc sql;
 	create table xyz_popsnitt as
-	select &bo, nyalder, ermann,
-		sum(pop) as pop
+	select &bo, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		, sum(pop) as pop
 	from xyz_pop_area
-	group by &bo, nyalder, ermann;
+	group by &bo, nyalder
+		%if &kjonn_just=Y %then , ermann;
+		;
 quit;
 data xyz_popsnitt;
 set xyz_popsnitt;
@@ -289,11 +228,14 @@ run;
 /*Referansepopulasjon for Norge, i standardiseringsår*/
 proc sql;
 	create table xyz_popN as
-	select nyalder, ermann,
-		sum(innbyggere) as Npop
+	select nyalder	
+		%if &kjonn_just=Y %then , ermann;
+		, sum(innbyggere) as Npop
 	from xyz_pop
 	where aar=&standardaar
-	group by nyalder, ermann;
+	group by nyalder
+		%if &kjonn_just=Y %then , ermann;
+		;
 quit;
 
 /*******slå sammen ratedata og populasjonsdata, og beregn rate****************/
@@ -301,7 +243,11 @@ proc sql;
 create table xyz_ratedata as
 select a.*,antall
 from xyz_pop_area as a left join xyz_ratedsn as b
-on a.&bo=b.&bo and a.aar=b.aar and a.nyalder=b.nyalder and a.ermann=b.ermann;
+ on a.&bo=b.&bo 
+and a.aar=b.aar 
+and a.nyalder=b.nyalder 
+%if &kjonn_just=Y %then and a.ermann=b.ermann;
+;
 run;
 
 data xyz_ratedata;
@@ -314,17 +260,22 @@ i) beregne events nasjonalt i standardiseringsår
 ii) merge inn i popN datasettet (referansepopulasjonen)*/
 proc sql;
 	create table xyz_eventN as
-	select nyalder, ermann,
-		sum(antall) as Nevent
+	select nyalder
+		%if &kjonn_just=Y %then , ermann;
+		, sum(antall) as Nevent
 	from xyz_ratedata
 	where aar=&standardaar and &bo=8888
-	group by nyalder, ermann;
+	group by nyalder
+		%if &kjonn_just=Y %then , ermann;
+		;
 quit;
 proc sql;
 create table xyz_popN as
 select a.*,b.Nevent
 from xyz_popN as a left join xyz_eventN as b
-on a.nyalder=b.nyalder and a.ermann=b.ermann;
+on a.nyalder=b.nyalder 
+%if &kjonn_just=Y %then and a.ermann=b.ermann;
+;
 run;
 
 /**Selve standardiseringa skjer her**/
@@ -343,7 +294,9 @@ population event=antall total=pop;
 %if &indirekte=1 %then %do;
 	reference event=Nevent total=Npop;
 %end;
-strata ermann nyalder /*/ stats*/;
+strata 
+%if &kjonn_just=Y %then  ermann; 
+nyalder /*/ stats*/;
 ods output stdrate=xyz_StdRate_&utdata;
 run;
 ods exclude none; 
@@ -356,12 +309,17 @@ run;
 /***********Lag aldersfigurer***********/
 PROC SQL;
    CREATE TABLE xyz_aldersfig AS
-   SELECT DISTINCT aar,Alder,ErMann,(SUM(&rate_var)) AS RV
+   SELECT DISTINCT aar,Alder
+		%if &kjonn_just=Y %then , ermann;
+		,(SUM(&rate_var)) AS RV
       FROM xyz_rateutvalg
-      GROUP BY aar, Alder, ErMann;	  
+      GROUP BY aar, Alder
+		%if &kjonn_just=Y %then , ermann;
+		;	  
 QUIT;
 
 /*For å få rikitg farge på menn og kvinner*/
+%if &kjonn_just=Y %then %do;
 proc sql;
 create table xyz_color as 
 select distinct ermann
@@ -381,10 +339,27 @@ fillcolor='CX95BDE6';
 value='Menn';
 end;
 run;
+%end;
+
+%else %do;
+
+data xyz_ermanncolor;
+    length id $10 value $20 fillcolor $8;
+    id        = 'ermann';
+    value     = 'Begge kjønn';
+    fillcolor = 'CX95BDE6';
+run;
+
+%end;
 
 proc sgplot data=xyz_aldersfig dattrmap=xyz_ermanncolor noautolegend noborder sganno=anno pad=(Bottom=4% );
 styleattrs /*datacolors=(CX00509E CX95BDE6)*/ DATACONTRASTCOLORS=(CX00509E);
+%if &kjonn_just=Y %then %do;
 	vbar alder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar" grouporder=ascending attrid=ermann;
+%end;
+%else %do;
+	vbar alder / response=RV stat=sum              groupdisplay=cluster name="Vbar" grouporder=ascending ;
+%end;
 	keylegend "Vbar" / location=outside position=topright noborder;
     yaxis label="Antall";
 	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, ett-årig';
@@ -392,18 +367,27 @@ run;
 
 PROC SQL;
    CREATE TABLE xyz_aldersfigkat AS
-   SELECT DISTINCT aar,nyAlder,ErMann,(SUM(&rate_var)) AS RV
+   SELECT DISTINCT aar,nyAlder
+		%if &kjonn_just=Y %then , ermann;
+		,(SUM(&rate_var)) AS RV
 	FROM xyz_rateutvalg where alder in (&alder_min:&alder_max)
-      GROUP BY aar, nyAlder, ErMann;	  
+      GROUP BY aar, nyAlder
+		%if &kjonn_just=Y %then , ermann;
+		;	  
 QUIT;
 
 
 proc sgplot data=xyz_aldersfigkat dattrmap=xyz_ermanncolor  noautolegend noborder sganno=anno pad=(Bottom=4% );
 styleattrs /*datacolors=(CX00509E CX95BDE6)*/ DATACONTRASTCOLORS=(CX00509E);
+%if &kjonn_just=Y %then %do;
 	vbar nyalder / response=RV stat=sum group=ermann groupdisplay=cluster name="Vbar" grouporder=ascending attrid=ermann;
+%end;
+%else %do;
+	vbar nyalder / response=RV stat=sum              groupdisplay=cluster name="Vbar" grouporder=ascending ;
+%end;
 	keylegend "Vbar" / location=outside position=topright noborder;
     yaxis label="Antall";
-	xaxis fitpolicy=thin offsetmin=0.035 label='Alder, 5-årige alderskategorier';
+	xaxis fitpolicy=thin offsetmin=0.035 label="Alder, &aldergr_bredde.-årige alderskategorier";
 run;
 
 /**************Lag tabeller***********/
@@ -723,21 +707,27 @@ quit;
 /*SCV*/
 proc sql;
 create table xyz_tmp_scv0 as 
-select nyalder, ermann,
-sum(antall)/sum(pop) as rjk
+select nyalder 
+%if &kjonn_just=Y %then , ermann;
+,sum(antall)/sum(pop) as rjk
 from xyz_ratedata
 where &bo ne 8888 and aar=&standardaar
-group by nyalder, ermann;
+group by nyalder
+%if &kjonn_just=Y %then , ermann;
+;
 quit;
 
 proc sql;
 create table xyz_tmp_scv1 as 
-select aar, &bo, nyalder, ermann,
-sum(pop) as pop,
+select aar, &bo, nyalder
+%if &kjonn_just=Y %then , ermann;
+,sum(pop) as pop,
 sum(antall) as antall
 from xyz_ratedata 
 where &bo ne 8888
-group by aar, &bo, nyalder, ermann;
+group by aar, &bo, nyalder
+%if &kjonn_just=Y %then , ermann;
+;
 quit;
 
 proc sql;
@@ -745,7 +735,10 @@ create table xyz_tmp_scv as
 select a.*, b.rjk
 from xyz_tmp_scv1 as a
 left join xyz_tmp_scv0 as b
-on a.nyalder=b.nyalder and a.ermann=b.ermann;
+on a.nyalder=b.nyalder 
+%if &kjonn_just=Y %then
+and a.ermann=b.ermann;
+;
 quit;
 
 proc sql;
