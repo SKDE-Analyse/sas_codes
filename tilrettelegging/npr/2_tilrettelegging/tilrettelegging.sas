@@ -30,6 +30,7 @@ call symput ('fagenhetkode',varnum(dset,'fagenhetkode'));
 call symput ('fagomrade',varnum(dset,'fagomrade'));
 call symput ('tilst1akse1',varnum(dset,'tilst1akse1'));
 call symput ('doddato',varnum(dset,'doddato'));
+call symput ('aggrshoppID_Lnr',varnum(dset,'aggrshoppID_Lnr'));
 run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
@@ -174,6 +175,53 @@ drop inn_sektor;
 %end;  
 run;
 
+/*-----------------*/
+/* AGGRSHOPPID_LNR */
+/*-----------------*/
+
+%if &aggrshoppID_Lnr ne 0 %then %do;
+
+title 'number of unique aggrshopp BEFORE';
+proc sql;
+  select count(distinct aggrshoppID_Lnr) as n_aggr format nlnum8.0,
+         count(distinct catx('-', pid, aggrshoppID_Lnr)) as n_pid_aggr format nlnum8.0
+  from tmp_data
+  where aggrshoppID_Lnr ne 1;
+quit;
+
+proc sort data=tmp_data;
+    by pid aggrshoppID_Lnr;
+run;
+
+data tmp_data(drop=tmp aggrshoppID_Lnr rename=(aggrshoppID_Lnr2=aggrshoppID_Lnr));
+    set tmp_data;
+    
+    by pid aggrshoppID_Lnr;
+    retain tmp 0;
+
+	/* assign a tmp number to each time there is a new aggrshopp that is not 1 */
+    if first.aggrshoppID_Lnr and aggrshoppID_Lnr ne 1 then do;
+	    tmp+1;
+    end;
+
+	/* combine aar and tmp to create the new aggrshopp, default 1s back to 1 */
+  	aggrshoppID_Lnr2=aar*1000000+tmp;
+    if aggrshoppID_Lnr = 1 then aggrshoppID_Lnr2=1;
+run;
+
+title 'number of unique aggrshopp AFTER';
+proc sql;
+  select count(distinct aggrshoppID_Lnr) as n_aggr format nlnum8.0,
+         count(distinct catx('-', pid, aggrshoppID_Lnr)) as n_pid_aggr format nlnum8.0
+  from tmp_data
+  where aggrshoppID_Lnr ne 1;
+quit;
+%end;
+
+/*---------*/
+/* AVTSPES */
+/*---------*/
+
 %if &sektor ne 0 %then %do;
 proc sql noprint;
 	select case when sektor in (6:7) then 1 end into: aspes
@@ -181,13 +229,11 @@ proc sql noprint;
 quit;
 %end;
 
-/*---------*/
-/* AVTSPES */
-/*---------*/
+%if &aspes eq 1 %then %do;
+
 data tmp_data;
 set tmp_data;
 
-%if &aspes eq 1 %then %do;
 hastegrad = 4;
 utdato=inndato;
 
@@ -219,8 +265,8 @@ drop sh_reg;
     if Fag = 30 then Fag_SKDE = 30;
     if Fag = 31 then Fag_SKDE = 31;
 %end;
-%end;
 run;
+%end;
 
 /*---------------*/
 /* Tilstandkoder */
