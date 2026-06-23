@@ -106,7 +106,7 @@ malingtid_20 malingtid_3 malingtid_4 malingtid_5 malingtid_6 malingtid_7 malingt
 
   /* pass-through if nothing to convert */
   %if %superq(_todo)= %then %do;
-    %put NOTE: No matching numeric variables to convert in &ds.. Creating &out as pass-through.;
+    %put NOTE: No matching character variables to convert in &ds.. Creating &out as pass-through.;
     %if %superq(out)= %then %let out=&ds;
     %if %upcase(&out) ne %upcase(&ds) %then %do;
       data &out; set &ds; run;
@@ -120,11 +120,11 @@ malingtid_20 malingtid_3 malingtid_4 malingtid_5 malingtid_6 malingtid_7 malingt
     %let i=1;
     %do %while(%length(%scan(&_todo,&i,%str( ))));
       %let item=%scan(&_todo,&i,%str( ));
-	length __cdtn_&item &_length;
-	__cdtn_&item = input(&item, ?? &informat);
-	format __cdtn_&item &format;   /* <= apply to the numeric temp */
-	drop &item;
-	rename __cdtn_&item = &item;               /* e.g., YYMMDD10. */
+	length _c&i &_length;
+_c&i = input(&item, ?? &informat);
+format _c&i &format;
+drop &item;
+rename _c&i = &item;
       %let i=%eval(&i+1);
     %end;
   run;
@@ -195,10 +195,10 @@ malingtid_20 malingtid_3 malingtid_4 malingtid_5 malingtid_6 malingtid_7 malingt
     %let i=1;
     %do %while(%length(%scan(&_todo,&i,%str( ))));
       %let item=%scan(&_todo,&i,%str( ));
-      length __ntc_&item $&_len;
-      __ntc_&item = put(&item, &_fmt);
-      drop &item;
-      rename __ntc_&item = &item;
+      length _n&i $&_len;
+_n&i = put(&item, &_fmt);
+drop &item;
+rename _n&i = &item;
       %let i=%eval(&i+1);
     %end;
   run;
