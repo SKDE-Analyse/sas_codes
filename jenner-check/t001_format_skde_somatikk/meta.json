@@ -1,0 +1,8 @@
+{
+  "bundle": "t001_format_skde_somatikk",
+  "source_file": "formater/SKDE_somatikk.sas",
+  "source_blob_sha": "9fb110840008aefd3903e6de3af77ea6b71635ea",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies ALD_GR, ErMann, DRGtypeHastegrad, ICD10kap_kort to a 4-row demo"
+}

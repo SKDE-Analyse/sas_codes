@@ -1,0 +1,8 @@
+{
+  "bundle": "t014_format_venteliste",
+  "source_file": "formater/venteliste.sas",
+  "source_blob_sha": "d06120f60ec9ea55e2715264c2bdbf04f691524c",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "loads waiting-list formats and runs PROC MEANS on a 3-row demo"
+}
