@@ -22,6 +22,7 @@
 - **kjonn** = `[begge, kvinner, menn]`. Denne variabelen avgjør om raten er på kvinnepopulasjonen, mannspopulasjonen, eller begge. Hvis kjonn=kvinner vil menn bli filtrert ut av både datafilen og populasjonsfilen, og den endelige raten vil bli "pr 1 000 kvinner", for eksempel. Default: begge.
 - **oslo** = `[no, yes]`. Hvis `yes` så blir Oslo samlet under bohf "Oslo" (30). Default: no.
 - **only_obs** = `[no, yes]`. Hvis `yes` så fjernes områder som ikke har noen observasjoner. Nyttig hvis man lager rater for kommuner i en spesifikk region, for eksempel. Default: no.
+- **custom_region** = `[no, yes]`. Hvis `yes` så vil makroen tillate at region kan være noe annet en bohf, borhf, bosh eller komnr. For eksempel bodps. Da må man sende inn population_data som har samme variabel. Hvis man vil ha format så kan man lage et format med navn `&region._fmt`.
 
 # Introduksjon
 
