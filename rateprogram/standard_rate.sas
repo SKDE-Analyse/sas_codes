@@ -15,6 +15,7 @@
    kjonn=begge,
    oslo=no,
    only_obs=no,
+   custom_region=no,
    debug=no
 );
 
@@ -44,6 +45,7 @@
 - **kjonn** = `[begge, kvinner, menn]`. Denne variabelen avgjør om raten er på kvinnepopulasjonen, mannspopulasjonen, eller begge. Hvis kjonn=kvinner vil menn bli filtrert ut av både datafilen og populasjonsfilen, og den endelige raten vil bli "pr 1 000 kvinner", for eksempel. Default: begge.
 - **oslo** = `[no, yes]`. Hvis `yes` så blir Oslo samlet under bohf "Oslo" (30). Default: no.
 - **only_obs** = `[no, yes]`. Hvis `yes` så fjernes områder som ikke har noen observasjoner. Nyttig hvis man lager rater for kommuner i en spesifikk region, for eksempel. Default: no.
+- **custom_region** = `[no, yes]`. Hvis `yes` så vil makroen tillate at region kan være noe annet en bohf, borhf, bosh eller komnr. For eksempel bodps. Da må man sende inn population_data som har samme variabel. Hvis man vil ha format så kan man lage et format med navn `&region._fmt`.
 
 # Introduksjon
 
@@ -130,7 +132,9 @@ options minoperator;
 %include "&filbane/makroer/boomraader.sas";
 %include "&filbane/rateprogram/graf.sas";
 
-%let region = %lowcase(&region);                 %assert_member(region, bohf borhf bosh komnr)
+%let region = %lowcase(&region);
+%let custom_region = %lowcase(&custom_region);
+%if &custom_region=no %then                      %assert_member(region, bohf borhf bosh komnr);
 %let standardize_by = %lowcase(&standardize_by); %assert_member(standardize_by, a ak k ka)
 %let kjonn = %lowcase(&kjonn);                   %assert_member(kjonn, menn kvinner begge)
 %let debug = %lowcase(&debug);                   %assert_member(debug, yes no)
@@ -204,7 +208,8 @@ data deleteme_rateutvalg;
          &region in (%if &region=bohf   %then 1:31;
                  %else %if &region=borhf  %then 1:4;
                  %else %if &region=bosh %then 11:301;
-                 %else %if &region=komnr %then 0:6000;) and
+                 %else %if &region=komnr %then 0:6000;
+                 %else 0:8000;) and
          ermann in %if &kjonn=menn    %then (1);
              %else %if &kjonn=kvinner %then (0);
              %else %if &kjonn=begge   %then (1 0); ;
@@ -266,9 +271,11 @@ data deleteme_population;
    age_group = floor(alder/&age_group_size) +1;
 run;
 
-/* The problem with &population_data is that it only has population data on the commune level; the %boomraader macro tacks
-   on the regional information as new variables at the end of the population dataset (without aggregating the data) */
-%boomraader(inndata=deleteme_population, bydel= %if &oslo=yes %then 0; %else 1; );
+%if &custom_region=no %then %do;
+  /* The problem with &population_data is that it only has population data on the commune level; the %boomraader macro tacks
+     on the regional information as new variables at the end of the population dataset (without aggregating the data) */
+  %boomraader(inndata=deleteme_population, bydel= %if &oslo=yes %then 0; %else 1; )
+%end;
 
 /* We aggregate the population data in the same way as we aggregated deleteme_rateutvalg above. */
 proc sql;
