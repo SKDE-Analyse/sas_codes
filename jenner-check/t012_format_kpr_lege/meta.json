@@ -1,0 +1,8 @@
+{
+  "bundle": "t012_format_kpr_lege",
+  "source_file": "formater/KPR_Lege.sas",
+  "source_blob_sha": "1d414b2152f3c29bf9124b0d0aace1fbf7feb01a",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies $icpc2_Kap and $fritakskode primary-care formats to a 3-row demo"
+}

@@ -1,0 +1,8 @@
+{
+  "bundle": "t008_format_npr_avtspes",
+  "source_file": "formater/NPR_AvtSpes.sas",
+  "source_blob_sha": "586ac431b6a71304e26548e9a8e540fc7c38e723",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies KOMPLETT, KONTAKT, $sektor formats to a 3-row demo"
+}

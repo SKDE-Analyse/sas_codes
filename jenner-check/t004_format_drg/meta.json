@@ -1,0 +1,8 @@
+{
+  "bundle": "t004_format_drg",
+  "source_file": "formater/drg.sas",
+  "source_blob_sha": "7f31e6c1e376e4c10a36777013b2d70769fc7f97",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies the $drg character format to 4 sample DRG codes"
+}

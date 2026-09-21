@@ -1,0 +1,8 @@
+{
+  "bundle": "t007_format_ncsp",
+  "source_file": "formater/ncsp.sas",
+  "source_blob_sha": "17cedbad13d7adab2613e9956a94a7dfea9e7ba9",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies the $ncsp surgical-procedure character format to 3 sample codes"
+}
