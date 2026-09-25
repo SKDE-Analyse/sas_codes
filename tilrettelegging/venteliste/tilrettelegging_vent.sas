@@ -22,6 +22,7 @@ run;
 
 %include "&filbane/formater/SKDE_somatikk.sas";
 %include "&filbane/formater/NPR_somatikk.sas";
+%include "&filbane/formater/venteliste.sas";
 
 /*strip variables fra NULL som string og erstatte med sas missing*/
 data temp1;
@@ -162,9 +163,16 @@ lopenr mnd tjenesteenhetReshID varslingHelfo;
   out=temp4
 );
 
+/* Check if temp3 and temp4 exist, and set the dataset to use */
+data _null_;
+    if exist('temp4') then call symputx('final_ds', 'temp4');
+    else if exist('temp3') then call symputx('final_ds', 'temp3');
+    else call symputx('final_ds', 'temp2');
+run;
 
+/* Use the dynamically selected dataset */
 data tmp_data;
-set temp4;
+    set &final_ds;
 
 /*-----*/
 /* PID */
@@ -297,15 +305,15 @@ label avvikl_dato = 'Ventetid sluttdato';
 label avvikl_kode ='Ventetid sluttkode';
 label fristStartBehandling = 'Frist for nødvendig helsehjelp';
 label fristbrudd = 'fristbrudd' ;
-label AV_KODE = 'Påbegynt helsehjelp (1=Ja)';
-label AV_IKKE_ORD ='påbegynt helsehjelp ikke ordinært (1=Ja)';
+label AV_KODE = 'Påbegynt helsehjelp';
+label AV_IKKE_ORD ='påbegynt helsehjelp ikke ordinært';
 label BoHF ='BoHF';
 label BoRHF ='BoRHF';
 label Bosh ='Bosh';
 label BehHF ='BehHF';
 label BehRHF ='BehRHF';
-label fortsatt_kode = 'Ventende (1=Ja)';
-label ny_henvist = 'Antall nyhenviste';
+label fortsatt_kode = 'Ventende';
+label ny_henvist = 'Nyhenviste';
 label VENTETID = 'Ventetid påbegynt helsehjelp'; 
 label Intern_ventetid = 'Intern ventetid';
 label SLETTE_KODE = 'Slettekode';
@@ -314,8 +322,18 @@ label FORTSATT_KODE_UTSATT = 'Ventende med utsettelsekode';
 
 rename OMSNIVAA_KODE = OMSORGSNIVA;
 
+/* ----------- */
+/* SLETTE_KODE */
+/* ----------- */
+if slette_kode = . then slette_kode = 0;
+
+
 periode=&periode;
-format periode YYMMDD10.;
+format periode YYMMDD10. 
+       henv_type henv_type. av_kode av_kode. fortsatt_kode fortsatt_kode. ny_henvist ny_henvist.
+       slette_kode slette_kode. avvikl_kode avvikl_kode.
+       fristbrudd fristbrudd. RAPPORTERTRETTTILHELSEHJELP RAPPORTERTRETTTILHELSEHJELP.
+       ;
 
 run;
 
