@@ -7,7 +7,7 @@ er registrert i behandler tabellen - kode for dette her: */
 data cont_vent;
 set HNMOT.VENTELISTE_2024_11;
 
-behandlingsstedkode_n = input(behandlingsstedkode, best9.);
+behandlingsstedkode_n = behandlingsstedkode+0;
 format behandlingsstedkode_n best9.;
 drop behandlingsstedkode;
 rename behandlingsstedkode_n = behandlingsstedkode;
@@ -38,7 +38,7 @@ data temp2;
 set temp1;
 
 /* Convert behandlingsstedkode (char → num) */
-behandlingsstedkode_n = input(behandlingsstedkode, best9.);
+behandlingsstedkode_n = behandlingsstedkode+0;
 format behandlingsstedkode_n best9.;
 drop behandlingsstedkode;
 rename behandlingsstedkode_n = behandlingsstedkode;
