@@ -16,7 +16,7 @@ run;
 %kontroll_behandlingssted(inndata=cont_vent, beh=behandlingsstedkode)
 */
 
-%macro tilrettelegging_vent(inndata=, utdata=,periode=);
+%macro tilrettelegging_vent(inndata=, utdata=,periode= /*starten av perioden, f.eks. '01jan2026'd*/, ter=1 /*1 hvis det er tertial, 0 hvis det er måned*/);
 
 
 
@@ -168,6 +168,14 @@ data _null_;
     if exist('temp4') then call symputx('final_ds', 'temp4');
     else if exist('temp3') then call symputx('final_ds', 'temp3');
     else call symputx('final_ds', 'temp2');
+
+    call symputx('start_mnd', month(&periode));
+    %if &ter=1 %then %do;
+        call symputx('end_mnd', month(&periode)+3);
+    %end;
+    %else %do;
+        call symputx('end_mnd', month(&periode));  
+    %end;
 run;
 
 /* Use the dynamically selected dataset */
@@ -233,6 +241,7 @@ drop kjonn_kode kjonn_ident;
 format ermann ermann.;
 %end;
 
+run;
 
 /* ----------- */
 /* Forny-komnr */
@@ -269,6 +278,12 @@ format ermann ermann.;
 
 /*lage labels*/
 data &utdata; set tmp_data;
+
+/*--------*/
+/* AVVIST */
+/*--------*/
+  if (rapportertretttilhelsehjelp = 5 or slette_kode = 31) and year(avvikl_dato)=year(&periode.) and month(avvikl_dato) in (&start_mnd.:&end_mnd.) then avvist=1;
+
 label aar = 'År';
 label ans_dato = "Ansiennitetsdato";
 label INSTITUSJONID = "InstitusjonId";
@@ -319,6 +334,7 @@ label Intern_ventetid = 'Intern ventetid';
 label SLETTE_KODE = 'Slettekode';
 label AV_KODE_UTSATT = 'avviklet med utsettelseskode';
 label FORTSATT_KODE_UTSATT = 'Ventende med utsettelsekode';
+label avvist = 'SKDE: Avviste i perioden';
 
 rename OMSNIVAA_KODE = OMSORGSNIVA;
 
