@@ -282,7 +282,7 @@ data &utdata; set tmp_data;
 /*--------*/
 /* AVVIST */
 /*--------*/
-  if (rapportertretttilhelsehjelp = 5 or slette_kode = 31) and year(avvikl_dato)=year(&periode.) and month(avvikl_dato) in (&start_mnd.:&end_mnd.) then avvist=1;
+  if (rapportertretttilhelsehjelp = 5 and slette_kode = 31) and year(avvikl_dato)=year(&periode.) and month(avvikl_dato) in (&start_mnd.:&end_mnd.) then avvist=1;
 
 label aar = 'År';
 label ans_dato = "Ansiennitetsdato";
