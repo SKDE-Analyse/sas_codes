@@ -73,15 +73,15 @@ if alder >= &aldergr_siste then nyalder = 999;
 else nyalder = floor(alder / &aldergr_bredde) + 1;
 
 
-%if &bo=bohf %then %do;
+%if %lowcase(&bo)=bohf %then %do;
     where &rate_var ge 1 and bohf in (1:31) and aar in (&start:&slutt);
     format bohf bohf_fmt.;
 %end;
-%if &bo=borhf %then %do;
+%if %lowcase(&bo)=borhf %then %do;
     where &rate_var ge 1 and borhf in (1:4) and aar in (&start:&slutt);
     format borhf borhf_fmt.;
 %end;
-%if &bo=bosh %then %do;
+%if %lowcase(&bo)=bosh %then %do;
     where &rate_var ge 1 and bosh in (11:233) and aar in (&start:&slutt);
     format bosh bosh_fmt.;
 %end; 
