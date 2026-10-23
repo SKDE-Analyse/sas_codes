@@ -151,7 +151,7 @@ data xyz_pop;
 set &innbygg_dsn;
 where aar in (&start:&slutt) and alder in (&alder_min:&alder_max);
 run;
-/* %boomraader(inndata=xyz_pop, indreOslo=&bodef_indreoslo, bydel=&bodef_bydel); */
+%boomraader(inndata=xyz_pop, indreOslo=&bodef_indreoslo, bydel=&bodef_bydel);
 
 data xyz_pop;
 set xyz_pop;
