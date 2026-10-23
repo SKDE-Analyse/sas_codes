@@ -204,11 +204,11 @@ data xyz_pop;
 set &innbygg_dsn;
 where aar in (&start:&slutt) and alder in (&alder_min:&alder_max);
 run;
-%boomraader(inndata=xyz_pop, indreOslo=&bodef_indreoslo, bydel=&bodef_bydel);
+/* %boomraader(inndata=xyz_pop, indreOslo=&bodef_indreoslo, bydel=&bodef_bydel); */
 
 data xyz_pop;
 set xyz_pop;
-%if &bo=bohf %then %do;
+/* %if &bo=bohf %then %do;
     drop komnr bydel boshhn borhf fylke;
     format bohf bohf_fmt.;
 %end;
@@ -219,7 +219,7 @@ set xyz_pop;
 %if &bo=boshhn %then %do;
     drop komnr bydel bohf borhf fylke;
     format boshhn boshhn_fmt.;
-%end;
+%end; */
 
 if alder in (0:4) then nyalder=1;
 else if alder in (5:9) then nyalder=2;
