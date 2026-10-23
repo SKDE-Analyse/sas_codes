@@ -24,48 +24,39 @@ Bo-variablene defineres ved å bruke 'komnr' og 'bydel' fra inndata.
 - februar 2022, Tove, ta ut radene som kun brukes til formater
 - april 2024, Tove, oppdatert med BODPS
 - 10. juli 2025, Janice og Gunnar oppdatert med BOSH
+- 15. april 2026, Tove endrer hvordan CSV-filen leses inn, og tar ut 'boshhn'
  */
 
 /*
-***********************************************
-1. Drop variablene BOHF, BORHF, BOSHHN og BODPS
-***********************************************
+*********************************************
+1. Drop variablene BOHF, BORHF, BOSH og BODPS
+*********************************************
 */
-/* Pga sql-merge i makroen må datasettet en sender inn ikke ha variablene bohf, borhf eller boshhn med */
+/* Pga sql-merge i makroen kan ikke datasettet en sender inn ha bo-variabler */
 data &inndata;
 set &inndata;
-drop bohf borhf bosh boshhn bodps;
+drop bohf borhf bosh bodps;
 run;
 /*
 *********************************************
 2. Importere CSV-fil med mapping av boområder
 *********************************************
 */
-data bo;
-  infile "&filbane/formater/boomr.csv"
-  delimiter=';'
-  missover firstobs=3 DSD;
+proc import 
+	datafile="&filbane/formater/boomr.csv"
+    out=bo
+    dbms=csv
+    replace;
+    delimiter=';';
+    getnames=yes;      /* Use first row as variable names */
+    datarow=3;         /* Data starts on line 3 */
+    guessingrows=1000;
+run;
 
-  format komnr 4.;
-  format komnr_navn $60.;
-  format bydel 6.;
-  format bydel_navn $60.;
-  format bohf 4.;
-  format bohf_navn $60.;
-  format boshhn 4.;
-  format boshhn_navn $15.;
-  format borhf 4.;
-  format borhf_navn $60.;
-  format kommentar $400.;
-  format bodps 4.;
-  format bodps_navn $60.;
-  format bosh 4.;
-  format bosh_navn $30.;
- 
-  input	
-  	komnr komnr_navn $ bydel bydel_navn $ bohf bohf_navn $ boshhn boshhn_navn $ borhf borhf_navn $ kommentar $ bodps bodps_navn $ bosh bosh_navn $
-	  ;
-  if komnr eq . then delete; /*ta vekk rader som kun brukes til å lage formater*/
+/*ta vekk rader som kun brukes til å lage formater*/
+data bo;
+  set bo;
+  if komnr eq . then delete; 
   run;
 /*
 *********************************
@@ -75,7 +66,7 @@ data bo;
 %if &bydel = 1 %then %do;
 proc sql;
   create table &inndata as
-  select a.*, b.bohf, b.boshhn, b.bosh, b.borhf, b.bodps
+  select a.*, b.bohf, b.bosh, b.borhf, b.bodps
   from &inndata a left join bo b
   on a.komnr=b.komnr
   and a.bydel=b.bydel;
@@ -99,7 +90,7 @@ run;
 
 proc sql;
   create table &inndata as
-  select a.*, b.bohf, b.boshhn, b.bosh, b.borhf, b.bodps 
+  select a.*, b.bohf, b.bosh, b.borhf, b.bodps 
   from &inndata a left join bo_utenbydel b
   on a.komnr=b.komnr;
 quit;

@@ -23,7 +23,7 @@ komnr
 bydel
 bohf
 borhf
-boshhn
+bosh
 bodps
 Fylke
 NPRId_reg
