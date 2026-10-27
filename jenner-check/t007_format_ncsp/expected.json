@@ -1,0 +1,20 @@
+{
+  "_captured_at": "2026-05-09T06:31:36Z",
+  "_captured_run_id": "r_019e0b6f2df27fd1a7c5b6a9e46b22ce",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Option OBS changed to 100.",
+    "NOTE: FORMAT $ncsp defined (7076 ranges).",
+    "NOTE: DATA demo",
+    "NOTE: PROC PRINT data=demo"
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

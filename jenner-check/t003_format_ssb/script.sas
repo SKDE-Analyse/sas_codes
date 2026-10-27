@@ -1,0 +1,380 @@
+/* jenner-check bundle: t003_format_ssb
+ * Source: formater/SSB.sas (SKDE-Analyse/sas_codes upstream)
+ * Source commit: 67a78dbbbf7c37158bc1043b2b3bd35d101a484c
+ * Adaptation: stripped UTF-8 BOM; appended a small driver DATA step
+ *             that applies one or more of the formats to demo rows.
+ */
+
+Proc format;
+/*NUS Nivå - første siffer i NUS-koden*/
+value nus1_9niva_fmt
+0='Ingen utdanning og førskoleutdanning Under skoleplikt'
+1='Barneskoleutdanning 1.-7. klassetrinn'
+2='Ungdomsskoleutdanning 8-10. klassetrinn'
+3='Videregående, grunnutdanning 11.-12. klassetrinn'
+4='Videregående, avsluttende utdanning 13. klassetrinn +'
+5='Påbygging til videregående utdanning 14. klassetrinn +'
+6='Universitets- og høgskoleutdanning, lavere nivå 14. -17. klassetrinn'
+7='Universitets- og høgskoleutdanning, høyere nivå 18.-19. klassetrinn'
+8='Forskerutdanning 20. klassetrinn +'
+9='Uoppgitt';
+value nus1_9niva_kort_fmt
+0='Ingen utdanning og førskoleutdanning'
+1='Barneskoleutdanning'
+2='Ungdomsskoleutdanning'
+3='Videregående, grunnutdanning'
+4='Videregående, avsluttende utdanning'
+5='Påbygging til videregående utdanning'
+6='Universitets- og høgskoleutdanning, lavere nivå'
+7='Universitets- og høgskoleutdanning, høyere nivå'
+8='Forskerutdanning'
+9='Uoppgitt';
+value nus1_3niva_mlf  (multilabel notsorted) 
+0='Under skoleplikt'
+1-2='Obligatorisk utdanning'
+3-5='Mellomutdanning'
+6-8='Universitets- og høgskoleutdanning'
+9='Uoppgitt';
+value nus1_3niva_fmt 
+0='Under skoleplikt'
+1='Obligatorisk utdanning'
+2='Mellomutdanning'
+3='Universitets- og høgskoleutdanning'
+9='Uoppgitt';
+/*NUS Fagfelt - andre siffer i NUS-koden*/
+value nus2_9fag_fmt
+0='Allmenne fag'
+1='Humanistiske og estetiske fag'
+2='Lærerutdanninger og utdanninger i pedagogikk'
+3='Samfunnsfag og juridiske fag'
+4='Økonomiske og administrative fag'
+5='Naturvitenskapelige fag, håndverksfag og tekniske fag'
+6='Helse-, sosial- og idrettsfag'
+7='Primærnæringsfag'
+8='Samferdsels- og sikkerhetsfag og andre servicefag'
+9='Uoppgitt fagfelt';
+/* TJ: NB: sivilstatus og sivilstand er to ulike definisjoner.
+SSB sin nettside: https://www.ssb.no/a/metadata/codelist/datadok/1702309/no 
+Sivilstand_fmt (lenger ned) har annen inndeling.*/
+value sivilstatus_fmt
+1='Ugift'	
+2='Gift'	
+3='Samboer'
+4='Skilt/separert'	
+5='Enke/enkemann';
+/* TS: Tettsted størrelse https://www.ssb.no/a/metadata/codelist/datadok/1078075/no */
+value ts_stor_fmt
+11='<= 199 bosatte (Ikke tettsted)'	
+12='Tettsted med 200 - 499 bosatte'	
+13='Tettsted med 500 - 999 bosatte'	
+14='Tettsted med 1 000 - 1 999 bosatte'	
+15='Tettsted med 2 000 - 19 999 bosatte'	
+16='Tettsted med 20 000 - 99 999 bosatte'	
+17='Tettsted med 100 000 eller flere bosatte'	
+99='Uoppgitt';
+ /* TS: https://www.ssb.no/a/metadata/codelist/datadok/1517386/no - dette må sjekkes ytterligere */
+/* value ts_kode_fmt
+s='person ikke bosatt i tettsted'	
+t='person bosatt i tettsted'	
+u='person uplassert på tett/spredt, pga manglende koordinat'; */
+value ts_kode_num_fmt
+1='person ikke bosatt i tettsted'	
+2='person bosatt i tettsted'	
+3='person uplassert på tett/spredt, pga manglende koordinat';
+value hushold_type				
+111 = 'Aleneboende under 30 år'
+112 = 'Aleneboende 30-44 år'				
+113 = 'Aleneboende 45-66 år'				
+114 = 'Aleneboende 67 år og over'							
+121 = 'Par uten barn, eldste person under 30 år'			
+122 = 'Par uten barn, eldste person 30-44 år'				
+123 = 'Par uten barn, eldste person 45-66 år'				
+124 = 'Par uten barn, eldste person 67 år og over'								
+131 ='Gifte par med små barn (yngste barn 0-5 år)'				
+132 = 'Samboerpar med små barn (yngste barn 0-5 år)'								
+141 = 'Gifte par med store barn (yngste barn 6-17 år)'				
+142 = 'Samboerpar med store barn (yngste barn 6-17 år)'							
+151 = 'Mor med små barn (yngste barn 0-5 år)'				
+152 = 'Far med små barn (yngste barn 0-5 år)'								
+161 = 'Mor med store barn (yngste barn 6-17 år)'				
+162 = 'Far med store barn (yngste barn 6-17 år)'								
+171 = 'Gifte par med voksne barn (yngste barn 18 år og over)'				
+172 = 'Samboerpar med voksne barn (yngste barn 18 år og over)'				
+173 = 'Mor med voksne barn (yngste barn 18 år og over)'				
+174 = 'Far med voksne barn (yngste barn 18 år og over)'												
+211 = 'Husholdninger med to eller flere enpersonfamilier'				
+212 = 'Andre flerfamiliehusholdninger uten barn 0-17 år'								
+220 = 'Flerfamiliehusholdninger med små barn (yngste barn under 0-5 år)'								
+230 = 'Flerfamiliehusholdninger med store barn (yngste barn 6-17 år)';
+/*Brukes i Reiseavstandsmatrise på data fra 2016*/
+value type_sh
+1='Sykehus'
+2='Ideele'
+3='Storby legeveakt'
+4='Private sykehus'
+5='Sykestuer HN'
+6='DMS HN'
+7='Sykestuer, DMS, Rehab utenfor HN';
+/*Brukes i Reiseavstandsmatrise på data fra 2016*/
+Value Sykehus_ID 
+1='Sørlandet sykehus, Arendal'
+2='Sørlandet sykehus, Flekkefjord (Lister)'
+4='Sørlandet sykehus, Kristiansand'
+5='Sykehuset Telemark, Kragerø'
+6='Sykehuset Telemark, Porsgrunn'
+7='Sykehuset Telemark, Skien'
+8='Sykehuset i Vestfold, Larvik'
+11='Sykehuset i Vestfold, Tønsberg'
+12='Vestre Viken, Drammen'
+13='Vestre Viken, Ringerike '
+14='Vestre Viken, Hallingdal sjukestugu'
+15='Vestre Viken, Kongsberg'
+16='Sykehuset Telemark, Notodden'
+17='Sykehuset Telemark, Rjukan'
+19='OUS, Rikshospitalet, Oslo'
+21='Sykehuset Vestfold,  Spesialsykehuset for rehabilitering, Stavern'
+22='Sørlandet sykehus, Kongsgård (rehabilitering) '
+23='OUS, Spesialsykehuset for epilepsi'
+24='OUS, Geilomo barnesykehus Hol'
+26='OUS, Radiumhospitalet, Oslo'
+27='Betanien hospital, Skien'
+28='OUS, Aker'
+29='Akerhus universitetssykehus, Ski'
+30='Akershus universitetssykehus, Lørenskog'
+31='Akershus universitetssykehus, Stensby'
+33='Vestre Viken, Bærum sykehus, Bærum'
+34='Sykehuset Østfold, Moss'
+36='Sykehuset Østfold, Fredrikstad'
+39='Sykehuset Innlandet, Lillehammer'
+40='Sykehuset Innlandet, Elverum'
+41='Sykehuset Innlandet, Gjøvik'
+42='Sykehuset Innlandet, Hamar'
+43='Sykehuset Innlandet, Tynset'
+44='Sykehuset Innlandet, Kongsvinger'
+45='Sykehuset Innlandet, Granheim lungesenter Follebu'
+46='Sunnaas sykehus, Nesodden'
+47='OUS, Ullevål sykehus, Oslo'
+48='Lovisenberg Diakonale sykehus, Oslo'
+49='Diakonhjemmet sykehus, Oslo'
+50='Revmatismesykehuset, Lillehammer'
+51='Martine Hansens hospital, Bærum'
+54='Sykehuset InnlandetOtta/Nord Gudbrandsdal  lokalmedisinske senter'
+55='Helse Stavanger, Universitetssykehuset Stavanger'
+58='Helse Bergen, Haukeland Universitetssjukehus'
+59='Helse Bergen, Voss sjukehus'
+60='Helse Bergen, Kysthospitalet i Hagevik'
+61='Haraldsplass diakonale sykehus, Bergen'
+62='Haugesund Sanitetssykehus for revmatisme, Haugesund'
+63='Betanien spesialistpoliklinikk, Bergen'
+64='Helse Fonna, Haugesund'
+65='Helse Fonna, Stord'
+66='Helse Fonna, Odda'
+67='Helse Førde, Førde'
+68='Helse Førde, Nordfjord'
+69='Helse Førde, Lærdal'
+70='Helse Nordmøre og Romsdal, Molde'
+71='Helse Nordmøre og Romsdal, Kristiansund'
+72='Helse Nord-Trøndelag, Namsos'
+73='Helse Nord-Trøndelag, Levanger'
+74='Helse Sunnmøre, Ålesund'
+75='Helse Sunnmøre, Volda'
+76='Helse Sunnmøre, Mork rehabsenter'
+77='St. Olavs Hospital, Trondheim'
+78='Helse Sunnmøre, Ålesund, Nevrohjemmet rehabilitering'
+79='St. Olavs Hospital, Røros sykehus'
+80='St. Olavs Hospital, Orkanger' 
+82='St. Olavs Hospital, Fosen Helse'
+83='St. Olavs Hospital, Værnesregionen DMS'
+84='St. Olavs Hospital, Munkvoll Rehabiliteringssenter'
+85='Helse Finnmark, Kirkenes'
+86='Helse Finnmark, Hammerfest'
+87='UNN, Tromsø '
+88='UNN, Harstad'
+89='UNN, Narvik'
+90='Nordlandssykehuset, Bodø'
+91='Nordlandssykehuset, Stokmarknes'
+92='Nordlandssykehuset, Gravdal'
+93='Helgelandssykehuset, Mo i Rana'
+94='Helgelandssykehuset, Mosjøen'
+95='Helgelandssykehuset, Sandnessjøen'
+96='Helgelandssykehuset, Spesialistpoliklinikken Brønnøysund'
+97='Helgelandssykehuset, Brønnøy fødestue'
+98='Nordlandssykehuset, Steigen fødestue'
+99='UNN, Midt-Troms Fødestue'
+100='UNN, Distriktsmedisinsk senter Midt-Troms'
+101='UNN, Kåfjord sykehjem'
+102='UNN, Skjervøy sykehjem'
+103='UNN, Helsesenter Sonjatun'
+104='UNN, Kvænangen sykehjem'
+105='Helse Finnmark, Vardø alders og sykehjem'
+106='Helse Finnmark, Vadsø helsesenter'
+107='Helse Finnmark, Kautokeino alders og sykehjem'
+108='Helse Finnmark, Alta helsesenter, avd sykestue'
+109='Helse Finnmark, Øksfjord helsesenter/sykehjem'
+110='Helse Finnmark, Hasvik helsesenter'
+111='Helse Finnmark, Havøysund helsesenter'
+112='Helse Finnmark, Nordkapp helsesenter'
+113='Helse Finnmark,Porsanger helsetun'
+114='Helse Finnmark, Karasjok helsesenter'
+115='Helse Finnmark, Kjøllefjord helsesenter'
+116='Helse Finnmark, Mehamn helsesenter'
+117='Helse Finnmark, Berlevåg sykestue'
+118='Helse Finnmark, Tana helsesenter'
+119='Helse Finnmark, Nesseby helsesenter'
+120='Helse Finnmark, Båtsfjord helsesenter'
+121='Drammen private sykehus, Drammen'
+122='Rosenborg sportsklinikk/ Teres Rosenborg'
+123='Bergen kirurgiske sykehus, Bergen'
+124='Teres Sørlandsparken'
+125='Teres Colosseum, Oslo'
+126='Klinikk Stokkan, Trondheim'
+127='Tromsø private sykehus/Teres Tromsø'
+128='Teres Colosseum, Stavanger'
+129='Teresklinikken, Bodø'
+130='Aleris sykehuset, Oslo'
+131='Aleris, Bergen'
+132='Aleris, Trondheim'
+133='Aleris Helse Tromsø'
+134='Aleris Helse Stavanger'
+135='Medi 3 Ålesund'
+136='Volvat medisinske senter, Oslo'
+137='Volvat medisinske senter, Hamar'
+138='Volvat medisinske senter, Fredrikstad'
+139='Volvat medisinske senter, Vestskogen'
+140='Volvat medisinske senter Bergen'
+141='Privatsykehuset Haugesund'
+142='Ringvollklinikken, Askim'
+143='Fana medisinske senter'
+144='Scandinavian Venous Centre'
+145='FysMed-klinikken, Trondheim'
+146='Friskvernklinikken, Asker'
+147='Feiringklinikken, Feiring'
+148='Glittreklinikken, Hakadal'
+149='Norsk diabetikersenter'
+150='Bergen Spine Senter, Bergen'
+151='Hjelp24 NIMI'
+152='Mjøs-kirurgene, Gjøvik'
+153='IbsenSykehuset'
+154='Akademiklinikken Oslo AS'
+155='NIMI AS Avd. Mini Ullevål'
+156='Kolibri Medical AS'
+157='Moxnessklinikken, Trondheim'
+158='Sykehuset innlandet HF Habilitering og rehabilitering Ottestad'
+159='Sørlandet sykehus, Kongsgård (Rehabilitering)'
+160='Bergen kommunale legevakt'
+161='Oslo kommunale legevakt'
+162='Helse Førde, Florø';
+/* Sentraliseringsindeks */
+Value Klasse_sentralisering
+1='Mest sentrale kommuner - indeks 930-1000'
+2='Nest-mest sentrale kommuner - indeks 870-929'
+3='Mellomsentrale kommuner 1 - indeks 770-869'
+4='Mellomsentrale kommuner 2 - indeks 650-769'
+5='Nest-minst sentrale kommuner - indeks 550-649'
+6='Minst sentrale kommuner - indeks 0-549';
+/* KOSTRA-grupper */
+Value KOSTRA_gruppe
+1='1 Små kommuner med middels bundne kostnader per innbygger, lave frie disponible inntekter'
+2='2 Små kommuner med middels bundne kostnader per innbygger, middels frie disponible inntekter'
+3='3 Små kommuner med middels bundne kostnader per innbygger, høye frie disponible inntekter'
+4='4 Små kommuner med høye bundne kostnader per innbygger, lave frie disponible inntekter'
+5='5 Små kommuner med høye bundne kostnader per innbygger, middels frie disponible inntekter'
+6='6 Små kommuner med høye bundne kostneder per innbygger, høye frie disponible inntekter'
+7='7 Mellomstore kommuner med lave bundne kostnader per innbygger, lave frie disponible inntekter'
+8='8 Mellomstore kommuner med lave bundne kostnader per innbygger, middels frie disponible inntekter'
+9='9 Mellomstore kommuner med lave bundne kostnader per innbygger, høye frie disponible inntekter'
+10='10 Mellomstore kommuner med middels bundne kostnader per innbygger, lave frie disponible inntekter' /*Det er ingen kommuner i denne kommunegruppen*/
+11='11 Mellomstore kommuner med middels bundne kostnader per innbygger, middels frie disponible inntekter'
+12='12 Mellomstore kommuner med middels bundne kostnader per innbygger, høye frie disponible inntekter'
+13='13 Store kommuner utenom de fire største byene'
+14='14 Bergen, Trondheim og Stavanger'
+15='15 Oslo kommune'
+16='16 De ti kommunene med høyest frie disponible inntekter per innbygger';
+/*Type flytting (rec_type)*/
+value flytting_fmt
+1 = 'Flytting mellom kommuner'
+2 = 'Utvandring'
+3 = 'Innvandring'
+4 = 'Flytting innen kommunen';
+
+/* Egenprodusert for befolkningsfremskrivingsdata */
+value alternativ
+-1 = "Lav nasjonal vekst (LLML)"
+0 = "Hovedalternativet (MMMM)"
+1 = "Høy nasjonal vekst (HHMH)";
+
+value famtype_fmt
+0='Uoppgitt'
+1='Enpersonfamilie'
+2='Ektepar uten barn'
+3='Ektepar med barn'
+4='Mor med barn'
+5='Far med barn'
+6='Samboerpar med felles barn'
+7='Partnerskap uten/med barn';
+value parstatus_fmt
+0='Ikke i familie med par (enslig/barn i familie med enslig)'	
+1='Ektefelle ulikekjønnet par'
+2='Ektefelle likekjønnet par/registrert partner'	
+3='Samboer med felles barn'	
+5='Samboer uten felles barn, motsatt kjønn - uendret siden forrige årgang/(FOB2001)'	
+6='Samboer uten felles barn, motsatt kjønn - ny siden forrige årgang - samme flyttedato'	
+7='Samboer uten felles barn, motsatt kjønn - ny siden forrige årgang - ulik flyttedato'	
+8='Barn i familie med par';
+value arbeidsyrke_fmt
+0='Militære yrker (ikke sivile stillinger i forsvaret)'
+1='Administrative ledere og politikere'
+2='Akademiske yrker'
+3='Høyskoleyrker'
+4='Kontor- og serviceyrker'
+5='Salgs-, service- og omsorgsyker'
+6='Jordbruk, skogbruk og fiske'
+7='Håndverkere og lignende'
+8='Prosess- og maskinoperatører, transportarbeidere mv.'
+9='Yrker uten krav til utdanning'
+;
+/*Det første sifferet i yrkeskoden sier også noe om kompetansenivå: 
+2: Kompetanse tilsvarende minst 4-års utdanning fra universitet eller høyskole.
+3: Kompetanse tilsvarende 1-3 års utdanning fra universitet eller høyskole.
+4 - 8: Kompetanse tilsvarende videregående skole, altså 11-14 års skolegang.
+0, 1 og 9: Har ikke bestemte kompetansenivå*/
+value arbeidsmarkedstatus_fmt
+0='Utenfor arbeidsstyrken'	
+1='Lønnstaker'
+2='Selvstendig'	
+3='Helt ledig'	
+4='På arbeidsmarkedstiltak';
+value sivilstand_fmt
+1='Ugift'
+2='Gift'
+3='Enke/enkemann'
+4='Skilt'
+5='Separert'
+6='Registrert partner'
+7='Separert partner'
+8='Skilt partner'
+9='Gjenlevende partner';
+value $innvandringskat_fmt
+/*Variabelen viser ulike kombinasjoner av eget eller foreldres fødeland.*/
+'A'='Født i Norge med to norskfødte foreldre'
+'B'='Innvandrere'
+'C'='Norskfødee med innvandrerforeldre'
+'E'='Utenlandsfødte med en norskfødt forelder'
+'F'='Norskfødte med en utenlandsfødt forelder'
+'G'='Utenlandsfødte med to norskfødte foreldre';
+run;
+
+/* Driver: apply 2 SSB (Statistics Norway) classification formats. */
+data demo;
+  input nus_niva sivilstatus;
+  datalines;
+0 1
+3 2
+6 4
+9 5
+;
+run;
+
+proc print data=demo label noobs;
+  format nus_niva nus1_9niva_kort_fmt. sivilstatus sivilstatus_fmt.;
+run;

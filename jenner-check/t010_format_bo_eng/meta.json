@@ -1,0 +1,8 @@
+{
+  "bundle": "t010_format_bo_eng",
+  "source_file": "formater/bo_eng.sas",
+  "source_blob_sha": "2dfbe524a438712141c473c4b489637b0f46a9c6",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies the BoHF and Bydel English-language area formats to a 3-row demo"
+}

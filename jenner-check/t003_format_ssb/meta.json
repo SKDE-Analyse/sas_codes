@@ -1,0 +1,8 @@
+{
+  "bundle": "t003_format_ssb",
+  "source_file": "formater/SSB.sas",
+  "source_blob_sha": "9d3bf9219b59cdf19c28bfd5efc096b4b294187f",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies SSB education and marital-status formats to a 4-row demo"
+}

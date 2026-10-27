@@ -1,0 +1,8 @@
+{
+  "bundle": "t002_format_npr_somatikk",
+  "source_file": "formater/NPR_somatikk.sas",
+  "source_blob_sha": "8a1516f3253ad956708b05e3734e9f910ff8748e",
+  "source_commit": "67a78dbbbf7c37158bc1043b2b3bd35d101a484c",
+  "tier": "real_data",
+  "notes": "applies NPRID_REG, KJONN to a 4-row demo of patient-record fields"
+}
